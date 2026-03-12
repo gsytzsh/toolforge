@@ -37,17 +37,6 @@
 
 <script>
 
-async function lookup(){
-
-let ip=document.getElementById("ip").value.trim()
-
-if(!ip){
-
-document.getElementById("result").innerText="Enter IP address"
-return
-
-}
-
 async function loadSelfIP(){
 
 try{
@@ -71,7 +60,16 @@ document.getElementById("self-ip").innerText="Unable to detect your IP."
 
 }
 
-loadSelfIP()
+async function lookup(){
+
+let ip=document.getElementById("ip").value.trim()
+
+if(!ip){
+
+document.getElementById("result").innerText="Enter IP address"
+return
+
+}
 
 try{
 
@@ -89,6 +87,8 @@ document.getElementById("result").innerText="Lookup failed"
 }
 
 }
+
+loadSelfIP()
 
 </script>
 
