@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Random Number Generator - ToolForge</title>
+<meta name="description" content="Random Number Generator free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Random Number Generator</h1>
+
+<p>Generate random integers in a range, with optional multiple values.</p>
+
+<h3>Settings</h3>
+
+<p>
+Min:
+<input id="min" type="number" style="width:120px" value="1">
+Max:
+<input id="max" type="number" style="width:120px" value="100">
+</p>
+
+<p>
+How many numbers:
+<input id="count" type="number" style="width:120px" value="1" min="1" max="1000">
+</p>
+
+<p>
+Allow duplicates?
+<label style="margin-left:6px;font-size:13px;">
+<input id="allowDup" type="checkbox" checked> Yes
+</label>
+</p>
+
+<button onclick="generate()">Generate</button>
+
+<h3 style="margin-top:24px">Result</h3>
+<textarea id="output" rows="8" style="width:90%" readonly></textarea>
+
+<p id="status" style="color:#666;margin-top:8px">Ready.</p>
+
+</div>
+
+<script>
+
+function setStatus(msg,isError){
+let el=document.getElementById("status")
+el.innerText=msg
+el.style.color=isError?"#b91c1c":"#16a34a"
+}
+
+function generate(){
+
+let min=parseInt(document.getElementById("min").value,10)
+let max=parseInt(document.getElementById("max").value,10)
+let count=parseInt(document.getElementById("count").value,10)
+let allowDup=document.getElementById("allowDup").checked
+
+if(isNaN(min)||isNaN(max)||isNaN(count)){
+setStatus("Please enter valid numbers.",true)
+return
+}
+
+if(max<min){
+[min,max]=[max,min]
+}
+
+if(count<1){
+count=1
+document.getElementById("count").value="1"
+}
+
+if(count>1000){
+count=1000
+document.getElementById("count").value="1000"
+}
+
+let rangeSize=max-min+1
+
+if(!allowDup && count>rangeSize){
+setStatus("Count is larger than range size when duplicates are disabled.",true)
+return
+}
+
+let result=[]
+
+if(allowDup){
+for(let i=0;i<count;i++){
+let n=Math.floor(Math.random()*rangeSize)+min
+result.push(n)
+}
+}else{
+let pool=[]
+for(let v=min;v<=max;v++){
+pool.push(v)
+}
+for(let i=0;i<count;i++){
+let idx=Math.floor(Math.random()*pool.length)
+result.push(pool[idx])
+pool.splice(idx,1)
+}
+}
+
+document.getElementById("output").value=result.join(", ")
+setStatus("Generated "+count+" number(s).",false)
+}
+
+</script>
+
+</body>
+</html>
+
