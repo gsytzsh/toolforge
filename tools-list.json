@@ -23,6 +23,7 @@
 {"file":"markdown-preview","name":"Markdown Preview"},
 {"file":"yaml-json-converter","name":"YAML JSON Converter"},
 {"file":"password-generator","name":"Password Generator"},
+{"file":"password-strength-checker","name":"Password Strength Checker"},
 {"file":"regex-tester","name":"Regex Tester"},
 {"file":"sql-formatter","name":"Sql Formatter"},
 {"file":"timestamp-converter","name":"Timestamp Converter"},
