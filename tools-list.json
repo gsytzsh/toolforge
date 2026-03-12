@@ -26,6 +26,7 @@
 {"file":"regex-tester","name":"Regex Tester"},
 {"file":"sql-formatter","name":"Sql Formatter"},
 {"file":"timestamp-converter","name":"Timestamp Converter"},
+{"file":"percentage-calculator","name":"Percentage Calculator"},
  {"file":"calendar","name":"Calendar"},
 {"file":"url-encode-decode","name":"Url Encode Decode"},
 {"file":"url-to-qr","name":"Url To Qr"},
