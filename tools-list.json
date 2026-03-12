@@ -21,6 +21,7 @@
 {"file":"jwt-decoder","name":"Jwt Decoder"},
 {"file":"jwt-generator","name":"Jwt Generator"},
 {"file":"markdown-preview","name":"Markdown Preview"},
+{"file":"yaml-json-converter","name":"YAML JSON Converter"},
 {"file":"password-generator","name":"Password Generator"},
 {"file":"regex-tester","name":"Regex Tester"},
 {"file":"sql-formatter","name":"Sql Formatter"},

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>YAML ⇄ JSON Converter - ToolForge</title>
+<meta name="description" content="YAML JSON Converter free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>YAML ⇄ JSON Converter</h1>
+
+<p>Convert between YAML and JSON. All parsing happens in your browser.</p>
+
+<h3>YAML</h3>
+<textarea id="yaml" rows="12" style="width:90%" placeholder="name: Tom&#10;age: 20&#10;tags:&#10;  - dev&#10;  - ops"></textarea>
+
+<br><br>
+
+<button onclick="yamlToJson()">YAML → JSON</button>
+
+<h3 style="margin-top:24px">JSON</h3>
+<textarea id="json" rows="12" style="width:90%" placeholder='{"name":"Tom","age":20,"tags":["dev","ops"]}'></textarea>
+
+<br><br>
+
+<button onclick="jsonToYaml()">JSON → YAML</button>
+
+<h3 style="margin-top:24px">Status</h3>
+<p id="status" style="color:#666">Ready.</p>
+
+</div>
+
+<script>
+
+function setStatus(msg,isError){
+let el=document.getElementById("status")
+el.innerText=msg
+el.style.color=isError?"#b91c1c":"#16a34a"
+}
+
+function yamlToJson(){
+
+let input=document.getElementById("yaml").value
+
+try{
+let obj=jsyaml.load(input||"")
+let pretty=JSON.stringify(obj,null,2)
+document.getElementById("json").value=pretty
+setStatus("YAML parsed successfully.",false)
+}catch(e){
+document.getElementById("status").innerText="YAML parse error: "+e.message
+document.getElementById("status").style.color="#b91c1c"
+}
+
+}
+
+function jsonToYaml(){
+
+let input=document.getElementById("json").value
+
+try{
+let obj=JSON.parse(input||"null")
+let yaml=jsyaml.dump(obj,{lineWidth:80})
+document.getElementById("yaml").value=yaml
+setStatus("JSON parsed successfully.",false)
+}catch(e){
+document.getElementById("status").innerText="JSON parse error: "+e.message
+document.getElementById("status").style.color="#b91c1c"
+}
+
+}
+
+</script>
+
+</body>
+</html>
+
