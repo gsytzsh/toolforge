@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958678744111881" crossorigin="anonymous">
+</script>
+<meta charset="UTF-8">
+<title>Calendar - ToolForge</title>
+<meta name="description" content="Calendar free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+<style>
+  .cal-wrap{max-width:860px;margin:0 auto}
+  .cal-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:18px 0}
+  .cal-title{font-size:20px;font-weight:700}
+  .cal-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .cal-actions button{padding:8px 10px;border:1px solid #ddd;background:#fff;border-radius:8px;cursor:pointer}
+  .cal-actions button:hover{box-shadow:0 2px 6px rgba(0,0,0,0.08)}
+
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+  .cal-dow{font-size:12px;color:#666;text-align:center;padding:6px 0}
+  .cal-day{background:#fff;border:1px solid #e6e8ef;border-radius:10px;min-height:72px;padding:10px;cursor:pointer;position:relative;box-shadow:0 2px 6px rgba(0,0,0,0.04)}
+  .cal-day:hover{transform:translateY(-1px);box-shadow:0 6px 14px rgba(0,0,0,0.10)}
+  .cal-day.is-out{opacity:0.45}
+  .cal-day.is-today{border-color:#3b82f6;box-shadow:0 0 0 2px rgba(59,130,246,0.18)}
+  .cal-day.is-selected{border-color:#111827;box-shadow:0 0 0 2px rgba(17,24,39,0.12)}
+  .cal-num{font-weight:700}
+  .cal-dot{position:absolute;right:10px;top:10px;width:8px;height:8px;border-radius:999px;background:#f59e0b}
+
+  .cal-panel{margin-top:18px;background:#fff;border-radius:10px;border:1px solid #e6e8ef;box-shadow:0 2px 6px rgba(0,0,0,0.04);padding:14px}
+  .cal-panel h3{margin:0 0 10px 0}
+  .cal-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .cal-meta{color:#666;font-size:13px}
+  #note{width:100%;min-height:110px;border:1px solid #ddd;border-radius:8px;padding:10px;font-size:14px;resize:vertical}
+  .cal-panel button{padding:8px 10px;border:1px solid #ddd;background:#fff;border-radius:8px;cursor:pointer}
+  .cal-panel button.primary{background:#111827;color:#fff;border-color:#111827}
+  .cal-panel button.primary:hover{filter:brightness(1.05)}
+  .cal-panel button:hover{box-shadow:0 2px 6px rgba(0,0,0,0.08)}
+
+  @media(max-width:640px){
+    .cal-day{min-height:62px;padding:8px}
+    .cal-title{font-size:18px}
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+  <div class="cal-wrap">
+    <h1>Calendar</h1>
+    <p>Browse months and attach quick notes to specific dates (saved locally in your browser).</p>
+
+    <div class="cal-toolbar">
+      <div>
+        <div class="cal-title" id="monthTitle"></div>
+        <div class="cal-meta" id="tzMeta"></div>
+      </div>
+      <div class="cal-actions">
+        <button onclick="goPrevMonth()">← Prev</button>
+        <button onclick="goToday()">Today</button>
+        <button onclick="goNextMonth()">Next →</button>
+      </div>
+    </div>
+
+    <div class="cal-grid" id="dowRow"></div>
+    <div class="cal-grid" id="daysGrid" style="margin-top:8px"></div>
+
+    <div class="cal-panel">
+      <div class="cal-row" style="justify-content:space-between">
+        <h3 style="margin:0">Selected date</h3>
+        <div class="cal-meta" id="selectedMeta"></div>
+      </div>
+      <div style="margin-top:10px">
+        <textarea id="note" placeholder="Write a note for this date..."></textarea>
+      </div>
+      <div class="cal-row" style="margin-top:10px;justify-content:flex-end">
+        <button onclick="clearNote()">Clear</button>
+        <button class="primary" onclick="saveNote()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DOW=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+const MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"]
+const NOTE_PREFIX="toolforge.calendar.note:"
+
+let viewYear
+let viewMonth
+let selectedISO
+
+function pad2(n){return String(n).padStart(2,"0")}
+function toISODate(d){return d.getFullYear()+"-"+pad2(d.getMonth()+1)+"-"+pad2(d.getDate())}
+function fromISODate(iso){
+  const [y,m,day]=iso.split("-").map(Number)
+  return new Date(y,m-1,day,12,0,0,0)
+}
+function keyForISO(iso){return NOTE_PREFIX+iso}
+
+function getNote(iso){
+  return localStorage.getItem(keyForISO(iso)) || ""
+}
+function setNote(iso,txt){
+  const v=(txt||"").trim()
+  if(!v) localStorage.removeItem(keyForISO(iso))
+  else localStorage.setItem(keyForISO(iso),v)
+}
+function hasNote(iso){
+  return !!localStorage.getItem(keyForISO(iso))
+}
+
+function renderDOW(){
+  const row=document.getElementById("dowRow")
+  row.innerHTML=""
+  DOW.forEach(d=>{
+    const el=document.createElement("div")
+    el.className="cal-dow"
+    el.textContent=d
+    row.appendChild(el)
+  })
+}
+
+function render(){
+  document.getElementById("monthTitle").innerText=MONTHS[viewMonth]+" "+viewYear
+  document.getElementById("tzMeta").innerText="Timezone: "+Intl.DateTimeFormat().resolvedOptions().timeZone
+
+  const grid=document.getElementById("daysGrid")
+  grid.innerHTML=""
+
+  const first=new Date(viewYear,viewMonth,1,12,0,0,0)
+  const startDow=first.getDay()
+  const start=new Date(first)
+  start.setDate(first.getDate()-startDow)
+
+  const todayISO=toISODate(new Date())
+
+  for(let i=0;i<42;i++){
+    const d=new Date(start)
+    d.setDate(start.getDate()+i)
+    const iso=toISODate(d)
+
+    const cell=document.createElement("div")
+    cell.className="cal-day"
+    if(d.getMonth()!==viewMonth) cell.classList.add("is-out")
+    if(iso===todayISO) cell.classList.add("is-today")
+    if(iso===selectedISO) cell.classList.add("is-selected")
+
+    const num=document.createElement("div")
+    num.className="cal-num"
+    num.textContent=d.getDate()
+    cell.appendChild(num)
+
+    if(hasNote(iso)){
+      const dot=document.createElement("div")
+      dot.className="cal-dot"
+      cell.appendChild(dot)
+    }
+
+    cell.addEventListener("click",()=>selectDate(iso,true))
+    grid.appendChild(cell)
+  }
+
+  updateSelectedPanel()
+}
+
+function selectDate(iso,ensureVisibleMonth){
+  selectedISO=iso
+  const d=fromISODate(iso)
+  if(ensureVisibleMonth){
+    viewYear=d.getFullYear()
+    viewMonth=d.getMonth()
+  }
+  render()
+}
+
+function updateSelectedPanel(){
+  const meta=document.getElementById("selectedMeta")
+  const note=document.getElementById("note")
+  const d=fromISODate(selectedISO)
+  meta.innerText=selectedISO+" ("+DOW[d.getDay()]+")"
+  note.value=getNote(selectedISO)
+}
+
+function saveNote(){
+  const note=document.getElementById("note").value
+  setNote(selectedISO,note)
+  render()
+}
+
+function clearNote(){
+  document.getElementById("note").value=""
+  setNote(selectedISO,"")
+  render()
+}
+
+function goPrevMonth(){
+  const d=new Date(viewYear,viewMonth,1,12,0,0,0)
+  d.setMonth(d.getMonth()-1)
+  viewYear=d.getFullYear()
+  viewMonth=d.getMonth()
+  render()
+}
+function goNextMonth(){
+  const d=new Date(viewYear,viewMonth,1,12,0,0,0)
+  d.setMonth(d.getMonth()+1)
+  viewYear=d.getFullYear()
+  viewMonth=d.getMonth()
+  render()
+}
+function goToday(){
+  const t=new Date()
+  viewYear=t.getFullYear()
+  viewMonth=t.getMonth()
+  selectDate(toISODate(t),false)
+}
+
+function init(){
+  renderDOW()
+  const t=new Date()
+  viewYear=t.getFullYear()
+  viewMonth=t.getMonth()
+  selectedISO=toISODate(t)
+  render()
+}
+
+init()
+</script>
+</body>
+</html>
