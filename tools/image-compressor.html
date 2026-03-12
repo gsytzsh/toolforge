@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Image Compressor - ToolForge</title>
+<meta name="description" content="Image Compressor free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Image Compressor</h1>
+
+<p>Upload image and compress it.</p>
+
+<input type="file" id="file">
+
+<br><br>
+
+<button onclick="compress()">Compress</button>
+
+<br><br>
+
+<img id="preview" style="max-width:400px">
+
+</div>
+
+<script>
+
+function compress(){
+
+let file=document.getElementById("file").files[0]
+
+if(!file){
+alert("Select image")
+return
+}
+
+let reader=new FileReader()
+
+reader.onload=function(e){
+
+let img=new Image()
+
+img.onload=function(){
+
+let canvas=document.createElement("canvas")
+
+let ctx=canvas.getContext("2d")
+
+canvas.width=img.width
+canvas.height=img.height
+
+ctx.drawImage(img,0,0)
+
+let compressed=canvas.toDataURL("image/jpeg",0.6)
+
+document.getElementById("preview").src=compressed
+
+}
+
+img.src=e.target.result
+
+}
+
+reader.readAsDataURL(file)
+
+}
+
+</script>
+
+</body>
+</html>

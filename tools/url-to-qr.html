@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958678744111881" crossorigin="anonymous">
+</script>
+<meta charset="UTF-8">
+<title>URL to QR Code Generator</title>
+<meta name="description" content="Url To Qr free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+<script src="/js/qrcode.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>URL to QR Code Generator</h1>
+
+<p>Convert any website URL into a QR code.</p>
+
+<input id="url" placeholder="https://example.com" style="width:70%;padding:10px">
+
+<br><br>
+
+<button onclick="generateQR()">Generate</button>
+
+<div id="qrcode" style="margin-top:30px"></div>
+
+</div>
+
+<script>
+
+function generateQR(){
+
+document.getElementById("qrcode").innerHTML=""
+
+var url=document.getElementById("url").value
+
+new QRCode(document.getElementById("qrcode"),{
+text:url,
+width:256,
+height:256
+})
+
+}
+
+</script>
+
+</body>
+</html>

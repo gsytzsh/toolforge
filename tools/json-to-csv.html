@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>JSON to CSV Converter - ToolForge</title>
+<meta name="description" content="Json To Csv free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>JSON to CSV Converter</h1>
+
+<p>Convert JSON array into CSV format.</p>
+
+<textarea id="json" rows="10" style="width:90%" placeholder='[{"name":"Tom","age":20},{"name":"Alice","age":25}]'></textarea>
+
+<br><br>
+
+<button onclick="convert()">Convert</button>
+
+<h3>CSV Result</h3>
+
+<textarea id="csv" rows="10" style="width:90%"></textarea>
+
+</div>
+
+<script>
+
+function convert(){
+
+let jsonText=document.getElementById("json").value
+
+try{
+
+let data=JSON.parse(jsonText)
+
+if(!Array.isArray(data)){
+alert("JSON must be an array")
+return
+}
+
+let keys=Object.keys(data[0])
+
+let csv=keys.join(",")+"\n"
+
+data.forEach(row=>{
+csv+=keys.map(k=>row[k]).join(",")+"\n"
+})
+
+document.getElementById("csv").value=csv
+
+}catch(e){
+alert("Invalid JSON")
+}
+
+}
+
+</script>
+
+</body>
+</html>

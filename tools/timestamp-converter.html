@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958678744111881" crossorigin="anonymous">
+</script>
+<meta charset="UTF-8">
+<title>Unix Timestamp Converter - ToolForge</title>
+
+<meta name="description" content="Timestamp Converter free online tool">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Unix Timestamp Converter</h1>
+
+<p>Convert between Unix timestamp and human readable date.</p>
+
+<h3>Input</h3>
+
+<input id="input" style="width:300px" placeholder="1710000000 or 2025-10-11 12:00:00">
+
+<br><br>
+
+<button onclick="timestampToDate()">Timestamp → Date</button>
+<button onclick="dateToTimestamp()">Date → Timestamp</button>
+
+<h3>Result</h3>
+
+<p><b>Local Time:</b> <span id="local"></span></p>
+<p><b>UTC Time:</b> <span id="utc"></span></p>
+<p><b>Timestamp (sec):</b> <span id="ts"></span></p>
+<p><b>Timestamp (ms):</b> <span id="tsms"></span></p>
+
+<h3>Current Time</h3>
+
+<p>Now Timestamp (sec): <span id="now"></span></p>
+<p>Now Timestamp (ms): <span id="nowms"></span></p>
+
+</div>
+
+<script>
+
+function timestampToDate(){
+
+let v=document.getElementById("input").value.trim()
+
+if(!v) return
+
+if(v.length==13) v=parseInt(v)
+else v=parseInt(v)*1000
+
+let date=new Date(v)
+
+document.getElementById("local").innerText=date.toString()
+document.getElementById("utc").innerText=date.toUTCString()
+
+document.getElementById("ts").innerText=Math.floor(date.getTime()/1000)
+document.getElementById("tsms").innerText=date.getTime()
+
+}
+
+function dateToTimestamp(){
+
+let v=document.getElementById("input").value.trim()
+
+let date=new Date(v)
+
+if(isNaN(date)){
+
+document.getElementById("local").innerText="Invalid date"
+return
+
+}
+
+document.getElementById("local").innerText=date.toString()
+document.getElementById("utc").innerText=date.toUTCString()
+
+document.getElementById("ts").innerText=Math.floor(date.getTime()/1000)
+document.getElementById("tsms").innerText=date.getTime()
+
+}
+
+function updateNow(){
+
+let now=new Date()
+
+document.getElementById("now").innerText=Math.floor(now.getTime()/1000)
+document.getElementById("nowms").innerText=now.getTime()
+
+}
+
+setInterval(updateNow,1000)
+
+updateNow()
+
+</script>
+
+</body>
+
+</html>

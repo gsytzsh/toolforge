@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>JSON Diff - ToolForge</title>
+
+<meta name="description" content="Json Diff free online tool">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>JSON Diff</h1>
+
+<p>Compare two JSON texts and find differences.</p>
+
+<div style="display:flex;gap:20px;flex-wrap:wrap">
+
+<div style="flex:1">
+<h3>JSON A</h3>
+<textarea id="jsonA" rows="15" style="width:100%"></textarea>
+</div>
+
+<div style="flex:1">
+<h3>JSON B</h3>
+<textarea id="jsonB" rows="15" style="width:100%"></textarea>
+</div>
+
+</div>
+
+<br>
+
+<button onclick="compare()">Compare JSON</button>
+<button onclick="clearAll()">Clear</button>
+
+<h3>Differences</h3>
+
+<pre id="result"></pre>
+
+</div>
+
+<script>
+
+function compare(){
+
+let a=document.getElementById("jsonA").value
+let b=document.getElementById("jsonB").value
+
+let result=document.getElementById("result")
+
+try{
+
+let objA=JSON.parse(a)
+let objB=JSON.parse(b)
+
+let diff=[]
+
+function walk(a,b,path){
+
+for(let k in a){
+
+let p=path?path+"."+k:k
+
+if(!(k in b)){
+diff.push("Removed: "+p)
+}
+else if(typeof a[k]=="object" && typeof b[k]=="object"){
+walk(a[k],b[k],p)
+}
+else if(a[k]!==b[k]){
+diff.push("Changed: "+p+" : "+a[k]+" → "+b[k])
+}
+
+}
+
+for(let k in b){
+
+let p=path?path+"."+k:k
+
+if(!(k in a)){
+diff.push("Added: "+p+" = "+b[k])
+}
+
+}
+
+}
+
+walk(objA,objB,"")
+
+result.innerText=diff.length?diff.join("\n"):"No difference"
+
+}catch(e){
+
+result.innerText="Invalid JSON"
+
+}
+
+}
+
+function clearAll(){
+
+document.getElementById("jsonA").value=""
+document.getElementById("jsonB").value=""
+document.getElementById("result").innerText=""
+
+}
+
+</script>
+
+</body>
+
+</html>

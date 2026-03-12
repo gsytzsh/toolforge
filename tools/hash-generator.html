@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958678744111881" crossorigin="anonymous">
+</script>
+<meta charset="UTF-8">
+<title>Hash Generator - MD5 SHA256</title>
+<meta name="description" content="Hash Generator free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<div class="container">
+
+<h1>Hash Generator</h1>
+
+<textarea id="input" rows="8" style="width:90%" placeholder="Enter text"></textarea>
+
+<br><br>
+
+<button onclick="generate('SHA-256')">SHA256</button>
+
+<h3>Result</h3>
+<textarea id="output" rows="5" style="width:90%"></textarea>
+
+</div>
+
+<script>
+
+async function generate(type){
+
+let text=document.getElementById("input").value
+
+let encoder=new TextEncoder()
+let data=encoder.encode(text)
+
+let hash=await crypto.subtle.digest(type,data)
+
+let hex=[...new Uint8Array(hash)]
+.map(b=>b.toString(16).padStart(2,"0"))
+.join("")
+
+document.getElementById("output").value=hex
+
+}
+
+</script>
+
+</body>
+</html>

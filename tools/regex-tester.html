@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958678744111881" crossorigin="anonymous">
+</script>
+<meta charset="UTF-8">
+<title>Regex Tester</title>
+<meta name="description" content="Regex Tester free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Regex Tester</h1>
+
+<input id="pattern" placeholder="Regex pattern">
+
+<textarea id="text" rows="8" style="width:90%" placeholder="Text"></textarea>
+
+<br><br>
+
+<button onclick="test()">Test</button>
+
+<h3>Matches</h3>
+
+<pre id="result"></pre>
+
+</div>
+
+<script>
+
+function test(){
+
+let pattern=document.getElementById("pattern").value
+
+let text=document.getElementById("text").value
+
+try{
+
+let regex=new RegExp(pattern,"g")
+
+let matches=text.match(regex)
+
+document.getElementById("result").innerText=
+matches?matches.join("\n"):"No match"
+
+}catch(e){
+
+document.getElementById("result").innerText="Invalid regex"
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

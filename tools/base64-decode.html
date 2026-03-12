@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958678744111881" crossorigin="anonymous">
+</script>
+<meta charset="UTF-8">
+<title>Base64 Decode - Free Online Tool</title>
+<meta name="description" content="Base64 Decode free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Base64 Decode</h1>
+
+<p>Decode Base64 string back to text.</p>
+
+<textarea id="input" rows="8" style="width:90%" placeholder="Enter Base64"></textarea>
+
+<br><br>
+
+<button type="button" onclick="decode()">Decode</button>
+
+<h3>Result</h3>
+
+<textarea id="output" rows="8" style="width:90%"></textarea>
+
+</div>
+
+<script>
+
+function decode(){
+
+let input=document.getElementById("input").value
+
+try{
+
+let result=atob(input)
+
+document.getElementById("output").value=result
+
+}catch(e){
+
+document.getElementById("output").value="Invalid Base64"
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

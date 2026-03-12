@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958678744111881" crossorigin="anonymous">
+</script>
+<meta charset="UTF-8">
+<title>UUID Generator - Free Online Tool</title>
+<meta name="description" content="Uuid Generator free online tool">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>UUID Generator</h1>
+
+<p>Generate a random UUID instantly.</p>
+
+<button onclick="generateUUID()">Generate UUID</button>
+
+<h2 id="uuid"></h2>
+
+</div>
+
+<script>
+
+function generateUUID(){
+
+var uuid = crypto.randomUUID()
+
+document.getElementById("uuid").innerText = uuid
+
+}
+
+</script>
+
+</body>
+</html>

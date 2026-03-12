@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958678744111881" crossorigin="anonymous">
+</script>
+<meta charset="UTF-8">
+<title>Color Picker</title>
+<meta name="description" content="Color Picker free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Color Picker</h1>
+
+<input type="color" id="color">
+
+<h3>HEX</h3>
+
+<p id="hex"></p>
+
+</div>
+
+<script>
+
+let picker=document.getElementById("color")
+
+picker.addEventListener("input",function(){
+
+document.getElementById("hex").innerText=this.value
+
+})
+
+</script>
+
+</body>
+</html>

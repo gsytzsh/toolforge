@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>HTTP Status Code Lookup - ToolForge</title>
+
+<meta name="description" content="Http Status Lookup free online tool">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>HTTP Status Code Lookup</h1>
+
+<p>Enter an HTTP status code to see its meaning.</p>
+
+<input id="code" placeholder="e.g. 404" style="width:120px">
+
+<button onclick="lookup()">Lookup</button>
+
+<h3>Result</h3>
+
+<pre id="result"></pre>
+
+</div>
+
+<script>
+
+const statusCodes = {
+"100": {name:"Continue",desc:"Request received, continue."},
+"101": {name:"Switching Protocols",desc:"Server switching protocols."},
+
+"200": {name:"OK",desc:"Request succeeded."},
+"201": {name:"Created",desc:"Resource successfully created."},
+"202": {name:"Accepted",desc:"Request accepted but not finished."},
+"204": {name:"No Content",desc:"Success with no response body."},
+
+"301": {name:"Moved Permanently",desc:"Resource permanently moved."},
+"302": {name:"Found",desc:"Temporary redirect."},
+"304": {name:"Not Modified",desc:"Resource not modified."},
+
+"400": {name:"Bad Request",desc:"Invalid request syntax."},
+"401": {name:"Unauthorized",desc:"Authentication required."},
+"403": {name:"Forbidden",desc:"Access denied."},
+"404": {name:"Not Found",desc:"Resource not found."},
+"405": {name:"Method Not Allowed",desc:"HTTP method not allowed."},
+"408": {name:"Request Timeout",desc:"Server timed out waiting."},
+"429": {name:"Too Many Requests",desc:"Rate limit exceeded."},
+
+"500": {name:"Internal Server Error",desc:"Server encountered error."},
+"501": {name:"Not Implemented",desc:"Feature not supported."},
+"502": {name:"Bad Gateway",desc:"Invalid response from upstream."},
+"503": {name:"Service Unavailable",desc:"Server temporarily unavailable."},
+"504": {name:"Gateway Timeout",desc:"Upstream server timeout."}
+}
+
+function lookup(){
+
+let code=document.getElementById("code").value.trim()
+
+let res=document.getElementById("result")
+
+if(statusCodes[code]){
+
+res.innerText=
+code+" "+statusCodes[code].name+"\n\n"+statusCodes[code].desc
+
+}else{
+
+res.innerText="Status code not found."
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

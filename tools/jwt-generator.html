@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>JWT Generator - ToolForge</title>
+
+<meta name="description" content="Jwt Generator free online tool">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>JWT Generator</h1>
+
+<p>Create a JSON Web Token.</p>
+
+<h3>Header</h3>
+
+<textarea id="header" rows="5" style="width:90%">
+{
+ "alg": "HS256",
+ "typ": "JWT"
+}
+</textarea>
+
+<h3>Payload</h3>
+
+<textarea id="payload" rows="6" style="width:90%">
+{
+ "user": "admin",
+ "role": "test"
+}
+</textarea>
+
+<h3>Secret</h3>
+
+<input id="secret" style="width:300px" placeholder="secret key">
+
+<br><br>
+
+<button onclick="generate()">Generate</button>
+
+<h3>JWT Token</h3>
+
+<textarea id="token" rows="4" style="width:90%"></textarea>
+
+</div>
+
+<script>
+
+function base64url(source){
+
+let encoded=btoa(source)
+
+return encoded.replace(/=/g,"")
+.replace(/\+/g,"-")
+.replace(/\//g,"_")
+
+}
+
+async function generate(){
+
+let header=document.getElementById("header").value
+let payload=document.getElementById("payload").value
+let secret=document.getElementById("secret").value
+
+let header64=base64url(header)
+let payload64=base64url(payload)
+
+let data=header64+"."+payload64
+
+const enc=new TextEncoder()
+
+let key=await crypto.subtle.importKey(
+"raw",
+enc.encode(secret),
+{name:"HMAC",hash:"SHA-256"},
+false,
+["sign"]
+)
+
+let sig=await crypto.subtle.sign(
+"HMAC",
+key,
+enc.encode(data)
+)
+
+let signature=btoa(
+String.fromCharCode(...new Uint8Array(sig))
+)
+.replace(/=/g,"")
+.replace(/\+/g,"-")
+.replace(/\//g,"_")
+
+let token=data+"."+signature
+
+document.getElementById("token").value=token
+
+}
+
+</script>
+
+</body>
+
+</html>

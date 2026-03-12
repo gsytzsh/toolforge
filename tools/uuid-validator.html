@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>UUID Validator - ToolForge</title>
+
+<meta name="description" content="Uuid Validator free online tool">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>UUID Validator</h1>
+
+<p>Check whether a UUID string is valid.</p>
+
+<input id="uuid" style="width:350px" placeholder="Enter UUID">
+
+<br><br>
+
+<button onclick="checkUUID()">Validate</button>
+<button onclick="clearInput()">Clear</button>
+
+<h3>Result</h3>
+
+<p id="result"></p>
+
+</div>
+
+<script>
+
+function checkUUID(){
+
+let uuid=document.getElementById("uuid").value.trim()
+
+let regex=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+
+let result=document.getElementById("result")
+
+if(regex.test(uuid)){
+
+result.innerText="Valid UUID"
+result.style.color="green"
+
+}else{
+
+result.innerText="Invalid UUID"
+result.style.color="red"
+
+}
+
+}
+
+function clearInput(){
+
+document.getElementById("uuid").value=""
+document.getElementById("result").innerText=""
+
+}
+
+</script>
+
+</body>
+
+</html>

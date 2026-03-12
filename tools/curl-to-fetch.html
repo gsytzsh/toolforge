@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Curl to Fetch Converter - ToolForge</title>
+
+<meta name="description" content="Curl To Fetch free online tool">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Curl to Fetch Converter</h1>
+
+<p>Convert curl command into JavaScript fetch.</p>
+
+<textarea id="curl" rows="10" style="width:90%" placeholder="Paste curl command"></textarea>
+
+<br><br>
+
+<button onclick="convert()">Convert</button>
+
+<h3>Fetch Code</h3>
+
+<textarea id="result" rows="12" style="width:90%"></textarea>
+
+</div>
+
+<script>
+
+function convert(){
+
+let curl=document.getElementById("curl").value
+
+let urlMatch=curl.match(/curl\s+['"]?([^'"\s]+)/)
+let url=urlMatch?urlMatch[1]:""
+
+let methodMatch=curl.match(/-X\s+(\w+)/)
+let method=methodMatch?methodMatch[1]:"GET"
+
+let headers={}
+let headerMatches=[...curl.matchAll(/-H\s+['"]([^:]+):\s*(.*?)['"]/g)]
+
+headerMatches.forEach(h=>{
+headers[h[1]]=h[2]
+})
+
+let bodyMatch=curl.match(/-d\s+['"](.+?)['"]/)
+let body=bodyMatch?bodyMatch[1]:""
+
+let fetchCode=`fetch("${url}", {
+  method: "${method}",
+  headers: ${JSON.stringify(headers,null,2)},`
+
+if(body){
+fetchCode+=`
+
+  body: ${JSON.stringify(body)}`
+}
+
+fetchCode+=`
+})
+.then(res => res.json())
+.then(data => console.log(data));
+`
+
+document.getElementById("result").value=fetchCode
+
+}
+
+</script>
+
+</body>
+
+</html>

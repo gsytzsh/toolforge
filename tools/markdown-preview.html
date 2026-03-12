@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958678744111881" crossorigin="anonymous">
+</script>
+<meta charset="UTF-8">
+<title>Markdown Preview</title>
+<meta name="description" content="Markdown Preview free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Markdown Preview</h1>
+
+<textarea id="input" rows="10" style="width:90%"></textarea>
+
+<br><br>
+
+<button onclick="render()">Preview</button>
+
+<h3>Output</h3>
+
+<div id="output"></div>
+
+</div>
+
+<script>
+
+function render(){
+
+let text=document.getElementById("input").value
+
+document.getElementById("output").innerHTML=marked.parse(text)
+
+}
+
+</script>
+
+</body>
+</html>

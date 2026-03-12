@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>CSV to JSON Converter - ToolForge</title>
+<meta name="description" content="Csv To Json free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>CSV to JSON Converter</h1>
+
+<p>Convert CSV data into JSON.</p>
+
+<textarea id="csv" rows="10" style="width:90%" placeholder="name,age&#10;Tom,20&#10;Alice,25"></textarea>
+
+<br><br>
+
+<button onclick="convert()">Convert</button>
+
+<h3>JSON Result</h3>
+
+<textarea id="json" rows="10" style="width:90%"></textarea>
+
+</div>
+
+<script>
+
+function convert(){
+
+let csv=document.getElementById("csv").value.trim()
+
+let lines=csv.split("\n")
+
+let headers=lines[0].split(",")
+
+let result=[]
+
+for(let i=1;i<lines.length;i++){
+
+let obj={}
+let values=lines[i].split(",")
+
+headers.forEach((h,index)=>{
+obj[h]=values[index]
+})
+
+result.push(obj)
+
+}
+
+document.getElementById("json").value=
+JSON.stringify(result,null,2)
+
+}
+
+</script>
+
+</body>
+</html>

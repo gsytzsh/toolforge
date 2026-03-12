@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958678744111881" crossorigin="anonymous">
+</script>
+<meta charset="UTF-8">
+<title>Word Counter - Free Online Tool</title>
+<meta name="description" content="Word Counter free online tool">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Word Counter</h1>
+
+<textarea id="text" rows="10" style="width:90%" placeholder="Enter text"></textarea>
+
+<br><br>
+
+<button onclick="countWords()">Count</button>
+
+<h2 id="result"></h2>
+
+</div>
+
+<script>
+
+function countWords(){
+
+let text=document.getElementById("text").value.trim()
+
+let words=text.split(/\s+/).filter(Boolean)
+
+document.getElementById("result").innerText="Words: "+words.length
+
+}
+
+</script>
+
+</body>
+</html>

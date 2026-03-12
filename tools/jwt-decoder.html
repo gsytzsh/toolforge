@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>JWT Decoder - ToolForge</title>
+
+<meta name="description" content="Jwt Decoder free online tool">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>JWT Decoder</h1>
+
+<p>Decode JSON Web Token and inspect header and payload.</p>
+
+<textarea id="token" rows="6" style="width:90%" placeholder="Paste JWT token here"></textarea>
+
+<br><br>
+
+<button onclick="decode()">Decode JWT</button>
+
+<h3>Header</h3>
+
+<pre id="header"></pre>
+
+<h3>Payload</h3>
+
+<pre id="payload"></pre>
+
+</div>
+
+<script>
+
+function decode(){
+
+let token=document.getElementById("token").value.trim()
+
+let parts=token.split(".")
+
+if(parts.length<2){
+
+alert("Invalid JWT")
+
+return
+
+}
+
+try{
+
+let header=JSON.parse(atob(parts[0]))
+
+let payload=JSON.parse(atob(parts[1]))
+
+document.getElementById("header").innerText=
+JSON.stringify(header,null,2)
+
+document.getElementById("payload").innerText=
+JSON.stringify(payload,null,2)
+
+}catch(e){
+
+alert("Decode failed")
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958678744111881" crossorigin="anonymous">
+</script>
+<meta charset="UTF-8">
+
+<title>JSON Viewer & Formatter - Free Online Tool</title>
+
+<meta name="description" content="Json Viewer free online tool">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<style>
+
+textarea{
+width:90%;
+font-family:monospace;
+}
+
+pre{
+background:#1e1e1e;
+color:#eee;
+padding:15px;
+border-radius:6px;
+overflow:auto;
+width:90%;
+}
+
+.key{color:#9cdcfe}
+.string{color:#ce9178}
+.number{color:#b5cea8}
+.boolean{color:#569cd6}
+.null{color:#569cd6}
+
+.error{
+color:red;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>JSON Viewer</h1>
+
+<p>Format, validate and highlight JSON instantly.</p>
+
+<textarea id="input" rows="12" placeholder='{"name":"toolforge","age":3}'></textarea>
+
+<br><br>
+
+<button onclick="formatJSON()">Format</button>
+
+<button onclick="compressJSON()">Compress</button>
+
+<button onclick="clearText()">Clear</button>
+
+<h3>Result</h3>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function syntaxHighlight(json){
+
+json=json.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+
+return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,function(match){
+
+let cls="number"
+
+if(/^"/.test(match)){
+
+if(/:$/.test(match)){
+
+cls="key"
+
+}else{
+
+cls="string"
+
+}
+
+}else if(/true|false/.test(match)){
+
+cls="boolean"
+
+}else if(/null/.test(match)){
+
+cls="null"
+
+}
+
+return '<span class="'+cls+'">'+match+'</span>'
+
+})
+
+}
+
+function formatJSON(){
+
+let text=document.getElementById("input").value
+
+try{
+
+let obj=JSON.parse(text)
+
+let formatted=JSON.stringify(obj,null,4)
+
+let highlighted=syntaxHighlight(formatted)
+
+document.getElementById("result").innerHTML="<pre>"+highlighted+"</pre>"
+
+}catch(e){
+
+document.getElementById("result").innerHTML="<div class='error'>Invalid JSON: "+e.message+"</div>"
+
+}
+
+}
+
+function compressJSON(){
+
+let text=document.getElementById("input").value
+
+try{
+
+let obj=JSON.parse(text)
+
+let compressed=JSON.stringify(obj)
+
+document.getElementById("result").innerHTML="<pre>"+compressed+"</pre>"
+
+}catch(e){
+
+document.getElementById("result").innerHTML="<div class='error'>Invalid JSON</div>"
+
+}
+
+}
+
+function clearText(){
+
+document.getElementById("input").value=""
+
+document.getElementById("result").innerHTML=""
+
+}
+
+</script>
+
+</body>
+
+</html>

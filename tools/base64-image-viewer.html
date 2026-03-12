@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Base64 Image Viewer - ToolForge</title>
+
+<meta name="description" content="Base64 Image Viewer free online tool">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Base64 Image Viewer</h1>
+
+<p>Paste a Base64 image string to preview the image.</p>
+
+<textarea id="input" rows="8" style="width:90%" placeholder="Paste Base64 image string here"></textarea>
+
+<br><br>
+
+<button onclick="renderImage()">Preview Image</button>
+<button onclick="clearAll()">Clear</button>
+
+<h3>Image Preview</h3>
+
+<div id="preview"></div>
+
+</div>
+
+<script>
+
+function renderImage(){
+
+let base64=document.getElementById("input").value.trim()
+
+let preview=document.getElementById("preview")
+
+preview.innerHTML=""
+
+if(!base64){
+
+preview.innerText="No Base64 data"
+
+return
+
+}
+
+if(!base64.startsWith("data:image")){
+
+base64="data:image/png;base64,"+base64
+
+}
+
+let img=document.createElement("img")
+
+img.src=base64
+img.style.maxWidth="100%"
+img.style.border="1px solid #ddd"
+
+preview.appendChild(img)
+
+}
+
+function clearAll(){
+
+document.getElementById("input").value=""
+document.getElementById("preview").innerHTML=""
+
+}
+
+</script>
+
+</body>
+
+</html>

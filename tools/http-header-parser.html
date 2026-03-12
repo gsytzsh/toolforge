@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>HTTP Header Parser - ToolForge</title>
+<meta name="description" content="Http Header Parser free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>HTTP Header Parser</h1>
+
+<p>Convert raw HTTP headers into structured JSON.</p>
+
+<textarea id="header" rows="10" style="width:90%" placeholder="Host: example.com&#10;User-Agent: Chrome"></textarea>
+
+<br><br>
+
+<button onclick="parseHeader()">Parse</button>
+
+<h3>JSON Result</h3>
+
+<pre id="result"></pre>
+
+</div>
+
+<script>
+
+function parseHeader(){
+
+let text=document.getElementById("header").value.trim()
+
+let lines=text.split("\n")
+
+let obj={}
+
+lines.forEach(line=>{
+
+let parts=line.split(":")
+
+if(parts.length>=2){
+
+let key=parts.shift().trim()
+let value=parts.join(":").trim()
+
+obj[key]=value
+
+}
+
+})
+
+document.getElementById("result").innerText=
+JSON.stringify(obj,null,2)
+
+}
+
+</script>
+
+</body>
+</html>

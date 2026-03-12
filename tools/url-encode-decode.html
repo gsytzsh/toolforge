@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>URL Encode Decode - ToolForge</title>
+
+<meta name="description" content="Url Encode Decode free online tool">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>URL Encode / Decode</h1>
+
+<p>Encode or decode URL strings safely.</p>
+
+<textarea id="input" rows="8" style="width:90%" placeholder="Enter text or URL"></textarea>
+
+<br><br>
+
+<button onclick="encode()">Encode</button>
+<button onclick="decode()">Decode</button>
+<button onclick="clearText()">Clear</button>
+
+<h3>Result</h3>
+
+<textarea id="output" rows="8" style="width:90%"></textarea>
+
+</div>
+
+<script>
+
+function encode(){
+
+let text=document.getElementById("input").value
+
+document.getElementById("output").value=
+encodeURIComponent(text)
+
+}
+
+function decode(){
+
+let text=document.getElementById("input").value
+
+try{
+
+document.getElementById("output").value=
+decodeURIComponent(text)
+
+}catch(e){
+
+document.getElementById("output").value="Invalid encoded URL"
+
+}
+
+}
+
+function clearText(){
+
+document.getElementById("input").value=""
+document.getElementById("output").value=""
+
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Base64 to Image Viewer - ToolForge</title>
+<meta name="description" content="Base64 To Image free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Base64 to Image Viewer</h1>
+
+<p>Paste Base64 string to preview image.</p>
+
+<textarea id="base64" rows="10" style="width:90%"></textarea>
+
+<br><br>
+
+<button onclick="show()">Preview</button>
+
+<h3>Image</h3>
+
+<img id="img" style="max-width:400px">
+
+</div>
+
+<script>
+
+function show(){
+
+let base64=document.getElementById("base64").value.trim()
+
+document.getElementById("img").src=base64
+
+}
+
+</script>
+
+</body>
+</html>

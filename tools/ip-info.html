@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>IP Info Lookup - ToolForge</title>
+
+<meta name="description" content="Ip Info free online tool">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>IP Info Lookup</h1>
+
+<p>Get location and network information about an IP address.</p>
+
+<input id="ip" placeholder="Enter IP address">
+
+<button onclick="lookup()">Lookup</button>
+
+<h3>Result</h3>
+
+<pre id="result"></pre>
+
+</div>
+
+<script>
+
+async function lookup(){
+
+let ip=document.getElementById("ip").value.trim()
+
+if(!ip){
+
+document.getElementById("result").innerText="Enter IP address"
+return
+
+}
+
+try{
+
+let res=await fetch("https://ipapi.co/"+ip+"/json/")
+
+let data=await res.json()
+
+document.getElementById("result").innerText=
+JSON.stringify(data,null,2)
+
+}catch(e){
+
+document.getElementById("result").innerText="Lookup failed"
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>

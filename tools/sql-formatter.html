@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>SQL Formatter - ToolForge</title>
+
+<meta name="description" content="Sql Formatter free online tool">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>SQL Formatter</h1>
+
+<p>Format SQL queries to improve readability.</p>
+
+<textarea id="input" rows="12" style="width:90%" placeholder="Paste SQL here"></textarea>
+
+<br><br>
+
+<button onclick="formatSQL()">Format</button>
+<button onclick="clearSQL()">Clear</button>
+
+<h3>Formatted SQL</h3>
+
+<textarea id="output" rows="12" style="width:90%"></textarea>
+
+</div>
+
+<script>
+
+function formatSQL(){
+
+let sql=document.getElementById("input").value
+
+let keywords=[
+"SELECT","FROM","WHERE","GROUP BY","ORDER BY","HAVING",
+"LEFT JOIN","RIGHT JOIN","INNER JOIN","OUTER JOIN","JOIN",
+"AND","OR","LIMIT","OFFSET","VALUES","SET"
+]
+
+keywords.forEach(k=>{
+let r=new RegExp("\\s+"+k,"gi")
+sql=sql.replace(r,"\n"+k)
+})
+
+sql=sql.replace(/SELECT/gi,"SELECT\n  ")
+sql=sql.replace(/,/g,",\n  ")
+
+document.getElementById("output").value=sql.trim()
+
+}
+
+function clearSQL(){
+
+document.getElementById("input").value=""
+document.getElementById("output").value=""
+
+}
+
+</script>
+
+</body>
+
+</html>

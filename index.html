@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<title>ToolForge - Free Online Developer Tools</title>
+
+<meta name="description" content="Free online developer tools: JSON formatter, Base64 encoder, UUID generator, JWT tools and more.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>ToolForge</h1>
+<p class="subtitle">Free Online Developer Tools</p>
+
+<input id="search" placeholder="Search tools..." onkeyup="searchTools()">
+
+<h2>All Tools</h2>
+
+<div id="tool-list" class="tool-grid"></div>
+
+</div>
+
+
+<script>
+
+let allTools=[]
+
+fetch("/tools-list.json")
+.then(r=>r.json())
+.then(data=>{
+allTools=data
+render(data)
+})
+
+
+function render(list){
+
+let container=document.getElementById("tool-list")
+
+container.innerHTML=""
+
+list.forEach(tool=>{
+
+let card=document.createElement("a")
+
+card.href="/tools/"+tool.file+".html"
+
+card.className="tool-card"
+
+card.innerHTML=`
+<div class="tool-title">${tool.name}</div>
+`
+
+container.appendChild(card)
+
+})
+
+}
+
+
+function searchTools(){
+
+let keyword=document.getElementById("search").value.toLowerCase()
+
+let filtered=allTools.filter(t =>
+t.name.toLowerCase().includes(keyword)
+)
+
+render(filtered)
+
+}
+
+</script>
+
+
+</body>
+
+</html>

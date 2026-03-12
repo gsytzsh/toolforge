@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>HTML to Markdown Converter - ToolForge</title>
+
+<meta name="description" content="Html To Markdown free online tool">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>HTML to Markdown Converter</h1>
+
+<p>Convert HTML code into Markdown.</p>
+
+<textarea id="html" rows="10" style="width:90%" placeholder="<h1>Hello</h1>"></textarea>
+
+<br><br>
+
+<button onclick="convert()">Convert</button>
+
+<h3>Markdown Result</h3>
+
+<textarea id="markdown" rows="10" style="width:90%"></textarea>
+
+</div>
+
+<script>
+
+function convert(){
+
+let html=document.getElementById("html").value
+
+let md=html
+
+.replace(/<h1>(.*?)<\/h1>/gi,"# $1\n")
+.replace(/<h2>(.*?)<\/h2>/gi,"## $1\n")
+.replace(/<h3>(.*?)<\/h3>/gi,"### $1\n")
+
+.replace(/<strong>(.*?)<\/strong>/gi,"**$1**")
+.replace(/<b>(.*?)<\/b>/gi,"**$1**")
+
+.replace(/<em>(.*?)<\/em>/gi,"*$1*")
+.replace(/<i>(.*?)<\/i>/gi,"*$1*")
+
+.replace(/<a href="(.*?)">(.*?)<\/a>/gi,"[$2]($1)")
+
+.replace(/<ul>/gi,"")
+.replace(/<\/ul>/gi,"")
+
+.replace(/<li>(.*?)<\/li>/gi,"- $1\n")
+
+.replace(/<br\s*\/?>/gi,"\n")
+
+.replace(/<p>(.*?)<\/p>/gi,"$1\n")
+
+.replace(/<[^>]+>/g,"")
+
+document.getElementById("markdown").value=md
+
+}
+
+</script>
+
+</body>
+
+</html>

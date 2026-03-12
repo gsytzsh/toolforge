@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>User Agent Parser - ToolForge</title>
+
+<meta name="description" content="User Agent Parser free online tool">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>User Agent Parser</h1>
+
+<p>Analyze browser and OS from User-Agent string.</p>
+
+<textarea id="ua" rows="6" style="width:90%" placeholder="Paste User-Agent string"></textarea>
+
+<br><br>
+
+<button onclick="parseUA()">Parse</button>
+
+<h3>Result</h3>
+
+<pre id="result"></pre>
+
+</div>
+
+<script>
+
+function parseUA(){
+
+let ua=document.getElementById("ua").value
+
+let browser="Unknown"
+let os="Unknown"
+
+if(ua.includes("Chrome")) browser="Chrome"
+if(ua.includes("Firefox")) browser="Firefox"
+if(ua.includes("Safari") && !ua.includes("Chrome")) browser="Safari"
+if(ua.includes("Edg")) browser="Edge"
+
+if(ua.includes("Windows")) os="Windows"
+if(ua.includes("Mac")) os="MacOS"
+if(ua.includes("Linux")) os="Linux"
+if(ua.includes("Android")) os="Android"
+if(ua.includes("iPhone")) os="iOS"
+
+let result={
+browser:browser,
+os:os,
+userAgent:ua
+}
+
+document.getElementById("result").innerText=
+JSON.stringify(result,null,2)
+
+}
+
+</script>
+
+</body>
+
+</html>
