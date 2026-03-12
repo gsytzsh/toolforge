@@ -1,5 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<title>Timezone Converter – Convert Date Time to Different Timezones | ToolForge</title>
+<meta name="description" content="Free online Timezone Converter to convert date and time to UTC, Asia/Shanghai, America/New_York, Europe/London and other timezones. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Timezone Converter</h1>
+
+<p class="subtitle">Pick a date and time, then see it displayed in your chosen timezone.</p>
+
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<h3>Date & Time</h3>
 <input type="datetime-local" id="time">
 
+<h3>Target Timezone</h3>
 <select id="zone">
 <option value="UTC">UTC</option>
 <option value="Asia/Shanghai">Asia/Shanghai</option>
@@ -7,20 +31,28 @@
 <option value="Europe/London">London</option>
 </select>
 
+<br><br>
+
 <button onclick="convert()">Convert</button>
 
+<h3 style="margin-top:24px">Result</h3>
 <pre id="result"></pre>
+
+</div>
 
 <script>
 
 function convert(){
 
 let t=document.getElementById("time").value
-
 let zone=document.getElementById("zone").value
 
-let d=new Date(t)
+if(!t){
+document.getElementById("result").textContent="Please select date and time."
+return
+}
 
+let d=new Date(t)
 let res=d.toLocaleString("en-US",{timeZone:zone})
 
 document.getElementById("result").textContent=res
@@ -28,3 +60,6 @@ document.getElementById("result").textContent=res
 }
 
 </script>
+
+</body>
+</html>

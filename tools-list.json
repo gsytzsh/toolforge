@@ -27,6 +27,7 @@
 {"file":"regex-tester","name":"Regex Tester"},
 {"file":"sql-formatter","name":"Sql Formatter"},
 {"file":"timestamp-converter","name":"Timestamp Converter"},
+{"file":"timezone-converter","name":"Timezone Converter"},
 {"file":"percentage-calculator","name":"Percentage Calculator"},
 {"file":"random-number-generator","name":"Random Number Generator"},
  {"file":"calendar","name":"Calendar"},
