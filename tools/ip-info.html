@@ -22,6 +22,9 @@
 
 <p>Get location and network information about an IP address.</p>
 
+<h3>Your IP</h3>
+<p id="self-ip">Detecting your IP...</p>
+
 <input id="ip" placeholder="Enter IP address">
 
 <button onclick="lookup()">Lookup</button>
@@ -44,6 +47,31 @@ document.getElementById("result").innerText="Enter IP address"
 return
 
 }
+
+async function loadSelfIP(){
+
+try{
+
+let res=await fetch("https://ipapi.co/json/")
+let data=await res.json()
+
+if(data && data.ip){
+let city=data.city||"Unknown city"
+document.getElementById("self-ip").innerText=
+data.ip+"  ·  "+city
+}else{
+document.getElementById("self-ip").innerText="Unable to detect your IP."
+}
+
+}catch(e){
+
+document.getElementById("self-ip").innerText="Unable to detect your IP."
+
+}
+
+}
+
+loadSelfIP()
 
 try{
 
