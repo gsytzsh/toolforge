@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Byte Size Converter - ToolForge</title>
+<meta name="description" content="Byte Size Converter free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Byte Size Converter</h1>
+
+<p>Convert between bytes, KB, MB, GB and TB.</p>
+
+<h3>Bytes</h3>
+<input id="bytes" type="number" style="width:200px" placeholder="1048576">
+
+<br><br>
+
+<button onclick="convert()">Convert</button>
+
+<h3 style="margin-top:24px">Result</h3>
+<p>KB: <span id="kb"></span></p>
+<p>MB: <span id="mb"></span></p>
+<p>GB: <span id="gb"></span></p>
+<p>TB: <span id="tb"></span></p>
+
+</div>
+
+<script>
+
+function fmt(n){
+if(!isFinite(n)) return ""
+return Number(n.toFixed(4)).toString()
+}
+
+function convert(){
+let v=parseFloat(document.getElementById("bytes").value)
+if(isNaN(v)){
+document.getElementById("kb").innerText="Enter a number."
+document.getElementById("mb").innerText=""
+document.getElementById("gb").innerText=""
+document.getElementById("tb").innerText=""
+return
+}
+document.getElementById("kb").innerText=fmt(v/1024)
+document.getElementById("mb").innerText=fmt(v/1024/1024)
+document.getElementById("gb").innerText=fmt(v/1024/1024/1024)
+document.getElementById("tb").innerText=fmt(v/1024/1024/1024/1024)
+}
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>URL Parser - ToolForge</title>
+<meta name="description" content="URL Parser free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>URL Parser</h1>
+
+<p>Parse a URL into protocol, host, path and query parameters.</p>
+
+<h3>Input URL</h3>
+<input id="url" style="width:80%" placeholder="https://example.com/path?foo=1&bar=2">
+
+<br><br>
+
+<button onclick="parseUrl()">Parse</button>
+
+<h3 style="margin-top:24px">Components</h3>
+<pre id="components"></pre>
+
+<h3>Query Parameters</h3>
+<pre id="params"></pre>
+
+</div>
+
+<script>
+
+function parseUrl(){
+
+let input=document.getElementById("url").value.trim()
+
+if(!input){
+document.getElementById("components").innerText="Enter URL"
+document.getElementById("params").innerText=""
+return
+}
+
+try{
+
+let u=new URL(input)
+
+let comp={
+href:u.href,
+protocol:u.protocol,
+host:u.host,
+hostname:u.hostname,
+port:u.port||"(default)",
+pathname:u.pathname,
+hash:u.hash||"(none)"
+}
+
+document.getElementById("components").innerText=
+JSON.stringify(comp,null,2)
+
+let paramsObj={}
+u.searchParams.forEach((v,k)=>{
+if(paramsObj[k]===undefined) paramsObj[k]=v
+else if(Array.isArray(paramsObj[k])) paramsObj[k].push(v)
+else paramsObj[k]=[paramsObj[k],v]
+})
+
+if(Object.keys(paramsObj).length===0){
+document.getElementById("params").innerText="(no query parameters)"
+}else{
+document.getElementById("params").innerText=
+JSON.stringify(paramsObj,null,2)
+}
+
+}catch(e){
+document.getElementById("components").innerText="Invalid URL"
+document.getElementById("params").innerText=""
+}
+
+}
+
+</script>
+
+</body>
+</html>
+

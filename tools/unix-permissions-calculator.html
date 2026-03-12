@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Unix Permissions Calculator - ToolForge</title>
+<meta name="description" content="Unix Permissions Calculator free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Unix Permissions Calculator</h1>
+
+<p>Build chmod values from read/write/execute flags.</p>
+
+<h3>User</h3>
+<label><input type="checkbox" id="ur"> read</label>
+<label><input type="checkbox" id="uw"> write</label>
+<label><input type="checkbox" id="ux"> execute</label>
+
+<h3>Group</h3>
+<label><input type="checkbox" id="gr"> read</label>
+<label><input type="checkbox" id="gw"> write</label>
+<label><input type="checkbox" id="gx"> execute</label>
+
+<h3>Other</h3>
+<label><input type="checkbox" id="or"> read</label>
+<label><input type="checkbox" id="ow"> write</label>
+<label><input type="checkbox" id="ox"> execute</label>
+
+<br><br>
+
+<button onclick="calc()">Calculate</button>
+
+<h3 style="margin-top:24px">Result</h3>
+<p><b>Numeric:</b> <span id="numeric"></span></p>
+<p><b>Symbolic:</b> <span id="symbolic"></span></p>
+
+</div>
+
+<script>
+
+function part(r,w,x){
+return (r?4:0)+(w?2:0)+(x?1:0)
+}
+
+function sym(r,w,x){
+return (r?"r":"-")+(w?"w":"-")+(x?"x":"-")
+}
+
+function calc(){
+let ur=document.getElementById("ur").checked
+let uw=document.getElementById("uw").checked
+let ux=document.getElementById("ux").checked
+let gr=document.getElementById("gr").checked
+let gw=document.getElementById("gw").checked
+let gx=document.getElementById("gx").checked
+let or=document.getElementById("or").checked
+let ow=document.getElementById("ow").checked
+let ox=document.getElementById("ox").checked
+
+let u=part(ur,uw,ux)
+let g=part(gr,gw,gx)
+let o=part(or,ow,ox)
+
+document.getElementById("numeric").innerText=""+u+g+o
+document.getElementById("symbolic").innerText=
+sym(ur,uw,ux)+sym(gr,gw,gx)+sym(or,ow,ox)
+}
+
+</script>
+
+</body>
+</html>
+

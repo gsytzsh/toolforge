@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Cron Generator - ToolForge</title>
+<meta name="description" content="Cron Generator free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Cron Generator</h1>
+
+<p>Build common cron expressions from simple options.</p>
+
+<h3>Minutes</h3>
+<select id="min">
+<option value="*">Every minute</option>
+<option value="0">At 0</option>
+<option value="*/5">Every 5 minutes</option>
+<option value="*/15">Every 15 minutes</option>
+<option value="*/30">Every 30 minutes</option>
+</select>
+
+<h3>Hours</h3>
+<select id="hour">
+<option value="*">Every hour</option>
+<option value="0">Midnight</option>
+<option value="8">08:00</option>
+<option value="12">12:00</option>
+<option value="18">18:00</option>
+</select>
+
+<h3>Day of Month</h3>
+<select id="dom">
+<option value="*">Every day</option>
+<option value="1">1st</option>
+<option value="15">15th</option>
+<option value="31">31st</option>
+</select>
+
+<h3>Month</h3>
+<select id="mon">
+<option value="*">Every month</option>
+<option value="1">Jan</option>
+<option value="4">Apr</option>
+<option value="7">Jul</option>
+<option value="10">Oct</option>
+</select>
+
+<h3>Day of Week</h3>
+<select id="dow">
+<option value="*">Every day</option>
+<option value="1">Mon</option>
+<option value="2">Tue</option>
+<option value="3">Wed</option>
+<option value="4">Thu</option>
+<option value="5">Fri</option>
+<option value="6">Sat</option>
+<option value="0">Sun</option>
+</select>
+
+<br><br>
+
+<button onclick="build()">Generate</button>
+
+<h3 style="margin-top:24px">Cron Expression</h3>
+<input id="cron" style="width:260px" readonly>
+
+</div>
+
+<script>
+
+function build(){
+let min=document.getElementById("min").value
+let hour=document.getElementById("hour").value
+let dom=document.getElementById("dom").value
+let mon=document.getElementById("mon").value
+let dow=document.getElementById("dow").value
+document.getElementById("cron").value=
+min+" "+hour+" "+dom+" "+mon+" "+dow
+}
+
+</script>
+
+</body>
+</html>
+

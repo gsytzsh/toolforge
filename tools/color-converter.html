@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Color Converter - ToolForge</title>
+<meta name="description" content="Color Converter free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Color Converter</h1>
+
+<p>Convert colors between HEX and RGB.</p>
+
+<h3>HEX to RGB</h3>
+<input id="hex" style="width:160px" placeholder="#3498db">
+<button onclick="hexToRgb()">Convert</button>
+<p><b>RGB:</b> <span id="rgbResult"></span></p>
+
+<hr>
+
+<h3>RGB to HEX</h3>
+R: <input id="r" type="number" style="width:70px" min="0" max="255">
+G: <input id="g" type="number" style="width:70px" min="0" max="255">
+B: <input id="b" type="number" style="width:70px" min="0" max="255">
+<button onclick="rgbToHex()">Convert</button>
+<p><b>HEX:</b> <span id="hexResult"></span></p>
+
+</div>
+
+<script>
+
+function hexToRgb(){
+let v=document.getElementById("hex").value.trim()
+if(v.startsWith("#")) v=v.substring(1)
+if(v.length===3){
+v=v[0]+v[0]+v[1]+v[1]+v[2]+v[2]
+}
+if(!/^[0-9a-fA-F]{6}$/.test(v)){
+document.getElementById("rgbResult").innerText="Invalid HEX"
+return
+}
+let r=parseInt(v.substring(0,2),16)
+let g=parseInt(v.substring(2,4),16)
+let b=parseInt(v.substring(4,6),16)
+document.getElementById("rgbResult").innerText=
+r+", "+g+", "+b
+}
+
+function toHex(n){
+let s=Math.max(0,Math.min(255,n)).toString(16).toUpperCase()
+return s.length===1?"0"+s:s
+}
+
+function rgbToHex(){
+let r=parseInt(document.getElementById("r").value,10)
+let g=parseInt(document.getElementById("g").value,10)
+let b=parseInt(document.getElementById("b").value,10)
+if(isNaN(r)||isNaN(g)||isNaN(b)){
+document.getElementById("hexResult").innerText="Enter RGB values."
+return
+}
+document.getElementById("hexResult").innerText=
+"#"+toHex(r)+toHex(g)+toHex(b)
+}
+
+</script>
+
+</body>
+</html>
+

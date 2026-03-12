@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Emoji Remover - ToolForge</title>
+<meta name="description" content="Emoji Remover free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Emoji Remover</h1>
+
+<p>Strip emoji characters from text while keeping normal letters and punctuation.</p>
+
+<h3>Input</h3>
+<textarea id="input" rows="8" style="width:90%" placeholder="Hello 👋 world 🌍!"></textarea>
+
+<br><br>
+
+<button onclick="strip()">Remove Emojis</button>
+
+<h3 style="margin-top:24px">Output</h3>
+<textarea id="output" rows="8" style="width:90%"></textarea>
+
+</div>
+
+<script>
+
+function stripEmojis(str){
+// Basic removal for common emoji ranges
+return str.replace(/[\u2190-\u21FF\u2300-\u23FF\u2600-\u27BF\u1F000-\u1FAFF]/g,"")
+}
+
+function strip(){
+let v=document.getElementById("input").value
+document.getElementById("output").value=stripEmojis(v)
+}
+
+</script>
+
+</body>
+</html>
+

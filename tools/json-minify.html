@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>JSON Minify - ToolForge</title>
+<meta name="description" content="JSON Minify free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>JSON Minify</h1>
+
+<p>Remove whitespace from JSON for smaller payloads.</p>
+
+<h3>Input JSON</h3>
+<textarea id="input" rows="10" style="width:90%" placeholder='{"foo": "bar"}'></textarea>
+
+<br><br>
+
+<button onclick="minify()">Minify</button>
+
+<h3 style="margin-top:24px">Minified JSON</h3>
+<textarea id="output" rows="10" style="width:90%"></textarea>
+
+<p id="status" style="color:#666;margin-top:8px">Ready.</p>
+
+</div>
+
+<script>
+
+function minify(){
+let v=document.getElementById("input").value
+try{
+let obj=JSON.parse(v)
+let out=JSON.stringify(obj)
+document.getElementById("output").value=out
+document.getElementById("status").innerText="OK."
+document.getElementById("status").style.color="#16a34a"
+}catch(e){
+document.getElementById("status").innerText="Invalid JSON: "+e.message
+document.getElementById("status").style.color="#b91c1c"
+}
+}
+
+</script>
+
+</body>
+</html>
+

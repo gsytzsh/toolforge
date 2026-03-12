@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Base Converter - ToolForge</title>
+<meta name="description" content="Base Converter free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Base Converter</h1>
+
+<p>Convert numbers between binary, octal, decimal and hexadecimal.</p>
+
+<h3>Input</h3>
+<input id="value" style="width:200px" placeholder="FF">
+<select id="fromBase">
+<option value="2">Binary (2)</option>
+<option value="8">Octal (8)</option>
+<option value="10" selected>Decimal (10)</option>
+<option value="16">Hex (16)</option>
+</select>
+
+<br><br>
+
+<button onclick="convert()">Convert</button>
+
+<h3 style="margin-top:24px">Result</h3>
+<p>Binary: <span id="b2"></span></p>
+<p>Octal: <span id="b8"></span></p>
+<p>Decimal: <span id="b10"></span></p>
+<p>Hex: <span id="b16"></span></p>
+
+</div>
+
+<script>
+
+function convert(){
+
+let v=document.getElementById("value").value.trim()
+let base=parseInt(document.getElementById("fromBase").value,10)
+
+if(!v){
+document.getElementById("b2").innerText=""
+document.getElementById("b8").innerText=""
+document.getElementById("b10").innerText=""
+document.getElementById("b16").innerText=""
+return
+}
+
+let n=parseInt(v,base)
+
+if(isNaN(n)){
+document.getElementById("b2").innerText="Invalid number"
+document.getElementById("b8").innerText=""
+document.getElementById("b10").innerText=""
+document.getElementById("b16").innerText=""
+return
+}
+
+document.getElementById("b2").innerText=n.toString(2)
+document.getElementById("b8").innerText=n.toString(8)
+document.getElementById("b10").innerText=n.toString(10)
+document.getElementById("b16").innerText=n.toString(16).toUpperCase()
+
+}
+
+</script>
+
+</body>
+</html>
+

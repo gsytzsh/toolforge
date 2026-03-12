@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>HTML Escape Unescape - ToolForge</title>
+<meta name="description" content="HTML Escape Unescape free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>HTML Escape / Unescape</h1>
+
+<p>Convert special characters to HTML entities and back.</p>
+
+<h3>Input</h3>
+<textarea id="input" rows="8" style="width:90%" placeholder="<div>Hello &amp; welcome</div>"></textarea>
+
+<br><br>
+
+<button onclick="escapeHtml()">Escape</button>
+<button onclick="unescapeHtml()">Unescape</button>
+
+<h3 style="margin-top:24px">Output</h3>
+<textarea id="output" rows="8" style="width:90%"></textarea>
+
+</div>
+
+<script>
+
+function htmlEscape(str){
+return str
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#39;")
+}
+
+function htmlUnescape(str){
+return str
+.replace(/&lt;/g,"<")
+.replace(/&gt;/g,">")
+.replace(/&quot;/g,'"')
+.replace(/&#39;/g,"'")
+.replace(/&amp;/g,"&")
+}
+
+function escapeHtml(){
+let v=document.getElementById("input").value
+document.getElementById("output").value=htmlEscape(v)
+}
+
+function unescapeHtml(){
+let v=document.getElementById("input").value
+document.getElementById("output").value=htmlUnescape(v)
+}
+
+</script>
+
+</body>
+</html>
+

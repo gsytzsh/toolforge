@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Text Statistics - ToolForge</title>
+<meta name="description" content="Text Statistics free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Text Statistics</h1>
+
+<p>Count characters, words and lines in a block of text.</p>
+
+<h3>Text</h3>
+<textarea id="text" rows="10" style="width:90%"></textarea>
+
+<br><br>
+
+<button onclick="analyze()">Analyze</button>
+
+<h3 style="margin-top:24px">Result</h3>
+<p>Characters (with spaces): <span id="charsAll"></span></p>
+<p>Characters (without spaces): <span id="charsNoSpace"></span></p>
+<p>Words: <span id="words"></span></p>
+<p>Lines: <span id="lines"></span></p>
+
+</div>
+
+<script>
+
+function analyze(){
+let t=document.getElementById("text").value
+let charsAll=t.length
+let charsNoSpace=t.replace(/\s+/g,"").length
+let lines=t? t.split(/\r?\n/).length : 0
+let words=t.trim()? t.trim().split(/\s+/).length : 0
+document.getElementById("charsAll").innerText=charsAll
+document.getElementById("charsNoSpace").innerText=charsNoSpace
+document.getElementById("words").innerText=words
+document.getElementById("lines").innerText=lines
+}
+
+</script>
+
+</body>
+</html>
+

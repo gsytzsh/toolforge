@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Slug Generator - ToolForge</title>
+<meta name="description" content="Slug Generator free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Slug Generator</h1>
+
+<p>Turn a title into a URL-friendly slug.</p>
+
+<h3>Title</h3>
+<input id="title" style="width:80%" placeholder="My Awesome Blog Post!">
+
+<br><br>
+
+<button onclick="makeSlug()">Generate Slug</button>
+
+<h3 style="margin-top:24px">Slug</h3>
+<input id="slug" style="width:80%" readonly>
+
+</div>
+
+<script>
+
+function makeSlug(){
+
+let text=document.getElementById("title").value
+
+let slug=text
+.toLowerCase()
+.normalize("NFKD").replace(/[\u0300-\u036f]/g,"")
+.replace(/[^a-z0-9]+/g,"-")
+.replace(/^-+|-+$/g,"")
+
+document.getElementById("slug").value=slug
+
+}
+
+</script>
+
+</body>
+</html>
+

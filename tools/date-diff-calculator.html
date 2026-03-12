@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Date Diff Calculator - ToolForge</title>
+<meta name="description" content="Date Diff Calculator free online tool">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Date Diff Calculator</h1>
+
+<p>Calculate the difference between two dates in days.</p>
+
+<h3>From</h3>
+<input id="from" type="date">
+
+<h3>To</h3>
+<input id="to" type="date">
+
+<br><br>
+
+<button onclick="calc()">Calculate</button>
+
+<h3 style="margin-top:24px">Result</h3>
+<p id="result"></p>
+
+</div>
+
+<script>
+
+function calc(){
+let a=document.getElementById("from").value
+let b=document.getElementById("to").value
+if(!a||!b){
+document.getElementById("result").innerText="Please select both dates."
+return
+}
+let d1=new Date(a+"T00:00:00Z")
+let d2=new Date(b+"T00:00:00Z")
+let ms=d2-d1
+let days=ms/86400000
+document.getElementById("result").innerText=
+days+" day(s) between the dates."
+}
+
+</script>
+
+</body>
+</html>
+
