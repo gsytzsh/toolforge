@@ -1,0 +1,30 @@
+<input type="datetime-local" id="time">
+
+<select id="zone">
+<option value="UTC">UTC</option>
+<option value="Asia/Shanghai">Asia/Shanghai</option>
+<option value="America/New_York">New York</option>
+<option value="Europe/London">London</option>
+</select>
+
+<button onclick="convert()">Convert</button>
+
+<pre id="result"></pre>
+
+<script>
+
+function convert(){
+
+let t=document.getElementById("time").value
+
+let zone=document.getElementById("zone").value
+
+let d=new Date(t)
+
+let res=d.toLocaleString("en-US",{timeZone:zone})
+
+document.getElementById("result").textContent=res
+
+}
+
+</script>
