@@ -25,8 +25,44 @@ width:100%;
 padding:12px;
 border:1px solid #ddd;
 border-radius:6px;
-margin-bottom:30px;
+margin-bottom:16px;
 font-size:16px;
+}
+
+.popular-tools{
+background:#fff;
+border:1px solid #e5e7eb;
+border-radius:8px;
+padding:16px 20px;
+margin-bottom:30px;
+}
+
+.popular-tools-title{
+font-size:0.9rem;
+color:#6b7280;
+margin:0 0 10px 0;
+font-weight:600;
+text-transform:uppercase;
+letter-spacing:0.02em;
+}
+
+.popular-tools-grid{
+display:flex;
+flex-direction:column;
+align-items:flex-start;
+gap:8px;
+}
+
+.popular-tool-link{
+color:#2563eb;
+text-decoration:none;
+font-size:0.95rem;
+padding:6px 0;
+display:inline-block;
+}
+
+.popular-tool-link:hover{
+text-decoration:underline;
 }
 
 .tool-section{
