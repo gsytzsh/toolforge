@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Volume Converter - Liters, Gallons, Cubic Meters Online | ToolForge</title>
+<meta name="description" content="Free online Volume Converter between liters, milliliters, gallons, cubic meters and cubic feet. Handy for cooking, engineering and everyday unit conversion. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Volume Converter</h1>
+<p class="subtitle">Convert between liters, gallons, cubic meters and more.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Value</h3>
+<input id="val" type="number" step="any" style="width:140px" placeholder="1">
+<select id="from">
+<option value="l">Liters (L)</option>
+<option value="ml">Milliliters (mL)</option>
+<option value="m3">Cubic meters (m3)</option>
+<option value="ft3">Cubic feet (ft3)</option>
+<option value="gal">US gallons (gal)</option>
+</select>
+<br><br>
+<button type="button" onclick="convertVolume()">Convert</button>
+<h3 style="margin-top:20px">Result</h3>
+<p>Liters (L): <b id="l"></b></p>
+<p>Milliliters (mL): <b id="ml"></b></p>
+<p>Cubic meters (m3): <b id="m3"></b></p>
+<p>Cubic feet (ft3): <b id="ft3"></b></p>
+<p>US gallons (gal): <b id="gal"></b></p>
+<section class="tool-seo">
+<h3>About Volume Converter</h3>
+<p>This volume converter makes it easy to convert between liters, milliliters, cubic meters, cubic feet and US gallons. It is helpful for cooking, engineering, storage calculations and general unit conversion.</p>
+<p>The tool shows multiple outputs at once so you can compare common metric and imperial volume units without switching between calculators.</p>
+</section>
+</div>
+<script>
+var toL={l:1,ml:0.001,m3:1000,ft3:28.316846592,gal:3.785411784};
+
+function convertVolume(){
+  var v=parseFloat(document.getElementById("val").value);
+  var from=document.getElementById("from").value;
+  if(isNaN(v)){
+    ["l","ml","m3","ft3","gal"].forEach(function(id){ document.getElementById(id).innerText=""; });
+    return;
+  }
+  var liters=v*toL[from];
+  document.getElementById("l").innerText=liters.toFixed(4);
+  document.getElementById("ml").innerText=(liters*1000).toFixed(2);
+  document.getElementById("m3").innerText=(liters/1000).toFixed(6);
+  document.getElementById("ft3").innerText=(liters/toL.ft3).toFixed(6);
+  document.getElementById("gal").innerText=(liters/toL.gal).toFixed(6);
+}
+</script>
+</body>
+</html>

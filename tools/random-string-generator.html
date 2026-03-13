@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Random String Generator - Generate Random Strings and Tokens | ToolForge</title>
+<meta name="description" content="Free online Random String Generator to create random strings for passwords, tokens and API keys with custom length and character sets. Uses secure browser crypto where available. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Random String Generator</h1>
+<p class="subtitle">Generate random strings for tokens, API keys or test data.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Options</h3>
+<p>
+Length:
+<input id="length" type="number" style="width:100px" value="16" min="1" max="1024">
+</p>
+<p>
+<label><input type="checkbox" id="lower" checked> a-z</label>
+<label style="margin-left:10px;"><input type="checkbox" id="upper" checked> A-Z</label>
+<label style="margin-left:10px;"><input type="checkbox" id="digits" checked> 0-9</label>
+<label style="margin-left:10px;"><input type="checkbox" id="symbols"> Symbols (!@#$...)</label>
+</p>
+<button type="button" onclick="generateString()">Generate</button>
+<h3 style="margin-top:20px">Result</h3>
+<textarea id="output" rows="4" style="width:90%;font-family:monospace" readonly></textarea>
+<p id="status" style="color:#666;margin-top:6px"></p>
+<section class="tool-seo">
+<h3>About Random String Generator</h3>
+<p>This random string generator creates custom strings for passwords, API keys, test data, invite codes and other development tasks. You can choose the length and character sets you want to include.</p>
+<p>When available, the generator uses browser crypto for stronger randomness, making it a practical option for quick client-side token generation.</p>
+</section>
+</div>
+<script>
+function getRandomInt(max){
+  if(window.crypto&&crypto.getRandomValues){
+    var array=new Uint32Array(1);
+    crypto.getRandomValues(array);
+    return array[0]%max;
+  }
+  return Math.floor(Math.random()*max);
+}
+
+function generateString(){
+  var len=parseInt(document.getElementById("length").value,10)||16;
+  var chars="";
+  if(document.getElementById("lower").checked) chars+="abcdefghijklmnopqrstuvwxyz";
+  if(document.getElementById("upper").checked) chars+="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  if(document.getElementById("digits").checked) chars+="0123456789";
+  if(document.getElementById("symbols").checked) chars+="!@#$%^&*()-_=+[]{};:,.<>/?";
+  if(!chars){
+    alert("Please select at least one character set.");
+    return;
+  }
+  var out="";
+  for(var i=0;i<len;i++) out+=chars.charAt(getRandomInt(chars.length));
+  document.getElementById("output").value=out;
+  document.getElementById("status").innerText="Generated "+len+"-character string"+(window.crypto&&crypto.getRandomValues?" using secure random.":" using Math.random fallback.");
+}
+</script>
+</body>
+</html>

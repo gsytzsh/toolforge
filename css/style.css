@@ -95,6 +95,25 @@ margin:0;
 font-size:0.95rem;
 }
 
+.tool-seo{
+margin-top:32px;
+padding-top:20px;
+border-top:1px solid #e5e7eb;
+max-width:900px;
+}
+
+.tool-seo h3{
+font-size:1rem;
+color:#374151;
+margin:0 0 10px 0;
+}
+
+.tool-seo p{
+color:#6b7280;
+line-height:1.7;
+margin:0 0 12px 0;
+}
+
 .tool-section{
 margin-bottom:32px;
 }

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Image Resizer - Resize Images by Pixels Online | ToolForge</title>
+<meta name="description" content="Free online Image Resizer to resize photos by width or height directly in your browser. No upload required, perfect for avatars, thumbnails and web graphics. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Image Resizer</h1>
+<p class="subtitle">Resize images by width or height entirely in your browser.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Source image</h3>
+<input type="file" id="file" accept="image/*" onchange="loadImage()">
+<p id="origInfo" style="color:#666;margin-top:6px"></p>
+<h3 style="margin-top:20px">Target size</h3>
+<p>
+Width (px):
+<input id="targetWidth" type="number" style="width:100px" placeholder="e.g. 800">
+Height (px):
+<input id="targetHeight" type="number" style="width:100px" placeholder="auto">
+</p>
+<p style="font-size:13px;color:#666;">Leave width or height empty to keep aspect ratio based on the other.</p>
+<button type="button" onclick="resizeImage()">Resize</button>
+<h3 style="margin-top:20px">Preview</h3>
+<canvas id="canvas" style="max-width:100%;border:1px solid #e5e7eb;border-radius:4px;"></canvas>
+<p id="newInfo" style="color:#666;margin-top:6px"></p>
+<p><a id="downloadLink" href="#" download="resized.png" style="display:none;">Download resized image</a></p>
+<section class="tool-seo">
+<h3>About Image Resizer</h3>
+<p>This image resizer lets you change image dimensions directly in your browser without uploading files to a server. It is useful for thumbnails, avatars, blog images, product images and quick content publishing tasks.</p>
+<p>You can resize by width or height while keeping the original aspect ratio, preview the result and download the new image in one step.</p>
+</section>
+</div>
+<script>
+var originalImage=new Image();
+
+function loadImage(){
+  var file=document.getElementById("file").files[0];
+  if(!file) return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    originalImage.onload=function(){
+      document.getElementById("origInfo").innerText="Original: "+originalImage.width+" x "+originalImage.height+" px";
+    };
+    originalImage.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function resizeImage(){
+  if(!originalImage.src){
+    alert("Please select an image first.");
+    return;
+  }
+  var w=parseInt(document.getElementById("targetWidth").value,10);
+  var h=parseInt(document.getElementById("targetHeight").value,10);
+  var ow=originalImage.width;
+  var oh=originalImage.height;
+
+  if(!w&&!h){
+    w=ow;
+    h=oh;
+  }else if(w&&!h){
+    h=Math.round(oh*(w/ow));
+  }else if(!w&&h){
+    w=Math.round(ow*(h/oh));
+  }
+
+  var canvas=document.getElementById("canvas");
+  canvas.width=w;
+  canvas.height=h;
+  var ctx=canvas.getContext("2d");
+  ctx.clearRect(0,0,w,h);
+  ctx.drawImage(originalImage,0,0,w,h);
+  document.getElementById("newInfo").innerText="Resized: "+w+" x "+h+" px";
+
+  canvas.toBlob(function(blob){
+    if(!blob) return;
+    var url=URL.createObjectURL(blob);
+    var link=document.getElementById("downloadLink");
+    link.href=url;
+    link.style.display="inline-block";
+  },"image/png");
+}
+</script>
+</body>
+</html>

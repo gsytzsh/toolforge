@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>QR Code Decoder - Decode QR Codes from Images Online | ToolForge</title>
+<meta name="description" content="Free online QR Code Decoder to read QR codes from image files directly in your browser using the BarcodeDetector API when available. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>QR Code Decoder</h1>
+<p class="subtitle">Decode QR codes from image files using your browser.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>QR image</h3>
+<input type="file" id="file" accept="image/*" onchange="decodeQr()">
+<p id="support" style="color:#666;margin-top:6px"></p>
+<h3 style="margin-top:20px">Decoded text</h3>
+<textarea id="output" rows="6" style="width:90%;font-family:monospace" readonly></textarea>
+<p id="status" style="color:#666;margin-top:6px"></p>
+<section class="tool-seo">
+<h3>About QR Code Decoder</h3>
+<p>This QR code decoder reads QR data from uploaded images directly in your browser. It is useful for checking printed QR codes, verifying encoded links and extracting text from screenshots or saved images.</p>
+<p>On supported browsers, decoding uses the native BarcodeDetector API for a fast and simple client-side workflow.</p>
+</section>
+</div>
+<script>
+(function(){
+  if(!("BarcodeDetector" in window)){
+    document.getElementById("support").innerText="BarcodeDetector API is not supported in this browser. QR decoding may not work.";
+  }else{
+    document.getElementById("support").innerText="BarcodeDetector is supported in this browser.";
+  }
+})();
+
+function decodeQr(){
+  var file=document.getElementById("file").files[0];
+  if(!file) return;
+  if(!("BarcodeDetector" in window)){
+    document.getElementById("status").style.color="#b91c1c";
+    document.getElementById("status").innerText="BarcodeDetector API not supported. Try a Chromium-based browser.";
+    return;
+  }
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var img=new Image();
+    img.onload=function(){
+      var canvas=document.createElement("canvas");
+      canvas.width=img.width;
+      canvas.height=img.height;
+      var ctx=canvas.getContext("2d");
+      ctx.drawImage(img,0,0);
+      var detector=new BarcodeDetector({formats:["qr_code"]});
+      detector.detect(canvas).then(function(codes){
+        if(!codes.length){
+          document.getElementById("output").value="";
+          document.getElementById("status").style.color="#b91c1c";
+          document.getElementById("status").innerText="No QR code detected.";
+          return;
+        }
+        document.getElementById("output").value=codes.map(function(c){ return c.rawValue; }).join("\n");
+        document.getElementById("status").style.color="#16a34a";
+        document.getElementById("status").innerText=codes.length+" QR code(s) decoded.";
+      }).catch(function(err){
+        document.getElementById("output").value="";
+        document.getElementById("status").style.color="#b91c1c";
+        document.getElementById("status").innerText="Decode error: "+err.message;
+      });
+    };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+</script>
+</body>
+</html>

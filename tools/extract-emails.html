@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Extract Emails - Find Email Addresses in Text Online | ToolForge</title>
+<meta name="description" content="Free online Extract Emails tool to scan text and list all email addresses using robust patterns. Ideal for log analysis and data cleanup. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Extract Emails</h1>
+<p class="subtitle">Scan text and extract all email addresses.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Text</h3>
+<textarea id="text" rows="10" style="width:90%;font-family:monospace" placeholder="Paste text containing email@example.com here"></textarea>
+<br><br>
+<button type="button" onclick="extractEmails()">Extract Emails</button>
+<h3 style="margin-top:20px">Found emails</h3>
+<textarea id="output" rows="10" style="width:90%;font-family:monospace" readonly></textarea>
+<p id="count" style="color:#666;margin-top:6px"></p>
+<section class="tool-seo">
+<h3>About Extract Emails</h3>
+<p>This email extractor scans pasted text and lists the addresses it finds in a clean, deduplicated output. It is useful for processing logs, support exports, scraped text and unstructured notes.</p>
+<p>You can paste large text blocks, quickly review the matches and copy only the email addresses you need for cleanup or further analysis.</p>
+</section>
+</div>
+<script>
+function extractEmails(){
+  var text=document.getElementById("text").value;
+  var pattern=/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
+  var matches=text.match(pattern)||[];
+  var unique=Array.from(new Set(matches));
+  document.getElementById("output").value=unique.join("\n");
+  document.getElementById("count").innerText=unique.length+" unique email(s) found.";
+}
+</script>
+</body>
+</html>

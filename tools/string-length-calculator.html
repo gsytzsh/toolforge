@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>String Length Calculator - Count Characters and Bytes Online | ToolForge</title>
+<meta name="description" content="Free online String Length Calculator to count characters, characters without spaces and UTF-8 bytes. Great for APIs, database limits, SMS and social media. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>String Length Calculator</h1>
+<p class="subtitle">Count characters, characters without spaces and UTF-8 bytes for any text.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Text</h3>
+<textarea id="text" rows="8" style="width:90%;font-family:monospace" oninput="updateCounts()" placeholder="Type or paste text here"></textarea>
+<h3 style="margin-top:20px">Counts</h3>
+<p>Total characters (with spaces): <b id="charsWith">0</b></p>
+<p>Characters (without spaces): <b id="charsWithout">0</b></p>
+<p>UTF-8 bytes: <b id="bytes">0</b></p>
+<section class="tool-seo">
+<h3>About String Length Calculator</h3>
+<p>This string length calculator shows character count, character count without spaces and UTF-8 byte size. It is useful when working with database limits, API payload caps, meta descriptions, SMS limits and social media text.</p>
+<p>The byte count is especially helpful for multilingual text, accented characters and emoji, where visual character count and actual storage size can be different.</p>
+</section>
+</div>
+<script>
+function updateCounts(){
+  var s=document.getElementById("text").value;
+  document.getElementById("charsWith").innerText=s.length;
+  document.getElementById("charsWithout").innerText=s.replace(/\s/g,"").length;
+  document.getElementById("bytes").innerText=new TextEncoder().encode(s).length;
+}
+</script>
+</body>
+</html>

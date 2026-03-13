@@ -98,5 +98,17 @@
 {"file":"random-yes-no","name":"Random Yes No","category":"Generators & Converters"},
 {"file":"json-validator","name":"JSON Validator","category":"JSON & Data"},
 {"file":"css-minify","name":"CSS Minify","category":"Code & Format"},
-{"file":"xml-formatter","name":"XML Formatter","category":"Code & Format"}
+{"file":"xml-formatter","name":"XML Formatter","category":"Code & Format"},
+{"file":"hex-encode-decode","name":"Hex Encode Decode","category":"Encoders & Decoders"},
+{"file":"string-length-calculator","name":"String Length Calculator","category":"Text"},
+{"file":"html-formatter","name":"HTML Formatter","category":"Code & Format","popular":true,"tag":"HTML Format","popularOrder":7},
+{"file":"js-beautify-minify","name":"JavaScript Beautify and Minify","category":"Code & Format","popular":true,"tag":"JS Minify","popularOrder":8},
+{"file":"extract-emails","name":"Extract Emails","category":"Text"},
+{"file":"extract-urls","name":"Extract URLs","category":"Text"},
+{"file":"image-resizer","name":"Image Resizer","category":"Image & Color","popular":true,"tag":"Image Resize","popularOrder":9},
+{"file":"area-converter","name":"Area Converter","category":"Generators & Converters"},
+{"file":"volume-converter","name":"Volume Converter","category":"Generators & Converters"},
+{"file":"speed-converter","name":"Speed Converter","category":"Generators & Converters"},
+{"file":"random-string-generator","name":"Random String Generator","category":"Generators & Converters","popular":true,"tag":"Rand String","popularOrder":10},
+{"file":"qr-code-decoder","name":"QR Code Decoder","category":"Encoders & Decoders"}
 ]

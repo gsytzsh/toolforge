@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HTML Formatter - Beautify and Format HTML Code Online | ToolForge</title>
+<meta name="description" content="Free online HTML Formatter to beautify and reindent HTML code for better readability. Paste HTML and get clean, formatted output. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>HTML Formatter</h1>
+<p class="subtitle">Beautify and reindent HTML code for easier reading.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>HTML input</h3>
+<textarea id="input" rows="10" style="width:90%;font-family:monospace" placeholder="<div><p>Hello</p></div>"></textarea>
+<br><br>
+<button type="button" onclick="formatHtml()">Format</button>
+<h3 style="margin-top:20px">Formatted HTML</h3>
+<textarea id="output" rows="14" style="width:90%;font-family:monospace" readonly></textarea>
+<section class="tool-seo">
+<h3>About HTML Formatter</h3>
+<p>This HTML formatter makes pasted markup easier to read by reindenting tags and spacing nested elements more clearly. It is useful when inspecting generated HTML, debugging templates or cleaning up copied snippets.</p>
+<p>For quick browser-based formatting of small and medium code blocks, it provides a simple way to improve readability before copying code back into your editor.</p>
+</section>
+</div>
+<script>
+function formatHtml(){
+  var html=document.getElementById("input").value;
+  var result="";
+  var indent=0;
+  var tokens=html.replace(/>\s+</g,"><").split(/(?=<)/g);
+  tokens.forEach(function(token){
+    var t=token.trim();
+    if(!t) return;
+    if(/^<\/.+>/.test(t)) indent=Math.max(indent-1,0);
+    result+="  ".repeat(indent)+t+"\n";
+    if(/^<[^\/!?][^>]*[^\/]>$/.test(t)) indent++;
+  });
+  document.getElementById("output").value=result.trim();
+}
+</script>
+</body>
+</html>

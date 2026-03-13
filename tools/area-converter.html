@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Area Converter - m2, ft2, Acres, Hectares Online | ToolForge</title>
+<meta name="description" content="Free online Area Converter between square meters, square feet, acres, hectares and more. Useful for real estate, land and construction. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Area Converter</h1>
+<p class="subtitle">Convert between square meters, square feet, acres and hectares.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Value</h3>
+<input id="val" type="number" step="any" style="width:140px" placeholder="1">
+<select id="from">
+<option value="m2">Square meters (m2)</option>
+<option value="ft2">Square feet (ft2)</option>
+<option value="acre">Acres</option>
+<option value="ha">Hectares (ha)</option>
+</select>
+<br><br>
+<button type="button" onclick="convertArea()">Convert</button>
+<h3 style="margin-top:20px">Result</h3>
+<p>Square meters (m2): <b id="m2"></b></p>
+<p>Square feet (ft2): <b id="ft2"></b></p>
+<p>Acres: <b id="acre"></b></p>
+<p>Hectares (ha): <b id="ha"></b></p>
+<section class="tool-seo">
+<h3>About Area Converter</h3>
+<p>This area converter helps you switch between metric and imperial land and surface units such as square meters, square feet, acres and hectares. It is useful for property listings, agriculture, construction and renovation planning.</p>
+<p>Enter any one value to instantly compare the most common area units in a simple, browser-based format.</p>
+</section>
+</div>
+<script>
+var areaToM2={m2:1,ft2:0.09290304,acre:4046.8564224,ha:10000};
+
+function convertArea(){
+  var v=parseFloat(document.getElementById("val").value);
+  var from=document.getElementById("from").value;
+  if(isNaN(v)){
+    ["m2","ft2","acre","ha"].forEach(function(id){ document.getElementById(id).innerText=""; });
+    return;
+  }
+  var m2=v*areaToM2[from];
+  document.getElementById("m2").innerText=m2.toFixed(4);
+  document.getElementById("ft2").innerText=(m2/areaToM2.ft2).toFixed(4);
+  document.getElementById("acre").innerText=(m2/areaToM2.acre).toFixed(6);
+  document.getElementById("ha").innerText=(m2/areaToM2.ha).toFixed(6);
+}
+</script>
+</body>
+</html>

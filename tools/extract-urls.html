@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Extract URLs - Find Links in Text Online | ToolForge</title>
+<meta name="description" content="Free online Extract URLs tool to find and list all HTTP and HTTPS links in plain text. Useful for cleaning logs, scraping and redirects. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Extract URLs</h1>
+<p class="subtitle">Find all HTTP and HTTPS links inside any block of text.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Text</h3>
+<textarea id="text" rows="10" style="width:90%;font-family:monospace" placeholder="Paste text containing https://example.com links here"></textarea>
+<br><br>
+<button type="button" onclick="extractUrls()">Extract URLs</button>
+<h3 style="margin-top:20px">Found URLs</h3>
+<textarea id="output" rows="10" style="width:90%;font-family:monospace" readonly></textarea>
+<p id="count" style="color:#666;margin-top:6px"></p>
+<section class="tool-seo">
+<h3>About Extract URLs</h3>
+<p>This URL extractor finds HTTP and HTTPS links inside pasted text and returns a deduplicated list. It is useful when reviewing redirect chains, scraped content, logs, marketing text or imported documents.</p>
+<p>The output is easy to copy into spreadsheets, crawl tools or QA workflows when you need to inspect links in bulk.</p>
+</section>
+</div>
+<script>
+function extractUrls(){
+  var text=document.getElementById("text").value;
+  var pattern=/(https?:\/\/[^\s"'<>]+)/gi;
+  var matches=text.match(pattern)||[];
+  var unique=Array.from(new Set(matches));
+  document.getElementById("output").value=unique.join("\n");
+  document.getElementById("count").innerText=unique.length+" unique URL(s) found.";
+}
+</script>
+</body>
+</html>
