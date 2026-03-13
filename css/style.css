@@ -65,6 +65,35 @@ display:inline-block;
 text-decoration:underline;
 }
 
+.about-tools{
+margin-top:48px;
+padding-top:32px;
+border-top:1px solid #e5e7eb;
+}
+
+.about-tools-title{
+font-size:0.9rem;
+color:#6b7280;
+margin:0 0 12px 0;
+font-weight:600;
+text-transform:uppercase;
+letter-spacing:0.02em;
+}
+
+.about-tools-heading{
+font-size:1.1rem;
+color:#374151;
+margin:0 0 8px 0;
+font-weight:600;
+}
+
+.about-tools-text{
+color:#6b7280;
+line-height:1.6;
+margin:0;
+font-size:0.95rem;
+}
+
 .tool-section{
 margin-bottom:32px;
 }
