@@ -29,16 +29,20 @@
 
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
-<label for="header" class="sr-only">Header</label>
-<textarea id="header" rows="10" style="width:90%" placeholder="Host: example.com&#10;User-Agent: Chrome" aria-label="Header"></textarea>
+<label for="header" class="sr-only">Header input</label>
+<textarea id="header" rows="10" style="width:90%" placeholder="Host: example.com&#10;User-Agent: Chrome" aria-label="Header input"></textarea>
 
 <br><br>
 
+<div class="tool-actions">
 <button onclick="parseHeader()">Parse</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
 
 <h3>JSON Result</h3>
 
 <pre id="result"></pre>
+<p id="status" class="inline-status"></p>
 
 </main>
 
@@ -69,7 +73,25 @@ obj[key]=value
 
 document.getElementById("result").innerText=
 JSON.stringify(obj,null,2)
+document.getElementById("status").innerText="Headers parsed."
+document.getElementById("status").style.color="#16a34a"
 
+}
+
+function copyResult(){
+let value=document.getElementById("result").innerText.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="JSON copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
 }
 
 </script>

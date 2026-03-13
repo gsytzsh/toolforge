@@ -74,16 +74,40 @@ function ensureMainLandmark(html) {
 function humanizeId(id) {
   const overrides = {
     P: "Principal",
-    r: "Annual rate percent",
-    t: "Time years",
     csv: "CSV input",
     json: "JSON input",
     xml: "XML input",
     html: "HTML input",
     hex: "Hex input",
     text: "Text input",
-    input: "Input",
-    output: "Output",
+    input: "Input text",
+    output: "Output text",
+    url: "URL",
+    uuid: "UUID",
+    ua: "User agent",
+    pwd: "Password",
+    yaml: "YAML input",
+    bin: "Binary input",
+    expr: "Expression",
+    num: "Number",
+    code: "Code",
+    val: "Value",
+    header: "Header input",
+    result: "Result text",
+    pattern: "Regex pattern",
+    token: "JWT token",
+    secret: "Secret key",
+    curl: "cURL command",
+    cron: "Cron expression",
+    jsonA: "JSON A",
+    jsonB: "JSON B",
+    min: "Minimum value",
+    max: "Maximum value",
+    count: "Count",
+    year: "Year",
+    title: "Title",
+    note: "Note",
+    code: "Status code",
   };
 
   if (overrides[id]) return overrides[id];
@@ -110,6 +134,61 @@ function ensureAriaLabels(html) {
       return match;
     }
     return `<input${attrs} aria-label="${escapeAttr(humanizeId(id))}">`;
+  });
+
+  return html;
+}
+
+function shouldNormalizeLabel(current, preferred, id) {
+  const currentTrimmed = current.trim();
+  if (!currentTrimmed || currentTrimmed === preferred) return false;
+  const genericLabels = new Set([
+    "Input",
+    "Input text",
+    "Output",
+    "Output text",
+    "Val",
+    "Url",
+    "Uuid",
+    "Ua",
+    "Pwd",
+    "Yaml",
+    "Bin",
+    "Expr",
+    "Num",
+    "Code",
+    "Json A",
+    "Json B",
+    "Curl",
+    "Header",
+    "Header input",
+    "Result",
+    "Result text",
+    "Pattern",
+    "Token",
+    "Morse",
+  ]);
+
+  return genericLabels.has(currentTrimmed) || currentTrimmed.toLowerCase() === id.toLowerCase();
+}
+
+function normalizeExistingLabelText(html) {
+  html = html.replace(/<(textarea|select)((?:"[^"]*"|'[^']*'|[^'">])*\sid="([^"]+)"(?:"[^"]*"|'[^']*'|[^'">])*)\saria-label="([^"]+)"([^>]*)>/g, (match, tag, before, id, current, after) => {
+    const preferred = humanizeId(id);
+    if (!shouldNormalizeLabel(current, preferred, id)) return match;
+    return `<${tag}${before} aria-label="${escapeAttr(preferred)}"${after}>`;
+  });
+
+  html = html.replace(/<input((?:"[^"]*"|'[^']*'|[^'">])*\sid="([^"]+)"(?:"[^"]*"|'[^']*'|[^'">])*)\saria-label="([^"]+)"([^>]*)>/g, (match, before, id, current, after) => {
+    const preferred = humanizeId(id);
+    if (!shouldNormalizeLabel(current, preferred, id)) return match;
+    return `<input${before} aria-label="${escapeAttr(preferred)}"${after}>`;
+  });
+
+  html = html.replace(/<label([^>]+for="([^"]+)"[^>]*) class="sr-only">([^<]*)<\/label>/g, (match, attrs, id, current) => {
+    const preferred = humanizeId(id);
+    if (!shouldNormalizeLabel(current, preferred, id)) return match;
+    return `<label${attrs} class="sr-only">${escapeAttr(preferred)}</label>`;
   });
 
   return html;
@@ -152,6 +231,7 @@ function normalizeFile(filePath) {
   html = ensureMainLandmark(html);
   html = ensureAriaLabels(html);
   html = ensureHiddenLabels(html);
+  html = normalizeExistingLabelText(html);
 
   if (html !== original) {
     fs.writeFileSync(filePath, html, "utf8");

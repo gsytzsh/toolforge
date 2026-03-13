@@ -27,19 +27,23 @@
 
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
-<label for="pattern" class="sr-only">Pattern</label>
-<input id="pattern" placeholder="Regex pattern" aria-label="Pattern">
+<label for="pattern" class="sr-only">Regex pattern</label>
+<input id="pattern" placeholder="Regex pattern" aria-label="Regex pattern">
 
 <label for="text" class="sr-only">Text input</label>
 <textarea id="text" rows="8" style="width:90%" placeholder="Text" aria-label="Text input"></textarea>
 
 <br><br>
 
+<div class="tool-actions">
 <button onclick="test()">Test</button>
+<button type="button" onclick="copyResult()">Copy Matches</button>
+</div>
 
 <h3>Matches</h3>
 
 <pre id="result"></pre>
+<p id="status" class="inline-status"></p>
 
 </main>
 
@@ -59,13 +63,33 @@ let matches=text.match(regex)
 
 document.getElementById("result").innerText=
 matches?matches.join("\n"):"No match"
+document.getElementById("status").innerText="Regex tested."
+document.getElementById("status").style.color="#16a34a"
 
 }catch(e){
 
 document.getElementById("result").innerText="Invalid regex"
+document.getElementById("status").innerText="Invalid regular expression."
+document.getElementById("status").style.color="#b91c1c"
 
 }
 
+}
+
+function copyResult(){
+let value=document.getElementById("result").innerText.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Matches copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
 }
 
 </script>

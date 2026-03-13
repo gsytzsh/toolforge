@@ -37,26 +37,30 @@
 
 <div style="flex:1">
 <h3>JSON A</h3>
-<label for="jsonA" class="sr-only">Json A</label>
-<textarea id="jsonA" rows="15" style="width:100%" aria-label="Json A"></textarea>
+<label for="jsonA" class="sr-only">JSON A</label>
+<textarea id="jsonA" rows="15" style="width:100%" aria-label="JSON A"></textarea>
 </div>
 
 <div style="flex:1">
 <h3>JSON B</h3>
-<label for="jsonB" class="sr-only">Json B</label>
-<textarea id="jsonB" rows="15" style="width:100%" aria-label="Json B"></textarea>
+<label for="jsonB" class="sr-only">JSON B</label>
+<textarea id="jsonB" rows="15" style="width:100%" aria-label="JSON B"></textarea>
 </div>
 
 </div>
 
 <br>
 
+<div class="tool-actions">
 <button onclick="compare()">Compare JSON</button>
+<button type="button" onclick="copyResult()">Copy Differences</button>
 <button onclick="clearAll()">Clear</button>
+</div>
 
 <h3>Differences</h3>
 
 <pre id="result"></pre>
+<p id="status" class="inline-status"></p>
 
 </main>
 
@@ -109,10 +113,14 @@ diff.push("Added: "+p+" = "+b[k])
 walk(objA,objB,"")
 
 result.innerText=diff.length?diff.join("\n"):"No difference"
+document.getElementById("status").innerText="Comparison complete."
+document.getElementById("status").style.color="#16a34a"
 
 }catch(e){
 
 result.innerText="Invalid JSON"
+document.getElementById("status").innerText="Invalid JSON input."
+document.getElementById("status").style.color="#b91c1c"
 
 }
 
@@ -123,7 +131,24 @@ function clearAll(){
 document.getElementById("jsonA").value=""
 document.getElementById("jsonB").value=""
 document.getElementById("result").innerText=""
+document.getElementById("status").innerText=""
 
+}
+
+function copyResult(){
+let value=document.getElementById("result").innerText.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Differences copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
 }
 
 </script>

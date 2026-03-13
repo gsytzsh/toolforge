@@ -32,17 +32,22 @@
 
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
-<label for="curl" class="sr-only">Curl</label>
-<textarea id="curl" rows="10" style="width:90%" placeholder="Paste curl command" aria-label="Curl"></textarea>
+<label for="curl" class="sr-only">cURL command</label>
+<textarea id="curl" rows="10" style="width:90%" placeholder="Paste curl command" aria-label="cURL command"></textarea>
 
 <br><br>
 
+<div class="tool-actions">
 <button onclick="convert()">Convert</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
 
 <h3>Fetch Code</h3>
 
-<label for="result" class="sr-only">Result</label>
-<textarea id="result" rows="12" style="width:90%" aria-label="Result"></textarea>
+<label for="result" class="sr-only">Result text</label>
+<textarea id="result" rows="12" style="width:90%" aria-label="Result text"></textarea>
+
+<p id="status" class="inline-status"></p>
 
 </main>
 
@@ -85,7 +90,25 @@ fetchCode+=`
 `
 
 document.getElementById("result").value=fetchCode
+document.getElementById("status").innerText="Converted successfully."
+document.getElementById("status").style.color="#16a34a"
 
+}
+
+function copyResult(){
+let value=document.getElementById("result").value
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Fetch code copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
 }
 
 </script>
