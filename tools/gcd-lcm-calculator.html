@@ -5,23 +5,32 @@
 <title>GCD LCM Calculator – Greatest Common Divisor & Least Common Multiple | ToolForge</title>
 <meta name="description" content="Free online GCD and LCM Calculator for two numbers. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/gcd-lcm-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="GCD LCM Calculator – Greatest Common Divisor &amp; Least Common Multiple | ToolForge">
+<meta property="og:description" content="Free online GCD and LCM Calculator for two numbers. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/gcd-lcm-calculator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GCD LCM Calculator – Greatest Common Divisor &amp; Least Common Multiple | ToolForge">
+<meta name="twitter:description" content="Free online GCD and LCM Calculator for two numbers. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>GCD & LCM Calculator</h1>
 <p class="subtitle">Enter two integers to get Greatest Common Divisor and Least Common Multiple.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Number A</h3>
-<input id="a" type="number" placeholder="24" style="width:120px">
+<input id="a" type="number" placeholder="24" style="width:120px" aria-label="A">
 <h3>Number B</h3>
-<input id="b" type="number" placeholder="36" style="width:120px">
+<input id="b" type="number" placeholder="36" style="width:120px" aria-label="B">
 <br><br>
 <button onclick="calc()">Calculate</button>
 <h3>Result</h3>
 <p>GCD: <span id="gcd"></span></p>
 <p>LCM: <span id="lcm"></span></p>
-</div>
+</main>
 <script>
 function gcd(a,b){return b?gcd(b,a%b):Math.abs(a)}
 function calc(){

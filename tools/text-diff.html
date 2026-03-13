@@ -5,22 +5,31 @@
 <title>Text Diff – Compare Two Texts Online | ToolForge</title>
 <meta name="description" content="Free online Text Diff to compare two text blocks and see differences line by line. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/text-diff.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Text Diff – Compare Two Texts Online | ToolForge">
+<meta property="og:description" content="Free online Text Diff to compare two text blocks and see differences line by line. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/text-diff.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Text Diff – Compare Two Texts Online | ToolForge">
+<meta name="twitter:description" content="Free online Text Diff to compare two text blocks and see differences line by line. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Text Diff</h1>
 <p class="subtitle">Paste two text blocks to compare them line by line. Lines only in A or only in B are highlighted.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <div style="display:flex;gap:20px;flex-wrap:wrap">
-<div style="flex:1;min-width:200px"><h3>Text A</h3><textarea id="a" rows="12" style="width:100%"></textarea></div>
-<div style="flex:1;min-width:200px"><h3>Text B</h3><textarea id="b" rows="12" style="width:100%"></textarea></div>
+<div style="flex:1;min-width:200px"><h3>Text A</h3><textarea id="a" rows="12" style="width:100%" aria-label="A"></textarea></div>
+<div style="flex:1;min-width:200px"><h3>Text B</h3><textarea id="b" rows="12" style="width:100%" aria-label="B"></textarea></div>
 </div>
 <br>
 <button onclick="diff()">Compare</button>
 <h3>Diff (A vs B)</h3>
 <pre id="out" style="background:#1e1e1e;color:#eee;padding:12px;border-radius:8px;overflow:auto;max-height:300px"></pre>
-</div>
+</main>
 <script>
 function diff(){
 var a=document.getElementById("a").value.split(/\r?\n/)

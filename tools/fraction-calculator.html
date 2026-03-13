@@ -5,17 +5,26 @@
 <title>Fraction Calculator – Add, Subtract, Multiply, Divide Fractions | ToolForge</title>
 <meta name="description" content="Free online Fraction Calculator to add, subtract, multiply and divide fractions. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/fraction-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Fraction Calculator – Add, Subtract, Multiply, Divide Fractions | ToolForge">
+<meta property="og:description" content="Free online Fraction Calculator to add, subtract, multiply and divide fractions. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/fraction-calculator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fraction Calculator – Add, Subtract, Multiply, Divide Fractions | ToolForge">
+<meta name="twitter:description" content="Free online Fraction Calculator to add, subtract, multiply and divide fractions. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Fraction Calculator</h1>
 <p class="subtitle">Add, subtract, multiply or divide two fractions and get the result in lowest terms.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Fraction 1</h3>
-<input id="n1" type="number" placeholder="Num" style="width:80px"> / <input id="d1" type="number" placeholder="Den" style="width:80px">
+<input id="n1" type="number" placeholder="Num" style="width:80px" aria-label="N1"> / <input id="d1" type="number" placeholder="Den" style="width:80px" aria-label="D1">
 <h3>Fraction 2</h3>
-<input id="n2" type="number" placeholder="Num" style="width:80px"> / <input id="d2" type="number" placeholder="Den" style="width:80px">
+<input id="n2" type="number" placeholder="Num" style="width:80px" aria-label="N2"> / <input id="d2" type="number" placeholder="Den" style="width:80px" aria-label="D2">
 <br><br>
 <button onclick="calc('+')">Add</button>
 <button onclick="calc('-')">Subtract</button>
@@ -23,7 +32,7 @@
 <button onclick="calc('/')">Divide</button>
 <h3>Result</h3>
 <p id="result"></p>
-</div>
+</main>
 <script>
 function gcd(a,b){return b?gcd(b,a%b):Math.abs(a)}
 function calc(op){

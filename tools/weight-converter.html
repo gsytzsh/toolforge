@@ -5,16 +5,25 @@
 <title>Weight Converter – kg, lb, oz | ToolForge</title>
 <meta name="description" content="Free online Weight Converter between kg, pounds and ounces. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/weight-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Weight Converter – kg, lb, oz | ToolForge">
+<meta property="og:description" content="Free online Weight Converter between kg, pounds and ounces. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/weight-converter.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Weight Converter – kg, lb, oz | ToolForge">
+<meta name="twitter:description" content="Free online Weight Converter between kg, pounds and ounces. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Weight Converter</h1>
 <p class="subtitle">Convert between kilograms, pounds and ounces.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Value</h3>
-<input id="val" type="number" step="any" placeholder="1" style="width:120px">
-<select id="from">
+<input id="val" type="number" step="any" placeholder="1" style="width:120px" aria-label="Val">
+<select id="from" aria-label="From">
 <option value="kg">Kilograms</option>
 <option value="lb">Pounds</option>
 <option value="oz">Ounces</option>
@@ -25,7 +34,7 @@
 <p>Kilograms: <span id="kg"></span></p>
 <p>Pounds: <span id="lb"></span></p>
 <p>Ounces: <span id="oz"></span></p>
-</div>
+</main>
 <script>
 var toKg={kg:1,lb:0.453592,oz:0.0283495}
 function convert(){

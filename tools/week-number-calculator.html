@@ -5,21 +5,30 @@
 <title>Week Number Calculator – ISO Week Number | ToolForge</title>
 <meta name="description" content="Free online Week Number Calculator: get ISO week number of the year for any date. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/week-number-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Week Number Calculator – ISO Week Number | ToolForge">
+<meta property="og:description" content="Free online Week Number Calculator: get ISO week number of the year for any date. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/week-number-calculator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Week Number Calculator – ISO Week Number | ToolForge">
+<meta name="twitter:description" content="Free online Week Number Calculator: get ISO week number of the year for any date. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Week Number Calculator</h1>
 <p class="subtitle">Get the ISO 8601 week number (1–53) for a given date.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Date</h3>
-<input id="d" type="date">
+<input id="d" type="date" aria-label="D">
 <br><br>
 <button onclick="calc()">Get Week Number</button>
 <h3>Result</h3>
 <p>Week number: <span id="result"></span></p>
 <p>Year: <span id="year"></span></p>
-</div>
+</main>
 <script>
 function calc(){
 var d=document.getElementById("d").value

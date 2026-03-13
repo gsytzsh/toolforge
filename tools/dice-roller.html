@@ -5,23 +5,32 @@
 <title>Dice Roller – Roll Dice Online | ToolForge</title>
 <meta name="description" content="Free online Dice Roller: roll one or more dice (d6, d20, etc.). Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/dice-roller.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Dice Roller – Roll Dice Online | ToolForge">
+<meta property="og:description" content="Free online Dice Roller: roll one or more dice (d6, d20, etc.). Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/dice-roller.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dice Roller – Roll Dice Online | ToolForge">
+<meta name="twitter:description" content="Free online Dice Roller: roll one or more dice (d6, d20, etc.). Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Dice Roller</h1>
 <p class="subtitle">Roll dice: e.g. 2d6 = two 6-sided dice, 1d20 = one 20-sided die.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Number of dice</h3>
-<input id="n" type="number" min="1" max="20" value="2" style="width:60px">
+<input id="n" type="number" min="1" max="20" value="2" style="width:60px" aria-label="N">
 <h3>Sides per die</h3>
-<input id="sides" type="number" min="2" max="100" value="6" style="width:60px">
+<input id="sides" type="number" min="2" max="100" value="6" style="width:60px" aria-label="Sides">
 <br><br>
 <button onclick="roll()">Roll</button>
 <h3>Result</h3>
 <p>Rolls: <span id="rolls"></span></p>
 <p>Sum: <span id="sum"></span></p>
-</div>
+</main>
 <script>
 function roll(){
 var n=parseInt(document.getElementById("n").value,10)||1

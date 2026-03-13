@@ -5,16 +5,25 @@
 <title>Area Converter - m2, ft2, Acres, Hectares Online | ToolForge</title>
 <meta name="description" content="Free online Area Converter between square meters, square feet, acres, hectares and more. Useful for real estate, land and construction. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/area-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Area Converter - m2, ft2, Acres, Hectares Online | ToolForge">
+<meta property="og:description" content="Free online Area Converter between square meters, square feet, acres, hectares and more. Useful for real estate, land and construction. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/area-converter.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Area Converter - m2, ft2, Acres, Hectares Online | ToolForge">
+<meta name="twitter:description" content="Free online Area Converter between square meters, square feet, acres, hectares and more. Useful for real estate, land and construction. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Area Converter</h1>
 <p class="subtitle">Convert between square meters, square feet, acres and hectares.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Value</h3>
-<input id="val" type="number" step="any" style="width:140px" placeholder="1">
-<select id="from">
+<input id="val" type="number" step="any" style="width:140px" placeholder="1" aria-label="Val">
+<select id="from" aria-label="From">
 <option value="m2">Square meters (m2)</option>
 <option value="ft2">Square feet (ft2)</option>
 <option value="acre">Acres</option>
@@ -32,7 +41,7 @@
 <p>This area converter helps you switch between metric and imperial land and surface units such as square meters, square feet, acres and hectares. It is useful for property listings, agriculture, construction and renovation planning.</p>
 <p>Enter any one value to instantly compare the most common area units in a simple, browser-based format.</p>
 </section>
-</div>
+</main>
 <script>
 var areaToM2={m2:1,ft2:0.09290304,acre:4046.8564224,ha:10000};
 

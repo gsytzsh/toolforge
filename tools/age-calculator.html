@@ -5,20 +5,29 @@
 <title>Age Calculator – Calculate Age from Birth Date | ToolForge</title>
 <meta name="description" content="Free online Age Calculator to compute age from date of birth. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/age-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Age Calculator – Calculate Age from Birth Date | ToolForge">
+<meta property="og:description" content="Free online Age Calculator to compute age from date of birth. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/age-calculator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Age Calculator – Calculate Age from Birth Date | ToolForge">
+<meta name="twitter:description" content="Free online Age Calculator to compute age from date of birth. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Age Calculator</h1>
 <p class="subtitle">Enter date of birth to get age in years, months and days (from today).</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Date of birth</h3>
-<input id="dob" type="date">
+<input id="dob" type="date" aria-label="Dob">
 <br><br>
 <button onclick="calc()">Calculate Age</button>
 <h3>Result</h3>
 <p id="result"></p>
-</div>
+</main>
 <script>
 function calc(){
 var dob=document.getElementById("dob").value

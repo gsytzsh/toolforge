@@ -5,21 +5,30 @@
 <title>Binary to Text – Decode Binary to ASCII | ToolForge</title>
 <meta name="description" content="Free online Binary to Text decoder: convert binary string to ASCII text. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/binary-to-text.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Binary to Text – Decode Binary to ASCII | ToolForge">
+<meta property="og:description" content="Free online Binary to Text decoder: convert binary string to ASCII text. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/binary-to-text.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Binary to Text – Decode Binary to ASCII | ToolForge">
+<meta name="twitter:description" content="Free online Binary to Text decoder: convert binary string to ASCII text. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Binary to Text</h1>
 <p class="subtitle">Enter a binary string (e.g. 01001000 01101001) to decode to text. Use 8 bits per character.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Binary</h3>
-<textarea id="bin" rows="6" style="width:90%" placeholder="01001000 01101001"></textarea>
+<textarea id="bin" rows="6" style="width:90%" placeholder="01001000 01101001" aria-label="Bin"></textarea>
 <br><br>
 <button onclick="decode()">Decode</button>
 <h3>Text</h3>
-<textarea id="text" rows="6" style="width:90%" readonly></textarea>
+<textarea id="text" rows="6" style="width:90%" readonly aria-label="Text input"></textarea>
 <p id="err" style="color:#b91c1c"></p>
-</div>
+</main>
 <script>
 function decode(){
 var s=document.getElementById("bin").value.replace(/\s+/g,"")

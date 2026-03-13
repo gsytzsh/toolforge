@@ -5,21 +5,30 @@
 <title>Reverse Text – Reverse String Online | ToolForge</title>
 <meta name="description" content="Free online Reverse Text tool to reverse a string character by character. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/reverse-text.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Reverse Text – Reverse String Online | ToolForge">
+<meta property="og:description" content="Free online Reverse Text tool to reverse a string character by character. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/reverse-text.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Reverse Text – Reverse String Online | ToolForge">
+<meta name="twitter:description" content="Free online Reverse Text tool to reverse a string character by character. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Reverse Text</h1>
 <p class="subtitle">Reverse a string character by character (or reverse each line).</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Input</h3>
-<textarea id="input" rows="6" style="width:90%"></textarea>
+<textarea id="input" rows="6" style="width:90%" aria-label="Input"></textarea>
 <br><br>
 <button onclick="reverseAll()">Reverse entire text</button>
 <button onclick="reverseLines()">Reverse each line</button>
 <h3>Result</h3>
-<textarea id="output" rows="6" style="width:90%"></textarea>
-</div>
+<textarea id="output" rows="6" style="width:90%" aria-label="Output"></textarea>
+</main>
 <script>
 function reverseAll(){document.getElementById("output").value=document.getElementById("input").value.split("").reverse().join("")}
 function reverseLines(){document.getElementById("output").value=document.getElementById("input").value.split(/\r?\n/).map(function(l){return l.split("").reverse().join("")}).join("\n")}

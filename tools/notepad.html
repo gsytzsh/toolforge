@@ -5,19 +5,28 @@
 <title>Online Notepad – Browser Notepad | ToolForge</title>
 <meta name="description" content="Free online Notepad: notes saved in your browser (localStorage). Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/notepad.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Online Notepad – Browser Notepad | ToolForge">
+<meta property="og:description" content="Free online Notepad: notes saved in your browser (localStorage). Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/notepad.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Online Notepad – Browser Notepad | ToolForge">
+<meta name="twitter:description" content="Free online Notepad: notes saved in your browser (localStorage). Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Online Notepad</h1>
 <p class="subtitle">Quick notes saved in your browser. Data stays on this device.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
-<textarea id="text" rows="14" style="width:100%;font-size:14px" placeholder="Type your notes here..."></textarea>
+<textarea id="text" rows="14" style="width:100%;font-size:14px" placeholder="Type your notes here..." aria-label="Text input"></textarea>
 <br><br>
 <button onclick="save()">Save</button>
 <button onclick="clearAll()">Clear</button>
 <span id="status" style="margin-left:12px;color:#666"></span>
-</div>
+</main>
 <script>
 var KEY="toolforge.notepad"
 var el=document.getElementById("text")

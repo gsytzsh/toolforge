@@ -6,13 +6,22 @@
 <title>Color Converter – Convert HEX and RGB Colors | ToolForge</title>
 <meta name="description" content="Free online Color Converter to convert colors between HEX and RGB formats. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/color-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Color Converter – Convert HEX and RGB Colors | ToolForge">
+<meta property="og:description" content="Free online Color Converter to convert colors between HEX and RGB formats. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/color-converter.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Color Converter – Convert HEX and RGB Colors | ToolForge">
+<meta name="twitter:description" content="Free online Color Converter to convert colors between HEX and RGB formats. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 
 </head>
 
 <body>
 
-<div class="container">
+<main class="container">
 
 <h1>Color Converter</h1>
 
@@ -21,20 +30,20 @@
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <h3>HEX to RGB</h3>
-<input id="hex" style="width:160px" placeholder="#3498db">
+<input id="hex" style="width:160px" placeholder="#3498db" aria-label="Hex input">
 <button onclick="hexToRgb()">Convert</button>
 <p><b>RGB:</b> <span id="rgbResult"></span></p>
 
 <hr>
 
 <h3>RGB to HEX</h3>
-R: <input id="r" type="number" style="width:70px" min="0" max="255">
-G: <input id="g" type="number" style="width:70px" min="0" max="255">
-B: <input id="b" type="number" style="width:70px" min="0" max="255">
+R: <input id="r" type="number" style="width:70px" min="0" max="255" aria-label="Annual rate percent">
+G: <input id="g" type="number" style="width:70px" min="0" max="255" aria-label="G">
+B: <input id="b" type="number" style="width:70px" min="0" max="255" aria-label="B">
 <button onclick="rgbToHex()">Convert</button>
 <p><b>HEX:</b> <span id="hexResult"></span></p>
 
-</div>
+</main>
 
 <script>
 

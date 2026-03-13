@@ -5,16 +5,25 @@
 <title>Temperature Converter – Celsius, Fahrenheit, Kelvin | ToolForge</title>
 <meta name="description" content="Free online Temperature Converter between Celsius, Fahrenheit and Kelvin. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/temperature-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Temperature Converter – Celsius, Fahrenheit, Kelvin | ToolForge">
+<meta property="og:description" content="Free online Temperature Converter between Celsius, Fahrenheit and Kelvin. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/temperature-converter.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Temperature Converter – Celsius, Fahrenheit, Kelvin | ToolForge">
+<meta name="twitter:description" content="Free online Temperature Converter between Celsius, Fahrenheit and Kelvin. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Temperature Converter</h1>
 <p class="subtitle">Convert between Celsius, Fahrenheit and Kelvin.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Value</h3>
-<input id="val" type="number" step="any" placeholder="0" style="width:120px">
-<select id="from">
+<input id="val" type="number" step="any" placeholder="0" style="width:120px" aria-label="Val">
+<select id="from" aria-label="From">
 <option value="C">Celsius</option>
 <option value="F">Fahrenheit</option>
 <option value="K">Kelvin</option>
@@ -25,7 +34,7 @@
 <p>Celsius: <span id="C"></span></p>
 <p>Fahrenheit: <span id="F"></span></p>
 <p>Kelvin: <span id="K"></span></p>
-</div>
+</main>
 <script>
 function convert(){
 var v=parseFloat(document.getElementById("val").value)

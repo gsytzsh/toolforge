@@ -5,20 +5,29 @@
 <title>Remove Duplicate Lines – Dedupe Lines Online | ToolForge</title>
 <meta name="description" content="Free online tool to remove duplicate lines from text, keeping first occurrence. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/remove-duplicate-lines.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Remove Duplicate Lines – Dedupe Lines Online | ToolForge">
+<meta property="og:description" content="Free online tool to remove duplicate lines from text, keeping first occurrence. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/remove-duplicate-lines.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Remove Duplicate Lines – Dedupe Lines Online | ToolForge">
+<meta name="twitter:description" content="Free online tool to remove duplicate lines from text, keeping first occurrence. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Remove Duplicate Lines</h1>
 <p class="subtitle">Paste text with one item per line; duplicate lines are removed (first occurrence kept).</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Input</h3>
-<textarea id="input" rows="10" style="width:90%"></textarea>
+<textarea id="input" rows="10" style="width:90%" aria-label="Input"></textarea>
 <br><br>
 <button onclick="dedupe()">Remove Duplicates</button>
 <h3>Result</h3>
-<textarea id="output" rows="10" style="width:90%"></textarea>
-</div>
+<textarea id="output" rows="10" style="width:90%" aria-label="Output"></textarea>
+</main>
 <script>
 function dedupe(){
 var lines=document.getElementById("input").value.split(/\r?\n/)

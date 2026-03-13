@@ -6,13 +6,22 @@
 <title>Cron Generator – Build Cron Expressions Online | ToolForge</title>
 <meta name="description" content="Free online Cron Generator to build common cron expressions from simple minute, hour, day and month options. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/cron-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Cron Generator – Build Cron Expressions Online | ToolForge">
+<meta property="og:description" content="Free online Cron Generator to build common cron expressions from simple minute, hour, day and month options. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/cron-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cron Generator – Build Cron Expressions Online | ToolForge">
+<meta name="twitter:description" content="Free online Cron Generator to build common cron expressions from simple minute, hour, day and month options. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 
 </head>
 
 <body>
 
-<div class="container">
+<main class="container">
 
 <h1>Cron Generator</h1>
 
@@ -21,7 +30,7 @@
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <h3>Minutes</h3>
-<select id="min">
+<select id="min" aria-label="Min">
 <option value="*">Every minute</option>
 <option value="0">At 0</option>
 <option value="*/5">Every 5 minutes</option>
@@ -30,7 +39,7 @@
 </select>
 
 <h3>Hours</h3>
-<select id="hour">
+<select id="hour" aria-label="Hour">
 <option value="*">Every hour</option>
 <option value="0">Midnight</option>
 <option value="8">08:00</option>
@@ -39,7 +48,7 @@
 </select>
 
 <h3>Day of Month</h3>
-<select id="dom">
+<select id="dom" aria-label="Dom">
 <option value="*">Every day</option>
 <option value="1">1st</option>
 <option value="15">15th</option>
@@ -47,7 +56,7 @@
 </select>
 
 <h3>Month</h3>
-<select id="mon">
+<select id="mon" aria-label="Mon">
 <option value="*">Every month</option>
 <option value="1">Jan</option>
 <option value="4">Apr</option>
@@ -56,7 +65,7 @@
 </select>
 
 <h3>Day of Week</h3>
-<select id="dow">
+<select id="dow" aria-label="Dow">
 <option value="*">Every day</option>
 <option value="1">Mon</option>
 <option value="2">Tue</option>
@@ -72,9 +81,9 @@
 <button onclick="build()">Generate</button>
 
 <h3 style="margin-top:24px">Cron Expression</h3>
-<input id="cron" style="width:260px" readonly>
+<input id="cron" style="width:260px" readonly aria-label="Cron">
 
-</div>
+</main>
 
 <script>
 

@@ -5,27 +5,36 @@
 <title>Hex Encode Decode - Text to Hex Converter Online | ToolForge</title>
 <meta name="description" content="Free online Hex Encode Decode tool to convert text to hexadecimal and hex back to text. Useful for debugging, binary data and low-level development. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/hex-encode-decode.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Hex Encode Decode - Text to Hex Converter Online | ToolForge">
+<meta property="og:description" content="Free online Hex Encode Decode tool to convert text to hexadecimal and hex back to text. Useful for debugging, binary data and low-level development. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/hex-encode-decode.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hex Encode Decode - Text to Hex Converter Online | ToolForge">
+<meta name="twitter:description" content="Free online Hex Encode Decode tool to convert text to hexadecimal and hex back to text. Useful for debugging, binary data and low-level development. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Hex Encode Decode</h1>
 <p class="subtitle">Convert text to hexadecimal and hex back to text directly in your browser.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Text</h3>
-<textarea id="text" rows="6" style="width:90%;font-family:monospace" placeholder="Hello, world"></textarea>
+<textarea id="text" rows="6" style="width:90%;font-family:monospace" placeholder="Hello, world" aria-label="Text input"></textarea>
 <br><br>
 <button type="button" onclick="encodeHex()">Text to Hex</button>
 <button type="button" onclick="decodeHex()">Hex to Text</button>
 <h3 style="margin-top:20px">Hex</h3>
-<textarea id="hex" rows="6" style="width:90%;font-family:monospace" placeholder="48 65 6c 6c 6f"></textarea>
+<textarea id="hex" rows="6" style="width:90%;font-family:monospace" placeholder="48 65 6c 6c 6f" aria-label="Hex input"></textarea>
 <p id="hex-error" style="color:#b91c1c;margin-top:8px"></p>
 <section class="tool-seo">
 <h3>About Hex Encode Decode</h3>
 <p>This hex converter helps you turn plain text into hexadecimal values and decode hex back into readable text. It is useful for debugging byte-level data, inspecting encoded payloads and learning how strings are represented in UTF-8.</p>
 <p>Because everything runs in your browser, you can quickly test short strings, API samples and binary-like data without sending content to a server.</p>
 </section>
-</div>
+</main>
 <script>
 function toHex(bytes){
   return Array.from(bytes).map(function(b){

@@ -5,17 +5,26 @@
 <title>Random String Generator - Generate Random Strings and Tokens | ToolForge</title>
 <meta name="description" content="Free online Random String Generator to create random strings for passwords, tokens and API keys with custom length and character sets. Uses secure browser crypto where available. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/random-string-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Random String Generator - Generate Random Strings and Tokens | ToolForge">
+<meta property="og:description" content="Free online Random String Generator to create random strings for passwords, tokens and API keys with custom length and character sets. Uses secure browser crypto where available. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/random-string-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Random String Generator - Generate Random Strings and Tokens | ToolForge">
+<meta name="twitter:description" content="Free online Random String Generator to create random strings for passwords, tokens and API keys with custom length and character sets. Uses secure browser crypto where available. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Random String Generator</h1>
 <p class="subtitle">Generate random strings for tokens, API keys or test data.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Options</h3>
 <p>
 Length:
-<input id="length" type="number" style="width:100px" value="16" min="1" max="1024">
+<input id="length" type="number" style="width:100px" value="16" min="1" max="1024" aria-label="Length">
 </p>
 <p>
 <label><input type="checkbox" id="lower" checked> a-z</label>
@@ -25,14 +34,14 @@ Length:
 </p>
 <button type="button" onclick="generateString()">Generate</button>
 <h3 style="margin-top:20px">Result</h3>
-<textarea id="output" rows="4" style="width:90%;font-family:monospace" readonly></textarea>
+<textarea id="output" rows="4" style="width:90%;font-family:monospace" readonly aria-label="Output"></textarea>
 <p id="status" style="color:#666;margin-top:6px"></p>
 <section class="tool-seo">
 <h3>About Random String Generator</h3>
 <p>This random string generator creates custom strings for passwords, API keys, test data, invite codes and other development tasks. You can choose the length and character sets you want to include.</p>
 <p>When available, the generator uses browser crypto for stronger randomness, making it a practical option for quick client-side token generation.</p>
 </section>
-</div>
+</main>
 <script>
 function getRandomInt(max){
   if(window.crypto&&crypto.getRandomValues){

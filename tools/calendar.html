@@ -5,6 +5,15 @@
 <title>Calendar – Online Calendar with Notes | ToolForge</title>
 <meta name="description" content="Free online Calendar tool to browse months and attach quick notes to specific dates, stored locally in your browser. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/calendar.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Calendar – Online Calendar with Notes | ToolForge">
+<meta property="og:description" content="Free online Calendar tool to browse months and attach quick notes to specific dates, stored locally in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/calendar.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Calendar – Online Calendar with Notes | ToolForge">
+<meta name="twitter:description" content="Free online Calendar tool to browse months and attach quick notes to specific dates, stored locally in your browser. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 
 <style>
@@ -43,7 +52,7 @@
 </head>
 
 <body>
-<div class="container">
+<main class="container">
   <div class="cal-wrap">
     <h1>Calendar</h1>
     <p class="subtitle">Browse months, see today at a glance and attach quick notes to specific dates, all stored locally in your browser.</p>
@@ -71,7 +80,7 @@
         <div class="cal-meta" id="selectedMeta"></div>
       </div>
       <div style="margin-top:10px">
-        <textarea id="note" placeholder="Write a note for this date..."></textarea>
+        <textarea id="note" placeholder="Write a note for this date..." aria-label="Note"></textarea>
       </div>
       <div class="cal-row" style="margin-top:10px;justify-content:flex-end">
         <button onclick="clearNote()">Clear</button>
@@ -79,7 +88,7 @@
       </div>
     </div>
   </div>
-</div>
+</main>
 
 <script>
 const DOW=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]

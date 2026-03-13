@@ -9,6 +9,15 @@
 <meta name="description" content="Free online IP Info Lookup tool to get IP address location, city, country and ASN. Also detect your current IP and city like ip138-style lookup. Part of the ToolForge developer tools collection.">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/ip-info.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="IP Info Lookup – Free Online IP Geolocation Tool | ToolForge">
+<meta property="og:description" content="Free online IP Info Lookup tool to get IP address location, city, country and ASN. Also detect your current IP and city like ip138-style lookup. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/ip-info.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IP Info Lookup – Free Online IP Geolocation Tool | ToolForge">
+<meta name="twitter:description" content="Free online IP Info Lookup tool to get IP address location, city, country and ASN. Also detect your current IP and city like ip138-style lookup. Part of the ToolForge developer tools collection.">
 
 <link rel="stylesheet" href="/css/style.css">
 
@@ -16,7 +25,7 @@
 
 <body>
 
-<div class="container">
+<main class="container">
 
 <h1>IP Info Lookup</h1>
 
@@ -27,7 +36,7 @@
 <h3>Your IP</h3>
 <p id="self-ip">Detecting your IP...</p>
 
-<input id="ip" placeholder="Enter IP address">
+<input id="ip" placeholder="Enter IP address" aria-label="Ip">
 
 <button onclick="lookup()">Lookup</button>
 
@@ -35,7 +44,7 @@
 
 <pre id="result"></pre>
 
-</div>
+</main>
 
 <script>
 

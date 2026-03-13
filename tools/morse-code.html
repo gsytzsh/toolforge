@@ -5,22 +5,31 @@
 <title>Morse Code – Encode Decode Morse Code | ToolForge</title>
 <meta name="description" content="Free online Morse Code encoder and decoder. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/morse-code.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Morse Code – Encode Decode Morse Code | ToolForge">
+<meta property="og:description" content="Free online Morse Code encoder and decoder. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/morse-code.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Morse Code – Encode Decode Morse Code | ToolForge">
+<meta name="twitter:description" content="Free online Morse Code encoder and decoder. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Morse Code</h1>
 <p class="subtitle">Encode text to Morse code or decode Morse to text. Use space between letters, / between words.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Text</h3>
-<textarea id="text" rows="4" style="width:90%" placeholder="Hello"></textarea>
+<textarea id="text" rows="4" style="width:90%" placeholder="Hello" aria-label="Text input"></textarea>
 <br><br>
 <button onclick="toMorse()">Text → Morse</button>
 <h3>Morse</h3>
-<textarea id="morse" rows="4" style="width:90%" placeholder=".... . .-.. .-.. ---"></textarea>
+<textarea id="morse" rows="4" style="width:90%" placeholder=".... . .-.. .-.. ---" aria-label="Morse"></textarea>
 <br><br>
 <button onclick="toText()">Morse → Text</button>
-</div>
+</main>
 <script>
 var map={A:".-",B:"-...",C:"-.-.",D:"-..",E:".",F:"..-.",G:"--.",H:"....",I:"..",J:".---",K:"-.-",L:".-..",M:"--",N:"-.",O:"---",P:".--.",Q:"--.-",R:".-.",S:"...",T:"-",U:"..-",V:"...-",W:".--",X:"-..-",Y:"-.--",Z:"--..","1":".----","2":"..---","3":"...--","4":"....-","5":".....","6":"-....","7":"--...","8":"---..","9":"----.","0":"-----"}
 var rev={}

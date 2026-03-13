@@ -5,26 +5,35 @@
 <title>Find and Replace – Text Find Replace Online | ToolForge</title>
 <meta name="description" content="Free online Find and Replace tool for text. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/find-replace.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Find and Replace – Text Find Replace Online | ToolForge">
+<meta property="og:description" content="Free online Find and Replace tool for text. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/find-replace.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Find and Replace – Text Find Replace Online | ToolForge">
+<meta name="twitter:description" content="Free online Find and Replace tool for text. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Find and Replace</h1>
 <p class="subtitle">Find a string and replace with another. Optionally use regex.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Find</h3>
-<input id="find" style="width:90%" placeholder="Text or regex">
+<input id="find" style="width:90%" placeholder="Text or regex" aria-label="Find">
 <label><input type="checkbox" id="regex"> Regex</label>
 <h3>Replace with</h3>
-<input id="repl" style="width:90%" placeholder="Replacement">
+<input id="repl" style="width:90%" placeholder="Replacement" aria-label="Repl">
 <h3>Text</h3>
-<textarea id="text" rows="10" style="width:90%"></textarea>
+<textarea id="text" rows="10" style="width:90%" aria-label="Text input"></textarea>
 <br><br>
 <button onclick="run()">Replace</button>
 <button onclick="replaceAll()">Replace all</button>
 <h3>Result</h3>
-<textarea id="output" rows="10" style="width:90%"></textarea>
-</div>
+<textarea id="output" rows="10" style="width:90%" aria-label="Output"></textarea>
+</main>
 <script>
 function run(){
 var f=document.getElementById("find").value

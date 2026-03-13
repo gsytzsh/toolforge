@@ -6,6 +6,15 @@
 <title>YAML ⇄ JSON Converter – Convert YAML and JSON Online | ToolForge</title>
 <meta name="description" content="Free online YAML ⇄ JSON Converter to convert YAML configuration files to JSON and back, directly in your browser. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/yaml-json-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="YAML ⇄ JSON Converter – Convert YAML and JSON Online | ToolForge">
+<meta property="og:description" content="Free online YAML ⇄ JSON Converter to convert YAML configuration files to JSON and back, directly in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/yaml-json-converter.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="YAML ⇄ JSON Converter – Convert YAML and JSON Online | ToolForge">
+<meta name="twitter:description" content="Free online YAML ⇄ JSON Converter to convert YAML configuration files to JSON and back, directly in your browser. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
@@ -14,7 +23,7 @@
 
 <body>
 
-<div class="container">
+<main class="container">
 
 <h1>YAML ⇄ JSON Converter</h1>
 
@@ -23,14 +32,14 @@
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <h3>YAML</h3>
-<textarea id="yaml" rows="12" style="width:90%" placeholder="name: Tom&#10;age: 20&#10;tags:&#10;  - dev&#10;  - ops"></textarea>
+<textarea id="yaml" rows="12" style="width:90%" placeholder="name: Tom&#10;age: 20&#10;tags:&#10;  - dev&#10;  - ops" aria-label="Yaml"></textarea>
 
 <br><br>
 
 <button onclick="yamlToJson()">YAML → JSON</button>
 
 <h3 style="margin-top:24px">JSON</h3>
-<textarea id="json" rows="12" style="width:90%" placeholder='{"name":"Tom","age":20,"tags":["dev","ops"]}'></textarea>
+<textarea id="json" rows="12" style="width:90%" placeholder='{"name":"Tom","age":20,"tags":["dev","ops"]}' aria-label="JSON input"></textarea>
 
 <br><br>
 
@@ -39,7 +48,7 @@
 <h3 style="margin-top:24px">Status</h3>
 <p id="status" style="color:#666">Ready.</p>
 
-</div>
+</main>
 
 <script>
 

@@ -5,21 +5,30 @@
 <title>JSON to XML – Convert JSON to XML Online | ToolForge</title>
 <meta name="description" content="Free online JSON to XML converter. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/json-to-xml.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="JSON to XML – Convert JSON to XML Online | ToolForge">
+<meta property="og:description" content="Free online JSON to XML converter. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/json-to-xml.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JSON to XML – Convert JSON to XML Online | ToolForge">
+<meta name="twitter:description" content="Free online JSON to XML converter. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>JSON to XML</h1>
 <p class="subtitle">Convert JSON to XML. Objects become elements, arrays repeat the key.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>JSON</h3>
-<textarea id="json" rows="10" style="width:90%" placeholder='{"name":"Tom","age":20}'></textarea>
+<textarea id="json" rows="10" style="width:90%" placeholder='{"name":"Tom","age":20}' aria-label="JSON input"></textarea>
 <br><br>
 <button onclick="convert()">Convert to XML</button>
 <h3>XML</h3>
-<textarea id="xml" rows="10" style="width:90%"></textarea>
+<textarea id="xml" rows="10" style="width:90%" aria-label="XML input"></textarea>
 <p id="status" style="color:#666"></p>
-</div>
+</main>
 <script>
 function escapeXml(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function toXml(key,val){

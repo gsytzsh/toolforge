@@ -5,20 +5,29 @@
 <title>Number to Words – Convert Number to English Words | ToolForge</title>
 <meta name="description" content="Free online Number to Words converter for integers (English). Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/number-to-words.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Number to Words – Convert Number to English Words | ToolForge">
+<meta property="og:description" content="Free online Number to Words converter for integers (English). Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/number-to-words.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Number to Words – Convert Number to English Words | ToolForge">
+<meta name="twitter:description" content="Free online Number to Words converter for integers (English). Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Number to Words</h1>
 <p class="subtitle">Convert a number to English words (e.g. 1234 → one thousand two hundred thirty-four).</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Number</h3>
-<input id="num" type="number" placeholder="1234" style="width:180px">
+<input id="num" type="number" placeholder="1234" style="width:180px" aria-label="Num">
 <br><br>
 <button onclick="convert()">Convert</button>
 <h3>Result</h3>
 <p id="result"></p>
-</div>
+</main>
 <script>
 var ones="zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split(" ")
 var tens="","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"

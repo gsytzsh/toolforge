@@ -5,22 +5,31 @@
 <title>Average Calculator – Mean, Median, Mode | ToolForge</title>
 <meta name="description" content="Free online Average Calculator to find mean, median and mode of a list of numbers. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/average-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Average Calculator – Mean, Median, Mode | ToolForge">
+<meta property="og:description" content="Free online Average Calculator to find mean, median and mode of a list of numbers. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/average-calculator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Average Calculator – Mean, Median, Mode | ToolForge">
+<meta name="twitter:description" content="Free online Average Calculator to find mean, median and mode of a list of numbers. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Average Calculator</h1>
 <p class="subtitle">Enter numbers separated by comma or space to get mean, median and mode.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Numbers</h3>
-<textarea id="input" rows="4" style="width:90%" placeholder="1, 2, 3, 4, 5"></textarea>
+<textarea id="input" rows="4" style="width:90%" placeholder="1, 2, 3, 4, 5" aria-label="Input"></textarea>
 <br><br>
 <button onclick="calc()">Calculate</button>
 <h3>Result</h3>
 <p>Mean: <span id="mean"></span></p>
 <p>Median: <span id="median"></span></p>
 <p>Mode: <span id="mode"></span></p>
-</div>
+</main>
 <script>
 function calc(){
 var t=document.getElementById("input").value.replace(/,/g," ").split(/\s+/).filter(Boolean).map(Number).filter(n=>!isNaN(n))

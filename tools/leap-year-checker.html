@@ -5,20 +5,29 @@
 <title>Leap Year Checker – Is This Year a Leap Year? | ToolForge</title>
 <meta name="description" content="Free online Leap Year Checker to determine if a year is a leap year. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/leap-year-checker.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Leap Year Checker – Is This Year a Leap Year? | ToolForge">
+<meta property="og:description" content="Free online Leap Year Checker to determine if a year is a leap year. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/leap-year-checker.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Leap Year Checker – Is This Year a Leap Year? | ToolForge">
+<meta name="twitter:description" content="Free online Leap Year Checker to determine if a year is a leap year. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Leap Year Checker</h1>
 <p class="subtitle">Enter a year to check if it is a leap year.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Year</h3>
-<input id="year" type="number" placeholder="2024" style="width:100px">
+<input id="year" type="number" placeholder="2024" style="width:100px" aria-label="Year">
 <br><br>
 <button onclick="check()">Check</button>
 <h3>Result</h3>
 <p id="result"></p>
-</div>
+</main>
 <script>
 function check(){
 var y=parseInt(document.getElementById("year").value,10)

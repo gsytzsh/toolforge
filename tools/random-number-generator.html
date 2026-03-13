@@ -6,13 +6,22 @@
 <title>Random Number Generator – Generate Random Numbers Online | ToolForge</title>
 <meta name="description" content="Free online Random Number Generator to pick random integers in a range, with support for multiple values and optional duplicates. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/random-number-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Random Number Generator – Generate Random Numbers Online | ToolForge">
+<meta property="og:description" content="Free online Random Number Generator to pick random integers in a range, with support for multiple values and optional duplicates. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/random-number-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Random Number Generator – Generate Random Numbers Online | ToolForge">
+<meta name="twitter:description" content="Free online Random Number Generator to pick random integers in a range, with support for multiple values and optional duplicates. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 
 </head>
 
 <body>
 
-<div class="container">
+<main class="container">
 
 <h1>Random Number Generator</h1>
 
@@ -24,14 +33,14 @@
 
 <p>
 Min:
-<input id="min" type="number" style="width:120px" value="1">
+<input id="min" type="number" style="width:120px" value="1" aria-label="Min">
 Max:
-<input id="max" type="number" style="width:120px" value="100">
+<input id="max" type="number" style="width:120px" value="100" aria-label="Max">
 </p>
 
 <p>
 How many numbers:
-<input id="count" type="number" style="width:120px" value="1" min="1" max="1000">
+<input id="count" type="number" style="width:120px" value="1" min="1" max="1000" aria-label="Count">
 </p>
 
 <p>
@@ -44,11 +53,11 @@ Allow duplicates?
 <button onclick="generate()">Generate</button>
 
 <h3 style="margin-top:24px">Result</h3>
-<textarea id="output" rows="8" style="width:90%" readonly></textarea>
+<textarea id="output" rows="8" style="width:90%" readonly aria-label="Output"></textarea>
 
 <p id="status" style="color:#666;margin-top:8px">Ready.</p>
 
-</div>
+</main>
 
 <script>
 

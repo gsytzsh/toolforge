@@ -5,21 +5,30 @@
 <title>XML Formatter – Pretty Print XML Online | ToolForge</title>
 <meta name="description" content="Free online XML Formatter to pretty print and indent XML. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/xml-formatter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="XML Formatter – Pretty Print XML Online | ToolForge">
+<meta property="og:description" content="Free online XML Formatter to pretty print and indent XML. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/xml-formatter.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XML Formatter – Pretty Print XML Online | ToolForge">
+<meta name="twitter:description" content="Free online XML Formatter to pretty print and indent XML. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>XML Formatter</h1>
 <p class="subtitle">Paste XML to format with indentation for readability.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>XML</h3>
-<textarea id="input" rows="12" style="width:90%;font-family:monospace" placeholder="<root><a>1</a><b>2</b></root>"></textarea>
+<textarea id="input" rows="12" style="width:90%;font-family:monospace" placeholder="<root aria-label="Input"><a>1</a><b>2</b></root>"></textarea>
 <br><br>
 <button onclick="format()">Format</button>
 <h3>Formatted</h3>
-<textarea id="output" rows="12" style="width:90%;font-family:monospace" readonly></textarea>
+<textarea id="output" rows="12" style="width:90%;font-family:monospace" readonly aria-label="Output"></textarea>
 <p id="err" style="color:#b91c1c"></p>
-</div>
+</main>
 <script>
 function format(){
 var s=document.getElementById("input").value.trim()

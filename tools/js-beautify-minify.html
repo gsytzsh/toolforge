@@ -5,26 +5,35 @@
 <title>JavaScript Beautify and Minify - Format or Minify JS Online | ToolForge</title>
 <meta name="description" content="Free online JavaScript Beautify and Minify tool to format messy JS or compress code by removing whitespace and comments. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/js-beautify-minify.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="JavaScript Beautify and Minify - Format or Minify JS Online | ToolForge">
+<meta property="og:description" content="Free online JavaScript Beautify and Minify tool to format messy JS or compress code by removing whitespace and comments. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/js-beautify-minify.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript Beautify and Minify - Format or Minify JS Online | ToolForge">
+<meta name="twitter:description" content="Free online JavaScript Beautify and Minify tool to format messy JS or compress code by removing whitespace and comments. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>JavaScript Beautify and Minify</h1>
 <p class="subtitle">Quickly format or minify small JavaScript snippets in your browser.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>JavaScript input</h3>
-<textarea id="input" rows="10" style="width:90%;font-family:monospace" placeholder="function hello(){console.log('hi');}"></textarea>
+<textarea id="input" rows="10" style="width:90%;font-family:monospace" placeholder="function hello(){console.log('hi');}" aria-label="Input"></textarea>
 <br><br>
 <button type="button" onclick="beautify()">Beautify</button>
 <button type="button" onclick="minify()">Minify</button>
 <h3 style="margin-top:20px">Output</h3>
-<textarea id="output" rows="14" style="width:90%;font-family:monospace" readonly></textarea>
+<textarea id="output" rows="14" style="width:90%;font-family:monospace" readonly aria-label="Output"></textarea>
 <section class="tool-seo">
 <h3>About JavaScript Beautify and Minify</h3>
 <p>This tool helps you quickly reformat JavaScript for readability or minify simple snippets by removing comments and extra whitespace. It is useful for debugging copied code, sharing examples and cleaning small inline scripts.</p>
 <p>For complex production builds you should still use dedicated bundlers, but this page is handy for fast browser-side formatting and inspection.</p>
 </section>
-</div>
+</main>
 <script>
 function beautify(){
   var code=document.getElementById("input").value;

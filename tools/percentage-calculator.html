@@ -6,13 +6,22 @@
 <title>Percentage Calculator – Solve Percentage Problems Online | ToolForge</title>
 <meta name="description" content="Free online Percentage Calculator to compute percentage values, percentage of, and percentage change for discounts, analytics and finance. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/percentage-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Percentage Calculator – Solve Percentage Problems Online | ToolForge">
+<meta property="og:description" content="Free online Percentage Calculator to compute percentage values, percentage of, and percentage change for discounts, analytics and finance. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/percentage-calculator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Percentage Calculator – Solve Percentage Problems Online | ToolForge">
+<meta name="twitter:description" content="Free online Percentage Calculator to compute percentage values, percentage of, and percentage change for discounts, analytics and finance. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 
 </head>
 
 <body>
 
-<div class="container">
+<main class="container">
 
 <h1>Percentage Calculator</h1>
 
@@ -23,9 +32,9 @@
 <h3>1. What is X% of Y?</h3>
 
 <p>
-<input id="p1_x" type="number" style="width:120px" placeholder="X"> %
+<input id="p1_x" type="number" style="width:120px" placeholder="X" aria-label="P1 X"> %
 of
-<input id="p1_y" type="number" style="width:160px" placeholder="Y">
+<input id="p1_y" type="number" style="width:160px" placeholder="Y" aria-label="P1 Y">
 </p>
 
 <button onclick="calcP1()">Calculate</button>
@@ -37,9 +46,9 @@ of
 <h3>2. X is what percent of Y?</h3>
 
 <p>
-<input id="p2_x" type="number" style="width:160px" placeholder="X">
+<input id="p2_x" type="number" style="width:160px" placeholder="X" aria-label="P2 X">
 is what % of
-<input id="p2_y" type="number" style="width:160px" placeholder="Y">
+<input id="p2_y" type="number" style="width:160px" placeholder="Y" aria-label="P2 Y">
 </p>
 
 <button onclick="calcP2()">Calculate</button>
@@ -52,16 +61,16 @@ is what % of
 
 <p>
 From
-<input id="p3_a" type="number" style="width:160px" placeholder="A">
+<input id="p3_a" type="number" style="width:160px" placeholder="A" aria-label="P3 A">
 to
-<input id="p3_b" type="number" style="width:160px" placeholder="B">
+<input id="p3_b" type="number" style="width:160px" placeholder="B" aria-label="P3 B">
 </p>
 
 <button onclick="calcP3()">Calculate</button>
 
 <p><b>Result:</b> <span id="p3_result"></span></p>
 
-</div>
+</main>
 
 <script>
 

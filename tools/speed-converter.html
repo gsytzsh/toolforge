@@ -5,16 +5,25 @@
 <title>Speed Converter - km/h, mph, m/s, Knots Online | ToolForge</title>
 <meta name="description" content="Free online Speed Converter between kilometers per hour, miles per hour, meters per second and knots. Great for travel, navigation and physics. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/speed-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Speed Converter - km/h, mph, m/s, Knots Online | ToolForge">
+<meta property="og:description" content="Free online Speed Converter between kilometers per hour, miles per hour, meters per second and knots. Great for travel, navigation and physics. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/speed-converter.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Speed Converter - km/h, mph, m/s, Knots Online | ToolForge">
+<meta name="twitter:description" content="Free online Speed Converter between kilometers per hour, miles per hour, meters per second and knots. Great for travel, navigation and physics. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Speed Converter</h1>
 <p class="subtitle">Convert between km/h, mph, m/s and knots.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Value</h3>
-<input id="val" type="number" step="any" style="width:140px" placeholder="1">
-<select id="from">
+<input id="val" type="number" step="any" style="width:140px" placeholder="1" aria-label="Val">
+<select id="from" aria-label="From">
 <option value="kmh">Kilometers per hour (km/h)</option>
 <option value="mph">Miles per hour (mph)</option>
 <option value="ms">Meters per second (m/s)</option>
@@ -32,7 +41,7 @@
 <p>This speed converter compares kilometers per hour, miles per hour, meters per second and knots in one place. It is useful for travel, aviation, boating, sports tracking and science or physics homework.</p>
 <p>Type one value and instantly see the equivalent speed in the other common units without needing multiple manual conversions.</p>
 </section>
-</div>
+</main>
 <script>
 var toMS={kmh:1000/3600,mph:0.44704,ms:1,kt:0.514444};
 

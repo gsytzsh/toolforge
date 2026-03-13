@@ -5,20 +5,29 @@
 <title>Factorial Calculator – n! Calculator | ToolForge</title>
 <meta name="description" content="Free online Factorial Calculator to compute n! for non-negative integers. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/factorial-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Factorial Calculator – n! Calculator | ToolForge">
+<meta property="og:description" content="Free online Factorial Calculator to compute n! for non-negative integers. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/factorial-calculator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Factorial Calculator – n! Calculator | ToolForge">
+<meta name="twitter:description" content="Free online Factorial Calculator to compute n! for non-negative integers. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Factorial Calculator</h1>
 <p class="subtitle">Enter a non-negative integer n to compute n! (factorial).</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>n</h3>
-<input id="n" type="number" min="0" placeholder="10" style="width:100px">
+<input id="n" type="number" min="0" placeholder="10" style="width:100px" aria-label="N">
 <br><br>
 <button onclick="calc()">Calculate</button>
 <h3>Result</h3>
 <p id="result"></p>
-</div>
+</main>
 <script>
 function calc(){
 var n=parseInt(document.getElementById("n").value,10)

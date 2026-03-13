@@ -5,24 +5,33 @@
 <title>Grade Calculator – Final Grade Needed Calculator | ToolForge</title>
 <meta name="description" content="Free online Grade Calculator: what grade you need on the final to get a target grade. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/grade-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Grade Calculator – Final Grade Needed Calculator | ToolForge">
+<meta property="og:description" content="Free online Grade Calculator: what grade you need on the final to get a target grade. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/grade-calculator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Grade Calculator – Final Grade Needed Calculator | ToolForge">
+<meta name="twitter:description" content="Free online Grade Calculator: what grade you need on the final to get a target grade. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Grade Calculator</h1>
 <p class="subtitle">Calculate the grade you need on the final exam to reach a target course grade.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Current grade %</h3>
-<input id="current" type="number" step="0.1" placeholder="80" style="width:100px">
+<input id="current" type="number" step="0.1" placeholder="80" style="width:100px" aria-label="Current">
 <h3>Weight of final %</h3>
-<input id="weight" type="number" step="0.1" placeholder="30" style="width:100px">
+<input id="weight" type="number" step="0.1" placeholder="30" style="width:100px" aria-label="Weight">
 <h3>Target course grade %</h3>
-<input id="target" type="number" step="0.1" placeholder="85" style="width:100px">
+<input id="target" type="number" step="0.1" placeholder="85" style="width:100px" aria-label="Target">
 <br><br>
 <button onclick="calc()">Calculate</button>
 <h3>Result</h3>
 <p>Grade needed on final: <span id="result"></span></p>
-</div>
+</main>
 <script>
 function calc(){
 var cur=parseFloat(document.getElementById("current").value)

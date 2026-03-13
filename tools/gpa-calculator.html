@@ -5,20 +5,29 @@
 <title>GPA Calculator – Grade Point Average Calculator | ToolForge</title>
 <meta name="description" content="Free online GPA Calculator to compute Grade Point Average from grades and credits. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/gpa-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="GPA Calculator – Grade Point Average Calculator | ToolForge">
+<meta property="og:description" content="Free online GPA Calculator to compute Grade Point Average from grades and credits. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/gpa-calculator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GPA Calculator – Grade Point Average Calculator | ToolForge">
+<meta name="twitter:description" content="Free online GPA Calculator to compute Grade Point Average from grades and credits. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>GPA Calculator</h1>
 <p class="subtitle">Enter grades (A=4, B=3, C=2, D=1, F=0) and credits per course, one per line: e.g. A 3</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Courses (grade credit per line)</h3>
-<textarea id="input" rows="6" style="width:90%" placeholder="A 3&#10;B 4&#10;C 2"></textarea>
+<textarea id="input" rows="6" style="width:90%" placeholder="A 3&#10;B 4&#10;C 2" aria-label="Input"></textarea>
 <br><br>
 <button onclick="calc()">Calculate GPA</button>
 <h3>Result</h3>
 <p>GPA: <span id="gpa"></span></p>
-</div>
+</main>
 <script>
 var map={A:4,B:3,C:2,D:1,F:0}
 function calc(){

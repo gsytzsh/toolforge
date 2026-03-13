@@ -5,25 +5,34 @@
 <title>Compound Interest Calculator – Calculate Compound Interest | ToolForge</title>
 <meta name="description" content="Free online Compound Interest Calculator. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/compound-interest-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Compound Interest Calculator – Calculate Compound Interest | ToolForge">
+<meta property="og:description" content="Free online Compound Interest Calculator. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/compound-interest-calculator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Compound Interest Calculator – Calculate Compound Interest | ToolForge">
+<meta name="twitter:description" content="Free online Compound Interest Calculator. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Compound Interest Calculator</h1>
 <p class="subtitle">Calculate final amount from principal, annual rate, and time in years (compound interest).</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Principal</h3>
-<input id="principal" type="number" placeholder="1000" style="width:140px">
+<input id="principal" type="number" placeholder="1000" style="width:140px" aria-label="Principal">
 <h3>Annual rate %</h3>
-<input id="rate" type="number" step="0.01" placeholder="5" style="width:80px">
+<input id="rate" type="number" step="0.01" placeholder="5" style="width:80px" aria-label="Rate">
 <h3>Years</h3>
-<input id="years" type="number" step="0.1" placeholder="10" style="width:80px">
+<input id="years" type="number" step="0.1" placeholder="10" style="width:80px" aria-label="Years">
 <br><br>
 <button onclick="calc()">Calculate</button>
 <h3>Result</h3>
 <p>Final amount: <span id="result"></span></p>
 <p>Interest earned: <span id="interest"></span></p>
-</div>
+</main>
 <script>
 function calc(){
 var P=parseFloat(document.getElementById("principal").value)

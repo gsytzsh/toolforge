@@ -5,16 +5,25 @@
 <title>Length Converter – m, km, miles, feet, inches | ToolForge</title>
 <meta name="description" content="Free online Length Converter between meters, km, miles, feet and inches. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/length-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Length Converter – m, km, miles, feet, inches | ToolForge">
+<meta property="og:description" content="Free online Length Converter between meters, km, miles, feet and inches. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/length-converter.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Length Converter – m, km, miles, feet, inches | ToolForge">
+<meta name="twitter:description" content="Free online Length Converter between meters, km, miles, feet and inches. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container">
+<main class="container">
 <h1>Length Converter</h1>
 <p class="subtitle">Convert between meters, kilometers, miles, feet and inches.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Value</h3>
-<input id="val" type="number" step="any" placeholder="1" style="width:120px">
-<select id="from">
+<input id="val" type="number" step="any" placeholder="1" style="width:120px" aria-label="Val">
+<select id="from" aria-label="From">
 <option value="m">Meters</option>
 <option value="km">Kilometers</option>
 <option value="mi">Miles</option>
@@ -29,7 +38,7 @@
 <p>Miles: <span id="mi"></span></p>
 <p>Feet: <span id="ft"></span></p>
 <p>Inches: <span id="in"></span></p>
-</div>
+</main>
 <script>
 var toM={m:1,km:1000,mi:1609.344,ft:0.3048,in:0.0254}
 function convert(){

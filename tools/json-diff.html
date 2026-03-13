@@ -9,6 +9,15 @@
 <meta name="description" content="Free online JSON Diff tool to compare two JSON documents and highlight added, removed and changed fields. Part of the ToolForge developer tools collection.">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/json-diff.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="JSON Diff – Compare Two JSON Objects Online | ToolForge">
+<meta property="og:description" content="Free online JSON Diff tool to compare two JSON documents and highlight added, removed and changed fields. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/json-diff.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JSON Diff – Compare Two JSON Objects Online | ToolForge">
+<meta name="twitter:description" content="Free online JSON Diff tool to compare two JSON documents and highlight added, removed and changed fields. Part of the ToolForge developer tools collection.">
 
 <link rel="stylesheet" href="/css/style.css">
 
@@ -16,7 +25,7 @@
 
 <body>
 
-<div class="container">
+<main class="container">
 
 <h1>JSON Diff</h1>
 
@@ -28,12 +37,12 @@
 
 <div style="flex:1">
 <h3>JSON A</h3>
-<textarea id="jsonA" rows="15" style="width:100%"></textarea>
+<textarea id="jsonA" rows="15" style="width:100%" aria-label="Json A"></textarea>
 </div>
 
 <div style="flex:1">
 <h3>JSON B</h3>
-<textarea id="jsonB" rows="15" style="width:100%"></textarea>
+<textarea id="jsonB" rows="15" style="width:100%" aria-label="Json B"></textarea>
 </div>
 
 </div>
@@ -47,7 +56,7 @@
 
 <pre id="result"></pre>
 
-</div>
+</main>
 
 <script>
 
