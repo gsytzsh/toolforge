@@ -281,6 +281,14 @@ padding-bottom:6px;
 border-bottom:2px solid #e5e7eb;
 }
 
+.category-description{
+color:#6b7280;
+font-size:0.95rem;
+line-height:1.6;
+margin:-4px 0 14px;
+max-width:760px;
+}
+
 .no-results{
 color:#6b7280;
 text-align:center;

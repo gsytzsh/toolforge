@@ -4,26 +4,48 @@
   let allTools = [];
 
   const CATEGORY_ORDER = [
-    "Encoders & Decoders",
     "JSON & Data",
-    "API & Data",
-    "Hash & Security",
-    "PDF & Export",
-    "Image & Color",
+    "Encoding & Decoding",
     "Text",
+    "Images & Colors",
+    "PDF & Export",
     "Date & Time",
     "Time & Planning",
     "Daily Productivity",
     "Money & Decisions",
-    "Network & HTTP",
-    "SEO & Webmaster",
-    "Code & Format",
-    "Code & Debug",
-    "Scheduling & Infra",
-    "Database",
     "Generators & Converters",
-    "Calculators"
+    "Calculators",
+    "Security & Tokens",
+    "Web & Network",
+    "API & Data",
+    "Code & Formatting",
+    "Debug & Testing",
+    "Database",
+    "Schedules & Infra",
+    "SEO & Webmaster"
   ];
+
+  const CATEGORY_DESCRIPTIONS = {
+    "JSON & Data": "Format, validate, convert and inspect JSON, CSV, XML and related data formats.",
+    "Encoding & Decoding": "Encode, decode and transform Base64, URL, binary, hex, QR and other text formats.",
+    "Text": "Clean up, count, compare and transform text for writing, content work and daily editing.",
+    "Images & Colors": "Resize, compress and convert images, then work with colors and image-related utilities.",
+    "PDF & Export": "Turn text, code, notes, tables and files into browser-generated PDF documents.",
+    "Date & Time": "Convert timestamps, compare dates and work with calendars, timers and time zones.",
+    "Time & Planning": "Plan schedules, compare meeting times and manage focus or daily time blocks.",
+    "Daily Productivity": "Organize notes, lists and simple workflows to get everyday tasks done faster.",
+    "Money & Decisions": "Compare prices, split bills and calculate common money-related everyday decisions.",
+    "Generators & Converters": "Generate values and convert units, numbers and formats used in daily work.",
+    "Calculators": "Solve common math, finance, school and number problems with focused calculators.",
+    "Security & Tokens": "Generate passwords, inspect JWTs, hash values and handle security-related tasks.",
+    "Web & Network": "Inspect URLs, HTTP headers, status codes, user agents and other web request details.",
+    "API & Data": "Work with APIs, requests, schemas, payloads and developer-facing data inspection tools.",
+    "Code & Formatting": "Format code and structured text so it is easier to read, copy and debug.",
+    "Debug & Testing": "Test regex, diffs and rewrite rules to debug code and verify expected behavior.",
+    "Database": "Build SQL queries and database-related snippets for quick drafting and testing.",
+    "Schedules & Infra": "Create cron schedules and other infrastructure-oriented helper outputs.",
+    "SEO & Webmaster": "Generate metadata, schema, robots rules and other technical SEO helper outputs."
+  };
 
   function groupByCategory(list) {
     const groups = {};
@@ -33,6 +55,15 @@
       groups[cat].push(tool);
     });
     return groups;
+  }
+
+  function sortTools(tools) {
+    return tools.slice().sort(function(a, b) {
+      const aPopular = typeof a.popularOrder === "number" ? a.popularOrder : Number.POSITIVE_INFINITY;
+      const bPopular = typeof b.popularOrder === "number" ? b.popularOrder : Number.POSITIVE_INFINITY;
+      if (aPopular !== bPopular) return aPopular - bPopular;
+      return a.name.localeCompare(b.name);
+    });
   }
 
   function render(list) {
@@ -52,15 +83,19 @@
     order.forEach(function(cat) {
       const tools = grouped[cat];
       if (!tools || tools.length === 0) return;
+      const sortedTools = sortTools(tools);
 
       const section = document.createElement("section");
       section.className = "tool-section";
-      section.innerHTML = "<h2 class=\"category-title\">" + cat + "</h2>";
+      const description = CATEGORY_DESCRIPTIONS[cat]
+        ? "<p class=\"category-description\">" + CATEGORY_DESCRIPTIONS[cat] + "</p>"
+        : "";
+      section.innerHTML = "<h2 class=\"category-title\">" + cat + "</h2>" + description;
 
       const grid = document.createElement("div");
       grid.className = "tool-grid";
 
-      tools.forEach(function(tool) {
+      sortedTools.forEach(function(tool) {
         const card = document.createElement("a");
         card.href = "/tools/" + tool.file + ".html";
         card.className = "tool-card";
