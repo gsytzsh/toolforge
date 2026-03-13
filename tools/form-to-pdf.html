@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Form to PDF - Fill a Form and Export PDF Online | ToolForge</title>
+<meta name="description" content="Free online Form to PDF tool to fill a simple form in your browser and export it as a PDF. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/form-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Form to PDF - Fill a Form and Export PDF Online | ToolForge">
+<meta property="og:description" content="Free online Form to PDF tool to fill a simple form in your browser and export it as a PDF. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/form-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Form to PDF - Fill a Form and Export PDF Online | ToolForge">
+<meta name="twitter:description" content="Free online Form to PDF tool to fill a simple form in your browser and export it as a PDF. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>Form to PDF</h1>
+<p class="subtitle">Fill a simple form, preview the result, then export it as a PDF.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p>
+Name:
+<label for="name" class="sr-only">Name</label>
+<input id="name" type="text" style="width:220px" aria-label="Name">
+</p>
+<p>
+Email:
+<label for="email" class="sr-only">Email</label>
+<input id="email" type="email" style="width:260px" aria-label="Email">
+</p>
+<p>
+Subject:
+<label for="subject" class="sr-only">Subject</label>
+<input id="subject" type="text" style="width:320px" aria-label="Subject">
+</p>
+<label for="message" class="sr-only">Message</label>
+<textarea id="message" class="pdf-editor" rows="8" aria-label="Message" placeholder="Write your form content here"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="renderPreview()">Render Form</button>
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<h3>Preview</h3>
+<div id="preview" class="pdf-preview-box"></div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Form to PDF</h3>
+<p>This Form to PDF tool turns a simple filled form into a printable PDF. It is useful for lightweight request forms, contact-style documents and small internal workflows.</p>
+<p>The rendered form is generated entirely in your browser and can be exported without sending data to a server.</p>
+</section>
+</main>
+<script>
+function escapeHtml(text){
+return String(text)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#39;")
+}
+
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function renderPreview(){
+let name=document.getElementById("name").value.trim()
+let email=document.getElementById("email").value.trim()
+let subject=document.getElementById("subject").value.trim()
+let message=document.getElementById("message").value.trim()
+if(!name&&!email&&!subject&&!message){
+document.getElementById("preview").innerHTML=""
+setStatus("Fill the form first.","#b91c1c")
+return false
+}
+document.getElementById("preview").innerHTML=
+  '<h2 style="margin-top:0">Form Submission</h2>'+
+  '<p><strong>Name:</strong> '+escapeHtml(name||"-")+'</p>'+
+  '<p><strong>Email:</strong> '+escapeHtml(email||"-")+'</p>'+
+  '<p><strong>Subject:</strong> '+escapeHtml(subject||"-")+'</p>'+
+  '<p><strong>Message:</strong></p>'+
+  '<div style="white-space:pre-wrap;border:1px solid #e5e7eb;border-radius:6px;padding:12px">'+escapeHtml(message||"-")+'</div>'
+setStatus("Form rendered.","#16a34a")
+return true
+}
+
+async function downloadPdf(){
+if(!renderPreview()){
+return
+}
+try{
+let canvas=await html2canvas(document.getElementById("preview"),{scale:2,backgroundColor:"#ffffff",useCORS:true})
+let imageData=canvas.toDataURL("image/png")
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let imgWidth=pageWidth-40
+let imgHeight=canvas.height*imgWidth/canvas.width
+let heightLeft=imgHeight
+let position=20
+pdf.addImage(imageData,"PNG",20,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-40
+while(heightLeft>0){
+position=heightLeft-imgHeight+20
+pdf.addPage()
+pdf.addImage(imageData,"PNG",20,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-40
+}
+pdf.save("form-to-pdf.pdf")
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+
+document.getElementById("name").value="Alex Johnson"
+document.getElementById("email").value="alex@example.com"
+document.getElementById("subject").value="Project Update"
+document.getElementById("message").value="This is a sample form exported from ToolForge."
+renderPreview()
+</script>
+</body>
+</html>

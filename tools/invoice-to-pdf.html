@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Invoice to PDF - Create Invoices and Export PDF Online | ToolForge</title>
+<meta name="description" content="Free online Invoice to PDF tool to create a simple invoice in your browser and export it as a PDF. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/invoice-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Invoice to PDF - Create Invoices and Export PDF Online | ToolForge">
+<meta property="og:description" content="Free online Invoice to PDF tool to create a simple invoice in your browser and export it as a PDF. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/invoice-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Invoice to PDF - Create Invoices and Export PDF Online | ToolForge">
+<meta name="twitter:description" content="Free online Invoice to PDF tool to create a simple invoice in your browser and export it as a PDF. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>Invoice to PDF</h1>
+<p class="subtitle">Create a simple invoice in your browser and download it as a PDF.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p>
+From:
+<label for="from" class="sr-only">From</label>
+<input id="from" type="text" style="width:260px" aria-label="From">
+</p>
+<p>
+To:
+<label for="to" class="sr-only">To</label>
+<input id="to" type="text" style="width:260px" aria-label="To">
+</p>
+<p>
+Invoice No:
+<label for="invoice-no" class="sr-only">Invoice number</label>
+<input id="invoice-no" type="text" style="width:140px" aria-label="Invoice number">
+Date:
+<label for="invoice-date" class="sr-only">Invoice date</label>
+<input id="invoice-date" type="date" style="width:160px" aria-label="Invoice date">
+</p>
+<p>
+Item:
+<label for="item" class="sr-only">Item description</label>
+<input id="item" type="text" style="width:260px" aria-label="Item description">
+Qty:
+<label for="qty" class="sr-only">Quantity</label>
+<input id="qty" type="number" value="1" min="1" style="width:80px" aria-label="Quantity">
+Unit Price:
+<label for="price" class="sr-only">Unit price</label>
+<input id="price" type="number" value="100" min="0" step="0.01" style="width:120px" aria-label="Unit price">
+</p>
+<div class="tool-actions">
+<button type="button" onclick="renderPreview()">Render Invoice</button>
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<h3>Preview</h3>
+<div id="preview" class="pdf-preview-box"></div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Invoice to PDF</h3>
+<p>This Invoice to PDF tool creates a simple one-line invoice and exports it as a PDF. It is useful for quick freelance invoices, simple billing and lightweight invoice drafts.</p>
+<p>Everything is created and rendered locally in your browser.</p>
+</section>
+</main>
+<script>
+function escapeHtml(text){
+return String(text)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#39;")
+}
+
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function renderPreview(){
+let from=document.getElementById("from").value.trim()
+let to=document.getElementById("to").value.trim()
+let invoiceNo=document.getElementById("invoice-no").value.trim()
+let date=document.getElementById("invoice-date").value
+let item=document.getElementById("item").value.trim()
+let qty=parseFloat(document.getElementById("qty").value)||0
+let price=parseFloat(document.getElementById("price").value)||0
+if(!from&&!to&&!item){
+document.getElementById("preview").innerHTML=""
+setStatus("Fill invoice details first.","#b91c1c")
+return false
+}
+let total=(qty*price).toFixed(2)
+document.getElementById("preview").innerHTML=
+  '<div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">'+
+  '<div><h2 style="margin:0 0 8px">Invoice</h2><p><strong>From:</strong> '+escapeHtml(from||"-")+'</p><p><strong>To:</strong> '+escapeHtml(to||"-")+'</p></div>'+
+  '<div><p><strong>No:</strong> '+escapeHtml(invoiceNo||"-")+'</p><p><strong>Date:</strong> '+escapeHtml(date||"-")+'</p></div>'+
+  '</div>'+
+  '<table style="border-collapse:collapse;width:100%;margin-top:16px">'+
+  '<tr><th style="border:1px solid #d1d5db;padding:8px;text-align:left">Item</th><th style="border:1px solid #d1d5db;padding:8px;text-align:right">Qty</th><th style="border:1px solid #d1d5db;padding:8px;text-align:right">Unit Price</th><th style="border:1px solid #d1d5db;padding:8px;text-align:right">Total</th></tr>'+
+  '<tr><td style="border:1px solid #d1d5db;padding:8px">'+escapeHtml(item||"-")+'</td><td style="border:1px solid #d1d5db;padding:8px;text-align:right">'+qty+'</td><td style="border:1px solid #d1d5db;padding:8px;text-align:right">'+price.toFixed(2)+'</td><td style="border:1px solid #d1d5db;padding:8px;text-align:right">'+total+'</td></tr>'+
+  '</table>'+
+  '<p style="text-align:right;font-size:18px;margin-top:16px"><strong>Total: '+total+'</strong></p>'
+setStatus("Invoice rendered.","#16a34a")
+return true
+}
+
+async function downloadPdf(){
+if(!renderPreview()){
+return
+}
+try{
+let canvas=await html2canvas(document.getElementById("preview"),{scale:2,backgroundColor:"#ffffff",useCORS:true})
+let imageData=canvas.toDataURL("image/png")
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let imgWidth=pageWidth-40
+let imgHeight=canvas.height*imgWidth/canvas.width
+let heightLeft=imgHeight
+let position=20
+pdf.addImage(imageData,"PNG",20,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-40
+while(heightLeft>0){
+position=heightLeft-imgHeight+20
+pdf.addPage()
+pdf.addImage(imageData,"PNG",20,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-40
+}
+pdf.save("invoice-to-pdf.pdf")
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+
+document.getElementById("from").value="ToolForge Studio"
+document.getElementById("to").value="Acme Inc."
+document.getElementById("invoice-no").value="INV-2026-001"
+document.getElementById("invoice-date").value=new Date().toISOString().slice(0,10)
+document.getElementById("item").value="Frontend PDF tooling"
+renderPreview()
+</script>
+</body>
+</html>

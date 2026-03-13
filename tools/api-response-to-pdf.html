@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>API Response to PDF - Convert API Output into PDF Online | ToolForge</title>
+<meta name="description" content="Free online API Response to PDF tool to fetch API output or upload response files and export the result as a PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/api-response-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="API Response to PDF - Convert API Output into PDF Online | ToolForge">
+<meta property="og:description" content="Free online API Response to PDF tool to fetch API output or upload response files and export the result as a PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/api-response-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="API Response to PDF - Convert API Output into PDF Online | ToolForge">
+<meta name="twitter:description" content="Free online API Response to PDF tool to fetch API output or upload response files and export the result as a PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>API Response to PDF</h1>
+<p class="subtitle">Fetch API output when allowed, or upload a response file, then export it as a readable PDF.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p>
+API URL:
+<label for="api-url" class="sr-only">API URL</label>
+<input id="api-url" class="pdf-editor" type="url" placeholder="https://api.example.com/data" aria-label="API URL">
+</p>
+<div class="tool-actions">
+<button type="button" onclick="fetchResponse()">Fetch Response</button>
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<h3>Upload Response File</h3>
+<label for="response-file" class="sr-only">Response file</label>
+<input id="response-file" class="pdf-file-input" type="file" accept=".json,.txt,.log,.xml,.csv,text/plain,application/json,text/xml,application/xml" onchange="loadResponseFile()" aria-label="Response file">
+<p class="pdf-helper">Browser fetch may fail because of CORS. In that case, upload a saved response file instead.</p>
+<label for="response-input" class="sr-only">Response input</label>
+<textarea id="response-input" class="pdf-editor pdf-editor-mono" rows="14" aria-label="Response input" placeholder='{"status":"ok","data":[1,2,3]}'></textarea>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About API Response to PDF</h3>
+<p>This API Response to PDF tool helps you turn fetched or saved API responses into a shareable PDF. It works for JSON, text and other response bodies that can be displayed as plain text.</p>
+<p>Because many APIs block browser requests, upload mode is the more reliable frontend-only path.</p>
+</section>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function loadResponseFile(){
+let file=document.getElementById("response-file").files[0]
+if(!file){
+return
+}
+let reader=new FileReader()
+reader.onload=function(e){
+document.getElementById("response-input").value=e.target.result
+setStatus("Response file loaded.","#16a34a")
+}
+reader.onerror=function(){
+setStatus("Failed to read response file.","#b91c1c")
+}
+reader.readAsText(file)
+}
+
+async function fetchResponse(){
+let url=document.getElementById("api-url").value.trim()
+if(!url){
+setStatus("Enter an API URL first.","#b91c1c")
+return
+}
+try{
+let response=await fetch(url)
+if(!response.ok){
+throw new Error("Request failed.")
+}
+let text=await response.text()
+document.getElementById("response-input").value=text
+setStatus("API response fetched.","#16a34a")
+}catch(e){
+setStatus("API fetch failed. Upload a saved response file instead.","#b91c1c")
+}
+}
+
+function downloadPdf(){
+let text=document.getElementById("response-input").value.trim()
+if(!text){
+setStatus("Fetch or upload a response first.","#b91c1c")
+return
+}
+try{
+let normalized=text
+try{
+normalized=JSON.stringify(JSON.parse(text),null,2)
+}catch(e){
+}
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let margin=36
+let usableWidth=pageWidth-margin*2
+let y=margin
+pdf.setFont("helvetica","bold")
+pdf.setFontSize(14)
+pdf.text("API Response",margin,y)
+y+=22
+pdf.setFont("courier","normal")
+pdf.setFontSize(9)
+normalized.split(/\r?\n/).forEach(function(line){
+let wrapped=pdf.splitTextToSize(line||" ",usableWidth)
+wrapped.forEach(function(segment){
+if(y>pageHeight-margin){
+pdf.addPage()
+pdf.setFont("courier","normal")
+pdf.setFontSize(9)
+y=margin
+}
+pdf.text(segment,margin,y)
+y+=12
+})
+})
+pdf.save("api-response-to-pdf.pdf")
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+
+document.getElementById("response-input").value='{"status":"ok","message":"Ready for export","items":[1,2,3]}'
+</script>
+</body>
+</html>

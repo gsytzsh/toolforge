@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Excel to PDF - Convert Excel Sheets into PDF Online | ToolForge</title>
+<meta name="description" content="Free online Excel to PDF tool to upload Excel files, preview worksheet data and export it as a PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/excel-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Excel to PDF - Convert Excel Sheets into PDF Online | ToolForge">
+<meta property="og:description" content="Free online Excel to PDF tool to upload Excel files, preview worksheet data and export it as a PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/excel-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Excel to PDF - Convert Excel Sheets into PDF Online | ToolForge">
+<meta name="twitter:description" content="Free online Excel to PDF tool to upload Excel files, preview worksheet data and export it as a PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>Excel to PDF</h1>
+<p class="subtitle">Upload an Excel file, preview worksheet data, then export it as a PDF.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Upload Excel File</h3>
+<label for="excel-file" class="sr-only">Excel file</label>
+<input id="excel-file" class="pdf-file-input" type="file" accept=".xlsx,.xls,.csv" onchange="loadWorkbook()" aria-label="Excel file">
+<p class="pdf-helper">Upload an Excel workbook and choose which sheet to export.</p>
+<p>
+Worksheet:
+<label for="sheet-select" class="sr-only">Worksheet</label>
+<select id="sheet-select" onchange="renderSheet()" aria-label="Worksheet"></select>
+</p>
+<div class="tool-actions">
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<h3>Preview</h3>
+<div id="preview-wrap" class="pdf-preview-wrap">
+<div id="preview" class="pdf-preview-table"></div>
+</div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Excel to PDF</h3>
+<p>This Excel to PDF tool reads worksheet data in your browser, renders a table preview and exports it as a PDF. It works well for lightweight spreadsheets, reports and tabular exports.</p>
+<p>Files stay on your device during conversion, making it suitable for quick frontend-only use.</p>
+</section>
+</main>
+<script>
+let workbook=null
+
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function escapeHtml(text){
+return String(text)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#39;")
+}
+
+function sheetToHtml(rows){
+let html='<table style="border-collapse:collapse;width:100%">'
+rows.forEach(function(row,rowIndex){
+html+="<tr>"
+row.forEach(function(cell){
+let tag=rowIndex===0?"th":"td"
+html+='<'+tag+' style="border:1px solid #d1d5db;padding:8px;text-align:left">'+escapeHtml(cell===undefined?"":cell)+'</'+tag+'>'
+})
+html+="</tr>"
+})
+html+="</table>"
+return html
+}
+
+function loadWorkbook(){
+let file=document.getElementById("excel-file").files[0]
+if(!file){
+return
+}
+let reader=new FileReader()
+reader.onload=function(e){
+try{
+let data=new Uint8Array(e.target.result)
+workbook=XLSX.read(data,{type:"array"})
+let select=document.getElementById("sheet-select")
+select.innerHTML=""
+workbook.SheetNames.forEach(function(name){
+let option=document.createElement("option")
+option.value=name
+option.textContent=name
+select.appendChild(option)
+})
+renderSheet()
+setStatus("Excel file loaded.","#16a34a")
+}catch(err){
+setStatus("Failed to parse Excel file.","#b91c1c")
+}
+}
+reader.readAsArrayBuffer(file)
+}
+
+function renderSheet(){
+if(!workbook){
+return false
+}
+let name=document.getElementById("sheet-select").value
+let sheet=workbook.Sheets[name]
+let rows=XLSX.utils.sheet_to_json(sheet,{header:1,blankrows:false})
+if(!rows.length){
+document.getElementById("preview").innerHTML=""
+setStatus("Selected worksheet is empty.","#b91c1c")
+return false
+}
+document.getElementById("preview").innerHTML=sheetToHtml(rows)
+setStatus("Worksheet rendered.","#16a34a")
+return true
+}
+
+async function downloadPdf(){
+if(!renderSheet()){
+setStatus("Upload an Excel file first.","#b91c1c")
+return
+}
+try{
+let element=document.getElementById("preview")
+let canvas=await html2canvas(element,{scale:2,backgroundColor:"#ffffff",useCORS:true})
+let imageData=canvas.toDataURL("image/png")
+let pdf=new window.jspdf.jsPDF("l","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let imgWidth=pageWidth-30
+let imgHeight=canvas.height*imgWidth/canvas.width
+let heightLeft=imgHeight
+let position=15
+pdf.addImage(imageData,"PNG",15,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-30
+while(heightLeft>0){
+position=heightLeft-imgHeight+15
+pdf.addPage()
+pdf.addImage(imageData,"PNG",15,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-30
+}
+pdf.save("excel-to-pdf.pdf")
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+</script>
+</body>
+</html>

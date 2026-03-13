@@ -7,6 +7,7 @@
     "Encoders & Decoders",
     "JSON & Data",
     "Hash & Security",
+    "PDF & Export",
     "Image & Color",
     "Text",
     "Date & Time",
