@@ -23,6 +23,10 @@
 <h1>HTML to PDF</h1>
 <p class="subtitle">Render HTML in your browser, preview it, then download the result as a PDF.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Upload HTML File</h3>
+<label for="html-file" class="sr-only">HTML file</label>
+<input id="html-file" type="file" accept=".html,.htm,text/html" onchange="loadHtmlFile()" aria-label="HTML file">
+<p style="font-size:13px;color:#666;">You can upload an HTML file or paste HTML below.</p>
 <label for="html-input" class="sr-only">HTML input</label>
 <textarea id="html-input" rows="12" style="width:90%;font-family:monospace" aria-label="HTML input" placeholder="<h1>Invoice</h1>&#10;<p>Hello ToolForge</p>&#10;<ul><li>Item A</li><li>Item B</li></ul>"></textarea>
 <div class="tool-actions">
@@ -78,6 +82,23 @@ return false
 preview.innerHTML=sanitizeHtml(input)
 setStatus("Preview rendered. Unsafe embedded elements are removed.","#16a34a")
 return true
+}
+
+function loadHtmlFile(){
+let file=document.getElementById("html-file").files[0]
+if(!file){
+return
+}
+let reader=new FileReader()
+reader.onload=function(e){
+document.getElementById("html-input").value=e.target.result
+renderPreview()
+setStatus("HTML file loaded.","#16a34a")
+}
+reader.onerror=function(){
+setStatus("Failed to read HTML file.","#b91c1c")
+}
+reader.readAsText(file)
 }
 
 async function elementToPdf(element,fileName){

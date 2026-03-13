@@ -23,6 +23,10 @@
 <h1>CSV to PDF</h1>
 <p class="subtitle">Preview CSV data as a table and export it as a PDF directly in your browser.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Upload CSV File</h3>
+<label for="csv-file" class="sr-only">CSV file</label>
+<input id="csv-file" type="file" accept=".csv,text/csv,text/plain" onchange="loadCsvFile()" aria-label="CSV file">
+<p style="font-size:13px;color:#666;">You can upload a CSV file or paste CSV data below.</p>
 <label for="csv-input" class="sr-only">CSV input</label>
 <textarea id="csv-input" rows="12" style="width:90%;font-family:monospace" aria-label="CSV input" placeholder="name,age&#10;Tom,20&#10;Alice,25"></textarea>
 <div class="tool-actions">
@@ -123,6 +127,23 @@ html+="</table>"
 preview.innerHTML=html
 setStatus("Table rendered.","#16a34a")
 return true
+}
+
+function loadCsvFile(){
+let file=document.getElementById("csv-file").files[0]
+if(!file){
+return
+}
+let reader=new FileReader()
+reader.onload=function(e){
+document.getElementById("csv-input").value=e.target.result
+renderPreview()
+setStatus("CSV file loaded.","#16a34a")
+}
+reader.onerror=function(){
+setStatus("Failed to read CSV file.","#b91c1c")
+}
+reader.readAsText(file)
 }
 
 async function downloadPdf(){

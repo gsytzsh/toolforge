@@ -22,6 +22,10 @@
 <h1>JSON to PDF</h1>
 <p class="subtitle">Pretty-print JSON and download it as a readable PDF directly in your browser.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Upload JSON File</h3>
+<label for="json-file" class="sr-only">JSON file</label>
+<input id="json-file" type="file" accept=".json,application/json,text/json" onchange="loadJsonFile()" aria-label="JSON file">
+<p style="font-size:13px;color:#666;">You can upload a JSON file or paste JSON below.</p>
 <label for="json-input" class="sr-only">JSON input</label>
 <textarea id="json-input" rows="12" style="width:90%;font-family:monospace" aria-label="JSON input" placeholder='{"name":"ToolForge","version":1}'></textarea>
 <div class="tool-actions">
@@ -69,6 +73,22 @@ y+=lineHeight
 })
 
 pdf.save(fileName)
+}
+
+function loadJsonFile(){
+let file=document.getElementById("json-file").files[0]
+if(!file){
+return
+}
+let reader=new FileReader()
+reader.onload=function(e){
+document.getElementById("json-input").value=e.target.result
+setStatus("JSON file loaded.","#16a34a")
+}
+reader.onerror=function(){
+setStatus("Failed to read JSON file.","#b91c1c")
+}
+reader.readAsText(file)
 }
 
 function downloadPdf(){

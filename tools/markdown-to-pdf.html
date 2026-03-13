@@ -24,6 +24,10 @@
 <h1>Markdown to PDF</h1>
 <p class="subtitle">Render Markdown as HTML in your browser, then export the preview as a PDF.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Upload Markdown File</h3>
+<label for="markdown-file" class="sr-only">Markdown file</label>
+<input id="markdown-file" type="file" accept=".md,.markdown,.txt,text/markdown,text/plain" onchange="loadMarkdownFile()" aria-label="Markdown file">
+<p style="font-size:13px;color:#666;">You can upload a Markdown file or paste Markdown below.</p>
 <label for="markdown-input" class="sr-only">Markdown input</label>
 <textarea id="markdown-input" rows="12" style="width:90%" aria-label="Markdown input" placeholder="# Project Notes&#10;&#10;- Item 1&#10;- Item 2"></textarea>
 <div class="tool-actions">
@@ -66,6 +70,23 @@ return false
 preview.innerHTML=marked.parse(escapeHtml(input))
 setStatus("Preview rendered.","#16a34a")
 return true
+}
+
+function loadMarkdownFile(){
+let file=document.getElementById("markdown-file").files[0]
+if(!file){
+return
+}
+let reader=new FileReader()
+reader.onload=function(e){
+document.getElementById("markdown-input").value=e.target.result
+renderPreview()
+setStatus("Markdown file loaded.","#16a34a")
+}
+reader.onerror=function(){
+setStatus("Failed to read Markdown file.","#b91c1c")
+}
+reader.readAsText(file)
 }
 
 async function elementToPdf(element,fileName){
