@@ -138,6 +138,59 @@ location:formatLocation([data.city,data.region_name,data.country_name||data.coun
 return null
 }
 
+async function lookupWithIpWho(ip){
+let data=await fetchJson("https://ipwho.is/"+encodeURIComponent(ip))
+if(!data || !data.success){
+return null
+}
+return [
+{label:"IP",value:(data.ip||ip)},
+{label:"City",value:(data.city||"Unknown")},
+{label:"Region",value:(data.region||"Unknown")},
+{label:"Country",value:(data.country||"Unknown")},
+{label:"Continent",value:(data.continent||"Unknown")},
+{label:"Postal",value:(data.postal||"Unknown")},
+{label:"Timezone",value:((data.timezone&&data.timezone.id)||"Unknown")},
+{label:"ASN",value:String((data.connection&&data.connection.asn)||"Unknown")},
+{label:"Org",value:((data.connection&&data.connection.org)||"Unknown")}
+]
+}
+
+async function lookupWithIpInfo(ip){
+let data=await fetchJson("https://ipinfo.io/"+encodeURIComponent(ip)+"/json")
+let org=data&&data.org?data.org:"Unknown"
+let asnMatch=org.match(/^AS(\d+)/i)
+return [
+{label:"IP",value:(data&&data.ip)||ip},
+{label:"City",value:(data&&data.city)||"Unknown"},
+{label:"Region",value:(data&&data.region)||"Unknown"},
+{label:"Country",value:(data&&data.country)||"Unknown"},
+{label:"Continent",value:"Unknown"},
+{label:"Postal",value:(data&&data.postal)||"Unknown"},
+{label:"Timezone",value:(data&&data.timezone)||"Unknown"},
+{label:"ASN",value:asnMatch?asnMatch[1]:"Unknown"},
+{label:"Org",value:org}
+]
+}
+
+async function lookupWithIpLocationNet(ip){
+let data=await fetchJson("https://api.iplocation.net/?ip="+encodeURIComponent(ip))
+if(!data || !(data.country_name||data.country_code2)){
+return null
+}
+return [
+{label:"IP",value:(data.ip||ip)},
+{label:"City",value:(data.city||"Unknown")},
+{label:"Region",value:(data.region_name||"Unknown")},
+{label:"Country",value:(data.country_name||data.country_code2||"Unknown")},
+{label:"Continent",value:"Unknown"},
+{label:"Postal",value:"Unknown"},
+{label:"Timezone",value:"Unknown"},
+{label:"ASN",value:"Unknown"},
+{label:"Org",value:(data.isp||"Unknown")}
+]
+}
+
 async function loadSelfIP(){
 
 try{
@@ -217,27 +270,31 @@ return
 }
 
 try{
+let lines=null
 
-let data=await fetchJson("https://ipwho.is/"+encodeURIComponent(ip))
-
-if(!data.success){
-document.getElementById("result").innerText=data.message||"Lookup failed"
-document.getElementById("status").innerText="Lookup failed."
-document.getElementById("status").style.color="#b91c1c"
-return
+try{
+lines=await lookupWithIpWho(ip)
+}catch(primaryError){
 }
 
-renderLookupLines([
-{label:"IP",value:(data.ip||ip)},
-{label:"City",value:(data.city||"Unknown")},
-{label:"Region",value:(data.region||"Unknown")},
-{label:"Country",value:(data.country||"Unknown")},
-{label:"Continent",value:(data.continent||"Unknown")},
-{label:"Postal",value:(data.postal||"Unknown")},
-{label:"Timezone",value:((data.timezone&&data.timezone.id)||"Unknown")},
-{label:"ASN",value:String((data.connection&&data.connection.asn)||"Unknown")},
-{label:"Org",value:((data.connection&&data.connection.org)||"Unknown")}
-])
+if(!lines){
+try{
+lines=await lookupWithIpInfo(ip)
+}catch(secondaryError){
+}
+}
+
+if(!lines){
+try{
+lines=await lookupWithIpLocationNet(ip)
+}catch(fallbackError){
+}
+}
+
+if(!lines){
+throw new Error("Lookup failed")
+}
+renderLookupLines(lines)
 document.getElementById("status").innerText="Lookup completed."
 document.getElementById("status").style.color="#16a34a"
 
