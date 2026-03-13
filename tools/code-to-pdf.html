@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Code to PDF - Convert Source Code into PDF Online | ToolForge</title>
+<meta name="description" content="Free online Code to PDF tool to upload or paste source code and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/code-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Code to PDF - Convert Source Code into PDF Online | ToolForge">
+<meta property="og:description" content="Free online Code to PDF tool to upload or paste source code and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/code-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Code to PDF - Convert Source Code into PDF Online | ToolForge">
+<meta name="twitter:description" content="Free online Code to PDF tool to upload or paste source code and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>Code to PDF</h1>
+<p class="subtitle">Upload or paste source code, optionally add line numbers, then export it as a PDF.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Upload Code File</h3>
+<label for="code-file" class="sr-only">Code file</label>
+<input id="code-file" type="file" accept=".js,.ts,.tsx,.jsx,.py,.java,.go,.rs,.php,.rb,.css,.scss,.html,.xml,.json,.yaml,.yml,.sql,.sh,.txt,.md,.c,.cpp,.cs" onchange="loadCodeFile()" aria-label="Code file">
+<p style="font-size:13px;color:#666;">You can upload a code file or paste code below.</p>
+<p>
+Title:
+<label for="doc-title" class="sr-only">Document title</label>
+<input id="doc-title" type="text" value="Source Code" style="width:220px" aria-label="Document title">
+<label style="margin-left:12px;"><input id="line-numbers" type="checkbox" checked> Include line numbers</label>
+</p>
+<label for="code-input" class="sr-only">Code input</label>
+<textarea id="code-input" rows="14" style="width:90%;font-family:monospace" aria-label="Code input" placeholder="function hello(){&#10;  return 'ToolForge'&#10;}"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Code to PDF</h3>
+<p>This Code to PDF tool exports source code into a clean, readable PDF using a monospace layout. It is useful for reviews, documentation, snippets, printed handouts and offline sharing.</p>
+<p>The conversion runs in your browser and supports both file upload and manual paste input.</p>
+</section>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function loadCodeFile(){
+let file=document.getElementById("code-file").files[0]
+if(!file){
+return
+}
+let reader=new FileReader()
+reader.onload=function(e){
+document.getElementById("code-input").value=e.target.result
+document.getElementById("doc-title").value=file.name
+setStatus("Code file loaded.","#16a34a")
+}
+reader.onerror=function(){
+setStatus("Failed to read code file.","#b91c1c")
+}
+reader.readAsText(file)
+}
+
+function downloadPdf(){
+let input=document.getElementById("code-input").value
+let title=document.getElementById("doc-title").value.trim()||"Source Code"
+let showNumbers=document.getElementById("line-numbers").checked
+if(!input.trim()){
+setStatus("Enter code first.","#b91c1c")
+return
+}
+
+try{
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let margin=36
+let usableWidth=pageWidth-margin*2
+let y=margin
+pdf.setFont("helvetica","bold")
+pdf.setFontSize(14)
+pdf.text(title,margin,y)
+y+=22
+pdf.setFont("courier","normal")
+pdf.setFontSize(9)
+
+input.split(/\r?\n/).forEach(function(line,index){
+let content=showNumbers?String(index+1).padStart(4," ")+"  "+line:line
+let wrapped=pdf.splitTextToSize(content||" ",usableWidth)
+wrapped.forEach(function(segment){
+if(y>pageHeight-margin){
+pdf.addPage()
+pdf.setFont("courier","normal")
+pdf.setFontSize(9)
+y=margin
+}
+pdf.text(segment,margin,y)
+y+=12
+})
+})
+
+pdf.save("code-to-pdf.pdf")
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+
+document.getElementById("code-input").value="function hello(){\n  return 'ToolForge';\n}"
+</script>
+</body>
+</html>

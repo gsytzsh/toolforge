@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Screenshot to PDF - Convert Screenshots into PDF Online | ToolForge</title>
+<meta name="description" content="Free online Screenshot to PDF tool to combine screenshots into a downloadable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/screenshot-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Screenshot to PDF - Convert Screenshots into PDF Online | ToolForge">
+<meta property="og:description" content="Free online Screenshot to PDF tool to combine screenshots into a downloadable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/screenshot-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Screenshot to PDF - Convert Screenshots into PDF Online | ToolForge">
+<meta name="twitter:description" content="Free online Screenshot to PDF tool to combine screenshots into a downloadable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>Screenshot to PDF</h1>
+<p class="subtitle">Upload one or more screenshots and export them into a single PDF document.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="screenshots" class="sr-only">Screenshot files</label>
+<input id="screenshots" type="file" accept="image/*" multiple onchange="loadScreenshots()" aria-label="Screenshot files">
+<p style="font-size:13px;color:#666;">Best for browser captures, UI mockups, bug report screenshots and app walkthroughs.</p>
+<h3 style="margin-top:20px">Selected Screenshots</h3>
+<div id="preview-list" style="display:flex;flex-wrap:wrap;gap:12px;width:90%"></div>
+<div class="tool-actions">
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Screenshot to PDF</h3>
+<p>This Screenshot to PDF tool combines screenshots into a single PDF for sharing walkthroughs, bug reports, UI reviews and visual notes. Each screenshot is scaled to fit a PDF page.</p>
+<p>Everything is processed directly in your browser without uploading screenshots to a server.</p>
+</section>
+</main>
+<script>
+let loadedImages=[]
+
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function loadScreenshots(){
+let files=Array.from(document.getElementById("screenshots").files||[])
+let preview=document.getElementById("preview-list")
+preview.innerHTML=""
+loadedImages=[]
+
+if(!files.length){
+setStatus("Select one or more screenshots first.","#b91c1c")
+return
+}
+
+let remaining=files.length
+files.forEach(function(file){
+let reader=new FileReader()
+reader.onload=function(e){
+let img=new Image()
+img.onload=function(){
+loadedImages.push({
+name:file.name,
+src:e.target.result,
+width:img.width,
+height:img.height
+})
+let card=document.createElement("div")
+card.style.width="150px"
+card.innerHTML='<img src="'+e.target.result+'" alt="" style="width:100%;border:1px solid #e5e7eb;border-radius:6px"><p style="font-size:12px;color:#666">'+file.name+"</p>"
+preview.appendChild(card)
+remaining--
+if(remaining===0){
+setStatus("Loaded "+loadedImages.length+" screenshot"+(loadedImages.length===1?"":"s")+".","#16a34a")
+}
+}
+img.src=e.target.result
+}
+reader.readAsDataURL(file)
+})
+}
+
+function downloadPdf(){
+if(!loadedImages.length){
+setStatus("Select one or more screenshots first.","#b91c1c")
+return
+}
+try{
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+loadedImages.forEach(function(image,index){
+if(index>0){
+pdf.addPage()
+}
+let maxWidth=pageWidth-40
+let maxHeight=pageHeight-40
+let ratio=Math.min(maxWidth/image.width,maxHeight/image.height)
+let renderWidth=image.width*ratio
+let renderHeight=image.height*ratio
+let x=(pageWidth-renderWidth)/2
+let y=(pageHeight-renderHeight)/2
+let format=image.src.indexOf("data:image/png")===0?"PNG":"JPEG"
+pdf.addImage(image.src,format,x,y,renderWidth,renderHeight)
+})
+pdf.save("screenshot-to-pdf.pdf")
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>XML to PDF - Convert XML into PDF Online | ToolForge</title>
+<meta name="description" content="Free online XML to PDF tool to validate, format and export XML as a downloadable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/xml-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="XML to PDF - Convert XML into PDF Online | ToolForge">
+<meta property="og:description" content="Free online XML to PDF tool to validate, format and export XML as a downloadable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/xml-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XML to PDF - Convert XML into PDF Online | ToolForge">
+<meta name="twitter:description" content="Free online XML to PDF tool to validate, format and export XML as a downloadable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>XML to PDF</h1>
+<p class="subtitle">Upload or paste XML, format it for readability, then download it as a PDF.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Upload XML File</h3>
+<label for="xml-file" class="sr-only">XML file</label>
+<input id="xml-file" type="file" accept=".xml,text/xml,application/xml" onchange="loadXmlFile()" aria-label="XML file">
+<p style="font-size:13px;color:#666;">You can upload an XML file or paste XML below.</p>
+<label for="xml-input" class="sr-only">XML input</label>
+<textarea id="xml-input" rows="12" style="width:90%;font-family:monospace" aria-label="XML input" placeholder="<root><item id=&quot;1&quot;>Hello</item></root>"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="formatXml()">Format XML</button>
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About XML to PDF</h3>
+<p>This XML to PDF tool validates XML, reformats it with indentation and exports the result as a readable PDF. It is useful for API payloads, configuration files and structured data snapshots.</p>
+<p>The XML is processed entirely in your browser, so your content stays on your device during formatting and export.</p>
+</section>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function formatXmlString(input){
+let parser=new DOMParser()
+let doc=parser.parseFromString(input,"text/xml")
+if(doc.querySelector("parsererror")){
+throw new Error("Invalid XML input.")
+}
+let serialized=new XMLSerializer().serializeToString(doc)
+let lines=serialized.replace(/(>)(<)(\/?)/g,"$1\n$2$3").split("\n")
+let formatted=""
+let indent=0
+for(let i=0;i<lines.length;i++){
+let line=lines[i].trim()
+if(!line){
+continue
+}
+if(/^<\//.test(line)){
+indent=Math.max(indent-1,0)
+}
+formatted+="  ".repeat(indent)+line+"\n"
+if(/^<[^!?/][^>]*[^/]>$/.test(line)){
+indent++
+}
+}
+return formatted.trim()
+}
+
+function writeTextPdf(text,fileName){
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let margin=40
+let usableWidth=pageWidth-margin*2
+let y=margin
+pdf.setFont("courier","normal")
+pdf.setFontSize(10)
+text.split(/\r?\n/).forEach(function(rawLine){
+let wrapped=pdf.splitTextToSize(rawLine||" ",usableWidth)
+wrapped.forEach(function(line){
+if(y>pageHeight-margin){
+pdf.addPage()
+pdf.setFont("courier","normal")
+pdf.setFontSize(10)
+y=margin
+}
+pdf.text(line,margin,y)
+y+=14
+})
+})
+pdf.save(fileName)
+}
+
+function loadXmlFile(){
+let file=document.getElementById("xml-file").files[0]
+if(!file){
+return
+}
+let reader=new FileReader()
+reader.onload=function(e){
+document.getElementById("xml-input").value=e.target.result
+setStatus("XML file loaded.","#16a34a")
+}
+reader.onerror=function(){
+setStatus("Failed to read XML file.","#b91c1c")
+}
+reader.readAsText(file)
+}
+
+function formatXml(){
+let input=document.getElementById("xml-input").value.trim()
+if(!input){
+setStatus("Enter XML first.","#b91c1c")
+return false
+}
+try{
+document.getElementById("xml-input").value=formatXmlString(input)
+setStatus("XML formatted.","#16a34a")
+return true
+}catch(e){
+setStatus(e.message,"#b91c1c")
+return false
+}
+}
+
+function downloadPdf(){
+if(!formatXml()){
+return
+}
+try{
+writeTextPdf(document.getElementById("xml-input").value,"xml-to-pdf.pdf")
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+
+document.getElementById("xml-input").value='<root>\n  <item id="1">Hello</item>\n</root>'
+</script>
+</body>
+</html>

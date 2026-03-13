@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Webpage to PDF - Convert a Webpage into PDF Online | ToolForge</title>
+<meta name="description" content="Free online Webpage to PDF tool to fetch a webpage when allowed, preview it in your browser and export it as a PDF. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/webpage-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Webpage to PDF - Convert a Webpage into PDF Online | ToolForge">
+<meta property="og:description" content="Free online Webpage to PDF tool to fetch a webpage when allowed, preview it in your browser and export it as a PDF. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/webpage-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Webpage to PDF - Convert a Webpage into PDF Online | ToolForge">
+<meta name="twitter:description" content="Free online Webpage to PDF tool to fetch a webpage when allowed, preview it in your browser and export it as a PDF. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>Webpage to PDF</h1>
+<p class="subtitle">Try to fetch a webpage URL in the browser, or upload saved HTML, then export the preview as a PDF.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p>
+Webpage URL:
+<label for="page-url" class="sr-only">Webpage URL</label>
+<input id="page-url" type="url" style="width:90%" placeholder="https://example.com" aria-label="Webpage URL">
+</p>
+<div class="tool-actions">
+<button type="button" onclick="fetchWebpage()">Fetch Webpage</button>
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<h3>Upload Saved HTML</h3>
+<label for="html-file" class="sr-only">Saved HTML file</label>
+<input id="html-file" type="file" accept=".html,.htm,text/html" onchange="loadHtmlFile()" aria-label="Saved HTML file">
+<p style="font-size:13px;color:#666;">Some websites block browser fetch because of CORS or anti-framing policies. If fetch fails, save the page HTML and upload it instead.</p>
+<h3>Preview</h3>
+<div id="preview" style="width:90%;min-height:260px;padding:16px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;color:#111827;overflow:auto"></div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Webpage to PDF</h3>
+<p>This Webpage to PDF tool tries to fetch publicly accessible webpage HTML in the browser, render a preview and export it as a PDF. When a site blocks browser fetch, you can still use the tool by uploading a saved HTML file.</p>
+<p>Because browser security policies vary by website, fetch support is best-effort. Saved HTML upload is the more reliable pure frontend path.</p>
+</section>
+</main>
+<script>
+function sanitizeHtml(input){
+let parser=new DOMParser()
+let doc=parser.parseFromString("<div>"+input+"</div>","text/html")
+doc.querySelectorAll("script,iframe,object,embed,link[rel='import']").forEach(function(node){
+node.remove()
+})
+doc.querySelectorAll("*").forEach(function(node){
+Array.from(node.attributes).forEach(function(attr){
+let name=attr.name.toLowerCase()
+let value=attr.value
+if(name.indexOf("on")===0){
+node.removeAttribute(attr.name)
+return
+}
+if((name==="href"||name==="src")&&/^javascript:/i.test(value)){
+node.removeAttribute(attr.name)
+}
+})
+})
+return doc.body.innerHTML
+}
+
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function renderHtml(input){
+document.getElementById("preview").innerHTML=sanitizeHtml(input)
+}
+
+async function fetchWebpage(){
+let url=document.getElementById("page-url").value.trim()
+if(!url){
+setStatus("Enter a webpage URL first.","#b91c1c")
+return
+}
+try{
+let response=await fetch(url)
+if(!response.ok){
+throw new Error("Request failed.")
+}
+let html=await response.text()
+renderHtml(html)
+setStatus("Webpage fetched. Some external assets may not render in preview.","#16a34a")
+}catch(e){
+setStatus("Webpage fetch failed. Many sites block browser fetch; try uploading saved HTML instead.","#b91c1c")
+}
+}
+
+function loadHtmlFile(){
+let file=document.getElementById("html-file").files[0]
+if(!file){
+return
+}
+let reader=new FileReader()
+reader.onload=function(e){
+renderHtml(e.target.result)
+setStatus("Saved HTML file loaded.","#16a34a")
+}
+reader.onerror=function(){
+setStatus("Failed to read HTML file.","#b91c1c")
+}
+reader.readAsText(file)
+}
+
+async function downloadPdf(){
+let preview=document.getElementById("preview")
+if(!preview.innerHTML.trim()){
+setStatus("Fetch a webpage or upload HTML first.","#b91c1c")
+return
+}
+try{
+let canvas=await html2canvas(preview,{
+scale:2,
+backgroundColor:"#ffffff",
+useCORS:true
+})
+let imageData=canvas.toDataURL("image/png")
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let imgWidth=pageWidth-40
+let imgHeight=canvas.height*imgWidth/canvas.width
+let heightLeft=imgHeight
+let position=20
+pdf.addImage(imageData,"PNG",20,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-40
+while(heightLeft>0){
+position=heightLeft-imgHeight+20
+pdf.addPage()
+pdf.addImage(imageData,"PNG",20,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-40
+}
+pdf.save("webpage-to-pdf.pdf")
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+
+renderHtml("<article><h1>Webpage Preview</h1><p>Enter a URL or upload saved HTML to generate a PDF.</p></article>")
+</script>
+</body>
+</html>

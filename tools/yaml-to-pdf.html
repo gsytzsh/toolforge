@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>YAML to PDF - Convert YAML into PDF Online | ToolForge</title>
+<meta name="description" content="Free online YAML to PDF tool to validate YAML and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/yaml-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="YAML to PDF - Convert YAML into PDF Online | ToolForge">
+<meta property="og:description" content="Free online YAML to PDF tool to validate YAML and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/yaml-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="YAML to PDF - Convert YAML into PDF Online | ToolForge">
+<meta name="twitter:description" content="Free online YAML to PDF tool to validate YAML and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>YAML to PDF</h1>
+<p class="subtitle">Upload or paste YAML, validate it, then export the content as a PDF.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Upload YAML File</h3>
+<label for="yaml-file" class="sr-only">YAML file</label>
+<input id="yaml-file" type="file" accept=".yaml,.yml,text/yaml,text/plain" onchange="loadYamlFile()" aria-label="YAML file">
+<p style="font-size:13px;color:#666;">You can upload a YAML file or paste YAML below.</p>
+<label for="yaml-input" class="sr-only">YAML input</label>
+<textarea id="yaml-input" rows="12" style="width:90%;font-family:monospace" aria-label="YAML input" placeholder="name: ToolForge&#10;active: true"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="validateYaml()">Validate YAML</button>
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About YAML to PDF</h3>
+<p>This YAML to PDF tool validates YAML and exports it as a readable PDF. It is useful for configuration files, CI workflows, infrastructure definitions and readable sharing of YAML documents.</p>
+<p>The YAML is processed entirely in the browser, so your file contents stay on your device during export.</p>
+</section>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function writeTextPdf(text,fileName){
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let margin=40
+let usableWidth=pageWidth-margin*2
+let y=margin
+pdf.setFont("courier","normal")
+pdf.setFontSize(10)
+text.split(/\r?\n/).forEach(function(rawLine){
+let wrapped=pdf.splitTextToSize(rawLine||" ",usableWidth)
+wrapped.forEach(function(line){
+if(y>pageHeight-margin){
+pdf.addPage()
+pdf.setFont("courier","normal")
+pdf.setFontSize(10)
+y=margin
+}
+pdf.text(line,margin,y)
+y+=14
+})
+})
+pdf.save(fileName)
+}
+
+function loadYamlFile(){
+let file=document.getElementById("yaml-file").files[0]
+if(!file){
+return
+}
+let reader=new FileReader()
+reader.onload=function(e){
+document.getElementById("yaml-input").value=e.target.result
+setStatus("YAML file loaded.","#16a34a")
+}
+reader.onerror=function(){
+setStatus("Failed to read YAML file.","#b91c1c")
+}
+reader.readAsText(file)
+}
+
+function validateYaml(){
+let input=document.getElementById("yaml-input").value.trim()
+if(!input){
+setStatus("Enter YAML first.","#b91c1c")
+return false
+}
+try{
+let parsed=jsyaml.load(input)
+document.getElementById("yaml-input").value=jsyaml.dump(parsed,{lineWidth:80})
+setStatus("YAML validated.","#16a34a")
+return true
+}catch(e){
+setStatus("YAML parse error: "+e.message,"#b91c1c")
+return false
+}
+}
+
+function downloadPdf(){
+if(!validateYaml()){
+return
+}
+try{
+writeTextPdf(document.getElementById("yaml-input").value,"yaml-to-pdf.pdf")
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+
+document.getElementById("yaml-input").value="name: ToolForge\nactive: true\nfeatures:\n  - pdf\n  - yaml"
+</script>
+</body>
+</html>
