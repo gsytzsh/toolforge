@@ -26,25 +26,25 @@
   ];
 
   const CATEGORY_DESCRIPTIONS = {
-    "JSON & Data": "Format, validate, convert and inspect JSON, CSV, XML and related data formats.",
-    "Encoding & Decoding": "Encode, decode and transform Base64, URL, binary, hex, QR and other text formats.",
-    "Text": "Clean up, count, compare and transform text for writing, content work and daily editing.",
-    "Images & Colors": "Resize, compress and convert images, then work with colors and image-related utilities.",
-    "PDF & Export": "Turn text, code, notes, tables and files into browser-generated PDF documents.",
-    "Date & Time": "Convert timestamps, compare dates and work with calendars, timers and time zones.",
-    "Time & Planning": "Plan schedules, compare meeting times and manage focus or daily time blocks.",
-    "Daily Productivity": "Organize notes, lists and simple workflows to get everyday tasks done faster.",
-    "Money & Decisions": "Compare prices, split bills and calculate common money-related everyday decisions.",
-    "Generators & Converters": "Generate values and convert units, numbers and formats used in daily work.",
-    "Calculators": "Solve common math, finance, school and number problems with focused calculators.",
-    "Security & Tokens": "Generate passwords, inspect JWTs, hash values and handle security-related tasks.",
-    "Web & Network": "Inspect URLs, HTTP headers, status codes, user agents and other web request details.",
-    "API & Data": "Work with APIs, requests, schemas, payloads and developer-facing data inspection tools.",
-    "Code & Formatting": "Format code and structured text so it is easier to read, copy and debug.",
-    "Debug & Testing": "Test regex, diffs and rewrite rules to debug code and verify expected behavior.",
-    "Database": "Build SQL queries and database-related snippets for quick drafting and testing.",
-    "Schedules & Infra": "Create cron schedules and other infrastructure-oriented helper outputs.",
-    "SEO & Webmaster": "Generate metadata, schema, robots rules and other technical SEO helper outputs."
+    "JSON & Data": "Open, format, validate and convert JSON, CSV, XML and YAML for APIs, logs and structured data work.",
+    "Encoding & Decoding": "Encode and decode Base64, URL, binary, hex and QR data for web, API and text-processing tasks.",
+    "Text": "Edit, clean, compare and transform text for writing, SEO, content cleanup and everyday copy work.",
+    "Images & Colors": "Resize, compress and convert images, extract Base64 and use color tools for design and frontend work.",
+    "PDF & Export": "Create browser-based PDFs from notes, tables, code, screenshots and uploaded files without extra software.",
+    "Date & Time": "Convert timestamps, compare dates and work with calendars, week numbers, timers and time zones.",
+    "Time & Planning": "Plan meetings, focus sessions, countdowns and work schedules with simple time-planning tools.",
+    "Daily Productivity": "Manage notes, checklists and small everyday tasks with lightweight tools that open instantly in the browser.",
+    "Money & Decisions": "Split bills, compare prices and handle quick money, shopping and decision-making calculations.",
+    "Generators & Converters": "Generate random values and convert everyday units, numbers and formats in a few clicks.",
+    "Calculators": "Use focused calculators for percentages, loans, grades, statistics and other common number problems.",
+    "Security & Tokens": "Generate passwords, inspect tokens, hash text and handle common browser-based security helper tasks.",
+    "Web & Network": "Inspect URLs, IPs, headers, status codes and client details for web, hosting and network troubleshooting.",
+    "API & Data": "Build requests, inspect payloads, test paths and work faster with API and structured-data helper tools.",
+    "Code & Formatting": "Format code, minify snippets and clean structured text so it is easier to read, share and debug.",
+    "Debug & Testing": "Test regex, diffs, rewrites and other developer workflows before you apply changes in real projects.",
+    "Database": "Build SQL queries, WHERE clauses and other database helpers for faster drafting and testing.",
+    "Schedules & Infra": "Create cron schedules and other small infrastructure helpers for automation and operations work.",
+    "SEO & Webmaster": "Generate schema, meta tags, robots rules and other SEO and webmaster utilities for site optimization."
   };
 
   function groupByCategory(list) {
