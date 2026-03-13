@@ -78,29 +78,121 @@ return item.label+": "+item.value
 }).join("\n")
 }
 
+function formatLocation(parts, fallbackText){
+let filtered=parts.filter(Boolean)
+return filtered.length?filtered.join(", "):fallbackText
+}
+
+async function tryIpWhoCurrent(){
+let data=await fetchJson("https://ipwho.is/")
+if(data && data.success && data.ip){
+return {
+ip:data.ip,
+location:formatLocation([data.city,data.region,data.country],"Unknown location")
+}
+}
+return null
+}
+
+async function tryIpWhoByIp(ip){
+let data=await fetchJson("https://ipwho.is/"+encodeURIComponent(ip))
+if(data && data.success){
+return {
+ip:data.ip||ip,
+location:formatLocation([data.city,data.region,data.country],"Unknown location")
+}
+}
+return null
+}
+
+async function tryKameroCurrent(){
+let data=await fetchJson("https://geo.kamero.ai/api/geo")
+if(data && data.ip){
+return {
+ip:data.ip,
+location:formatLocation([data.city,data.country],"Unknown location")
+}
+}
+return null
+}
+
+async function tryKameroByIp(ip){
+let data=await fetchJson("https://geo.kamero.ai/api/geo?ip="+encodeURIComponent(ip))
+if(data && data.ip){
+return {
+ip:data.ip||ip,
+location:formatLocation([data.city,data.country],"Unknown location")
+}
+}
+return null
+}
+
+async function tryIpLocationNet(ip){
+let data=await fetchJson("https://api.iplocation.net/?ip="+encodeURIComponent(ip))
+if(data && (data.country_name||data.country_code2)){
+return {
+ip:data.ip||ip,
+location:formatLocation([data.city,data.region_name,data.country_name||data.country_code2],"Unknown location")
+}
+}
+return null
+}
+
 async function loadSelfIP(){
 
 try{
-let currentData=await fetchJson("https://ipwho.is/")
-
-if(currentData && currentData.success && currentData.ip){
-let locationParts=[
-currentData.city,
-currentData.region,
-currentData.country
-].filter(Boolean)
-renderCurrentIpLine(
-currentData.ip,
-locationParts.length?locationParts.join(", "):"Unknown location"
-)
+let currentResult=await tryIpWhoCurrent()
+if(currentResult){
+renderCurrentIpLine(currentResult.ip,currentResult.location)
 document.getElementById("status").innerText=""
 return
 }
-
 }catch(e){
+}
+
+try{
+let kameroCurrent=await tryKameroCurrent()
+if(kameroCurrent){
+renderCurrentIpLine(kameroCurrent.ip,kameroCurrent.location)
+document.getElementById("status").innerText=""
+return
+}
+}catch(e){
+}
+
 try{
 let fallback=await fetchJson("https://api64.ipify.org?format=json")
 if(fallback && fallback.ip){
+try{
+let fallbackGeo=await tryIpWhoByIp(fallback.ip)
+if(fallbackGeo){
+renderCurrentIpLine(fallbackGeo.ip,fallbackGeo.location)
+document.getElementById("status").innerText=""
+return
+}
+}catch(geoErr){
+}
+
+try{
+let kameroGeo=await tryKameroByIp(fallback.ip)
+if(kameroGeo){
+renderCurrentIpLine(kameroGeo.ip,kameroGeo.location)
+document.getElementById("status").innerText=""
+return
+}
+}catch(kameroErr){
+}
+
+try{
+let countryFallback=await tryIpLocationNet(fallback.ip)
+if(countryFallback){
+renderCurrentIpLine(countryFallback.ip,countryFallback.location)
+document.getElementById("status").innerText=""
+return
+}
+}catch(countryErr){
+}
+
 renderCurrentIpLine(fallback.ip,"Location unavailable")
 document.getElementById("status").innerText=""
 return
@@ -109,9 +201,6 @@ return
 }
 
 document.getElementById("self-ip").innerText="Unable to detect your IP."
-
-}
-
 }
 
 async function lookup(){
