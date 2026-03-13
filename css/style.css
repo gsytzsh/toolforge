@@ -30,10 +30,7 @@ font-size:16px;
 }
 
 .popular-tools{
-background:#fff;
-border:1px solid #e5e7eb;
-border-radius:8px;
-padding:16px 20px;
+padding:16px 0;
 margin-bottom:30px;
 }
 
@@ -46,23 +43,27 @@ text-transform:uppercase;
 letter-spacing:0.02em;
 }
 
-.popular-tools-grid{
+.popular-tools-row{
 display:flex;
-flex-direction:column;
-align-items:flex-start;
-gap:8px;
+flex-wrap:wrap;
+gap:10px;
+align-items:center;
 }
 
-.popular-tool-link{
+.popular-tool-tag{
 color:#2563eb;
 text-decoration:none;
-font-size:0.95rem;
-padding:6px 0;
+font-size:0.9rem;
+padding:4px 10px;
 display:inline-block;
+border:1px solid #c7d2fe;
+border-radius:6px;
+background:#eef2ff;
 }
 
-.popular-tool-link:hover{
-text-decoration:underline;
+.popular-tool-tag:hover{
+background:#c7d2fe;
+border-color:#818cf8;
 }
 
 .about-tools{
