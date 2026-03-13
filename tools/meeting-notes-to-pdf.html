@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Meeting Notes to PDF - Export Meeting Notes Online | ToolForge</title>
+<meta name="description" content="Free online Meeting Notes to PDF tool to capture meeting details, agenda, decisions and action items, then export them as a PDF. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/meeting-notes-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Meeting Notes to PDF - Export Meeting Notes Online | ToolForge">
+<meta property="og:description" content="Free online Meeting Notes to PDF tool to capture meeting details, agenda, decisions and action items, then export them as a PDF. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/meeting-notes-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Meeting Notes to PDF - Export Meeting Notes Online | ToolForge">
+<meta name="twitter:description" content="Free online Meeting Notes to PDF tool to capture meeting details, agenda, decisions and action items, then export them as a PDF. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>Meeting Notes to PDF</h1>
+<p class="subtitle">Capture meeting details, agenda, notes and action items, then export them as a PDF.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p>
+Meeting Title:
+<label for="meeting-title" class="sr-only">Meeting title</label>
+<input id="meeting-title" type="text" style="width:320px" aria-label="Meeting title">
+</p>
+<p>
+Date:
+<label for="meeting-date" class="sr-only">Meeting date</label>
+<input id="meeting-date" type="date" style="width:160px" aria-label="Meeting date">
+Attendees:
+<label for="attendees" class="sr-only">Attendees</label>
+<input id="attendees" type="text" style="width:320px" aria-label="Attendees">
+</p>
+<label for="agenda" class="sr-only">Agenda</label>
+<textarea id="agenda" class="pdf-editor" rows="4" aria-label="Agenda" placeholder="Agenda items"></textarea>
+<br><br>
+<label for="notes" class="sr-only">Meeting notes</label>
+<textarea id="notes" class="pdf-editor" rows="6" aria-label="Meeting notes" placeholder="Discussion notes"></textarea>
+<br><br>
+<label for="actions" class="sr-only">Action items</label>
+<textarea id="actions" class="pdf-editor" rows="4" aria-label="Action items" placeholder="Action items"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="renderPreview()">Render Notes</button>
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<h3>Preview</h3>
+<div id="preview" class="pdf-preview-box"></div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Meeting Notes to PDF</h3>
+<p>This tool turns meeting notes into a structured PDF with title, attendees, agenda, discussion notes and follow-up actions. It is useful for internal syncs, client calls and status meetings.</p>
+<p>Everything is generated locally in your browser and can be exported without sending notes to a server.</p>
+</section>
+</main>
+<script>
+function escapeHtml(text){
+return String(text)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#39;")
+}
+
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function sectionHtml(title,value){
+return '<h3 style="margin:20px 0 8px">'+title+'</h3><div style="white-space:pre-wrap;border:1px solid #e5e7eb;border-radius:6px;padding:12px">'+escapeHtml(value||"-")+'</div>'
+}
+
+function renderPreview(){
+let title=document.getElementById("meeting-title").value.trim()
+let date=document.getElementById("meeting-date").value
+let attendees=document.getElementById("attendees").value.trim()
+let agenda=document.getElementById("agenda").value.trim()
+let notes=document.getElementById("notes").value.trim()
+let actions=document.getElementById("actions").value.trim()
+if(!title&&!agenda&&!notes&&!actions){
+document.getElementById("preview").innerHTML=""
+setStatus("Fill meeting notes first.","#b91c1c")
+return false
+}
+document.getElementById("preview").innerHTML=
+  '<h2 style="margin-top:0">'+escapeHtml(title||"Meeting Notes")+'</h2>'+
+  '<p><strong>Date:</strong> '+escapeHtml(date||"-")+'</p>'+
+  '<p><strong>Attendees:</strong> '+escapeHtml(attendees||"-")+'</p>'+
+  sectionHtml("Agenda",agenda)+
+  sectionHtml("Notes",notes)+
+  sectionHtml("Action Items",actions)
+setStatus("Meeting notes rendered.","#16a34a")
+return true
+}
+
+async function downloadPdf(){
+if(!renderPreview()){
+return
+}
+try{
+let canvas=await html2canvas(document.getElementById("preview"),{scale:2,backgroundColor:"#ffffff",useCORS:true})
+let imageData=canvas.toDataURL("image/png")
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let imgWidth=pageWidth-40
+let imgHeight=canvas.height*imgWidth/canvas.width
+let heightLeft=imgHeight
+let position=20
+pdf.addImage(imageData,"PNG",20,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-40
+while(heightLeft>0){
+position=heightLeft-imgHeight+20
+pdf.addPage()
+pdf.addImage(imageData,"PNG",20,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-40
+}
+pdf.save("meeting-notes-to-pdf.pdf")
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+
+document.getElementById("meeting-title").value="Weekly Product Sync"
+document.getElementById("meeting-date").value=new Date().toISOString().slice(0,10)
+document.getElementById("attendees").value="Alex, Sam, Jamie"
+document.getElementById("agenda").value="1. Status updates\n2. PDF tools roadmap"
+document.getElementById("notes").value="Discussed the new export category and reviewed upload flow improvements."
+document.getElementById("actions").value="Alex: review homepage grouping\nSam: test PDF tools on mobile"
+renderPreview()
+</script>
+</body>
+</html>

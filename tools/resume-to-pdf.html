@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Resume to PDF - Create a Simple Resume Online | ToolForge</title>
+<meta name="description" content="Free online Resume to PDF tool to create a simple resume in your browser and export it as a PDF. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/resume-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Resume to PDF - Create a Simple Resume Online | ToolForge">
+<meta property="og:description" content="Free online Resume to PDF tool to create a simple resume in your browser and export it as a PDF. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/resume-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Resume to PDF - Create a Simple Resume Online | ToolForge">
+<meta name="twitter:description" content="Free online Resume to PDF tool to create a simple resume in your browser and export it as a PDF. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>Resume to PDF</h1>
+<p class="subtitle">Create a simple resume in your browser and export it as a PDF.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p>
+Full Name:
+<label for="full-name" class="sr-only">Full name</label>
+<input id="full-name" type="text" style="width:280px" aria-label="Full name">
+</p>
+<p>
+Role:
+<label for="role" class="sr-only">Role</label>
+<input id="role" type="text" style="width:280px" aria-label="Role">
+</p>
+<p>
+Email:
+<label for="resume-email" class="sr-only">Email</label>
+<input id="resume-email" type="email" style="width:260px" aria-label="Email">
+Phone:
+<label for="resume-phone" class="sr-only">Phone</label>
+<input id="resume-phone" type="text" style="width:180px" aria-label="Phone">
+</p>
+<label for="summary" class="sr-only">Professional summary</label>
+<textarea id="summary" class="pdf-editor" rows="4" aria-label="Professional summary" placeholder="Professional summary"></textarea>
+<br><br>
+<label for="experience" class="sr-only">Experience</label>
+<textarea id="experience" class="pdf-editor" rows="5" aria-label="Experience" placeholder="Experience"></textarea>
+<br><br>
+<label for="skills" class="sr-only">Skills</label>
+<textarea id="skills" class="pdf-editor" rows="4" aria-label="Skills" placeholder="Skills"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="renderPreview()">Render Resume</button>
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<h3>Preview</h3>
+<div id="preview" class="pdf-preview-box"></div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Resume to PDF</h3>
+<p>This Resume to PDF tool creates a simple single-page style resume with core contact, summary, experience and skills sections. It is useful for quick resume drafts and lightweight profile sharing.</p>
+<p>The resume is rendered locally in your browser before export.</p>
+</section>
+</main>
+<script>
+function escapeHtml(text){
+return String(text)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#39;")
+}
+
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function block(title,value){
+return '<h3 style="margin:18px 0 8px">'+title+'</h3><div style="white-space:pre-wrap">'+escapeHtml(value||"-")+'</div>'
+}
+
+function renderPreview(){
+let name=document.getElementById("full-name").value.trim()
+let role=document.getElementById("role").value.trim()
+let email=document.getElementById("resume-email").value.trim()
+let phone=document.getElementById("resume-phone").value.trim()
+let summary=document.getElementById("summary").value.trim()
+let experience=document.getElementById("experience").value.trim()
+let skills=document.getElementById("skills").value.trim()
+if(!name&&!summary&&!experience&&!skills){
+document.getElementById("preview").innerHTML=""
+setStatus("Fill resume details first.","#b91c1c")
+return false
+}
+document.getElementById("preview").innerHTML=
+  '<h2 style="margin-top:0">'+escapeHtml(name||"Your Name")+'</h2>'+
+  '<p style="font-size:16px;color:#4b5563;margin-top:-4px">'+escapeHtml(role||"Your Role")+'</p>'+
+  '<p><strong>Email:</strong> '+escapeHtml(email||"-")+' &nbsp; <strong>Phone:</strong> '+escapeHtml(phone||"-")+'</p>'+
+  block("Summary",summary)+
+  block("Experience",experience)+
+  block("Skills",skills)
+setStatus("Resume rendered.","#16a34a")
+return true
+}
+
+async function downloadPdf(){
+if(!renderPreview()){
+return
+}
+try{
+let canvas=await html2canvas(document.getElementById("preview"),{scale:2,backgroundColor:"#ffffff",useCORS:true})
+let imageData=canvas.toDataURL("image/png")
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let imgWidth=pageWidth-40
+let imgHeight=canvas.height*imgWidth/canvas.width
+let heightLeft=imgHeight
+let position=20
+pdf.addImage(imageData,"PNG",20,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-40
+while(heightLeft>0){
+position=heightLeft-imgHeight+20
+pdf.addPage()
+pdf.addImage(imageData,"PNG",20,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-40
+}
+pdf.save("resume-to-pdf.pdf")
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+
+document.getElementById("full-name").value="Alex Johnson"
+document.getElementById("role").value="Frontend Engineer"
+document.getElementById("resume-email").value="alex@example.com"
+document.getElementById("resume-phone").value="+1 555 0102"
+document.getElementById("summary").value="Frontend engineer focused on developer tools, UI systems and browser-based workflows."
+document.getElementById("experience").value="ToolForge Studio\nBuilt and maintained frontend utility tools with strong UX focus."
+document.getElementById("skills").value="JavaScript\nHTML/CSS\nUI systems\nPDF export flows"
+renderPreview()
+</script>
+</body>
+</html>

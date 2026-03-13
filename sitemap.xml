@@ -133,6 +133,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.toolforge.site/tools/meeting-notes-to-pdf.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.toolforge.site/tools/checklist-to-pdf.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.toolforge.site/tools/resume-to-pdf.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.toolforge.site/tools/hash-generator.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>

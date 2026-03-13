@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Checklist to PDF - Create Checklists and Export PDF Online | ToolForge</title>
+<meta name="description" content="Free online Checklist to PDF tool to create a checklist in your browser and export it as a clean PDF. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/checklist-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Checklist to PDF - Create Checklists and Export PDF Online | ToolForge">
+<meta property="og:description" content="Free online Checklist to PDF tool to create a checklist in your browser and export it as a clean PDF. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/checklist-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Checklist to PDF - Create Checklists and Export PDF Online | ToolForge">
+<meta name="twitter:description" content="Free online Checklist to PDF tool to create a checklist in your browser and export it as a clean PDF. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>Checklist to PDF</h1>
+<p class="subtitle">Create a checklist from simple lines of text and export it as a PDF.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p>
+Checklist Title:
+<label for="checklist-title" class="sr-only">Checklist title</label>
+<input id="checklist-title" type="text" style="width:320px" aria-label="Checklist title">
+</p>
+<label for="checklist-input" class="sr-only">Checklist items</label>
+<textarea id="checklist-input" class="pdf-editor" rows="10" aria-label="Checklist items" placeholder="One item per line"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="renderPreview()">Render Checklist</button>
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<h3>Preview</h3>
+<div id="preview" class="pdf-preview-box"></div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Checklist to PDF</h3>
+<p>This tool turns one checklist item per line into a printable PDF checklist. It is useful for onboarding lists, QA steps, packing lists and recurring work routines.</p>
+<p>The checklist is rendered entirely in your browser and exported without any server upload.</p>
+</section>
+</main>
+<script>
+function escapeHtml(text){
+return String(text)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#39;")
+}
+
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function renderPreview(){
+let title=document.getElementById("checklist-title").value.trim()
+let items=document.getElementById("checklist-input").value.split(/\r?\n/).map(function(item){
+return item.trim()
+}).filter(Boolean)
+if(!items.length){
+document.getElementById("preview").innerHTML=""
+setStatus("Enter checklist items first.","#b91c1c")
+return false
+}
+let html='<h2 style="margin-top:0">'+escapeHtml(title||"Checklist")+'</h2><ul style="list-style:none;padding:0">'
+items.forEach(function(item){
+html+='<li style="display:flex;align-items:flex-start;gap:10px;margin:10px 0"><span style="display:inline-block;width:18px;height:18px;border:2px solid #6b7280;border-radius:3px;flex:none"></span><span>'+escapeHtml(item)+'</span></li>'
+})
+html+='</ul>'
+document.getElementById("preview").innerHTML=html
+setStatus("Checklist rendered.","#16a34a")
+return true
+}
+
+async function downloadPdf(){
+if(!renderPreview()){
+return
+}
+try{
+let canvas=await html2canvas(document.getElementById("preview"),{scale:2,backgroundColor:"#ffffff",useCORS:true})
+let imageData=canvas.toDataURL("image/png")
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let imgWidth=pageWidth-40
+let imgHeight=canvas.height*imgWidth/canvas.width
+let heightLeft=imgHeight
+let position=20
+pdf.addImage(imageData,"PNG",20,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-40
+while(heightLeft>0){
+position=heightLeft-imgHeight+20
+pdf.addPage()
+pdf.addImage(imageData,"PNG",20,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-40
+}
+pdf.save("checklist-to-pdf.pdf")
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+
+document.getElementById("checklist-title").value="Launch Checklist"
+document.getElementById("checklist-input").value="Review sitemap\nCheck homepage PDF grouping\nTest export tools\nDeploy latest build"
+renderPreview()
+</script>
+</body>
+</html>
