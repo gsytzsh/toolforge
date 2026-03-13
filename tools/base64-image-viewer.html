@@ -5,20 +5,20 @@
 
 <meta charset="UTF-8">
 
-<title>Base64 Image Viewer – Preview Base64 Images Online | ToolForge</title>
+<title>Base64 Image Viewer – Preview Base64 to Image Online | ToolForge</title>
 
-<meta name="description" content="Free online Base64 Image Viewer to preview images from Base64 strings or data URLs in your browser. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Free online Base64 Image Viewer to preview images from Base64 strings or data URLs, and download the decoded image in your browser. Part of the ToolForge developer tools collection.">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://www.toolforge.site/tools/base64-image-viewer.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Base64 Image Viewer – Preview Base64 Images Online | ToolForge">
-<meta property="og:description" content="Free online Base64 Image Viewer to preview images from Base64 strings or data URLs in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Base64 Image Viewer – Preview Base64 to Image Online | ToolForge">
+<meta property="og:description" content="Free online Base64 Image Viewer to preview images from Base64 strings or data URLs, and download the decoded image in your browser. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://www.toolforge.site/tools/base64-image-viewer.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Base64 Image Viewer – Preview Base64 Images Online | ToolForge">
-<meta name="twitter:description" content="Free online Base64 Image Viewer to preview images from Base64 strings or data URLs in your browser. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Base64 Image Viewer – Preview Base64 to Image Online | ToolForge">
+<meta name="twitter:description" content="Free online Base64 Image Viewer to preview images from Base64 strings or data URLs, and download the decoded image in your browser. Part of the ToolForge developer tools collection.">
 
 <link rel="stylesheet" href="/css/style.css">
 
@@ -30,7 +30,7 @@
 
 <h1>Base64 Image Viewer</h1>
 
-<p class="subtitle">Paste a Base64 image string or data URL and preview the image instantly.</p>
+<p class="subtitle">Paste a Base64 image string or data URL to preview the image instantly and download it if needed.</p>
 
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
@@ -39,12 +39,16 @@
 
 <br><br>
 
-<button onclick="renderImage()">Preview Image</button>
-<button onclick="clearAll()">Clear</button>
+<div class="tool-actions">
+<button type="button" onclick="renderImage()">Preview Image</button>
+<button type="button" onclick="downloadImage()">Download Image</button>
+<button type="button" onclick="clearAll()">Clear</button>
+</div>
 
 <h3>Image Preview</h3>
 
 <div id="preview"></div>
+<p id="status" class="inline-status"></p>
 
 </main>
 
@@ -61,6 +65,8 @@ preview.innerHTML=""
 if(!base64){
 
 preview.innerText="No Base64 data"
+document.getElementById("status").innerText="Paste Base64 image data first."
+document.getElementById("status").style.color="#b91c1c"
 
 return
 
@@ -79,13 +85,36 @@ img.style.maxWidth="100%"
 img.style.border="1px solid #ddd"
 
 preview.appendChild(img)
+document.getElementById("status").innerText="Image preview ready."
+document.getElementById("status").style.color="#16a34a"
 
+}
+
+function downloadImage(){
+let base64=document.getElementById("input").value.trim()
+if(!base64){
+document.getElementById("status").innerText="Nothing to download."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+if(!base64.startsWith("data:image")){
+base64="data:image/png;base64,"+base64
+}
+let link=document.createElement("a")
+link.href=base64
+link.download="decoded-image.png"
+document.body.appendChild(link)
+link.click()
+document.body.removeChild(link)
+document.getElementById("status").innerText="Image download started."
+document.getElementById("status").style.color="#16a34a"
 }
 
 function clearAll(){
 
 document.getElementById("input").value=""
 document.getElementById("preview").innerHTML=""
+document.getElementById("status").innerText=""
 
 }
 

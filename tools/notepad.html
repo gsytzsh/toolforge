@@ -2,39 +2,163 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Online Notepad – Browser Notepad | ToolForge</title>
-<meta name="description" content="Free online Notepad: notes saved in your browser (localStorage). Part of the ToolForge developer tools collection.">
+<title>Notes & Lists – Notepad, Checklist and Shopping List | ToolForge</title>
+<meta name="description" content="Free online Notes & Lists tool to keep quick notes, build checklists and organize shopping lists in your browser with local save.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://www.toolforge.site/tools/notepad.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Online Notepad – Browser Notepad | ToolForge">
-<meta property="og:description" content="Free online Notepad: notes saved in your browser (localStorage). Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Notes & Lists – Notepad, Checklist and Shopping List | ToolForge">
+<meta property="og:description" content="Free online Notes & Lists tool to keep quick notes, build checklists and organize shopping lists in your browser with local save.">
 <meta property="og:url" content="https://www.toolforge.site/tools/notepad.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Online Notepad – Browser Notepad | ToolForge">
-<meta name="twitter:description" content="Free online Notepad: notes saved in your browser (localStorage). Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Notes & Lists – Notepad, Checklist and Shopping List | ToolForge">
+<meta name="twitter:description" content="Free online Notes & Lists tool to keep quick notes, build checklists and organize shopping lists in your browser with local save.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <main class="container">
-<h1>Online Notepad</h1>
-<p class="subtitle">Quick notes saved in your browser. Data stays on this device.</p>
+<h1>Notes & Lists</h1>
+<p class="subtitle">Keep notes, build checklists and organize shopping lists in one browser-based tool.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
-<label for="text" class="sr-only">Text input</label>
-<textarea id="text" rows="14" style="width:100%;font-size:14px" placeholder="Type your notes here..." aria-label="Text input"></textarea>
+<label for="mode" class="sr-only">Mode</label>
+<select id="mode" aria-label="Mode" onchange="switchMode()">
+<option value="notes">Notes</option>
+<option value="checklist">Checklist</option>
+<option value="shopping">Shopping List</option>
+</select>
 <br><br>
-<button onclick="save()">Save</button>
-<button onclick="clearAll()">Clear</button>
-<span id="status" style="margin-left:12px;color:#666"></span>
+<label for="text" class="sr-only">Text input</label>
+<textarea id="text" rows="14" style="width:100%;font-size:14px" aria-label="Text input" placeholder="Type your notes here..."></textarea>
+<div class="tool-actions">
+<button type="button" onclick="renderOutput()">Render</button>
+<button type="button" onclick="save()">Save</button>
+<button type="button" onclick="copyOutput()">Copy Output</button>
+<button type="button" onclick="clearAll()">Clear</button>
+</div>
+<div id="preview"></div>
+<p id="status" class="inline-status"></p>
 </main>
 <script>
-var KEY="toolforge.notepad"
+var KEYS={
+notes:"toolforge.notes-lists.notes",
+checklist:"toolforge.notes-lists.checklist",
+shopping:"toolforge.notes-lists.shopping"
+}
+var MODE_HINTS={
+notes:"Type your notes here...",
+checklist:"Buy milk\nSend email\nPack charger",
+shopping:"Produce|Apples\nProduce|Bananas\nDairy|Milk"
+}
 var el=document.getElementById("text")
-try{var s=localStorage.getItem(KEY);if(s)el.value=s}catch(e){}
-function save(){try{localStorage.setItem(KEY,el.value);document.getElementById("status").innerText="Saved."}catch(e){document.getElementById("status").innerText="Save failed."}}
-function clearAll(){el.value="";try{localStorage.removeItem(KEY)}catch(e){};document.getElementById("status").innerText="Cleared."}
-el.addEventListener("input",function(){document.getElementById("status").innerText=""})
+
+function currentMode(){
+return document.getElementById("mode").value
+}
+
+function switchMode(){
+let mode=currentMode()
+el.placeholder=MODE_HINTS[mode]
+try{
+el.value=localStorage.getItem(KEYS[mode])||""
+}catch(e){
+el.value=""
+}
+renderOutput()
+document.getElementById("status").innerText=""
+}
+
+function renderNotes(value){
+return value?'<pre style="white-space:pre-wrap">'+escapeHtml(value)+'</pre>':"<p>No notes yet.</p>"
+}
+
+function renderChecklist(value){
+let lines=value.split(/\r?\n/).map(function(line){return line.trim()}).filter(Boolean)
+if(!lines.length) return "<p>No checklist items yet.</p>"
+return lines.map(function(item){
+return '<label style="display:block;margin:8px 0"><input type="checkbox"> '+escapeHtml(item)+'</label>'
+}).join("")
+}
+
+function renderShopping(value){
+let groups={}
+value.split(/\r?\n/).map(function(line){return line.trim()}).filter(Boolean).forEach(function(line){
+let parts=line.split("|")
+let group=parts.length>1?(parts[0]||"Other").trim():"Other"
+let item=(parts.length>1?parts.slice(1).join("|"):parts[0]||"").trim()
+if(!groups[group]) groups[group]=[]
+groups[group].push(item)
+})
+let keys=Object.keys(groups)
+if(!keys.length) return "<p>No shopping items yet.</p>"
+return "<pre>"+keys.map(function(group){
+return group+"\n- "+groups[group].join("\n- ")
+}).join("\n\n")+"</pre>"
+}
+
+function escapeHtml(value){
+return value.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+}
+
+function renderOutput(){
+let mode=currentMode()
+let value=el.value
+let preview=document.getElementById("preview")
+if(mode==="notes") preview.innerHTML=renderNotes(value)
+if(mode==="checklist") preview.innerHTML=renderChecklist(value)
+if(mode==="shopping") preview.innerHTML=renderShopping(value)
+document.getElementById("status").innerText=mode==="notes"?"Notes updated.":mode==="checklist"?"Checklist built.":"Shopping list organized."
+document.getElementById("status").style.color="#16a34a"
+}
+
+function save(){
+try{
+localStorage.setItem(KEYS[currentMode()],el.value)
+document.getElementById("status").innerText="Saved."
+document.getElementById("status").style.color="#16a34a"
+}catch(e){
+document.getElementById("status").innerText="Save failed."
+document.getElementById("status").style.color="#b91c1c"
+}
+}
+
+function copyOutput(){
+let mode=currentMode()
+let value=""
+if(mode==="notes") value=el.value.trim()
+if(mode==="checklist") value=el.value.split(/\r?\n/).map(function(line){return line.trim()}).filter(Boolean).map(function(line){return "- "+line}).join("\n")
+if(mode==="shopping"){
+let tmp=document.createElement("div")
+tmp.innerHTML=renderShopping(el.value)
+value=tmp.innerText.trim()
+}
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Output copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+
+function clearAll(){
+el.value=""
+document.getElementById("preview").innerHTML=""
+try{localStorage.removeItem(KEYS[currentMode()])}catch(e){}
+document.getElementById("status").innerText="Cleared."
+document.getElementById("status").style.color="#666"
+}
+
+el.addEventListener("input",function(){
+document.getElementById("status").innerText=""
+})
+
+switchMode()
 </script>
 </body>
 </html>

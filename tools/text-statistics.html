@@ -3,18 +3,18 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Text Statistics – Count Characters, Words and Lines | ToolForge</title>
-<meta name="description" content="Free online Text Statistics tool to count characters, words and lines in a block of text. Part of the ToolForge developer tools collection.">
+<title>Text Statistics & Word Counter – Count Characters, Words and Lines | ToolForge</title>
+<meta name="description" content="Free online Text Statistics and Word Counter tool to count characters, words and lines in a block of text. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://www.toolforge.site/tools/text-statistics.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Text Statistics – Count Characters, Words and Lines | ToolForge">
-<meta property="og:description" content="Free online Text Statistics tool to count characters, words and lines in a block of text. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Text Statistics & Word Counter – Count Characters, Words and Lines | ToolForge">
+<meta property="og:description" content="Free online Text Statistics and Word Counter tool to count characters, words and lines in a block of text. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://www.toolforge.site/tools/text-statistics.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Text Statistics – Count Characters, Words and Lines | ToolForge">
-<meta name="twitter:description" content="Free online Text Statistics tool to count characters, words and lines in a block of text. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Text Statistics & Word Counter – Count Characters, Words and Lines | ToolForge">
+<meta name="twitter:description" content="Free online Text Statistics and Word Counter tool to count characters, words and lines in a block of text. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 
 </head>
@@ -23,9 +23,9 @@
 
 <main class="container">
 
-<h1>Text Statistics</h1>
+<h1>Text Statistics & Word Counter</h1>
 
-<p class="subtitle">Count characters, words and lines in a block of text for limits, SEO and content analysis.</p>
+<p class="subtitle">Count words, characters and lines in one place for writing, SEO and content analysis.</p>
 
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
@@ -35,13 +35,17 @@
 
 <br><br>
 
-<button onclick="analyze()">Analyze</button>
+<div class="tool-actions">
+<button type="button" onclick="analyze()">Analyze</button>
+<button type="button" onclick="copySummary()">Copy Result</button>
+</div>
 
 <h3 style="margin-top:24px">Result</h3>
 <p>Characters (with spaces): <span id="charsAll"></span></p>
 <p>Characters (without spaces): <span id="charsNoSpace"></span></p>
 <p>Words: <span id="words"></span></p>
 <p>Lines: <span id="lines"></span></p>
+<p id="status" class="inline-status"></p>
 
 </main>
 
@@ -57,6 +61,29 @@ document.getElementById("charsAll").innerText=charsAll
 document.getElementById("charsNoSpace").innerText=charsNoSpace
 document.getElementById("words").innerText=words
 document.getElementById("lines").innerText=lines
+document.getElementById("status").innerText="Text analyzed."
+document.getElementById("status").style.color="#16a34a"
+}
+
+function copySummary(){
+let summary=[
+"Characters (with spaces): "+document.getElementById("charsAll").innerText,
+"Characters (without spaces): "+document.getElementById("charsNoSpace").innerText,
+"Words: "+document.getElementById("words").innerText,
+"Lines: "+document.getElementById("lines").innerText
+].join("\n")
+if(!document.getElementById("charsAll").innerText){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(summary).then(function(){
+document.getElementById("status").innerText="Result copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
 }
 
 </script>

@@ -25,12 +25,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.toolforge.site/tools/base64-to-image.html</loc>
-    <lastmod>2026-03-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.toolforge.site/tools/url-encode-decode.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -68,12 +62,6 @@
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/yaml-json-converter.html</loc>
-    <lastmod>2026-03-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.toolforge.site/tools/json-minify.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -169,12 +157,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.toolforge.site/tools/jwt-decoder.html</loc>
-    <lastmod>2026-03-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.toolforge.site/tools/jwt-generator.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -218,12 +200,6 @@
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/case-converter.html</loc>
-    <lastmod>2026-03-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.toolforge.site/tools/word-counter.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -571,12 +547,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.toolforge.site/tools/tip-calculator.html</loc>
-    <lastmod>2026-03-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.toolforge.site/tools/loan-calculator.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -829,12 +799,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.toolforge.site/tools/json-validator.html</loc>
-    <lastmod>2026-03-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.toolforge.site/tools/css-minify.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -1034,18 +998,6 @@
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/speech-time-calculator.html</loc>
-    <lastmod>2026-03-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.toolforge.site/tools/checklist-maker.html</loc>
-    <lastmod>2026-03-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.toolforge.site/tools/shopping-list-organizer.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
