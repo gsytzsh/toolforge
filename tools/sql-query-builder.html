@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SQL Query Builder - Build SELECT Statements Online | ToolForge</title>
+<meta name="description" content="Free online SQL Query Builder to compose SELECT queries with columns, table names, WHERE conditions, ORDER BY and LIMIT clauses.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/sql-query-builder.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="SQL Query Builder - Build SELECT Statements Online | ToolForge">
+<meta property="og:description" content="Free online SQL Query Builder to compose SELECT queries with columns, table names, WHERE conditions, ORDER BY and LIMIT clauses.">
+<meta property="og:url" content="https://www.toolforge.site/tools/sql-query-builder.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL Query Builder - Build SELECT Statements Online | ToolForge">
+<meta name="twitter:description" content="Free online SQL Query Builder to compose SELECT queries with columns, table names, WHERE conditions, ORDER BY and LIMIT clauses.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>SQL Query Builder</h1>
+<p class="subtitle">Build simple SELECT queries for demos, docs and quick testing.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="table" class="sr-only">Table name</label>
+<input id="table" style="width:90%" aria-label="Table name" placeholder="users">
+<br><br>
+<label for="columns" class="sr-only">Columns</label>
+<input id="columns" style="width:90%" aria-label="Columns" placeholder="id, name, email">
+<br><br>
+<label for="where" class="sr-only">Where clause</label>
+<input id="where" style="width:90%" aria-label="Where clause" placeholder="status = 'active'">
+<br><br>
+<label for="order" class="sr-only">Order by</label>
+<input id="order" style="width:90%" aria-label="Order by" placeholder="created_at DESC">
+<br><br>
+<label for="limit" class="sr-only">Limit value</label>
+<input id="limit" style="width:90%" aria-label="Limit value" placeholder="100">
+<div class="tool-actions">
+<button type="button" onclick="buildQuery()">Build SQL</button>
+<button type="button" onclick="copyQuery()">Copy SQL</button>
+</div>
+<h3>SQL Output</h3>
+<textarea id="output" rows="10" class="pdf-editor pdf-editor-mono" aria-label="SQL output" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function buildQuery(){
+let table=document.getElementById("table").value.trim()
+if(!table){
+document.getElementById("output").value=""
+document.getElementById("status").innerText="Table name is required."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+let columns=document.getElementById("columns").value.trim()||"*"
+let where=document.getElementById("where").value.trim()
+let order=document.getElementById("order").value.trim()
+let limit=document.getElementById("limit").value.trim()
+let sql="SELECT "+columns+"\nFROM "+table
+if(where) sql+="\nWHERE "+where
+if(order) sql+="\nORDER BY "+order
+if(limit) sql+="\nLIMIT "+limit
+sql+=";"
+document.getElementById("output").value=sql
+document.getElementById("status").innerText="SQL query built."
+document.getElementById("status").style.color="#16a34a"
+}
+function copyQuery(){
+let value=document.getElementById("output").value.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="SQL copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

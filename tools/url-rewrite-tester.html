@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>URL Rewrite Tester - Test Rewrite Rules Online | ToolForge</title>
+<meta name="description" content="Free online URL Rewrite Tester to test regex-style URL rewrite rules and preview rewritten output paths in the browser.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/url-rewrite-tester.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="URL Rewrite Tester - Test Rewrite Rules Online | ToolForge">
+<meta property="og:description" content="Free online URL Rewrite Tester to test regex-style URL rewrite rules and preview rewritten output paths in the browser.">
+<meta property="og:url" content="https://www.toolforge.site/tools/url-rewrite-tester.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="URL Rewrite Tester - Test Rewrite Rules Online | ToolForge">
+<meta name="twitter:description" content="Free online URL Rewrite Tester to test regex-style URL rewrite rules and preview rewritten output paths in the browser.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>URL Rewrite Tester</h1>
+<p class="subtitle">Test regex rewrite patterns and replacement rules before adding them to server configs.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="source-url" class="sr-only">Source URL path</label>
+<input id="source-url" style="width:90%" aria-label="Source URL path" placeholder="/blog/123">
+<br><br>
+<label for="pattern" class="sr-only">Rewrite pattern</label>
+<input id="pattern" style="width:90%" aria-label="Rewrite pattern" placeholder="^/blog/(\\d+)$">
+<br><br>
+<label for="target" class="sr-only">Rewrite target</label>
+<input id="target" style="width:90%" aria-label="Rewrite target" placeholder="/posts?id=$1">
+<div class="tool-actions">
+<button type="button" onclick="testRewrite()">Test Rewrite</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
+<h3>Rewrite Result</h3>
+<pre id="result"></pre>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function testRewrite(){
+let source=document.getElementById("source-url").value.trim()
+let pattern=document.getElementById("pattern").value
+let target=document.getElementById("target").value
+try{
+let regex=new RegExp(pattern)
+let matched=regex.test(source)
+regex.lastIndex=0
+let rewritten=matched?source.replace(regex,target):"No match"
+document.getElementById("result").innerText="Matched: "+(matched?"yes":"no")+"\nRewritten: "+rewritten
+document.getElementById("status").innerText="Rewrite rule tested."
+document.getElementById("status").style.color="#16a34a"
+}catch(e){
+document.getElementById("result").innerText=""
+document.getElementById("status").innerText="Invalid rewrite pattern."
+document.getElementById("status").style.color="#b91c1c"
+}
+}
+function copyResult(){
+let value=document.getElementById("result").innerText.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Result copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

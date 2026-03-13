@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Regex Replace Tester - Test Regex Replace Rules Online | ToolForge</title>
+<meta name="description" content="Free online Regex Replace Tester to test search-and-replace expressions with JavaScript regular expressions and replacement patterns.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/regex-replace-tester.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Regex Replace Tester - Test Regex Replace Rules Online | ToolForge">
+<meta property="og:description" content="Free online Regex Replace Tester to test search-and-replace expressions with JavaScript regular expressions and replacement patterns.">
+<meta property="og:url" content="https://www.toolforge.site/tools/regex-replace-tester.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Regex Replace Tester - Test Regex Replace Rules Online | ToolForge">
+<meta name="twitter:description" content="Free online Regex Replace Tester to test search-and-replace expressions with JavaScript regular expressions and replacement patterns.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Regex Replace Tester</h1>
+<p class="subtitle">Try regex search-and-replace rules with flags and preview the output instantly.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="pattern" class="sr-only">Regex pattern</label>
+<input id="pattern" style="width:90%" aria-label="Regex pattern" placeholder="\\bfoo\\b">
+<br><br>
+<label for="flags" class="sr-only">Regex flags</label>
+<input id="flags" style="width:90%" aria-label="Regex flags" placeholder="gim">
+<br><br>
+<label for="replacement" class="sr-only">Replacement text</label>
+<input id="replacement" style="width:90%" aria-label="Replacement text" placeholder="bar">
+<br><br>
+<label for="input-text" class="sr-only">Input text</label>
+<textarea id="input-text" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Input text" placeholder="foo one&#10;foo two"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="runReplace()">Run Replace</button>
+<button type="button" onclick="copyOutput()">Copy Output</button>
+</div>
+<h3>Output</h3>
+<textarea id="output" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Output text" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function runReplace(){
+try{
+let pattern=document.getElementById("pattern").value
+let flags=document.getElementById("flags").value
+let replacement=document.getElementById("replacement").value
+let input=document.getElementById("input-text").value
+let regex=new RegExp(pattern,flags)
+let output=input.replace(regex,replacement)
+document.getElementById("output").value=output
+document.getElementById("status").innerText="Replacement complete."
+document.getElementById("status").style.color="#16a34a"
+}catch(e){
+document.getElementById("output").value=""
+document.getElementById("status").innerText="Invalid pattern or flags."
+document.getElementById("status").style.color="#b91c1c"
+}
+}
+function copyOutput(){
+let value=document.getElementById("output").value.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Output copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>cURL Builder - Generate curl Commands Online | ToolForge</title>
+<meta name="description" content="Free online cURL Builder to compose curl commands with method, headers and body for API debugging and documentation.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/curl-builder.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="cURL Builder - Generate curl Commands Online | ToolForge">
+<meta property="og:description" content="Free online cURL Builder to compose curl commands with method, headers and body for API debugging and documentation.">
+<meta property="og:url" content="https://www.toolforge.site/tools/curl-builder.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cURL Builder - Generate curl Commands Online | ToolForge">
+<meta name="twitter:description" content="Free online cURL Builder to compose curl commands with method, headers and body for API debugging and documentation.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>cURL Builder</h1>
+<p class="subtitle">Build copy-ready curl commands from method, URL, headers and request body.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="method" class="sr-only">HTTP method</label>
+<select id="method" aria-label="HTTP method">
+<option>GET</option>
+<option>POST</option>
+<option>PUT</option>
+<option>PATCH</option>
+<option>DELETE</option>
+</select>
+<br><br>
+<label for="url" class="sr-only">Request URL</label>
+<input id="url" style="width:90%" aria-label="Request URL" placeholder="https://api.example.com/users">
+<br><br>
+<label for="headers" class="sr-only">Request headers</label>
+<textarea id="headers" rows="6" class="pdf-editor pdf-editor-mono" aria-label="Request headers" placeholder="Content-Type: application/json&#10;Authorization: Bearer token"></textarea>
+<br><br>
+<label for="body" class="sr-only">Request body</label>
+<textarea id="body" rows="8" class="pdf-editor pdf-editor-mono" aria-label="Request body" placeholder='{"name":"ToolForge"}'></textarea>
+<div class="tool-actions">
+<button type="button" onclick="buildCurl()">Build cURL</button>
+<button type="button" onclick="copyCurl()">Copy Command</button>
+</div>
+<h3>cURL Command</h3>
+<textarea id="output" rows="10" class="pdf-editor pdf-editor-mono" aria-label="cURL command" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function buildCurl(){
+let method=document.getElementById("method").value
+let url=document.getElementById("url").value.trim()
+if(!url){
+document.getElementById("status").innerText="Request URL is required."
+document.getElementById("status").style.color="#b91c1c"
+document.getElementById("output").value=""
+return
+}
+let parts=['curl "'+url+'"']
+if(method!=="GET") parts.push('-X '+method)
+document.getElementById("headers").value.split(/\r?\n/).forEach(function(line){
+let trimmed=line.trim()
+if(trimmed) parts.push('-H "'+trimmed.replace(/"/g,'\\"')+'"')
+})
+let body=document.getElementById("body").value.trim()
+if(body&&method!=="GET"){
+parts.push("--data '"+body.replace(/'/g,"'\\''")+"'")
+}
+document.getElementById("output").value=parts.join(" \\\n  ")
+document.getElementById("status").innerText="cURL command generated."
+document.getElementById("status").style.color="#16a34a"
+}
+function copyCurl(){
+let value=document.getElementById("output").value.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="cURL command copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

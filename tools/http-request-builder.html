@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HTTP Request Builder - Build and Send API Requests | ToolForge</title>
+<meta name="description" content="Free online HTTP Request Builder to compose GET, POST, PUT, PATCH and DELETE requests, add headers and request bodies, then send them in the browser.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/http-request-builder.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="HTTP Request Builder - Build and Send API Requests | ToolForge">
+<meta property="og:description" content="Free online HTTP Request Builder to compose GET, POST, PUT, PATCH and DELETE requests, add headers and request bodies, then send them in the browser.">
+<meta property="og:url" content="https://www.toolforge.site/tools/http-request-builder.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP Request Builder - Build and Send API Requests | ToolForge">
+<meta name="twitter:description" content="Free online HTTP Request Builder to compose GET, POST, PUT, PATCH and DELETE requests, add headers and request bodies, then send them in the browser.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>HTTP Request Builder</h1>
+<p class="subtitle">Build API requests in the browser. Cross-origin policies still depend on the target server.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="method" class="sr-only">HTTP method</label>
+<select id="method" aria-label="HTTP method">
+<option>GET</option>
+<option>POST</option>
+<option>PUT</option>
+<option>PATCH</option>
+<option>DELETE</option>
+</select>
+<br><br>
+<label for="url" class="sr-only">Request URL</label>
+<input id="url" style="width:90%" aria-label="Request URL" placeholder="https://api.example.com/users">
+<br><br>
+<label for="headers" class="sr-only">Request headers</label>
+<textarea id="headers" rows="6" class="pdf-editor pdf-editor-mono" aria-label="Request headers" placeholder="Content-Type: application/json&#10;Authorization: Bearer token"></textarea>
+<br><br>
+<label for="body" class="sr-only">Request body</label>
+<textarea id="body" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Request body" placeholder='{"name":"ToolForge"}'></textarea>
+<div class="tool-actions">
+<button type="button" onclick="sendRequest()">Send Request</button>
+<button type="button" onclick="copyResponse()">Copy Response</button>
+</div>
+<h3>Response</h3>
+<pre id="response"></pre>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function parseHeaders(text){
+let headers={}
+text.split(/\r?\n/).forEach(function(line){
+let index=line.indexOf(":")
+if(index>0){
+let key=line.slice(0,index).trim()
+let value=line.slice(index+1).trim()
+if(key) headers[key]=value
+}
+})
+return headers
+}
+async function sendRequest(){
+let method=document.getElementById("method").value
+let url=document.getElementById("url").value.trim()
+if(!url){
+document.getElementById("status").innerText="Request URL is required."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+let options={method:method,headers:parseHeaders(document.getElementById("headers").value)}
+if(method!=="GET"&&method!=="DELETE"){
+let body=document.getElementById("body").value
+if(body.trim()) options.body=body
+}
+document.getElementById("status").innerText="Sending request..."
+document.getElementById("status").style.color="#666"
+try{
+let res=await fetch(url,options)
+let text=await res.text()
+let content="Status: "+res.status+" "+res.statusText+"\n\n"+text
+document.getElementById("response").innerText=content
+document.getElementById("status").innerText="Request completed."
+document.getElementById("status").style.color="#16a34a"
+}catch(e){
+document.getElementById("response").innerText=""
+document.getElementById("status").innerText="Request failed. The server may block browser requests or CORS."
+document.getElementById("status").style.color="#b91c1c"
+}
+}
+function copyResponse(){
+let value=document.getElementById("response").innerText.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Response copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

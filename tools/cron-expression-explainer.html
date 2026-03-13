@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cron Expression Explainer - Explain Cron Schedules Online | ToolForge</title>
+<meta name="description" content="Free online Cron Expression Explainer to turn common 5-part cron expressions into readable schedule descriptions for Linux and server jobs.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/cron-expression-explainer.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Cron Expression Explainer - Explain Cron Schedules Online | ToolForge">
+<meta property="og:description" content="Free online Cron Expression Explainer to turn common 5-part cron expressions into readable schedule descriptions for Linux and server jobs.">
+<meta property="og:url" content="https://www.toolforge.site/tools/cron-expression-explainer.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cron Expression Explainer - Explain Cron Schedules Online | ToolForge">
+<meta name="twitter:description" content="Free online Cron Expression Explainer to turn common 5-part cron expressions into readable schedule descriptions for Linux and server jobs.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Cron Expression Explainer</h1>
+<p class="subtitle">Explain common 5-field cron expressions like <code>*/15 9-17 * * 1-5</code>.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="cron" class="sr-only">Cron expression</label>
+<input id="cron" style="width:90%" aria-label="Cron expression" placeholder="*/15 9-17 * * 1-5">
+<div class="tool-actions">
+<button type="button" onclick="explainCron()">Explain</button>
+<button type="button" onclick="copyExplanation()">Copy Explanation</button>
+</div>
+<h3>Explanation</h3>
+<pre id="result"></pre>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function explainField(value,label){
+if(value==="*") return "every "+label
+if(value.indexOf("*/")===0) return "every "+value.slice(2)+" "+label+"s"
+if(value.indexOf("-")>-1) return label+"s "+value
+if(value.indexOf(",")>-1) return label+"s "+value
+return label+" "+value
+}
+function explainCron(){
+let value=document.getElementById("cron").value.trim()
+let parts=value.split(/\s+/)
+if(parts.length!==5){
+document.getElementById("result").innerText=""
+document.getElementById("status").innerText="Use a 5-field cron expression."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+let text=[
+"Minute: "+explainField(parts[0],"minute"),
+"Hour: "+explainField(parts[1],"hour"),
+"Day of month: "+explainField(parts[2],"day"),
+"Month: "+explainField(parts[3],"month"),
+"Day of week: "+explainField(parts[4],"weekday")
+].join("\n")
+document.getElementById("result").innerText=text
+document.getElementById("status").innerText="Cron expression explained."
+document.getElementById("status").style.color="#16a34a"
+}
+function copyExplanation(){
+let value=document.getElementById("result").innerText.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Explanation copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+document.getElementById("cron").value="*/15 9-17 * * 1-5"
+explainCron()
+</script>
+</body>
+</html>

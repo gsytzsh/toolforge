@@ -151,5 +151,15 @@
 {"file":"volume-converter","name":"Volume Converter","category":"Generators & Converters"},
 {"file":"speed-converter","name":"Speed Converter","category":"Generators & Converters"},
 {"file":"random-string-generator","name":"Token & String Generator","category":"Generators & Converters","popular":true,"tag":"Token Gen","popularOrder":10},
-{"file":"qr-code-decoder","name":"QR Code Decoder","category":"Encoders & Decoders"}
+{"file":"qr-code-decoder","name":"QR Code Decoder","category":"Encoders & Decoders"},
+{"file":"jwt-inspector","name":"JWT Inspector","category":"API & Data"},
+{"file":"json-path-tester","name":"JSON Path Tester","category":"API & Data"},
+{"file":"json-schema-generator","name":"JSON Schema Generator","category":"API & Data"},
+{"file":"http-request-builder","name":"HTTP Request Builder","category":"API & Data"},
+{"file":"curl-builder","name":"cURL Builder","category":"API & Data"},
+{"file":"regex-replace-tester","name":"Regex Replace Tester","category":"Code & Debug"},
+{"file":"diff-patch-generator","name":"Diff Patch Generator","category":"Code & Debug"},
+{"file":"url-rewrite-tester","name":"URL Rewrite Tester","category":"Code & Debug"},
+{"file":"cron-expression-explainer","name":"Cron Expression Explainer","category":"Scheduling & Infra"},
+{"file":"sql-query-builder","name":"SQL Query Builder","category":"Database"}
 ]

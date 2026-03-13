@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JWT Inspector - Inspect JSON Web Tokens Online | ToolForge</title>
+<meta name="description" content="Free online JWT Inspector to decode JWT header and payload, inspect signature parts and view expiration times. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/jwt-inspector.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="JWT Inspector - Inspect JSON Web Tokens Online | ToolForge">
+<meta property="og:description" content="Free online JWT Inspector to decode JWT header and payload, inspect signature parts and view expiration times. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/jwt-inspector.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JWT Inspector - Inspect JSON Web Tokens Online | ToolForge">
+<meta name="twitter:description" content="Free online JWT Inspector to decode JWT header and payload, inspect signature parts and view expiration times. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>JWT Inspector</h1>
+<p class="subtitle">Inspect JWT header, payload, timestamps and signature parts for debugging.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="token" class="sr-only">JWT token</label>
+<textarea id="token" rows="6" class="pdf-editor pdf-editor-mono" aria-label="JWT token" placeholder="Paste JWT token here"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="inspectToken()">Inspect JWT</button>
+<button type="button" onclick="copyOutput()">Copy Inspection</button>
+</div>
+<h3>Header</h3>
+<pre id="header"></pre>
+<h3>Payload</h3>
+<pre id="payload"></pre>
+<h3>Token Info</h3>
+<pre id="meta"></pre>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function decodeBase64Url(segment){
+let normalized=segment.replace(/-/g,"+").replace(/_/g,"/")
+while(normalized.length%4!==0) normalized+="="
+let binary=atob(normalized)
+let bytes=new Uint8Array(binary.length)
+for(let i=0;i<binary.length;i++) bytes[i]=binary.charCodeAt(i)
+return new TextDecoder().decode(bytes)
+}
+function formatEpoch(value){
+if(typeof value!=="number") return "n/a"
+return new Date(value*1000).toISOString()
+}
+function inspectToken(){
+let token=document.getElementById("token").value.trim()
+let parts=token.split(".")
+if(parts.length<2){
+document.getElementById("header").innerText=""
+document.getElementById("payload").innerText=""
+document.getElementById("meta").innerText=""
+document.getElementById("status").innerText="Invalid JWT format."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+try{
+let header=JSON.parse(decodeBase64Url(parts[0]))
+let payload=JSON.parse(decodeBase64Url(parts[1]))
+let now=Math.floor(Date.now()/1000)
+let info=[
+  "Signature present: "+(parts[2]?"yes":"no"),
+  "exp: "+formatEpoch(payload.exp),
+  "iat: "+formatEpoch(payload.iat),
+  "nbf: "+formatEpoch(payload.nbf),
+  "Expired: "+(payload.exp?String(now>payload.exp):"n/a")
+]
+document.getElementById("header").innerText=JSON.stringify(header,null,2)
+document.getElementById("payload").innerText=JSON.stringify(payload,null,2)
+document.getElementById("meta").innerText=info.join("\n")
+document.getElementById("status").innerText="JWT inspected."
+document.getElementById("status").style.color="#16a34a"
+}catch(e){
+document.getElementById("header").innerText=""
+document.getElementById("payload").innerText=""
+document.getElementById("meta").innerText=""
+document.getElementById("status").innerText="JWT inspection failed."
+document.getElementById("status").style.color="#b91c1c"
+}
+}
+function copyOutput(){
+let text=["Header:",document.getElementById("header").innerText,"","Payload:",document.getElementById("payload").innerText,"","Info:",document.getElementById("meta").innerText].join("\n")
+if(!document.getElementById("header").innerText&&!document.getElementById("payload").innerText){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(text).then(function(){
+document.getElementById("status").innerText="Inspection copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

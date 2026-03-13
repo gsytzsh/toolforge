@@ -6,6 +6,7 @@
   const CATEGORY_ORDER = [
     "Encoders & Decoders",
     "JSON & Data",
+    "API & Data",
     "Hash & Security",
     "PDF & Export",
     "Image & Color",
@@ -14,6 +15,9 @@
     "Network & HTTP",
     "SEO & Webmaster",
     "Code & Format",
+    "Code & Debug",
+    "Scheduling & Infra",
+    "Database",
     "Generators & Converters",
     "Calculators"
   ];

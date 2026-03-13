@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JSON Schema Generator - Generate JSON Schema from JSON | ToolForge</title>
+<meta name="description" content="Free online JSON Schema Generator to infer a basic schema from JSON objects and arrays. Useful for API docs, validation drafts and sample payloads.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/json-schema-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="JSON Schema Generator - Generate JSON Schema from JSON | ToolForge">
+<meta property="og:description" content="Free online JSON Schema Generator to infer a basic schema from JSON objects and arrays. Useful for API docs, validation drafts and sample payloads.">
+<meta property="og:url" content="https://www.toolforge.site/tools/json-schema-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JSON Schema Generator - Generate JSON Schema from JSON | ToolForge">
+<meta name="twitter:description" content="Free online JSON Schema Generator to infer a basic schema from JSON objects and arrays. Useful for API docs, validation drafts and sample payloads.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>JSON Schema Generator</h1>
+<p class="subtitle">Generate a basic JSON Schema draft from sample JSON data in your browser.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="json-input" class="sr-only">JSON input</label>
+<textarea id="json-input" rows="12" class="pdf-editor pdf-editor-mono" aria-label="JSON input" placeholder='{"id":1,"name":"ToolForge","active":true,"tags":["dev","json"]}'></textarea>
+<div class="tool-actions">
+<button type="button" onclick="generateSchema()">Generate Schema</button>
+<button type="button" onclick="copySchema()">Copy Schema</button>
+</div>
+<h3>Generated Schema</h3>
+<textarea id="schema-output" rows="16" class="pdf-editor pdf-editor-mono" aria-label="Generated schema" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function inferSchema(value){
+if(Array.isArray(value)){
+return {
+type:"array",
+items:value.length?inferSchema(value[0]):{}
+}
+}
+if(value===null) return {type:"null"}
+if(typeof value==="object"){
+let properties={}
+let required=[]
+Object.keys(value).forEach(function(key){
+properties[key]=inferSchema(value[key])
+required.push(key)
+})
+return {type:"object",properties:properties,required:required}
+}
+return {type:typeof value}
+}
+function generateSchema(){
+try{
+let data=JSON.parse(document.getElementById("json-input").value)
+let schema={
+"$schema":"https://json-schema.org/draft/2020-12/schema",
+...inferSchema(data)
+}
+document.getElementById("schema-output").value=JSON.stringify(schema,null,2)
+document.getElementById("status").innerText="Schema generated."
+document.getElementById("status").style.color="#16a34a"
+}catch(e){
+document.getElementById("schema-output").value=""
+document.getElementById("status").innerText="Invalid JSON input."
+document.getElementById("status").style.color="#b91c1c"
+}
+}
+function copySchema(){
+let value=document.getElementById("schema-output").value.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Schema copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JSON Path Tester - Query JSON Paths Online | ToolForge</title>
+<meta name="description" content="Free online JSON Path Tester to query JSON data with a simple dot and bracket path syntax. Useful for inspecting nested API responses in the browser.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/json-path-tester.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="JSON Path Tester - Query JSON Paths Online | ToolForge">
+<meta property="og:description" content="Free online JSON Path Tester to query JSON data with a simple dot and bracket path syntax. Useful for inspecting nested API responses in the browser.">
+<meta property="og:url" content="https://www.toolforge.site/tools/json-path-tester.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JSON Path Tester - Query JSON Paths Online | ToolForge">
+<meta name="twitter:description" content="Free online JSON Path Tester to query JSON data with a simple dot and bracket path syntax. Useful for inspecting nested API responses in the browser.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>JSON Path Tester</h1>
+<p class="subtitle">Query nested JSON using simple paths like <code>user.profile.name</code> or <code>items[0].id</code>.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="json-input" class="sr-only">JSON input</label>
+<textarea id="json-input" rows="12" class="pdf-editor pdf-editor-mono" aria-label="JSON input" placeholder='{"user":{"profile":{"name":"ToolForge"}},"items":[{"id":1},{"id":2}]}'></textarea>
+<br><br>
+<label for="path-input" class="sr-only">JSON path</label>
+<input id="path-input" style="width:90%" aria-label="JSON path" placeholder="user.profile.name">
+<div class="tool-actions">
+<button type="button" onclick="runPath()">Run Query</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
+<h3>Result</h3>
+<pre id="result"></pre>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function tokenizePath(path){
+return path.replace(/\[(\d+)\]/g,".$1").split(".").filter(Boolean)
+}
+function runPath(){
+try{
+let data=JSON.parse(document.getElementById("json-input").value)
+let path=document.getElementById("path-input").value.trim()
+let tokens=tokenizePath(path)
+let current=data
+for(let i=0;i<tokens.length;i++){
+if(current===undefined||current===null||!(tokens[i] in current)){
+throw new Error("Path not found")
+}
+current=current[tokens[i]]
+}
+document.getElementById("result").innerText=JSON.stringify(current,null,2)
+document.getElementById("status").innerText="Path resolved."
+document.getElementById("status").style.color="#16a34a"
+}catch(e){
+document.getElementById("result").innerText=""
+document.getElementById("status").innerText=e.message==="Path not found"?"Path not found.":"Invalid JSON or path."
+document.getElementById("status").style.color="#b91c1c"
+}
+}
+function copyResult(){
+let value=document.getElementById("result").innerText.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Result copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

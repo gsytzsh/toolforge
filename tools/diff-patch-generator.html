@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Diff Patch Generator - Create Simple Line Diffs Online | ToolForge</title>
+<meta name="description" content="Free online Diff Patch Generator to compare two text blocks and create a simple line-based patch style output for reviews and debugging.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/diff-patch-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Diff Patch Generator - Create Simple Line Diffs Online | ToolForge">
+<meta property="og:description" content="Free online Diff Patch Generator to compare two text blocks and create a simple line-based patch style output for reviews and debugging.">
+<meta property="og:url" content="https://www.toolforge.site/tools/diff-patch-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Diff Patch Generator - Create Simple Line Diffs Online | ToolForge">
+<meta name="twitter:description" content="Free online Diff Patch Generator to compare two text blocks and create a simple line-based patch style output for reviews and debugging.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Diff Patch Generator</h1>
+<p class="subtitle">Compare original and updated text, then generate a lightweight line diff patch.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<div style="display:flex;gap:20px;flex-wrap:wrap">
+<div style="flex:1;min-width:220px">
+<h3>Original</h3>
+<label for="before" class="sr-only">Original text</label>
+<textarea id="before" rows="12" class="pdf-editor pdf-editor-mono" aria-label="Original text"></textarea>
+</div>
+<div style="flex:1;min-width:220px">
+<h3>Updated</h3>
+<label for="after" class="sr-only">Updated text</label>
+<textarea id="after" rows="12" class="pdf-editor pdf-editor-mono" aria-label="Updated text"></textarea>
+</div>
+</div>
+<div class="tool-actions">
+<button type="button" onclick="generatePatch()">Generate Patch</button>
+<button type="button" onclick="copyPatch()">Copy Patch</button>
+</div>
+<h3>Patch Output</h3>
+<pre id="patch"></pre>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function generatePatch(){
+let before=document.getElementById("before").value.split(/\r?\n/)
+let after=document.getElementById("after").value.split(/\r?\n/)
+let max=Math.max(before.length,after.length)
+let out=["--- original","+++ updated"]
+for(let i=0;i<max;i++){
+let a=before[i]
+let b=after[i]
+if(a===b){
+if(a!==undefined) out.push(" "+a)
+continue
+}
+if(a!==undefined) out.push("-"+a)
+if(b!==undefined) out.push("+"+b)
+}
+document.getElementById("patch").innerText=out.join("\n")
+document.getElementById("status").innerText="Patch generated."
+document.getElementById("status").style.color="#16a34a"
+}
+function copyPatch(){
+let value=document.getElementById("patch").innerText.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Patch copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>
