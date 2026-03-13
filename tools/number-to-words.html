@@ -25,9 +25,13 @@
 <label for="num" class="sr-only">Number</label>
 <input id="num" type="number" placeholder="1234" style="width:180px" aria-label="Number">
 <br><br>
+<div class="tool-actions">
 <button onclick="convert()">Convert</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
 <h3>Result</h3>
 <p id="result"></p>
+<p id="status" class="inline-status"></p>
 </main>
 <script>
 var ones="zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split(" ")
@@ -42,8 +46,26 @@ return word(~~(n/1e9))+" billion"+(n%1e9?" "+word(n%1e9):"")
 }
 function convert(){
 var n=parseInt(document.getElementById("num").value,10)
-if(isNaN(n)||n<0||n>999999999999){document.getElementById("result").innerText="Enter 0–999999999999.";return}
+if(isNaN(n)||n<0||n>999999999999){document.getElementById("result").innerText="Enter 0–999999999999.";document.getElementById("status").innerText="Invalid number.";document.getElementById("status").style.color="#b91c1c";return}
 document.getElementById("result").innerText=word(n)
+document.getElementById("status").innerText="Converted successfully."
+document.getElementById("status").style.color="#16a34a"
+}
+
+function copyResult(){
+var value=document.getElementById("result").innerText.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Result copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
 }
 </script>
 </body>

@@ -35,9 +35,14 @@
 
 <br><br>
 
+<div class="tool-actions">
 <button onclick="generateQR()">Generate</button>
+<button type="button" onclick="copyUrl()">Copy URL</button>
+<button type="button" onclick="downloadQr()">Download QR</button>
+</div>
 
 <div id="qrcode" style="margin-top:30px"></div>
+<p id="status" class="inline-status"></p>
 
 </main>
 
@@ -49,12 +54,65 @@ document.getElementById("qrcode").innerHTML=""
 
 var url=document.getElementById("url").value
 
+if(!url){
+document.getElementById("status").innerText="Enter a URL first."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+
 new QRCode(document.getElementById("qrcode"),{
 text:url,
 width:256,
 height:256
 })
 
+document.getElementById("status").innerText="QR code generated."
+document.getElementById("status").style.color="#16a34a"
+
+}
+
+function copyUrl(){
+var url=document.getElementById("url").value.trim()
+if(!url){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(url).then(function(){
+document.getElementById("status").innerText="URL copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+
+function downloadQr(){
+var container=document.getElementById("qrcode")
+var canvas=container.querySelector("canvas")
+var img=container.querySelector("img")
+var source=""
+
+if(canvas){
+source=canvas.toDataURL("image/png")
+}else if(img){
+source=img.src
+}
+
+if(!source){
+document.getElementById("status").innerText="Generate a QR code first."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+
+var link=document.createElement("a")
+link.href=source
+link.download="toolforge-qr.png"
+document.body.appendChild(link)
+link.click()
+document.body.removeChild(link)
+document.getElementById("status").innerText="QR download started."
+document.getElementById("status").style.color="#16a34a"
 }
 
 </script>
