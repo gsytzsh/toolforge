@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Schema Markup Generator - Create JSON-LD Online | ToolForge</title>
+<meta name="description" content="Free online Schema Markup Generator to create JSON-LD for Organization, FAQ, Article and Product pages. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/schema-markup-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Schema Markup Generator - Create JSON-LD Online | ToolForge">
+<meta property="og:description" content="Free online Schema Markup Generator to create JSON-LD for Organization, FAQ, Article and Product pages. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/schema-markup-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Schema Markup Generator - Create JSON-LD Online | ToolForge">
+<meta name="twitter:description" content="Free online Schema Markup Generator to create JSON-LD for Organization, FAQ, Article and Product pages. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Schema Markup Generator</h1>
+<p class="subtitle">Generate basic JSON-LD schema markup for common SEO use cases.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p>Schema Type:
+<label for="schema-type" class="sr-only">Schema type</label>
+<select id="schema-type" aria-label="Schema type">
+<option value="Organization">Organization</option>
+<option value="Article">Article</option>
+<option value="FAQPage">FAQPage</option>
+<option value="Product">Product</option>
+</select></p>
+<p>Name / Title:
+<label for="schema-name" class="sr-only">Schema name</label>
+<input id="schema-name" type="text" style="width:90%" aria-label="Schema name"></p>
+<p>URL:
+<label for="schema-url" class="sr-only">Schema URL</label>
+<input id="schema-url" type="url" style="width:90%" aria-label="Schema URL"></p>
+<p>Description:
+<label for="schema-description" class="sr-only">Schema description</label></p>
+<textarea id="schema-description" rows="4" class="pdf-editor" aria-label="Schema description"></textarea>
+<p style="font-size:13px;color:#666;">For FAQPage, use one question and answer pair in the description field separated by `::`.</p>
+<div class="tool-actions">
+<button type="button" onclick="generateSchema()">Generate</button>
+<button type="button" onclick="copyOutput()">Copy JSON-LD</button>
+</div>
+<label for="output" class="sr-only">Schema markup output</label>
+<textarea id="output" rows="14" class="pdf-editor pdf-editor-mono" aria-label="Schema markup output" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+function generateSchema(){
+let type=document.getElementById("schema-type").value
+let name=document.getElementById("schema-name").value.trim()
+let url=document.getElementById("schema-url").value.trim()
+let description=document.getElementById("schema-description").value.trim()
+let data={"@context":"https://schema.org","@type":type}
+if(type==="FAQPage"){
+let parts=description.split("::")
+data.mainEntity=[{
+  "@type":"Question",
+  "name":parts[0]||"Question",
+  "acceptedAnswer":{"@type":"Answer","text":parts[1]||"Answer"}
+}]
+}else{
+if(name) data.name=name
+if(url) data.url=url
+if(description) data.description=description
+if(type==="Article"&&name){
+data.headline=name
+}
+}
+document.getElementById("output").value=JSON.stringify(data,null,2)
+setStatus("Schema markup generated.","#16a34a")
+}
+function copyOutput(){
+let value=document.getElementById("output").value
+if(!value){
+setStatus("Generate schema first.","#b91c1c")
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+setStatus("Schema markup copied.","#16a34a")
+}).catch(function(){
+setStatus("Copy failed.","#b91c1c")
+})
+}
+document.getElementById("schema-name").value="ToolForge"
+document.getElementById("schema-url").value="https://www.toolforge.site"
+document.getElementById("schema-description").value="Developer tools and SEO utilities"
+generateSchema()
+</script>
+</body>
+</html>

@@ -409,6 +409,36 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.toolforge.site/tools/robots-txt-tester.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.toolforge.site/tools/schema-markup-generator.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.toolforge.site/tools/schema-validator.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.toolforge.site/tools/serp-snippet-preview.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.toolforge.site/tools/heading-structure-checker.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.toolforge.site/tools/webpage-to-pdf.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>

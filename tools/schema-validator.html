@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Schema Validator - Validate JSON-LD Online | ToolForge</title>
+<meta name="description" content="Free online Schema Validator to validate JSON-LD and inspect required schema fields directly in your browser. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/schema-validator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Schema Validator - Validate JSON-LD Online | ToolForge">
+<meta property="og:description" content="Free online Schema Validator to validate JSON-LD and inspect required schema fields directly in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/schema-validator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Schema Validator - Validate JSON-LD Online | ToolForge">
+<meta name="twitter:description" content="Free online Schema Validator to validate JSON-LD and inspect required schema fields directly in your browser. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Schema Validator</h1>
+<p class="subtitle">Validate JSON-LD syntax and inspect core schema fields.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="schema-input" class="sr-only">Schema JSON-LD input</label>
+<textarea id="schema-input" rows="14" class="pdf-editor pdf-editor-mono" aria-label="Schema JSON-LD input"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="validateSchema()">Validate</button>
+<button type="button" onclick="copyReport()">Copy Report</button>
+</div>
+<label for="report" class="sr-only">Schema validation report</label>
+<textarea id="report" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Schema validation report" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+function validateSchema(){
+let input=document.getElementById("schema-input").value.trim()
+if(!input){
+document.getElementById("report").value=""
+setStatus("Enter JSON-LD first.","#b91c1c")
+return
+}
+try{
+let data=JSON.parse(input)
+let report=[]
+report.push("@context: "+(data["@context"]||"missing"))
+report.push("@type: "+(data["@type"]||"missing"))
+;["name","url","description","headline","mainEntity"].forEach(function(field){
+report.push(field+": "+(data[field]!==undefined?"present":"missing"))
+})
+document.getElementById("report").value=report.join("\n")
+setStatus("Schema validated.","#16a34a")
+}catch(e){
+document.getElementById("report").value=""
+setStatus("Invalid JSON-LD input.","#b91c1c")
+}
+}
+function copyReport(){
+let value=document.getElementById("report").value
+if(!value){
+setStatus("Validate schema first.","#b91c1c")
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+setStatus("Validation report copied.","#16a34a")
+}).catch(function(){
+setStatus("Copy failed.","#b91c1c")
+})
+}
+document.getElementById("schema-input").value='{\n  "@context": "https://schema.org",\n  "@type": "Organization",\n  "name": "ToolForge",\n  "url": "https://www.toolforge.site"\n}'
+validateSchema()
+</script>
+</body>
+</html>

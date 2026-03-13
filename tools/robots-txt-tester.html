@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Robots.txt Tester - Test Robots Rules Online | ToolForge</title>
+<meta name="description" content="Free online Robots.txt Tester to check whether a URL is allowed or blocked for a user-agent based on robots.txt rules. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/robots-txt-tester.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Robots.txt Tester - Test Robots Rules Online | ToolForge">
+<meta property="og:description" content="Free online Robots.txt Tester to check whether a URL is allowed or blocked for a user-agent based on robots.txt rules. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/robots-txt-tester.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Robots.txt Tester - Test Robots Rules Online | ToolForge">
+<meta name="twitter:description" content="Free online Robots.txt Tester to check whether a URL is allowed or blocked for a user-agent based on robots.txt rules. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Robots.txt Tester</h1>
+<p class="subtitle">Test whether a URL path is allowed or blocked for a given user-agent.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="robots-input" class="sr-only">Robots.txt input</label>
+<textarea id="robots-input" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Robots.txt input"></textarea>
+<p>User-agent:
+<label for="test-agent" class="sr-only">User-agent</label>
+<input id="test-agent" type="text" value="Googlebot" style="width:220px" aria-label="User-agent"></p>
+<p>Path:
+<label for="test-path" class="sr-only">Path</label>
+<input id="test-path" type="text" value="/private/" style="width:320px" aria-label="Path"></p>
+<div class="tool-actions">
+<button type="button" onclick="testRobots()">Test Rules</button>
+</div>
+<label for="output" class="sr-only">Test result</label>
+<textarea id="output" rows="8" class="pdf-editor pdf-editor-mono" aria-label="Test result" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+function parseRules(text){
+let lines=text.split(/\r?\n/)
+let current="*"
+let rules={}
+lines.forEach(function(line){
+let clean=line.replace(/#.*$/,"").trim()
+if(!clean) return
+let parts=clean.split(":")
+let key=(parts.shift()||"").trim().toLowerCase()
+let value=parts.join(":").trim()
+if(key==="user-agent"){
+current=value||"*"
+if(!rules[current]) rules[current]=[]
+}else if(key==="allow"||key==="disallow"){
+if(!rules[current]) rules[current]=[]
+rules[current].push({type:key,path:value||"/"})
+}
+})
+return rules
+}
+function bestMatch(rules,agent,path){
+let selected=rules[agent]||rules["*"]||[]
+let best=null
+selected.forEach(function(rule){
+if(path.indexOf(rule.path)===0){
+if(!best||rule.path.length>best.path.length){
+best=rule
+}
+}
+})
+return best
+}
+function testRobots(){
+let rules=parseRules(document.getElementById("robots-input").value)
+let agent=document.getElementById("test-agent").value.trim()||"*"
+let path=document.getElementById("test-path").value.trim()||"/"
+let match=bestMatch(rules,agent,path)
+if(!match){
+document.getElementById("output").value="Result: Allowed\nReason: No matching rule found."
+setStatus("Rules tested.","#16a34a")
+return
+}
+let allowed=match.type==="allow"
+document.getElementById("output").value="Result: "+(allowed?"Allowed":"Blocked")+"\nMatched rule: "+match.type.toUpperCase()+": "+match.path+"\nUser-agent: "+agent+"\nPath: "+path
+setStatus("Rules tested.","#16a34a")
+}
+document.getElementById("robots-input").value="User-agent: *\nDisallow: /admin/\nDisallow: /private/\nAllow: /public/"
+testRobots()
+</script>
+</body>
+</html>

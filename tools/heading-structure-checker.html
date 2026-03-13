@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Heading Structure Checker - Check H1-H6 Hierarchy Online | ToolForge</title>
+<meta name="description" content="Free online Heading Structure Checker to inspect H1-H6 hierarchy from HTML and detect skipped heading levels. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/heading-structure-checker.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Heading Structure Checker - Check H1-H6 Hierarchy Online | ToolForge">
+<meta property="og:description" content="Free online Heading Structure Checker to inspect H1-H6 hierarchy from HTML and detect skipped heading levels. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/heading-structure-checker.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Heading Structure Checker - Check H1-H6 Hierarchy Online | ToolForge">
+<meta name="twitter:description" content="Free online Heading Structure Checker to inspect H1-H6 hierarchy from HTML and detect skipped heading levels. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Heading Structure Checker</h1>
+<p class="subtitle">Inspect H1-H6 heading order in HTML and detect skipped levels.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="html-input" class="sr-only">HTML input</label>
+<textarea id="html-input" rows="12" class="pdf-editor pdf-editor-mono" aria-label="HTML input"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="checkHeadings()">Check Headings</button>
+<button type="button" onclick="copyOutput()">Copy Report</button>
+</div>
+<label for="output" class="sr-only">Heading structure report</label>
+<textarea id="output" rows="12" class="pdf-editor pdf-editor-mono" aria-label="Heading structure report" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+function checkHeadings(){
+let input=document.getElementById("html-input").value.trim()
+if(!input){
+document.getElementById("output").value=""
+setStatus("Enter HTML first.","#b91c1c")
+return
+}
+let doc=new DOMParser().parseFromString(input,"text/html")
+let headings=Array.from(doc.querySelectorAll("h1,h2,h3,h4,h5,h6"))
+let report=[]
+let prev=0
+headings.forEach(function(node,index){
+let level=parseInt(node.tagName.slice(1),10)
+report.push(node.tagName.toUpperCase()+": "+node.textContent.trim())
+if(prev&&level>prev+1){
+report.push("Warning: skipped from H"+prev+" to H"+level)
+}
+prev=level
+})
+if(!headings.length){
+report.push("No headings found.")
+}
+document.getElementById("output").value=report.join("\n")
+setStatus("Heading structure checked.","#16a34a")
+}
+function copyOutput(){
+let value=document.getElementById("output").value
+if(!value){
+setStatus("Check headings first.","#b91c1c")
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+setStatus("Heading report copied.","#16a34a")
+}).catch(function(){
+setStatus("Copy failed.","#b91c1c")
+})
+}
+document.getElementById("html-input").value="<h1>Main Title</h1>\n<h2>Section</h2>\n<h4>Skipped Level Example</h4>"
+checkHeadings()
+</script>
+</body>
+</html>
