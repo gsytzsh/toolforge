@@ -29,7 +29,7 @@
 
 <h1>IP Info Lookup</h1>
 
-<p class="subtitle">Get IP address location, city, country and ASN, and see your own IP and city directly in the browser.</p>
+<p class="subtitle">Get IP address location, city, country and ASN, and see your own IP with city and country directly in the browser.</p>
 
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
@@ -39,11 +39,15 @@
 <label for="ip" class="sr-only">Ip</label>
 <input id="ip" placeholder="Enter IP address" aria-label="Ip">
 
+<div class="tool-actions">
 <button onclick="lookup()">Lookup</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
 
 <h3>Result</h3>
 
 <pre id="result"></pre>
+<p id="status" class="inline-status"></p>
 
 </main>
 
@@ -57,9 +61,14 @@ let res=await fetch("https://ipapi.co/json/")
 let data=await res.json()
 
 if(data && data.ip){
-let city=data.city||"Unknown city"
+let locationParts=[
+data.city,
+data.region,
+data.country_name||data.country
+].filter(Boolean)
 document.getElementById("self-ip").innerText=
-data.ip+"  ·  "+city
+data.ip+"  ·  "+(locationParts.length?locationParts.join(", "):"Unknown location")
+document.getElementById("status").innerText=""
 }else{
 document.getElementById("self-ip").innerText="Unable to detect your IP."
 }
@@ -79,6 +88,8 @@ let ip=document.getElementById("ip").value.trim()
 if(!ip){
 
 document.getElementById("result").innerText="Enter IP address"
+document.getElementById("status").innerText="Enter an IP address first."
+document.getElementById("status").style.color="#b91c1c"
 return
 
 }
@@ -89,16 +100,60 @@ let res=await fetch("https://ipapi.co/"+ip+"/json/")
 
 let data=await res.json()
 
-document.getElementById("result").innerText=
-JSON.stringify(data,null,2)
+if(data.error){
+document.getElementById("result").innerText=data.reason||"Lookup failed"
+document.getElementById("status").innerText="Lookup failed."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+
+let lines=[
+"IP: "+(data.ip||ip),
+"City: "+(data.city||"Unknown"),
+"Region: "+(data.region||"Unknown"),
+"Country: "+(data.country_name||data.country||"Unknown"),
+"Postal: "+(data.postal||"Unknown"),
+"Timezone: "+(data.timezone||"Unknown"),
+"ASN: "+(data.asn||"Unknown"),
+"Org: "+(data.org||"Unknown")
+]
+
+document.getElementById("result").innerText=lines.join("\n")
+document.getElementById("status").innerText="Lookup completed."
+document.getElementById("status").style.color="#16a34a"
 
 }catch(e){
 
 document.getElementById("result").innerText="Lookup failed"
+document.getElementById("status").innerText="Lookup failed."
+document.getElementById("status").style.color="#b91c1c"
 
 }
 
 }
+
+function copyResult(){
+let value=document.getElementById("result").innerText.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Result copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+
+document.getElementById("ip").addEventListener("keydown",function(e){
+if(e.key==="Enter"){
+e.preventDefault()
+lookup()
+}
+})
 
 loadSelfIP()
 
