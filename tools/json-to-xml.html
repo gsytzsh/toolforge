@@ -24,7 +24,10 @@
 <h3>JSON</h3>
 <textarea id="json" rows="10" style="width:90%" placeholder='{"name":"Tom","age":20}' aria-label="JSON input"></textarea>
 <br><br>
+<div class="tool-actions">
 <button onclick="convert()">Convert to XML</button>
+<button type="button" onclick="copyOutput()">Copy Result</button>
+</div>
 <h3>XML</h3>
 <textarea id="xml" rows="10" style="width:90%" aria-label="XML input"></textarea>
 <p id="status" style="color:#666"></p>
@@ -68,6 +71,22 @@ document.getElementById("status").innerText="OK."
 document.getElementById("status").style.color="#16a34a"
 }catch(e){document.getElementById("status").innerText="Error: "+e.message
 document.getElementById("status").style.color="#b91c1c"}
+}
+
+function copyOutput(){
+var value=document.getElementById("xml").value
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Result copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
 }
 </script>
 </body>

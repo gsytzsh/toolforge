@@ -72,13 +72,19 @@ font-weight:bold;
 
 <button onclick="clearText()">Clear</button>
 
+<button onclick="copyResult()">Copy Result</button>
+
 <h3>Result</h3>
 
 <div id="result"></div>
 
+<p id="status" class="inline-status"></p>
+
 </main>
 
 <script>
+
+let latestResultText=""
 
 function syntaxHighlight(json){
 
@@ -129,10 +135,16 @@ let formatted=JSON.stringify(obj,null,4)
 let highlighted=syntaxHighlight(formatted)
 
 document.getElementById("result").innerHTML="<pre>"+highlighted+"</pre>"
+latestResultText=formatted
+document.getElementById("status").innerText="Formatted successfully."
+document.getElementById("status").style.color="#16a34a"
 
 }catch(e){
 
 document.getElementById("result").innerHTML="<div class='error'>Invalid JSON: "+e.message+"</div>"
+latestResultText=""
+document.getElementById("status").innerText="Invalid JSON."
+document.getElementById("status").style.color="#b91c1c"
 
 }
 
@@ -149,10 +161,16 @@ let obj=JSON.parse(text)
 let compressed=JSON.stringify(obj)
 
 document.getElementById("result").innerHTML="<pre>"+compressed+"</pre>"
+latestResultText=compressed
+document.getElementById("status").innerText="Compressed successfully."
+document.getElementById("status").style.color="#16a34a"
 
 }catch(e){
 
 document.getElementById("result").innerHTML="<div class='error'>Invalid JSON</div>"
+latestResultText=""
+document.getElementById("status").innerText="Invalid JSON."
+document.getElementById("status").style.color="#b91c1c"
 
 }
 
@@ -163,6 +181,24 @@ function clearText(){
 document.getElementById("input").value=""
 
 document.getElementById("result").innerHTML=""
+latestResultText=""
+document.getElementById("status").innerText=""
+
+}
+
+function copyResult(){
+if(!latestResultText){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(latestResultText).then(function(){
+document.getElementById("status").innerText="Result copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
 
 }
 

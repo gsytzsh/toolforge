@@ -33,7 +33,10 @@
 
 <br><br>
 
+<div class="tool-actions">
 <button onclick="convert()">Convert</button>
+<button type="button" onclick="copyOutput()">Copy Result</button>
+</div>
 
 <h3>JSON Result</h3>
 
@@ -126,6 +129,22 @@ JSON.stringify(result,null,2)
 document.getElementById("status").innerText="Converted successfully."
 document.getElementById("status").style.color="#16a34a"
 
+}
+
+function copyOutput(){
+let value=document.getElementById("json").value
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Result copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
 }
 
 </script>

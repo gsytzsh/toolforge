@@ -24,7 +24,10 @@
 <h3>JSON</h3>
 <textarea id="json" rows="12" style="width:90%;font-family:monospace" placeholder='{"key": "value"}' aria-label="JSON input"></textarea>
 <br><br>
+<div class="tool-actions">
 <button onclick="validate()">Validate</button>
+<button type="button" onclick="copyInput()">Copy JSON</button>
+</div>
 <h3>Result</h3>
 <p id="result"></p>
 </main>
@@ -39,6 +42,22 @@ document.getElementById("result").style.color="#16a34a"
 document.getElementById("result").innerText="Invalid: "+e.message
 document.getElementById("result").style.color="#b91c1c"
 }
+}
+
+function copyInput(){
+var value=document.getElementById("json").value
+if(!value){
+document.getElementById("result").innerText="Nothing to copy."
+document.getElementById("result").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("result").innerText="JSON copied."
+document.getElementById("result").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("result").innerText="Copy failed."
+document.getElementById("result").style.color="#b91c1c"
+})
 }
 </script>
 </body>

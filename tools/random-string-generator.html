@@ -32,7 +32,10 @@ Length:
 <label style="margin-left:10px;"><input type="checkbox" id="digits" checked> 0-9</label>
 <label style="margin-left:10px;"><input type="checkbox" id="symbols"> Symbols (!@#$...)</label>
 </p>
+<div class="tool-actions">
 <button type="button" onclick="generateString()">Generate</button>
+<button type="button" onclick="copyOutput()">Copy Result</button>
+</div>
 <h3 style="margin-top:20px">Result</h3>
 <textarea id="output" rows="4" style="width:90%;font-family:monospace" readonly aria-label="Output"></textarea>
 <p id="status" style="color:#666;margin-top:6px"></p>
@@ -67,6 +70,22 @@ function generateString(){
   for(var i=0;i<len;i++) out+=chars.charAt(getRandomInt(chars.length));
   document.getElementById("output").value=out;
   document.getElementById("status").innerText="Generated "+len+"-character string"+(window.crypto&&crypto.getRandomValues?" using secure random.":" using Math.random fallback.");
+}
+
+function copyOutput(){
+var value=document.getElementById("output").value
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Result copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
 }
 </script>
 </body>

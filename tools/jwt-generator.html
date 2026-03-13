@@ -56,7 +56,10 @@
 
 <br><br>
 
+<div class="tool-actions">
 <button onclick="generate()">Generate</button>
+<button type="button" onclick="copyToken()">Copy Token</button>
+</div>
 
 <h3>JWT Token</h3>
 
@@ -137,6 +140,22 @@ document.getElementById("token").value=token
 document.getElementById("status").innerText="Token generated successfully."
 document.getElementById("status").style.color="#16a34a"
 
+}
+
+function copyToken(){
+let value=document.getElementById("token").value
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Token copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
 }
 
 </script>

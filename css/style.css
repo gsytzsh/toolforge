@@ -114,6 +114,18 @@ line-height:1.7;
 margin:0 0 12px 0;
 }
 
+.tool-actions{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin:12px 0 0;
+}
+
+.inline-status{
+color:#6b7280;
+margin-top:8px;
+}
+
 .tool-section{
 margin-bottom:32px;
 }

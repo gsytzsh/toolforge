@@ -24,9 +24,13 @@
 <h3>HTML input</h3>
 <textarea id="input" rows="10" style="width:90%;font-family:monospace" placeholder="<div><p>Hello</p></div>" aria-label="HTML input"></textarea>
 <br><br>
+<div class="tool-actions">
 <button type="button" onclick="formatHtml()">Format</button>
+<button type="button" onclick="copyOutput()">Copy Result</button>
+</div>
 <h3 style="margin-top:20px">Formatted HTML</h3>
 <textarea id="output" rows="14" style="width:90%;font-family:monospace" readonly aria-label="Output"></textarea>
+<p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About HTML Formatter</h3>
 <p>This HTML formatter makes pasted markup easier to read by reindenting tags and spacing nested elements more clearly. It is useful when inspecting generated HTML, debugging templates or cleaning up copied snippets.</p>
@@ -69,6 +73,7 @@ function formatHtml(){
   var html=document.getElementById("input").value.trim();
   if(!html){
     document.getElementById("output").value="";
+    document.getElementById("status").innerText="";
     return;
   }
   var parser=new DOMParser();
@@ -77,6 +82,24 @@ function formatHtml(){
     return formatNode(node,0);
   }).join("");
   document.getElementById("output").value=result.trim();
+  document.getElementById("status").innerText="Formatted successfully.";
+  document.getElementById("status").style.color="#16a34a";
+}
+
+function copyOutput(){
+var value=document.getElementById("output").value
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c";
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Result copied."
+document.getElementById("status").style.color="#16a34a";
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c";
+})
 }
 </script>
 </body>

@@ -24,7 +24,10 @@
 <h3>XML</h3>
 <textarea id="input" rows="12" style="width:90%;font-family:monospace" placeholder="<root><a>1</a><b>2</b></root>" aria-label="XML input"></textarea>
 <br><br>
+<div class="tool-actions">
 <button onclick="format()">Format</button>
+<button type="button" onclick="copyOutput()">Copy Result</button>
+</div>
 <h3>Formatted</h3>
 <textarea id="output" rows="12" style="width:90%;font-family:monospace" readonly aria-label="Output"></textarea>
 <p id="err" style="color:#b91c1c"></p>
@@ -50,6 +53,21 @@ if(/^<[^!?/][^>]*[^/]>$/.test(line)) indent++
 }
 document.getElementById("output").value=formatted.trim()
 }catch(e){document.getElementById("err").innerText=e.message}
+}
+
+function copyOutput(){
+var value=document.getElementById("output").value
+if(!value){
+document.getElementById("err").innerText="Nothing to copy."
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("err").innerText="Result copied."
+document.getElementById("err").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("err").innerText="Copy failed."
+document.getElementById("err").style.color="#b91c1c"
+})
 }
 </script>
 </body>
