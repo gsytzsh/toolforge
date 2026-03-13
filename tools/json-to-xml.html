@@ -31,17 +31,39 @@
 </main>
 <script>
 function escapeXml(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
-function toXml(key,val){
-if(typeof val!=="object"||val===null)return "<"+key+">"+escapeXml(String(val))+"</"+key+">"
-if(Array.isArray(val)){var s="";val.forEach(function(v){s+=toXml(key,v)});return s}
-var s=""
-for(var k in val)s+=toXml(k,val[k])
-return "<"+key+">"+s+"</"+key+">"
+function toXml(key,val,level){
+var pad="  ".repeat(level||0)
+if(typeof val!=="object"||val===null){
+return pad+"<"+key+">"+escapeXml(String(val))+"</"+key+">\n"
+}
+if(Array.isArray(val)){
+var arr=""
+val.forEach(function(v){arr+=toXml(key,v,level)})
+return arr
+}
+var attrs=""
+var content=""
+for(var k in val){
+if(k==="@attributes"&&val[k]&&typeof val[k]==="object"){
+for(var attr in val[k]) attrs+=" "+attr+'="'+escapeXml(val[k][attr])+'"'
+}else if(k==="#text"){
+content+=escapeXml(String(val[k]))
+}else{
+content+="\n"+toXml(k,val[k],(level||0)+1)
+}
+}
+if(!content){
+return pad+"<"+key+attrs+"></"+key+">\n"
+}
+if(content.indexOf("\n")===-1){
+return pad+"<"+key+attrs+">"+content+"</"+key+">\n"
+}
+return pad+"<"+key+attrs+">"+content+pad+"</"+key+">\n"
 }
 function convert(){
 try{
 var obj=JSON.parse(document.getElementById("json").value||"{}")
-document.getElementById("xml").value='<?xml version="1.0" encoding="UTF-8"?>\n'+toXml("root",obj)
+document.getElementById("xml").value=('<?xml version="1.0" encoding="UTF-8"?>\n'+toXml("root",obj,0)).trim()
 document.getElementById("status").innerText="OK."
 document.getElementById("status").style.color="#16a34a"
 }catch(e){document.getElementById("status").innerText="Error: "+e.message

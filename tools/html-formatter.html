@@ -22,7 +22,7 @@
 <p class="subtitle">Beautify and reindent HTML code for easier reading.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>HTML input</h3>
-<textarea id="input" rows="10" style="width:90%;font-family:monospace" placeholder="<div aria-label="Input"><p>Hello</p></div>"></textarea>
+<textarea id="input" rows="10" style="width:90%;font-family:monospace" placeholder="<div><p>Hello</p></div>" aria-label="HTML input"></textarea>
 <br><br>
 <button type="button" onclick="formatHtml()">Format</button>
 <h3 style="margin-top:20px">Formatted HTML</h3>
@@ -34,18 +34,48 @@
 </section>
 </main>
 <script>
+function formatAttributes(el){
+  if(!el.attributes||!el.attributes.length) return "";
+  return Array.from(el.attributes).map(function(attr){
+    return " " + attr.name + '="' + attr.value.replace(/"/g,"&quot;") + '"';
+  }).join("");
+}
+
+function formatNode(node,level){
+  var pad="  ".repeat(level);
+  if(node.nodeType===Node.TEXT_NODE){
+    var text=node.textContent.replace(/\s+/g," ").trim();
+    return text ? pad + text + "\n" : "";
+  }
+  if(node.nodeType===Node.COMMENT_NODE){
+    return pad + "<!--" + node.nodeValue.trim() + "-->\n";
+  }
+  if(node.nodeType!==Node.ELEMENT_NODE) return "";
+
+  var openTag="<" + node.tagName.toLowerCase() + formatAttributes(node) + ">";
+  var closeTag="</" + node.tagName.toLowerCase() + ">";
+  var children=Array.from(node.childNodes).map(function(child){
+    return formatNode(child,level+1);
+  }).join("");
+
+  if(!children.trim()){
+    return pad + openTag + closeTag + "\n";
+  }
+
+  return pad + openTag + "\n" + children + pad + closeTag + "\n";
+}
+
 function formatHtml(){
-  var html=document.getElementById("input").value;
-  var result="";
-  var indent=0;
-  var tokens=html.replace(/>\s+</g,"><").split(/(?=<)/g);
-  tokens.forEach(function(token){
-    var t=token.trim();
-    if(!t) return;
-    if(/^<\/.+>/.test(t)) indent=Math.max(indent-1,0);
-    result+="  ".repeat(indent)+t+"\n";
-    if(/^<[^\/!?][^>]*[^\/]>$/.test(t)) indent++;
-  });
+  var html=document.getElementById("input").value.trim();
+  if(!html){
+    document.getElementById("output").value="";
+    return;
+  }
+  var parser=new DOMParser();
+  var doc=parser.parseFromString("<body>" + html + "</body>","text/html");
+  var result=Array.from(doc.body.childNodes).map(function(node){
+    return formatNode(node,0);
+  }).join("");
   document.getElementById("output").value=result.trim();
 }
 </script>

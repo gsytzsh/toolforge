@@ -44,29 +44,116 @@
 
 <textarea id="output" rows="12" style="width:90%" aria-label="Output"></textarea>
 
+<p id="status" style="color:#666"></p>
+
 </main>
 
 <script>
+
+function tokenizeSql(sql){
+let tokens=[]
+let current=""
+let quote=null
+
+for(let i=0;i<sql.length;i++){
+let ch=sql[i]
+
+if(quote){
+current+=ch
+if(ch===quote && sql[i-1]!=="\\") quote=null
+continue
+}
+
+if(ch==="'"||ch==='"'||ch==="`"){
+current+=ch
+quote=ch
+continue
+}
+
+if(/\s/.test(ch)){
+if(current){
+tokens.push(current)
+current=""
+}
+continue
+}
+
+if(ch===","||ch==="("||ch===")"){
+if(current){
+tokens.push(current)
+current=""
+}
+tokens.push(ch)
+continue
+}
+
+current+=ch
+}
+
+if(current) tokens.push(current)
+return tokens
+}
 
 function formatSQL(){
 
 let sql=document.getElementById("input").value
 
-let keywords=[
-"SELECT","FROM","WHERE","GROUP BY","ORDER BY","HAVING",
-"LEFT JOIN","RIGHT JOIN","INNER JOIN","OUTER JOIN","JOIN",
-"AND","OR","LIMIT","OFFSET","VALUES","SET"
-]
+if(!sql.trim()){
+document.getElementById("output").value=""
+document.getElementById("status").innerText=""
+return
+}
 
-keywords.forEach(k=>{
-let r=new RegExp("\\s+"+k,"gi")
-sql=sql.replace(r,"\n"+k)
-})
+let tokens=tokenizeSql(sql)
+let multiWordStarts=["GROUP","ORDER","LEFT","RIGHT","INNER","OUTER"]
+let breakWords=["SELECT","FROM","WHERE","HAVING","LIMIT","OFFSET","VALUES","SET","JOIN","ON","AND","OR"]
+let output=""
+let indent=0
 
-sql=sql.replace(/SELECT/gi,"SELECT\n  ")
-sql=sql.replace(/,/g,",\n  ")
+for(let i=0;i<tokens.length;i++){
+let token=tokens[i]
+let upper=token.toUpperCase()
+let next=(tokens[i+1]||"").toUpperCase()
+let combined=upper+" "+next
 
-document.getElementById("output").value=sql.trim()
+if(upper===")"){
+indent=Math.max(indent-1,0)
+}
+
+if(["GROUP BY","ORDER BY","LEFT JOIN","RIGHT JOIN","INNER JOIN","OUTER JOIN"].includes(combined)){
+output+="\n"+"  ".repeat(indent)+combined+" "
+i++
+continue
+}
+
+if(breakWords.includes(upper)){
+output+="\n"+"  ".repeat(indent)+upper+" "
+continue
+}
+
+if(token==="("){
+output+="(\n"
+indent++
+output+="  ".repeat(indent)
+continue
+}
+
+if(token===")"){
+output=output.trimEnd()+"\n"+"  ".repeat(indent)+") "
+continue
+}
+
+if(token===","){
+output=output.trimEnd()+",\n"+"  ".repeat(indent)
+continue
+}
+
+output+=token+" "
+}
+
+document.getElementById("output").value=output.trim()
+document.getElementById("status").innerText="Formatted with conservative rules. Review before using in production."
+document.getElementById("status").style.color="#666"
 
 }
 
@@ -74,6 +161,7 @@ function clearSQL(){
 
 document.getElementById("input").value=""
 document.getElementById("output").value=""
+document.getElementById("status").innerText=""
 
 }
 

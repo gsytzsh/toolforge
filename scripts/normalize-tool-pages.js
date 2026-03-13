@@ -97,12 +97,12 @@ function humanizeId(id) {
 }
 
 function ensureAriaLabels(html) {
-  html = html.replace(/<(textarea|select)([^>]*\sid="([^"]+)"[^>]*)>/g, (match, tag, attrs, id) => {
+  html = html.replace(/<(textarea|select)((?:"[^"]*"|'[^']*'|[^'">])*\sid="([^"]+)"(?:"[^"]*"|'[^']*'|[^'">])*)>/g, (match, tag, attrs, id) => {
     if (/aria-label=/i.test(attrs)) return match;
     return `<${tag}${attrs} aria-label="${escapeAttr(humanizeId(id))}">`;
   });
 
-  html = html.replace(/<input([^>]*\sid="([^"]+)"[^>]*)>/g, (match, attrs, id) => {
+  html = html.replace(/<input((?:"[^"]*"|'[^']*'|[^'">])*\sid="([^"]+)"(?:"[^"]*"|'[^']*'|[^'">])*)>/g, (match, attrs, id) => {
     if (/aria-label=/i.test(attrs)) return match;
     const typeMatch = attrs.match(/\stype="([^"]+)"/i);
     const type = typeMatch ? typeMatch[1].toLowerCase() : "text";

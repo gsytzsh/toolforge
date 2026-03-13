@@ -22,7 +22,7 @@
 <p class="subtitle">Paste simple XML to convert to JSON (browser parser).</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>XML</h3>
-<textarea id="xml" rows="10" style="width:90%" placeholder='<root aria-label="XML input"><name>Tom</name><age>20</age></root>'></textarea>
+<textarea id="xml" rows="10" style="width:90%" placeholder='<root><name>Tom</name><age>20</age></root>' aria-label="XML input"></textarea>
 <br><br>
 <button onclick="convert()">Convert to JSON</button>
 <h3>JSON</h3>
@@ -31,16 +31,45 @@
 </main>
 <script>
 function parseXmlToJson(node){
-if(node.nodeType===3)return node.textContent.trim()?node.textContent.trim():null
-if(node.nodeType!==1)return null
-var obj={},children=node.children
-if(children.length===0)return node.textContent.trim()
-for(var i=0;i<children.length;i++){
-var c=children[i],name=c.tagName,val=parseXmlToJson(c)
+if(node.nodeType!==1) return null
+
+var obj={}
+if(node.attributes.length){
+obj["@attributes"]={}
+for(var i=0;i<node.attributes.length;i++){
+obj["@attributes"][node.attributes[i].name]=node.attributes[i].value
+}
+}
+
+var elementChildren=Array.from(node.childNodes).filter(function(child){
+return child.nodeType===1
+})
+var textChildren=Array.from(node.childNodes).filter(function(child){
+return child.nodeType===3 && child.textContent.trim()
+})
+
+if(!elementChildren.length){
+if(textChildren.length && !node.attributes.length){
+return textChildren.map(function(child){ return child.textContent.trim() }).join(" ")
+}
+if(textChildren.length){
+obj["#text"]=textChildren.map(function(child){ return child.textContent.trim() }).join(" ")
+}
+return obj
+}
+
+elementChildren.forEach(function(child){
+var name=child.tagName
+var val=parseXmlToJson(child)
 if(obj[name]===undefined)obj[name]=val
 else if(Array.isArray(obj[name]))obj[name].push(val)
 else obj[name]=[obj[name],val]
+})
+
+if(textChildren.length){
+obj["#text"]=textChildren.map(function(child){ return child.textContent.trim() }).join(" ")
 }
+
 return obj
 }
 function convert(){
@@ -49,8 +78,8 @@ var parser=new DOMParser()
 var doc=parser.parseFromString(document.getElementById("xml").value,"text/xml")
 if(doc.querySelector("parsererror")){document.getElementById("status").innerText="XML parse error.";document.getElementById("status").style.color="#b91c1c";return}
 var root=doc.documentElement
-var out=root.tagName?{}:null
-if(root.tagName){var j=parseXmlToJson(root);out=j}
+var out={}
+if(root.tagName){out[root.tagName]=parseXmlToJson(root)}
 document.getElementById("json").value=JSON.stringify(out,null,2)
 document.getElementById("status").innerText="OK."
 document.getElementById("status").style.color="#16a34a"
