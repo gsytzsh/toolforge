@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JSON Validator – Validate JSON Online | ToolForge</title>
+<meta name="description" content="Free online JSON Validator to check if JSON is valid and see error location. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>JSON Validator</h1>
+<p class="subtitle">Paste JSON to validate. If invalid, see the error message and approximate position.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>JSON</h3>
+<textarea id="json" rows="12" style="width:90%;font-family:monospace" placeholder='{"key": "value"}'></textarea>
+<br><br>
+<button onclick="validate()">Validate</button>
+<h3>Result</h3>
+<p id="result"></p>
+</div>
+<script>
+function validate(){
+var s=document.getElementById("json").value
+try{
+JSON.parse(s)
+document.getElementById("result").innerText="Valid JSON."
+document.getElementById("result").style.color="#16a34a"
+}catch(e){
+document.getElementById("result").innerText="Invalid: "+e.message
+document.getElementById("result").style.color="#b91c1c"
+}
+}
+</script>
+</body>
+</html>

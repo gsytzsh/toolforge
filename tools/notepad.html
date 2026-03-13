@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Online Notepad – Browser Notepad | ToolForge</title>
+<meta name="description" content="Free online Notepad: notes saved in your browser (localStorage). Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Online Notepad</h1>
+<p class="subtitle">Quick notes saved in your browser. Data stays on this device.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<textarea id="text" rows="14" style="width:100%;font-size:14px" placeholder="Type your notes here..."></textarea>
+<br><br>
+<button onclick="save()">Save</button>
+<button onclick="clearAll()">Clear</button>
+<span id="status" style="margin-left:12px;color:#666"></span>
+</div>
+<script>
+var KEY="toolforge.notepad"
+var el=document.getElementById("text")
+try{var s=localStorage.getItem(KEY);if(s)el.value=s}catch(e){}
+function save(){try{localStorage.setItem(KEY,el.value);document.getElementById("status").innerText="Saved."}catch(e){document.getElementById("status").innerText="Save failed."}}
+function clearAll(){el.value="";try{localStorage.removeItem(KEY)}catch(e){};document.getElementById("status").innerText="Cleared."}
+el.addEventListener("input",function(){document.getElementById("status").innerText=""})
+</script>
+</body>
+</html>

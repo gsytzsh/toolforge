@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Find and Replace – Text Find Replace Online | ToolForge</title>
+<meta name="description" content="Free online Find and Replace tool for text. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Find and Replace</h1>
+<p class="subtitle">Find a string and replace with another. Optionally use regex.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Find</h3>
+<input id="find" style="width:90%" placeholder="Text or regex">
+<label><input type="checkbox" id="regex"> Regex</label>
+<h3>Replace with</h3>
+<input id="repl" style="width:90%" placeholder="Replacement">
+<h3>Text</h3>
+<textarea id="text" rows="10" style="width:90%"></textarea>
+<br><br>
+<button onclick="run()">Replace</button>
+<button onclick="replaceAll()">Replace all</button>
+<h3>Result</h3>
+<textarea id="output" rows="10" style="width:90%"></textarea>
+</div>
+<script>
+function run(){
+var f=document.getElementById("find").value
+var r=document.getElementById("repl").value
+var t=document.getElementById("text").value
+var useRegex=document.getElementById("regex").checked
+if(!f){document.getElementById("output").value=t;return}
+try{
+var result=useRegex?t.replace(new RegExp(f,"g"),r):t.split(f).join(r)
+document.getElementById("output").value=result
+}catch(e){document.getElementById("output").value="Regex error: "+e.message}
+}
+function replaceAll(){run()}
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Whitespace Remover – Remove Extra Spaces Online | ToolForge</title>
+<meta name="description" content="Free online Whitespace Remover to normalize and remove extra spaces. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Whitespace Remover</h1>
+<p class="subtitle">Remove extra spaces, trim lines, or collapse all whitespace to single spaces.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Input</h3>
+<textarea id="input" rows="8" style="width:90%"></textarea>
+<br><br>
+<button onclick="collapse()">Collapse spaces</button>
+<button onclick="trimLines()">Trim each line</button>
+<button onclick="removeAll()">Remove all spaces</button>
+<h3>Result</h3>
+<textarea id="output" rows="8" style="width:90%"></textarea>
+</div>
+<script>
+function collapse(){document.getElementById("output").value=document.getElementById("input").value.replace(/\s+/g," ").trim()}
+function trimLines(){document.getElementById("output").value=document.getElementById("input").value.split(/\r?\n/).map(function(l){return l.trim()}).join("\n")}
+function removeAll(){document.getElementById("output").value=document.getElementById("input").value.replace(/\s+/g,"")}
+</script>
+</body>
+</html>

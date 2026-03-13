@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Text to Binary – Encode Text to Binary | ToolForge</title>
+<meta name="description" content="Free online Text to Binary encoder: convert text to binary string. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Text to Binary</h1>
+<p class="subtitle">Convert text to binary (8 bits per character). Optionally add space between bytes.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Text</h3>
+<textarea id="text" rows="6" style="width:90%" placeholder="Hello"></textarea>
+<br><br>
+<label><input type="checkbox" id="space" checked> Space between bytes</label>
+<br><br>
+<button onclick="encode()">Encode</button>
+<h3>Binary</h3>
+<textarea id="bin" rows="6" style="width:90%" readonly></textarea>
+</div>
+<script>
+function encode(){
+var s=document.getElementById("text").value
+var sep=document.getElementById("space").checked?" ":""
+var out=""
+for(var i=0;i<s.length;i++)out+=(i?sep:"")+s.charCodeAt(i).toString(2).padStart(8,"0")
+document.getElementById("bin").value=out
+}
+</script>
+</body>
+</html>

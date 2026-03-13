@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Days Until Date – Countdown to Date | ToolForge</title>
+<meta name="description" content="Free online Days Until Date: how many days from today until a future date. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Days Until Date</h1>
+<p class="subtitle">Enter a future date to see how many days from today until that date.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Target date</h3>
+<input id="target" type="date">
+<br><br>
+<button onclick="calc()">Calculate</button>
+<h3>Result</h3>
+<p id="result"></p>
+</div>
+<script>
+function calc(){
+var t=document.getElementById("target").value
+if(!t){document.getElementById("result").innerText="Select a date.";return}
+var today=new Date();today.setHours(0,0,0,0)
+var d=new Date(t);d.setHours(0,0,0,0)
+var diff=Math.round((d-today)/86400000)
+if(diff<0)document.getElementById("result").innerText=Math.abs(diff)+" days ago."
+else if(diff===0)document.getElementById("result").innerText="Today."
+else document.getElementById("result").innerText=diff+" days from today."
+}
+</script>
+</body>
+</html>

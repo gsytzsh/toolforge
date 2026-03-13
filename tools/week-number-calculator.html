@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Week Number Calculator – ISO Week Number | ToolForge</title>
+<meta name="description" content="Free online Week Number Calculator: get ISO week number of the year for any date. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Week Number Calculator</h1>
+<p class="subtitle">Get the ISO 8601 week number (1–53) for a given date.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Date</h3>
+<input id="d" type="date">
+<br><br>
+<button onclick="calc()">Get Week Number</button>
+<h3>Result</h3>
+<p>Week number: <span id="result"></span></p>
+<p>Year: <span id="year"></span></p>
+</div>
+<script>
+function calc(){
+var d=document.getElementById("d").value
+if(!d){document.getElementById("result").innerText="";document.getElementById("year").innerText="Select a date.";return}
+var dt=new Date(d+"T12:00:00")
+var start=new Date(dt.getFullYear(),0,1)
+var days=Math.floor((dt-start)/86400000)
+var wn=Math.ceil((days+start.getDay()+1)/7)
+var y=dt.getFullYear()
+if(wn<1){wn=53;y--}
+document.getElementById("result").innerText=wn
+document.getElementById("year").innerText=y
+}
+</script>
+</body>
+</html>

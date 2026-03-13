@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Binary to Text – Decode Binary to ASCII | ToolForge</title>
+<meta name="description" content="Free online Binary to Text decoder: convert binary string to ASCII text. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Binary to Text</h1>
+<p class="subtitle">Enter a binary string (e.g. 01001000 01101001) to decode to text. Use 8 bits per character.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Binary</h3>
+<textarea id="bin" rows="6" style="width:90%" placeholder="01001000 01101001"></textarea>
+<br><br>
+<button onclick="decode()">Decode</button>
+<h3>Text</h3>
+<textarea id="text" rows="6" style="width:90%" readonly></textarea>
+<p id="err" style="color:#b91c1c"></p>
+</div>
+<script>
+function decode(){
+var s=document.getElementById("bin").value.replace(/\s+/g,"")
+document.getElementById("err").innerText=""
+if(s.length%8!==0){document.getElementById("text").value="";document.getElementById("err").innerText="Binary length must be multiple of 8.";return}
+var out=""
+for(var i=0;i<s.length;i+=8){
+var byte=s.slice(i,i+8)
+if(/[^01]/.test(byte)){document.getElementById("text").value="";document.getElementById("err").innerText="Invalid binary.";return}
+out+=String.fromCharCode(parseInt(byte,2))
+}
+document.getElementById("text").value=out
+}
+</script>
+</body>
+</html>

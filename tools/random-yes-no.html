@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Random Yes No – Random Yes or No | ToolForge</title>
+<meta name="description" content="Free online Random Yes or No picker. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Random Yes No</h1>
+<p class="subtitle">Get a random Yes or No (50/50).</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<button onclick="pick()">Pick</button>
+<h2 id="result" style="font-size:2rem;margin-top:16px"></h2>
+</div>
+<script>
+function pick(){document.getElementById("result").innerText=Math.random()<0.5?"Yes":"No"}
+</script>
+</body>
+</html>

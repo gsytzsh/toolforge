@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>XML Formatter – Pretty Print XML Online | ToolForge</title>
+<meta name="description" content="Free online XML Formatter to pretty print and indent XML. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>XML Formatter</h1>
+<p class="subtitle">Paste XML to format with indentation for readability.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>XML</h3>
+<textarea id="input" rows="12" style="width:90%;font-family:monospace" placeholder="<root><a>1</a><b>2</b></root>"></textarea>
+<br><br>
+<button onclick="format()">Format</button>
+<h3>Formatted</h3>
+<textarea id="output" rows="12" style="width:90%;font-family:monospace" readonly></textarea>
+<p id="err" style="color:#b91c1c"></p>
+</div>
+<script>
+function format(){
+var s=document.getElementById("input").value.trim()
+document.getElementById("err").innerText=""
+try{
+var parser=new DOMParser()
+var doc=parser.parseFromString(s,"text/xml")
+if(doc.querySelector("parsererror")){document.getElementById("err").innerText="Invalid XML.";return}
+function indent(node,lvl){
+var lvl=lvl||0
+var pad="  ".repeat(lvl)
+if(node.nodeType===3){var t=node.textContent.trim();return t?pad+t+"\n":""}
+if(node.nodeType!==1)return ""
+var tag=node.tagName
+var child=""
+for(var i=0;i<node.childNodes.length;i++)child+=indent(node.childNodes[i],lvl+1)
+if(!child.trim())return pad+"<"+tag+"/>\n"
+return pad+"<"+tag+">\n"+child+pad+"</"+tag+">\n"
+}
+var out=""
+for(var i=0;i<doc.documentElement.childNodes.length;i++)out+=indent(doc.documentElement.childNodes[i],0)
+document.getElementById("output").value=out.trim()||doc.documentElement.outerHTML
+}catch(e){document.getElementById("err").innerText=e.message}
+}
+</script>
+</body>
+</html>

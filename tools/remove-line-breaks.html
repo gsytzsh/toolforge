@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Remove Line Breaks – Join Lines Online | ToolForge</title>
+<meta name="description" content="Free online tool to remove line breaks and join lines with space or nothing. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Remove Line Breaks</h1>
+<p class="subtitle">Replace line breaks with a space or with nothing to join lines.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Input</h3>
+<textarea id="input" rows="8" style="width:90%"></textarea>
+<br><br>
+<button onclick="join(' ')">Join with space</button>
+<button onclick="join('')">Join (no space)</button>
+<h3>Result</h3>
+<textarea id="output" rows="6" style="width:90%"></textarea>
+</div>
+<script>
+function join(sep){document.getElementById("output").value=document.getElementById("input").value.split(/\r?\n/).join(sep)}
+</script>
+</body>
+</html>

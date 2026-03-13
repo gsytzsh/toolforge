@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Morse Code – Encode Decode Morse Code | ToolForge</title>
+<meta name="description" content="Free online Morse Code encoder and decoder. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Morse Code</h1>
+<p class="subtitle">Encode text to Morse code or decode Morse to text. Use space between letters, / between words.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Text</h3>
+<textarea id="text" rows="4" style="width:90%" placeholder="Hello"></textarea>
+<br><br>
+<button onclick="toMorse()">Text → Morse</button>
+<h3>Morse</h3>
+<textarea id="morse" rows="4" style="width:90%" placeholder=".... . .-.. .-.. ---"></textarea>
+<br><br>
+<button onclick="toText()">Morse → Text</button>
+</div>
+<script>
+var map={A:".-",B:"-...",C:"-.-.",D:"-..",E:".",F:"..-.",G:"--.",H:"....",I:"..",J:".---",K:"-.-",L:".-..",M:"--",N:"-.",O:"---",P:".--.",Q:"--.-",R:".-.",S:"...",T:"-",U:"..-",V:"...-",W:".--",X:"-..-",Y:"-.--",Z:"--..","1":".----","2":"..---","3":"...--","4":"....-","5":".....","6":"-....","7":"--...","8":"---..","9":"----.","0":"-----"}
+var rev={}
+for(var k in map)rev[map[k]]=k
+function toMorse(){
+var s=document.getElementById("text").value.toUpperCase().replace(/[^A-Z0-9\s]/g,"")
+document.getElementById("morse").value=s.split("").map(function(c){return c===" "?"/":map[c]||""}).join(" ").replace(/\s*\/\s*/g," / ")
+}
+function toText(){
+var s=document.getElementById("morse").value.trim().split(/\s+/)
+document.getElementById("text").value=s.map(function(c){return c==="/"?" ":rev[c]||""}).join("")
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CSS Minify – Minify CSS Online | ToolForge</title>
+<meta name="description" content="Free online CSS Minify tool to remove comments and extra whitespace. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>CSS Minify</h1>
+<p class="subtitle">Remove comments and collapse whitespace to minify CSS.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>CSS</h3>
+<textarea id="input" rows="12" style="width:90%;font-family:monospace" placeholder="/* comment */&#10;.foo { color: red; }"></textarea>
+<br><br>
+<button onclick="minify()">Minify</button>
+<h3>Minified</h3>
+<textarea id="output" rows="8" style="width:90%;font-family:monospace" readonly></textarea>
+</div>
+<script>
+function minify(){
+var s=document.getElementById("input").value
+s=s.replace(/\/\*[\s\S]*?\*\//g,"")
+s=s.replace(/\s+/g," ").replace(/\s*([{}:;,])\s*/g,"$1").trim()
+document.getElementById("output").value=s
+}
+</script>
+</body>
+</html>
