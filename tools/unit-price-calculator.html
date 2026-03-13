@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Unit Price Calculator - Compare Cost Per Unit | ToolForge</title>
+<meta name="description" content="Free online Unit Price Calculator to compare the cost per unit between two products and find the better value.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/unit-price-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Unit Price Calculator - Compare Cost Per Unit | ToolForge">
+<meta property="og:description" content="Free online Unit Price Calculator to compare the cost per unit between two products and find the better value.">
+<meta property="og:url" content="https://www.toolforge.site/tools/unit-price-calculator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unit Price Calculator - Compare Cost Per Unit | ToolForge">
+<meta name="twitter:description" content="Free online Unit Price Calculator to compare the cost per unit between two products and find the better value.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Unit Price Calculator</h1>
+<p class="subtitle">Compare two products by cost per unit to find the better deal.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Product A</h3>
+<label for="price-a" class="sr-only">Price A</label>
+<input id="price-a" type="number" step="0.01" placeholder="4.99" aria-label="Price A">
+<label for="qty-a" class="sr-only">Quantity A</label>
+<input id="qty-a" type="number" step="0.01" placeholder="500" aria-label="Quantity A" style="margin-left:8px">
+<h3>Product B</h3>
+<label for="price-b" class="sr-only">Price B</label>
+<input id="price-b" type="number" step="0.01" placeholder="7.29" aria-label="Price B">
+<label for="qty-b" class="sr-only">Quantity B</label>
+<input id="qty-b" type="number" step="0.01" placeholder="750" aria-label="Quantity B" style="margin-left:8px">
+<div class="tool-actions">
+<button type="button" onclick="compareUnits()">Compare</button>
+</div>
+<h3>Result</h3>
+<pre id="result"></pre>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function compareUnits(){
+let priceA=parseFloat(document.getElementById("price-a").value)
+let qtyA=parseFloat(document.getElementById("qty-a").value)
+let priceB=parseFloat(document.getElementById("price-b").value)
+let qtyB=parseFloat(document.getElementById("qty-b").value)
+if(!(priceA>0&&qtyA>0&&priceB>0&&qtyB>0)){
+document.getElementById("result").innerText=""
+document.getElementById("status").innerText="Enter valid prices and quantities for both products."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+let unitA=priceA/qtyA
+let unitB=priceB/qtyB
+let better=unitA<unitB?"Product A":"Product B"
+document.getElementById("result").innerText="Product A: "+unitA.toFixed(4)+" per unit\nProduct B: "+unitB.toFixed(4)+" per unit\nBetter value: "+better
+document.getElementById("status").innerText="Unit prices compared."
+document.getElementById("status").style.color="#16a34a"
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pomodoro Timer - Online Focus Timer | ToolForge</title>
+<meta name="description" content="Free online Pomodoro Timer to alternate focused work sessions and short breaks in your browser. Useful for study, work and daily productivity.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/pomodoro-timer.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Pomodoro Timer - Online Focus Timer | ToolForge">
+<meta property="og:description" content="Free online Pomodoro Timer to alternate focused work sessions and short breaks in your browser. Useful for study, work and daily productivity.">
+<meta property="og:url" content="https://www.toolforge.site/tools/pomodoro-timer.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Pomodoro Timer - Online Focus Timer | ToolForge">
+<meta name="twitter:description" content="Free online Pomodoro Timer to alternate focused work sessions and short breaks in your browser. Useful for study, work and daily productivity.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Pomodoro Timer</h1>
+<p class="subtitle">Run focused work sessions and short breaks with a simple Pomodoro timer.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="work" class="sr-only">Work minutes</label>
+<input id="work" type="number" min="1" value="25" style="width:90px" aria-label="Work minutes">
+<label for="break" class="sr-only">Break minutes</label>
+<input id="break" type="number" min="1" value="5" style="width:90px;margin-left:8px" aria-label="Break minutes">
+<h2 id="phase">Work</h2>
+<h2 id="display" style="font-size:2.5rem;font-family:monospace">25:00</h2>
+<div class="tool-actions">
+<button type="button" onclick="startTimer()">Start</button>
+<button type="button" onclick="pauseTimer()">Pause</button>
+<button type="button" onclick="resetTimer()">Reset</button>
+</div>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+let timerId=null
+let remaining=25*60
+let currentMode="work"
+function render(){
+let minutes=Math.floor(remaining/60)
+let seconds=remaining%60
+document.getElementById("display").innerText=String(minutes).padStart(2,"0")+":"+String(seconds).padStart(2,"0")
+document.getElementById("phase").innerText=currentMode==="work"?"Work":"Break"
+}
+function setMode(mode){
+currentMode=mode
+let value=parseInt(document.getElementById(mode==="work"?"work":"break").value,10)||1
+remaining=value*60
+render()
+}
+function tick(){
+remaining--
+if(remaining<=0){
+currentMode=currentMode==="work"?"break":"work"
+document.getElementById("status").innerText=currentMode==="work"?"Break finished. Back to work.":"Work session complete. Time for a break."
+document.getElementById("status").style.color="#16a34a"
+setMode(currentMode)
+return
+}
+render()
+}
+function startTimer(){
+if(timerId) return
+timerId=setInterval(tick,1000)
+document.getElementById("status").innerText="Timer running."
+document.getElementById("status").style.color="#16a34a"
+}
+function pauseTimer(){
+if(timerId){clearInterval(timerId);timerId=null}
+document.getElementById("status").innerText="Timer paused."
+document.getElementById("status").style.color="#666"
+}
+function resetTimer(){
+if(timerId){clearInterval(timerId);timerId=null}
+setMode("work")
+document.getElementById("status").innerText="Timer reset."
+document.getElementById("status").style.color="#666"
+}
+document.getElementById("work").addEventListener("change",function(){if(currentMode==="work") setMode("work")})
+document.getElementById("break").addEventListener("change",function(){if(currentMode==="break") setMode("break")})
+render()
+</script>
+</body>
+</html>

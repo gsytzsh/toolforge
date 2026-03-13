@@ -166,5 +166,15 @@
 {"file":"sql-where-builder","name":"SQL WHERE Builder","category":"Database"},
 {"file":"graphql-query-builder","name":"GraphQL Query Builder","category":"API & Data"},
 {"file":"http-header-builder","name":"HTTP Header Builder","category":"Network & HTTP"},
-{"file":"webhook-payload-viewer","name":"Webhook Payload Viewer","category":"API & Data"}
+{"file":"webhook-payload-viewer","name":"Webhook Payload Viewer","category":"API & Data"},
+{"file":"pomodoro-timer","name":"Pomodoro Timer","category":"Time & Planning"},
+{"file":"working-days-calculator","name":"Working Days Calculator","category":"Time & Planning"},
+{"file":"meeting-time-finder","name":"Meeting Time Finder","category":"Time & Planning"},
+{"file":"sleep-calculator","name":"Sleep Calculator","category":"Time & Planning"},
+{"file":"reading-time-calculator","name":"Reading Time Calculator","category":"Daily Productivity"},
+{"file":"speech-time-calculator","name":"Speech Time Calculator","category":"Daily Productivity"},
+{"file":"checklist-maker","name":"Checklist Maker","category":"Daily Productivity"},
+{"file":"shopping-list-organizer","name":"Shopping List Organizer","category":"Daily Productivity"},
+{"file":"unit-price-calculator","name":"Unit Price Calculator","category":"Money & Decisions"},
+{"file":"split-bill-calculator","name":"Split Bill Calculator","category":"Money & Decisions"}
 ]

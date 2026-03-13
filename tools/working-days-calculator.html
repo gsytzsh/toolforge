@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Working Days Calculator - Count Business Days | ToolForge</title>
+<meta name="description" content="Free online Working Days Calculator to count business days between two dates, excluding weekends. Useful for deadlines, planning and schedules.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/working-days-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Working Days Calculator - Count Business Days | ToolForge">
+<meta property="og:description" content="Free online Working Days Calculator to count business days between two dates, excluding weekends. Useful for deadlines, planning and schedules.">
+<meta property="og:url" content="https://www.toolforge.site/tools/working-days-calculator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Working Days Calculator - Count Business Days | ToolForge">
+<meta name="twitter:description" content="Free online Working Days Calculator to count business days between two dates, excluding weekends. Useful for deadlines, planning and schedules.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Working Days Calculator</h1>
+<p class="subtitle">Count business days between two dates while excluding weekends.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="start" class="sr-only">Start date</label>
+<input id="start" type="date" aria-label="Start date">
+<label for="end" class="sr-only">End date</label>
+<input id="end" type="date" aria-label="End date" style="margin-left:8px">
+<div class="tool-actions">
+<button type="button" onclick="calculateDays()">Calculate</button>
+</div>
+<h3>Result</h3>
+<p id="result"></p>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function calculateDays(){
+let startValue=document.getElementById("start").value
+let endValue=document.getElementById("end").value
+if(!startValue||!endValue){
+document.getElementById("result").innerText=""
+document.getElementById("status").innerText="Select both dates."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+let start=new Date(startValue+"T00:00:00")
+let end=new Date(endValue+"T00:00:00")
+if(end<start){
+document.getElementById("result").innerText=""
+document.getElementById("status").innerText="End date must be after start date."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+let working=0,total=0
+let cursor=new Date(start)
+while(cursor<=end){
+let day=cursor.getDay()
+if(day!==0&&day!==6) working++
+total++
+cursor.setDate(cursor.getDate()+1)
+}
+document.getElementById("result").innerText="Working days: "+working+" | Total days: "+total
+document.getElementById("status").innerText="Date range calculated."
+document.getElementById("status").style.color="#16a34a"
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sleep Calculator - Calculate Sleep Cycles | ToolForge</title>
+<meta name="description" content="Free online Sleep Calculator to estimate suggested bedtimes or wake-up times based on 90-minute sleep cycles.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/sleep-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Sleep Calculator - Calculate Sleep Cycles | ToolForge">
+<meta property="og:description" content="Free online Sleep Calculator to estimate suggested bedtimes or wake-up times based on 90-minute sleep cycles.">
+<meta property="og:url" content="https://www.toolforge.site/tools/sleep-calculator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sleep Calculator - Calculate Sleep Cycles | ToolForge">
+<meta name="twitter:description" content="Free online Sleep Calculator to estimate suggested bedtimes or wake-up times based on 90-minute sleep cycles.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Sleep Calculator</h1>
+<p class="subtitle">Estimate suggested sleep or wake times using 90-minute sleep cycles plus time to fall asleep.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="mode" class="sr-only">Calculation mode</label>
+<select id="mode" aria-label="Calculation mode">
+<option value="wake">I want to wake up at</option>
+<option value="sleep">I want to go to sleep at</option>
+</select>
+<label for="time" class="sr-only">Target time</label>
+<input id="time" type="time" aria-label="Target time" style="margin-left:8px">
+<div class="tool-actions">
+<button type="button" onclick="calculateSleep()">Calculate</button>
+</div>
+<h3>Suggested Times</h3>
+<pre id="result"></pre>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function formatTime(date){
+return String(date.getHours()).padStart(2,"0")+":"+String(date.getMinutes()).padStart(2,"0")
+}
+function calculateSleep(){
+let mode=document.getElementById("mode").value
+let time=document.getElementById("time").value
+if(!time){
+document.getElementById("result").innerText=""
+document.getElementById("status").innerText="Select a time first."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+let parts=time.split(":")
+let base=new Date()
+base.setHours(parseInt(parts[0],10),parseInt(parts[1],10),0,0)
+let lines=[]
+for(let cycles=6;cycles>=4;cycles--){
+let minutes=cycles*90+15
+let candidate=new Date(base)
+candidate.setMinutes(candidate.getMinutes()+(mode==="wake"?-minutes:minutes))
+lines.push(cycles+" cycles: "+formatTime(candidate))
+}
+document.getElementById("result").innerText=lines.join("\n")
+document.getElementById("status").innerText="Sleep times calculated."
+document.getElementById("status").style.color="#16a34a"
+}
+</script>
+</body>
+</html>

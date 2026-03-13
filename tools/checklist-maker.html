@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Checklist Maker - Create a Simple Checklist | ToolForge</title>
+<meta name="description" content="Free online Checklist Maker to create, save and manage a simple checklist in your browser. Useful for tasks, packing and daily routines.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/checklist-maker.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Checklist Maker - Create a Simple Checklist | ToolForge">
+<meta property="og:description" content="Free online Checklist Maker to create, save and manage a simple checklist in your browser. Useful for tasks, packing and daily routines.">
+<meta property="og:url" content="https://www.toolforge.site/tools/checklist-maker.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Checklist Maker - Create a Simple Checklist | ToolForge">
+<meta name="twitter:description" content="Free online Checklist Maker to create, save and manage a simple checklist in your browser. Useful for tasks, packing and daily routines.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Checklist Maker</h1>
+<p class="subtitle">Create a simple checklist and save it locally in your browser.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="items" class="sr-only">Checklist items</label>
+<textarea id="items" rows="12" class="pdf-editor" aria-label="Checklist items" placeholder="Buy milk&#10;Send email&#10;Pack charger"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="renderList()">Build Checklist</button>
+<button type="button" onclick="saveList()">Save</button>
+<button type="button" onclick="clearList()">Clear</button>
+</div>
+<div id="list"></div>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+const KEY="toolforge.checklist-maker"
+function renderList(){
+let lines=document.getElementById("items").value.split(/\r?\n/).map(function(line){return line.trim()}).filter(Boolean)
+let html=lines.map(function(item,index){
+return '<label style="display:block;margin:8px 0"><input type="checkbox" data-index="'+index+'"> '+item+'</label>'
+}).join("")
+document.getElementById("list").innerHTML=html||"<p>No checklist items yet.</p>"
+document.getElementById("status").innerText="Checklist built."
+document.getElementById("status").style.color="#16a34a"
+}
+function saveList(){
+try{
+localStorage.setItem(KEY,document.getElementById("items").value)
+document.getElementById("status").innerText="Checklist saved."
+document.getElementById("status").style.color="#16a34a"
+}catch(e){
+document.getElementById("status").innerText="Save failed."
+document.getElementById("status").style.color="#b91c1c"
+}
+}
+function clearList(){
+document.getElementById("items").value=""
+document.getElementById("list").innerHTML=""
+try{localStorage.removeItem(KEY)}catch(e){}
+document.getElementById("status").innerText="Checklist cleared."
+document.getElementById("status").style.color="#666"
+}
+try{
+let saved=localStorage.getItem(KEY)
+if(saved){document.getElementById("items").value=saved;renderList()}
+}catch(e){}
+</script>
+</body>
+</html>

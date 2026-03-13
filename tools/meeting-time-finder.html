@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Meeting Time Finder - Compare Time Zones | ToolForge</title>
+<meta name="description" content="Free online Meeting Time Finder to compare local times across UTC offsets and find a reasonable meeting hour for distributed teams.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/meeting-time-finder.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Meeting Time Finder - Compare Time Zones | ToolForge">
+<meta property="og:description" content="Free online Meeting Time Finder to compare local times across UTC offsets and find a reasonable meeting hour for distributed teams.">
+<meta property="og:url" content="https://www.toolforge.site/tools/meeting-time-finder.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Meeting Time Finder - Compare Time Zones | ToolForge">
+<meta name="twitter:description" content="Free online Meeting Time Finder to compare local times across UTC offsets and find a reasonable meeting hour for distributed teams.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Meeting Time Finder</h1>
+<p class="subtitle">Compare the same meeting hour across multiple UTC offsets.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="base-time" class="sr-only">Base meeting time</label>
+<input id="base-time" type="datetime-local" aria-label="Base meeting time">
+<br><br>
+<label for="zones" class="sr-only">Time zone offsets</label>
+<textarea id="zones" rows="6" class="pdf-editor pdf-editor-mono" aria-label="Time zone offsets" placeholder="UTC-8 Pacific&#10;UTC+0 London&#10;UTC+8 Singapore"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="findTimes()">Compare Times</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
+<h3>Local Times</h3>
+<pre id="result"></pre>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function findTimes(){
+let value=document.getElementById("base-time").value
+let lines=document.getElementById("zones").value.split(/\r?\n/).map(function(line){return line.trim()}).filter(Boolean)
+if(!value||!lines.length){
+document.getElementById("result").innerText=""
+document.getElementById("status").innerText="Enter a base time and at least one UTC offset."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+let base=new Date(value)
+let utc=base.getTime()-base.getTimezoneOffset()*60000
+try{
+let out=lines.map(function(line){
+let match=line.match(/^UTC([+-]\d{1,2})(?:\s+(.+))?$/i)
+if(!match) throw new Error("invalid")
+let offset=parseInt(match[1],10)
+let label=(match[2]||("UTC"+match[1])).trim()
+let local=new Date(utc+offset*3600000)
+return label+": "+local.toISOString().replace("T"," ").slice(0,16)
+})
+document.getElementById("result").innerText=out.join("\n")
+document.getElementById("status").innerText="Meeting times compared."
+document.getElementById("status").style.color="#16a34a"
+}catch(e){
+document.getElementById("result").innerText=""
+document.getElementById("status").innerText="Use lines like UTC+8 Singapore or UTC-5 New York."
+document.getElementById("status").style.color="#b91c1c"
+}
+}
+function copyResult(){
+let value=document.getElementById("result").innerText.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Result copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

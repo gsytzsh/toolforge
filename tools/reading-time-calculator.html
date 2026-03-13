@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Reading Time Calculator - Estimate Reading Time | ToolForge</title>
+<meta name="description" content="Free online Reading Time Calculator to estimate how long text takes to read based on word count and reading speed.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/reading-time-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Reading Time Calculator - Estimate Reading Time | ToolForge">
+<meta property="og:description" content="Free online Reading Time Calculator to estimate how long text takes to read based on word count and reading speed.">
+<meta property="og:url" content="https://www.toolforge.site/tools/reading-time-calculator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Reading Time Calculator - Estimate Reading Time | ToolForge">
+<meta name="twitter:description" content="Free online Reading Time Calculator to estimate how long text takes to read based on word count and reading speed.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Reading Time Calculator</h1>
+<p class="subtitle">Estimate reading time from word count and reading speed.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="wpm" class="sr-only">Words per minute</label>
+<input id="wpm" type="number" min="50" value="200" style="width:110px" aria-label="Words per minute">
+<br><br>
+<label for="text" class="sr-only">Text input</label>
+<textarea id="text" rows="12" class="pdf-editor" aria-label="Text input" placeholder="Paste article or text here"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="calculateReading()">Calculate</button>
+</div>
+<h3>Result</h3>
+<p id="result"></p>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function calculateReading(){
+let text=document.getElementById("text").value.trim()
+let words=text?text.split(/\s+/).filter(Boolean).length:0
+let wpm=parseInt(document.getElementById("wpm").value,10)||200
+if(!words){
+document.getElementById("result").innerText=""
+document.getElementById("status").innerText="Paste some text first."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+let minutes=words/wpm
+document.getElementById("result").innerText="Words: "+words+" | Estimated reading time: "+minutes.toFixed(1)+" minutes"
+document.getElementById("status").innerText="Reading time estimated."
+document.getElementById("status").style.color="#16a34a"
+}
+</script>
+</body>
+</html>
