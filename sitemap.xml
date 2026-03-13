@@ -7,12 +7,6 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.toolforge.site/tools/base64-decode.html</loc>
-    <lastmod>2026-03-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.toolforge.site/tools/base64-encode.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -50,12 +44,6 @@
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/json-to-csv.html</loc>
-    <lastmod>2026-03-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.toolforge.site/tools/csv-to-json.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -163,12 +151,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.toolforge.site/tools/image-compressor.html</loc>
-    <lastmod>2026-03-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.toolforge.site/tools/image-to-pdf.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -236,12 +218,6 @@
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/markdown-to-pdf.html</loc>
-    <lastmod>2026-03-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.toolforge.site/tools/html-to-markdown.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -692,12 +668,6 @@
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/json-to-xml.html</loc>
-    <lastmod>2026-03-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.toolforge.site/tools/xml-to-json.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

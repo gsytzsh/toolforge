@@ -2,24 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Image Resizer - Resize Images by Pixels Online | ToolForge</title>
-<meta name="description" content="Free online Image Resizer to resize photos by width or height directly in your browser. No upload required, perfect for avatars, thumbnails and web graphics. Part of the ToolForge developer tools collection.">
+<title>Image Resize & Compress - Resize Images Online | ToolForge</title>
+<meta name="description" content="Free online Image Resize and Compress tool to resize photos and reduce image size directly in your browser. Perfect for avatars, thumbnails and web graphics. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://www.toolforge.site/tools/image-resizer.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Image Resizer - Resize Images by Pixels Online | ToolForge">
-<meta property="og:description" content="Free online Image Resizer to resize photos by width or height directly in your browser. No upload required, perfect for avatars, thumbnails and web graphics. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Image Resize & Compress - Resize Images Online | ToolForge">
+<meta property="og:description" content="Free online Image Resize and Compress tool to resize photos and reduce image size directly in your browser. Perfect for avatars, thumbnails and web graphics. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://www.toolforge.site/tools/image-resizer.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Image Resizer - Resize Images by Pixels Online | ToolForge">
-<meta name="twitter:description" content="Free online Image Resizer to resize photos by width or height directly in your browser. No upload required, perfect for avatars, thumbnails and web graphics. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Image Resize & Compress - Resize Images Online | ToolForge">
+<meta name="twitter:description" content="Free online Image Resize and Compress tool to resize photos and reduce image size directly in your browser. Perfect for avatars, thumbnails and web graphics. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <main class="container">
-<h1>Image Resizer</h1>
-<p class="subtitle">Resize images by width or height entirely in your browser.</p>
+<h1>Image Resize & Compress</h1>
+<p class="subtitle">Resize images by width or height and optionally compress them in one browser-based tool.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Source image</h3>
 <label for="file" class="sr-only">File</label>
@@ -35,7 +35,22 @@ Height (px):
 <input id="targetHeight" type="number" style="width:100px" placeholder="auto" aria-label="Target Height">
 </p>
 <p style="font-size:13px;color:#666;">Leave width or height empty to keep aspect ratio based on the other.</p>
-<button type="button" onclick="resizeImage()">Resize</button>
+<p>
+Format:
+<label for="format" class="sr-only">Output format</label>
+<select id="format" aria-label="Output format">
+<option value="image/png">PNG</option>
+<option value="image/jpeg">JPEG</option>
+<option value="image/webp">WebP</option>
+</select>
+Quality:
+<label for="quality" class="sr-only">Compression quality</label>
+<input id="quality" type="range" min="0.1" max="1" step="0.1" value="0.8" aria-label="Compression quality">
+<span id="qualityValue">0.8</span>
+</p>
+<div class="tool-actions">
+<button type="button" onclick="resizeImage()">Process Image</button>
+</div>
 <h3 style="margin-top:20px">Preview</h3>
 <canvas id="canvas" style="max-width:100%;border:1px solid #e5e7eb;border-radius:4px;"></canvas>
 <p id="newInfo" style="color:#666;margin-top:6px"></p>
@@ -48,6 +63,11 @@ Height (px):
 </main>
 <script>
 var originalImage=new Image();
+var objectUrl=null
+
+document.getElementById("quality").addEventListener("input",function(){
+  document.getElementById("qualityValue").innerText=this.value;
+});
 
 function loadImage(){
   var file=document.getElementById("file").files[0];
@@ -56,6 +76,8 @@ function loadImage(){
   reader.onload=function(e){
     originalImage.onload=function(){
       document.getElementById("origInfo").innerText="Original: "+originalImage.width+" x "+originalImage.height+" px";
+      document.getElementById("newInfo").innerText=""
+      document.getElementById("downloadLink").style.display="none"
     };
     originalImage.src=e.target.result;
   };
@@ -64,7 +86,7 @@ function loadImage(){
 
 function resizeImage(){
   if(!originalImage.src){
-    alert("Please select an image first.");
+    document.getElementById("newInfo").innerText="Please select an image first.";
     return;
   }
   var w=parseInt(document.getElementById("targetWidth").value,10);
@@ -89,13 +111,19 @@ function resizeImage(){
   ctx.drawImage(originalImage,0,0,w,h);
   document.getElementById("newInfo").innerText="Resized: "+w+" x "+h+" px";
 
+  var format=document.getElementById("format").value;
+  var quality=parseFloat(document.getElementById("quality").value)||0.8;
   canvas.toBlob(function(blob){
     if(!blob) return;
+    if(objectUrl) URL.revokeObjectURL(objectUrl);
     var url=URL.createObjectURL(blob);
+    objectUrl=url;
     var link=document.getElementById("downloadLink");
     link.href=url;
+    link.download="processed-image"+(format==="image/jpeg"?".jpg":format==="image/webp"?".webp":".png");
     link.style.display="inline-block";
-  },"image/png");
+    document.getElementById("newInfo").innerText="Processed: "+w+" x "+h+" px | Approx size: "+Math.round(blob.size/1024)+" KB";
+  },format,quality);
 }
 </script>
 </body>

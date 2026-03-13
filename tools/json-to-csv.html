@@ -3,18 +3,18 @@
 <head>
 
 <meta charset="UTF-8">
-<title>JSON to CSV Converter – Convert JSON Arrays Online | ToolForge</title>
-<meta name="description" content="Free online JSON to CSV Converter to turn JSON arrays into CSV format for spreadsheets, imports and reports. Part of the ToolForge developer tools collection.">
+<title>JSON CSV Converter – Convert JSON and CSV Online | ToolForge</title>
+<meta name="description" content="Free online JSON CSV Converter to turn JSON arrays into CSV and convert CSV back to JSON for spreadsheets, imports and reports. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://www.toolforge.site/tools/json-to-csv.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="JSON to CSV Converter – Convert JSON Arrays Online | ToolForge">
-<meta property="og:description" content="Free online JSON to CSV Converter to turn JSON arrays into CSV format for spreadsheets, imports and reports. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="JSON CSV Converter – Convert JSON and CSV Online | ToolForge">
+<meta property="og:description" content="Free online JSON CSV Converter to turn JSON arrays into CSV and convert CSV back to JSON for spreadsheets, imports and reports. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://www.toolforge.site/tools/json-to-csv.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JSON to CSV Converter – Convert JSON Arrays Online | ToolForge">
-<meta name="twitter:description" content="Free online JSON to CSV Converter to turn JSON arrays into CSV format for spreadsheets, imports and reports. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="JSON CSV Converter – Convert JSON and CSV Online | ToolForge">
+<meta name="twitter:description" content="Free online JSON CSV Converter to turn JSON arrays into CSV and convert CSV back to JSON for spreadsheets, imports and reports. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 
 </head>
@@ -23,26 +23,35 @@
 
 <main class="container">
 
-<h1>JSON to CSV Converter</h1>
+<h1>JSON CSV Converter</h1>
 
-<p class="subtitle">Convert JSON arrays into CSV files for spreadsheets, imports, analytics and reporting.</p>
+<p class="subtitle">Convert JSON arrays into CSV files, or convert CSV back into JSON arrays.</p>
 
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
-<label for="json" class="sr-only">JSON input</label>
-<textarea id="json" rows="10" style="width:90%" placeholder='[{"name":"Tom","age":20},{"name":"Alice","age":25}]' aria-label="JSON input"></textarea>
+<label for="mode" class="sr-only">Conversion mode</label>
+<select id="mode" aria-label="Conversion mode">
+<option value="json-to-csv">JSON to CSV</option>
+<option value="csv-to-json">CSV to JSON</option>
+</select>
+
+<br><br>
+
+<label for="input" class="sr-only">Converter input</label>
+<textarea id="input" rows="10" style="width:90%" placeholder='[{"name":"Tom","age":20},{"name":"Alice","age":25}]' aria-label="Converter input"></textarea>
 
 <br><br>
 
 <div class="tool-actions">
-<button onclick="convert()">Convert</button>
+<button type="button" onclick="convert()">Convert</button>
+<button type="button" onclick="swapValues()">Swap</button>
 <button type="button" onclick="copyOutput()">Copy Result</button>
 </div>
 
-<h3>CSV Result</h3>
+<h3>Result</h3>
 
-<label for="csv" class="sr-only">CSV input</label>
-<textarea id="csv" rows="10" style="width:90%" aria-label="CSV input"></textarea>
+<label for="output" class="sr-only">Converter output</label>
+<textarea id="output" rows="10" style="width:90%" aria-label="Converter output"></textarea>
 
 <p id="status" style="color:#666"></p>
 
@@ -59,43 +68,87 @@ return '"' + text.replace(/"/g,'""') + '"'
 return text
 }
 
-function convert(){
-
-let jsonText=document.getElementById("json").value
-
-try{
-
+function jsonToCsv(jsonText){
 let data=JSON.parse(jsonText)
-
-if(!Array.isArray(data)||!data.length){
-document.getElementById("csv").value=""
-document.getElementById("status").innerText="JSON must be a non-empty array."
-document.getElementById("status").style.color="#b91c1c"
-return
-}
-
+if(!Array.isArray(data)||!data.length) throw new Error("JSON must be a non-empty array.")
 let keys=Object.keys(data[0])
-
 let csv=keys.map(escapeCsv).join(",")+"\n"
-
-data.forEach(row=>{
+data.forEach(function(row){
 csv+=keys.map(function(k){ return escapeCsv(row[k]); }).join(",")+"\n"
 })
-
-document.getElementById("csv").value=csv
-document.getElementById("status").innerText="Converted successfully."
-document.getElementById("status").style.color="#16a34a"
-
-}catch(e){
-document.getElementById("csv").value=""
-document.getElementById("status").innerText="Invalid JSON input."
-document.getElementById("status").style.color="#b91c1c"
+return csv
 }
 
+function parseCsv(text){
+let rows=[]
+let row=[]
+let value=""
+let inQuotes=false
+
+for(let i=0;i<text.length;i++){
+let ch=text[i]
+let next=text[i+1]
+
+if(ch==='"'){
+if(inQuotes&&next==='"'){
+value+='"'
+i++
+}else{
+inQuotes=!inQuotes
+}
+}else if(ch===","&&!inQuotes){
+row.push(value)
+value=""
+}else if((ch==="\n"||ch==="\r")&&!inQuotes){
+if(ch==="\r"&&next==="\n") i++
+row.push(value)
+rows.push(row)
+row=[]
+value=""
+}else{
+value+=ch
+}
+}
+
+row.push(value)
+rows.push(row)
+return rows.filter(function(item){
+return item.length>1||item[0]!==""
+})
+}
+
+function csvToJson(csvText){
+let rows=parseCsv(csvText.trim())
+if(!rows.length) throw new Error("No CSV rows found.")
+let headers=rows[0]
+let result=[]
+for(let i=1;i<rows.length;i++){
+let obj={}
+let values=rows[i]
+headers.forEach(function(h,index){
+obj[h]=values[index]
+})
+result.push(obj)
+}
+return JSON.stringify(result,null,2)
+}
+
+function convert(){
+let input=document.getElementById("input").value
+let mode=document.getElementById("mode").value
+try{
+document.getElementById("output").value=mode==="json-to-csv"?jsonToCsv(input):csvToJson(input)
+document.getElementById("status").innerText="Converted successfully."
+document.getElementById("status").style.color="#16a34a"
+}catch(e){
+document.getElementById("output").value=""
+document.getElementById("status").innerText=e.message||"Conversion failed."
+document.getElementById("status").style.color="#b91c1c"
+}
 }
 
 function copyOutput(){
-let value=document.getElementById("csv").value
+let value=document.getElementById("output").value
 if(!value){
 document.getElementById("status").innerText="Nothing to copy."
 document.getElementById("status").style.color="#b91c1c"
@@ -108,6 +161,16 @@ document.getElementById("status").style.color="#16a34a"
 document.getElementById("status").innerText="Copy failed."
 document.getElementById("status").style.color="#b91c1c"
 })
+}
+
+function swapValues(){
+let input=document.getElementById("input")
+let output=document.getElementById("output")
+let tmp=input.value
+input.value=output.value
+output.value=tmp
+document.getElementById("status").innerText="Input and output swapped."
+document.getElementById("status").style.color="#16a34a"
 }
 
 </script>

@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Markdown Preview – Online Markdown Viewer | ToolForge</title>
-<meta name="description" content="Free online Markdown Preview tool to render Markdown to HTML using marked.js in your browser. Part of the ToolForge developer tools collection.">
+<title>Markdown Toolkit – Preview Markdown and Convert HTML | ToolForge</title>
+<meta name="description" content="Free online Markdown Toolkit to preview Markdown as HTML and convert simple HTML into Markdown in your browser. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://www.toolforge.site/tools/markdown-preview.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Markdown Preview – Online Markdown Viewer | ToolForge">
-<meta property="og:description" content="Free online Markdown Preview tool to render Markdown to HTML using marked.js in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Markdown Toolkit – Preview Markdown and Convert HTML | ToolForge">
+<meta property="og:description" content="Free online Markdown Toolkit to preview Markdown as HTML and convert simple HTML into Markdown in your browser. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://www.toolforge.site/tools/markdown-preview.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Markdown Preview – Online Markdown Viewer | ToolForge">
-<meta name="twitter:description" content="Free online Markdown Preview tool to render Markdown to HTML using marked.js in your browser. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Markdown Toolkit – Preview Markdown and Convert HTML | ToolForge">
+<meta name="twitter:description" content="Free online Markdown Toolkit to preview Markdown as HTML and convert simple HTML into Markdown in your browser. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -22,18 +22,29 @@
 
 <main class="container">
 
-<h1>Markdown Preview</h1>
+<h1>Markdown Toolkit</h1>
 
-<p class="subtitle">Type or paste Markdown and preview the rendered HTML instantly in your browser.</p>
+<p class="subtitle">Preview Markdown as HTML or convert simple HTML snippets into Markdown in one page.</p>
 
 <p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="mode" class="sr-only">Markdown mode</label>
+<select id="mode" aria-label="Markdown mode" onchange="switchMode()">
+<option value="preview">Markdown Preview</option>
+<option value="html-to-markdown">HTML to Markdown</option>
+</select>
+
+<br><br>
 
 <label for="input" class="sr-only">Input text</label>
 <textarea id="input" rows="10" style="width:90%" aria-label="Input text"></textarea>
 
 <br><br>
 
-<button onclick="render()">Preview</button>
+<div class="tool-actions">
+<button type="button" onclick="runTool()">Run</button>
+<button type="button" onclick="copyOutput()">Copy Result</button>
+</div>
 
 <h3>Output</h3>
 
@@ -54,15 +65,75 @@ return text
 .replace(/'/g,"&#39;")
 }
 
-function render(){
+let latestOutput=""
 
-let text=document.getElementById("input").value
-
-let safeText=escapeHtml(text)
-document.getElementById("output").innerHTML=marked.parse(safeText)
-document.getElementById("status").innerText="Preview rendered. Raw HTML is escaped for safety."
-
+function htmlToMarkdown(html){
+return html
+.replace(/<h1>(.*?)<\/h1>/gi,"# $1\n")
+.replace(/<h2>(.*?)<\/h2>/gi,"## $1\n")
+.replace(/<h3>(.*?)<\/h3>/gi,"### $1\n")
+.replace(/<strong>(.*?)<\/strong>/gi,"**$1**")
+.replace(/<b>(.*?)<\/b>/gi,"**$1**")
+.replace(/<em>(.*?)<\/em>/gi,"*$1*")
+.replace(/<i>(.*?)<\/i>/gi,"*$1*")
+.replace(/<a href="(.*?)">(.*?)<\/a>/gi,"[$2]($1)")
+.replace(/<ul>/gi,"")
+.replace(/<\/ul>/gi,"")
+.replace(/<li>(.*?)<\/li>/gi,"- $1\n")
+.replace(/<br\s*\/?>/gi,"\n")
+.replace(/<p>(.*?)<\/p>/gi,"$1\n")
+.replace(/<[^>]+>/g,"")
 }
+
+function switchMode(){
+let mode=document.getElementById("mode").value
+let input=document.getElementById("input")
+let output=document.getElementById("output")
+latestOutput=""
+output.innerHTML=""
+if(mode==="preview"){
+input.placeholder="# Hello ToolForge\n\n- item 1\n- item 2"
+}else{
+input.placeholder="<h1>Hello</h1><p>ToolForge</p>"
+}
+document.getElementById("status").innerText=""
+}
+
+function runTool(){
+let mode=document.getElementById("mode").value
+let text=document.getElementById("input").value
+if(mode==="preview"){
+let safeText=escapeHtml(text)
+latestOutput=marked.parse(safeText)
+document.getElementById("output").innerHTML=latestOutput
+document.getElementById("status").innerText="Preview rendered. Raw HTML is escaped for safety."
+document.getElementById("status").style.color="#16a34a"
+return
+}
+latestOutput=htmlToMarkdown(text)
+document.getElementById("output").innerHTML="<pre>"+escapeHtml(latestOutput)+"</pre>"
+document.getElementById("status").innerText="HTML converted to Markdown."
+document.getElementById("status").style.color="#16a34a"
+}
+
+function copyOutput(){
+let mode=document.getElementById("mode").value
+let value=mode==="preview"?document.getElementById("output").innerText.trim():latestOutput.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Result copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+
+switchMode()
 
 </script>
 

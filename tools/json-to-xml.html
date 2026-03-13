@@ -2,36 +2,43 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>JSON to XML – Convert JSON to XML Online | ToolForge</title>
-<meta name="description" content="Free online JSON to XML converter. Part of the ToolForge developer tools collection.">
+<title>JSON XML Converter – Convert JSON and XML Online | ToolForge</title>
+<meta name="description" content="Free online JSON XML Converter to convert JSON to XML and XML back to JSON. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://www.toolforge.site/tools/json-to-xml.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="JSON to XML – Convert JSON to XML Online | ToolForge">
-<meta property="og:description" content="Free online JSON to XML converter. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="JSON XML Converter – Convert JSON and XML Online | ToolForge">
+<meta property="og:description" content="Free online JSON XML Converter to convert JSON to XML and XML back to JSON. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://www.toolforge.site/tools/json-to-xml.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JSON to XML – Convert JSON to XML Online | ToolForge">
-<meta name="twitter:description" content="Free online JSON to XML converter. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="JSON XML Converter – Convert JSON and XML Online | ToolForge">
+<meta name="twitter:description" content="Free online JSON XML Converter to convert JSON to XML and XML back to JSON. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <main class="container">
-<h1>JSON to XML</h1>
-<p class="subtitle">Convert JSON to XML. Objects become elements, arrays repeat the key.</p>
+<h1>JSON XML Converter</h1>
+<p class="subtitle">Convert JSON to XML or XML back to JSON in one page.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
-<h3>JSON</h3>
-<label for="json" class="sr-only">JSON input</label>
-<textarea id="json" rows="10" style="width:90%" placeholder='{"name":"Tom","age":20}' aria-label="JSON input"></textarea>
+<label for="mode" class="sr-only">Conversion mode</label>
+<select id="mode" aria-label="Conversion mode">
+<option value="json-to-xml">JSON to XML</option>
+<option value="xml-to-json">XML to JSON</option>
+</select>
+<br><br>
+<h3>Input</h3>
+<label for="input" class="sr-only">Converter input</label>
+<textarea id="input" rows="10" style="width:90%" placeholder='{"name":"Tom","age":20}' aria-label="Converter input"></textarea>
 <br><br>
 <div class="tool-actions">
-<button onclick="convert()">Convert to XML</button>
+<button type="button" onclick="convert()">Convert</button>
+<button type="button" onclick="swapValues()">Swap</button>
 <button type="button" onclick="copyOutput()">Copy Result</button>
 </div>
-<h3>XML</h3>
-<label for="xml" class="sr-only">XML input</label>
-<textarea id="xml" rows="10" style="width:90%" aria-label="XML input"></textarea>
+<h3>Output</h3>
+<label for="output" class="sr-only">Converter output</label>
+<textarea id="output" rows="10" style="width:90%" aria-label="Converter output"></textarea>
 <p id="status" style="color:#666"></p>
 </main>
 <script>
@@ -65,18 +72,72 @@ return pad+"<"+key+attrs+">"+content+"</"+key+">\n"
 }
 return pad+"<"+key+attrs+">"+content+pad+"</"+key+">\n"
 }
+function jsonToXml(text){
+var obj=JSON.parse(text||"{}")
+return ('<?xml version="1.0" encoding="UTF-8"?>\n'+toXml("root",obj,0)).trim()
+}
+
+function parseXmlToJson(node){
+if(node.nodeType!==1) return null
+var obj={}
+if(node.attributes.length){
+obj["@attributes"]={}
+for(var i=0;i<node.attributes.length;i++){
+obj["@attributes"][node.attributes[i].name]=node.attributes[i].value
+}
+}
+var elementChildren=Array.from(node.childNodes).filter(function(child){
+return child.nodeType===1
+})
+var textChildren=Array.from(node.childNodes).filter(function(child){
+return child.nodeType===3 && child.textContent.trim()
+})
+if(!elementChildren.length){
+if(textChildren.length && !node.attributes.length){
+return textChildren.map(function(child){ return child.textContent.trim() }).join(" ")
+}
+if(textChildren.length){
+obj["#text"]=textChildren.map(function(child){ return child.textContent.trim() }).join(" ")
+}
+return obj
+}
+elementChildren.forEach(function(child){
+var name=child.tagName
+var val=parseXmlToJson(child)
+if(obj[name]===undefined)obj[name]=val
+else if(Array.isArray(obj[name]))obj[name].push(val)
+else obj[name]=[obj[name],val]
+})
+if(textChildren.length){
+obj["#text"]=textChildren.map(function(child){ return child.textContent.trim() }).join(" ")
+}
+return obj
+}
+
+function xmlToJson(text){
+var parser=new DOMParser()
+var doc=parser.parseFromString(text,"text/xml")
+if(doc.querySelector("parsererror")) throw new Error("XML parse error.")
+var root=doc.documentElement
+var out={}
+if(root.tagName){out[root.tagName]=parseXmlToJson(root)}
+return JSON.stringify(out,null,2)
+}
+
 function convert(){
 try{
-var obj=JSON.parse(document.getElementById("json").value||"{}")
-document.getElementById("xml").value=('<?xml version="1.0" encoding="UTF-8"?>\n'+toXml("root",obj,0)).trim()
-document.getElementById("status").innerText="OK."
+var input=document.getElementById("input").value
+var mode=document.getElementById("mode").value
+document.getElementById("output").value=mode==="json-to-xml"?jsonToXml(input):xmlToJson(input)
+document.getElementById("status").innerText="Converted successfully."
 document.getElementById("status").style.color="#16a34a"
-}catch(e){document.getElementById("status").innerText="Error: "+e.message
+}catch(e){document.getElementById("output").value=""
+document.getElementById("status").innerText="Error: "+e.message
 document.getElementById("status").style.color="#b91c1c"}
 }
 
 function copyOutput(){
-var value=document.getElementById("xml").value
+var value=document.getElementById("output").value
 if(!value){
 document.getElementById("status").innerText="Nothing to copy."
 document.getElementById("status").style.color="#b91c1c"
@@ -89,6 +150,16 @@ document.getElementById("status").style.color="#16a34a"
 document.getElementById("status").innerText="Copy failed."
 document.getElementById("status").style.color="#b91c1c"
 })
+}
+
+function swapValues(){
+var input=document.getElementById("input")
+var output=document.getElementById("output")
+var tmp=input.value
+input.value=output.value
+output.value=tmp
+document.getElementById("status").innerText="Input and output swapped."
+document.getElementById("status").style.color="#16a34a"
 }
 </script>
 </body>
