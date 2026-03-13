@@ -33,12 +33,16 @@
 
 <h3>Input</h3>
 
+<label for="input" class="sr-only">Input</label>
 <input id="input" style="width:300px" placeholder="1710000000 or 2025-10-11 12:00:00" aria-label="Input">
 
 <br><br>
 
+<div class="tool-actions">
 <button onclick="timestampToDate()">Timestamp → Date</button>
 <button onclick="dateToTimestamp()">Date → Timestamp</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
 
 <h3>Result</h3>
 
@@ -46,6 +50,7 @@
 <p><b>UTC Time:</b> <span id="utc"></span></p>
 <p><b>Timestamp (sec):</b> <span id="ts"></span></p>
 <p><b>Timestamp (ms):</b> <span id="tsms"></span></p>
+<p id="status" class="inline-status"></p>
 
 <h3>Current Time</h3>
 
@@ -72,6 +77,8 @@ document.getElementById("utc").innerText=date.toUTCString()
 
 document.getElementById("ts").innerText=Math.floor(date.getTime()/1000)
 document.getElementById("tsms").innerText=date.getTime()
+document.getElementById("status").innerText="Converted successfully."
+document.getElementById("status").style.color="#16a34a"
 
 }
 
@@ -84,6 +91,8 @@ let date=new Date(v)
 if(isNaN(date)){
 
 document.getElementById("local").innerText="Invalid date"
+document.getElementById("status").innerText="Invalid date input."
+document.getElementById("status").style.color="#b91c1c"
 return
 
 }
@@ -93,7 +102,30 @@ document.getElementById("utc").innerText=date.toUTCString()
 
 document.getElementById("ts").innerText=Math.floor(date.getTime()/1000)
 document.getElementById("tsms").innerText=date.getTime()
+document.getElementById("status").innerText="Converted successfully."
+document.getElementById("status").style.color="#16a34a"
 
+}
+
+function copyResult(){
+let lines=[
+"Local Time: "+document.getElementById("local").innerText,
+"UTC Time: "+document.getElementById("utc").innerText,
+"Timestamp (sec): "+document.getElementById("ts").innerText,
+"Timestamp (ms): "+document.getElementById("tsms").innerText
+]
+if(!document.getElementById("local").innerText && !document.getElementById("ts").innerText){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(lines.join("\n")).then(function(){
+document.getElementById("status").innerText="Result copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
 }
 
 function updateNow(){

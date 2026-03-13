@@ -33,13 +33,16 @@
 
 <p>
 Min:
+<label for="min" class="sr-only">Min</label>
 <input id="min" type="number" style="width:120px" value="1" aria-label="Min">
 Max:
+<label for="max" class="sr-only">Max</label>
 <input id="max" type="number" style="width:120px" value="100" aria-label="Max">
 </p>
 
 <p>
 How many numbers:
+<label for="count" class="sr-only">Count</label>
 <input id="count" type="number" style="width:120px" value="1" min="1" max="1000" aria-label="Count">
 </p>
 
@@ -53,6 +56,7 @@ Allow duplicates?
 <button onclick="generate()">Generate</button>
 
 <h3 style="margin-top:24px">Result</h3>
+<label for="output" class="sr-only">Output</label>
 <textarea id="output" rows="8" style="width:90%" readonly aria-label="Output"></textarea>
 
 <p id="status" style="color:#666;margin-top:8px">Ready.</p>

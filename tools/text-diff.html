@@ -22,8 +22,10 @@
 <p class="subtitle">Paste two text blocks to compare them line by line. Lines only in A or only in B are highlighted.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <div style="display:flex;gap:20px;flex-wrap:wrap">
-<div style="flex:1;min-width:200px"><h3>Text A</h3><textarea id="a" rows="12" style="width:100%" aria-label="A"></textarea></div>
-<div style="flex:1;min-width:200px"><h3>Text B</h3><textarea id="b" rows="12" style="width:100%" aria-label="B"></textarea></div>
+<div style="flex:1;min-width:200px"><h3>Text A</h3><label for="a" class="sr-only">A</label>
+<textarea id="a" rows="12" style="width:100%" aria-label="A"></textarea></div>
+<div style="flex:1;min-width:200px"><h3>Text B</h3><label for="b" class="sr-only">B</label>
+<textarea id="b" rows="12" style="width:100%" aria-label="B"></textarea></div>
 </div>
 <br>
 <button onclick="diff()">Compare</button>

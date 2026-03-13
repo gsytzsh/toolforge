@@ -22,10 +22,12 @@
 <p class="subtitle">Remove comments and collapse whitespace to minify CSS.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>CSS</h3>
+<label for="input" class="sr-only">Input</label>
 <textarea id="input" rows="12" style="width:90%;font-family:monospace" placeholder="/* comment */&#10;.foo { color: red; }" aria-label="Input"></textarea>
 <br><br>
 <button onclick="minify()">Minify</button>
 <h3>Minified</h3>
+<label for="output" class="sr-only">Output</label>
 <textarea id="output" rows="8" style="width:90%;font-family:monospace" readonly aria-label="Output"></textarea>
 </main>
 <script>

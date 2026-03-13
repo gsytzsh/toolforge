@@ -115,6 +115,34 @@ function ensureAriaLabels(html) {
   return html;
 }
 
+function hasLabelFor(html, id) {
+  const pattern = new RegExp(`<label[^>]+for=["']${id}["']`, "i");
+  return pattern.test(html);
+}
+
+function ensureHiddenLabels(html) {
+  html = html.replace(/<(textarea|select)((?:"[^"]*"|'[^']*'|[^'">])*\sid="([^"]+)"(?:"[^"]*"|'[^']*'|[^'">])*)>/g, (match, tag, attrs, id) => {
+    if (hasLabelFor(html, id)) return match;
+    const ariaMatch = attrs.match(/\saria-label="([^"]+)"/i);
+    const labelText = ariaMatch ? ariaMatch[1] : humanizeId(id);
+    return `<label for="${id}" class="sr-only">${escapeAttr(labelText)}</label>\n${match}`;
+  });
+
+  html = html.replace(/<input((?:"[^"]*"|'[^']*'|[^'">])*\sid="([^"]+)"(?:"[^"]*"|'[^']*'|[^'">])*)>/g, (match, attrs, id) => {
+    if (hasLabelFor(html, id)) return match;
+    const typeMatch = attrs.match(/\stype="([^"]+)"/i);
+    const type = typeMatch ? typeMatch[1].toLowerCase() : "text";
+    if (["checkbox", "radio", "hidden", "button", "submit"].includes(type)) {
+      return match;
+    }
+    const ariaMatch = attrs.match(/\saria-label="([^"]+)"/i);
+    const labelText = ariaMatch ? ariaMatch[1] : humanizeId(id);
+    return `<label for="${id}" class="sr-only">${escapeAttr(labelText)}</label>\n${match}`;
+  });
+
+  return html;
+}
+
 function normalizeFile(filePath) {
   const slug = path.basename(filePath, ".html");
   let html = fs.readFileSync(filePath, "utf8");
@@ -123,6 +151,7 @@ function normalizeFile(filePath) {
   html = ensureSocialMeta(html, slug);
   html = ensureMainLandmark(html);
   html = ensureAriaLabels(html);
+  html = ensureHiddenLabels(html);
 
   if (html !== original) {
     fs.writeFileSync(filePath, html, "utf8");

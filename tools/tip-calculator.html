@@ -22,10 +22,13 @@
 <p class="subtitle">Enter bill amount and tip percentage to get tip and total. Optionally split by number of people.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Bill amount</h3>
+<label for="bill" class="sr-only">Bill</label>
 <input id="bill" type="number" step="0.01" placeholder="100" style="width:120px" aria-label="Bill">
 <h3>Tip %</h3>
+<label for="pct" class="sr-only">Pct</label>
 <input id="pct" type="number" step="1" value="15" style="width:80px" aria-label="Pct">
 <h3>Split (people)</h3>
+<label for="split" class="sr-only">Split</label>
 <input id="split" type="number" min="1" value="1" style="width:80px" aria-label="Split">
 <br><br>
 <button onclick="calc()">Calculate</button>

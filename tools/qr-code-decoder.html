@@ -22,9 +22,11 @@
 <p class="subtitle">Decode QR codes from image files using your browser.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>QR image</h3>
+<label for="file" class="sr-only">File</label>
 <input type="file" id="file" accept="image/*" onchange="decodeQr()" aria-label="File">
 <p id="support" style="color:#666;margin-top:6px"></p>
 <h3 style="margin-top:20px">Decoded text</h3>
+<label for="output" class="sr-only">Output</label>
 <textarea id="output" rows="6" style="width:90%;font-family:monospace" readonly aria-label="Output"></textarea>
 <p id="status" style="color:#666;margin-top:6px"></p>
 <section class="tool-seo">

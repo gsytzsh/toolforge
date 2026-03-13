@@ -30,6 +30,7 @@
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <h3>Minutes</h3>
+<label for="min" class="sr-only">Min</label>
 <select id="min" aria-label="Min">
 <option value="*">Every minute</option>
 <option value="0">At 0</option>
@@ -39,6 +40,7 @@
 </select>
 
 <h3>Hours</h3>
+<label for="hour" class="sr-only">Hour</label>
 <select id="hour" aria-label="Hour">
 <option value="*">Every hour</option>
 <option value="0">Midnight</option>
@@ -48,6 +50,7 @@
 </select>
 
 <h3>Day of Month</h3>
+<label for="dom" class="sr-only">Dom</label>
 <select id="dom" aria-label="Dom">
 <option value="*">Every day</option>
 <option value="1">1st</option>
@@ -56,6 +59,7 @@
 </select>
 
 <h3>Month</h3>
+<label for="mon" class="sr-only">Mon</label>
 <select id="mon" aria-label="Mon">
 <option value="*">Every month</option>
 <option value="1">Jan</option>
@@ -65,6 +69,7 @@
 </select>
 
 <h3>Day of Week</h3>
+<label for="dow" class="sr-only">Dow</label>
 <select id="dow" aria-label="Dow">
 <option value="*">Every day</option>
 <option value="1">Mon</option>
@@ -81,6 +86,7 @@
 <button onclick="build()">Generate</button>
 
 <h3 style="margin-top:24px">Cron Expression</h3>
+<label for="cron" class="sr-only">Cron</label>
 <input id="cron" style="width:260px" readonly aria-label="Cron">
 
 </main>

@@ -22,9 +22,13 @@
 <p class="subtitle">Add, subtract, multiply or divide two fractions and get the result in lowest terms.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Fraction 1</h3>
-<input id="n1" type="number" placeholder="Num" style="width:80px" aria-label="N1"> / <input id="d1" type="number" placeholder="Den" style="width:80px" aria-label="D1">
+<label for="n1" class="sr-only">N1</label>
+<input id="n1" type="number" placeholder="Num" style="width:80px" aria-label="N1"> / <label for="d1" class="sr-only">D1</label>
+<input id="d1" type="number" placeholder="Den" style="width:80px" aria-label="D1">
 <h3>Fraction 2</h3>
-<input id="n2" type="number" placeholder="Num" style="width:80px" aria-label="N2"> / <input id="d2" type="number" placeholder="Den" style="width:80px" aria-label="D2">
+<label for="n2" class="sr-only">N2</label>
+<input id="n2" type="number" placeholder="Num" style="width:80px" aria-label="N2"> / <label for="d2" class="sr-only">D2</label>
+<input id="d2" type="number" placeholder="Den" style="width:80px" aria-label="D2">
 <br><br>
 <button onclick="calc('+')">Add</button>
 <button onclick="calc('-')">Subtract</button>

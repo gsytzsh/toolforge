@@ -30,17 +30,22 @@
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <h3>Input URL</h3>
+<label for="url" class="sr-only">Url</label>
 <input id="url" style="width:80%" placeholder="https://example.com/path?foo=1&bar=2" aria-label="Url">
 
 <br><br>
 
+<div class="tool-actions">
 <button onclick="parseUrl()">Parse</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
 
 <h3 style="margin-top:24px">Components</h3>
 <pre id="components"></pre>
 
 <h3>Query Parameters</h3>
 <pre id="params"></pre>
+<p id="status" class="inline-status"></p>
 
 </main>
 
@@ -53,6 +58,8 @@ let input=document.getElementById("url").value.trim()
 if(!input){
 document.getElementById("components").innerText="Enter URL"
 document.getElementById("params").innerText=""
+document.getElementById("status").innerText="Enter a URL to parse."
+document.getElementById("status").style.color="#b91c1c"
 return
 }
 
@@ -86,12 +93,34 @@ document.getElementById("params").innerText="(no query parameters)"
 document.getElementById("params").innerText=
 JSON.stringify(paramsObj,null,2)
 }
+document.getElementById("status").innerText="Parsed successfully."
+document.getElementById("status").style.color="#16a34a"
 
 }catch(e){
 document.getElementById("components").innerText="Invalid URL"
 document.getElementById("params").innerText=""
+document.getElementById("status").innerText="Invalid URL."
+document.getElementById("status").style.color="#b91c1c"
 }
 
+}
+
+function copyResult(){
+let components=document.getElementById("components").innerText.trim()
+let params=document.getElementById("params").innerText.trim()
+if(!components && !params){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+let text=["Components:",components,"","Query Parameters:",params].join("\n")
+navigator.clipboard.writeText(text).then(function(){
+document.getElementById("status").innerText="Parsed result copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
 }
 
 </script>

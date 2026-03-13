@@ -22,12 +22,14 @@
 <p class="subtitle">Convert text to binary (8 bits per character). Optionally add space between bytes.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Text</h3>
+<label for="text" class="sr-only">Text input</label>
 <textarea id="text" rows="6" style="width:90%" placeholder="Hello" aria-label="Text input"></textarea>
 <br><br>
 <label><input type="checkbox" id="space" checked> Space between bytes</label>
 <br><br>
 <button onclick="encode()">Encode</button>
 <h3>Binary</h3>
+<label for="bin" class="sr-only">Bin</label>
 <textarea id="bin" rows="6" style="width:90%" readonly aria-label="Bin"></textarea>
 </main>
 <script>
