@@ -46,34 +46,67 @@
 
 <h3>Result</h3>
 
-<pre id="result"></pre>
+<pre id="result">Enter an IP address to see details.</pre>
 <p id="status" class="inline-status"></p>
 
 </main>
 
 <script>
 
+async function fetchJson(url, options){
+let res=await fetch(url, options)
+if(!res.ok) throw new Error("Request failed")
+return await res.json()
+}
+
+function escapeHtml(value){
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+}
+
+function renderCurrentIpLine(ip, location){
+document.getElementById("self-ip").innerText=
+ip+"  ·  "+location
+}
+
+function renderLookupLines(items){
+document.getElementById("result").innerText=items.map(function(item){
+return item.label+": "+item.value
+}).join("\n")
+}
+
 async function loadSelfIP(){
 
 try{
+let currentData=await fetchJson("https://ipwho.is/")
 
-let res=await fetch("https://ipapi.co/json/")
-let data=await res.json()
-
-if(data && data.ip){
+if(currentData && currentData.success && currentData.ip){
 let locationParts=[
-data.city,
-data.region,
-data.country_name||data.country
+currentData.city,
+currentData.region,
+currentData.country
 ].filter(Boolean)
-document.getElementById("self-ip").innerText=
-data.ip+"  ·  "+(locationParts.length?locationParts.join(", "):"Unknown location")
+renderCurrentIpLine(
+currentData.ip,
+locationParts.length?locationParts.join(", "):"Unknown location"
+)
 document.getElementById("status").innerText=""
-}else{
-document.getElementById("self-ip").innerText="Unable to detect your IP."
+return
 }
 
 }catch(e){
+try{
+let fallback=await fetchJson("https://api64.ipify.org?format=json")
+if(fallback && fallback.ip){
+renderCurrentIpLine(fallback.ip,"Location unavailable")
+document.getElementById("status").innerText=""
+return
+}
+}catch(err){
+}
 
 document.getElementById("self-ip").innerText="Unable to detect your IP."
 
@@ -96,29 +129,26 @@ return
 
 try{
 
-let res=await fetch("https://ipapi.co/"+ip+"/json/")
+let data=await fetchJson("https://ipwho.is/"+encodeURIComponent(ip))
 
-let data=await res.json()
-
-if(data.error){
-document.getElementById("result").innerText=data.reason||"Lookup failed"
+if(!data.success){
+document.getElementById("result").innerText=data.message||"Lookup failed"
 document.getElementById("status").innerText="Lookup failed."
 document.getElementById("status").style.color="#b91c1c"
 return
 }
 
-let lines=[
-"IP: "+(data.ip||ip),
-"City: "+(data.city||"Unknown"),
-"Region: "+(data.region||"Unknown"),
-"Country: "+(data.country_name||data.country||"Unknown"),
-"Postal: "+(data.postal||"Unknown"),
-"Timezone: "+(data.timezone||"Unknown"),
-"ASN: "+(data.asn||"Unknown"),
-"Org: "+(data.org||"Unknown")
-]
-
-document.getElementById("result").innerText=lines.join("\n")
+renderLookupLines([
+{label:"IP",value:(data.ip||ip)},
+{label:"City",value:(data.city||"Unknown")},
+{label:"Region",value:(data.region||"Unknown")},
+{label:"Country",value:(data.country||"Unknown")},
+{label:"Continent",value:(data.continent||"Unknown")},
+{label:"Postal",value:(data.postal||"Unknown")},
+{label:"Timezone",value:((data.timezone&&data.timezone.id)||"Unknown")},
+{label:"ASN",value:String((data.connection&&data.connection.asn)||"Unknown")},
+{label:"Org",value:((data.connection&&data.connection.org)||"Unknown")}
+])
 document.getElementById("status").innerText="Lookup completed."
 document.getElementById("status").style.color="#16a34a"
 
