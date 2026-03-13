@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Markdown to PDF - Convert Markdown into PDF Online | ToolForge</title>
+<meta name="description" content="Free online Markdown to PDF tool to preview Markdown as HTML and export it as a PDF in your browser. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/markdown-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Markdown to PDF - Convert Markdown into PDF Online | ToolForge">
+<meta property="og:description" content="Free online Markdown to PDF tool to preview Markdown as HTML and export it as a PDF in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/markdown-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Markdown to PDF - Convert Markdown into PDF Online | ToolForge">
+<meta name="twitter:description" content="Free online Markdown to PDF tool to preview Markdown as HTML and export it as a PDF in your browser. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>Markdown to PDF</h1>
+<p class="subtitle">Render Markdown as HTML in your browser, then export the preview as a PDF.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="markdown-input" class="sr-only">Markdown input</label>
+<textarea id="markdown-input" rows="12" style="width:90%" aria-label="Markdown input" placeholder="# Project Notes&#10;&#10;- Item 1&#10;- Item 2"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="renderPreview()">Render Preview</button>
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<h3>Preview</h3>
+<div id="preview" style="width:90%;min-height:240px;padding:16px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;color:#111827;overflow:auto"></div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Markdown to PDF</h3>
+<p>This Markdown to PDF tool converts Markdown into a browser preview and exports the rendered result as a PDF. It works well for notes, documentation drafts, changelogs and lightweight printable content.</p>
+<p>For safety, raw HTML is escaped before rendering. Everything is processed locally in your browser without uploading your content to a server.</p>
+</section>
+</main>
+<script>
+function escapeHtml(text){
+return String(text)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#39;")
+}
+
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function renderPreview(){
+let input=document.getElementById("markdown-input").value.trim()
+let preview=document.getElementById("preview")
+if(!input){
+preview.innerHTML=""
+setStatus("Enter Markdown to preview first.","#b91c1c")
+return false
+}
+preview.innerHTML=marked.parse(escapeHtml(input))
+setStatus("Preview rendered.","#16a34a")
+return true
+}
+
+async function elementToPdf(element,fileName){
+let canvas=await html2canvas(element,{
+scale:2,
+backgroundColor:"#ffffff",
+useCORS:true
+})
+let imageData=canvas.toDataURL("image/png")
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let imgWidth=pageWidth-40
+let imgHeight=canvas.height*imgWidth/canvas.width
+let heightLeft=imgHeight
+let position=20
+
+pdf.addImage(imageData,"PNG",20,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-40
+
+while(heightLeft>0){
+position=heightLeft-imgHeight+20
+pdf.addPage()
+pdf.addImage(imageData,"PNG",20,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-40
+}
+
+pdf.save(fileName)
+}
+
+async function downloadPdf(){
+if(!renderPreview()){
+return
+}
+try{
+await elementToPdf(document.getElementById("preview"),"markdown-to-pdf.pdf")
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+
+document.getElementById("markdown-input").value="# Project Notes\n\n- Item 1\n- Item 2\n\n**Ready for export**"
+renderPreview()
+</script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HTML to PDF - Convert HTML into PDF Online | ToolForge</title>
+<meta name="description" content="Free online HTML to PDF tool to render HTML in your browser and export it as a PDF. No server upload required. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/html-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="HTML to PDF - Convert HTML into PDF Online | ToolForge">
+<meta property="og:description" content="Free online HTML to PDF tool to render HTML in your browser and export it as a PDF. No server upload required. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/html-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML to PDF - Convert HTML into PDF Online | ToolForge">
+<meta name="twitter:description" content="Free online HTML to PDF tool to render HTML in your browser and export it as a PDF. No server upload required. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>HTML to PDF</h1>
+<p class="subtitle">Render HTML in your browser, preview it, then download the result as a PDF.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="html-input" class="sr-only">HTML input</label>
+<textarea id="html-input" rows="12" style="width:90%;font-family:monospace" aria-label="HTML input" placeholder="<h1>Invoice</h1>&#10;<p>Hello ToolForge</p>&#10;<ul><li>Item A</li><li>Item B</li></ul>"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="renderPreview()">Render Preview</button>
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<h3>Preview</h3>
+<div id="preview" style="width:90%;min-height:240px;padding:16px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;color:#111827;overflow:auto"></div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About HTML to PDF</h3>
+<p>This HTML to PDF tool renders your HTML in the browser and exports the preview as a downloadable PDF. It is useful for simple invoices, formatted snippets, printable notes and quick HTML document exports.</p>
+<p>For safety, the preview removes scripts and potentially unsafe embedded content before rendering. Everything runs locally in your browser without sending your HTML to a server.</p>
+</section>
+</main>
+<script>
+function sanitizeHtml(input){
+let parser=new DOMParser()
+let doc=parser.parseFromString("<div>"+input+"</div>","text/html")
+doc.querySelectorAll("script,iframe,object,embed,link[rel='import']").forEach(function(node){
+node.remove()
+})
+doc.querySelectorAll("*").forEach(function(node){
+Array.from(node.attributes).forEach(function(attr){
+let name=attr.name.toLowerCase()
+let value=attr.value
+if(name.indexOf("on")===0){
+node.removeAttribute(attr.name)
+return
+}
+if((name==="href"||name==="src")&&/^javascript:/i.test(value)){
+node.removeAttribute(attr.name)
+}
+})
+})
+return doc.body.innerHTML
+}
+
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function renderPreview(){
+let input=document.getElementById("html-input").value.trim()
+let preview=document.getElementById("preview")
+if(!input){
+preview.innerHTML=""
+setStatus("Enter HTML to preview first.","#b91c1c")
+return false
+}
+preview.innerHTML=sanitizeHtml(input)
+setStatus("Preview rendered. Unsafe embedded elements are removed.","#16a34a")
+return true
+}
+
+async function elementToPdf(element,fileName){
+let canvas=await html2canvas(element,{
+scale:2,
+backgroundColor:"#ffffff",
+useCORS:true
+})
+let imageData=canvas.toDataURL("image/png")
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let imgWidth=pageWidth-40
+let imgHeight=canvas.height*imgWidth/canvas.width
+let heightLeft=imgHeight
+let position=20
+
+pdf.addImage(imageData,"PNG",20,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-40
+
+while(heightLeft>0){
+position=heightLeft-imgHeight+20
+pdf.addPage()
+pdf.addImage(imageData,"PNG",20,position,imgWidth,imgHeight)
+heightLeft-=pageHeight-40
+}
+
+pdf.save(fileName)
+}
+
+async function downloadPdf(){
+if(!renderPreview()){
+return
+}
+try{
+await elementToPdf(document.getElementById("preview"),"html-to-pdf.pdf")
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+
+document.getElementById("html-input").value="<h1>Invoice</h1>\n<p>Hello ToolForge</p>\n<ul><li>Item A</li><li>Item B</li></ul>"
+renderPreview()
+</script>
+</body>
+</html>

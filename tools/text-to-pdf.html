@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Text to PDF - Convert Plain Text into PDF Online | ToolForge</title>
+<meta name="description" content="Free online Text to PDF tool to turn plain text into a downloadable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/text-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Text to PDF - Convert Plain Text into PDF Online | ToolForge">
+<meta property="og:description" content="Free online Text to PDF tool to turn plain text into a downloadable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/text-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Text to PDF - Convert Plain Text into PDF Online | ToolForge">
+<meta name="twitter:description" content="Free online Text to PDF tool to turn plain text into a downloadable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>Text to PDF</h1>
+<p class="subtitle">Paste plain text and download it as a paginated PDF directly in your browser.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="text-input" class="sr-only">Text input</label>
+<textarea id="text-input" rows="12" style="width:90%;font-family:monospace" aria-label="Text input" placeholder="Paste plain text here"></textarea>
+<p>
+Font size:
+<label for="font-size" class="sr-only">Font size</label>
+<input id="font-size" type="number" value="11" min="8" max="20" style="width:90px" aria-label="Font size">
+</p>
+<div class="tool-actions">
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Text to PDF</h3>
+<p>This Text to PDF tool turns plain text into a simple paginated PDF. It is useful for notes, logs, snippets, drafts and quick printable text documents.</p>
+<p>The conversion is done entirely in your browser, so your text stays on your device during export.</p>
+</section>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function writeTextPdf(text,fileName,fontSize){
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let margin=40
+let usableWidth=pageWidth-margin*2
+let lineHeight=fontSize*1.5
+let y=margin
+
+pdf.setFont("courier","normal")
+pdf.setFontSize(fontSize)
+
+text.split(/\r?\n/).forEach(function(rawLine){
+let wrapped=pdf.splitTextToSize(rawLine||" ",usableWidth)
+wrapped.forEach(function(line){
+if(y>pageHeight-margin){
+pdf.addPage()
+pdf.setFont("courier","normal")
+pdf.setFontSize(fontSize)
+y=margin
+}
+pdf.text(line,margin,y)
+y+=lineHeight
+})
+})
+
+pdf.save(fileName)
+}
+
+function downloadPdf(){
+let text=document.getElementById("text-input").value
+let fontSize=parseInt(document.getElementById("font-size").value,10)||11
+if(!text.trim()){
+setStatus("Enter text first.","#b91c1c")
+return
+}
+try{
+writeTextPdf(text,"text-to-pdf.pdf",fontSize)
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+
+document.getElementById("text-input").value="ToolForge text export\n\nThis page converts plain text into a simple PDF."
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JSON to PDF - Convert JSON into PDF Online | ToolForge</title>
+<meta name="description" content="Free online JSON to PDF tool to format JSON and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/json-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="JSON to PDF - Convert JSON into PDF Online | ToolForge">
+<meta property="og:description" content="Free online JSON to PDF tool to format JSON and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/json-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JSON to PDF - Convert JSON into PDF Online | ToolForge">
+<meta name="twitter:description" content="Free online JSON to PDF tool to format JSON and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>JSON to PDF</h1>
+<p class="subtitle">Pretty-print JSON and download it as a readable PDF directly in your browser.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="json-input" class="sr-only">JSON input</label>
+<textarea id="json-input" rows="12" style="width:90%;font-family:monospace" aria-label="JSON input" placeholder='{"name":"ToolForge","version":1}'></textarea>
+<div class="tool-actions">
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About JSON to PDF</h3>
+<p>This JSON to PDF tool validates JSON, formats it with indentation and exports the result as a clean PDF. It is helpful for sharing configs, API examples, payloads and structured data snapshots.</p>
+<p>The conversion is handled entirely in the browser, so your JSON is not uploaded to a server.</p>
+</section>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function writeTextPdf(text,fileName){
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let margin=40
+let usableWidth=pageWidth-margin*2
+let fontSize=10
+let lineHeight=14
+let y=margin
+
+pdf.setFont("courier","normal")
+pdf.setFontSize(fontSize)
+
+text.split(/\r?\n/).forEach(function(rawLine){
+let wrapped=pdf.splitTextToSize(rawLine||" ",usableWidth)
+wrapped.forEach(function(line){
+if(y>pageHeight-margin){
+pdf.addPage()
+pdf.setFont("courier","normal")
+pdf.setFontSize(fontSize)
+y=margin
+}
+pdf.text(line,margin,y)
+y+=lineHeight
+})
+})
+
+pdf.save(fileName)
+}
+
+function downloadPdf(){
+let input=document.getElementById("json-input").value.trim()
+if(!input){
+setStatus("Enter JSON first.","#b91c1c")
+return
+}
+try{
+let parsed=JSON.parse(input)
+let formatted=JSON.stringify(parsed,null,2)
+writeTextPdf(formatted,"json-to-pdf.pdf")
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("Invalid JSON input.","#b91c1c")
+}
+}
+
+document.getElementById("json-input").value='{"name":"ToolForge","category":"JSON & Data","active":true}'
+</script>
+</body>
+</html>
