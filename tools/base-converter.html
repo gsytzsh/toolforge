@@ -42,7 +42,10 @@
 
 <br><br>
 
+<div class="tool-actions">
 <button onclick="convert()">Convert</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
 
 <h3 style="margin-top:24px">Result</h3>
 <p>Binary: <span id="b2"></span></p>
@@ -107,6 +110,31 @@ document.getElementById("b16").innerText=n.toString(16).toUpperCase()
 document.getElementById("status").innerText="Converted successfully."
 document.getElementById("status").style.color="#16a34a"
 
+}
+
+function copyResult(){
+let b2=document.getElementById("b2").innerText
+let b8=document.getElementById("b8").innerText
+let b10=document.getElementById("b10").innerText
+let b16=document.getElementById("b16").innerText
+if(!b2&&!b8&&!b10&&!b16){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+let text=[
+"Binary: "+b2,
+"Octal: "+b8,
+"Decimal: "+b10,
+"Hex: "+b16
+].join("\n")
+navigator.clipboard.writeText(text).then(function(){
+document.getElementById("status").innerText="Result copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
 }
 
 </script>

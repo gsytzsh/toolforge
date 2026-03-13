@@ -25,12 +25,19 @@
 <label for="text" class="sr-only">Text input</label>
 <textarea id="text" rows="4" style="width:90%" placeholder="Hello" aria-label="Text input"></textarea>
 <br><br>
+<div class="tool-actions">
 <button onclick="toMorse()">Text → Morse</button>
+<button type="button" onclick="copyMorse()">Copy Morse</button>
+</div>
 <h3>Morse</h3>
-<label for="morse" class="sr-only">Morse</label>
-<textarea id="morse" rows="4" style="width:90%" placeholder=".... . .-.. .-.. ---" aria-label="Morse"></textarea>
+<label for="morse" class="sr-only">Morse code</label>
+<textarea id="morse" rows="4" style="width:90%" placeholder=".... . .-.. .-.. ---" aria-label="Morse code"></textarea>
 <br><br>
+<div class="tool-actions">
 <button onclick="toText()">Morse → Text</button>
+<button type="button" onclick="copyText()">Copy Text</button>
+</div>
+<p id="status" class="inline-status"></p>
 </main>
 <script>
 var map={A:".-",B:"-...",C:"-.-.",D:"-..",E:".",F:"..-.",G:"--.",H:"....",I:"..",J:".---",K:"-.-",L:".-..",M:"--",N:"-.",O:"---",P:".--.",Q:"--.-",R:".-.",S:"...",T:"-",U:"..-",V:"...-",W:".--",X:"-..-",Y:"-.--",Z:"--..","1":".----","2":"..---","3":"...--","4":"....-","5":".....","6":"-....","7":"--...","8":"---..","9":"----.","0":"-----"}
@@ -39,10 +46,46 @@ for(var k in map)rev[map[k]]=k
 function toMorse(){
 var s=document.getElementById("text").value.toUpperCase().replace(/[^A-Z0-9\s]/g,"")
 document.getElementById("morse").value=s.split("").map(function(c){return c===" "?"/":map[c]||""}).join(" ").replace(/\s*\/\s*/g," / ")
+document.getElementById("status").innerText="Converted to Morse."
+document.getElementById("status").style.color="#16a34a"
 }
 function toText(){
 var s=document.getElementById("morse").value.trim().split(/\s+/)
 document.getElementById("text").value=s.map(function(c){return c==="/"?" ":rev[c]||""}).join("")
+document.getElementById("status").innerText="Converted to text."
+document.getElementById("status").style.color="#16a34a"
+}
+
+function copyMorse(){
+var value=document.getElementById("morse").value
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Morse copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+
+function copyText(){
+var value=document.getElementById("text").value
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Text copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
 }
 </script>
 </body>

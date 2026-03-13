@@ -25,7 +25,10 @@
 <label for="bin" class="sr-only">Binary input</label>
 <textarea id="bin" rows="6" style="width:90%" placeholder="01001000 01101001" aria-label="Binary input"></textarea>
 <br><br>
+<div class="tool-actions">
 <button onclick="decode()">Decode</button>
+<button type="button" onclick="copyOutput()">Copy Result</button>
+</div>
 <h3>Text</h3>
 <label for="text" class="sr-only">Text input</label>
 <textarea id="text" rows="6" style="width:90%" readonly aria-label="Text input"></textarea>
@@ -43,6 +46,24 @@ if(/[^01]/.test(byte)){document.getElementById("text").value="";document.getElem
 out+=String.fromCharCode(parseInt(byte,2))
 }
 document.getElementById("text").value=out
+document.getElementById("err").innerText="Decoded successfully."
+document.getElementById("err").style.color="#16a34a"
+}
+
+function copyOutput(){
+var value=document.getElementById("text").value
+if(!value){
+document.getElementById("err").innerText="Nothing to copy."
+document.getElementById("err").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("err").innerText="Result copied."
+document.getElementById("err").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("err").innerText="Copy failed."
+document.getElementById("err").style.color="#b91c1c"
+})
 }
 </script>
 </body>

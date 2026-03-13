@@ -90,7 +90,6 @@ function humanizeId(id) {
     bin: "Binary input",
     expr: "Expression",
     num: "Number",
-    code: "Code",
     val: "Value",
     header: "Header input",
     result: "Result text",
@@ -108,6 +107,11 @@ function humanizeId(id) {
     title: "Title",
     note: "Note",
     code: "Status code",
+    slug: "Slug",
+    fromBase: "Source base",
+    targetWidth: "Target width",
+    targetHeight: "Target height",
+    morse: "Morse code",
   };
 
   if (overrides[id]) return overrides[id];

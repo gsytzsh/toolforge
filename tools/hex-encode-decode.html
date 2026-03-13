@@ -25,8 +25,11 @@
 <label for="text" class="sr-only">Text input</label>
 <textarea id="text" rows="6" style="width:90%;font-family:monospace" placeholder="Hello, world" aria-label="Text input"></textarea>
 <br><br>
+<div class="tool-actions">
 <button type="button" onclick="encodeHex()">Text to Hex</button>
 <button type="button" onclick="decodeHex()">Hex to Text</button>
+<button type="button" onclick="copyCurrent()">Copy Current Result</button>
+</div>
 <h3 style="margin-top:20px">Hex</h3>
 <label for="hex" class="sr-only">Hex input</label>
 <textarea id="hex" rows="6" style="width:90%;font-family:monospace" placeholder="48 65 6c 6c 6f" aria-label="Hex input"></textarea>
@@ -59,6 +62,8 @@ function encodeHex(){
   var text=document.getElementById("text").value;
   var enc=new TextEncoder();
   document.getElementById("hex").value=toHex(enc.encode(text));
+  document.getElementById("hex-error").innerText="Hex generated.";
+  document.getElementById("hex-error").style.color="#16a34a";
 }
 
 function decodeHex(){
@@ -70,7 +75,26 @@ function decodeHex(){
   }catch(e){
     document.getElementById("text").value="";
     document.getElementById("hex-error").innerText=e.message;
+    document.getElementById("hex-error").style.color="#b91c1c";
   }
+}
+
+function copyCurrent(){
+  var hex=document.getElementById("hex").value.trim();
+  var text=document.getElementById("text").value.trim();
+  var value=hex||text;
+  if(!value){
+    document.getElementById("hex-error").innerText="Nothing to copy.";
+    document.getElementById("hex-error").style.color="#b91c1c";
+    return;
+  }
+  navigator.clipboard.writeText(value).then(function(){
+    document.getElementById("hex-error").innerText="Result copied.";
+    document.getElementById("hex-error").style.color="#16a34a";
+  }).catch(function(){
+    document.getElementById("hex-error").innerText="Copy failed.";
+    document.getElementById("hex-error").style.color="#b91c1c";
+  });
 }
 </script>
 </body>

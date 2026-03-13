@@ -27,10 +27,14 @@
 <br><br>
 <label><input type="checkbox" id="space" checked> Space between bytes</label>
 <br><br>
+<div class="tool-actions">
 <button onclick="encode()">Encode</button>
+<button type="button" onclick="copyOutput()">Copy Result</button>
+</div>
 <h3>Binary</h3>
 <label for="bin" class="sr-only">Binary input</label>
 <textarea id="bin" rows="6" style="width:90%" readonly aria-label="Binary input"></textarea>
+<p id="status" class="inline-status"></p>
 </main>
 <script>
 function encode(){
@@ -39,6 +43,24 @@ var sep=document.getElementById("space").checked?" ":""
 var out=""
 for(var i=0;i<s.length;i++)out+=(i?sep:"")+s.charCodeAt(i).toString(2).padStart(8,"0")
 document.getElementById("bin").value=out
+document.getElementById("status").innerText="Encoded successfully."
+document.getElementById("status").style.color="#16a34a"
+}
+
+function copyOutput(){
+var value=document.getElementById("bin").value
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Result copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
 }
 </script>
 </body>
