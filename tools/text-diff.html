@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Text Diff – Compare Two Texts Online | ToolForge</title>
+<meta name="description" content="Free online Text Diff to compare two text blocks and see differences line by line. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Text Diff</h1>
+<p class="subtitle">Paste two text blocks to compare them line by line. Lines only in A or only in B are highlighted.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<div style="display:flex;gap:20px;flex-wrap:wrap">
+<div style="flex:1;min-width:200px"><h3>Text A</h3><textarea id="a" rows="12" style="width:100%"></textarea></div>
+<div style="flex:1;min-width:200px"><h3>Text B</h3><textarea id="b" rows="12" style="width:100%"></textarea></div>
+</div>
+<br>
+<button onclick="diff()">Compare</button>
+<h3>Diff (A vs B)</h3>
+<pre id="out" style="background:#1e1e1e;color:#eee;padding:12px;border-radius:8px;overflow:auto;max-height:300px"></pre>
+</div>
+<script>
+function diff(){
+var a=document.getElementById("a").value.split(/\r?\n/)
+var b=document.getElementById("b").value.split(/\r?\n/)
+var setB=new Set(b)
+var setA=new Set(a)
+var out=[]
+a.forEach(function(line){out.push(setB.has(line)?"  "+line:"- "+line)})
+b.forEach(function(line){if(!setA.has(line))out.push("+ "+line)})
+document.getElementById("out").innerText=out.join("\n")||"(no difference)"
+}
+</script>
+</body>
+</html>

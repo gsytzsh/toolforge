@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Permutation & Combination – nPr nCr Calculator | ToolForge</title>
+<meta name="description" content="Free online Permutation and Combination calculator (nPr, nCr). Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Permutation & Combination</h1>
+<p class="subtitle">Enter n and r to get nPr (permutations) and nCr (combinations).</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>n</h3>
+<input id="n" type="number" min="0" placeholder="5" style="width:80px">
+<h3>r</h3>
+<input id="r" type="number" min="0" placeholder="2" style="width:80px">
+<br><br>
+<button onclick="calc()">Calculate</button>
+<h3>Result</h3>
+<p>nPr: <span id="pr"></span></p>
+<p>nCr: <span id="cr"></span></p>
+</div>
+<script>
+function fact(k){var f=1;for(var i=2;i<=k;i++)f*=i;return f}
+function calc(){
+var n=parseInt(document.getElementById("n").value,10)
+var r=parseInt(document.getElementById("r").value,10)
+if(isNaN(n)||isNaN(r)||n<0||r<0||r>n){document.getElementById("pr").innerText="";document.getElementById("cr").innerText="Enter n ≥ r ≥ 0.";return}
+document.getElementById("pr").innerText=fact(n)/fact(n-r)
+document.getElementById("cr").innerText=fact(n)/(fact(r)*fact(n-r))
+}
+</script>
+</body>
+</html>

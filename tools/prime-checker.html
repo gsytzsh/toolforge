@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Prime Number Checker – Check if Number is Prime | ToolForge</title>
+<meta name="description" content="Free online Prime Number Checker to determine if a number is prime. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Prime Number Checker</h1>
+<p class="subtitle">Enter a positive integer to check if it is prime.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Number</h3>
+<input id="n" type="number" min="2" placeholder="97" style="width:120px">
+<br><br>
+<button onclick="check()">Check</button>
+<h3>Result</h3>
+<p id="result"></p>
+</div>
+<script>
+function check(){
+var n=parseInt(document.getElementById("n").value,10)
+if(isNaN(n)||n<2){document.getElementById("result").innerText="Enter an integer ≥ 2.";return}
+var prime=true
+for(var i=2;i*i<=n;i++)if(n%i===0){prime=false;break}
+document.getElementById("result").innerText=prime?"Prime.":"Not prime."
+}
+</script>
+</body>
+</html>

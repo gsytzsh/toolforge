@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Factorial Calculator – n! Calculator | ToolForge</title>
+<meta name="description" content="Free online Factorial Calculator to compute n! for non-negative integers. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Factorial Calculator</h1>
+<p class="subtitle">Enter a non-negative integer n to compute n! (factorial).</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>n</h3>
+<input id="n" type="number" min="0" placeholder="10" style="width:100px">
+<br><br>
+<button onclick="calc()">Calculate</button>
+<h3>Result</h3>
+<p id="result"></p>
+</div>
+<script>
+function calc(){
+var n=parseInt(document.getElementById("n").value,10)
+if(isNaN(n)||n<0){document.getElementById("result").innerText="Enter n ≥ 0.";return}
+var f=1
+for(var i=2;i<=n;i++)f*=i
+document.getElementById("result").innerText=f.toString()
+}
+</script>
+</body>
+</html>

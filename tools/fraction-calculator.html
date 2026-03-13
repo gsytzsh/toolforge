@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fraction Calculator – Add, Subtract, Multiply, Divide Fractions | ToolForge</title>
+<meta name="description" content="Free online Fraction Calculator to add, subtract, multiply and divide fractions. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Fraction Calculator</h1>
+<p class="subtitle">Add, subtract, multiply or divide two fractions and get the result in lowest terms.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Fraction 1</h3>
+<input id="n1" type="number" placeholder="Num" style="width:80px"> / <input id="d1" type="number" placeholder="Den" style="width:80px">
+<h3>Fraction 2</h3>
+<input id="n2" type="number" placeholder="Num" style="width:80px"> / <input id="d2" type="number" placeholder="Den" style="width:80px">
+<br><br>
+<button onclick="calc('+')">Add</button>
+<button onclick="calc('-')">Subtract</button>
+<button onclick="calc('*')">Multiply</button>
+<button onclick="calc('/')">Divide</button>
+<h3>Result</h3>
+<p id="result"></p>
+</div>
+<script>
+function gcd(a,b){return b?gcd(b,a%b):Math.abs(a)}
+function calc(op){
+var n1=+document.getElementById("n1").value,d1=+document.getElementById("d1").value
+var n2=+document.getElementById("n2").value,d2=+document.getElementById("d2").value
+if(!d1||!d2){document.getElementById("result").innerText="Enter both fractions.";return}
+var num,den
+if(op==='+'){num=n1*d2+n2*d1;den=d1*d2}
+else if(op==='-'){num=n1*d2-n2*d1;den=d1*d2}
+else if(op==='*'){num=n1*n2;den=d1*d2}
+else{num=n1*d2;den=d1*n2}
+if(!den){document.getElementById("result").innerText="Invalid.";return}
+var g=gcd(num,den)
+num/=g;den/=g
+if(den<0){num=-num;den=-den}
+document.getElementById("result").innerText=num+(den!==1?" / "+den:"")
+}
+</script>
+</body>
+</html>

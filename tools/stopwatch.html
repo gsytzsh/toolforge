@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Stopwatch – Online Stopwatch | ToolForge</title>
+<meta name="description" content="Free online Stopwatch to measure elapsed time. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Stopwatch</h1>
+<p class="subtitle">Simple stopwatch: start, pause and reset.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h2 id="display" style="font-size:2.5rem;font-family:monospace">00:00:00.0</h2>
+<br>
+<button onclick="start()">Start</button>
+<button onclick="pause()">Pause</button>
+<button onclick="reset()">Reset</button>
+</div>
+<script>
+var startTime=0,elapsed=0,tid=null
+function show(){
+var ms=elapsed+(tid?Date.now()-startTime:0)
+var h=Math.floor(ms/3600000),m=Math.floor((ms%3600000)/60000),s=Math.floor((ms%60000)/1000),t=Math.floor((ms%1000)/100)
+document.getElementById("display").innerText=
+String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")+"."+t
+}
+function start(){if(tid)return;startTime=Date.now();tid=setInterval(show,100)}
+function pause(){if(tid){clearInterval(tid);elapsed+=Date.now()-startTime;tid=null}}
+function reset(){pause();elapsed=0;show()}
+show()
+</script>
+</body>
+</html>

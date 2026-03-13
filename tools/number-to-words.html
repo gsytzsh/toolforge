@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Number to Words – Convert Number to English Words | ToolForge</title>
+<meta name="description" content="Free online Number to Words converter for integers (English). Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Number to Words</h1>
+<p class="subtitle">Convert a number to English words (e.g. 1234 → one thousand two hundred thirty-four).</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Number</h3>
+<input id="num" type="number" placeholder="1234" style="width:180px">
+<br><br>
+<button onclick="convert()">Convert</button>
+<h3>Result</h3>
+<p id="result"></p>
+</div>
+<script>
+var ones="zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split(" ")
+var tens="","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"
+function word(n){
+if(n<20)return ones[n]
+if(n<100)return tens[~~(n/10)]+(n%10?"-"+ones[n%10]:"")
+if(n<1000)return ones[~~(n/100)]+" hundred"+(n%100?" "+word(n%100):"")
+if(n<1e6)return word(~~(n/1000))+" thousand"+(n%1000?" "+word(n%1000):"")
+if(n<1e9)return word(~~(n/1e6))+" million"+(n%1e6?" "+word(n%1e6):"")
+return word(~~(n/1e9))+" billion"+(n%1e9?" "+word(n%1e9):"")
+}
+function convert(){
+var n=parseInt(document.getElementById("num").value,10)
+if(isNaN(n)||n<0||n>999999999999){document.getElementById("result").innerText="Enter 0–999999999999.";return}
+document.getElementById("result").innerText=word(n)
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Reverse Text – Reverse String Online | ToolForge</title>
+<meta name="description" content="Free online Reverse Text tool to reverse a string character by character. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Reverse Text</h1>
+<p class="subtitle">Reverse a string character by character (or reverse each line).</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Input</h3>
+<textarea id="input" rows="6" style="width:90%"></textarea>
+<br><br>
+<button onclick="reverseAll()">Reverse entire text</button>
+<button onclick="reverseLines()">Reverse each line</button>
+<h3>Result</h3>
+<textarea id="output" rows="6" style="width:90%"></textarea>
+</div>
+<script>
+function reverseAll(){document.getElementById("output").value=document.getElementById("input").value.split("").reverse().join("")}
+function reverseLines(){document.getElementById("output").value=document.getElementById("input").value.split(/\r?\n/).map(function(l){return l.split("").reverse().join("")}).join("\n")}
+</script>
+</body>
+</html>

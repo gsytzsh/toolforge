@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JSON to XML – Convert JSON to XML Online | ToolForge</title>
+<meta name="description" content="Free online JSON to XML converter. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>JSON to XML</h1>
+<p class="subtitle">Convert JSON to XML. Objects become elements, arrays repeat the key.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>JSON</h3>
+<textarea id="json" rows="10" style="width:90%" placeholder='{"name":"Tom","age":20}'></textarea>
+<br><br>
+<button onclick="convert()">Convert to XML</button>
+<h3>XML</h3>
+<textarea id="xml" rows="10" style="width:90%"></textarea>
+<p id="status" style="color:#666"></p>
+</div>
+<script>
+function escapeXml(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function toXml(key,val){
+if(typeof val!=="object"||val===null)return "<"+key+">"+escapeXml(String(val))+"</"+key+">"
+if(Array.isArray(val)){var s="";val.forEach(function(v){s+=toXml(key,v)});return s}
+var s=""
+for(var k in val)s+=toXml(k,val[k])
+return "<"+key+">"+s+"</"+key+">"
+}
+function convert(){
+try{
+var obj=JSON.parse(document.getElementById("json").value||"{}")
+document.getElementById("xml").value='<?xml version="1.0" encoding="UTF-8"?>\n'+toXml("root",obj)
+document.getElementById("status").innerText="OK."
+document.getElementById("status").style.color="#16a34a"
+}catch(e){document.getElementById("status").innerText="Error: "+e.message
+document.getElementById("status").style.color="#b91c1c"}
+}
+</script>
+</body>
+</html>

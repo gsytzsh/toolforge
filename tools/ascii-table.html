@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ASCII Table – ASCII Character Codes | ToolForge</title>
+<meta name="description" content="Free online ASCII table with decimal, hex and character codes. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>ASCII Table</h1>
+<p class="subtitle">Reference table for ASCII character codes (0–127): decimal, hex and character.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Table</h3>
+<table id="tbl" style="width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd">
+<thead><tr><th>Dec</th><th>Hex</th><th>Char</th><th>Dec</th><th>Hex</th><th>Char</th></tr></thead>
+<tbody id="body"></tbody>
+</table>
+</div>
+<script>
+var t=document.getElementById("body")
+for(var i=0;i<128;i+=2){
+var r=document.createElement("tr")
+var c=function(n){var cell=document.createElement("td");cell.style.border="1px solid #eee";cell.style.padding="6px";return cell}
+r.appendChild(c()).innerText=i
+r.appendChild(c()).innerText=i.toString(16).toUpperCase()
+r.appendChild(c()).innerText=i>=32?String.fromCharCode(i):""
+r.appendChild(c()).innerText=i+1
+r.appendChild(c()).innerText=(i+1).toString(16).toUpperCase()
+r.appendChild(c()).innerText=i+1>=32?String.fromCharCode(i+1):""
+t.appendChild(r)
+}
+</script>
+</body>
+</html>

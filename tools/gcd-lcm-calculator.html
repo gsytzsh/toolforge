@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GCD LCM Calculator – Greatest Common Divisor & Least Common Multiple | ToolForge</title>
+<meta name="description" content="Free online GCD and LCM Calculator for two numbers. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>GCD & LCM Calculator</h1>
+<p class="subtitle">Enter two integers to get Greatest Common Divisor and Least Common Multiple.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Number A</h3>
+<input id="a" type="number" placeholder="24" style="width:120px">
+<h3>Number B</h3>
+<input id="b" type="number" placeholder="36" style="width:120px">
+<br><br>
+<button onclick="calc()">Calculate</button>
+<h3>Result</h3>
+<p>GCD: <span id="gcd"></span></p>
+<p>LCM: <span id="lcm"></span></p>
+</div>
+<script>
+function gcd(a,b){return b?gcd(b,a%b):Math.abs(a)}
+function calc(){
+var a=parseInt(document.getElementById("a").value,10)
+var b=parseInt(document.getElementById("b").value,10)
+if(isNaN(a)||isNaN(b)){document.getElementById("gcd").innerText="";document.getElementById("lcm").innerText="Enter two numbers.";return}
+var g=gcd(a,b)
+document.getElementById("gcd").innerText=g
+document.getElementById("lcm").innerText=g?Math.abs(a*b)/g:""
+}
+</script>
+</body>
+</html>

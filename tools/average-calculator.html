@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Average Calculator – Mean, Median, Mode | ToolForge</title>
+<meta name="description" content="Free online Average Calculator to find mean, median and mode of a list of numbers. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Average Calculator</h1>
+<p class="subtitle">Enter numbers separated by comma or space to get mean, median and mode.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Numbers</h3>
+<textarea id="input" rows="4" style="width:90%" placeholder="1, 2, 3, 4, 5"></textarea>
+<br><br>
+<button onclick="calc()">Calculate</button>
+<h3>Result</h3>
+<p>Mean: <span id="mean"></span></p>
+<p>Median: <span id="median"></span></p>
+<p>Mode: <span id="mode"></span></p>
+</div>
+<script>
+function calc(){
+var t=document.getElementById("input").value.replace(/,/g," ").split(/\s+/).filter(Boolean).map(Number).filter(n=>!isNaN(n))
+if(!t.length){document.getElementById("mean").innerText="";document.getElementById("median").innerText="";document.getElementById("mode").innerText="Enter numbers.";return}
+var sum=t.reduce((a,b)=>a+b,0)
+document.getElementById("mean").innerText=(sum/t.length).toFixed(4)
+t.sort((a,b)=>a-b)
+var mid=Math.floor(t.length/2)
+document.getElementById("median").innerText=t.length%2?t[mid]:((t[mid-1]+t[mid])/2).toFixed(4)
+var freq={},max=0,mode=[]
+t.forEach(n=>{freq[n]=(freq[n]||0)+1;if(freq[n]>max)max=freq[n]})
+Object.keys(freq).forEach(k=>{if(freq[k]===max)mode.push(Number(k))})
+document.getElementById("mode").innerText=mode.length===t.length?"N/A":mode.join(", ")
+}
+</script>
+</body>
+</html>

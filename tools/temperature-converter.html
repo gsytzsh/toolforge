@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Temperature Converter – Celsius, Fahrenheit, Kelvin | ToolForge</title>
+<meta name="description" content="Free online Temperature Converter between Celsius, Fahrenheit and Kelvin. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Temperature Converter</h1>
+<p class="subtitle">Convert between Celsius, Fahrenheit and Kelvin.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Value</h3>
+<input id="val" type="number" step="any" placeholder="0" style="width:120px">
+<select id="from">
+<option value="C">Celsius</option>
+<option value="F">Fahrenheit</option>
+<option value="K">Kelvin</option>
+</select>
+<br><br>
+<button onclick="convert()">Convert</button>
+<h3>Result</h3>
+<p>Celsius: <span id="C"></span></p>
+<p>Fahrenheit: <span id="F"></span></p>
+<p>Kelvin: <span id="K"></span></p>
+</div>
+<script>
+function convert(){
+var v=parseFloat(document.getElementById("val").value)
+var from=document.getElementById("from").value
+if(isNaN(v)){document.getElementById("C").innerText="";document.getElementById("F").innerText="";document.getElementById("K").innerText="Enter a number.";return}
+var c,f,k
+if(from==="C"){c=v;f=v*9/5+32;k=v+273.15}
+else if(from==="F"){c=(v-32)*5/9;f=v;k=c+273.15}
+else{c=v-273.15;f=c*9/5+32;k=v}
+document.getElementById("C").innerText=c.toFixed(2)
+document.getElementById("F").innerText=f.toFixed(2)
+document.getElementById("K").innerText=k.toFixed(2)
+}
+</script>
+</body>
+</html>

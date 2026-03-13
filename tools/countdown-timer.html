@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Countdown Timer – Count Down Timer Online | ToolForge</title>
+<meta name="description" content="Free online Countdown Timer to count down from minutes and seconds. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Countdown Timer</h1>
+<p class="subtitle">Set minutes and seconds, then start the countdown.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Minutes</h3>
+<input id="min" type="number" min="0" value="1" style="width:80px">
+<h3>Seconds</h3>
+<input id="sec" type="number" min="0" max="59" value="0" style="width:80px">
+<br><br>
+<button onclick="start()">Start</button>
+<button onclick="stop()">Stop</button>
+<h2 id="display" style="font-size:2.5rem;font-family:monospace">01:00</h2>
+<p id="msg"></p>
+</div>
+<script>
+var tid=null,remaining=0
+function show(){
+var m=Math.floor(remaining/60),s=remaining%60
+document.getElementById("display").innerText=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")
+if(remaining<=0){clearInterval(tid);tid=null;document.getElementById("msg").innerText="Time's up!"}
+}
+function start(){
+if(tid)return
+var min=parseInt(document.getElementById("min").value,10)||0
+var sec=parseInt(document.getElementById("sec").value,10)||0
+remaining=min*60+sec
+document.getElementById("msg").innerText=""
+show()
+tid=setInterval(function(){remaining--;show()},1000)
+}
+function stop(){if(tid){clearInterval(tid);tid=null}document.getElementById("msg").innerText="Stopped."}
+</script>
+</body>
+</html>

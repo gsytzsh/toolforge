@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Weight Converter – kg, lb, oz | ToolForge</title>
+<meta name="description" content="Free online Weight Converter between kg, pounds and ounces. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Weight Converter</h1>
+<p class="subtitle">Convert between kilograms, pounds and ounces.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Value</h3>
+<input id="val" type="number" step="any" placeholder="1" style="width:120px">
+<select id="from">
+<option value="kg">Kilograms</option>
+<option value="lb">Pounds</option>
+<option value="oz">Ounces</option>
+</select>
+<br><br>
+<button onclick="convert()">Convert</button>
+<h3>Result</h3>
+<p>Kilograms: <span id="kg"></span></p>
+<p>Pounds: <span id="lb"></span></p>
+<p>Ounces: <span id="oz"></span></p>
+</div>
+<script>
+var toKg={kg:1,lb:0.453592,oz:0.0283495}
+function convert(){
+var v=parseFloat(document.getElementById("val").value)
+var from=document.getElementById("from").value
+if(isNaN(v)){document.getElementById("kg").innerText="";document.getElementById("lb").innerText="";document.getElementById("oz").innerText="Enter a number.";return}
+var kg=v*toKg[from]
+document.getElementById("kg").innerText=kg.toFixed(4)
+document.getElementById("lb").innerText=(kg/0.453592).toFixed(4)
+document.getElementById("oz").innerText=(kg/0.0283495).toFixed(4)
+}
+</script>
+</body>
+</html>

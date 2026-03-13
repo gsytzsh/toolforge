@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sort Lines – Sort Text Lines Alphabetically | ToolForge</title>
+<meta name="description" content="Free online Sort Lines tool to sort lines alphabetically (A–Z or Z–A). Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Sort Lines</h1>
+<p class="subtitle">Paste text with one item per line; sort alphabetically ascending or descending.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Input</h3>
+<textarea id="input" rows="10" style="width:90%"></textarea>
+<br><br>
+<button onclick="sort(true)">Sort A–Z</button>
+<button onclick="sort(false)">Sort Z–A</button>
+<h3>Result</h3>
+<textarea id="output" rows="10" style="width:90%"></textarea>
+</div>
+<script>
+function sort(asc){
+var lines=document.getElementById("input").value.split(/\r?\n/)
+lines.sort(function(a,b){return asc?a.localeCompare(b):b.localeCompare(a)})
+document.getElementById("output").value=lines.join("\n")
+}
+</script>
+</body>
+</html>

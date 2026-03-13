@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Binary Calculator – Add Subtract Binary Numbers | ToolForge</title>
+<meta name="description" content="Free online Binary Calculator to add or subtract binary numbers. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Binary Calculator</h1>
+<p class="subtitle">Add or subtract two binary numbers (positive integers).</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Binary A</h3>
+<input id="a" placeholder="1010" style="width:200px">
+<h3>Binary B</h3>
+<input id="b" placeholder="111" style="width:200px">
+<br><br>
+<button onclick="calc('+')">Add</button>
+<button onclick="calc('-')">Subtract</button>
+<h3>Result</h3>
+<p>Binary: <span id="bin"></span></p>
+<p>Decimal: <span id="dec"></span></p>
+</div>
+<script>
+function parseBin(s){var n=parseInt(s.replace(/\s/g,""),2);return isNaN(n)?null:n}
+function calc(op){
+var sa=document.getElementById("a").value.trim()
+var sb=document.getElementById("b").value.trim()
+var a=parseBin(sa),b=parseBin(sb)
+if(a===null||b===null){document.getElementById("bin").innerText="";document.getElementById("dec").innerText="Enter valid binary.";return}
+var res=op==="+"?a+b:a-b
+if(res<0){document.getElementById("bin").innerText="Negative result.";document.getElementById("dec").innerText=res;return}
+document.getElementById("dec").innerText=res
+document.getElementById("bin").innerText=res.toString(2)
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Roman Numerals Converter – Decimal to Roman | ToolForge</title>
+<meta name="description" content="Free online Roman Numerals Converter between decimal and Roman numerals. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Roman Numerals Converter</h1>
+<p class="subtitle">Convert between decimal numbers and Roman numerals (1–3999).</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Decimal to Roman</h3>
+<input id="dec" type="number" min="1" max="3999" placeholder="2024" style="width:100px">
+<button onclick="toRoman()">To Roman</button>
+<p>Roman: <span id="roman"></span></p>
+<h3>Roman to Decimal</h3>
+<input id="rom" placeholder="MMXXIV" style="width:120px">
+<button onclick="toDec()">To Decimal</button>
+<p>Decimal: <span id="decimal"></span></p>
+</div>
+<script>
+var R=[["M",1000],["CM",900],["D",500],["CD",400],["C",100],["XC",90],["L",50],["XL",40],["X",10],["IX",9],["V",5],["IV",4],["I",1]]
+function toRoman(){
+var n=parseInt(document.getElementById("dec").value,10)
+if(isNaN(n)||n<1||n>3999){document.getElementById("roman").innerText="Enter 1–3999.";return}
+var s=""
+for(var i=0;i<R.length;i++)while(n>=R[i][1]){s+=R[i][0];n-=R[i][1]}
+document.getElementById("roman").innerText=s
+}
+function toDec(){
+var s=document.getElementById("rom").value.toUpperCase().trim()
+var n=0
+for(var i=0;i<R.length;i++)while(s.indexOf(R[i][0])===0){n+=R[i][1];s=s.slice(R[i][0].length)}
+document.getElementById("decimal").innerText=s?"Invalid.":n
+}
+</script>
+</body>
+</html>

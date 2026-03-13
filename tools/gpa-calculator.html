@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GPA Calculator – Grade Point Average Calculator | ToolForge</title>
+<meta name="description" content="Free online GPA Calculator to compute Grade Point Average from grades and credits. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>GPA Calculator</h1>
+<p class="subtitle">Enter grades (A=4, B=3, C=2, D=1, F=0) and credits per course, one per line: e.g. A 3</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Courses (grade credit per line)</h3>
+<textarea id="input" rows="6" style="width:90%" placeholder="A 3&#10;B 4&#10;C 2"></textarea>
+<br><br>
+<button onclick="calc()">Calculate GPA</button>
+<h3>Result</h3>
+<p>GPA: <span id="gpa"></span></p>
+</div>
+<script>
+var map={A:4,B:3,C:2,D:1,F:0}
+function calc(){
+var lines=document.getElementById("input").value.trim().split(/\n/).filter(Boolean)
+var sum=0,cred=0
+for(var i=0;i<lines.length;i++){
+var p=lines[i].trim().split(/\s+/)
+var g=(map[p[0].toUpperCase()]!=null?map[p[0].toUpperCase()]:parseFloat(p[0]))||0
+var c=parseFloat(p[1])||1
+sum+=g*c;cred+=c
+}
+document.getElementById("gpa").innerText=cred?(sum/cred).toFixed(2):"Enter courses."
+}
+</script>
+</body>
+</html>

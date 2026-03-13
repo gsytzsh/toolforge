@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Length Converter – m, km, miles, feet, inches | ToolForge</title>
+<meta name="description" content="Free online Length Converter between meters, km, miles, feet and inches. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Length Converter</h1>
+<p class="subtitle">Convert between meters, kilometers, miles, feet and inches.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Value</h3>
+<input id="val" type="number" step="any" placeholder="1" style="width:120px">
+<select id="from">
+<option value="m">Meters</option>
+<option value="km">Kilometers</option>
+<option value="mi">Miles</option>
+<option value="ft">Feet</option>
+<option value="in">Inches</option>
+</select>
+<br><br>
+<button onclick="convert()">Convert</button>
+<h3>Result</h3>
+<p>Meters: <span id="m"></span></p>
+<p>Kilometers: <span id="km"></span></p>
+<p>Miles: <span id="mi"></span></p>
+<p>Feet: <span id="ft"></span></p>
+<p>Inches: <span id="in"></span></p>
+</div>
+<script>
+var toM={m:1,km:1000,mi:1609.344,ft:0.3048,in:0.0254}
+function convert(){
+var v=parseFloat(document.getElementById("val").value)
+var from=document.getElementById("from").value
+if(isNaN(v)){["m","km","mi","ft","in"].forEach(u=>document.getElementById(u).innerText="");return}
+var m=v*toM[from]
+document.getElementById("m").innerText=(m).toFixed(4)
+document.getElementById("km").innerText=(m/1000).toFixed(4)
+document.getElementById("mi").innerText=(m/1609.344).toFixed(4)
+document.getElementById("ft").innerText=(m/0.3048).toFixed(4)
+document.getElementById("in").innerText=(m/0.0254).toFixed(4)
+}
+</script>
+</body>
+</html>

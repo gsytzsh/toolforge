@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Standard Deviation Calculator – Population & Sample | ToolForge</title>
+<meta name="description" content="Free online Standard Deviation Calculator for a list of numbers. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Standard Deviation Calculator</h1>
+<p class="subtitle">Enter numbers separated by comma or space to get mean, population and sample standard deviation.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Numbers</h3>
+<textarea id="input" rows="4" style="width:90%" placeholder="1, 2, 3, 4, 5"></textarea>
+<br><br>
+<button onclick="calc()">Calculate</button>
+<h3>Result</h3>
+<p>Mean: <span id="mean"></span></p>
+<p>Population σ: <span id="pop"></span></p>
+<p>Sample s: <span id="samp"></span></p>
+</div>
+<script>
+function calc(){
+var t=document.getElementById("input").value.replace(/,/g," ").split(/\s+/).filter(Boolean).map(Number).filter(n=>!isNaN(n))
+if(t.length<2){document.getElementById("mean").innerText="";document.getElementById("pop").innerText="";document.getElementById("samp").innerText="Enter at least 2 numbers.";return}
+var n=t.length,sum=t.reduce((a,b)=>a+b,0),mean=sum/n
+var sq=t.reduce((a,b)=>a+(b-mean)*(b-mean),0)
+document.getElementById("mean").innerText=mean.toFixed(4)
+document.getElementById("pop").innerText=(Math.sqrt(sq/n)).toFixed(4)
+document.getElementById("samp").innerText=(Math.sqrt(sq/(n-1))).toFixed(4)
+}
+</script>
+</body>
+</html>

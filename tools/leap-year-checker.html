@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Leap Year Checker – Is This Year a Leap Year? | ToolForge</title>
+<meta name="description" content="Free online Leap Year Checker to determine if a year is a leap year. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>Leap Year Checker</h1>
+<p class="subtitle">Enter a year to check if it is a leap year.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Year</h3>
+<input id="year" type="number" placeholder="2024" style="width:100px">
+<br><br>
+<button onclick="check()">Check</button>
+<h3>Result</h3>
+<p id="result"></p>
+</div>
+<script>
+function check(){
+var y=parseInt(document.getElementById("year").value,10)
+if(isNaN(y)){document.getElementById("result").innerText="Enter a year.";return}
+var leap=(y%4===0&&y%100!==0)||y%400===0
+document.getElementById("result").innerText=leap?"Leap year.":"Not a leap year."
+}
+</script>
+</body>
+</html>

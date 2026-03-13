@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BMI Calculator – Body Mass Index Calculator | ToolForge</title>
+<meta name="description" content="Free online BMI Calculator to compute Body Mass Index from height and weight. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+<h1>BMI Calculator</h1>
+<p class="subtitle">Enter your height and weight to get your Body Mass Index and category.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Height (cm)</h3>
+<input id="height" type="number" placeholder="170" style="width:120px">
+<h3>Weight (kg)</h3>
+<input id="weight" type="number" placeholder="70" style="width:120px">
+<br><br>
+<button onclick="calc()">Calculate BMI</button>
+<h3>Result</h3>
+<p>BMI: <span id="bmi"></span></p>
+<p>Category: <span id="cat"></span></p>
+</div>
+<script>
+function calc(){
+var h=parseFloat(document.getElementById("height").value)/100
+var w=parseFloat(document.getElementById("weight").value)
+if(!h||!w||h<=0||w<=0){document.getElementById("bmi").innerText="";document.getElementById("cat").innerText="Enter valid height and weight.";return}
+var bmi=w/(h*h)
+document.getElementById("bmi").innerText=bmi.toFixed(2)
+var cat="Underweight"
+if(bmi>=30)cat="Obese"
+else if(bmi>=25)cat="Overweight"
+else if(bmi>=18.5)cat="Normal"
+document.getElementById("cat").innerText=cat
+}
+</script>
+</body>
+</html>
