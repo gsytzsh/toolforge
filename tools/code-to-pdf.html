@@ -24,8 +24,8 @@
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Upload Code File</h3>
 <label for="code-file" class="sr-only">Code file</label>
-<input id="code-file" type="file" accept=".js,.ts,.tsx,.jsx,.py,.java,.go,.rs,.php,.rb,.css,.scss,.html,.xml,.json,.yaml,.yml,.sql,.sh,.txt,.md,.c,.cpp,.cs" onchange="loadCodeFile()" aria-label="Code file">
-<p style="font-size:13px;color:#666;">You can upload a code file or paste code below.</p>
+<input id="code-file" class="pdf-file-input" type="file" accept=".js,.ts,.tsx,.jsx,.py,.java,.go,.rs,.php,.rb,.css,.scss,.html,.xml,.json,.yaml,.yml,.sql,.sh,.txt,.md,.c,.cpp,.cs" onchange="loadCodeFile()" aria-label="Code file">
+<p class="pdf-helper">You can upload a code file or paste code below.</p>
 <p>
 Title:
 <label for="doc-title" class="sr-only">Document title</label>
@@ -33,7 +33,7 @@ Title:
 <label style="margin-left:12px;"><input id="line-numbers" type="checkbox" checked> Include line numbers</label>
 </p>
 <label for="code-input" class="sr-only">Code input</label>
-<textarea id="code-input" rows="14" style="width:90%;font-family:monospace" aria-label="Code input" placeholder="function hello(){&#10;  return 'ToolForge'&#10;}"></textarea>
+<textarea id="code-input" class="pdf-editor pdf-editor-mono" rows="14" aria-label="Code input" placeholder="function hello(){&#10;  return 'ToolForge'&#10;}"></textarea>
 <div class="tool-actions">
 <button type="button" onclick="downloadPdf()">Download PDF</button>
 </div>

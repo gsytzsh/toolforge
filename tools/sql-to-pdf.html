@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SQL to PDF - Convert SQL into PDF Online | ToolForge</title>
+<meta name="description" content="Free online SQL to PDF tool to upload or paste SQL, optionally format it, and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/sql-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="SQL to PDF - Convert SQL into PDF Online | ToolForge">
+<meta property="og:description" content="Free online SQL to PDF tool to upload or paste SQL, optionally format it, and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/sql-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL to PDF - Convert SQL into PDF Online | ToolForge">
+<meta name="twitter:description" content="Free online SQL to PDF tool to upload or paste SQL, optionally format it, and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>SQL to PDF</h1>
+<p class="subtitle">Upload or paste SQL, format it for readability, then export it as a PDF.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Upload SQL File</h3>
+<label for="sql-file" class="sr-only">SQL file</label>
+<input id="sql-file" class="pdf-file-input" type="file" accept=".sql,.txt,text/plain,application/sql" onchange="loadSqlFile()" aria-label="SQL file">
+<p class="pdf-helper">You can upload a SQL file or paste SQL below.</p>
+<p>
+Title:
+<label for="doc-title" class="sr-only">Document title</label>
+<input id="doc-title" type="text" value="SQL Query" style="width:220px" aria-label="Document title">
+</p>
+<label for="sql-input" class="sr-only">SQL input</label>
+<textarea id="sql-input" class="pdf-editor pdf-editor-mono" rows="14" aria-label="SQL input" placeholder="select id, name from users where active = 1;"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="formatSql()">Format SQL</button>
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About SQL to PDF</h3>
+<p>This SQL to PDF tool formats SQL for readability and exports it as a PDF using a monospace layout. It is useful for reviews, query sharing, training material and documentation.</p>
+<p>The conversion is handled entirely in your browser, so your SQL stays on your device.</p>
+</section>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function loadSqlFile(){
+let file=document.getElementById("sql-file").files[0]
+if(!file){
+return
+}
+let reader=new FileReader()
+reader.onload=function(e){
+document.getElementById("sql-input").value=e.target.result
+document.getElementById("doc-title").value=file.name
+setStatus("SQL file loaded.","#16a34a")
+}
+reader.onerror=function(){
+setStatus("Failed to read SQL file.","#b91c1c")
+}
+reader.readAsText(file)
+}
+
+function tokenizeSql(sql){
+let tokens=[]
+let current=""
+let quote=null
+for(let i=0;i<sql.length;i++){
+let ch=sql[i]
+if(quote){
+current+=ch
+if(ch===quote&&sql[i-1]!=="\\") quote=null
+continue
+}
+if(ch==="'"||ch==='"'||ch==="`"){
+current+=ch
+quote=ch
+continue
+}
+if(/\s/.test(ch)){
+if(current){
+tokens.push(current)
+current=""
+}
+continue
+}
+if(ch===","||ch==="("||ch===")"){
+if(current){
+tokens.push(current)
+current=""
+}
+tokens.push(ch)
+continue
+}
+current+=ch
+}
+if(current) tokens.push(current)
+return tokens
+}
+
+function formatSql(){
+let sql=document.getElementById("sql-input").value.trim()
+if(!sql){
+setStatus("Enter SQL first.","#b91c1c")
+return false
+}
+let tokens=tokenizeSql(sql)
+let breakWords=["SELECT","FROM","WHERE","HAVING","LIMIT","OFFSET","VALUES","SET","JOIN","ON","AND","OR"]
+let output=""
+let indent=0
+for(let i=0;i<tokens.length;i++){
+let token=tokens[i]
+let upper=token.toUpperCase()
+let next=(tokens[i+1]||"").toUpperCase()
+let combined=upper+" "+next
+if(upper===")"){
+indent=Math.max(indent-1,0)
+}
+if(["GROUP BY","ORDER BY","LEFT JOIN","RIGHT JOIN","INNER JOIN","OUTER JOIN"].includes(combined)){
+output+="\n"+"  ".repeat(indent)+combined+" "
+i++
+continue
+}
+if(breakWords.includes(upper)){
+output+="\n"+"  ".repeat(indent)+upper+" "
+continue
+}
+if(token==="("){
+output+="(\n"
+indent++
+output+="  ".repeat(indent)
+continue
+}
+if(token===")"){
+output=output.trimEnd()+"\n"+"  ".repeat(indent)+") "
+continue
+}
+if(token===","){
+output=output.trimEnd()+",\n"+"  ".repeat(indent)
+continue
+}
+output+=token+" "
+}
+document.getElementById("sql-input").value=output.trim()
+setStatus("SQL formatted with conservative rules.","#16a34a")
+return true
+}
+
+function writeTextPdf(text,fileName,title){
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let margin=36
+let usableWidth=pageWidth-margin*2
+let y=margin
+pdf.setFont("helvetica","bold")
+pdf.setFontSize(14)
+pdf.text(title,margin,y)
+y+=22
+pdf.setFont("courier","normal")
+pdf.setFontSize(9)
+text.split(/\r?\n/).forEach(function(line){
+let wrapped=pdf.splitTextToSize(line||" ",usableWidth)
+wrapped.forEach(function(segment){
+if(y>pageHeight-margin){
+pdf.addPage()
+pdf.setFont("courier","normal")
+pdf.setFontSize(9)
+y=margin
+}
+pdf.text(segment,margin,y)
+y+=12
+})
+})
+pdf.save(fileName)
+}
+
+function downloadPdf(){
+let sql=document.getElementById("sql-input").value.trim()
+let title=document.getElementById("doc-title").value.trim()||"SQL Query"
+if(!sql){
+setStatus("Enter SQL first.","#b91c1c")
+return
+}
+try{
+writeTextPdf(sql,"sql-to-pdf.pdf",title)
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+
+document.getElementById("sql-input").value="select id, name from users where active = 1 order by name;"
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Notepad to PDF - Export Notes to PDF Online | ToolForge</title>
+<meta name="description" content="Free online Notepad to PDF tool to write notes in your browser, auto-save them locally, and export them as a PDF. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/notepad-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Notepad to PDF - Export Notes to PDF Online | ToolForge">
+<meta property="og:description" content="Free online Notepad to PDF tool to write notes in your browser, auto-save them locally, and export them as a PDF. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/notepad-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Notepad to PDF - Export Notes to PDF Online | ToolForge">
+<meta name="twitter:description" content="Free online Notepad to PDF tool to write notes in your browser, auto-save them locally, and export them as a PDF. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>Notepad to PDF</h1>
+<p class="subtitle">Write notes in your browser, keep them locally, and export them to PDF when ready.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Upload Text File</h3>
+<label for="note-file" class="sr-only">Text file</label>
+<input id="note-file" class="pdf-file-input" type="file" accept=".txt,.md,text/plain" onchange="loadNoteFile()" aria-label="Text file">
+<p class="pdf-helper">You can upload a text file or write notes directly below. Notes are auto-saved in your browser.</p>
+<p>
+Title:
+<label for="note-title" class="sr-only">Note title</label>
+<input id="note-title" type="text" value="My Notes" style="width:220px" aria-label="Note title">
+</p>
+<label for="note-input" class="sr-only">Note input</label>
+<textarea id="note-input" class="pdf-editor" rows="14" aria-label="Note input" placeholder="Write your notes here..."></textarea>
+<div class="tool-actions">
+<button type="button" onclick="clearNotes()">Clear</button>
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Notepad to PDF</h3>
+<p>This Notepad to PDF tool lets you draft notes in the browser, keep them locally with auto-save, and export them as a simple PDF when you are ready to share or print.</p>
+<p>Your notes stay on this device unless you choose to export them.</p>
+</section>
+</main>
+<script>
+let STORAGE_KEY="toolforge.notepadToPdf"
+let TITLE_KEY="toolforge.notepadToPdfTitle"
+
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function loadSavedNotes(){
+try{
+let saved=localStorage.getItem(STORAGE_KEY)
+let savedTitle=localStorage.getItem(TITLE_KEY)
+if(saved!==null){
+document.getElementById("note-input").value=saved
+}
+if(savedTitle){
+document.getElementById("note-title").value=savedTitle
+}
+}catch(e){
+}
+}
+
+function persistNotes(){
+try{
+localStorage.setItem(STORAGE_KEY,document.getElementById("note-input").value)
+localStorage.setItem(TITLE_KEY,document.getElementById("note-title").value)
+}catch(e){
+}
+}
+
+function loadNoteFile(){
+let file=document.getElementById("note-file").files[0]
+if(!file){
+return
+}
+let reader=new FileReader()
+reader.onload=function(e){
+document.getElementById("note-input").value=e.target.result
+document.getElementById("note-title").value=file.name.replace(/\.[^.]+$/,"")
+persistNotes()
+setStatus("Text file loaded.","#16a34a")
+}
+reader.onerror=function(){
+setStatus("Failed to read text file.","#b91c1c")
+}
+reader.readAsText(file)
+}
+
+function clearNotes(){
+document.getElementById("note-input").value=""
+persistNotes()
+setStatus("Notes cleared.","#16a34a")
+}
+
+function downloadPdf(){
+let text=document.getElementById("note-input").value
+let title=document.getElementById("note-title").value.trim()||"My Notes"
+if(!text.trim()){
+setStatus("Enter notes first.","#b91c1c")
+return
+}
+try{
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let margin=40
+let usableWidth=pageWidth-margin*2
+let y=margin
+pdf.setFont("helvetica","bold")
+pdf.setFontSize(14)
+pdf.text(title,margin,y)
+y+=24
+pdf.setFont("helvetica","normal")
+pdf.setFontSize(11)
+text.split(/\r?\n/).forEach(function(line){
+let wrapped=pdf.splitTextToSize(line||" ",usableWidth)
+wrapped.forEach(function(segment){
+if(y>pageHeight-margin){
+pdf.addPage()
+pdf.setFont("helvetica","normal")
+pdf.setFontSize(11)
+y=margin
+}
+pdf.text(segment,margin,y)
+y+=15
+})
+})
+pdf.save("notepad-to-pdf.pdf")
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+
+document.getElementById("note-input").addEventListener("input",function(){
+persistNotes()
+setStatus("Notes saved locally.","#16a34a")
+})
+document.getElementById("note-title").addEventListener("input",persistNotes)
+loadSavedNotes()
+if(!document.getElementById("note-input").value){
+document.getElementById("note-input").value="Meeting notes\n\n- Discuss PDF tools\n- Review upload UX"
+persistNotes()
+}
+</script>
+</body>
+</html>

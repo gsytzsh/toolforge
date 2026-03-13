@@ -24,10 +24,10 @@
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Upload Text File</h3>
 <label for="text-file" class="sr-only">Text file</label>
-<input id="text-file" type="file" accept=".txt,.log,.md,text/plain" onchange="loadTextFile()" aria-label="Text file">
-<p style="font-size:13px;color:#666;">You can upload a text file or paste text below.</p>
+<input id="text-file" class="pdf-file-input" type="file" accept=".txt,.log,.md,text/plain" onchange="loadTextFile()" aria-label="Text file">
+<p class="pdf-helper">You can upload a text file or paste text below.</p>
 <label for="text-input" class="sr-only">Text input</label>
-<textarea id="text-input" rows="12" style="width:90%;font-family:monospace" aria-label="Text input" placeholder="Paste plain text here"></textarea>
+<textarea id="text-input" class="pdf-editor pdf-editor-mono" rows="12" aria-label="Text input" placeholder="Paste plain text here"></textarea>
 <p>
 Font size:
 <label for="font-size" class="sr-only">Font size</label>

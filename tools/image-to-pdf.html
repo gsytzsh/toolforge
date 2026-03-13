@@ -23,9 +23,10 @@
 <p class="subtitle">Combine one or more images into a downloadable PDF without uploading them to a server.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <label for="images" class="sr-only">Image files</label>
-<input id="images" type="file" accept="image/*" multiple onchange="loadImages()" aria-label="Image files">
+<input id="images" class="pdf-file-input" type="file" accept="image/*" multiple onchange="loadImages()" aria-label="Image files">
+<p class="pdf-helper">Upload one or more images to combine them into a PDF.</p>
 <h3 style="margin-top:20px">Selected Images</h3>
-<div id="preview-list" style="display:flex;flex-wrap:wrap;gap:12px;width:90%"></div>
+<div id="preview-list" class="pdf-preview-grid"></div>
 <div class="tool-actions">
 <button type="button" onclick="downloadPdf()">Download PDF</button>
 </div>
@@ -70,8 +71,8 @@ height:img.height
 })
 
 let card=document.createElement("div")
-card.style.width="150px"
-card.innerHTML='<img src="'+e.target.result+'" alt="" style="width:100%;border:1px solid #e5e7eb;border-radius:6px"><p style="font-size:12px;color:#666">'+file.name+"</p>"
+card.className="pdf-thumb"
+card.innerHTML='<img src="'+e.target.result+'" alt=""><p>'+file.name+"</p>"
 preview.appendChild(card)
 
 remaining--

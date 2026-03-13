@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Log to PDF - Convert Logs into PDF Online | ToolForge</title>
+<meta name="description" content="Free online Log to PDF tool to upload or paste logs and export them as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/log-to-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Log to PDF - Convert Logs into PDF Online | ToolForge">
+<meta property="og:description" content="Free online Log to PDF tool to upload or paste logs and export them as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/log-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Log to PDF - Convert Logs into PDF Online | ToolForge">
+<meta name="twitter:description" content="Free online Log to PDF tool to upload or paste logs and export them as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>Log to PDF</h1>
+<p class="subtitle">Upload or paste log output, then export it as a readable PDF for reports and debugging.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Upload Log File</h3>
+<label for="log-file" class="sr-only">Log file</label>
+<input id="log-file" class="pdf-file-input" type="file" accept=".log,.txt,text/plain" onchange="loadLogFile()" aria-label="Log file">
+<p class="pdf-helper">You can upload a log file or paste log output below.</p>
+<label for="log-input" class="sr-only">Log input</label>
+<textarea id="log-input" class="pdf-editor pdf-editor-mono" rows="14" aria-label="Log input" placeholder="[2026-03-13 10:00:00] INFO Service started"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="downloadPdf()">Download PDF</button>
+</div>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Log to PDF</h3>
+<p>This Log to PDF tool converts text logs into a simple PDF for incident reports, audits, troubleshooting notes and ticket attachments.</p>
+<p>Everything runs locally in your browser, so your logs stay on your device.</p>
+</section>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function loadLogFile(){
+let file=document.getElementById("log-file").files[0]
+if(!file){
+return
+}
+let reader=new FileReader()
+reader.onload=function(e){
+document.getElementById("log-input").value=e.target.result
+setStatus("Log file loaded.","#16a34a")
+}
+reader.onerror=function(){
+setStatus("Failed to read log file.","#b91c1c")
+}
+reader.readAsText(file)
+}
+
+function downloadPdf(){
+let text=document.getElementById("log-input").value
+if(!text.trim()){
+setStatus("Enter log content first.","#b91c1c")
+return
+}
+try{
+let pdf=new window.jspdf.jsPDF("p","pt","a4")
+let pageWidth=pdf.internal.pageSize.getWidth()
+let pageHeight=pdf.internal.pageSize.getHeight()
+let margin=36
+let usableWidth=pageWidth-margin*2
+let y=margin
+pdf.setFont("helvetica","bold")
+pdf.setFontSize(14)
+pdf.text("Log Output",margin,y)
+y+=22
+pdf.setFont("courier","normal")
+pdf.setFontSize(8.5)
+text.split(/\r?\n/).forEach(function(line,index){
+let content=String(index+1).padStart(4," ")+"  "+line
+let wrapped=pdf.splitTextToSize(content||" ",usableWidth)
+wrapped.forEach(function(segment){
+if(y>pageHeight-margin){
+pdf.addPage()
+pdf.setFont("courier","normal")
+pdf.setFontSize(8.5)
+y=margin
+}
+pdf.text(segment,margin,y)
+y+=11
+})
+})
+pdf.save("log-to-pdf.pdf")
+setStatus("PDF downloaded.","#16a34a")
+}catch(e){
+setStatus("PDF export failed.","#b91c1c")
+}
+}
+
+document.getElementById("log-input").value="[2026-03-13 10:00:00] INFO Service started\n[2026-03-13 10:00:01] WARN Cache miss\n[2026-03-13 10:00:02] ERROR Timeout detected"
+</script>
+</body>
+</html>

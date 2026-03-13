@@ -24,10 +24,10 @@
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Upload XML File</h3>
 <label for="xml-file" class="sr-only">XML file</label>
-<input id="xml-file" type="file" accept=".xml,text/xml,application/xml" onchange="loadXmlFile()" aria-label="XML file">
-<p style="font-size:13px;color:#666;">You can upload an XML file or paste XML below.</p>
+<input id="xml-file" class="pdf-file-input" type="file" accept=".xml,text/xml,application/xml" onchange="loadXmlFile()" aria-label="XML file">
+<p class="pdf-helper">You can upload an XML file or paste XML below.</p>
 <label for="xml-input" class="sr-only">XML input</label>
-<textarea id="xml-input" rows="12" style="width:90%;font-family:monospace" aria-label="XML input" placeholder="<root><item id=&quot;1&quot;>Hello</item></root>"></textarea>
+<textarea id="xml-input" class="pdf-editor pdf-editor-mono" rows="12" aria-label="XML input" placeholder="<root><item id=&quot;1&quot;>Hello</item></root>"></textarea>
 <div class="tool-actions">
 <button type="button" onclick="formatXml()">Format XML</button>
 <button type="button" onclick="downloadPdf()">Download PDF</button>

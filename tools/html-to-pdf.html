@@ -25,16 +25,16 @@
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Upload HTML File</h3>
 <label for="html-file" class="sr-only">HTML file</label>
-<input id="html-file" type="file" accept=".html,.htm,text/html" onchange="loadHtmlFile()" aria-label="HTML file">
-<p style="font-size:13px;color:#666;">You can upload an HTML file or paste HTML below.</p>
+<input id="html-file" class="pdf-file-input" type="file" accept=".html,.htm,text/html" onchange="loadHtmlFile()" aria-label="HTML file">
+<p class="pdf-helper">You can upload an HTML file or paste HTML below.</p>
 <label for="html-input" class="sr-only">HTML input</label>
-<textarea id="html-input" rows="12" style="width:90%;font-family:monospace" aria-label="HTML input" placeholder="<h1>Invoice</h1>&#10;<p>Hello ToolForge</p>&#10;<ul><li>Item A</li><li>Item B</li></ul>"></textarea>
+<textarea id="html-input" class="pdf-editor pdf-editor-mono" rows="12" aria-label="HTML input" placeholder="<h1>Invoice</h1>&#10;<p>Hello ToolForge</p>&#10;<ul><li>Item A</li><li>Item B</li></ul>"></textarea>
 <div class="tool-actions">
 <button type="button" onclick="renderPreview()">Render Preview</button>
 <button type="button" onclick="downloadPdf()">Download PDF</button>
 </div>
 <h3>Preview</h3>
-<div id="preview" style="width:90%;min-height:240px;padding:16px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;color:#111827;overflow:auto"></div>
+<div id="preview" class="pdf-preview-box"></div>
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About HTML to PDF</h3>

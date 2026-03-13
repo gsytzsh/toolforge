@@ -26,7 +26,7 @@
 <p>
 Webpage URL:
 <label for="page-url" class="sr-only">Webpage URL</label>
-<input id="page-url" type="url" style="width:90%" placeholder="https://example.com" aria-label="Webpage URL">
+<input id="page-url" class="pdf-editor" type="url" placeholder="https://example.com" aria-label="Webpage URL">
 </p>
 <div class="tool-actions">
 <button type="button" onclick="fetchWebpage()">Fetch Webpage</button>
@@ -34,10 +34,10 @@ Webpage URL:
 </div>
 <h3>Upload Saved HTML</h3>
 <label for="html-file" class="sr-only">Saved HTML file</label>
-<input id="html-file" type="file" accept=".html,.htm,text/html" onchange="loadHtmlFile()" aria-label="Saved HTML file">
-<p style="font-size:13px;color:#666;">Some websites block browser fetch because of CORS or anti-framing policies. If fetch fails, save the page HTML and upload it instead.</p>
+<input id="html-file" class="pdf-file-input" type="file" accept=".html,.htm,text/html" onchange="loadHtmlFile()" aria-label="Saved HTML file">
+<p class="pdf-helper">Some websites block browser fetch because of CORS or anti-framing policies. If fetch fails, save the page HTML and upload it instead.</p>
 <h3>Preview</h3>
-<div id="preview" style="width:90%;min-height:260px;padding:16px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;color:#111827;overflow:auto"></div>
+<div id="preview" class="pdf-preview-box" style="min-height:260px"></div>
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Webpage to PDF</h3>

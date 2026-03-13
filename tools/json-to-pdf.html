@@ -24,10 +24,10 @@
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Upload JSON File</h3>
 <label for="json-file" class="sr-only">JSON file</label>
-<input id="json-file" type="file" accept=".json,application/json,text/json" onchange="loadJsonFile()" aria-label="JSON file">
-<p style="font-size:13px;color:#666;">You can upload a JSON file or paste JSON below.</p>
+<input id="json-file" class="pdf-file-input" type="file" accept=".json,application/json,text/json" onchange="loadJsonFile()" aria-label="JSON file">
+<p class="pdf-helper">You can upload a JSON file or paste JSON below.</p>
 <label for="json-input" class="sr-only">JSON input</label>
-<textarea id="json-input" rows="12" style="width:90%;font-family:monospace" aria-label="JSON input" placeholder='{"name":"ToolForge","version":1}'></textarea>
+<textarea id="json-input" class="pdf-editor pdf-editor-mono" rows="12" aria-label="JSON input" placeholder='{"name":"ToolForge","version":1}'></textarea>
 <div class="tool-actions">
 <button type="button" onclick="downloadPdf()">Download PDF</button>
 </div>

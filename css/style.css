@@ -126,6 +126,74 @@ color:#6b7280;
 margin-top:8px;
 }
 
+.pdf-file-input{
+display:block;
+margin:8px 0 0;
+}
+
+.pdf-helper{
+font-size:13px;
+color:#666;
+margin:8px 0 12px;
+}
+
+.pdf-editor{
+width:90%;
+}
+
+.pdf-editor-mono{
+font-family:monospace;
+}
+
+.pdf-preview-box{
+width:90%;
+min-height:240px;
+padding:16px;
+border:1px solid #e5e7eb;
+border-radius:8px;
+background:#fff;
+color:#111827;
+overflow:auto;
+box-sizing:border-box;
+}
+
+.pdf-preview-wrap{
+width:90%;
+overflow:auto;
+}
+
+.pdf-preview-table{
+display:inline-block;
+min-width:100%;
+background:#fff;
+color:#111827;
+}
+
+.pdf-preview-grid{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+width:90%;
+}
+
+.pdf-thumb{
+width:150px;
+}
+
+.pdf-thumb img{
+width:100%;
+border:1px solid #e5e7eb;
+border-radius:6px;
+display:block;
+}
+
+.pdf-thumb p{
+font-size:12px;
+color:#666;
+margin:6px 0 0;
+word-break:break-word;
+}
+
 .info-card{
 background:#fff;
 border:1px solid #e5e7eb;

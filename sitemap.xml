@@ -223,6 +223,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.toolforge.site/tools/log-to-pdf.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.toolforge.site/tools/notepad-to-pdf.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.toolforge.site/tools/text-to-pdf.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -314,6 +326,12 @@
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/code-to-pdf.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.toolforge.site/tools/sql-to-pdf.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

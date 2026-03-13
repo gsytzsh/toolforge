@@ -25,17 +25,17 @@
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Upload CSV File</h3>
 <label for="csv-file" class="sr-only">CSV file</label>
-<input id="csv-file" type="file" accept=".csv,text/csv,text/plain" onchange="loadCsvFile()" aria-label="CSV file">
-<p style="font-size:13px;color:#666;">You can upload a CSV file or paste CSV data below.</p>
+<input id="csv-file" class="pdf-file-input" type="file" accept=".csv,text/csv,text/plain" onchange="loadCsvFile()" aria-label="CSV file">
+<p class="pdf-helper">You can upload a CSV file or paste CSV data below.</p>
 <label for="csv-input" class="sr-only">CSV input</label>
-<textarea id="csv-input" rows="12" style="width:90%;font-family:monospace" aria-label="CSV input" placeholder="name,age&#10;Tom,20&#10;Alice,25"></textarea>
+<textarea id="csv-input" class="pdf-editor pdf-editor-mono" rows="12" aria-label="CSV input" placeholder="name,age&#10;Tom,20&#10;Alice,25"></textarea>
 <div class="tool-actions">
 <button type="button" onclick="renderPreview()">Render Table</button>
 <button type="button" onclick="downloadPdf()">Download PDF</button>
 </div>
 <h3>Preview</h3>
-<div id="preview-wrap" style="width:90%;overflow:auto">
-<div id="preview" style="display:inline-block;min-width:100%;background:#fff;color:#111827"></div>
+<div id="preview-wrap" class="pdf-preview-wrap">
+<div id="preview" class="pdf-preview-table"></div>
 </div>
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">

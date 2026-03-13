@@ -26,16 +26,16 @@
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Upload Markdown File</h3>
 <label for="markdown-file" class="sr-only">Markdown file</label>
-<input id="markdown-file" type="file" accept=".md,.markdown,.txt,text/markdown,text/plain" onchange="loadMarkdownFile()" aria-label="Markdown file">
-<p style="font-size:13px;color:#666;">You can upload a Markdown file or paste Markdown below.</p>
+<input id="markdown-file" class="pdf-file-input" type="file" accept=".md,.markdown,.txt,text/markdown,text/plain" onchange="loadMarkdownFile()" aria-label="Markdown file">
+<p class="pdf-helper">You can upload a Markdown file or paste Markdown below.</p>
 <label for="markdown-input" class="sr-only">Markdown input</label>
-<textarea id="markdown-input" rows="12" style="width:90%" aria-label="Markdown input" placeholder="# Project Notes&#10;&#10;- Item 1&#10;- Item 2"></textarea>
+<textarea id="markdown-input" class="pdf-editor" rows="12" aria-label="Markdown input" placeholder="# Project Notes&#10;&#10;- Item 1&#10;- Item 2"></textarea>
 <div class="tool-actions">
 <button type="button" onclick="renderPreview()">Render Preview</button>
 <button type="button" onclick="downloadPdf()">Download PDF</button>
 </div>
 <h3>Preview</h3>
-<div id="preview" style="width:90%;min-height:240px;padding:16px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;color:#111827;overflow:auto"></div>
+<div id="preview" class="pdf-preview-box"></div>
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Markdown to PDF</h3>
