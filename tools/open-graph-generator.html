@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Open Graph Generator - Create OG Tags Online | ToolForge</title>
+<meta name="description" content="Free online Open Graph Generator to create OG meta tags for social sharing. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/open-graph-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Open Graph Generator - Create OG Tags Online | ToolForge">
+<meta property="og:description" content="Free online Open Graph Generator to create OG meta tags for social sharing. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/open-graph-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Open Graph Generator - Create OG Tags Online | ToolForge">
+<meta name="twitter:description" content="Free online Open Graph Generator to create OG meta tags for social sharing. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Open Graph Generator</h1>
+<p class="subtitle">Generate Open Graph tags for Facebook, LinkedIn and other social previews.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p>Title:
+<label for="og-title" class="sr-only">OG title</label>
+<input id="og-title" type="text" style="width:90%" aria-label="OG title"></p>
+<p>Description:
+<label for="og-description" class="sr-only">OG description</label></p>
+<textarea id="og-description" rows="4" class="pdf-editor" aria-label="OG description"></textarea>
+<p>URL:
+<label for="og-url" class="sr-only">OG URL</label>
+<input id="og-url" type="url" style="width:90%" aria-label="OG URL"></p>
+<p>Image URL:
+<label for="og-image" class="sr-only">OG image URL</label>
+<input id="og-image" type="url" style="width:90%" aria-label="OG image URL"></p>
+<p>Type:
+<label for="og-type" class="sr-only">OG type</label>
+<input id="og-type" type="text" value="website" style="width:220px" aria-label="OG type"></p>
+<div class="tool-actions">
+<button type="button" onclick="generateTags()">Generate</button>
+<button type="button" onclick="copyOutput()">Copy Tags</button>
+</div>
+<label for="output" class="sr-only">Open Graph tag output</label>
+<textarea id="output" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Open Graph tag output" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+function generateTags(){
+let title=document.getElementById("og-title").value.trim()
+let desc=document.getElementById("og-description").value.trim()
+let url=document.getElementById("og-url").value.trim()
+let image=document.getElementById("og-image").value.trim()
+let type=document.getElementById("og-type").value.trim()||"website"
+let lines=[
+  '<meta property="og:type" content="'+type+'">',
+  '<meta property="og:title" content="'+title+'">',
+  '<meta property="og:description" content="'+desc+'">',
+  '<meta property="og:url" content="'+url+'">'
+]
+if(image){
+lines.push('<meta property="og:image" content="'+image+'">')
+}
+document.getElementById("output").value=lines.join("\n")
+setStatus("Open Graph tags generated.","#16a34a")
+}
+function copyOutput(){
+let value=document.getElementById("output").value
+if(!value){
+setStatus("Generate tags first.","#b91c1c")
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+setStatus("OG tags copied.","#16a34a")
+}).catch(function(){
+setStatus("Copy failed.","#b91c1c")
+})
+}
+document.getElementById("og-title").value="ToolForge Open Graph Generator"
+document.getElementById("og-description").value="Generate Open Graph tags for social sharing."
+document.getElementById("og-url").value="https://www.toolforge.site/tools/open-graph-generator.html"
+generateTags()
+</script>
+</body>
+</html>

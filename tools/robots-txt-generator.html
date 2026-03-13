@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Robots.txt Generator - Create Robots.txt Online | ToolForge</title>
+<meta name="description" content="Free online Robots.txt Generator to create a robots.txt file for search engines with user-agent, allow, disallow and sitemap rules. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/robots-txt-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Robots.txt Generator - Create Robots.txt Online | ToolForge">
+<meta property="og:description" content="Free online Robots.txt Generator to create a robots.txt file for search engines with user-agent, allow, disallow and sitemap rules. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/robots-txt-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Robots.txt Generator - Create Robots.txt Online | ToolForge">
+<meta name="twitter:description" content="Free online Robots.txt Generator to create a robots.txt file for search engines with user-agent, allow, disallow and sitemap rules. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Robots.txt Generator</h1>
+<p class="subtitle">Create a robots.txt file for search engines and website crawlers.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p>User-agent:
+<label for="user-agent" class="sr-only">User-agent</label>
+<input id="user-agent" type="text" value="*" style="width:220px" aria-label="User-agent"></p>
+<p>Disallow paths:
+<label for="disallow" class="sr-only">Disallow paths</label></p>
+<textarea id="disallow" rows="4" class="pdf-editor pdf-editor-mono" aria-label="Disallow paths" placeholder="One path per line, for example /admin/&#10;/private/"></textarea>
+<p>Allow paths:
+<label for="allow" class="sr-only">Allow paths</label></p>
+<textarea id="allow" rows="3" class="pdf-editor pdf-editor-mono" aria-label="Allow paths" placeholder="One path per line, for example /public/"></textarea>
+<p>Sitemap URL:
+<label for="sitemap-url" class="sr-only">Sitemap URL</label>
+<input id="sitemap-url" type="url" style="width:90%" aria-label="Sitemap URL" placeholder="https://example.com/sitemap.xml"></p>
+<div class="tool-actions">
+<button type="button" onclick="generateRobots()">Generate</button>
+<button type="button" onclick="copyOutput()">Copy Result</button>
+</div>
+<h3>robots.txt</h3>
+<label for="output" class="sr-only">Robots.txt output</label>
+<textarea id="output" rows="12" class="pdf-editor pdf-editor-mono" aria-label="Robots.txt output" readonly></textarea>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Robots.txt Generator</h3>
+<p>This tool helps you create a valid robots.txt file with common crawl directives such as User-agent, Allow, Disallow and Sitemap.</p>
+</section>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+function nonEmptyLines(value){
+return value.split(/\r?\n/).map(function(line){ return line.trim() }).filter(Boolean)
+}
+function generateRobots(){
+let lines=["User-agent: "+(document.getElementById("user-agent").value.trim()||"*")]
+nonEmptyLines(document.getElementById("disallow").value).forEach(function(line){
+lines.push("Disallow: "+line)
+})
+nonEmptyLines(document.getElementById("allow").value).forEach(function(line){
+lines.push("Allow: "+line)
+})
+let sitemap=document.getElementById("sitemap-url").value.trim()
+if(sitemap){
+lines.push("")
+lines.push("Sitemap: "+sitemap)
+}
+document.getElementById("output").value=lines.join("\n")
+setStatus("robots.txt generated.","#16a34a")
+}
+function copyOutput(){
+let value=document.getElementById("output").value
+if(!value){
+setStatus("Generate robots.txt first.","#b91c1c")
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+setStatus("robots.txt copied.","#16a34a")
+}).catch(function(){
+setStatus("Copy failed.","#b91c1c")
+})
+}
+document.getElementById("disallow").value="/admin/\n/private/"
+generateRobots()
+</script>
+</body>
+</html>

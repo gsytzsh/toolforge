@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Twitter Card Generator - Create Twitter Card Tags Online | ToolForge</title>
+<meta name="description" content="Free online Twitter Card Generator to create Twitter/X card meta tags for link previews. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/twitter-card-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Twitter Card Generator - Create Twitter Card Tags Online | ToolForge">
+<meta property="og:description" content="Free online Twitter Card Generator to create Twitter/X card meta tags for link previews. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/twitter-card-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Twitter Card Generator - Create Twitter Card Tags Online | ToolForge">
+<meta name="twitter:description" content="Free online Twitter Card Generator to create Twitter/X card meta tags for link previews. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Twitter Card Generator</h1>
+<p class="subtitle">Generate Twitter/X card meta tags for social link previews.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p>Card Type:
+<label for="card-type" class="sr-only">Card type</label>
+<select id="card-type" aria-label="Card type">
+<option value="summary">summary</option>
+<option value="summary_large_image">summary_large_image</option>
+</select></p>
+<p>Title:
+<label for="twitter-title" class="sr-only">Twitter title</label>
+<input id="twitter-title" type="text" style="width:90%" aria-label="Twitter title"></p>
+<p>Description:
+<label for="twitter-description" class="sr-only">Twitter description</label></p>
+<textarea id="twitter-description" rows="4" class="pdf-editor" aria-label="Twitter description"></textarea>
+<p>Image URL:
+<label for="twitter-image" class="sr-only">Twitter image URL</label>
+<input id="twitter-image" type="url" style="width:90%" aria-label="Twitter image URL"></p>
+<p>Site Handle:
+<label for="twitter-site" class="sr-only">Twitter site handle</label>
+<input id="twitter-site" type="text" style="width:220px" aria-label="Twitter site handle" placeholder="@toolforge"></p>
+<div class="tool-actions">
+<button type="button" onclick="generateTags()">Generate</button>
+<button type="button" onclick="copyOutput()">Copy Tags</button>
+</div>
+<label for="output" class="sr-only">Twitter card tag output</label>
+<textarea id="output" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Twitter card tag output" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+function generateTags(){
+let card=document.getElementById("card-type").value
+let title=document.getElementById("twitter-title").value.trim()
+let desc=document.getElementById("twitter-description").value.trim()
+let image=document.getElementById("twitter-image").value.trim()
+let site=document.getElementById("twitter-site").value.trim()
+let lines=[
+  '<meta name="twitter:card" content="'+card+'">',
+  '<meta name="twitter:title" content="'+title+'">',
+  '<meta name="twitter:description" content="'+desc+'">'
+]
+if(image){
+lines.push('<meta name="twitter:image" content="'+image+'">')
+}
+if(site){
+lines.push('<meta name="twitter:site" content="'+site+'">')
+}
+document.getElementById("output").value=lines.join("\n")
+setStatus("Twitter card tags generated.","#16a34a")
+}
+function copyOutput(){
+let value=document.getElementById("output").value
+if(!value){
+setStatus("Generate tags first.","#b91c1c")
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+setStatus("Twitter tags copied.","#16a34a")
+}).catch(function(){
+setStatus("Copy failed.","#b91c1c")
+})
+}
+document.getElementById("twitter-title").value="ToolForge Twitter Card Generator"
+document.getElementById("twitter-description").value="Generate Twitter card tags for richer link previews."
+generateTags()
+</script>
+</body>
+</html>

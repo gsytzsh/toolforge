@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hreflang Tag Generator - Create Hreflang Tags Online | ToolForge</title>
+<meta name="description" content="Free online Hreflang Tag Generator to create alternate language tags for multilingual sites. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/hreflang-tag-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Hreflang Tag Generator - Create Hreflang Tags Online | ToolForge">
+<meta property="og:description" content="Free online Hreflang Tag Generator to create alternate language tags for multilingual sites. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/hreflang-tag-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hreflang Tag Generator - Create Hreflang Tags Online | ToolForge">
+<meta name="twitter:description" content="Free online Hreflang Tag Generator to create alternate language tags for multilingual sites. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Hreflang Tag Generator</h1>
+<p class="subtitle">Generate hreflang alternate tags for multilingual or multi-region pages.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p style="font-size:13px;color:#666;">Enter one language and URL pair per line in the format: <code>en:https://example.com/en/</code></p>
+<label for="pairs" class="sr-only">Language URL pairs</label>
+<textarea id="pairs" rows="8" class="pdf-editor pdf-editor-mono" aria-label="Language URL pairs"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="generateTags()">Generate</button>
+<button type="button" onclick="copyOutput()">Copy Tags</button>
+</div>
+<h3>Hreflang Tags</h3>
+<label for="output" class="sr-only">Hreflang output</label>
+<textarea id="output" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Hreflang output" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+function generateTags(){
+let pairs=document.getElementById("pairs").value.split(/\r?\n/).map(function(line){ return line.trim() }).filter(Boolean)
+if(!pairs.length){
+document.getElementById("output").value=""
+setStatus("Enter language and URL pairs first.","#b91c1c")
+return
+}
+let lines=[]
+pairs.forEach(function(pair){
+let parts=pair.split(":")
+let lang=parts.shift()
+let url=parts.join(":")
+if(lang&&url){
+lines.push('<link rel="alternate" hreflang="'+lang.trim()+'" href="'+url.trim()+'">')
+}
+})
+document.getElementById("output").value=lines.join("\n")
+setStatus("Hreflang tags generated.","#16a34a")
+}
+function copyOutput(){
+let value=document.getElementById("output").value
+if(!value){
+setStatus("Generate hreflang tags first.","#b91c1c")
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+setStatus("Hreflang tags copied.","#16a34a")
+}).catch(function(){
+setStatus("Copy failed.","#b91c1c")
+})
+}
+document.getElementById("pairs").value="en:https://example.com/en/\nfr:https://example.com/fr/\nx-default:https://example.com/"
+generateTags()
+</script>
+</body>
+</html>

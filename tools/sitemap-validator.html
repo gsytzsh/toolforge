@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sitemap Validator - Validate Sitemap XML Online | ToolForge</title>
+<meta name="description" content="Free online Sitemap Validator to validate sitemap.xml files, count URLs and check the basic structure in your browser. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/sitemap-validator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Sitemap Validator - Validate Sitemap XML Online | ToolForge">
+<meta property="og:description" content="Free online Sitemap Validator to validate sitemap.xml files, count URLs and check the basic structure in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/sitemap-validator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sitemap Validator - Validate Sitemap XML Online | ToolForge">
+<meta name="twitter:description" content="Free online Sitemap Validator to validate sitemap.xml files, count URLs and check the basic structure in your browser. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Sitemap Validator</h1>
+<p class="subtitle">Validate sitemap XML, count URLs and inspect the basic sitemap structure.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="sitemap-input" class="sr-only">Sitemap XML input</label>
+<textarea id="sitemap-input" rows="12" class="pdf-editor pdf-editor-mono" aria-label="Sitemap XML input" placeholder='<?xml version="1.0" encoding="UTF-8"?><urlset></urlset>'></textarea>
+<div class="tool-actions">
+<button type="button" onclick="validateSitemap()">Validate</button>
+<button type="button" onclick="copyReport()">Copy Report</button>
+</div>
+<h3>Validation Report</h3>
+<label for="report" class="sr-only">Validation report</label>
+<textarea id="report" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Validation report" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+function validateSitemap(){
+let input=document.getElementById("sitemap-input").value.trim()
+if(!input){
+document.getElementById("report").value=""
+setStatus("Enter sitemap XML first.","#b91c1c")
+return
+}
+try{
+let doc=new DOMParser().parseFromString(input,"text/xml")
+if(doc.querySelector("parsererror")){
+throw new Error("Invalid XML.")
+}
+let root=doc.documentElement
+let report=[]
+report.push("Root element: "+root.nodeName)
+if(root.nodeName==="urlset"){
+let urls=Array.from(doc.getElementsByTagName("url"))
+let locs=urls.map(function(url){
+let loc=url.getElementsByTagName("loc")[0]
+return loc?loc.textContent.trim():""
+}).filter(Boolean)
+let duplicates=locs.filter(function(loc,index){ return locs.indexOf(loc)!==index })
+report.push("URL count: "+locs.length)
+report.push("Duplicate URLs: "+duplicates.length)
+report.push("Sample URLs:")
+locs.slice(0,5).forEach(function(loc){ report.push("- "+loc) })
+}else if(root.nodeName==="sitemapindex"){
+let sitemaps=Array.from(doc.getElementsByTagName("sitemap"))
+report.push("Nested sitemap count: "+sitemaps.length)
+}else{
+report.push("Unexpected root. Expected urlset or sitemapindex.")
+}
+document.getElementById("report").value=report.join("\n")
+setStatus("Sitemap validated.","#16a34a")
+}catch(e){
+document.getElementById("report").value=""
+setStatus(e.message,"#b91c1c")
+}
+}
+function copyReport(){
+let value=document.getElementById("report").value
+if(!value){
+setStatus("Validate sitemap first.","#b91c1c")
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+setStatus("Validation report copied.","#16a34a")
+}).catch(function(){
+setStatus("Copy failed.","#b91c1c")
+})
+}
+document.getElementById("sitemap-input").value='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>https://example.com/</loc></url>\n</urlset>'
+validateSitemap()
+</script>
+</body>
+</html>

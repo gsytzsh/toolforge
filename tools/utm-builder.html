@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>UTM Builder - Build UTM URLs Online | ToolForge</title>
+<meta name="description" content="Free online UTM Builder to create campaign tracking URLs with utm_source, utm_medium, utm_campaign and more. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/utm-builder.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="UTM Builder - Build UTM URLs Online | ToolForge">
+<meta property="og:description" content="Free online UTM Builder to create campaign tracking URLs with utm_source, utm_medium, utm_campaign and more. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/utm-builder.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UTM Builder - Build UTM URLs Online | ToolForge">
+<meta name="twitter:description" content="Free online UTM Builder to create campaign tracking URLs with utm_source, utm_medium, utm_campaign and more. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>UTM Builder</h1>
+<p class="subtitle">Build a campaign tracking URL with standard UTM parameters.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p>Base URL:
+<label for="base-url" class="sr-only">Base URL</label>
+<input id="base-url" type="url" style="width:90%" aria-label="Base URL"></p>
+<p>Source:
+<label for="utm-source" class="sr-only">UTM source</label>
+<input id="utm-source" type="text" style="width:220px" aria-label="UTM source">
+Medium:
+<label for="utm-medium" class="sr-only">UTM medium</label>
+<input id="utm-medium" type="text" style="width:220px" aria-label="UTM medium"></p>
+<p>Campaign:
+<label for="utm-campaign" class="sr-only">UTM campaign</label>
+<input id="utm-campaign" type="text" style="width:220px" aria-label="UTM campaign">
+Term:
+<label for="utm-term" class="sr-only">UTM term</label>
+<input id="utm-term" type="text" style="width:220px" aria-label="UTM term"></p>
+<p>Content:
+<label for="utm-content" class="sr-only">UTM content</label>
+<input id="utm-content" type="text" style="width:220px" aria-label="UTM content"></p>
+<div class="tool-actions">
+<button type="button" onclick="buildUrl()">Build URL</button>
+<button type="button" onclick="copyOutput()">Copy URL</button>
+</div>
+<label for="output" class="sr-only">UTM output URL</label>
+<textarea id="output" rows="4" class="pdf-editor pdf-editor-mono" aria-label="UTM output URL" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+function buildUrl(){
+let base=document.getElementById("base-url").value.trim()
+if(!base){
+document.getElementById("output").value=""
+setStatus("Enter a base URL first.","#b91c1c")
+return
+}
+let url=new URL(base)
+[
+  ["utm_source","utm-source"],
+  ["utm_medium","utm-medium"],
+  ["utm_campaign","utm-campaign"],
+  ["utm_term","utm-term"],
+  ["utm_content","utm-content"]
+].forEach(function(pair){
+let value=document.getElementById(pair[1]).value.trim()
+if(value){
+url.searchParams.set(pair[0],value)
+}
+})
+document.getElementById("output").value=url.toString()
+setStatus("UTM URL built.","#16a34a")
+}
+function copyOutput(){
+let value=document.getElementById("output").value
+if(!value){
+setStatus("Build a URL first.","#b91c1c")
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+setStatus("UTM URL copied.","#16a34a")
+}).catch(function(){
+setStatus("Copy failed.","#b91c1c")
+})
+}
+document.getElementById("base-url").value="https://example.com/pricing"
+document.getElementById("utm-source").value="newsletter"
+document.getElementById("utm-medium").value="email"
+document.getElementById("utm-campaign").value="spring-launch"
+buildUrl()
+</script>
+</body>
+</html>

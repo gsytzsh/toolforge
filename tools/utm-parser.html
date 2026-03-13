@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>UTM Parser - Parse UTM Parameters Online | ToolForge</title>
+<meta name="description" content="Free online UTM Parser to extract utm_source, utm_medium, utm_campaign and other parameters from a URL. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/utm-parser.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="UTM Parser - Parse UTM Parameters Online | ToolForge">
+<meta property="og:description" content="Free online UTM Parser to extract utm_source, utm_medium, utm_campaign and other parameters from a URL. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/utm-parser.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UTM Parser - Parse UTM Parameters Online | ToolForge">
+<meta name="twitter:description" content="Free online UTM Parser to extract utm_source, utm_medium, utm_campaign and other parameters from a URL. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>UTM Parser</h1>
+<p class="subtitle">Extract UTM parameters from a campaign URL.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p>Tracked URL:
+<label for="tracked-url" class="sr-only">Tracked URL</label>
+<input id="tracked-url" type="url" style="width:90%" aria-label="Tracked URL"></p>
+<div class="tool-actions">
+<button type="button" onclick="parseUtm()">Parse</button>
+<button type="button" onclick="copyOutput()">Copy Result</button>
+</div>
+<label for="output" class="sr-only">UTM parse output</label>
+<textarea id="output" rows="10" class="pdf-editor pdf-editor-mono" aria-label="UTM parse output" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+function parseUtm(){
+let input=document.getElementById("tracked-url").value.trim()
+if(!input){
+document.getElementById("output").value=""
+setStatus("Enter a tracked URL first.","#b91c1c")
+return
+}
+try{
+let url=new URL(input)
+let lines=[]
+url.searchParams.forEach(function(value,key){
+if(key.indexOf("utm_")===0){
+lines.push(key+": "+value)
+}
+})
+document.getElementById("output").value=lines.length?lines.join("\n"):"No UTM parameters found."
+setStatus("UTM parameters parsed.","#16a34a")
+}catch(e){
+document.getElementById("output").value=""
+setStatus("Invalid URL.","#b91c1c")
+}
+}
+function copyOutput(){
+let value=document.getElementById("output").value
+if(!value){
+setStatus("Parse a URL first.","#b91c1c")
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+setStatus("Parsed UTM data copied.","#16a34a")
+}).catch(function(){
+setStatus("Copy failed.","#b91c1c")
+})
+}
+document.getElementById("tracked-url").value="https://example.com/pricing?utm_source=newsletter&utm_medium=email&utm_campaign=spring-launch"
+parseUtm()
+</script>
+</body>
+</html>

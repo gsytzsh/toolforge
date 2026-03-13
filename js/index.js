@@ -12,6 +12,7 @@
     "Text",
     "Date & Time",
     "Network & HTTP",
+    "SEO & Webmaster",
     "Code & Format",
     "Generators & Converters",
     "Calculators"
