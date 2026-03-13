@@ -109,6 +109,6 @@
 {"file":"area-converter","name":"Area Converter","category":"Generators & Converters"},
 {"file":"volume-converter","name":"Volume Converter","category":"Generators & Converters"},
 {"file":"speed-converter","name":"Speed Converter","category":"Generators & Converters"},
-{"file":"random-string-generator","name":"Random String Generator","category":"Generators & Converters","popular":true,"tag":"Rand String","popularOrder":10},
+{"file":"random-string-generator","name":"Token & String Generator","category":"Generators & Converters","popular":true,"tag":"Token Gen","popularOrder":10},
 {"file":"qr-code-decoder","name":"QR Code Decoder","category":"Encoders & Decoders"}
 ]
