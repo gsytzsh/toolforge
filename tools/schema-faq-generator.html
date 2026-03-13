@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Schema FAQ Generator - Create FAQ JSON-LD Online | ToolForge</title>
+<meta name="description" content="Free online Schema FAQ Generator to create FAQPage JSON-LD markup for SEO. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/schema-faq-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Schema FAQ Generator - Create FAQ JSON-LD Online | ToolForge">
+<meta property="og:description" content="Free online Schema FAQ Generator to create FAQPage JSON-LD markup for SEO. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/schema-faq-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Schema FAQ Generator - Create FAQ JSON-LD Online | ToolForge">
+<meta name="twitter:description" content="Free online Schema FAQ Generator to create FAQPage JSON-LD markup for SEO. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Schema FAQ Generator</h1>
+<p class="subtitle">Create FAQPage JSON-LD markup from question and answer pairs.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p style="font-size:13px;color:#666;">Enter one FAQ pair per block using the format: <code>Question :: Answer</code></p>
+<label for="faq-input" class="sr-only">FAQ pairs</label>
+<textarea id="faq-input" rows="10" class="pdf-editor pdf-editor-mono" aria-label="FAQ pairs"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="generateFaqSchema()">Generate</button>
+<button type="button" onclick="copyOutput()">Copy JSON-LD</button>
+</div>
+<label for="output" class="sr-only">FAQ schema output</label>
+<textarea id="output" rows="14" class="pdf-editor pdf-editor-mono" aria-label="FAQ schema output" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+function generateFaqSchema(){
+let blocks=document.getElementById("faq-input").value.split(/\r?\n/).map(function(line){
+return line.trim()
+}).filter(Boolean)
+if(!blocks.length){
+document.getElementById("output").value=""
+setStatus("Enter FAQ pairs first.","#b91c1c")
+return
+}
+let mainEntity=blocks.map(function(line){
+let parts=line.split("::")
+return {
+  "@type":"Question",
+  "name":(parts[0]||"Question").trim(),
+  "acceptedAnswer":{
+    "@type":"Answer",
+    "text":(parts.slice(1).join("::")||"Answer").trim()
+  }
+}
+})
+let data={"@context":"https://schema.org","@type":"FAQPage","mainEntity":mainEntity}
+document.getElementById("output").value=JSON.stringify(data,null,2)
+setStatus("FAQ schema generated.","#16a34a")
+}
+function copyOutput(){
+let value=document.getElementById("output").value
+if(!value){
+setStatus("Generate schema first.","#b91c1c")
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+setStatus("FAQ schema copied.","#16a34a")
+}).catch(function(){
+setStatus("Copy failed.","#b91c1c")
+})
+}
+document.getElementById("faq-input").value="What is ToolForge? :: ToolForge is a collection of browser-based utilities.\nCan I use it for free? :: Yes, the tools are free to use."
+generateFaqSchema()
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Redirect Rule Generator - Create Redirect Rules Online | ToolForge</title>
+<meta name="description" content="Free online Redirect Rule Generator to create simple 301 and 302 redirect rules for websites. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/redirect-rule-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Redirect Rule Generator - Create Redirect Rules Online | ToolForge">
+<meta property="og:description" content="Free online Redirect Rule Generator to create simple 301 and 302 redirect rules for websites. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/redirect-rule-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redirect Rule Generator - Create Redirect Rules Online | ToolForge">
+<meta name="twitter:description" content="Free online Redirect Rule Generator to create simple 301 and 302 redirect rules for websites. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Redirect Rule Generator</h1>
+<p class="subtitle">Generate simple redirect rules for Apache and Nginx.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p>Redirect Type:
+<label for="redirect-type" class="sr-only">Redirect type</label>
+<select id="redirect-type" aria-label="Redirect type">
+<option value="301">301 Permanent</option>
+<option value="302">302 Temporary</option>
+</select></p>
+<p>From Path:
+<label for="from-path" class="sr-only">From path</label>
+<input id="from-path" type="text" style="width:320px" aria-label="From path" placeholder="/old-page"></p>
+<p>To URL:
+<label for="to-url" class="sr-only">To URL</label>
+<input id="to-url" type="url" style="width:90%" aria-label="To URL" placeholder="https://example.com/new-page"></p>
+<div class="tool-actions">
+<button type="button" onclick="generateRules()">Generate</button>
+<button type="button" onclick="copyOutput()">Copy Rules</button>
+</div>
+<label for="output" class="sr-only">Redirect rules output</label>
+<textarea id="output" rows="8" class="pdf-editor pdf-editor-mono" aria-label="Redirect rules output" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+function generateRules(){
+let type=document.getElementById("redirect-type").value
+let from=document.getElementById("from-path").value.trim()
+let to=document.getElementById("to-url").value.trim()
+if(!from||!to){
+document.getElementById("output").value=""
+setStatus("Enter both source path and target URL.","#b91c1c")
+return
+}
+let lines=[]
+lines.push("# Apache (.htaccess)")
+lines.push("Redirect "+type+" "+from+" "+to)
+lines.push("")
+lines.push("# Nginx")
+lines.push("rewrite ^"+from.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"$ "+to+" "+(type==="301"?"permanent":"redirect")+";")
+document.getElementById("output").value=lines.join("\n")
+setStatus("Redirect rules generated.","#16a34a")
+}
+function copyOutput(){
+let value=document.getElementById("output").value
+if(!value){
+setStatus("Generate redirect rules first.","#b91c1c")
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+setStatus("Redirect rules copied.","#16a34a")
+}).catch(function(){
+setStatus("Copy failed.","#b91c1c")
+})
+}
+document.getElementById("from-path").value="/old-page"
+document.getElementById("to-url").value="https://example.com/new-page"
+generateRules()
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>X-Robots-Tag Generator - Create X-Robots-Tag Headers Online | ToolForge</title>
+<meta name="description" content="Free online X-Robots-Tag Generator to create SEO header directives such as noindex and nofollow. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/x-robots-tag-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="X-Robots-Tag Generator - Create X-Robots-Tag Headers Online | ToolForge">
+<meta property="og:description" content="Free online X-Robots-Tag Generator to create SEO header directives such as noindex and nofollow. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/x-robots-tag-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="X-Robots-Tag Generator - Create X-Robots-Tag Headers Online | ToolForge">
+<meta name="twitter:description" content="Free online X-Robots-Tag Generator to create SEO header directives such as noindex and nofollow. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>X-Robots-Tag Generator</h1>
+<p class="subtitle">Generate an X-Robots-Tag HTTP header for SEO crawler control.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p>
+<label><input id="noindex" type="checkbox"> noindex</label>
+<label style="margin-left:12px;"><input id="nofollow" type="checkbox"> nofollow</label>
+<label style="margin-left:12px;"><input id="noarchive" type="checkbox"> noarchive</label>
+<label style="margin-left:12px;"><input id="nosnippet" type="checkbox"> nosnippet</label>
+</p>
+<div class="tool-actions">
+<button type="button" onclick="generateHeader()">Generate</button>
+<button type="button" onclick="copyOutput()">Copy Header</button>
+</div>
+<label for="output" class="sr-only">X-Robots-Tag output</label>
+<textarea id="output" rows="4" class="pdf-editor pdf-editor-mono" aria-label="X-Robots-Tag output" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+function generateHeader(){
+let flags=["noindex","nofollow","noarchive","nosnippet"].filter(function(flag){
+return document.getElementById(flag).checked
+})
+if(!flags.length){
+document.getElementById("output").value=""
+setStatus("Select at least one directive.","#b91c1c")
+return
+}
+document.getElementById("output").value="X-Robots-Tag: "+flags.join(", ")
+setStatus("X-Robots-Tag generated.","#16a34a")
+}
+function copyOutput(){
+let value=document.getElementById("output").value
+if(!value){
+setStatus("Generate a header first.","#b91c1c")
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+setStatus("Header copied.","#16a34a")
+}).catch(function(){
+setStatus("Copy failed.","#b91c1c")
+})
+}
+document.getElementById("noindex").checked=true
+document.getElementById("nofollow").checked=true
+generateHeader()
+</script>
+</body>
+</html>

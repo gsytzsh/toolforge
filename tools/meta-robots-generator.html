@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Meta Robots Generator - Create Meta Robots Tags Online | ToolForge</title>
+<meta name="description" content="Free online Meta Robots Generator to create meta robots tags like noindex and nofollow for SEO. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/meta-robots-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Meta Robots Generator - Create Meta Robots Tags Online | ToolForge">
+<meta property="og:description" content="Free online Meta Robots Generator to create meta robots tags like noindex and nofollow for SEO. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/meta-robots-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Meta Robots Generator - Create Meta Robots Tags Online | ToolForge">
+<meta name="twitter:description" content="Free online Meta Robots Generator to create meta robots tags like noindex and nofollow for SEO. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Meta Robots Generator</h1>
+<p class="subtitle">Generate a meta robots tag for search indexing and crawling directives.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p>
+<label><input id="meta-index" type="checkbox"> noindex</label>
+<label style="margin-left:12px;"><input id="meta-follow" type="checkbox"> nofollow</label>
+<label style="margin-left:12px;"><input id="meta-archive" type="checkbox"> noarchive</label>
+<label style="margin-left:12px;"><input id="meta-snippet" type="checkbox"> nosnippet</label>
+</p>
+<div class="tool-actions">
+<button type="button" onclick="generateMetaRobots()">Generate</button>
+<button type="button" onclick="copyOutput()">Copy Tag</button>
+</div>
+<label for="output" class="sr-only">Meta robots output</label>
+<textarea id="output" rows="4" class="pdf-editor pdf-editor-mono" aria-label="Meta robots output" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+function generateMetaRobots(){
+let options=[]
+if(document.getElementById("meta-index").checked) options.push("noindex")
+if(document.getElementById("meta-follow").checked) options.push("nofollow")
+if(document.getElementById("meta-archive").checked) options.push("noarchive")
+if(document.getElementById("meta-snippet").checked) options.push("nosnippet")
+if(!options.length){
+document.getElementById("output").value=""
+setStatus("Select at least one directive.","#b91c1c")
+return
+}
+document.getElementById("output").value='<meta name="robots" content="'+options.join(", ")+'">'
+setStatus("Meta robots tag generated.","#16a34a")
+}
+function copyOutput(){
+let value=document.getElementById("output").value
+if(!value){
+setStatus("Generate a meta robots tag first.","#b91c1c")
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+setStatus("Meta robots tag copied.","#16a34a")
+}).catch(function(){
+setStatus("Copy failed.","#b91c1c")
+})
+}
+document.getElementById("meta-index").checked=true
+generateMetaRobots()
+</script>
+</body>
+</html>

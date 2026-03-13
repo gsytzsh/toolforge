@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Breadcrumb Schema Generator - Create Breadcrumb JSON-LD Online | ToolForge</title>
+<meta name="description" content="Free online Breadcrumb Schema Generator to create BreadcrumbList JSON-LD markup for SEO. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/breadcrumb-schema-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Breadcrumb Schema Generator - Create Breadcrumb JSON-LD Online | ToolForge">
+<meta property="og:description" content="Free online Breadcrumb Schema Generator to create BreadcrumbList JSON-LD markup for SEO. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/breadcrumb-schema-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Breadcrumb Schema Generator - Create Breadcrumb JSON-LD Online | ToolForge">
+<meta name="twitter:description" content="Free online Breadcrumb Schema Generator to create BreadcrumbList JSON-LD markup for SEO. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Breadcrumb Schema Generator</h1>
+<p class="subtitle">Generate BreadcrumbList JSON-LD markup for structured breadcrumbs.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p style="font-size:13px;color:#666;">Enter one breadcrumb per line using the format: <code>Name :: URL</code></p>
+<label for="breadcrumb-input" class="sr-only">Breadcrumb pairs</label>
+<textarea id="breadcrumb-input" rows="8" class="pdf-editor pdf-editor-mono" aria-label="Breadcrumb pairs"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="generateBreadcrumbs()">Generate</button>
+<button type="button" onclick="copyOutput()">Copy JSON-LD</button>
+</div>
+<label for="output" class="sr-only">Breadcrumb schema output</label>
+<textarea id="output" rows="14" class="pdf-editor pdf-editor-mono" aria-label="Breadcrumb schema output" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+function generateBreadcrumbs(){
+let items=document.getElementById("breadcrumb-input").value.split(/\r?\n/).map(function(line){
+return line.trim()
+}).filter(Boolean)
+if(!items.length){
+document.getElementById("output").value=""
+setStatus("Enter breadcrumb items first.","#b91c1c")
+return
+}
+let list=items.map(function(line,index){
+let parts=line.split("::")
+return {
+  "@type":"ListItem",
+  "position":index+1,
+  "name":(parts[0]||"Item").trim(),
+  "item":(parts.slice(1).join("::")||"").trim()
+}
+})
+let data={"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":list}
+document.getElementById("output").value=JSON.stringify(data,null,2)
+setStatus("Breadcrumb schema generated.","#16a34a")
+}
+function copyOutput(){
+let value=document.getElementById("output").value
+if(!value){
+setStatus("Generate schema first.","#b91c1c")
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+setStatus("Breadcrumb schema copied.","#16a34a")
+}).catch(function(){
+setStatus("Copy failed.","#b91c1c")
+})
+}
+document.getElementById("breadcrumb-input").value="Home :: https://example.com/\nBlog :: https://example.com/blog/\nPost :: https://example.com/blog/post/"
+generateBreadcrumbs()
+</script>
+</body>
+</html>
