@@ -3,18 +3,18 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Cron Generator – Build Cron Expressions Online | ToolForge</title>
-<meta name="description" content="Free online Cron Generator to build common cron expressions from simple minute, hour, day and month options. Part of the ToolForge developer tools collection.">
+<title>Cron Generator – Build and Explain Cron Expressions | ToolForge</title>
+<meta name="description" content="Free online Cron Generator to build cron expressions from simple options or paste an existing cron expression to explain what the schedule means. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://www.toolforge.site/tools/cron-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Cron Generator – Build Cron Expressions Online | ToolForge">
-<meta property="og:description" content="Free online Cron Generator to build common cron expressions from simple minute, hour, day and month options. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Cron Generator – Build and Explain Cron Expressions | ToolForge">
+<meta property="og:description" content="Free online Cron Generator to build cron expressions from simple options or paste an existing cron expression to explain what the schedule means. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://www.toolforge.site/tools/cron-generator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Cron Generator – Build Cron Expressions Online | ToolForge">
-<meta name="twitter:description" content="Free online Cron Generator to build common cron expressions from simple minute, hour, day and month options. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Cron Generator – Build and Explain Cron Expressions | ToolForge">
+<meta name="twitter:description" content="Free online Cron Generator to build cron expressions from simple options or paste an existing cron expression to explain what the schedule means. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 
 </head>
@@ -25,7 +25,7 @@
 
 <h1>Cron Generator</h1>
 
-<p class="subtitle">Build common cron expressions from simple minute, hour, day and month options.</p>
+<p class="subtitle">Build cron expressions from simple options, or paste an existing cron expression to explain what it means.</p>
 
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
@@ -83,15 +83,44 @@
 
 <br><br>
 
-<button onclick="build()">Generate</button>
+<div class="tool-actions">
+<button type="button" onclick="build()">Generate</button>
+<button type="button" onclick="explainCurrent()">Explain Input</button>
+<button type="button" onclick="copyCron()">Copy Cron</button>
+<button type="button" onclick="copyExplanation()">Copy Explanation</button>
+</div>
 
 <h3 style="margin-top:24px">Cron Expression</h3>
 <label for="cron" class="sr-only">Cron expression</label>
-<input id="cron" style="width:260px" readonly aria-label="Cron expression">
+<input id="cron" style="width:320px" aria-label="Cron expression" placeholder="*/15 9-17 * * 1-5">
+
+<h3 style="margin-top:24px">Explanation</h3>
+<pre id="explanation"></pre>
+<p id="status" class="inline-status"></p>
 
 </main>
 
 <script>
+
+function explainField(value,label){
+if(value==="*") return "every "+label
+if(value.indexOf("*/")===0) return "every "+value.slice(2)+" "+label+(value.slice(2)==="1"?"":"s")
+if(value.indexOf("-")>-1) return label+"s "+value
+if(value.indexOf(",")>-1) return label+"s "+value
+return label+" "+value
+}
+
+function explainCron(cron){
+let parts=cron.split(/\s+/)
+if(parts.length!==5) return "Use a 5-field cron expression."
+return [
+"Minute: "+explainField(parts[0],"minute"),
+"Hour: "+explainField(parts[1],"hour"),
+"Day of month: "+explainField(parts[2],"day"),
+"Month: "+explainField(parts[3],"month"),
+"Day of week: "+explainField(parts[4],"weekday")
+].join("\n")
+}
 
 function build(){
 let min=document.getElementById("min").value
@@ -99,9 +128,59 @@ let hour=document.getElementById("hour").value
 let dom=document.getElementById("dom").value
 let mon=document.getElementById("mon").value
 let dow=document.getElementById("dow").value
-document.getElementById("cron").value=
-min+" "+hour+" "+dom+" "+mon+" "+dow
+let cron=min+" "+hour+" "+dom+" "+mon+" "+dow
+document.getElementById("cron").value=cron
+document.getElementById("explanation").innerText=explainCron(cron)
+document.getElementById("status").innerText="Cron expression generated."
+document.getElementById("status").style.color="#16a34a"
 }
+
+function explainCurrent(){
+let value=document.getElementById("cron").value.trim()
+if(!value){
+document.getElementById("explanation").innerText=""
+document.getElementById("status").innerText="Enter a cron expression first."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+document.getElementById("explanation").innerText=explainCron(value)
+document.getElementById("status").innerText=/^Use a 5-field/.test(document.getElementById("explanation").innerText)?"Invalid cron format.":"Cron expression explained."
+document.getElementById("status").style.color=/^Use a 5-field/.test(document.getElementById("explanation").innerText)?"#b91c1c":"#16a34a"
+}
+
+function copyCron(){
+let value=document.getElementById("cron").value.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Cron expression copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+
+function copyExplanation(){
+let value=document.getElementById("explanation").innerText.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Explanation copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+
+build()
 
 </script>
 

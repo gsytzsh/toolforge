@@ -505,12 +505,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.toolforge.site/tools/cron-parser.html</loc>
-    <lastmod>2026-03-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.toolforge.site/tools/cron-generator.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -968,12 +962,6 @@
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/url-rewrite-tester.html</loc>
-    <lastmod>2026-03-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.toolforge.site/tools/cron-expression-explainer.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
