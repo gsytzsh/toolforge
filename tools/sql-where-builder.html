@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SQL WHERE Builder - Build WHERE Clauses Online | ToolForge</title>
+<meta name="description" content="Free online SQL WHERE Builder to compose simple SQL WHERE clauses from line-by-line conditions for quick query drafting and debugging.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/sql-where-builder.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="SQL WHERE Builder - Build WHERE Clauses Online | ToolForge">
+<meta property="og:description" content="Free online SQL WHERE Builder to compose simple SQL WHERE clauses from line-by-line conditions for quick query drafting and debugging.">
+<meta property="og:url" content="https://www.toolforge.site/tools/sql-where-builder.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL WHERE Builder - Build WHERE Clauses Online | ToolForge">
+<meta name="twitter:description" content="Free online SQL WHERE Builder to compose simple SQL WHERE clauses from line-by-line conditions for quick query drafting and debugging.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>SQL WHERE Builder</h1>
+<p class="subtitle">Build SQL WHERE clauses from simple condition lines using <code>field|operator|value</code>.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="connector" class="sr-only">Condition connector</label>
+<select id="connector" aria-label="Condition connector">
+<option>AND</option>
+<option>OR</option>
+</select>
+<br><br>
+<label for="conditions" class="sr-only">Conditions input</label>
+<textarea id="conditions" rows="12" class="pdf-editor pdf-editor-mono" aria-label="Conditions input" placeholder="status|=|active&#10;age|>=|18&#10;country|IN|'US','CA'"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="buildWhere()">Build WHERE</button>
+<button type="button" onclick="copyWhere()">Copy Clause</button>
+</div>
+<h3>WHERE Clause</h3>
+<textarea id="output" rows="10" class="pdf-editor pdf-editor-mono" aria-label="WHERE clause output" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function formatValue(operator,value){
+if(/^(IN|NOT IN)$/i.test(operator)) return "("+value+")"
+if(/^(IS NULL|IS NOT NULL)$/i.test(operator)) return ""
+if(/^[-]?\d+(\.\d+)?$/.test(value)||/^'.*'$/.test(value)||/^".*"$/.test(value)) return value
+return "'"+value.replace(/'/g,"''")+"'"
+}
+function buildWhere(){
+let connector=document.getElementById("connector").value
+let lines=document.getElementById("conditions").value.split(/\r?\n/).map(function(line){return line.trim()}).filter(Boolean)
+if(!lines.length){
+document.getElementById("output").value=""
+document.getElementById("status").innerText="Add at least one condition."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+try{
+let clauses=lines.map(function(line){
+let parts=line.split("|")
+if(parts.length<2) throw new Error("invalid")
+let field=(parts[0]||"").trim()
+let operator=(parts[1]||"").trim().toUpperCase()
+let value=(parts.slice(2).join("|")||"").trim()
+if(!field||!operator) throw new Error("invalid")
+let formattedValue=formatValue(operator,value)
+return formattedValue?field+" "+operator+" "+formattedValue:field+" "+operator
+})
+document.getElementById("output").value="WHERE\n  "+clauses.join("\n  "+connector+" ")
+document.getElementById("status").innerText="WHERE clause built."
+document.getElementById("status").style.color="#16a34a"
+}catch(e){
+document.getElementById("output").value=""
+document.getElementById("status").innerText="Each line must use field|operator|value."
+document.getElementById("status").style.color="#b91c1c"
+}
+}
+function copyWhere(){
+let value=document.getElementById("output").value.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="WHERE clause copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

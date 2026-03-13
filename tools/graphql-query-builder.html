@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GraphQL Query Builder - Build GraphQL Queries Online | ToolForge</title>
+<meta name="description" content="Free online GraphQL Query Builder to create query or mutation strings from an operation name, root field, arguments and selected fields.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/graphql-query-builder.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="GraphQL Query Builder - Build GraphQL Queries Online | ToolForge">
+<meta property="og:description" content="Free online GraphQL Query Builder to create query or mutation strings from an operation name, root field, arguments and selected fields.">
+<meta property="og:url" content="https://www.toolforge.site/tools/graphql-query-builder.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GraphQL Query Builder - Build GraphQL Queries Online | ToolForge">
+<meta name="twitter:description" content="Free online GraphQL Query Builder to create query or mutation strings from an operation name, root field, arguments and selected fields.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>GraphQL Query Builder</h1>
+<p class="subtitle">Build a simple GraphQL query or mutation from fields and arguments.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="operation-type" class="sr-only">Operation type</label>
+<select id="operation-type" aria-label="Operation type">
+<option value="query">query</option>
+<option value="mutation">mutation</option>
+</select>
+<br><br>
+<label for="operation-name" class="sr-only">Operation name</label>
+<input id="operation-name" style="width:90%" aria-label="Operation name" placeholder="GetUser">
+<br><br>
+<label for="root-field" class="sr-only">Root field</label>
+<input id="root-field" style="width:90%" aria-label="Root field" placeholder="user">
+<br><br>
+<label for="args" class="sr-only">Arguments lines</label>
+<textarea id="args" rows="5" class="pdf-editor pdf-editor-mono" aria-label="Arguments lines" placeholder='id: 1&#10;includePosts: true'></textarea>
+<br><br>
+<label for="fields" class="sr-only">Selected fields</label>
+<textarea id="fields" rows="8" class="pdf-editor pdf-editor-mono" aria-label="Selected fields" placeholder="id&#10;name&#10;email"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="buildGraphql()">Build GraphQL</button>
+<button type="button" onclick="copyQuery()">Copy Query</button>
+</div>
+<h3>GraphQL Output</h3>
+<textarea id="output" rows="16" class="pdf-editor pdf-editor-mono" aria-label="GraphQL output" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function buildGraphql(){
+let operationType=document.getElementById("operation-type").value
+let operationName=document.getElementById("operation-name").value.trim()||"MyOperation"
+let rootField=document.getElementById("root-field").value.trim()
+let args=document.getElementById("args").value.split(/\r?\n/).map(function(line){return line.trim()}).filter(Boolean)
+let fields=document.getElementById("fields").value.split(/\r?\n/).map(function(line){return line.trim()}).filter(Boolean)
+if(!rootField||!fields.length){
+document.getElementById("output").value=""
+document.getElementById("status").innerText="Root field and selected fields are required."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+let argBlock=args.length?"("+args.join(", ")+")":""
+let query=operationType+" "+operationName+" {\n  "+rootField+argBlock+" {\n    "+fields.join("\n    ")+"\n  }\n}"
+document.getElementById("output").value=query
+document.getElementById("status").innerText="GraphQL query built."
+document.getElementById("status").style.color="#16a34a"
+}
+function copyQuery(){
+let value=document.getElementById("output").value.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Query copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

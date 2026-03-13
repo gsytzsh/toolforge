@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Webhook Payload Viewer - Inspect Webhook JSON Online | ToolForge</title>
+<meta name="description" content="Free online Webhook Payload Viewer to pretty print webhook JSON, flatten key paths and inspect nested event payloads in the browser.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/webhook-payload-viewer.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Webhook Payload Viewer - Inspect Webhook JSON Online | ToolForge">
+<meta property="og:description" content="Free online Webhook Payload Viewer to pretty print webhook JSON, flatten key paths and inspect nested event payloads in the browser.">
+<meta property="og:url" content="https://www.toolforge.site/tools/webhook-payload-viewer.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Webhook Payload Viewer - Inspect Webhook JSON Online | ToolForge">
+<meta name="twitter:description" content="Free online Webhook Payload Viewer to pretty print webhook JSON, flatten key paths and inspect nested event payloads in the browser.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Webhook Payload Viewer</h1>
+<p class="subtitle">Inspect webhook events by pretty printing JSON and flattening nested keys into readable paths.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="payload" class="sr-only">Webhook payload JSON</label>
+<textarea id="payload" rows="14" class="pdf-editor pdf-editor-mono" aria-label="Webhook payload JSON" placeholder='{"event":"user.created","data":{"id":1,"user":{"email":"test@example.com"}}}'></textarea>
+<div class="tool-actions">
+<button type="button" onclick="inspectPayload()">Inspect Payload</button>
+<button type="button" onclick="copyResult()">Copy Flattened Keys</button>
+</div>
+<h3>Pretty JSON</h3>
+<pre id="pretty"></pre>
+<h3>Flattened Paths</h3>
+<pre id="paths"></pre>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function flatten(value,prefix,output){
+if(Array.isArray(value)){
+value.forEach(function(item,index){
+flatten(item,prefix+"["+index+"]",output)
+})
+return
+}
+if(value&&typeof value==="object"){
+Object.keys(value).forEach(function(key){
+let next=prefix?prefix+"."+key:key
+flatten(value[key],next,output)
+})
+return
+}
+output.push(prefix+": "+String(value))
+}
+function inspectPayload(){
+try{
+let data=JSON.parse(document.getElementById("payload").value)
+let output=[]
+flatten(data,"",output)
+document.getElementById("pretty").innerText=JSON.stringify(data,null,2)
+document.getElementById("paths").innerText=output.join("\n")
+document.getElementById("status").innerText="Webhook payload inspected."
+document.getElementById("status").style.color="#16a34a"
+}catch(e){
+document.getElementById("pretty").innerText=""
+document.getElementById("paths").innerText=""
+document.getElementById("status").innerText="Invalid JSON payload."
+document.getElementById("status").style.color="#b91c1c"
+}
+}
+function copyResult(){
+let value=document.getElementById("paths").innerText.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Flattened keys copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

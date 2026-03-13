@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HTTP Header Builder - Build HTTP Headers Online | ToolForge</title>
+<meta name="description" content="Free online HTTP Header Builder to compose request or response headers and export them as raw header text, JSON or fetch header objects.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/http-header-builder.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="HTTP Header Builder - Build HTTP Headers Online | ToolForge">
+<meta property="og:description" content="Free online HTTP Header Builder to compose request or response headers and export them as raw header text, JSON or fetch header objects.">
+<meta property="og:url" content="https://www.toolforge.site/tools/http-header-builder.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP Header Builder - Build HTTP Headers Online | ToolForge">
+<meta name="twitter:description" content="Free online HTTP Header Builder to compose request or response headers and export them as raw header text, JSON or fetch header objects.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>HTTP Header Builder</h1>
+<p class="subtitle">Compose headers once, then export them as raw text, JSON or a JavaScript headers object.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="headers" class="sr-only">Headers input</label>
+<textarea id="headers" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Headers input" placeholder="Content-Type: application/json&#10;Authorization: Bearer token&#10;X-Request-ID: abc123"></textarea>
+<br><br>
+<label for="format" class="sr-only">Output format</label>
+<select id="format" aria-label="Output format">
+<option value="raw">Raw header lines</option>
+<option value="json">JSON object</option>
+<option value="fetch">JavaScript fetch headers</option>
+</select>
+<div class="tool-actions">
+<button type="button" onclick="buildHeaders()">Build Output</button>
+<button type="button" onclick="copyOutput()">Copy Output</button>
+</div>
+<h3>Header Output</h3>
+<textarea id="output" rows="14" class="pdf-editor pdf-editor-mono" aria-label="Header output" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function parseHeaders(text){
+let list=[]
+text.split(/\r?\n/).forEach(function(line){
+let index=line.indexOf(":")
+if(index>0){
+let key=line.slice(0,index).trim()
+let value=line.slice(index+1).trim()
+if(key) list.push([key,value])
+}
+})
+return list
+}
+function buildHeaders(){
+let format=document.getElementById("format").value
+let items=parseHeaders(document.getElementById("headers").value)
+if(!items.length){
+document.getElementById("output").value=""
+document.getElementById("status").innerText="Add at least one valid header line."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+let output=""
+if(format==="raw"){
+output=items.map(function(item){return item[0]+": "+item[1]}).join("\n")
+}else if(format==="json"){
+let obj={}
+items.forEach(function(item){obj[item[0]]=item[1]})
+output=JSON.stringify(obj,null,2)
+}else{
+let obj={}
+items.forEach(function(item){obj[item[0]]=item[1]})
+output="const headers = "+JSON.stringify(obj,null,2)+";"
+}
+document.getElementById("output").value=output
+document.getElementById("status").innerText="Header output built."
+document.getElementById("status").style.color="#16a34a"
+}
+function copyOutput(){
+let value=document.getElementById("output").value.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Output copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

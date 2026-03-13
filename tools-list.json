@@ -161,5 +161,10 @@
 {"file":"diff-patch-generator","name":"Diff Patch Generator","category":"Code & Debug"},
 {"file":"url-rewrite-tester","name":"URL Rewrite Tester","category":"Code & Debug"},
 {"file":"cron-expression-explainer","name":"Cron Expression Explainer","category":"Scheduling & Infra"},
-{"file":"sql-query-builder","name":"SQL Query Builder","category":"Database"}
+{"file":"sql-query-builder","name":"SQL Query Builder","category":"Database"},
+{"file":"api-mock-generator","name":"API Mock Generator","category":"API & Data"},
+{"file":"sql-where-builder","name":"SQL WHERE Builder","category":"Database"},
+{"file":"graphql-query-builder","name":"GraphQL Query Builder","category":"API & Data"},
+{"file":"http-header-builder","name":"HTTP Header Builder","category":"Network & HTTP"},
+{"file":"webhook-payload-viewer","name":"Webhook Payload Viewer","category":"API & Data"}
 ]

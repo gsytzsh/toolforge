@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>API Mock Generator - Generate Mock API Responses | ToolForge</title>
+<meta name="description" content="Free online API Mock Generator to create a mock request and response definition for API demos, frontend testing and documentation.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/api-mock-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="API Mock Generator - Generate Mock API Responses | ToolForge">
+<meta property="og:description" content="Free online API Mock Generator to create a mock request and response definition for API demos, frontend testing and documentation.">
+<meta property="og:url" content="https://www.toolforge.site/tools/api-mock-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="API Mock Generator - Generate Mock API Responses | ToolForge">
+<meta name="twitter:description" content="Free online API Mock Generator to create a mock request and response definition for API demos, frontend testing and documentation.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>API Mock Generator</h1>
+<p class="subtitle">Generate a lightweight mock request and response object for frontend testing and API documentation.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="method" class="sr-only">HTTP method</label>
+<select id="method" aria-label="HTTP method">
+<option>GET</option>
+<option>POST</option>
+<option>PUT</option>
+<option>PATCH</option>
+<option>DELETE</option>
+</select>
+<br><br>
+<label for="url" class="sr-only">Endpoint URL</label>
+<input id="url" style="width:90%" aria-label="Endpoint URL" placeholder="/api/users">
+<br><br>
+<label for="status-code" class="sr-only">Status code</label>
+<input id="status-code" style="width:90%" aria-label="Status code" placeholder="200">
+<br><br>
+<label for="headers" class="sr-only">Response headers</label>
+<textarea id="headers" rows="5" class="pdf-editor pdf-editor-mono" aria-label="Response headers" placeholder="Content-Type: application/json&#10;Cache-Control: no-store"></textarea>
+<br><br>
+<label for="body" class="sr-only">Response body JSON</label>
+<textarea id="body" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Response body JSON" placeholder='{"success":true,"data":{"id":1,"name":"ToolForge"}}'></textarea>
+<div class="tool-actions">
+<button type="button" onclick="generateMock()">Generate Mock</button>
+<button type="button" onclick="copyMock()">Copy Mock</button>
+</div>
+<h3>Mock Output</h3>
+<textarea id="output" rows="18" class="pdf-editor pdf-editor-mono" aria-label="Mock output" readonly></textarea>
+<p id="status" class="inline-status"></p>
+</main>
+<script>
+function parseHeaders(text){
+let headers={}
+text.split(/\r?\n/).forEach(function(line){
+let index=line.indexOf(":")
+if(index>0){
+let key=line.slice(0,index).trim()
+let value=line.slice(index+1).trim()
+if(key) headers[key]=value
+}
+})
+return headers
+}
+function generateMock(){
+let url=document.getElementById("url").value.trim()||"/api/example"
+let method=document.getElementById("method").value
+let statusCode=parseInt(document.getElementById("status-code").value,10)||200
+let headers=parseHeaders(document.getElementById("headers").value)
+let bodyValue=document.getElementById("body").value.trim()||"{}"
+try{
+let body=JSON.parse(bodyValue)
+let mock={
+request:{method:method,url:url},
+response:{status:statusCode,headers:headers,body:body}
+}
+let snippet=[
+"const mock = "+JSON.stringify(mock,null,2)+";",
+"",
+"return new Response(JSON.stringify(mock.response.body), {",
+"  status: mock.response.status,",
+"  headers: mock.response.headers",
+"});"
+].join("\n")
+document.getElementById("output").value=snippet
+document.getElementById("status").innerText="Mock response generated."
+document.getElementById("status").style.color="#16a34a"
+}catch(e){
+document.getElementById("output").value=""
+document.getElementById("status").innerText="Response body must be valid JSON."
+document.getElementById("status").style.color="#b91c1c"
+}
+}
+function copyMock(){
+let value=document.getElementById("output").value.trim()
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Mock copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>
