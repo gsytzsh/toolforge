@@ -25,14 +25,7 @@
 
 <section class="popular-tools">
   <h2 class="popular-tools-title">Popular Tools</h2>
-  <div class="popular-tools-row">
-    <a href="/tools/uuid-generator.html" class="popular-tool-tag">UUID</a>
-    <a href="/tools/json-viewer.html" class="popular-tool-tag">JSON</a>
-    <a href="/tools/base64-encode.html" class="popular-tool-tag">Base64</a>
-    <a href="/tools/timestamp-converter.html" class="popular-tool-tag">Timestamp</a>
-    <a href="/tools/password-generator.html" class="popular-tool-tag">Password</a>
-    <a href="/tools/url-encode-decode.html" class="popular-tool-tag">URL Encode</a>
-  </div>
+  <div id="popular-tools-row" class="popular-tools-row"></div>
 </section>
 
 <div id="tool-list"></div>
@@ -44,105 +37,7 @@
 
 </div>
 
-
-<script>
-
-let allTools=[]
-
-const CATEGORY_ORDER=[
-  "Encoders & Decoders",
-  "JSON & Data",
-  "Hash & Security",
-  "Image & Color",
-  "Text",
-  "Date & Time",
-  "Network & HTTP",
-  "Code & Format",
-  "Generators & Converters",
-  "Calculators"
-]
-
-fetch("/tools-list.json")
-.then(r=>r.json())
-.then(data=>{
-  allTools=data
-  render(data)
-})
-
-function groupByCategory(list){
-  const groups={}
-  list.forEach(tool=>{
-    const cat=tool.category||"Other"
-    if(!groups[cat]) groups[cat]=[]
-    groups[cat].push(tool)
-  })
-  return groups
-}
-
-function render(list){
-  const container=document.getElementById("tool-list")
-  container.innerHTML=""
-
-  if(list.length===0){
-    container.innerHTML='<p class="no-results">No tools match your search.</p>'
-    return
-  }
-
-  const grouped=groupByCategory(list)
-
-  CATEGORY_ORDER.forEach(cat=>{
-    const tools=grouped[cat]
-    if(!tools||tools.length===0) return
-
-    const section=document.createElement("section")
-    section.className="tool-section"
-    section.innerHTML=`<h2 class="category-title">${cat}</h2>`
-
-    const grid=document.createElement("div")
-    grid.className="tool-grid"
-
-    tools.forEach(tool=>{
-      const card=document.createElement("a")
-      card.href="/tools/"+tool.file+".html"
-      card.className="tool-card"
-      card.innerHTML=`<div class="tool-title">${tool.name}</div>`
-      grid.appendChild(card)
-    })
-
-    section.appendChild(grid)
-    container.appendChild(section)
-  })
-
-  const remaining=Object.keys(grouped).filter(c=>!CATEGORY_ORDER.includes(c))
-  remaining.forEach(cat=>{
-    const tools=grouped[cat]
-    const section=document.createElement("section")
-    section.className="tool-section"
-    section.innerHTML=`<h2 class="category-title">${cat}</h2>`
-    const grid=document.createElement("div")
-    grid.className="tool-grid"
-    tools.forEach(tool=>{
-      const card=document.createElement("a")
-      card.href="/tools/"+tool.file+".html"
-      card.className="tool-card"
-      card.innerHTML=`<div class="tool-title">${tool.name}</div>`
-      grid.appendChild(card)
-    })
-    section.appendChild(grid)
-    container.appendChild(section)
-  })
-}
-
-function searchTools(){
-  const keyword=document.getElementById("search").value.toLowerCase().trim()
-  const filtered=keyword
-    ? allTools.filter(t=>t.name.toLowerCase().includes(keyword))
-    : allTools
-  render(filtered)
-}
-
-</script>
-
+<script src="/js/index.js"></script>
 
 </body>
 
