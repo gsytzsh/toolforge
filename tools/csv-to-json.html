@@ -30,24 +30,78 @@
 
 <textarea id="json" rows="10" style="width:90%"></textarea>
 
+<p id="status" style="color:#666"></p>
+
 </div>
 
 <script>
+
+function parseCsv(text){
+let rows=[]
+let row=[]
+let value=""
+let inQuotes=false
+
+for(let i=0;i<text.length;i++){
+let ch=text[i]
+let next=text[i+1]
+
+if(ch==='"'){
+if(inQuotes&&next==='"'){
+value+='"'
+i++
+}else{
+inQuotes=!inQuotes
+}
+}else if(ch===","&&!inQuotes){
+row.push(value)
+value=""
+}else if((ch==="\n"||ch==="\r")&&!inQuotes){
+if(ch==="\r"&&next==="\n") i++
+row.push(value)
+rows.push(row)
+row=[]
+value=""
+}else{
+value+=ch
+}
+}
+
+row.push(value)
+rows.push(row)
+return rows.filter(function(item){
+return item.length>1||item[0]!=="" 
+})
+}
 
 function convert(){
 
 let csv=document.getElementById("csv").value.trim()
 
-let lines=csv.split("\n")
+if(!csv){
+document.getElementById("json").value=""
+document.getElementById("status").innerText="Enter CSV data."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
 
-let headers=lines[0].split(",")
+let rows=parseCsv(csv)
+
+if(!rows.length){
+document.getElementById("json").value=""
+document.getElementById("status").innerText="No CSV rows found."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+
+let headers=rows[0]
 
 let result=[]
 
-for(let i=1;i<lines.length;i++){
+for(let i=1;i<rows.length;i++){
 
 let obj={}
-let values=lines[i].split(",")
+let values=rows[i]
 
 headers.forEach((h,index)=>{
 obj[h]=values[index]
@@ -59,6 +113,9 @@ result.push(obj)
 
 document.getElementById("json").value=
 JSON.stringify(result,null,2)
+
+document.getElementById("status").innerText="Converted successfully."
+document.getElementById("status").style.color="#16a34a"
 
 }
 

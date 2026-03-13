@@ -53,13 +53,24 @@
 
 <textarea id="token" rows="4" style="width:90%"></textarea>
 
+<p id="status" style="color:#666"></p>
+
 </div>
 
 <script>
 
+function utf8ToBase64(source){
+let bytes=new TextEncoder().encode(source)
+let binary=""
+bytes.forEach(function(byte){
+binary+=String.fromCharCode(byte)
+})
+return btoa(binary)
+}
+
 function base64url(source){
 
-let encoded=btoa(source)
+let encoded=utf8ToBase64(source)
 
 return encoded.replace(/=/g,"")
 .replace(/\+/g,"-")
@@ -72,6 +83,16 @@ async function generate(){
 let header=document.getElementById("header").value
 let payload=document.getElementById("payload").value
 let secret=document.getElementById("secret").value
+
+try{
+JSON.parse(header)
+JSON.parse(payload)
+}catch(e){
+document.getElementById("token").value=""
+document.getElementById("status").innerText="Header and payload must be valid JSON."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
 
 let header64=base64url(header)
 let payload64=base64url(payload)
@@ -104,6 +125,8 @@ String.fromCharCode(...new Uint8Array(sig))
 let token=data+"."+signature
 
 document.getElementById("token").value=token
+document.getElementById("status").innerText="Token generated successfully."
+document.getElementById("status").style.color="#16a34a"
 
 }
 

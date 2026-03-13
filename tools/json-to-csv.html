@@ -30,9 +30,20 @@
 
 <textarea id="csv" rows="10" style="width:90%"></textarea>
 
+<p id="status" style="color:#666"></p>
+
 </div>
 
 <script>
+
+function escapeCsv(value){
+if(value===null||value===undefined) return ""
+let text=String(value)
+if(/[",\n\r]/.test(text)){
+return '"' + text.replace(/"/g,'""') + '"'
+}
+return text
+}
 
 function convert(){
 
@@ -42,23 +53,29 @@ try{
 
 let data=JSON.parse(jsonText)
 
-if(!Array.isArray(data)){
-alert("JSON must be an array")
+if(!Array.isArray(data)||!data.length){
+document.getElementById("csv").value=""
+document.getElementById("status").innerText="JSON must be a non-empty array."
+document.getElementById("status").style.color="#b91c1c"
 return
 }
 
 let keys=Object.keys(data[0])
 
-let csv=keys.join(",")+"\n"
+let csv=keys.map(escapeCsv).join(",")+"\n"
 
 data.forEach(row=>{
-csv+=keys.map(k=>row[k]).join(",")+"\n"
+csv+=keys.map(function(k){ return escapeCsv(row[k]); }).join(",")+"\n"
 })
 
 document.getElementById("csv").value=csv
+document.getElementById("status").innerText="Converted successfully."
+document.getElementById("status").style.color="#16a34a"
 
 }catch(e){
-alert("Invalid JSON")
+document.getElementById("csv").value=""
+document.getElementById("status").innerText="Invalid JSON input."
+document.getElementById("status").style.color="#b91c1c"
 }
 
 }

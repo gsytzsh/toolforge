@@ -29,7 +29,7 @@ function calc(){
 var P=parseFloat(document.getElementById("P").value)
 var r=parseFloat(document.getElementById("r").value)/100
 var t=parseFloat(document.getElementById("t").value)
-if(!P||!t){document.getElementById("interest").innerText="";document.getElementById("total").innerText="Enter principal and time.";return}
+if(isNaN(P)||isNaN(t)||isNaN(r)||P<0||t<0){document.getElementById("interest").innerText="";document.getElementById("total").innerText="Enter valid non-negative values.";return}
 var I=P*r*t
 document.getElementById("interest").innerText=I.toFixed(2)
 document.getElementById("total").innerText=(P+I).toFixed(2)

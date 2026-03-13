@@ -28,20 +28,18 @@ try{
 var parser=new DOMParser()
 var doc=parser.parseFromString(s,"text/xml")
 if(doc.querySelector("parsererror")){document.getElementById("err").innerText="Invalid XML.";return}
-function indent(node,lvl){
-var lvl=lvl||0
-var pad="  ".repeat(lvl)
-if(node.nodeType===3){var t=node.textContent.trim();return t?pad+t+"\n":""}
-if(node.nodeType!==1)return ""
-var tag=node.tagName
-var child=""
-for(var i=0;i<node.childNodes.length;i++)child+=indent(node.childNodes[i],lvl+1)
-if(!child.trim())return pad+"<"+tag+"/>\n"
-return pad+"<"+tag+">\n"+child+pad+"</"+tag+">\n"
+var serialized=new XMLSerializer().serializeToString(doc)
+var lines=serialized.replace(/(>)(<)(\/?)/g,"$1\n$2$3").split("\n")
+var formatted=""
+var indent=0
+for(var i=0;i<lines.length;i++){
+var line=lines[i].trim()
+if(!line) continue
+if(/^<\//.test(line)) indent=Math.max(indent-1,0)
+formatted+="  ".repeat(indent)+line+"\n"
+if(/^<[^!?/][^>]*[^/]>$/.test(line)) indent++
 }
-var out=""
-for(var i=0;i<doc.documentElement.childNodes.length;i++)out+=indent(doc.documentElement.childNodes[i],0)
-document.getElementById("output").value=out.trim()||doc.documentElement.outerHTML
+document.getElementById("output").value=formatted.trim()
 }catch(e){document.getElementById("err").innerText=e.message}
 }
 </script>

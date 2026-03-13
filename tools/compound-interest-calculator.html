@@ -29,7 +29,7 @@ function calc(){
 var P=parseFloat(document.getElementById("principal").value)
 var r=parseFloat(document.getElementById("rate").value)/100
 var t=parseFloat(document.getElementById("years").value)
-if(!P||P<0||!t){document.getElementById("result").innerText="";document.getElementById("interest").innerText="Enter valid values.";return}
+if(isNaN(P)||isNaN(r)||isNaN(t)||P<0||t<0){document.getElementById("result").innerText="";document.getElementById("interest").innerText="Enter valid non-negative values.";return}
 var A=P*Math.pow(1+r,t)
 document.getElementById("result").innerText=A.toFixed(2)
 document.getElementById("interest").innerText=(A-P).toFixed(2)

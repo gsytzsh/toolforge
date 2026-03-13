@@ -28,15 +28,34 @@
 
 <textarea id="output" rows="8" style="width:90%"></textarea>
 
+<p id="status" style="color:#666"></p>
+
 </div>
 
 <script>
+
+function textToBase64(text){
+const bytes=new TextEncoder().encode(text)
+let binary=""
+bytes.forEach(function(byte){
+binary+=String.fromCharCode(byte)
+})
+return btoa(binary)
+}
 
 function encode(){
 
 let input=document.getElementById("input").value
 
-document.getElementById("output").value=btoa(input)
+try{
+document.getElementById("output").value=textToBase64(input)
+document.getElementById("status").innerText="Encoded successfully."
+document.getElementById("status").style.color="#16a34a"
+}catch(e){
+document.getElementById("output").value=""
+document.getElementById("status").innerText="Encode failed."
+document.getElementById("status").style.color="#b91c1c"
+}
 
 }
 

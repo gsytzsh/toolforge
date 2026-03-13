@@ -24,17 +24,34 @@
 
 <p id="hex"></p>
 
+<button type="button" onclick="copyHex()">Copy HEX</button>
+<p id="status" style="color:#666"></p>
+
 </div>
 
 <script>
 
 let picker=document.getElementById("color")
 
+document.getElementById("hex").innerText=picker.value
+
 picker.addEventListener("input",function(){
 
 document.getElementById("hex").innerText=this.value
 
 })
+
+function copyHex(){
+let value=document.getElementById("hex").innerText
+if(!value) return
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="HEX copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
 
 </script>
 

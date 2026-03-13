@@ -38,10 +38,21 @@
 <p>Octal: <span id="b8"></span></p>
 <p>Decimal: <span id="b10"></span></p>
 <p>Hex: <span id="b16"></span></p>
+<p id="status" style="color:#666"></p>
 
 </div>
 
 <script>
+
+function isValidForBase(value,base){
+const patterns={
+2:/^[01]+$/,
+8:/^[0-7]+$/,
+10:/^-?[0-9]+$/,
+16:/^[0-9a-fA-F]+$/
+}
+return patterns[base].test(value)
+}
 
 function convert(){
 
@@ -53,6 +64,17 @@ document.getElementById("b2").innerText=""
 document.getElementById("b8").innerText=""
 document.getElementById("b10").innerText=""
 document.getElementById("b16").innerText=""
+document.getElementById("status").innerText=""
+return
+}
+
+if(!isValidForBase(v,base)){
+document.getElementById("b2").innerText=""
+document.getElementById("b8").innerText=""
+document.getElementById("b10").innerText=""
+document.getElementById("b16").innerText=""
+document.getElementById("status").innerText="Invalid number for the selected base."
+document.getElementById("status").style.color="#b91c1c"
 return
 }
 
@@ -63,6 +85,7 @@ document.getElementById("b2").innerText="Invalid number"
 document.getElementById("b8").innerText=""
 document.getElementById("b10").innerText=""
 document.getElementById("b16").innerText=""
+document.getElementById("status").innerText=""
 return
 }
 
@@ -70,6 +93,8 @@ document.getElementById("b2").innerText=n.toString(2)
 document.getElementById("b8").innerText=n.toString(8)
 document.getElementById("b10").innerText=n.toString(10)
 document.getElementById("b16").innerText=n.toString(16).toUpperCase()
+document.getElementById("status").innerText="Converted successfully."
+document.getElementById("status").style.color="#16a34a"
 
 }
 
