@@ -120,10 +120,11 @@ async function convert(){
     const res = await fetch(url);
     if (!res.ok) throw new Error("Rate fetch failed");
     const data = await res.json();
-    const rate = data.rates[to];
-    const converted = (amount * rate).toLocaleString(undefined, { maximumFractionDigits: 6 });
+    const convertedAmount = data.rates[to];
+    const ratePerOne = convertedAmount / amount;
+    const converted = convertedAmount.toLocaleString(undefined, { maximumFractionDigits: 6 });
     resultEl.textContent = amount.toLocaleString() + " " + from + " = " + converted + " " + to;
-    rateEl.textContent = "1 " + from + " = " + rate.toLocaleString(undefined, { maximumFractionDigits: 6 }) + " " + to + " (as of " + data.date + ")";
+    rateEl.textContent = "1 " + from + " = " + ratePerOne.toLocaleString(undefined, { maximumFractionDigits: 6 }) + " " + to + " (as of " + data.date + ")";
     statusEl.textContent = "Converted successfully.";
     statusEl.style.color = "#16a34a";
   } catch (e) {
