@@ -36,15 +36,22 @@
 </section>
 </main>
 <script>
+function getWeek1Thursday(y){
+var jan1=new Date(y,0,1)
+var dow=jan1.getDay()||7
+return new Date(y,0,1+(4-dow+7)%7)
+}
 function calc(){
 var d=document.getElementById("d").value
 if(!d){document.getElementById("result").innerText="";document.getElementById("year").innerText="Select a date.";return}
 var dt=new Date(d+"T12:00:00")
-var start=new Date(dt.getFullYear(),0,1)
-var days=Math.floor((dt-start)/86400000)
-var wn=Math.ceil((days+start.getDay()+1)/7)
+dt.setDate(dt.getDate()+4-(dt.getDay()||7))
 var y=dt.getFullYear()
-if(wn<1){wn=53;y--}
+var w1=getWeek1Thursday(y)
+if(dt<w1){y--;w1=getWeek1Thursday(y)}
+var wn=Math.round((dt-w1)/86400000/7)+1
+var w1Next=getWeek1Thursday(y+1)
+if(dt>=w1Next){y++;wn=1}
 document.getElementById("result").innerText=wn
 document.getElementById("year").innerText=y
 }

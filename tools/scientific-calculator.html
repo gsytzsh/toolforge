@@ -19,11 +19,11 @@
 <body>
 <main class="container">
 <h1>Scientific Calculator</h1>
-<p class="subtitle">Basic scientific operations: sin, cos, tan, sqrt, log, power (use deg for angles).</p>
+<p class="subtitle">Basic scientific operations: sin, cos, tan (angles in degrees), sqrt, log, power.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Expression</h3>
 <label for="expr" class="sr-only">Expression</label>
-<input id="expr" style="width:280px" placeholder="e.g. 2 + 3 * 4 or sin(0.5)" aria-label="Expression">
+<input id="expr" style="width:280px" placeholder="e.g. 2 + 3 * 4 or sin(90)" aria-label="Expression">
 <br><br>
 <button onclick="calc()">Calculate</button>
 <h3>Result</h3>
@@ -35,9 +35,10 @@
 </section>
 </main>
 <script>
+function degRad(x){return x*Math.PI/180}
 function calc(){
 var s=document.getElementById("expr").value.replace(/\s+/g,"").replace(/π/g,"Math.PI").replace(/√/g,"Math.sqrt")
-s=s.replace(/sin\(/g,"Math.sin(").replace(/cos\(/g,"Math.cos(").replace(/tan\(/g,"Math.tan(")
+s=s.replace(/sin\(/g,"(function(x){return Math.sin(degRad(x))})(").replace(/cos\(/g,"(function(x){return Math.cos(degRad(x))})(").replace(/tan\(/g,"(function(x){return Math.tan(degRad(x))})(")
 s=s.replace(/log\(/g,"Math.log10(").replace(/ln\(/g,"Math.log(").replace(/sqrt\(/g,"Math.sqrt(")
 s=s.replace(/\^/g,"**")
 try{
