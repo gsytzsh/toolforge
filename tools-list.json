@@ -48,7 +48,7 @@
 {"file":"curl-to-fetch","name":"cURL to Fetch","category":"Web & Network"},
 {"file":"url-parser","name":"URL Parser","category":"Web & Network"},
 {"file":"user-agent-parser","name":"User Agent Parser","category":"Web & Network"},
-{"file":"url-to-qr","name":"URL to QR","category":"Web & Network"},
+{"file":"url-to-qr","name":"QR Code Generator","category":"Web & Network"},
 {"file":"robots-txt-generator","name":"Robots.txt Generator","category":"SEO & Webmaster"},
 {"file":"sitemap-validator","name":"Sitemap Validator","category":"SEO & Webmaster"},
 {"file":"canonical-tag-generator","name":"Canonical Tag Generator","category":"SEO & Webmaster"},

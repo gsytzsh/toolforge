@@ -2,125 +2,258 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>URL to QR Code Generator – Create QR Codes from URLs | ToolForge</title>
-<meta name="description" content="Free online URL to QR Code Generator to turn any website link into a QR code image. Part of the ToolForge developer tools collection.">
+<title>QR Code Generator – Text, URL, WiFi, Phone, Email, SMS | ToolForge</title>
+<meta name="description" content="Free online QR Code Generator for text, URLs, WiFi, phone, email, SMS and more. Customize colors and size. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://www.toolforge.site/tools/url-to-qr.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="URL to QR Code Generator – Create QR Codes from URLs | ToolForge">
-<meta property="og:description" content="Free online URL to QR Code Generator to turn any website link into a QR code image. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="QR Code Generator – Text, URL, WiFi, Phone, Email, SMS | ToolForge">
+<meta property="og:description" content="Free online QR Code Generator for text, URLs, WiFi, phone, email, SMS and more. Customize colors and size. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://www.toolforge.site/tools/url-to-qr.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="URL to QR Code Generator – Create QR Codes from URLs | ToolForge">
-<meta name="twitter:description" content="Free online URL to QR Code Generator to turn any website link into a QR code image. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="QR Code Generator – Text, URL, WiFi, Phone, Email, SMS | ToolForge">
+<meta name="twitter:description" content="Free online QR Code Generator for text, URLs, WiFi, phone, email, SMS and more. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
-
 <script src="/js/qrcode.min.js"></script>
-
+<style>
+.qr-type-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.qr-type-tab{padding:8px 14px;border:1px solid #d1d5db;border-radius:6px;background:#fff;cursor:pointer;font-size:0.9rem}
+.qr-type-tab:hover{background:#f3f4f6}
+.qr-type-tab.active{background:#2563eb;color:#fff;border-color:#2563eb}
+.qr-type-panel{display:none}
+.qr-type-panel.active{display:block}
+.qr-field{margin-bottom:12px}
+.qr-field label{display:block;font-size:0.85rem;color:#6b7280;margin-bottom:4px}
+.qr-field input,.qr-field select,.qr-field textarea{width:100%;max-width:400px;padding:8px 10px;border:1px solid #ddd;border-radius:6px}
+.qr-opts{display:flex;flex-wrap:wrap;gap:16px;margin:16px 0;padding:12px;background:#f9fafb;border-radius:8px}
+.qr-opt{display:flex;align-items:center;gap:8px}
+.qr-opt label{font-size:0.85rem;color:#6b7280;margin:0}
+.qr-opt input[type="color"]{width:32px;height:28px;padding:2px;cursor:pointer;border:1px solid #ddd;border-radius:4px}
+.qr-opt input[type="number"]{width:70px;padding:6px}
+#qrcode canvas,#qrcode img{display:block;margin:16px auto}
+</style>
 </head>
-
 <body>
-
 <main class="container">
-
-<h1>URL to QR Code Generator</h1>
-
-<p class="subtitle">Convert any website URL into a QR code image you can share or print.</p>
-
+<h1>QR Code Generator</h1>
+<p class="subtitle">Create QR codes for text, URLs, WiFi, phone, email, SMS and more. Customize size and colors.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
-<label for="url" class="sr-only">URL</label>
-<input id="url" placeholder="https://example.com" style="width:70%;padding:10px" aria-label="URL">
-
-<br><br>
-
-<div class="tool-actions">
-<button onclick="generateQR()">Generate</button>
-<button type="button" onclick="copyUrl()">Copy URL</button>
-<button type="button" onclick="downloadQr()">Download QR</button>
+<div class="qr-type-tabs">
+  <button type="button" class="qr-type-tab active" data-type="text">Text</button>
+  <button type="button" class="qr-type-tab" data-type="url">URL</button>
+  <button type="button" class="qr-type-tab" data-type="wifi">WiFi</button>
+  <button type="button" class="qr-type-tab" data-type="phone">Phone</button>
+  <button type="button" class="qr-type-tab" data-type="email">Email</button>
+  <button type="button" class="qr-type-tab" data-type="sms">SMS</button>
 </div>
 
-<div id="qrcode" style="margin-top:30px"></div>
+<div id="panel-text" class="qr-type-panel active">
+  <div class="qr-field">
+    <label for="text-content">Text content</label>
+    <textarea id="text-content" rows="4" placeholder="Enter any text (up to ~300 chars for best scan results)" maxlength="500"></textarea>
+  </div>
+</div>
+
+<div id="panel-url" class="qr-type-panel">
+  <div class="qr-field">
+    <label for="url-content">Website URL</label>
+    <input id="url-content" type="url" placeholder="https://example.com">
+  </div>
+</div>
+
+<div id="panel-wifi" class="qr-type-panel">
+  <div class="qr-field">
+    <label for="wifi-ssid">Network name (SSID)</label>
+    <input id="wifi-ssid" placeholder="MyWiFi">
+  </div>
+  <div class="qr-field">
+    <label for="wifi-password">Password</label>
+    <input id="wifi-password" type="text" placeholder="Optional">
+  </div>
+  <div class="qr-field">
+    <label for="wifi-encrypt">Encryption</label>
+    <select id="wifi-encrypt">
+      <option value="WPA">WPA/WPA2</option>
+      <option value="WEP">WEP</option>
+      <option value="">None</option>
+    </select>
+  </div>
+</div>
+
+<div id="panel-phone" class="qr-type-panel">
+  <div class="qr-field">
+    <label for="phone-number">Phone number</label>
+    <input id="phone-number" type="tel" placeholder="+1 234 567 8900">
+  </div>
+</div>
+
+<div id="panel-email" class="qr-type-panel">
+  <div class="qr-field">
+    <label for="email-addr">Email address</label>
+    <input id="email-addr" type="email" placeholder="you@example.com">
+  </div>
+  <div class="qr-field">
+    <label for="email-subject">Subject (optional)</label>
+    <input id="email-subject" placeholder="Optional">
+  </div>
+  <div class="qr-field">
+    <label for="email-body">Body (optional)</label>
+    <textarea id="email-body" rows="2" placeholder="Optional"></textarea>
+  </div>
+</div>
+
+<div id="panel-sms" class="qr-type-panel">
+  <div class="qr-field">
+    <label for="sms-number">Phone number</label>
+    <input id="sms-number" type="tel" placeholder="+1 234 567 8900">
+  </div>
+  <div class="qr-field">
+    <label for="sms-body">Message</label>
+    <textarea id="sms-body" rows="3" placeholder="Pre-filled SMS text" maxlength="300"></textarea>
+  </div>
+</div>
+
+<div class="qr-opts">
+  <div class="qr-opt">
+    <label for="qr-size">Size:</label>
+    <input id="qr-size" type="number" min="128" max="512" value="256" step="32">
+    <span>px</span>
+  </div>
+  <div class="qr-opt">
+    <label for="qr-fg">Foreground:</label>
+    <input id="qr-fg" type="color" value="#000000">
+  </div>
+  <div class="qr-opt">
+    <label for="qr-bg">Background:</label>
+    <input id="qr-bg" type="color" value="#ffffff">
+  </div>
+  <div class="qr-opt">
+    <label for="qr-ec">Error correction:</label>
+    <select id="qr-ec">
+      <option value="L">Low (7%)</option>
+      <option value="M" selected>Medium (15%)</option>
+      <option value="Q">Quartile (25%)</option>
+      <option value="H">High (30%)</option>
+    </select>
+  </div>
+</div>
+
+<div class="tool-actions">
+  <button type="button" onclick="generateQR()">Generate QR Code</button>
+  <button type="button" onclick="downloadQr()">Download PNG</button>
+</div>
+
+<div id="qrcode" style="margin-top:24px;min-height:100px"></div>
 <p id="status" class="inline-status"></p>
 
 <section class="tool-seo">
-<h3>About URL to QR Code Generator</h3>
-<p>This URL-to-QR code generator turns a website URL into a QR code image that you can share or print.</p>
-<p>It is useful for posters, menus, event handouts, packaging and any offline-to-online workflow where people need to open a link by scanning instead of typing.</p>
+<h3>About QR Code Generator</h3>
+<p>This QR code generator creates scannable codes for text, URLs, WiFi credentials, phone numbers, emails and SMS. You can customize size, colors and error correction level.</p>
+<p>It is useful for posters, menus, business cards, event handouts, WiFi sharing and any offline-to-online workflow where people need to scan instead of type.</p>
 </section>
 </main>
 
 <script>
+var currentType="text";
+
+document.querySelectorAll(".qr-type-tab").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    currentType=this.dataset.type;
+    document.querySelectorAll(".qr-type-tab").forEach(function(b){b.classList.remove("active")});
+    document.querySelectorAll(".qr-type-panel").forEach(function(p){p.classList.remove("active")});
+    this.classList.add("active");
+    document.getElementById("panel-"+currentType).classList.add("active");
+  });
+});
+
+function getPayload(){
+  switch(currentType){
+    case "text":
+      return document.getElementById("text-content").value.trim();
+    case "url":
+      return document.getElementById("url-content").value.trim();
+    case "wifi":{
+      var ssid=document.getElementById("wifi-ssid").value.trim();
+      var pwd=document.getElementById("wifi-password").value;
+      var enc=document.getElementById("wifi-encrypt").value;
+      if(!ssid)return"";
+      var s="WIFI:T:"+(enc||"nopass")+";S:"+ssid+";";
+      if(pwd)s+="P:"+pwd+";";
+      s+=";";
+      return s;
+    }
+    case "phone":{
+      var n=document.getElementById("phone-number").value.trim().replace(/\s/g,"");
+      return n?"tel:"+n:"";
+    }
+    case "email":{
+      var addr=document.getElementById("email-addr").value.trim();
+      if(!addr)return"";
+      var u="mailto:"+encodeURIComponent(addr);
+      var sub=document.getElementById("email-subject").value.trim();
+      var body=document.getElementById("email-body").value.trim();
+      var params=[];
+      if(sub)params.push("subject="+encodeURIComponent(sub));
+      if(body)params.push("body="+encodeURIComponent(body));
+      if(params.length)u+="?"+params.join("&");
+      return u;
+    }
+    case "sms":{
+      var n=document.getElementById("sms-number").value.trim().replace(/\s/g,"");
+      var msg=document.getElementById("sms-body").value.trim();
+      if(!n)return"";
+      return"smsto:"+n+(msg?":"+msg:"");
+    }
+    default:return"";
+  }
+}
 
 function generateQR(){
-
-document.getElementById("qrcode").innerHTML=""
-
-var url=document.getElementById("url").value
-
-if(!url){
-document.getElementById("status").innerText="Enter a URL first."
-document.getElementById("status").style.color="#b91c1c"
-return
-}
-
-new QRCode(document.getElementById("qrcode"),{
-text:url,
-width:256,
-height:256
-})
-
-document.getElementById("status").innerText="QR code generated."
-document.getElementById("status").style.color="#16a34a"
-
-}
-
-function copyUrl(){
-var url=document.getElementById("url").value.trim()
-if(!url){
-document.getElementById("status").innerText="Nothing to copy."
-document.getElementById("status").style.color="#b91c1c"
-return
-}
-navigator.clipboard.writeText(url).then(function(){
-document.getElementById("status").innerText="URL copied."
-document.getElementById("status").style.color="#16a34a"
-}).catch(function(){
-document.getElementById("status").innerText="Copy failed."
-document.getElementById("status").style.color="#b91c1c"
-})
+  var payload=getPayload();
+  if(!payload){
+    document.getElementById("status").innerText="Enter content first.";
+    document.getElementById("status").style.color="#b91c1c";
+    return;
+  }
+  document.getElementById("qrcode").innerHTML="";
+  var size=Math.min(512,Math.max(128,parseInt(document.getElementById("qr-size").value,10)||256));
+  var ec=document.getElementById("qr-ec").value;
+  var ecMap={L:QRCode.CorrectLevel.L,M:QRCode.CorrectLevel.M,Q:QRCode.CorrectLevel.Q,H:QRCode.CorrectLevel.H};
+  new QRCode(document.getElementById("qrcode"),{
+    text:payload,
+    width:size,
+    height:size,
+    colorDark:document.getElementById("qr-fg").value,
+    colorLight:document.getElementById("qr-bg").value,
+    correctLevel:ecMap[ec]||QRCode.CorrectLevel.M
+  });
+  document.getElementById("status").innerText="QR code generated.";
+  document.getElementById("status").style.color="#16a34a";
 }
 
 function downloadQr(){
-var container=document.getElementById("qrcode")
-var canvas=container.querySelector("canvas")
-var img=container.querySelector("img")
-var source=""
-
-if(canvas){
-source=canvas.toDataURL("image/png")
-}else if(img){
-source=img.src
+  var container=document.getElementById("qrcode");
+  var canvas=container.querySelector("canvas");
+  var img=container.querySelector("img");
+  var source="";
+  if(canvas)source=canvas.toDataURL("image/png");
+  else if(img)source=img.src;
+  if(!source){
+    document.getElementById("status").innerText="Generate a QR code first.";
+    document.getElementById("status").style.color="#b91c1c";
+    return;
+  }
+  var link=document.createElement("a");
+  link.href=source;
+  link.download="qrcode.png";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  document.getElementById("status").innerText="Download started.";
+  document.getElementById("status").style.color="#16a34a";
 }
-
-if(!source){
-document.getElementById("status").innerText="Generate a QR code first."
-document.getElementById("status").style.color="#b91c1c"
-return
-}
-
-var link=document.createElement("a")
-link.href=source
-link.download="toolforge-qr.png"
-document.body.appendChild(link)
-link.click()
-document.body.removeChild(link)
-document.getElementById("status").innerText="QR download started."
-document.getElementById("status").style.color="#16a34a"
-}
-
 </script>
-
 </body>
 </html>
