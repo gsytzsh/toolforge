@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Currency Converter – Real-Time Exchange Rate & Forex Conversion | ToolForge</title>
+<meta name="description" content="Free online Currency Converter to convert between USD, CNY, EUR, GBP, JPY and 30+ currencies with real-time exchange rates. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/currency-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Currency Converter – Real-Time Exchange Rate & Forex Conversion | ToolForge">
+<meta property="og:description" content="Free online Currency Converter to convert between USD, CNY, EUR, GBP, JPY and 30+ currencies with real-time exchange rates. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/currency-converter.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Currency Converter – Real-Time Exchange Rate & Forex Conversion | ToolForge">
+<meta name="twitter:description" content="Free online Currency Converter to convert between USD, CNY, EUR, GBP, JPY and 30+ currencies with real-time exchange rates. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Currency Converter</h1>
+<p class="subtitle">Convert between 30+ currencies with real-time exchange rates. Rates update daily from the European Central Bank.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<div class="converter-row">
+  <div class="converter-field">
+    <label for="amount">Amount</label>
+    <input id="amount" type="number" step="0.01" min="0" placeholder="1" value="1" aria-label="Amount">
+  </div>
+  <div class="converter-field">
+    <label for="from">From</label>
+    <select id="from" aria-label="From currency"></select>
+  </div>
+  <button type="button" class="swap-btn" onclick="swapCurrencies()" aria-label="Swap currencies">⇄</button>
+  <div class="converter-field">
+    <label for="to">To</label>
+    <select id="to" aria-label="To currency"></select>
+  </div>
+</div>
+
+<div class="tool-actions">
+  <button type="button" onclick="convert()">Convert</button>
+  <button type="button" onclick="copyResult()">Copy Result</button>
+</div>
+
+<h3>Result</h3>
+<div id="result-area">
+  <p id="result-text" class="result-value">Enter amount and select currencies, then click Convert.</p>
+  <p id="rate-info" class="rate-info"></p>
+</div>
+<p id="status" class="inline-status"></p>
+
+<section class="tool-seo">
+<h3>About Currency Converter</h3>
+<p>This currency converter lets you convert between major world currencies including USD, CNY, EUR, GBP, JPY, HKD and more. Exchange rates are fetched from the European Central Bank and update daily.</p>
+<p>It is useful for travel planning, international payments, e-commerce pricing, invoicing in foreign currencies and quick forex reference without leaving the page.</p>
+</section>
+</main>
+
+<style>
+.converter-row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px;margin:16px 0}
+.converter-field{display:flex;flex-direction:column;gap:4px}
+.converter-field label{font-size:0.85rem;color:#6b7280;font-weight:500}
+.converter-field input,.converter-field select{padding:10px 12px;border:1px solid #ddd;border-radius:6px;font-size:16px;min-width:140px}
+.converter-field input{max-width:140px}
+.swap-btn{background:#e5e7eb;border:1px solid #d1d5db;border-radius:6px;padding:10px 14px;font-size:1.2rem;cursor:pointer;align-self:flex-end;margin-bottom:2px}
+.swap-btn:hover{background:#d1d5db}
+.result-value{font-size:1.25rem;font-weight:600;color:#1f2937;margin:8px 0}
+.rate-info{font-size:0.9rem;color:#6b7280;margin:4px 0}
+</style>
+
+<script>
+const CURRENCIES = {
+  CNY:"Chinese Yuan",USD:"US Dollar",EUR:"Euro",GBP:"British Pound",JPY:"Japanese Yen",
+  HKD:"Hong Kong Dollar",KRW:"South Korean Won",AUD:"Australian Dollar",CAD:"Canadian Dollar",
+  CHF:"Swiss Franc",SGD:"Singapore Dollar",THB:"Thai Baht",INR:"Indian Rupee",MXN:"Mexican Peso",
+  BRL:"Brazilian Real",ZAR:"South African Rand",PLN:"Polish Złoty",SEK:"Swedish Krona",
+  NOK:"Norwegian Krone",DKK:"Danish Krone",CZK:"Czech Koruna",HUF:"Hungarian Forint",
+  RON:"Romanian Leu",TRY:"Turkish Lira",IDR:"Indonesian Rupiah",MYR:"Malaysian Ringgit",
+  PHP:"Philippine Peso",ILS:"Israeli Shekel",NZD:"New Zealand Dollar",ISK:"Icelandic Króna"
+};
+
+function buildSelectOptions(){
+  const opts = Object.entries(CURRENCIES).map(([code,name])=>`<option value="${code}">${code} – ${name}</option>`).join("");
+  document.getElementById("from").innerHTML = opts;
+  document.getElementById("to").innerHTML = opts;
+  document.getElementById("from").value = "USD";
+  document.getElementById("to").value = "CNY";
+}
+
+function swapCurrencies(){
+  const from = document.getElementById("from");
+  const to = document.getElementById("to");
+  const tmp = from.value;
+  from.value = to.value;
+  to.value = tmp;
+  convert();
+}
+
+async function convert(){
+  const amount = parseFloat(document.getElementById("amount").value) || 1;
+  const from = document.getElementById("from").value;
+  const to = document.getElementById("to").value;
+  const statusEl = document.getElementById("status");
+  const resultEl = document.getElementById("result-text");
+  const rateEl = document.getElementById("rate-info");
+
+  if (from === to) {
+    resultEl.textContent = amount + " " + from + " = " + amount + " " + to;
+    rateEl.textContent = "Same currency, no conversion needed.";
+    statusEl.textContent = "";
+    return;
+  }
+
+  statusEl.textContent = "Fetching rates...";
+  statusEl.style.color = "#6b7280";
+
+  try {
+    const url = "https://api.frankfurter.app/latest?from=" + encodeURIComponent(from) + "&to=" + encodeURIComponent(to) + "&amount=" + encodeURIComponent(amount);
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("Rate fetch failed");
+    const data = await res.json();
+    const rate = data.rates[to];
+    const converted = (amount * rate).toLocaleString(undefined, { maximumFractionDigits: 6 });
+    resultEl.textContent = amount.toLocaleString() + " " + from + " = " + converted + " " + to;
+    rateEl.textContent = "1 " + from + " = " + rate.toLocaleString(undefined, { maximumFractionDigits: 6 }) + " " + to + " (as of " + data.date + ")";
+    statusEl.textContent = "Converted successfully.";
+    statusEl.style.color = "#16a34a";
+  } catch (e) {
+    resultEl.textContent = "Unable to fetch exchange rates. Please try again later.";
+    rateEl.textContent = "";
+    statusEl.textContent = "API error: " + (e.message || "Network or rate limit.");
+    statusEl.style.color = "#b91c1c";
+  }
+}
+
+function copyResult(){
+  const text = document.getElementById("result-text").textContent;
+  if (!text || text.startsWith("Enter amount")) return;
+  navigator.clipboard.writeText(text).then(function(){
+    document.getElementById("status").textContent = "Copied to clipboard.";
+    document.getElementById("status").style.color = "#16a34a";
+  }).catch(function(){
+    document.getElementById("status").textContent = "Copy failed.";
+    document.getElementById("status").style.color = "#b91c1c";
+  });
+}
+
+buildSelectOptions();
+document.getElementById("amount").addEventListener("input", convert);
+document.getElementById("from").addEventListener("change", convert);
+document.getElementById("to").addEventListener("change", convert);
+convert();
+</script>
+</body>
+</html>

@@ -161,5 +161,6 @@
 {"file":"reading-time-calculator","name":"Reading Time Calculator","category":"Daily Productivity"},
 {"file":"speech-time-calculator","name":"Speech Time Calculator","category":"Daily Productivity"},
 {"file":"unit-price-calculator","name":"Unit Price Calculator","category":"Money & Decisions"},
-{"file":"split-bill-calculator","name":"Split Bill & Tip Calculator","category":"Money & Decisions"}
+{"file":"split-bill-calculator","name":"Split Bill & Tip Calculator","category":"Money & Decisions"},
+{"file":"currency-converter","name":"Currency Converter","category":"Money & Decisions"}
 ]
