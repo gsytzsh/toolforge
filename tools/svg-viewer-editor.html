@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SVG Viewer &amp; Editor – Preview and Edit SVG Online | ToolForge</title>
+<meta name="description" content="Free online SVG Viewer and Editor to preview, edit and validate SVG code in your browser. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/svg-viewer-editor.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="SVG Viewer &amp; Editor – Preview and Edit SVG Online | ToolForge">
+<meta property="og:description" content="Free online SVG Viewer and Editor to preview, edit and validate SVG code in your browser.">
+<meta property="og:url" content="https://www.toolforge.site/tools/svg-viewer-editor.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SVG Viewer &amp; Editor – Preview and Edit SVG Online | ToolForge">
+<meta name="twitter:description" content="Free online SVG Viewer and Editor to preview, edit and validate SVG code in your browser.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.svg-split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:768px){.svg-split{grid-template-columns:1fr}}
+.svg-preview{min-height:200px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;padding:16px;overflow:auto}
+.svg-preview svg{max-width:100%;height:auto}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>SVG Viewer &amp; Editor</h1>
+<p class="subtitle">Paste or edit SVG code to preview it live. Changes update the preview instantly.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<div class="svg-split">
+<div>
+<h3>SVG Code</h3>
+<label for="svg-input" class="sr-only">SVG input</label>
+<textarea id="svg-input" rows="14" style="width:100%;font-family:monospace;font-size:13px" placeholder="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 100 100&quot;><circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;40&quot; fill=&quot;#2563eb&quot;/></svg>" aria-label="SVG code" oninput="renderSvg()"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="renderSvg()">Preview</button>
+<button type="button" onclick="copySvg()">Copy SVG</button>
+<button type="button" onclick="downloadSvg()">Download</button>
+</div>
+</div>
+<div>
+<h3>Preview</h3>
+<div id="svg-preview" class="svg-preview"></div>
+<p id="err" class="inline-status" style="color:#b91c1c"></p>
+</div>
+</div>
+
+<section class="tool-seo">
+<h3>About SVG Viewer &amp; Editor</h3>
+<p>This SVG Viewer and Editor lets you paste or edit SVG markup and see the result live. Useful for debugging icons, tweaking vector graphics and validating SVG before embedding.</p>
+</section>
+</main>
+<script>
+var sample='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#2563eb"/></svg>'
+document.getElementById("svg-input").value=sample
+
+var _prevUrl=null
+function renderSvg(){
+var s=document.getElementById("svg-input").value.trim()
+var preview=document.getElementById("svg-preview")
+var err=document.getElementById("err")
+err.textContent=""
+preview.innerHTML=""
+if(_prevUrl){URL.revokeObjectURL(_prevUrl);_prevUrl=null}
+if(!s){err.textContent="Enter SVG code.";return}
+try{
+var blob=new Blob([s],{type:"image/svg+xml"})
+var url=URL.createObjectURL(blob)
+_prevUrl=url
+var img=document.createElement("img")
+img.src=url
+img.alt="SVG preview"
+img.style.maxWidth="100%"
+img.onerror=function(){err.textContent="Invalid or unsupported SVG."}
+preview.appendChild(img)
+}catch(e){err.textContent="Error: "+e.message}
+}
+
+function copySvg(){
+var s=document.getElementById("svg-input").value
+if(!s){document.getElementById("err").textContent="Nothing to copy.";return}
+navigator.clipboard.writeText(s).then(function(){
+document.getElementById("err").textContent="Copied.";document.getElementById("err").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("err").textContent="Copy failed.";document.getElementById("err").style.color="#b91c1c"
+})
+}
+
+function downloadSvg(){
+var s=document.getElementById("svg-input").value
+if(!s){document.getElementById("err").textContent="Nothing to download.";return}
+var blob=new Blob([s],{type:"image/svg+xml"})
+var a=document.createElement("a")
+a.href=URL.createObjectURL(blob)
+a.download="image.svg"
+a.click()
+URL.revokeObjectURL(a.href)
+document.getElementById("err").textContent="Downloaded.";document.getElementById("err").style.color="#16a34a"
+}
+
+renderSvg()
+</script>
+</body>
+</html>

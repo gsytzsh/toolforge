@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Word Frequency – Count Word Occurrences Online | ToolForge</title>
+<meta name="description" content="Free online Word Frequency tool to count how often each word appears in text. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/word-frequency.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Word Frequency – Count Word Occurrences Online | ToolForge">
+<meta property="og:description" content="Free online Word Frequency tool to count how often each word appears in text.">
+<meta property="og:url" content="https://www.toolforge.site/tools/word-frequency.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Word Frequency – Count Word Occurrences Online | ToolForge">
+<meta name="twitter:description" content="Free online Word Frequency tool to count how often each word appears in text.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Word Frequency</h1>
+<p class="subtitle">Count how often each word appears in your text. Results sorted by frequency.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<h3>Text</h3>
+<label for="text" class="sr-only">Text input</label>
+<textarea id="text" rows="10" style="width:90%" placeholder="Paste or type text here..." aria-label="Text input"></textarea>
+
+<div class="tool-actions">
+<button type="button" onclick="analyze()">Analyze</button>
+<button type="button" onclick="copyResults()">Copy Results</button>
+</div>
+
+<h3>Results</h3>
+<p>Total words: <span id="total">0</span> | Unique: <span id="unique">0</span></p>
+<table id="results" style="width:100%;max-width:500px;border-collapse:collapse;background:#fff;border:1px solid #e5e7eb">
+<thead><tr><th style="text-align:left;padding:8px;border:1px solid #eee">Word</th><th style="text-align:right;padding:8px;border:1px solid #eee">Count</th></tr></thead>
+<tbody id="tbody"></tbody>
+</table>
+<p id="status" class="inline-status"></p>
+
+<section class="tool-seo">
+<h3>About Word Frequency</h3>
+<p>This Word Frequency tool counts how often each word appears in your text. Useful for content analysis, SEO keyword density and text mining.</p>
+</section>
+</main>
+<script>
+function analyze(){
+var t=document.getElementById("text").value
+var words=t.toLowerCase().replace(/[^\w\s]/g," ").split(/\s+/).filter(Boolean)
+var map={}
+words.forEach(function(w){
+map[w]=(map[w]||0)+1
+})
+var arr=Object.keys(map).map(function(w){return{word:w,count:map[w]}})
+arr.sort(function(a,b){return b.count-a.count})
+document.getElementById("total").textContent=words.length
+document.getElementById("unique").textContent=arr.length
+var tbody=document.getElementById("tbody")
+tbody.innerHTML=""
+arr.forEach(function(x){
+var tr=document.createElement("tr")
+tr.innerHTML="<td style=\"padding:8px;border:1px solid #eee\">"+x.word+"</td><td style=\"text-align:right;padding:8px;border:1px solid #eee\">"+x.count+"</td>"
+tbody.appendChild(tr)
+})
+document.getElementById("status").textContent="Analyzed."
+document.getElementById("status").style.color="#16a34a"
+}
+
+function copyResults(){
+var rows=document.querySelectorAll("#tbody tr")
+if(!rows.length){document.getElementById("status").textContent="Analyze first.";document.getElementById("status").style.color="#b91c1c";return}
+var lines=["Word\tCount"]
+rows.forEach(function(tr){
+var cells=tr.querySelectorAll("td")
+lines.push(cells[0].textContent+"\t"+cells[1].textContent)
+})
+navigator.clipboard.writeText(lines.join("\n")).then(function(){
+document.getElementById("status").textContent="Copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").textContent="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Viewport Size – Live Window &amp; Screen Dimensions | ToolForge</title>
+<meta name="description" content="Free online Viewport Size tool to see live window dimensions, screen resolution and device pixel ratio. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/viewport-size.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Viewport Size – Live Window &amp; Screen Dimensions | ToolForge">
+<meta property="og:description" content="Free online Viewport Size tool to see live window dimensions, screen resolution and device pixel ratio.">
+<meta property="og:url" content="https://www.toolforge.site/tools/viewport-size.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Viewport Size – Live Window &amp; Screen Dimensions | ToolForge">
+<meta name="twitter:description" content="Free online Viewport Size tool to see live window dimensions, screen resolution and device pixel ratio.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.vp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:16px 0}
+.vp-card{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:16px}
+.vp-card h4{font-size:0.85rem;color:#6b7280;margin:0 0 8px 0;font-weight:600}
+.vp-card .val{font-size:1.5rem;font-weight:700;color:#1f2937}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Viewport Size</h1>
+<p class="subtitle">Live window and screen dimensions. Resize the window to see values update.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<h3>Current Dimensions</h3>
+<div class="vp-grid">
+<div class="vp-card"><h4>Window Inner</h4><div class="val" id="win-inner">—</div><small>window.innerWidth × innerHeight</small></div>
+<div class="vp-card"><h4>Document</h4><div class="val" id="doc-size">—</div><small>document.documentElement</small></div>
+<div class="vp-card"><h4>Screen Size</h4><div class="val" id="screen-size">—</div><small>screen.width × height</small></div>
+<div class="vp-card"><h4>Available</h4><div class="val" id="avail">—</div><small>screen.availWidth × availHeight</small></div>
+<div class="vp-card"><h4>Device Pixel Ratio</h4><div class="val" id="dpr">—</div><small>window.devicePixelRatio</small></div>
+<div class="vp-card"><h4>Color Depth</h4><div class="val" id="color-depth">—</div><small>screen.colorDepth bit</small></div>
+</div>
+
+<h3>Breakpoint</h3>
+<p id="breakpoint" class="inline-status"></p>
+
+<section class="tool-seo">
+<h3>About Viewport Size</h3>
+<p>This Viewport Size tool shows live window dimensions, screen resolution and device pixel ratio. Useful for responsive design testing and debugging viewport-dependent layouts.</p>
+</section>
+</main>
+<script>
+function update(){
+var w=window.innerWidth
+var h=window.innerHeight
+document.getElementById("win-inner").textContent=w+" × "+h
+document.getElementById("doc-size").textContent=document.documentElement.clientWidth+" × "+document.documentElement.clientHeight
+document.getElementById("screen-size").textContent=screen.width+" × "+screen.height
+document.getElementById("avail").textContent=screen.availWidth+" × "+screen.availHeight
+document.getElementById("dpr").textContent=window.devicePixelRatio||1
+document.getElementById("color-depth").textContent=screen.colorDepth+" bit"
+var bp=""
+if(w<640)bp="xs (&lt;640px)"
+else if(w<768)bp="sm (640–768px)"
+else if(w<1024)bp="md (768–1024px)"
+else if(w<1280)bp="lg (1024–1280px)"
+else if(w<1536)bp="xl (1280–1536px)"
+else bp="2xl (≥1536px)"
+document.getElementById("breakpoint").textContent="Current: "+bp
+}
+update()
+window.addEventListener("resize",update)
+</script>
+</body>
+</html>

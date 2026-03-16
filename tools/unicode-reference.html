@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Unicode Reference – Unicode Character Codes &amp; Symbols | ToolForge</title>
+<meta name="description" content="Free online Unicode reference table with code points, hex and characters. Search symbols and copy Unicode. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/unicode-reference.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Unicode Reference – Unicode Character Codes &amp; Symbols | ToolForge">
+<meta property="og:description" content="Free online Unicode reference table with code points, hex and characters.">
+<meta property="og:url" content="https://www.toolforge.site/tools/unicode-reference.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unicode Reference – Unicode Character Codes &amp; Symbols | ToolForge">
+<meta name="twitter:description" content="Free online Unicode reference table with code points, hex and characters.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.uni-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem}
+.uni-table th,.uni-table td{border:1px solid #eee;padding:6px 10px}
+.uni-table th{background:#f8fafc;font-weight:600}
+.uni-table .char{font-size:1.2em;cursor:pointer}
+.uni-table .char:hover{background:#eef2ff}
+.uni-blocks{margin-bottom:16px}
+.uni-blocks button{margin:4px;padding:6px 12px;border:1px solid #ddd;background:#fff;border-radius:4px;cursor:pointer}
+.uni-blocks button:hover{background:#f3f4f6}
+.uni-blocks button.active{background:#2563eb;color:#fff;border-color:#2563eb}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Unicode Reference</h1>
+<p class="subtitle">Browse Unicode code points, hex codes and characters. Click a character to copy.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="search" class="sr-only">Search</label>
+<input id="search" placeholder="Search by U+hex, decimal or character" style="width:100%;max-width:400px;padding:10px;margin-bottom:12px;border:1px solid #ddd;border-radius:6px" aria-label="Search">
+
+<div class="uni-blocks">
+<button type="button" data-start="160" data-end="255">Latin-1 (U+00A0–FF)</button>
+<button type="button" data-start="8192" data-end="8303">Punctuation (U+2000–206F)</button>
+<button type="button" data-start="8592" data-end="8703">Arrows (U+2190–21FF)</button>
+<button type="button" data-start="9472" data-end="9599">Box Drawing (U+2500–257F)</button>
+<button type="button" data-start="8704" data-end="8959">Math (U+2200–22FF)</button>
+<button type="button" data-start="128512" data-end="128591">Emoji (U+1F600–1F64F)</button>
+</div>
+
+<h3>Characters</h3>
+<table class="uni-table">
+<thead><tr><th>U+</th><th>Dec</th><th>Char</th><th>U+</th><th>Dec</th><th>Char</th></tr></thead>
+<tbody id="body"></tbody>
+</table>
+<p id="status" class="inline-status"></p>
+
+<section class="tool-seo">
+<h3>About Unicode Reference</h3>
+<p>This Unicode reference shows code points in U+hex and decimal with their characters. Useful for symbol lookups, copy-paste and encoding reference.</p>
+</section>
+</main>
+<script>
+var BLOCKS=[{s:160,e:255},{s:8192,e:8303},{s:8592,e:8703},{s:9472,e:9599},{s:8704,e:8959},{s:128512,e:128591}]
+var currentBlock=BLOCKS[0]
+
+function escapeHtml(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML}
+
+function render(){
+var q=(document.getElementById("search").value||"").toLowerCase().trim()
+var s=currentBlock.s,e=currentBlock.e
+var tbody=document.getElementById("body")
+tbody.innerHTML=""
+for(var i=s;i<=e;i+=2){
+var c1="",c2=""
+try{c1=String.fromCodePoint(i)}catch(x){}
+try{c2=i+1<=e?String.fromCodePoint(i+1):""}catch(x){}
+var u1="U+"+i.toString(16).toUpperCase().padStart(4,"0")
+var u2="U+"+(i+1).toString(16).toUpperCase().padStart(4,"0")
+var match1=!q||(u1.toLowerCase().indexOf(q)!==-1)||(i+"").indexOf(q)!==-1||c1.indexOf(q)!==-1
+var match2=!q||(u2.toLowerCase().indexOf(q)!==-1)||((i+1)+"").indexOf(q)!==-1||(i+1<=e&&c2.indexOf(q)!==-1)
+if(q&&!match1&&!(i+1<=e&&match2))continue
+var tr=document.createElement("tr")
+var cell1="<td>"+u1+"</td><td>"+i+"</td><td class=\"char\" title=\"Click to copy\" data-char=\""+escapeHtml(c1)+"\">"+escapeHtml(c1||"")+"</td>"
+var cell2=""
+if(i+1<=e)cell2="<td>"+u2+"</td><td>"+(i+1)+"</td><td class=\"char\" title=\"Click to copy\" data-char=\""+escapeHtml(c2)+"\">"+escapeHtml(c2||"")+"</td>"
+else cell2="<td></td><td></td><td></td>"
+tr.innerHTML=cell1+cell2
+tbody.appendChild(tr)
+}
+}
+
+function init(){
+document.querySelectorAll(".uni-blocks button").forEach(function(btn){
+btn.addEventListener("click",function(){
+document.querySelectorAll(".uni-blocks button").forEach(function(b){b.classList.remove("active")})
+btn.classList.add("active")
+currentBlock={s:parseInt(btn.getAttribute("data-start"),10),e:parseInt(btn.getAttribute("data-end"),10)}
+render()
+})
+})
+document.querySelector(".uni-blocks button").classList.add("active")
+document.getElementById("search").addEventListener("input",render)
+document.getElementById("body").addEventListener("click",function(e){
+var cell=e.target.closest(".char")
+if(cell){
+var ch=cell.getAttribute("data-char")
+if(ch){
+navigator.clipboard.writeText(ch).then(function(){
+document.getElementById("status").textContent="Copied: "+ch
+document.getElementById("status").style.color="#16a34a"
+setTimeout(function(){document.getElementById("status").textContent=""},1500)
+})
+}
+}
+})
+render()
+}
+init()
+</script>
+</body>
+</html>

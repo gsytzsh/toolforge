@@ -205,5 +205,10 @@
 {"file":"font-preview-tool","name":"Font Preview Tool","category":"Images & Colors"},
 {"file":"ppi-calculator","name":"PPI Calculator","category":"Calculators"},
 {"file":"batch-open-urls","name":"Batch Open URLs","category":"Debug & Testing"},
-{"file":"text-to-image","name":"Text to Image","category":"Images & Colors"}
+{"file":"text-to-image","name":"Text to Image","category":"Images & Colors"},
+{"file":"svg-viewer-editor","name":"SVG Viewer & Editor","category":"Images & Colors"},
+{"file":"html-table-generator","name":"HTML Table Generator","category":"Code & Formatting"},
+{"file":"viewport-size","name":"Viewport Size","category":"Web & Network"},
+{"file":"word-frequency","name":"Word Frequency","category":"Text"},
+{"file":"unicode-reference","name":"Unicode Reference","category":"Code & Formatting"}
 ]

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HTML Table Generator – Create HTML Tables Online | ToolForge</title>
+<meta name="description" content="Free online HTML Table Generator to create HTML table code from rows and columns. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/html-table-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="HTML Table Generator – Create HTML Tables Online | ToolForge">
+<meta property="og:description" content="Free online HTML Table Generator to create HTML table code from rows and columns.">
+<meta property="og:url" content="https://www.toolforge.site/tools/html-table-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML Table Generator – Create HTML Tables Online | ToolForge">
+<meta name="twitter:description" content="Free online HTML Table Generator to create HTML table code from rows and columns.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>HTML Table Generator</h1>
+<p class="subtitle">Generate HTML table code from rows and columns. First row is used as header.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<p>Rows: <input type="number" id="rows" min="1" max="50" value="3" style="width:60px"> Columns: <input type="number" id="cols" min="1" max="20" value="3" style="width:60px"> <button type="button" onclick="buildGrid()">Build Grid</button></p>
+
+<h3>Table Data (comma-separated per row, or one value per cell)</h3>
+<div id="grid"></div>
+
+<div class="tool-actions">
+<button type="button" onclick="generate()">Generate HTML</button>
+<button type="button" onclick="copyHtml()">Copy HTML</button>
+</div>
+
+<h3>Output</h3>
+<textarea id="output" rows="12" style="width:90%;font-family:monospace" readonly aria-label="Generated HTML"></textarea>
+<p id="status" class="inline-status"></p>
+
+<section class="tool-seo">
+<h3>About HTML Table Generator</h3>
+<p>This HTML Table Generator creates table markup from your data. Enter values per cell; the first row becomes the header. Useful for quick table scaffolding and email HTML.</p>
+</section>
+</main>
+<script>
+function buildGrid(){
+var r=parseInt(document.getElementById("rows").value,10)||1
+var c=parseInt(document.getElementById("cols").value,10)||1
+r=Math.min(50,Math.max(1,r))
+c=Math.min(20,Math.max(1,c))
+document.getElementById("rows").value=r
+document.getElementById("cols").value=c
+var g=document.getElementById("grid")
+g.innerHTML=""
+for(var i=0;i<r;i++){
+var row=document.createElement("div")
+row.style.marginBottom="8px"
+for(var j=0;j<c;j++){
+var inp=document.createElement("input")
+inp.type="text"
+inp.placeholder="Cell"
+inp.style.width="100px"
+inp.style.marginRight="4px"
+inp.setAttribute("data-r",i)
+inp.setAttribute("data-c",j)
+row.appendChild(inp)
+}
+g.appendChild(row)
+}
+}
+
+function generate(){
+var inputs=document.querySelectorAll("#grid input")
+if(!inputs.length){buildGrid();inputs=document.querySelectorAll("#grid input")}
+var r=parseInt(document.getElementById("rows").value,10)
+var c=parseInt(document.getElementById("cols").value,10)
+var rows=[]
+var idx=0
+for(var i=0;i<r;i++){
+var cells=[]
+for(var j=0;j<c;j++){
+cells.push(inputs[idx]?inputs[idx].value:"")
+idx++
+}
+rows.push(cells)
+}
+var html="<table border=\"1\" cellpadding=\"8\" cellspacing=\"0\">\n"
+rows.forEach(function(row,i){
+var t=i===0?"th":"td"
+html+="  <tr>\n"
+row.forEach(function(cell){
+var esc=(cell+"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")
+html+="    <"+t+">"+esc+"</"+t+">\n"
+})
+html+="  </tr>\n"
+})
+html+="</table>"
+document.getElementById("output").value=html
+document.getElementById("status").textContent="HTML generated."
+document.getElementById("status").style.color="#16a34a"
+}
+
+function copyHtml(){
+var v=document.getElementById("output").value
+if(!v){document.getElementById("status").textContent="Generate HTML first.";document.getElementById("status").style.color="#b91c1c";return}
+navigator.clipboard.writeText(v).then(function(){
+document.getElementById("status").textContent="Copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").textContent="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+
+buildGrid()
+</script>
+</body>
+</html>
