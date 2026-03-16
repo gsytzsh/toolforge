@@ -67,6 +67,10 @@
     return groups;
   }
 
+  function slugify(str) {
+    return String(str).toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+  }
+
   function sortTools(tools) {
     return tools.slice().sort(function(a, b) {
       const aPopular = typeof a.popularOrder === "number" ? a.popularOrder : Number.POSITIVE_INFINITY;
@@ -97,6 +101,7 @@
 
       const section = document.createElement("section");
       section.className = "tool-section";
+      section.id = "cat-" + slugify(cat);
       const description = CATEGORY_DESCRIPTIONS[cat]
         ? "<p class=\"category-description\">" + CATEGORY_DESCRIPTIONS[cat] + "</p>"
         : "";
@@ -215,6 +220,14 @@
 
   window.searchTools = searchTools;
 
+  function scrollToHash() {
+    var hash = location.hash;
+    if (hash && hash.indexOf("cat-") === 1) {
+      var el = document.getElementById(hash.slice(1));
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
   fetch("/tools-list.json")
     .then(function(r) { return r.json(); })
     .then(function(data) {
@@ -225,5 +238,8 @@
       var popular = allTools.filter(function(t) { return t.popular; });
       popular.sort(function(a, b) { return (a.popularOrder || 0) - (b.popularOrder || 0); });
       renderPopularTools(popular);
+      scrollToHash();
     });
+
+  window.addEventListener("hashchange", scrollToHash);
 })();

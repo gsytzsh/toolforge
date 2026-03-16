@@ -60,5 +60,6 @@ if(!list.length){document.getElementById("status").innerText="Paste at least one
 navigator.clipboard.writeText(list.join("\n")).then(function(){document.getElementById("status").innerText="Copied "+list.length+" URLs.";document.getElementById("status").style.color="#16a34a"}).catch(function(){document.getElementById("status").innerText="Copy failed.";document.getElementById("status").style.color="#b91c1c"})
 }
 </script>
+<script src="/js/tool-common.js"></script>
 </body>
 </html>
