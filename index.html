@@ -37,8 +37,22 @@
 
 </div>
 
-<script src="/js/index.js"></script>
+<button id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 
+<script src="/js/index.js"></script>
+<script>
+(function(){
+var btn=document.getElementById("back-to-top")
+function toggle(){
+btn.classList.toggle("visible",window.scrollY>200)
+}
+window.addEventListener("scroll",toggle,{passive:true})
+toggle()
+btn.addEventListener("click",function(){
+window.scrollTo({top:0,behavior:"smooth"})
+})
+})()
+</script>
 </body>
 
 </html>

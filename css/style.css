@@ -332,3 +332,28 @@ grid-template-columns:1fr;
 }
 
 }
+
+.back-to-top{
+position:fixed;
+bottom:24px;
+right:24px;
+width:44px;
+height:44px;
+border-radius:50%;
+border:1px solid #c7d2fe;
+background:#eef2ff;
+color:#2563eb;
+font-size:1.2rem;
+cursor:pointer;
+opacity:0;
+visibility:hidden;
+transition:opacity 0.2s,visibility 0.2s;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+.back-to-top:hover{
+background:#c7d2fe;
+}
+.back-to-top.visible{
+opacity:1;
+visibility:visible;
+}
