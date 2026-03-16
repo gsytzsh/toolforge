@@ -105,7 +105,8 @@
       const description = CATEGORY_DESCRIPTIONS[cat]
         ? "<p class=\"category-description\">" + CATEGORY_DESCRIPTIONS[cat] + "</p>"
         : "";
-      section.innerHTML = "<h2 class=\"category-title\">" + cat + "</h2>" + description;
+      const catSlug = slugify(cat);
+      section.innerHTML = "<h2 class=\"category-title\"><a href=\"/category/" + catSlug + ".html\">" + cat + "</a></h2>" + description;
 
       const grid = document.createElement("div");
       grid.className = "tool-grid";

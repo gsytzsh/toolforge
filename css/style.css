@@ -188,6 +188,10 @@ border-color:#818cf8;
 .tool-breadcrumb a{color:#2563eb;text-decoration:none}
 .tool-breadcrumb a:hover{text-decoration:underline}
 .tool-breadcrumb span{color:#374151}
+.tool-category-list{list-style:none;padding:0;margin:16px 0}
+.tool-category-list li{margin:8px 0}
+.tool-category-list a{color:#2563eb;text-decoration:none}
+.tool-category-list a:hover{text-decoration:underline}
 .tool-related{margin-top:32px;padding-top:24px;border-top:1px solid #e5e7eb}
 .tool-related h3{font-size:1rem;color:#374151;margin:0 0 12px 0}
 .tool-related ul{margin:0;padding-left:20px}
@@ -408,6 +412,14 @@ color:#374151;
 margin-bottom:12px;
 padding-bottom:6px;
 border-bottom:2px solid #e5e7eb;
+}
+.category-title a{
+color:#374151;
+text-decoration:none;
+}
+.category-title a:hover{
+color:#2563eb;
+text-decoration:underline;
 }
 
 .category-description{

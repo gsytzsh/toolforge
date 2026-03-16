@@ -46,6 +46,20 @@ function main() {
     "  </url>",
   ];
 
+  const cats = [...new Set(tools.map((t) => t.category || "Other"))];
+  const slugify = (s) => String(s).toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+  for (const cat of cats) {
+    const slug = slugify(cat);
+    lines.push(
+      "  <url>",
+      `    <loc>${escapeXml(BASE_URL + "/category/" + slug + ".html")}</loc>`,
+      `    <lastmod>${TODAY}</lastmod>`,
+      "    <changefreq>monthly</changefreq>",
+      "    <priority>0.7</priority>",
+      "  </url>"
+    );
+  }
+
   for (const tool of tools) {
     const file = tool.file || tool;
     const loc = `${BASE_URL}/tools/${file}.html`;
