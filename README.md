@@ -111,7 +111,3 @@ node scripts/generate-sitemap.js
    node scripts/generate-category-pages.js
    node scripts/generate-sitemap.js
    ```
-
-## License
-
-MIT
