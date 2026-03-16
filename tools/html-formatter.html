@@ -79,7 +79,8 @@ function formatHtml(){
     return;
   }
   var parser=new DOMParser();
-  var doc=parser.parseFromString("<body>" + html + "<script src="/js/tool-common.js"></script>
+  var doc=parser.parseFromString("<body>" + html + "<script src="/js/favorites.js"></script>
+<script src="/js/tool-common.js"></script>
 </body>","text/html");
   var result=Array.from(doc.body.childNodes).map(function(node){
     return formatNode(node,0);

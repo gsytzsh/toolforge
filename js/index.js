@@ -115,7 +115,7 @@
         const card = document.createElement("a");
         card.href = "/tools/" + tool.file + ".html";
         card.className = "tool-card";
-        card.innerHTML = "<div class=\"tool-title\">" + tool.name + "</div>";
+        card.textContent = tool.name;
         grid.appendChild(card);
       });
 
@@ -211,6 +211,29 @@
     });
   }
 
+  function renderFavorites() {
+    const section = document.getElementById("favorites-section");
+    const grid = document.getElementById("favorites-grid");
+    if (!section || !grid) return;
+    var favs = window.ToolFavorites ? window.ToolFavorites.get() : [];
+    if (favs.length === 0) {
+      section.style.display = "none";
+      return;
+    }
+    var map = {};
+    allTools.forEach(function(t) { map[t.file] = t; });
+    var tools = favs.map(function(f) { return map[f]; }).filter(Boolean);
+    section.style.display = "block";
+    grid.innerHTML = "";
+    tools.forEach(function(tool) {
+      const a = document.createElement("a");
+      a.href = "/tools/" + tool.file + ".html";
+      a.className = "tool-link-plain";
+      a.textContent = tool.name;
+      grid.appendChild(a);
+    });
+  }
+
   function searchTools() {
     const keyword = document.getElementById("search").value.toLowerCase().trim();
     const filtered = keyword
@@ -259,6 +282,7 @@
       renderTopNav(grouped);
       initMobileNav();
       render(allTools);
+      renderFavorites();
       var popular = allTools.filter(function(t) { return t.popular; });
       popular.sort(function(a, b) { return (a.popularOrder || 0) - (b.popularOrder || 0); });
       renderPopularTools(popular);
@@ -266,4 +290,7 @@
     });
 
   window.addEventListener("hashchange", scrollToHash);
+  window.addEventListener("storage", function(e) {
+    if (e.key === "toolforge_favorites") renderFavorites();
+  });
 })();

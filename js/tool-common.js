@@ -149,12 +149,29 @@
     breadcrumb.className="tool-breadcrumb";
     breadcrumb.setAttribute("aria-label","Breadcrumb");
     breadcrumb.innerHTML='<a href="/">Home</a> &gt; <a href="/category/'+catSlug+'.html">'+escapeHtml(cat)+"</a> &gt; <span>"+escapeHtml(current.name)+"</span>";
+    var row=document.createElement("div");
+    row.className="tool-breadcrumb-row";
+    row.appendChild(breadcrumb);
+    if(window.ToolFavorites){
+      var favBtn=document.createElement("button");
+      favBtn.type="button";
+      favBtn.className="tool-page-fav-btn"+(window.ToolFavorites.is(currentFile)?" active":"");
+      favBtn.setAttribute("aria-label",window.ToolFavorites.is(currentFile)?"Remove from favorites":"Add to favorites");
+      favBtn.innerHTML="★ "+(window.ToolFavorites.is(currentFile)?"Favorited":"Add to favorites");
+      favBtn.addEventListener("click",function(){
+        var now=window.ToolFavorites.toggle(currentFile);
+        favBtn.classList.toggle("active",now);
+        favBtn.setAttribute("aria-label",now?"Remove from favorites":"Add to favorites");
+        favBtn.innerHTML="★ "+(now?"Favorited":"Add to favorites");
+      });
+      row.appendChild(favBtn);
+    }
     if(backLink){
       var p=backLink.closest("p");
-      if(p)p.parentNode.replaceChild(breadcrumb,p);
-      else main.insertBefore(breadcrumb,main.firstChild);
+      if(p)p.parentNode.replaceChild(row,p);
+      else main.insertBefore(row,main.firstChild);
     }else{
-      main.insertBefore(breadcrumb,main.firstChild);
+      main.insertBefore(row,main.firstChild);
     }
 
     var seo=main.querySelector("section.tool-seo");

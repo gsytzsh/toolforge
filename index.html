@@ -35,6 +35,11 @@
 
 <input id="search" placeholder="Search tools..." onkeyup="searchTools()">
 
+<section class="favorites-section" id="favorites-section" style="display:none">
+  <h2 class="favorites-section-title">My Favorites</h2>
+  <div id="favorites-grid" class="favorites-grid"></div>
+</section>
+
 <section class="popular-tools">
   <h2 class="popular-tools-title">Popular Tools</h2>
   <div id="popular-tools-row" class="popular-tools-row"></div>
@@ -51,6 +56,7 @@
 
 <button id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 
+<script src="/js/favorites.js"></script>
 <script src="/js/index.js"></script>
 <script>
 (function(){
