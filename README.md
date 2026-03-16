@@ -11,6 +11,8 @@ Free online developer tools collection: JSON formatter, Base64 encoder, UUID gen
 - **No backend required** – all tools run in the browser
 - **Static site** – HTML, CSS, vanilla JS
 - **SEO-friendly** – sitemap, meta tags, canonical URLs, Schema.org, breadcrumbs, related tools
+- **Mobile-friendly** – hamburger nav on small screens, back-to-top on tool pages
+- **Custom 404** – friendly error page with links to popular tools
 
 ## Categories
 
@@ -40,6 +42,7 @@ Free online developer tools collection: JSON formatter, Base64 encoder, UUID gen
 ```
 toolforge/
 ├── index.html              # Homepage
+├── 404.html                # Custom 404 page
 ├── tools-list.json         # Tool catalog (name, category, popular)
 ├── sitemap.xml             # Generated sitemap
 ├── favicon.png             # Site favicon
@@ -50,6 +53,7 @@ toolforge/
 ├── tools/                  # 210+ tool pages (*.html)
 ├── category/               # 18 category landing pages (generated)
 └── scripts/
+    ├── build.js                    # Unified build (category pages + sitemap)
     ├── generate-sitemap.js         # Build sitemap from tools-list.json
     ├── generate-category-pages.js  # Generate category/*.html
     ├── normalize-tool-pages.js     # Canonical, OG, Twitter meta
@@ -76,6 +80,7 @@ npx serve .
 
 | Script | Purpose |
 |--------|---------|
+| `node scripts/build.js` | **Unified build** – runs category pages + sitemap |
 | `node scripts/generate-sitemap.js` | Regenerate `sitemap.xml` from `tools-list.json` |
 | `node scripts/generate-category-pages.js` | Regenerate `category/*.html` landing pages |
 | `node scripts/normalize-tool-pages.js` | Add canonical, OG, Twitter meta to tool pages |

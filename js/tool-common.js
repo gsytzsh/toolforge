@@ -28,7 +28,7 @@
     if(!header){
       header=document.createElement("header");
       header.className="top-nav";
-      header.innerHTML='<a href="/" class="top-nav-brand">ToolForge</a><nav id="tool-top-nav-menu" class="top-nav-menu" aria-label="Tool categories"></nav>';
+      header.innerHTML='<a href="/" class="top-nav-brand">ToolForge</a><button type="button" class="top-nav-toggle" id="tool-top-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span class="top-nav-toggle-bar"></span><span class="top-nav-toggle-bar"></span><span class="top-nav-toggle-bar"></span></button><nav id="tool-top-nav-menu" class="top-nav-menu" aria-label="Tool categories"></nav>';
       document.body.insertBefore(header,document.body.firstChild);
     }
     var menu=document.getElementById("tool-top-nav-menu")||header.querySelector(".top-nav-menu");
@@ -84,8 +84,48 @@
     }
   }
 
+  function injectBackToTop(){
+    if(document.getElementById("back-to-top"))return;
+    var btn=document.createElement("button");
+    btn.id="back-to-top";
+    btn.className="back-to-top";
+    btn.setAttribute("aria-label","Back to top");
+    btn.setAttribute("title","Back to top");
+    btn.textContent="↑";
+    document.body.appendChild(btn);
+    function toggle(){btn.classList.toggle("visible",window.scrollY>200)}
+    window.addEventListener("scroll",toggle,{passive:true});
+    toggle();
+    btn.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});
+  }
+
+  function initMobileNav(){
+    var toggle=document.getElementById("tool-top-nav-toggle");
+    var menu=document.getElementById("tool-top-nav-menu");
+    var header=document.querySelector(".top-nav");
+    if(!toggle||!menu||!header)return;
+    toggle.addEventListener("click",function(){
+      var open=header.classList.toggle("top-nav-open");
+      toggle.setAttribute("aria-expanded",open?"true":"false");
+    });
+    var triggers=menu.querySelectorAll(".top-nav-trigger");
+    for(var i=0;i<triggers.length;i++){
+      triggers[i].addEventListener("click",function(e){
+        if(window.innerWidth>768)return;
+        e.preventDefault();
+        var item=e.target.closest(".top-nav-item");
+        item.classList.toggle("top-nav-item-open");
+      });
+    }
+    menu.addEventListener("click",function(e){
+      if(e.target.tagName==="A")header.classList.remove("top-nav-open");
+    });
+  }
+
   fetch("/tools-list.json").then(function(r){return r.json()}).then(function(tools){
     injectTopNav(tools);
+    initMobileNav();
+    injectBackToTop();
     if(!isToolPage)return;
     var current=null;
     var byCat={};

@@ -462,6 +462,122 @@ text-align:center;
 font-weight:600;
 }
 
+/* Mobile nav toggle */
+.top-nav-toggle{
+display:none;
+width:40px;
+height:40px;
+padding:0;
+border:none;
+background:transparent;
+cursor:pointer;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:5px;
+margin-left:auto;
+}
+.top-nav-toggle-bar{
+display:block;
+width:22px;
+height:2px;
+background:#4b5563;
+border-radius:1px;
+transition:transform 0.2s,opacity 0.2s;
+}
+.top-nav-open .top-nav-toggle-bar:nth-child(1){
+transform:translateY(7px) rotate(45deg);
+}
+.top-nav-open .top-nav-toggle-bar:nth-child(2){
+opacity:0;
+}
+.top-nav-open .top-nav-toggle-bar:nth-child(3){
+transform:translateY(-7px) rotate(-45deg);
+}
+
+@media(max-width:768px){
+.top-nav-toggle{
+display:flex;
+}
+.top-nav-menu{
+position:fixed;
+top:48px;
+left:0;
+right:0;
+bottom:auto;
+flex-direction:column;
+align-items:stretch;
+gap:0;
+background:#fff;
+border-bottom:1px solid #e5e7eb;
+max-height:calc(100vh - 48px);
+overflow-y:auto;
+padding:12px 0;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+opacity:0;
+visibility:hidden;
+transform:translateY(-10px);
+transition:opacity 0.2s,visibility 0.2s,transform 0.2s;
+}
+.top-nav-open .top-nav-menu{
+opacity:1;
+visibility:visible;
+transform:translateY(0);
+}
+.top-nav-item{
+position:static;
+border-bottom:1px solid #e5e7eb;
+}
+.top-nav-item:last-child{
+border-bottom:none;
+}
+.top-nav-trigger{
+width:100%;
+text-align:left;
+padding:12px 16px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+.top-nav-dropdown{
+position:static;
+opacity:1;
+visibility:visible;
+transform:none;
+box-shadow:none;
+border:none;
+border-radius:0;
+margin:0;
+padding:0 0 8px;
+max-height:0;
+overflow:hidden;
+transition:max-height 0.25s ease-out;
+}
+.top-nav-item-open .top-nav-dropdown{
+max-height:400px;
+overflow-y:auto;
+}
+.top-nav-dropdown a{
+padding:10px 16px 10px 28px;
+}
+.top-nav-dropdown-other{
+min-width:auto;
+}
+.top-nav-dropdown-group{
+padding:8px 0 0;
+}
+.top-nav-dropdown-group:not(:first-child){
+margin-top:8px;
+padding-top:8px;
+}
+.top-nav-item:hover .top-nav-dropdown{
+visibility:hidden;
+}
+.top-nav-item-open .top-nav-dropdown{
+visibility:visible;
+}
+}
+
 @media(max-width:900px){
 
 .tool-grid{
