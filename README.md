@@ -6,44 +6,54 @@ Free online developer tools collection: JSON formatter, Base64 encoder, UUID gen
 
 ## Features
 
-- **160+ tools** across multiple categories
+- **210+ tools** across 18 categories
+- **Category landing pages** – dedicated pages per category for SEO
 - **No backend required** – all tools run in the browser
 - **Static site** – HTML, CSS, vanilla JS
-- **SEO-friendly** – sitemap, meta tags, canonical URLs
+- **SEO-friendly** – sitemap, meta tags, canonical URLs, Schema.org, breadcrumbs, related tools
 
 ## Categories
 
 | Category | Examples |
 |----------|----------|
-| Encoding & Decoding | Base64, URL Encode, HTML Escape, Hex, Morse Code |
 | JSON & Data | JSON Viewer, JSON Diff, JSON to CSV/XML/YAML |
+| Encoding & Decoding | Base64, URL Encode, HTML Escape, Hex, Morse Code, Gzip, Punycode |
+| Text | Case Converter, Lorem Ipsum, Slug, Word Frequency, Text Statistics |
+| Images & Colors | Color Picker, Image to Base64, Image Resize, SVG Viewer |
 | PDF & Export | JSON/CSV/Excel/Image/Markdown/HTML to PDF |
+| Date & Time | Timestamp, Timezone, Calendar, Stopwatch, Countdown |
 | Security & Tokens | Password Generator, Hash, JWT, UUID |
 | SEO & Webmaster | Robots.txt, Sitemap, Schema, OG, UTM, Canonical |
-| Code & Formatting | Regex, SQL Formatter, HTML/XML Formatter, Cron |
-| Web & Network | IP Info, HTTP Status, cURL to Fetch, URL Parser |
+| Code & Formatting | Regex, SQL Formatter, HTML/XML Formatter, Cron, Unicode Reference |
+| Web & Network | IP Info, HTTP Status, cURL to Fetch, URL Parser, Viewport Size |
 | Calculators | Loan, BMI, Percentage, Scientific, Date Diff |
-| Text | Case Converter, Lorem Ipsum, Slug, Emoji Remover |
-| Date & Time | Timestamp, Timezone, Calendar, Stopwatch |
-| Images & Colors | Color Picker, Image to Base64, Image Resize |
-| Daily Productivity | Notes & Lists, Pomodoro, Reading Time |
+| Time & Planning | Pomodoro, Working Days, Meeting Time Finder |
+| Daily Productivity | Notes & Lists, Reading Time, Speech Time |
+| Generators & Converters | UUID, Base Converter, Random Number |
+| Debug & Testing | Regex Tester, Diff Patch, XPath Tester |
+| API & Data | HTTP Request Builder, JWT Inspector, JSON Path |
+| Database | SQL Query Builder, SQL WHERE Builder |
+| Money & Decisions | Split Bill, Currency Converter, Unit Price |
 
 ## Project Structure
 
 ```
 toolforge/
-├── index.html          # Homepage
-├── tools-list.json     # Tool catalog (name, category, popular)
-├── sitemap.xml         # Generated sitemap
-├── css/style.css       # Global styles
+├── index.html              # Homepage
+├── tools-list.json         # Tool catalog (name, category, popular)
+├── sitemap.xml             # Generated sitemap
+├── favicon.png             # Site favicon
+├── css/style.css           # Global styles
 ├── js/
-│   ├── index.js        # Homepage logic, search, categories
-│   └── tools.js        # Shared tool utilities
-├── tools/              # 160+ tool pages (*.html)
+│   ├── index.js            # Homepage logic, search, categories, top nav
+│   └── tool-common.js      # Tool pages: top nav, breadcrumb, related tools, Schema
+├── tools/                  # 210+ tool pages (*.html)
+├── category/               # 18 category landing pages (generated)
 └── scripts/
-    ├── generate-sitemap.js    # Build sitemap from tools-list.json
-    ├── normalize-tool-pages.js # Canonical, OG, Twitter meta
-    └── normalize-seo-titles.js # Title/description typography
+    ├── generate-sitemap.js         # Build sitemap from tools-list.json
+    ├── generate-category-pages.js  # Generate category/*.html
+    ├── normalize-tool-pages.js     # Canonical, OG, Twitter meta
+    └── normalize-seo-titles.js    # Title/description typography
 ```
 
 ## Local Development
@@ -67,10 +77,16 @@ npx serve .
 | Script | Purpose |
 |--------|---------|
 | `node scripts/generate-sitemap.js` | Regenerate `sitemap.xml` from `tools-list.json` |
+| `node scripts/generate-category-pages.js` | Regenerate `category/*.html` landing pages |
 | `node scripts/normalize-tool-pages.js` | Add canonical, OG, Twitter meta to tool pages |
 | `node scripts/normalize-seo-titles.js` | Normalize ` - ` → ` – ` in titles and meta |
 
-The `build.sh` script is used on the deployment server for meta updates and sitemap generation.
+**After adding or changing tools**, run:
+
+```bash
+node scripts/generate-category-pages.js
+node scripts/generate-sitemap.js
+```
 
 ## Deployment
 
@@ -85,7 +101,11 @@ The `build.sh` script is used on the deployment server for meta updates and site
    ```json
    {"file":"your-tool-name","name":"Your Tool Name","category":"Category Name"}
    ```
-3. Run `node scripts/generate-sitemap.js` to update the sitemap
+3. Run:
+   ```bash
+   node scripts/generate-category-pages.js
+   node scripts/generate-sitemap.js
+   ```
 
 ## License
 
