@@ -2,991 +2,1015 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.toolforge.site/</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/base64-encode.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/base64-image-viewer.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/url-encode-decode.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/html-escape.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/json-viewer.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/json-diff.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/json-to-csv.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/yaml-json-converter.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/json-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/csv-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/xml-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/yaml-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/excel-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/tsv-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/api-response-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/form-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/invoice-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/meeting-notes-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/checklist-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/resume-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/hash-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/password-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/password-strength-checker.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/jwt-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/image-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/screenshot-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/image-to-base64.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/color-picker.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/color-converter.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/case-converter.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/text-statistics.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/lorem-ipsum.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/slug-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/emoji-stripper.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/markdown-preview.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/markdown-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/log-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/notepad-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/text-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/timestamp-converter.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/timezone-converter.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/date-diff-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/calendar.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/ip-info.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/http-status-lookup.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.toolforge.site/tools/http-status-reference.html</loc>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.toolforge.site/tools/port-reference.html</loc>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/http-header-parser.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/curl-to-fetch.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/url-parser.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/user-agent-parser.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/url-to-qr.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/robots-txt-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/sitemap-validator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/canonical-tag-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/hreflang-tag-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/meta-tag-preview.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/open-graph-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/twitter-card-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/utm-builder.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/utm-parser.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/robots-txt-tester.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/schema-markup-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/schema-validator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/serp-snippet-preview.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/heading-structure-checker.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/schema-faq-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/breadcrumb-schema-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/redirect-rule-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/x-robots-tag-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/meta-robots-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/webpage-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/regex-tester.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/html-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/code-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/sql-to-pdf.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/sql-formatter.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/cron-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/unix-permissions-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/uuid-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/uuid-validator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/random-number-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/percentage-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/base-converter.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/byte-size-converter.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/fraction-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/average-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/bmi-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/loan-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/compound-interest-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/gpa-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/gcd-lcm-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/prime-checker.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/factorial-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/standard-deviation-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/permutation-combination.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/temperature-converter.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/length-converter.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/weight-converter.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/roman-numerals.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/ascii-table.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.toolforge.site/tools/git-commands-reference.html</loc>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.toolforge.site/tools/frontend-shortcuts-reference.html</loc>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/binary-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/number-to-words.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/text-diff.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/sort-lines.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/remove-duplicate-lines.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/reverse-text.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/invert-case.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/age-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/leap-year-checker.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/stopwatch.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/countdown-timer.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/json-to-xml.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/scientific-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/grade-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/simple-interest-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/notepad.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/line-number-adder.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/remove-line-breaks.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/find-replace.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/whitespace-remover.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/days-until-date.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/week-number-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/binary-to-text.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/text-to-binary.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/morse-code.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/dice-roller.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/coin-flip.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/random-yes-no.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/css-minify.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/xml-formatter.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/hex-encode-decode.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/string-length-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/html-formatter.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/js-beautify-minify.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/extract-emails.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/extract-urls.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/image-resizer.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/area-converter.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/volume-converter.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/speed-converter.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/random-string-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/qr-code-decoder.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/jwt-inspector.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/json-path-tester.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/json-schema-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/http-request-builder.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/curl-builder.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/regex-replace-tester.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/diff-patch-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/url-rewrite-tester.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/sql-query-builder.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/api-mock-generator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/sql-where-builder.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/graphql-query-builder.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/http-header-builder.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/webhook-payload-viewer.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/pomodoro-timer.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/working-days-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/meeting-time-finder.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/sleep-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/reading-time-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/speech-time-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/unit-price-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/split-bill-calculator.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/currency-converter.html</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HTTP Status Codes Reference – Full HTTP Status Code Table | ToolForge</title>
+<meta name="description" content="Free online HTTP status codes reference. Complete table of 1xx, 2xx, 3xx, 4xx, 5xx status codes with descriptions. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/http-status-reference.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="HTTP Status Codes Reference – Full HTTP Status Code Table | ToolForge">
+<meta property="og:description" content="Free online HTTP status codes reference. Complete table of status codes. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/http-status-reference.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP Status Codes Reference – Full HTTP Status Code Table | ToolForge">
+<meta name="twitter:description" content="Free online HTTP status codes reference. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem}
+.ref-table th,.ref-table td{border:1px solid #eee;padding:8px 12px;text-align:left}
+.ref-table th{background:#f8fafc;font-weight:600}
+.ref-table .code{font-weight:600;width:70px}
+.ref-table .1xx{background:#e0f2fe}
+.ref-table .2xx{background:#dcfce7}
+.ref-table .3xx{background:#fef9c3}
+.ref-table .4xx{background:#fee2e2}
+.ref-table .5xx{background:#fce7f3}
+.ref-section{margin-top:24px}
+.ref-section h3{font-size:1rem;color:#475569;margin-bottom:8px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>HTTP Status Codes Reference</h1>
+<p class="subtitle">Complete reference table for HTTP response status codes. <a href="/tools/http-status-lookup.html">Quick lookup</a> by code.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="filter" class="sr-only">Filter</label>
+<input id="filter" placeholder="Search by code or name (e.g. 404, Not Found)" style="width:100%;max-width:400px;padding:10px;margin-bottom:16px;border:1px solid #ddd;border-radius:6px" aria-label="Filter">
+
+<div class="ref-section">
+<h3>1xx Informational</h3>
+<table class="ref-table">
+<thead><tr><th>Code</th><th>Status</th><th>Description</th></tr></thead>
+<tbody>
+<tr class="1xx"><td class="code">100</td><td>Continue</td><td>Request received, client should continue</td></tr>
+<tr class="1xx"><td class="code">101</td><td>Switching Protocols</td><td>Server agrees to switch protocol</td></tr>
+<tr class="1xx"><td class="code">102</td><td>Processing</td><td>Request is being processed (WebDAV)</td></tr>
+<tr class="1xx"><td class="code">103</td><td>Early Hints</td><td>Preload hints for the browser</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="ref-section">
+<h3>2xx Success</h3>
+<table class="ref-table">
+<thead><tr><th>Code</th><th>Status</th><th>Description</th></tr></thead>
+<tbody>
+<tr class="2xx"><td class="code">200</td><td>OK</td><td>Request succeeded</td></tr>
+<tr class="2xx"><td class="code">201</td><td>Created</td><td>Resource successfully created</td></tr>
+<tr class="2xx"><td class="code">202</td><td>Accepted</td><td>Request accepted but not yet processed</td></tr>
+<tr class="2xx"><td class="code">203</td><td>Non-Authoritative Info</td><td>Transformed response from proxy</td></tr>
+<tr class="2xx"><td class="code">204</td><td>No Content</td><td>Success with no response body</td></tr>
+<tr class="2xx"><td class="code">205</td><td>Reset Content</td><td>Client should reset document view</td></tr>
+<tr class="2xx"><td class="code">206</td><td>Partial Content</td><td>Partial GET response (range request)</td></tr>
+<tr class="2xx"><td class="code">207</td><td>Multi-Status</td><td>Multiple status codes (WebDAV)</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="ref-section">
+<h3>3xx Redirection</h3>
+<table class="ref-table">
+<thead><tr><th>Code</th><th>Status</th><th>Description</th></tr></thead>
+<tbody>
+<tr class="3xx"><td class="code">300</td><td>Multiple Choices</td><td>Multiple options for the resource</td></tr>
+<tr class="3xx"><td class="code">301</td><td>Moved Permanently</td><td>Resource permanently moved</td></tr>
+<tr class="3xx"><td class="code">302</td><td>Found</td><td>Temporary redirect</td></tr>
+<tr class="3xx"><td class="code">303</td><td>See Other</td><td>Redirect to different URI via GET</td></tr>
+<tr class="3xx"><td class="code">304</td><td>Not Modified</td><td>Use cached version</td></tr>
+<tr class="3xx"><td class="code">307</td><td>Temporary Redirect</td><td>Same as 302 but method preserved</td></tr>
+<tr class="3xx"><td class="code">308</td><td>Permanent Redirect</td><td>Same as 301 but method preserved</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="ref-section">
+<h3>4xx Client Error</h3>
+<table class="ref-table">
+<thead><tr><th>Code</th><th>Status</th><th>Description</th></tr></thead>
+<tbody>
+<tr class="4xx"><td class="code">400</td><td>Bad Request</td><td>Invalid request syntax</td></tr>
+<tr class="4xx"><td class="code">401</td><td>Unauthorized</td><td>Authentication required</td></tr>
+<tr class="4xx"><td class="code">403</td><td>Forbidden</td><td>Access denied</td></tr>
+<tr class="4xx"><td class="code">404</td><td>Not Found</td><td>Resource not found</td></tr>
+<tr class="4xx"><td class="code">405</td><td>Method Not Allowed</td><td>HTTP method not allowed</td></tr>
+<tr class="4xx"><td class="code">408</td><td>Request Timeout</td><td>Server timed out waiting</td></tr>
+<tr class="4xx"><td class="code">409</td><td>Conflict</td><td>Request conflicts with current state</td></tr>
+<tr class="4xx"><td class="code">410</td><td>Gone</td><td>Resource permanently removed</td></tr>
+<tr class="4xx"><td class="code">413</td><td>Payload Too Large</td><td>Request entity too large</td></tr>
+<tr class="4xx"><td class="code">414</td><td>URI Too Long</td><td>Request URI too long</td></tr>
+<tr class="4xx"><td class="code">415</td><td>Unsupported Media Type</td><td>Format not supported</td></tr>
+<tr class="4xx"><td class="code">429</td><td>Too Many Requests</td><td>Rate limit exceeded</td></tr>
+<tr class="4xx"><td class="code">431</td><td>Request Header Fields Too Large</td><td>Headers too large</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="ref-section">
+<h3>5xx Server Error</h3>
+<table class="ref-table">
+<thead><tr><th>Code</th><th>Status</th><th>Description</th></tr></thead>
+<tbody>
+<tr class="5xx"><td class="code">500</td><td>Internal Server Error</td><td>Server encountered error</td></tr>
+<tr class="5xx"><td class="code">501</td><td>Not Implemented</td><td>Feature not supported</td></tr>
+<tr class="5xx"><td class="code">502</td><td>Bad Gateway</td><td>Invalid response from upstream</td></tr>
+<tr class="5xx"><td class="code">503</td><td>Service Unavailable</td><td>Server temporarily unavailable</td></tr>
+<tr class="5xx"><td class="code">504</td><td>Gateway Timeout</td><td>Upstream server timeout</td></tr>
+<tr class="5xx"><td class="code">505</td><td>HTTP Version Not Supported</td><td>HTTP version not supported</td></tr>
+<tr class="5xx"><td class="code">511</td><td>Network Auth Required</td><td>Network authentication required</td></tr>
+</tbody>
+</table>
+</div>
+
+<section class="tool-seo">
+<h3>About HTTP Status Reference</h3>
+<p>This HTTP status codes reference lists standard response codes from 1xx to 5xx with brief descriptions.</p>
+<p>It is useful for API development, debugging server responses and understanding what each status code means.</p>
+</section>
+</main>
+<script>
+(function(){
+var input=document.getElementById("filter")
+var tables=document.querySelectorAll(".ref-section")
+input.addEventListener("input",function(){
+var q=(input.value||"").toLowerCase().trim()
+tables.forEach(function(section){
+var rows=section.querySelectorAll("tbody tr")
+rows.forEach(function(tr){
+var text=(tr.textContent||"").toLowerCase()
+tr.style.display=(!q||text.indexOf(q)!==-1)?"":"none"
+})
+})
+})
+})()
+</script>
+</body>
+</html>

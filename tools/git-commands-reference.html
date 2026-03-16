@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Git Commands Reference – Common Git Commands Cheat Sheet | ToolForge</title>
+<meta name="description" content="Free online Git commands reference and cheat sheet. Init, clone, branch, merge, push, pull and more. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/git-commands-reference.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Git Commands Reference – Common Git Commands Cheat Sheet | ToolForge">
+<meta property="og:description" content="Free online Git commands reference and cheat sheet. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/git-commands-reference.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git Commands Reference – Common Git Commands Cheat Sheet | ToolForge">
+<meta name="twitter:description" content="Free online Git commands reference and cheat sheet. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem}
+.ref-table th,.ref-table td{border:1px solid #eee;padding:8px 12px;text-align:left}
+.ref-table th{background:#f8fafc;font-weight:600}
+.ref-table code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:0.9em}
+.ref-section{margin-top:24px}
+.ref-section h3{font-size:1rem;color:#475569;margin-bottom:8px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Git Commands Reference</h1>
+<p class="subtitle">Quick reference for common Git commands. Init, clone, branch, commit, push, pull and more.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<div class="ref-section">
+<h3>Initialize & Clone</h3>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>git init</code></td><td>Create a new Git repo in current directory</td></tr>
+<tr><td><code>git init [project-name]</code></td><td>Create directory and init as Git repo</td></tr>
+<tr><td><code>git clone &lt;url&gt;</code></td><td>Clone a remote repository</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="ref-section">
+<h3>Config</h3>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>git config --list</code></td><td>Show current Git config</td></tr>
+<tr><td><code>git config [--global] user.name "name"</code></td><td>Set author name</td></tr>
+<tr><td><code>git config [--global] user.email "email"</code></td><td>Set author email</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="ref-section">
+<h3>Branch</h3>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>git branch</code></td><td>List local branches</td></tr>
+<tr><td><code>git branch -r</code></td><td>List remote branches</td></tr>
+<tr><td><code>git branch -a</code></td><td>List all branches</td></tr>
+<tr><td><code>git branch [name]</code></td><td>Create branch (stay on current)</td></tr>
+<tr><td><code>git checkout -b [branch]</code></td><td>Create and switch to branch</td></tr>
+<tr><td><code>git checkout [branch]</code></td><td>Switch to branch</td></tr>
+<tr><td><code>git merge [branch]</code></td><td>Merge branch into current</td></tr>
+<tr><td><code>git branch -d [branch]</code></td><td>Delete branch</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="ref-section">
+<h3>Commit & Status</h3>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>git status</code></td><td>Show working tree status</td></tr>
+<tr><td><code>git add [file]</code></td><td>Stage file(s)</td></tr>
+<tr><td><code>git add .</code></td><td>Stage all changes</td></tr>
+<tr><td><code>git commit -m "message"</code></td><td>Commit with message</td></tr>
+<tr><td><code>git commit -am "message"</code></td><td>Add tracked files and commit</td></tr>
+<tr><td><code>git log</code></td><td>Show commit history</td></tr>
+<tr><td><code>git diff</code></td><td>Show unstaged changes</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="ref-section">
+<h3>Remote & Push / Pull</h3>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>git remote -v</code></td><td>List remotes</td></tr>
+<tr><td><code>git remote add origin &lt;url&gt;</code></td><td>Add remote</td></tr>
+<tr><td><code>git push [remote] [branch]</code></td><td>Push to remote</td></tr>
+<tr><td><code>git pull [remote] [branch]</code></td><td>Pull and merge from remote</td></tr>
+<tr><td><code>git fetch</code></td><td>Fetch from remote (no merge)</td></tr>
+</tbody>
+</table>
+</div>
+
+<section class="tool-seo">
+<h3>About Git Commands Reference</h3>
+<p>This Git commands reference lists common commands for initializing repos, branching, committing, and syncing with remotes.</p>
+<p>It is useful when you need a quick reminder of syntax, setting up a new project, or onboarding to a Git-based workflow.</p>
+</section>
+</main>
+</body>
+</html>

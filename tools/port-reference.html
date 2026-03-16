@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Common Port Numbers Reference – TCP/UDP Port Lookup | ToolForge</title>
+<meta name="description" content="Free online common port numbers reference for TCP and UDP. Look up FTP, SSH, HTTP, HTTPS, SMTP and 80+ well-known ports. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/port-reference.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Common Port Numbers Reference – TCP/UDP Port Lookup | ToolForge">
+<meta property="og:description" content="Free online common port numbers reference for TCP and UDP. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/port-reference.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Common Port Numbers Reference – TCP/UDP Port Lookup | ToolForge">
+<meta name="twitter:description" content="Free online common port numbers reference for TCP and UDP. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem}
+.ref-table th,.ref-table td{border:1px solid #eee;padding:8px 12px;text-align:left}
+.ref-table th{background:#f8fafc;font-weight:600}
+.ref-table input{width:100%;max-width:120px;padding:6px;border:1px solid #ddd;border-radius:4px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Common Port Numbers Reference</h1>
+<p class="subtitle">Reference table for well-known TCP and UDP port numbers. Search by port or service name.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="filter" class="sr-only">Filter</label>
+<input id="filter" placeholder="Search by port or name (e.g. 80, http, ssh)" style="width:100%;max-width:400px;padding:10px;margin-bottom:16px;border:1px solid #ddd;border-radius:6px" aria-label="Filter">
+
+<h3>Common Ports</h3>
+<table class="ref-table">
+<thead><tr><th>Port</th><th>Service</th><th>Description</th></tr></thead>
+<tbody id="body"></tbody>
+</table>
+
+<section class="tool-seo">
+<h3>About Port Reference</h3>
+<p>This port reference lists well-known TCP and UDP port numbers used by common network services such as HTTP, SSH, FTP, SMTP and DNS.</p>
+<p>It is useful for firewall rules, server configuration, debugging network issues and understanding which services use which ports.</p>
+</section>
+</main>
+<script>
+var ports=[
+[7,"echo","Echo service"],
+[9,"discard","Connection test null service"],
+[20,"ftp-data","FTP data"],
+[21,"ftp","File Transfer Protocol"],
+[22,"ssh","Secure Shell"],
+[23,"telnet","Telnet"],
+[25,"smtp","Simple Mail Transfer Protocol"],
+[53,"domain","DNS (Domain Name Service)"],
+[67,"bootps","DHCP/BOOTP server"],
+[68,"bootpc","DHCP/BOOTP client"],
+[69,"tftp","Trivial File Transfer Protocol"],
+[80,"http","Hypertext Transfer Protocol (WWW)"],
+[88,"kerberos","Kerberos authentication"],
+[110,"pop3","Post Office Protocol v3"],
+[111,"sunrpc","RPC / NFS"],
+[123,"ntp","Network Time Protocol"],
+[137,"netbios-ns","NETBIOS Name Service"],
+[138,"netbios-dgm","NETBIOS Datagram"],
+[139,"netbios-ssn","NETBIOS Session"],
+[143,"imap","Internet Message Access Protocol"],
+[161,"snmp","Simple Network Management Protocol"],
+[194,"irc","Internet Relay Chat"],
+[389,"ldap","Lightweight Directory Access Protocol"],
+[443,"https","HTTP Secure"],
+[445,"microsoft-ds","SMB over TCP"],
+[465,"smtps","SMTP over SSL"],
+[500,"isakmp","IKE / IPsec"],
+[514,"syslog","Syslog (UDP)"],
+[515,"printer","LPD printer"],
+[587,"submission","Mail submission (MSA)"],
+[631,"ipp","Internet Printing Protocol"],
+[636,"ldaps","LDAP over SSL"],
+[873,"rsync","rsync file transfer"],
+[993,"imaps","IMAP over SSL"],
+[994,"ircs","IRC over SSL"],
+[995,"pop3s","POP3 over SSL"],
+[1080,"socks","SOCKS proxy"],
+[1433,"ms-sql","Microsoft SQL Server"],
+[1521,"oracle","Oracle database"],
+[2049,"nfs","NFS"],
+[3128,"squid","Squid proxy"],
+[3306,"mysql","MySQL"],
+[3389,"rdp","Remote Desktop Protocol"],
+[5432,"postgresql","PostgreSQL"],
+[5900,"vnc","VNC"],
+[6379,"redis","Redis"],
+[8080,"http-alt","HTTP alternate"],
+[8443,"https-alt","HTTPS alternate"],
+[27017,"mongodb","MongoDB"]
+];
+function render(){
+var q=(document.getElementById("filter").value||"").toLowerCase().trim()
+var tbody=document.getElementById("body")
+tbody.innerHTML=""
+ports.forEach(function(p){
+if(q&&p[0].toString().indexOf(q)===-1&&p[1].toLowerCase().indexOf(q)===-1&&p[2].toLowerCase().indexOf(q)===-1)return
+var tr=document.createElement("tr")
+tr.innerHTML="<td>"+p[0]+"</td><td><code>"+p[1]+"</code></td><td>"+p[2]+"</td>"
+tbody.appendChild(tr)
+})
+}
+document.getElementById("filter").addEventListener("input",render)
+render()
+</script>
+</body>
+</html>
