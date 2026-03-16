@@ -3,6 +3,16 @@
 
   let allTools = [];
 
+  const KEY_NAV_CATEGORIES = [
+    "JSON & Data",
+    "Encoding & Decoding",
+    "Text",
+    "PDF & Export",
+    "Date & Time",
+    "Security & Tokens",
+    "Code & Formatting"
+  ];
+
   const CATEGORY_ORDER = [
     "JSON & Data",
     "Encoding & Decoding",
@@ -108,6 +118,80 @@
     });
   }
 
+  function renderTopNav(groups) {
+    const menu = document.getElementById("top-nav-menu");
+    if (!menu) return;
+    const otherCats = CATEGORY_ORDER.concat(
+      Object.keys(groups).filter(function(c) { return CATEGORY_ORDER.indexOf(c) === -1; })
+    ).filter(function(c) { return KEY_NAV_CATEGORIES.indexOf(c) === -1; })
+     .filter(function(c) { return groups[c] && groups[c].length > 0; });
+
+    menu.innerHTML = "";
+
+    KEY_NAV_CATEGORIES.forEach(function(cat) {
+      const tools = groups[cat];
+      if (!tools || tools.length === 0) return;
+      const sortedTools = sortTools(tools);
+      const item = document.createElement("div");
+      item.className = "top-nav-item";
+      const trigger = document.createElement("button");
+      trigger.className = "top-nav-trigger";
+      trigger.type = "button";
+      trigger.textContent = cat + " ▾";
+      trigger.setAttribute("aria-haspopup", "true");
+      trigger.setAttribute("aria-expanded", "false");
+      const dropdown = document.createElement("div");
+      dropdown.className = "top-nav-dropdown";
+      dropdown.setAttribute("role", "menu");
+      sortedTools.forEach(function(tool) {
+        const a = document.createElement("a");
+        a.href = "/tools/" + tool.file + ".html";
+        a.textContent = tool.name;
+        a.setAttribute("role", "menuitem");
+        dropdown.appendChild(a);
+      });
+      item.appendChild(trigger);
+      item.appendChild(dropdown);
+      menu.appendChild(item);
+    });
+
+    if (otherCats.length > 0) {
+      const item = document.createElement("div");
+      item.className = "top-nav-item";
+      const trigger = document.createElement("button");
+      trigger.className = "top-nav-trigger";
+      trigger.type = "button";
+      trigger.textContent = "Other ▾";
+      trigger.setAttribute("aria-haspopup", "true");
+      trigger.setAttribute("aria-expanded", "false");
+      const dropdown = document.createElement("div");
+      dropdown.className = "top-nav-dropdown top-nav-dropdown-other";
+      dropdown.setAttribute("role", "menu");
+      otherCats.forEach(function(cat) {
+        const tools = groups[cat];
+        if (!tools || tools.length === 0) return;
+        const sortedTools = sortTools(tools);
+        const group = document.createElement("div");
+        group.className = "top-nav-dropdown-group";
+        const groupTitle = document.createElement("div");
+        groupTitle.className = "top-nav-dropdown-group-title";
+        groupTitle.textContent = cat;
+        group.appendChild(groupTitle);
+        sortedTools.forEach(function(tool) {
+          const a = document.createElement("a");
+          a.href = "/tools/" + tool.file + ".html";
+          a.textContent = tool.name;
+          a.setAttribute("role", "menuitem");
+          group.appendChild(a);
+        });
+        dropdown.appendChild(group);
+      });
+      item.appendChild(trigger);
+      item.appendChild(dropdown);
+      menu.appendChild(item);
+    }
+  }
+
   function renderPopularTools(tools) {
     const el = document.getElementById("popular-tools-row");
     if (!el) return;
@@ -135,6 +219,8 @@
     .then(function(r) { return r.json(); })
     .then(function(data) {
       allTools = data;
+      var grouped = groupByCategory(allTools);
+      renderTopNav(grouped);
       render(allTools);
       var popular = allTools.filter(function(t) { return t.popular; });
       popular.sort(function(a, b) { return (a.popularOrder || 0) - (b.popularOrder || 0); });
