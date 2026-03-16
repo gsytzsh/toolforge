@@ -157,12 +157,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.toolforge.site/tools/screenshot-to-pdf.html</loc>
-    <lastmod>2026-03-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.toolforge.site/tools/image-to-base64.html</loc>
     <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
@@ -386,12 +380,6 @@
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/schema-validator.html</loc>
-    <lastmod>2026-03-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.toolforge.site/tools/serp-snippet-preview.html</loc>
     <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -763,12 +751,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.toolforge.site/tools/text-to-binary.html</loc>
-    <lastmod>2026-03-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.toolforge.site/tools/morse-code.html</loc>
     <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
@@ -806,12 +788,6 @@
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/hex-encode-decode.html</loc>
-    <lastmod>2026-03-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.toolforge.site/tools/string-length-calculator.html</loc>
     <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -1232,12 +1208,6 @@
   </url>
   <url>
     <loc>https://www.toolforge.site/tools/test-data-generator.html</loc>
-    <lastmod>2026-03-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.toolforge.site/tools/os-browser-detector.html</loc>
     <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

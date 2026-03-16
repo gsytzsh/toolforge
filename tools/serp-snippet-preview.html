@@ -2,68 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SERP Snippet Preview – Preview Search Snippets Online | ToolForge</title>
-<meta name="description" content="Free online SERP Snippet Preview to preview page titles, URLs and descriptions as search snippets. Part of the ToolForge developer tools collection.">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="canonical" href="https://www.toolforge.site/tools/serp-snippet-preview.html">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="SERP Snippet Preview – Preview Search Snippets Online | ToolForge">
-<meta property="og:description" content="Free online SERP Snippet Preview to preview page titles, URLs and descriptions as search snippets. Part of the ToolForge developer tools collection.">
-<meta property="og:url" content="https://www.toolforge.site/tools/serp-snippet-preview.html">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SERP Snippet Preview – Preview Search Snippets Online | ToolForge">
-<meta name="twitter:description" content="Free online SERP Snippet Preview to preview page titles, URLs and descriptions as search snippets. Part of the ToolForge developer tools collection.">
-<link rel="stylesheet" href="/css/style.css">
+<meta http-equiv="refresh" content="0;url=/tools/meta-tag-preview.html">
+<title>Redirecting to Meta Tag Preview | ToolForge</title>
 </head>
-<body>
-<main class="container">
-<h1>SERP Snippet Preview</h1>
-<p class="subtitle">Preview title, URL and description length the way they may appear in search.</p>
-<p><a href="/">Back to all tools on ToolForge</a></p>
-<p>Title:
-<label for="serp-title" class="sr-only">SERP title</label>
-<input id="serp-title" type="text" style="width:90%" aria-label="SERP title"></p>
-<p>URL:
-<label for="serp-url" class="sr-only">SERP URL</label>
-<input id="serp-url" type="url" style="width:90%" aria-label="SERP URL"></p>
-<p>Description:
-<label for="serp-description" class="sr-only">SERP description</label></p>
-<textarea id="serp-description" rows="4" class="pdf-editor" aria-label="SERP description"></textarea>
-<div class="tool-actions">
-<button type="button" onclick="renderSnippet()">Preview</button>
-</div>
-<div class="pdf-preview-box" style="max-width:720px">
-<div id="snippet-url" style="color:#006621;font-size:14px"></div>
-<div id="snippet-title" style="color:#1a0dab;font-size:22px;line-height:1.3;margin:4px 0"></div>
-<div id="snippet-description" style="color:#4d5156;font-size:14px;line-height:1.5"></div>
-</div>
-<p id="status" class="inline-status"></p>
-<section class="tool-seo">
-<h3>About SERP Snippet Preview</h3>
-<p>This SERP snippet preview lets you check how a page title, URL and description may look on a search results page.</p>
-<p>It is useful for on-page SEO editing, content refreshes and CTR optimization when you want to compare different headline and description options before publishing.</p>
-</section>
-</main>
-<script>
-function setStatus(message,color){
-let status=document.getElementById("status")
-status.innerText=message
-status.style.color=color
-}
-function renderSnippet(){
-let title=document.getElementById("serp-title").value.trim()||"Search snippet title"
-let url=document.getElementById("serp-url").value.trim()||"https://example.com/page"
-let description=document.getElementById("serp-description").value.trim()||"Search snippet description preview."
-document.getElementById("snippet-title").innerText=title
-document.getElementById("snippet-url").innerText=url
-document.getElementById("snippet-description").innerText=description
-setStatus("SERP snippet updated. Title: "+title.length+" chars, Description: "+description.length+" chars.","#16a34a")
-}
-document.getElementById("serp-title").value="ToolForge SERP Snippet Preview"
-document.getElementById("serp-url").value="https://www.toolforge.site/tools/serp-snippet-preview.html"
-document.getElementById("serp-description").value="Preview title and description lengths before publishing SEO pages."
-renderSnippet()
-</script>
-</body>
+<body><p>Redirecting to <a href="/tools/meta-tag-preview.html">Meta Tag Preview</a>…</p></body>
 </html>

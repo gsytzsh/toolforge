@@ -1,89 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
 <title>User Agent Parser – Analyze Browser User Agents | ToolForge</title>
-
-<meta name="description" content="Free online User Agent Parser to detect browser, OS and show the full User-Agent string. Part of the ToolForge developer tools collection.">
-
+<meta name="description" content="Free online User Agent Parser to detect browser, OS and show the full User-Agent string. Parse any UA or view your current environment. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://www.toolforge.site/tools/user-agent-parser.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="User Agent Parser – Analyze Browser User Agents | ToolForge">
-<meta property="og:description" content="Free online User Agent Parser to detect browser, OS and show the full User-Agent string. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Free online User Agent Parser to detect browser, OS and show the full User-Agent string. Parse any UA or view your current environment. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://www.toolforge.site/tools/user-agent-parser.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="User Agent Parser – Analyze Browser User Agents | ToolForge">
-<meta name="twitter:description" content="Free online User Agent Parser to detect browser, OS and show the full User-Agent string. Part of the ToolForge developer tools collection.">
-
+<meta name="twitter:description" content="Free online User Agent Parser to detect browser, OS and show the full User-Agent string. Parse any UA or view your current environment. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
-
+<style>
+.info-table{width:100%;max-width:600px;border-collapse:collapse}
+.info-table td{padding:8px 12px;border-bottom:1px solid #eee}
+.info-table td:first-child{font-weight:600;width:140px}
+.tab-btn{margin-right:8px;padding:6px 12px;cursor:pointer;border:1px solid #ccc;background:#fff}
+.tab-btn.active{background:#e5e7eb;border-color:#6b7280}
+</style>
 </head>
-
 <body>
-
 <main class="container">
-
 <h1>User Agent Parser</h1>
-
-<p class="subtitle">Analyze browser and operating system from a User-Agent string for debugging and analytics.</p>
-
+<p class="subtitle">Analyze browser and operating system from a User-Agent string, or view your current environment.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
+<div style="margin-bottom:16px">
+<button type="button" class="tab-btn active" id="tab-parse" onclick="showTab('parse')">Parse User Agent</button>
+<button type="button" class="tab-btn" id="tab-current" onclick="showTab('current')">Current Environment</button>
+</div>
+
+<div id="panel-parse">
 <label for="ua" class="sr-only">User agent</label>
 <textarea id="ua" rows="6" style="width:90%" placeholder="Paste User-Agent string" aria-label="User agent"></textarea>
-
 <br><br>
-
 <button onclick="parseUA()">Parse</button>
-
 <h3>Result</h3>
-
 <pre id="result"></pre>
+</div>
+
+<div id="panel-current" style="display:none">
+<h3>Detected Info</h3>
+<table class="info-table">
+<tbody id="info"></tbody>
+</table>
+<h3>Raw User Agent</h3>
+<pre id="ua-current" style="word-break:break-all;font-size:0.85rem"></pre>
+<button type="button" onclick="copyUa()">Copy User Agent</button>
+<p id="status" class="inline-status"></p>
+</div>
 
 <section class="tool-seo">
 <h3>About User Agent Parser</h3>
-<p>This user agent parser analyzes a User-Agent string to identify browser, operating system and device details.</p>
+<p>This user agent parser analyzes a User-Agent string to identify browser, operating system and device details. Use the Current Environment tab to see your own browser and OS info.</p>
 <p>It is useful for analytics checks, support troubleshooting and request debugging when you need to understand what client environment a request came from.</p>
+<p>Note: User agent strings can be spoofed; use for development reference only.</p>
 </section>
 </main>
-
 <script>
-
+function showTab(t){
+document.getElementById("tab-parse").classList.toggle("active",t==="parse")
+document.getElementById("tab-current").classList.toggle("active",t==="current")
+document.getElementById("panel-parse").style.display=t==="parse"?"block":"none"
+document.getElementById("panel-current").style.display=t==="current"?"block":"none"
+if(t==="current"&&!document.getElementById("info").innerHTML) renderCurrent()
+}
+if(location.hash==="#current") showTab("current")
+function renderCurrent(){
+var n=navigator
+var ua=n.userAgent
+var rows=[
+["OS",detectOS(ua)],
+["Browser",detectBrowser(ua)],
+["Platform",n.platform||"-"],
+["Language",n.language||"-"],
+["Languages",n.languages?n.languages.join(", "):"-"],
+["Cookie Enabled",n.cookieEnabled?"Yes":"No"],
+["Online",n.onLine?"Yes":"No"],
+["Hardware Concurrency",n.hardwareConcurrency||"-"],
+["Device Memory (GB)",n.deviceMemory||"-"],
+["Max Touch Points",n.maxTouchPoints||0]
+]
+var tbody=document.getElementById("info")
+tbody.innerHTML=""
+rows.forEach(function(r){
+var tr=document.createElement("tr")
+tr.innerHTML="<td>"+r[0]+"</td><td>"+r[1]+"</td>"
+tbody.appendChild(tr)
+})
+document.getElementById("ua-current").textContent=ua
+}
+function detectOS(ua){
+if(/Windows NT 10/.test(ua)) return "Windows 10/11"
+if(/Windows/.test(ua)) return "Windows"
+if(/Mac OS X/.test(ua)) return "macOS"
+if(/Linux/.test(ua)) return "Linux"
+if(/Android/.test(ua)) return "Android"
+if(/iPhone|iPad/.test(ua)) return "iOS"
+return "Unknown"
+}
+function detectBrowser(ua){
+if(/Edg\//.test(ua)) return "Edge"
+if(/Chrome\//.test(ua)&&!/Edg/.test(ua)) return "Chrome"
+if(/Firefox\//.test(ua)) return "Firefox"
+if(/Safari\//.test(ua)&&!/Chrome/.test(ua)) return "Safari"
+if(/OPR\//.test(ua)) return "Opera"
+return "Unknown"
+}
 function parseUA(){
-
 let ua=document.getElementById("ua").value
-
 let browser="Unknown"
 let os="Unknown"
-
 if(ua.includes("Chrome")) browser="Chrome"
 if(ua.includes("Firefox")) browser="Firefox"
 if(ua.includes("Safari") && !ua.includes("Chrome")) browser="Safari"
 if(ua.includes("Edg")) browser="Edge"
-
 if(ua.includes("Windows")) os="Windows"
 if(ua.includes("Mac")) os="MacOS"
 if(ua.includes("Linux")) os="Linux"
 if(ua.includes("Android")) os="Android"
 if(ua.includes("iPhone")) os="iOS"
-
-let result={
-browser:browser,
-os:os,
-userAgent:ua
+let result={browser:browser,os:os,userAgent:ua}
+document.getElementById("result").innerText=JSON.stringify(result,null,2)
 }
-
-document.getElementById("result").innerText=
-JSON.stringify(result,null,2)
-
+function copyUa(){
+navigator.clipboard.writeText(navigator.userAgent).then(function(){
+document.getElementById("status").innerText="User agent copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
 }
-
 </script>
-
 </body>
-
 </html>

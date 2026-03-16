@@ -2,71 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Text to Binary – Encode Text to Binary | ToolForge</title>
-<meta name="description" content="Free online Text to Binary encoder: convert text to binary string. Part of the ToolForge developer tools collection.">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="canonical" href="https://www.toolforge.site/tools/text-to-binary.html">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Text to Binary – Encode Text to Binary | ToolForge">
-<meta property="og:description" content="Free online Text to Binary encoder: convert text to binary string. Part of the ToolForge developer tools collection.">
-<meta property="og:url" content="https://www.toolforge.site/tools/text-to-binary.html">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Text to Binary – Encode Text to Binary | ToolForge">
-<meta name="twitter:description" content="Free online Text to Binary encoder: convert text to binary string. Part of the ToolForge developer tools collection.">
-<link rel="stylesheet" href="/css/style.css">
+<meta http-equiv="refresh" content="0;url=/tools/binary-to-text.html#encode">
+<title>Redirecting to Binary to Text | ToolForge</title>
 </head>
-<body>
-<main class="container">
-<h1>Text to Binary</h1>
-<p class="subtitle">Convert text to binary (8 bits per character). Optionally add space between bytes.</p>
-<p><a href="/">Back to all tools on ToolForge</a></p>
-<h3>Text</h3>
-<label for="text" class="sr-only">Text input</label>
-<textarea id="text" rows="6" style="width:90%" placeholder="Hello" aria-label="Text input"></textarea>
-<br><br>
-<label><input type="checkbox" id="space" checked> Space between bytes</label>
-<br><br>
-<div class="tool-actions">
-<button onclick="encode()">Encode</button>
-<button type="button" onclick="copyOutput()">Copy Result</button>
-</div>
-<h3>Binary</h3>
-<label for="bin" class="sr-only">Binary input</label>
-<textarea id="bin" rows="6" style="width:90%" readonly aria-label="Binary input"></textarea>
-<p id="status" class="inline-status"></p>
-<section class="tool-seo">
-<h3>About Text to Binary</h3>
-<p>The Text to Binary tool lets you convert text to binary (8 bits per character). Optionally add space between bytes.</p>
-<p>It is useful when working with encoded values, copied payloads, browser-safe strings and quick debugging tasks across common text formats.</p>
-</section>
-</main>
-<script>
-function encode(){
-var s=document.getElementById("text").value
-var sep=document.getElementById("space").checked?" ":""
-var out=""
-for(var i=0;i<s.length;i++)out+=(i?sep:"")+s.charCodeAt(i).toString(2).padStart(8,"0")
-document.getElementById("bin").value=out
-document.getElementById("status").innerText="Encoded successfully."
-document.getElementById("status").style.color="#16a34a"
-}
-
-function copyOutput(){
-var value=document.getElementById("bin").value
-if(!value){
-document.getElementById("status").innerText="Nothing to copy."
-document.getElementById("status").style.color="#b91c1c"
-return
-}
-navigator.clipboard.writeText(value).then(function(){
-document.getElementById("status").innerText="Result copied."
-document.getElementById("status").style.color="#16a34a"
-}).catch(function(){
-document.getElementById("status").innerText="Copy failed."
-document.getElementById("status").style.color="#b91c1c"
-})
-}
-</script>
-</body>
+<body><p>Redirecting to <a href="/tools/binary-to-text.html">Binary to Text</a>…</p></body>
 </html>

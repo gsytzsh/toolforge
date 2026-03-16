@@ -43,6 +43,7 @@
 <h3 style="margin-top:24px">Result</h3>
 <p>Characters (with spaces): <span id="charsAll"></span></p>
 <p>Characters (without spaces): <span id="charsNoSpace"></span></p>
+<p>UTF-8 bytes: <span id="utf8Bytes"></span></p>
 <p>Words: <span id="words"></span></p>
 <p>Lines: <span id="lines"></span></p>
 <p id="status" class="inline-status"></p>
@@ -60,10 +61,12 @@ function analyze(){
 let t=document.getElementById("text").value
 let charsAll=t.length
 let charsNoSpace=t.replace(/\s+/g,"").length
+let utf8Bytes=new TextEncoder().encode(t).length
 let lines=t? t.split(/\r?\n/).length : 0
 let words=t.trim()? t.trim().split(/\s+/).length : 0
 document.getElementById("charsAll").innerText=charsAll
 document.getElementById("charsNoSpace").innerText=charsNoSpace
+document.getElementById("utf8Bytes").innerText=utf8Bytes
 document.getElementById("words").innerText=words
 document.getElementById("lines").innerText=lines
 document.getElementById("status").innerText="Text analyzed."
@@ -74,6 +77,7 @@ function copySummary(){
 let summary=[
 "Characters (with spaces): "+document.getElementById("charsAll").innerText,
 "Characters (without spaces): "+document.getElementById("charsNoSpace").innerText,
+"UTF-8 bytes: "+document.getElementById("utf8Bytes").innerText,
 "Words: "+document.getElementById("words").innerText,
 "Lines: "+document.getElementById("lines").innerText
 ].join("\n")

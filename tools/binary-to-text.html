@@ -2,72 +2,128 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Binary to Text – Decode Binary to ASCII | ToolForge</title>
-<meta name="description" content="Free online Binary to Text decoder: convert binary string to ASCII text. Part of the ToolForge developer tools collection.">
+<title>Binary to Text – Encode and Decode Binary Online | ToolForge</title>
+<meta name="description" content="Free online Binary to Text tool: encode text to binary or decode binary to ASCII. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://www.toolforge.site/tools/binary-to-text.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Binary to Text – Decode Binary to ASCII | ToolForge">
-<meta property="og:description" content="Free online Binary to Text decoder: convert binary string to ASCII text. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Binary to Text – Encode and Decode Binary Online | ToolForge">
+<meta property="og:description" content="Free online Binary to Text tool: encode text to binary or decode binary to ASCII. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://www.toolforge.site/tools/binary-to-text.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Binary to Text – Decode Binary to ASCII | ToolForge">
-<meta name="twitter:description" content="Free online Binary to Text decoder: convert binary string to ASCII text. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Binary to Text – Encode and Decode Binary Online | ToolForge">
+<meta name="twitter:description" content="Free online Binary to Text tool: encode text to binary or decode binary to ASCII. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
+<style>
+.tab-btn{margin-right:8px;padding:6px 12px;cursor:pointer;border:1px solid #ccc;background:#fff}
+.tab-btn.active{background:#e5e7eb;border-color:#6b7280}
+</style>
 </head>
 <body>
 <main class="container">
 <h1>Binary to Text</h1>
-<p class="subtitle">Enter a binary string (e.g. 01001000 01101001) to decode to text. Use 8 bits per character.</p>
+<p class="subtitle">Encode text to binary or decode binary to text. Use 8 bits per character.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+
+<div style="margin-bottom:16px">
+<button type="button" class="tab-btn active" id="tab-decode" onclick="showTab('decode')">Decode Binary</button>
+<button type="button" class="tab-btn" id="tab-encode" onclick="showTab('encode')">Encode to Binary</button>
+</div>
+
+<div id="panel-decode">
 <h3>Binary</h3>
 <label for="bin" class="sr-only">Binary input</label>
 <textarea id="bin" rows="6" style="width:90%" placeholder="01001000 01101001" aria-label="Binary input"></textarea>
 <br><br>
 <div class="tool-actions">
 <button onclick="decode()">Decode</button>
-<button type="button" onclick="copyOutput()">Copy Result</button>
+<button type="button" onclick="copyDecodeOutput()">Copy Result</button>
 </div>
 <h3>Text</h3>
-<label for="text" class="sr-only">Text input</label>
-<textarea id="text" rows="6" style="width:90%" readonly aria-label="Text input"></textarea>
+<textarea id="text-out" rows="6" style="width:90%" readonly aria-label="Text output"></textarea>
 <p id="err" style="color:#b91c1c"></p>
+</div>
+
+<div id="panel-encode" style="display:none">
+<h3>Text</h3>
+<label for="text-in" class="sr-only">Text input</label>
+<textarea id="text-in" rows="6" style="width:90%" placeholder="Hello" aria-label="Text input"></textarea>
+<br><br>
+<label><input type="checkbox" id="space" checked> Space between bytes</label>
+<br><br>
+<div class="tool-actions">
+<button onclick="encode()">Encode</button>
+<button type="button" onclick="copyEncodeOutput()">Copy Result</button>
+</div>
+<h3>Binary</h3>
+<textarea id="bin-out" rows="6" style="width:90%" readonly aria-label="Binary output"></textarea>
+<p id="status" class="inline-status"></p>
+</div>
+
 <section class="tool-seo">
 <h3>About Binary to Text</h3>
-<p>The Binary to Text tool lets you enter a binary string (e.g. 01001000 01101001) to decode to text. Use 8 bits per character.</p>
+<p>The Binary to Text tool lets you encode text to binary or decode binary strings to ASCII text. Use 8 bits per character. Optionally add space between bytes when encoding.</p>
 <p>It is useful when working with encoded values, copied payloads, browser-safe strings and quick debugging tasks across common text formats.</p>
 </section>
 </main>
 <script>
+function showTab(t){
+document.getElementById("tab-decode").classList.toggle("active",t==="decode")
+document.getElementById("tab-encode").classList.toggle("active",t==="encode")
+document.getElementById("panel-decode").style.display=t==="decode"?"block":"none"
+document.getElementById("panel-encode").style.display=t==="encode"?"block":"none"
+}
+if(location.hash==="#encode") showTab("encode")
+
 function decode(){
 var s=document.getElementById("bin").value.replace(/\s+/g,"")
 document.getElementById("err").innerText=""
-if(s.length%8!==0){document.getElementById("text").value="";document.getElementById("err").innerText="Binary length must be multiple of 8.";return}
+if(s.length%8!==0){document.getElementById("text-out").value="";document.getElementById("err").innerText="Binary length must be multiple of 8.";document.getElementById("err").style.color="#b91c1c";return}
 var out=""
 for(var i=0;i<s.length;i+=8){
 var byte=s.slice(i,i+8)
-if(/[^01]/.test(byte)){document.getElementById("text").value="";document.getElementById("err").innerText="Invalid binary.";return}
+if(/[^01]/.test(byte)){document.getElementById("text-out").value="";document.getElementById("err").innerText="Invalid binary.";document.getElementById("err").style.color="#b91c1c";return}
 out+=String.fromCharCode(parseInt(byte,2))
 }
-document.getElementById("text").value=out
+document.getElementById("text-out").value=out
 document.getElementById("err").innerText="Decoded successfully."
 document.getElementById("err").style.color="#16a34a"
 }
 
-function copyOutput(){
-var value=document.getElementById("text").value
-if(!value){
-document.getElementById("err").innerText="Nothing to copy."
-document.getElementById("err").style.color="#b91c1c"
-return
-}
+function copyDecodeOutput(){
+var value=document.getElementById("text-out").value
+var err=document.getElementById("err")
+if(!value){err.innerText="Nothing to copy.";err.style.color="#b91c1c";return}
 navigator.clipboard.writeText(value).then(function(){
-document.getElementById("err").innerText="Result copied."
-document.getElementById("err").style.color="#16a34a"
+err.innerText="Result copied."
+err.style.color="#16a34a"
 }).catch(function(){
-document.getElementById("err").innerText="Copy failed."
-document.getElementById("err").style.color="#b91c1c"
+err.innerText="Copy failed."
+err.style.color="#b91c1c"
+})
+}
+
+function encode(){
+var s=document.getElementById("text-in").value
+var sep=document.getElementById("space").checked?" ":""
+var out=""
+for(var i=0;i<s.length;i++)out+=(i?sep:"")+s.charCodeAt(i).toString(2).padStart(8,"0")
+document.getElementById("bin-out").value=out
+document.getElementById("status").innerText="Encoded successfully."
+document.getElementById("status").style.color="#16a34a"
+}
+
+function copyEncodeOutput(){
+var value=document.getElementById("bin-out").value
+var status=document.getElementById("status")
+if(!value){status.innerText="Nothing to copy.";status.style.color="#b91c1c";return}
+navigator.clipboard.writeText(value).then(function(){
+status.innerText="Result copied."
+status.style.color="#16a34a"
+}).catch(function(){
+status.innerText="Copy failed."
+status.style.color="#b91c1c"
 })
 }
 </script>
