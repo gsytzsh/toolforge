@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Punycode Converter – IDN Encode Decode Domain Names | ToolForge</title>
+<meta name="description" content="Free online Punycode converter for IDN domain names. Encode Unicode domains to Punycode (xn--) and decode Punycode back to Unicode. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/punycode-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Punycode Converter – IDN Encode Decode Domain Names | ToolForge">
+<meta property="og:description" content="Free online Punycode converter for IDN domain names. Encode Unicode domains to Punycode (xn--) and decode Punycode back to Unicode. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/punycode-converter.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Punycode Converter – IDN Encode Decode Domain Names | ToolForge">
+<meta name="twitter:description" content="Free online Punycode converter for IDN domain names. Encode Unicode domains to Punycode (xn--) and decode Punycode back to Unicode. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/punycode@1.4.1/punycode.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>Punycode Converter</h1>
+<p class="subtitle">Encode and decode Punycode for IDN (Internationalized Domain Names). Convert Unicode domains to xn-- format and back.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Unicode (IDN)</h3>
+<label for="unicode" class="sr-only">Unicode domain input</label>
+<textarea id="unicode" rows="4" style="width:90%;font-family:monospace" placeholder="münchen.de or 例え.jp" aria-label="Unicode domain input"></textarea>
+<br><br>
+<div class="tool-actions">
+<button type="button" onclick="encodePunycode()">Encode to Punycode</button>
+<button type="button" onclick="decodePunycode()">Decode from Punycode</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
+<h3 style="margin-top:24px">Punycode (xn--)</h3>
+<label for="punycode" class="sr-only">Punycode input</label>
+<textarea id="punycode" rows="4" style="width:90%;font-family:monospace" placeholder="xn--mnchen-3ya.de or xn--r8jz45g.jp" aria-label="Punycode input"></textarea>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Punycode Converter</h3>
+<p>This Punycode converter helps you encode and decode Internationalized Domain Names (IDN). Unicode domain names like münchen.de are converted to ASCII Punycode (xn--mnchen-3ya.de) for DNS compatibility.</p>
+<p>It is useful when working with non-ASCII domain names, debugging IDN issues, or preparing domains for registration and DNS configuration.</p>
+</section>
+</main>
+<script>
+function setStatus(msg,isError){
+var el=document.getElementById("status");
+el.innerText=msg;
+el.style.color=isError?"#b91c1c":"#16a34a";
+}
+function encodePunycode(){
+try{
+var input=document.getElementById("unicode").value.trim();
+if(!input){
+setStatus("Enter a Unicode domain.",true);
+return;
+}
+var out=punycode.toASCII(input);
+document.getElementById("punycode").value=out;
+setStatus("Encoded.",false);
+}catch(e){
+setStatus("Error: "+e.message,true);
+}
+}
+function decodePunycode(){
+try{
+var input=document.getElementById("punycode").value.trim();
+if(!input){
+setStatus("Enter Punycode (xn--).",true);
+return;
+}
+var out=punycode.toUnicode(input);
+document.getElementById("unicode").value=out;
+setStatus("Decoded.",false);
+}catch(e){
+setStatus("Error: "+e.message,true);
+}
+}
+function copyResult(){
+var v=document.getElementById("punycode").value||document.getElementById("unicode").value;
+if(!v){
+setStatus("Nothing to copy.",true);
+return;
+}
+navigator.clipboard.writeText(v).then(function(){
+setStatus("Copied.",false);
+}).catch(function(){
+setStatus("Copy failed.",true);
+});
+}
+</script>
+</body>
+</html>

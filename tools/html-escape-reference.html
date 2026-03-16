@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HTML Escape Reference – HTML/XML Escape Characters Table | ToolForge</title>
+<meta name="description" content="Free online HTML and XML escape characters reference table. Named entities and numeric codes. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/html-escape-reference.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="HTML Escape Reference – HTML/XML Escape Characters Table | ToolForge">
+<meta property="og:description" content="Free online HTML/XML escape characters reference. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/html-escape-reference.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML Escape Reference – HTML/XML Escape Characters Table | ToolForge">
+<meta name="twitter:description" content="Free online HTML/XML escape characters reference. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem}
+.ref-table th,.ref-table td{border:1px solid #eee;padding:8px 12px;text-align:left}
+.ref-table th{background:#f8fafc;font-weight:600}
+.ref-table code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:0.9em}
+.ref-table input{width:100%;max-width:200px;padding:6px;border:1px solid #ddd;border-radius:4px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>HTML Escape Reference</h1>
+<p class="subtitle">Reference table for HTML and XML escape characters: named entities and numeric codes.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="filter" class="sr-only">Filter</label>
+<input id="filter" placeholder="Search by char, entity or description" style="width:100%;max-width:400px;padding:10px;margin-bottom:16px;border:1px solid #ddd;border-radius:6px" aria-label="Filter">
+
+<h3>Common HTML/XML Entities</h3>
+<table class="ref-table">
+<thead><tr><th>Char</th><th>Named Entity</th><th>Decimal</th><th>Hex</th><th>Description</th></tr></thead>
+<tbody id="body"></tbody>
+</table>
+
+<section class="tool-seo">
+<h3>About HTML Escape Reference</h3>
+<p>This reference lists HTML and XML escape characters including named entities (&amp;amp;, &amp;lt;) and numeric codes (&#38;, &#x26;).</p>
+<p>It is useful when escaping user input for HTML, building XML, or debugging character display issues.</p>
+</section>
+</main>
+<script>
+var entities=[
+["&","&amp;","&#38;","&#x26;","Ampersand"],
+["<","&lt;","&#60;","&#x3C;","Less than"],
+[">","&gt;","&#62;","&#x3E;","Greater than"],
+['"',"&quot;","&#34;","&#x22;","Double quote"],
+["'","&apos;","&#39;","&#x27;","Apostrophe"],
+[" ","&nbsp;","&#160;","&#xA0;","Non-breaking space"],
+["¡","&iexcl;","&#161;","&#xA1;","Inverted exclamation"],
+["¢","&cent;","&#162;","&#xA2;","Cent"],
+["£","&pound;","&#163;","&#xA3;","Pound"],
+["©","&copy;","&#169;","&#xA9;","Copyright"],
+["®","&reg;","&#174;","&#xAE;","Registered"],
+["°","&deg;","&#176;","&#xB0;","Degree"],
+["±","&plusmn;","&#177;","&#xB1;","Plus-minus"],
+["×","&times;","&#215;","&#xD7;","Multiplication"],
+["÷","&divide;","&#247;","&#xF7;","Division"],
+["€","&euro;","&#8364;","&#x20AC;","Euro"],
+["™","&trade;","&#8482;","&#x2122;","Trademark"],
+["–","&ndash;","&#8211;","&#x2013;","En dash"],
+["—","&mdash;","&#8212;","&#x2014;","Em dash"],
+["…","&hellip;","&#8230;","&#x2026;","Ellipsis"]
+]
+function render(){
+var q=(document.getElementById("filter").value||"").toLowerCase().trim()
+var tbody=document.getElementById("body")
+tbody.innerHTML=""
+entities.forEach(function(e){
+if(q&&e[0].indexOf(q)===-1&&e[1].toLowerCase().indexOf(q)===-1&&e[2].indexOf(q)===-1&&e[3].toLowerCase().indexOf(q)===-1&&e[4].toLowerCase().indexOf(q)===-1)return
+var tr=document.createElement("tr")
+tr.innerHTML="<td><code>"+e[0]+"</code></td><td><code>"+e[1]+"</code></td><td><code>"+e[2]+"</code></td><td><code>"+e[3]+"</code></td><td>"+e[4]+"</td>"
+tbody.appendChild(tr)
+})
+}
+document.getElementById("filter").addEventListener("input",render)
+render()
+</script>
+</body>
+</html>

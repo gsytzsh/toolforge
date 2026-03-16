@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Camel Case Converter – snake_case to camelCase Online | ToolForge</title>
+<meta name="description" content="Free online camelCase and snake_case converter. Convert between snake_case and camelCase for variable names, JSON keys and code. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/camel-case-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Camel Case Converter – snake_case to camelCase Online | ToolForge">
+<meta property="og:description" content="Free online camelCase and snake_case converter. Convert between snake_case and camelCase for variable names, JSON keys and code. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/camel-case-converter.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Camel Case Converter – snake_case to camelCase Online | ToolForge">
+<meta name="twitter:description" content="Free online camelCase and snake_case converter. Convert between snake_case and camelCase for variable names, JSON keys and code. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Camel Case Converter</h1>
+<p class="subtitle">Convert between snake_case and camelCase for variable names, JSON keys and code.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="input" class="sr-only">Input text</label>
+<textarea id="input" rows="10" style="width:90%;font-family:monospace" placeholder="user_name or userName" aria-label="Input text"></textarea>
+<br><br>
+<div class="tool-actions">
+<button type="button" onclick="snakeToCamel()">snake_case → camelCase</button>
+<button type="button" onclick="camelToSnake()">camelCase → snake_case</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
+<h3 style="margin-top:24px">Result</h3>
+<label for="output" class="sr-only">Output text</label>
+<textarea id="output" rows="10" style="width:90%;font-family:monospace" aria-label="Output text"></textarea>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Camel Case Converter</h3>
+<p>This converter switches between snake_case and camelCase naming. Useful for converting variable names, JSON keys, database columns and API fields between conventions.</p>
+<p>It is useful when mapping between different APIs, converting database schemas to code, or standardizing naming across a codebase.</p>
+</section>
+</main>
+<script>
+function setStatus(msg,isError){
+var el=document.getElementById("status");
+el.innerText=msg;
+el.style.color=isError?"#b91c1c":"#16a34a";
+}
+function snakeToCamel(){
+var s=document.getElementById("input").value;
+var out=s.replace(/_([a-z])/g,function(m,c){ return c.toUpperCase(); });
+document.getElementById("output").value=out;
+setStatus("Converted to camelCase.",false);
+}
+function camelToSnake(){
+var s=document.getElementById("input").value;
+var out=s.replace(/([A-Z])/g,function(m){ return "_"+m.toLowerCase(); }).replace(/^_/,"");
+document.getElementById("output").value=out;
+setStatus("Converted to snake_case.",false);
+}
+function copyResult(){
+var v=document.getElementById("output").value;
+if(!v){
+setStatus("Nothing to copy.",true);
+return;
+}
+navigator.clipboard.writeText(v).then(function(){
+setStatus("Copied.",false);
+}).catch(function(){
+setStatus("Copy failed.",true);
+});
+}
+</script>
+</body>
+</html>

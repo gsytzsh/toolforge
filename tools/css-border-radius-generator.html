@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CSS Border Radius Generator – Live Preview | ToolForge</title>
+<meta name="description" content="Free online CSS border-radius generator with live preview. Set 4 corners with px values and copy the CSS. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/css-border-radius-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="CSS Border Radius Generator – Live Preview | ToolForge">
+<meta property="og:description" content="Free online CSS border-radius generator with live preview.">
+<meta property="og:url" content="https://www.toolforge.site/tools/css-border-radius-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS Border Radius Generator – Live Preview | ToolForge">
+<meta name="twitter:description" content="Free online CSS border-radius generator with live preview.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+#preview-box{width:200px;height:120px;background:#3498db;margin:16px 0;transition:border-radius .2s}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>CSS Border Radius Generator</h1>
+<p class="subtitle">Generate border-radius CSS with live preview. Set each corner in px.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:400px">
+<div>
+<label for="tl">Top-left (px)</label>
+<input id="tl" type="number" min="0" value="0" style="width:80px">
+</div>
+<div>
+<label for="tr">Top-right (px)</label>
+<input id="tr" type="number" min="0" value="0" style="width:80px">
+</div>
+<div>
+<label for="br">Bottom-right (px)</label>
+<input id="br" type="number" min="0" value="0" style="width:80px">
+</div>
+<div>
+<label for="bl">Bottom-left (px)</label>
+<input id="bl" type="number" min="0" value="0" style="width:80px">
+</div>
+</div>
+
+<h3>Live Preview</h3>
+<div id="preview-box"></div>
+
+<h3>CSS Output</h3>
+<pre id="output">border-radius: 0 0 0 0;</pre>
+<button type="button" onclick="copyCss()">Copy CSS</button>
+<p id="status" class="inline-status"></p>
+
+<section class="tool-seo">
+<h3>About CSS Border Radius Generator</h3>
+<p>This tool generates CSS border-radius values with a live preview. Set each corner independently in pixels.</p>
+<p>Useful for designing rounded corners on boxes, buttons and cards without guessing values.</p>
+</section>
+</main>
+<script>
+function update(){
+var tl=parseInt(document.getElementById("tl").value,10)||0
+var tr=parseInt(document.getElementById("tr").value,10)||0
+var br=parseInt(document.getElementById("br").value,10)||0
+var bl=parseInt(document.getElementById("bl").value,10)||0
+var box=document.getElementById("preview-box")
+box.style.borderRadius=tl+"px "+tr+"px "+br+"px "+bl+"px"
+document.getElementById("output").textContent="border-radius: "+tl+"px "+tr+"px "+br+"px "+bl+"px;"
+}
+["tl","tr","br","bl"].forEach(function(id){
+document.getElementById(id).addEventListener("input",update)
+})
+update()
+function copyCss(){
+var v=document.getElementById("output").textContent
+navigator.clipboard.writeText(v).then(function(){
+document.getElementById("status").innerText="Copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

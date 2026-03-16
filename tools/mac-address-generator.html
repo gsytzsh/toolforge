@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MAC Address Generator – Generate Random MAC Addresses | ToolForge</title>
+<meta name="description" content="Free online MAC address generator. Generate random MAC addresses in various formats. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/mac-address-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="MAC Address Generator – Generate Random MAC Addresses | ToolForge">
+<meta property="og:description" content="Generate random MAC addresses.">
+<meta property="og:url" content="https://www.toolforge.site/tools/mac-address-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MAC Address Generator – Generate Random MAC Addresses | ToolForge">
+<meta name="twitter:description" content="Generate random MAC addresses.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>MAC Address Generator</h1>
+<p class="subtitle">Generate random MAC addresses. Choose format and count.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="count">Count</label>
+<input id="count" type="number" min="1" max="100" value="5" style="width:80px">
+<br><br>
+
+<label for="format">Format</label>
+<select id="format">
+<option value="colon">Colon (AA:BB:CC:DD:EE:FF)</option>
+<option value="dash">Dash (AA-BB-CC-DD-EE-FF)</option>
+<option value="dot">Dot (AABB.CCDD.EEFF)</option>
+<option value="none">None (AABBCCDDEEFF)</option>
+</select>
+<br><br>
+
+<button onclick="generate()">Generate</button>
+
+<h3>Result</h3>
+<textarea id="output" rows="12" style="width:90%" readonly></textarea>
+<button type="button" onclick="copyOutput()">Copy</button>
+<p id="status" class="inline-status"></p>
+
+<section class="tool-seo">
+<h3>About MAC Address Generator</h3>
+<p>This tool generates random MAC (Media Access Control) addresses for testing, virtualization and network configuration.</p>
+<p>Useful for VM setup, network testing and placeholder values.</p>
+</section>
+</main>
+<script>
+function randomHex(){return Math.floor(Math.random()*256).toString(16).padStart(2,"0").toUpperCase()}
+function formatMac(bytes,f){
+var s=bytes.join("")
+if(f==="colon") return bytes.join(":")
+if(f==="dash") return bytes.join("-")
+if(f==="dot") return s.slice(0,4)+"."+s.slice(4,8)+"."+s.slice(8,12)
+return s
+}
+function generate(){
+var count=Math.min(100,Math.max(1,parseInt(document.getElementById("count").value,10)||1))
+var fmt=document.getElementById("format").value
+var out=[]
+for(var i=0;i<count;i++){
+var bytes=[randomHex(),randomHex(),randomHex(),randomHex(),randomHex(),randomHex()]
+out.push(formatMac(bytes,fmt))
+}
+document.getElementById("output").value=out.join("\n")
+document.getElementById("status").innerText="Generated "+count+" MAC address(es)."
+document.getElementById("status").style.color="#16a34a"
+}
+function copyOutput(){
+var v=document.getElementById("output").value
+if(!v){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(v).then(function(){
+document.getElementById("status").innerText="Copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

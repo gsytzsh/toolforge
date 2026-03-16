@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CRC32 Calculator – CRC32 Checksum Online | ToolForge</title>
+<meta name="description" content="Free online CRC32 checksum calculator. Compute CRC32 hash of text for integrity checks and error detection. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/crc32-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="CRC32 Calculator – CRC32 Checksum Online | ToolForge">
+<meta property="og:description" content="Free online CRC32 checksum calculator. Compute CRC32 hash of text for integrity checks and error detection. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/crc32-calculator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CRC32 Calculator – CRC32 Checksum Online | ToolForge">
+<meta name="twitter:description" content="Free online CRC32 checksum calculator. Compute CRC32 hash of text for integrity checks and error detection. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>CRC32 Calculator</h1>
+<p class="subtitle">Compute CRC32 checksum of text for integrity checks and error detection.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="input" class="sr-only">Input text</label>
+<textarea id="input" rows="8" style="width:90%;font-family:monospace" placeholder="Enter text" aria-label="Input text"></textarea>
+<br><br>
+<div class="tool-actions">
+<button type="button" onclick="calculate()">Calculate CRC32</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
+<h3 style="margin-top:24px">CRC32 Result</h3>
+<label for="output" class="sr-only">CRC32 output</label>
+<textarea id="output" rows="2" style="width:90%;font-family:monospace" aria-label="CRC32 output"></textarea>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About CRC32 Calculator</h3>
+<p>This CRC32 calculator computes the CRC-32 checksum of text. CRC32 is commonly used for error detection in files, ZIP archives and network protocols.</p>
+<p>It is useful for verifying data integrity, comparing checksums and debugging when you need a quick CRC32 value without installing external tools.</p>
+</section>
+</main>
+<script>
+var crcTable;
+function makeCRCTable(){
+var c;
+var table=[];
+for(var n=0;n<256;n++){
+c=n;
+for(var k=0;k<8;k++){
+c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);
+}
+table[n]=c;
+}
+return table;
+}
+function crc32(str){
+if(!crcTable) crcTable=makeCRCTable();
+var enc=new TextEncoder().encode(str);
+var crc=0^(-1);
+for(var i=0;i<enc.length;i++){
+crc=(crc>>>8)^crcTable[(crc^enc[i])&0xff];
+}
+return ((crc^(-1))>>>0).toString(16);
+}
+function calculate(){
+var input=document.getElementById("input").value;
+var result=crc32(input);
+document.getElementById("output").value=result;
+document.getElementById("status").innerText="CRC32 calculated.";
+document.getElementById("status").style.color="#16a34a";
+}
+function copyResult(){
+var v=document.getElementById("output").value;
+if(!v){
+document.getElementById("status").innerText="Nothing to copy.";
+document.getElementById("status").style.color="#b91c1c";
+return;
+}
+navigator.clipboard.writeText(v).then(function(){
+document.getElementById("status").innerText="Copied.";
+document.getElementById("status").style.color="#16a34a";
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed.";
+document.getElementById("status").style.color="#b91c1c";
+});
+}
+</script>
+</body>
+</html>

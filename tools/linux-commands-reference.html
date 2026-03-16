@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Linux Commands Reference – Common Linux Commands Cheat Sheet | ToolForge</title>
+<meta name="description" content="Free online Linux commands reference and cheat sheet. ls, cd, grep, find, chmod and more. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/linux-commands-reference.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Linux Commands Reference – Common Linux Commands Cheat Sheet | ToolForge">
+<meta property="og:description" content="Free online Linux commands reference and cheat sheet. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/linux-commands-reference.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux Commands Reference – Common Linux Commands Cheat Sheet | ToolForge">
+<meta name="twitter:description" content="Free online Linux commands reference and cheat sheet. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem}
+.ref-table th,.ref-table td{border:1px solid #eee;padding:8px 12px;text-align:left}
+.ref-table th{background:#f8fafc;font-weight:600}
+.ref-table code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:0.9em}
+.ref-section{margin-top:24px}
+.ref-section h3{font-size:1rem;color:#475569;margin-bottom:8px}
+.ref-table input{width:100%;max-width:200px;padding:6px;border:1px solid #ddd;border-radius:4px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Linux Commands Reference</h1>
+<p class="subtitle">Quick reference for common Linux and Unix commands.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="filter" class="sr-only">Filter</label>
+<input id="filter" placeholder="Search commands" style="width:100%;max-width:400px;padding:10px;margin-bottom:16px;border:1px solid #ddd;border-radius:6px" aria-label="Filter">
+
+<div class="ref-section">
+<h3>File & Directory</h3>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>ls</code></td><td>List directory contents</td></tr>
+<tr><td><code>ls -la</code></td><td>List with details (hidden files)</td></tr>
+<tr><td><code>cd &lt;dir&gt;</code></td><td>Change directory</td></tr>
+<tr><td><code>pwd</code></td><td>Print working directory</td></tr>
+<tr><td><code>mkdir &lt;name&gt;</code></td><td>Create directory</td></tr>
+<tr><td><code>rm &lt;file&gt;</code></td><td>Remove file</td></tr>
+<tr><td><code>rm -r &lt;dir&gt;</code></td><td>Remove directory recursively</td></tr>
+<tr><td><code>cp src dest</code></td><td>Copy file or directory</td></tr>
+<tr><td><code>mv src dest</code></td><td>Move or rename</td></tr>
+<tr><td><code>cat &lt;file&gt;</code></td><td>Print file contents</td></tr>
+<tr><td><code>head -n N &lt;file&gt;</code></td><td>First N lines</td></tr>
+<tr><td><code>tail -n N &lt;file&gt;</code></td><td>Last N lines</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="ref-section">
+<h3>Search & Find</h3>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>find . -name "*.txt"</code></td><td>Find files by name</td></tr>
+<tr><td><code>grep "pattern" file</code></td><td>Search text in file</td></tr>
+<tr><td><code>grep -r "pattern" .</code></td><td>Recursive grep</td></tr>
+<tr><td><code>which &lt;cmd&gt;</code></td><td>Show command path</td></tr>
+<tr><td><code>locate &lt;name&gt;</code></td><td>Find by name (indexed)</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="ref-section">
+<h3>Permissions & Process</h3>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>chmod 755 file</code></td><td>Change permissions</td></tr>
+<tr><td><code>chown user:group file</code></td><td>Change owner</td></tr>
+<tr><td><code>ps aux</code></td><td>List processes</td></tr>
+<tr><td><code>kill &lt;pid&gt;</code></td><td>Terminate process</td></tr>
+<tr><td><code>kill -9 &lt;pid&gt;</code></td><td>Force kill</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="ref-section">
+<h3>System & Network</h3>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>df -h</code></td><td>Disk space</td></tr>
+<tr><td><code>du -sh *</code></td><td>Directory sizes</td></tr>
+<tr><td><code>free -h</code></td><td>Memory usage</td></tr>
+<tr><td><code>curl &lt;url&gt;</code></td><td>HTTP request</td></tr>
+<tr><td><code>wget &lt;url&gt;</code></td><td>Download file</td></tr>
+<tr><td><code>ssh user@host</code></td><td>SSH connect</td></tr>
+<tr><td><code>scp file user@host:path</code></td><td>Copy over SSH</td></tr>
+</tbody>
+</table>
+</div>
+
+<section class="tool-seo">
+<h3>About Linux Commands Reference</h3>
+<p>This reference lists common Linux and Unix commands for file operations, search, permissions and system tasks.</p>
+<p>It is useful as a quick reminder when working in the terminal or writing shell scripts.</p>
+</section>
+</main>
+<script>
+var rows=document.querySelectorAll(".ref-table tbody tr")
+var filter=document.getElementById("filter")
+filter.addEventListener("input",function(){
+var q=(filter.value||"").toLowerCase().trim()
+rows.forEach(function(tr){
+var text=(tr.textContent||"").toLowerCase()
+tr.style.display=(!q||text.indexOf(q)!==-1)?"":"none"
+})
+})
+</script>
+</body>
+</html>

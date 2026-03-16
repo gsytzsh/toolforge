@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Color Midpoint Calculator – Color Between Two Hex Colors | ToolForge</title>
+<meta name="description" content="Free online color midpoint calculator. Calculate the color between two hex colors. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/color-midpoint-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Color Midpoint Calculator – Color Between Two Hex Colors | ToolForge">
+<meta property="og:description" content="Calculate the color between two hex colors.">
+<meta property="og:url" content="https://www.toolforge.site/tools/color-midpoint-calculator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Color Midpoint Calculator – Color Between Two Hex Colors | ToolForge">
+<meta name="twitter:description" content="Calculate the color between two hex colors.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.swatch{display:inline-block;width:60px;height:40px;border:1px solid #ccc;vertical-align:middle;margin-right:8px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Color Midpoint Calculator</h1>
+<p class="subtitle">Calculate the color between two hex colors. Use ratio 0.5 for exact midpoint.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="hex1">Color 1 (hex)</label>
+<input id="hex1" type="text" value="#ff0000" placeholder="#ff0000" style="width:120px">
+<span class="swatch" id="sw1"></span>
+<br><br>
+
+<label for="hex2">Color 2 (hex)</label>
+<input id="hex2" type="text" value="#0000ff" placeholder="#0000ff" style="width:120px">
+<span class="swatch" id="sw2"></span>
+<br><br>
+
+<label for="ratio">Ratio (0 = color1, 1 = color2, 0.5 = midpoint)</label>
+<input id="ratio" type="number" min="0" max="1" step="0.1" value="0.5" style="width:80px">
+<br><br>
+
+<button onclick="calc()">Calculate</button>
+
+<h3>Result</h3>
+<p><span class="swatch" id="swResult"></span> <strong>HEX:</strong> <span id="hexResult"></span></p>
+<p><strong>RGB:</strong> <span id="rgbResult"></span></p>
+<button type="button" onclick="copyHex()">Copy HEX</button>
+<p id="status" class="inline-status"></p>
+
+<section class="tool-seo">
+<h3>About Color Midpoint Calculator</h3>
+<p>This tool calculates the interpolated color between two hex colors at a given ratio. Ratio 0.5 gives the exact midpoint.</p>
+<p>Useful for gradients, color ramps and design systems.</p>
+</section>
+</main>
+<script>
+function parseHex(hex){
+if(hex.startsWith("#")) hex=hex.slice(1)
+if(hex.length===3) hex=hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2]
+if(!/^[0-9a-fA-F]{6}$/.test(hex)) return null
+return {r:parseInt(hex.slice(0,2),16),g:parseInt(hex.slice(2,4),16),b:parseInt(hex.slice(4,6),16)}
+}
+function toHex(n){var s=Math.round(Math.max(0,Math.min(255,n))).toString(16);return s.length===1?"0"+s:s}
+function calc(){
+var c1=parseHex(document.getElementById("hex1").value.trim())
+var c2=parseHex(document.getElementById("hex2").value.trim())
+var ratio=parseFloat(document.getElementById("ratio").value)||0.5
+if(!c1||!c2){
+document.getElementById("status").innerText="Invalid hex color."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+var r=Math.round(c1.r+(c2.r-c1.r)*ratio)
+var g=Math.round(c1.g+(c2.g-c1.g)*ratio)
+var b=Math.round(c1.b+(c2.b-c1.b)*ratio)
+var hex="#"+toHex(r)+toHex(g)+toHex(b)
+document.getElementById("hexResult").textContent=hex
+document.getElementById("rgbResult").textContent=r+", "+g+", "+b
+document.getElementById("swResult").style.backgroundColor=hex
+document.getElementById("sw1").style.backgroundColor=document.getElementById("hex1").value
+document.getElementById("sw2").style.backgroundColor=document.getElementById("hex2").value
+document.getElementById("status").innerText="Calculated."
+document.getElementById("status").style.color="#16a34a"
+}
+document.getElementById("hex1").addEventListener("input",calc)
+document.getElementById("hex2").addEventListener("input",calc)
+document.getElementById("ratio").addEventListener("input",calc)
+calc()
+function copyHex(){
+var v=document.getElementById("hexResult").textContent
+if(!v) return
+navigator.clipboard.writeText(v).then(function(){
+document.getElementById("status").innerText="Copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>URL Batch Generator – Generate URLs from Base + Pattern | ToolForge</title>
+<meta name="description" content="Free online URL batch generator. Generate multiple URLs from base URL and pattern (e.g. /page-1, /page-2). Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/url-batch-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="URL Batch Generator – Generate URLs from Base + Pattern | ToolForge">
+<meta property="og:description" content="Batch generate URLs from base URL and pattern.">
+<meta property="og:url" content="https://www.toolforge.site/tools/url-batch-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="URL Batch Generator – Generate URLs from Base + Pattern | ToolForge">
+<meta name="twitter:description" content="Batch generate URLs from base URL and pattern.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>URL Batch Generator</h1>
+<p class="subtitle">Generate multiple URLs from base URL and pattern. Use {n} for the index (1-based).</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="base">Base URL</label>
+<input id="base" type="text" value="https://example.com" placeholder="https://example.com" style="width:90%">
+<br><br>
+
+<label for="pattern">Pattern (use {n} for index)</label>
+<input id="pattern" type="text" value="/page-{n}" placeholder="/page-{n}" style="width:90%">
+<br><br>
+
+<label for="start">Start</label>
+<input id="start" type="number" value="1" style="width:80px">
+<label for="end">End</label>
+<input id="end" type="number" value="10" style="width:80px">
+<br><br>
+
+<button onclick="generate()">Generate</button>
+
+<h3>Result</h3>
+<textarea id="output" rows="16" style="width:90%" readonly></textarea>
+<button type="button" onclick="copyOutput()">Copy</button>
+<p id="status" class="inline-status"></p>
+
+<section class="tool-seo">
+<h3>About URL Batch Generator</h3>
+<p>This tool generates a list of URLs from a base URL and a pattern. Use {n} as placeholder for the index (e.g. /page-{n} from 1 to 10).</p>
+<p>Useful for sitemaps, bulk requests and pagination URLs.</p>
+</section>
+</main>
+<script>
+function generate(){
+var base=document.getElementById("base").value.trim().replace(/\/+$/,"")
+var pattern=document.getElementById("pattern").value
+var start=parseInt(document.getElementById("start").value,10)||1
+var end=parseInt(document.getElementById("end").value,10)||10
+if(start>end){var t=start;start=end;end=t}
+var out=[]
+for(var i=start;i<=end;i++){
+var url=base+pattern.replace(/\{n\}/g,i)
+out.push(url)
+}
+document.getElementById("output").value=out.join("\n")
+document.getElementById("status").innerText="Generated "+out.length+" URL(s)."
+document.getElementById("status").style.color="#16a34a"
+}
+function copyOutput(){
+var v=document.getElementById("output").value
+if(!v){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(v).then(function(){
+document.getElementById("status").innerText="Copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

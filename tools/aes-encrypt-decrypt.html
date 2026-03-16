@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AES Encrypt Decrypt – Password-Based AES in Browser | ToolForge</title>
+<meta name="description" content="Free online AES encrypt and decrypt using Web Crypto API. Password-based AES-256-GCM in the browser. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/aes-encrypt-decrypt.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="AES Encrypt Decrypt – Password-Based AES in Browser | ToolForge">
+<meta property="og:description" content="Password-based AES encrypt/decrypt using Web Crypto API.">
+<meta property="og:url" content="https://www.toolforge.site/tools/aes-encrypt-decrypt.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AES Encrypt Decrypt – Password-Based AES in Browser | ToolForge">
+<meta name="twitter:description" content="Password-based AES encrypt/decrypt using Web Crypto API.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>AES Encrypt Decrypt</h1>
+<p class="subtitle">Password-based AES-256-GCM encrypt/decrypt using Web Crypto API. All processing in browser.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<h3>Encrypt</h3>
+<label for="plain">Plain text</label>
+<textarea id="plain" rows="4" style="width:90%" placeholder="Enter text to encrypt"></textarea>
+<br>
+<label for="passEnc">Password</label>
+<input id="passEnc" type="password" placeholder="Password" style="width:200px">
+<br><br>
+<button onclick="encrypt()">Encrypt</button>
+
+<h3>Decrypt</h3>
+<label for="cipher">Cipher text (base64)</label>
+<textarea id="cipher" rows="4" style="width:90%" placeholder="Paste encrypted output"></textarea>
+<br>
+<label for="passDec">Password</label>
+<input id="passDec" type="password" placeholder="Password" style="width:200px">
+<br><br>
+<button onclick="decrypt()">Decrypt</button>
+
+<h3>Result</h3>
+<textarea id="result" rows="4" style="width:90%" readonly></textarea>
+<button type="button" onclick="copyResult()">Copy Result</button>
+<p id="status" class="inline-status"></p>
+
+<section class="tool-seo">
+<h3>About AES Encrypt Decrypt</h3>
+<p>This tool encrypts and decrypts text using AES-256-GCM with a password. Uses Web Crypto API; all data stays in your browser.</p>
+<p>Useful for securing sensitive text, sharing encrypted messages and testing encryption flows.</p>
+</section>
+</main>
+<script>
+async function deriveKey(password,salt){
+var enc=new TextEncoder()
+var keyMaterial=await crypto.subtle.importKey("raw",enc.encode(password),"PBKDF2",false,["deriveBits","deriveKey"])
+return crypto.subtle.deriveKey({name:"PBKDF2",salt:salt,iterations:100000,hash:"SHA-256"},keyMaterial,{name:"AES-GCM",length:256},false,["encrypt","decrypt"])
+}
+async function encrypt(){
+var plain=document.getElementById("plain").value
+var pass=document.getElementById("passEnc").value
+if(!plain||!pass){setStatus("Enter text and password.",1);return}
+try{
+var salt=crypto.getRandomValues(new Uint8Array(16))
+var iv=crypto.getRandomValues(new Uint8Array(12))
+var key=await deriveKey(pass,salt)
+var enc=new TextEncoder()
+var ct=await crypto.subtle.encrypt({name:"AES-GCM",iv:iv},key,enc.encode(plain))
+var combined=new Uint8Array(salt.length+iv.length+ct.byteLength)
+combined.set(salt,0);combined.set(iv,salt.length);combined.set(new Uint8Array(ct),salt.length+iv.length)
+document.getElementById("result").value=btoa(String.fromCharCode.apply(null,combined))
+document.getElementById("cipher").value=document.getElementById("result").value
+setStatus("Encrypted.",0)
+}catch(e){setStatus("Error: "+e.message,1)}
+}
+async function decrypt(){
+var cipher=document.getElementById("cipher").value.trim()
+var pass=document.getElementById("passDec").value
+if(!cipher||!pass){setStatus("Enter cipher and password.",1);return}
+try{
+var raw=Uint8Array.from(atob(cipher),c=>c.charCodeAt(0))
+var salt=raw.slice(0,16),iv=raw.slice(16,28),ct=raw.slice(28)
+var key=await deriveKey(pass,salt)
+var dec=await crypto.subtle.decrypt({name:"AES-GCM",iv:iv},key,ct)
+document.getElementById("result").value=new TextDecoder().decode(dec)
+setStatus("Decrypted.",0)
+}catch(e){setStatus("Decrypt failed. Wrong password or invalid data.",1)}
+}
+function setStatus(msg,err){var s=document.getElementById("status");s.innerText=msg;s.style.color=err?"#b91c1c":"#16a34a"}
+function copyResult(){
+var v=document.getElementById("result").value
+if(!v){setStatus("Nothing to copy.",1);return}
+navigator.clipboard.writeText(v).then(function(){setStatus("Copied.",0)}).catch(function(){setStatus("Copy failed.",1)})
+}
+</script>
+</body>
+</html>

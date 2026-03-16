@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Odd Even Lines – Split Text into Odd and Even Lines | ToolForge</title>
+<meta name="description" content="Free online tool to split text into odd lines and even lines. Extract alternating lines. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/odd-even-lines.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Odd Even Lines – Split Text into Odd and Even Lines | ToolForge">
+<meta property="og:description" content="Free online tool to split text into odd and even lines. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/odd-even-lines.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Odd Even Lines – Split Text into Odd and Even Lines | ToolForge">
+<meta name="twitter:description" content="Free online tool to split text into odd and even lines. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Odd Even Lines</h1>
+<p class="subtitle">Split text into odd-numbered lines (1, 3, 5…) and even-numbered lines (2, 4, 6…).</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Input</h3>
+<label for="input" class="sr-only">Input text</label>
+<textarea id="input" rows="10" style="width:90%" aria-label="Input text"></textarea>
+<br><br>
+<button onclick="run()">Split Odd/Even</button>
+<h3>Odd Lines (1, 3, 5…)</h3>
+<label for="odd" class="sr-only">Odd lines output</label>
+<textarea id="odd" rows="6" style="width:90%" aria-label="Odd lines output"></textarea>
+<h3>Even Lines (2, 4, 6…)</h3>
+<label for="even" class="sr-only">Even lines output</label>
+<textarea id="even" rows="6" style="width:90%" aria-label="Even lines output"></textarea>
+<section class="tool-seo">
+<h3>About Odd Even Lines</h3>
+<p>This tool splits text into odd-numbered lines and even-numbered lines. Line 1 is the first line.</p>
+<p>It is useful for separating key-value pairs, alternating data, or extracting every other line from logs and exports.</p>
+</section>
+</main>
+<script>
+function run(){
+var lines=document.getElementById("input").value.split(/\r?\n/)
+var odd=[],even=[]
+lines.forEach(function(l,i){
+if(i%2===0)odd.push(l)
+else even.push(l)
+})
+document.getElementById("odd").value=odd.join("\n")
+document.getElementById("even").value=even.join("\n")
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Java Formatter – Java Code Beautify Online | ToolForge</title>
+<meta name="description" content="Free online Java formatter to beautify and indent Java code by braces. No external libraries. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/java-formatter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Java Formatter – Java Code Beautify Online | ToolForge">
+<meta property="og:description" content="Free online Java formatter to beautify and indent Java code by braces. No external libraries. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/java-formatter.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java Formatter – Java Code Beautify Online | ToolForge">
+<meta name="twitter:description" content="Free online Java formatter to beautify and indent Java code by braces. No external libraries. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Java Formatter</h1>
+<p class="subtitle">Beautify and indent Java code by braces. Simple formatter, no external libraries.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<label for="input" class="sr-only">Java code input</label>
+<textarea id="input" rows="14" style="width:90%;font-family:monospace" placeholder="public class Main{public static void main(String[] args){System.out.println(&quot;Hello&quot;);}}" aria-label="Java code input"></textarea>
+<br><br>
+<div class="tool-actions">
+<button type="button" onclick="format()">Format / Beautify</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
+<h3 style="margin-top:24px">Result</h3>
+<label for="output" class="sr-only">Formatted output</label>
+<textarea id="output" rows="14" style="width:90%;font-family:monospace" aria-label="Formatted output"></textarea>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Java Formatter</h3>
+<p>This Java formatter beautifies and indents Java code based on braces. It adds line breaks and indentation to make code easier to read without using external libraries.</p>
+<p>It is useful for quickly formatting minified or poorly indented Java snippets, pasted code or small examples before sharing or reviewing.</p>
+</section>
+</main>
+<script>
+function format(){
+var src=document.getElementById("input").value;
+var indent="  ";
+var out="";
+var level=0;
+var i=0;
+var len=src.length;
+var inStr=false;
+var strChar="";
+var inComment=false;
+var inLineComment=false;
+while(i<len){
+var c=src[i];
+if(inLineComment){
+out+=c;
+if(c==="\n") inLineComment=false;
+i++;
+continue;
+}
+if(inComment){
+out+=c;
+if(c==="*"&&src[i+1]==="/"){ out+="/"; i+=2; inComment=false; } else i++;
+continue;
+}
+if(inStr){
+out+=c;
+if(c===strChar&&src[i-1]!=="\\") inStr=false;
+i++;
+continue;
+}
+if(c==='"'||c==="'"){
+inStr=true;
+strChar=c;
+out+=c;
+i++;
+continue;
+}
+if(c==="/"&&src[i+1]==="/"){
+inLineComment=true;
+out+=c;
+i++;
+continue;
+}
+if(c==="/"&&src[i+1]==="*"){
+inComment=true;
+out+=c;
+i++;
+continue;
+}
+if(c==="{"){
+out+=c;
+level++;
+if(i+1<len&&src[i+1]!=="}"&&src[i+1]!=="\n") out+="\n";
+i++;
+continue;
+}
+if(c==="}"){
+level=Math.max(0,level-1);
+out+="\n";
+for(var j=0;j<level;j++) out+=indent;
+out+=c;
+if(i+1<len&&src[i+1]!=="}"&&src[i+1]!==";"&&src[i+1]!==","&&src[i+1]!=="\n") out+="\n";
+i++;
+continue;
+}
+if(c===";"){
+out+=c;
+if(i+1<len&&src[i+1]!=="\n"&&src[i+1]!=="}") out+="\n";
+i++;
+continue;
+}
+if(c==="\n"){
+out+=c;
+i++;
+continue;
+}
+if(c===" "||c==="\t"){
+if(out.length>0&&out[out.length-1]!==" "&&out[out.length-1]!=="\n") out+=c;
+i++;
+continue;
+}
+var lineStart=out.length;
+var lastNl=out.lastIndexOf("\n");
+if(lastNl>=0) lineStart=lastNl+1;
+var lineSoFar=out.slice(lineStart);
+if(lineSoFar.trim().length===0){
+for(var k=0;k<level;k++) out+=indent;
+}
+out+=c;
+i++;
+}
+document.getElementById("output").value=out;
+document.getElementById("status").innerText="Formatted.";
+document.getElementById("status").style.color="#16a34a";
+}
+function copyResult(){
+var v=document.getElementById("output").value;
+if(!v){
+document.getElementById("status").innerText="Nothing to copy.";
+document.getElementById("status").style.color="#b91c1c";
+return;
+}
+navigator.clipboard.writeText(v).then(function(){
+document.getElementById("status").innerText="Copied.";
+document.getElementById("status").style.color="#16a34a";
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed.";
+document.getElementById("status").style.color="#b91c1c";
+});
+}
+</script>
+</body>
+</html>

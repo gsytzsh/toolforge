@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>String to HTML Paragraphs – Convert Text to &lt;p&gt; Tags | ToolForge</title>
+<meta name="description" content="Free online tool to convert plain text to HTML paragraphs. Each line or block becomes a &lt;p&gt; tag. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/string-to-html-paragraphs.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="String to HTML Paragraphs – Convert Text to &lt;p&gt; Tags | ToolForge">
+<meta property="og:description" content="Convert plain text to HTML paragraphs.">
+<meta property="og:url" content="https://www.toolforge.site/tools/string-to-html-paragraphs.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="String to HTML Paragraphs – Convert Text to &lt;p&gt; Tags | ToolForge">
+<meta name="twitter:description" content="Convert plain text to HTML paragraphs.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>String to HTML Paragraphs</h1>
+<p class="subtitle">Convert plain text to HTML paragraphs. Each paragraph (blank-line separated) becomes a &lt;p&gt; tag.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="input">Plain text</label>
+<textarea id="input" rows="10" style="width:90%" placeholder="First paragraph here.
+
+Second paragraph after blank line.
+
+Third paragraph."></textarea>
+<br><br>
+
+<div class="tool-actions">
+<button onclick="convert()">Convert</button>
+<button type="button" onclick="copyOutput()">Copy HTML</button>
+</div>
+
+<h3>HTML Output</h3>
+<textarea id="output" rows="12" style="width:90%" readonly></textarea>
+<p id="status" class="inline-status"></p>
+
+<section class="tool-seo">
+<h3>About String to HTML Paragraphs</h3>
+<p>This tool converts plain text into HTML paragraphs. Blocks separated by blank lines become individual &lt;p&gt; elements.</p>
+<p>Useful for CMS content, email templates and converting copy to HTML.</p>
+</section>
+</main>
+<script>
+function convert(){
+var text=document.getElementById("input").value
+var blocks=text.split(/\n\s*\n/)
+var html=blocks.map(function(b){
+var t=b.trim().replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")
+return "<p>"+t+"</p>"
+}).join("\n")
+document.getElementById("output").value=html
+document.getElementById("status").innerText="Converted."
+document.getElementById("status").style.color="#16a34a"
+}
+function copyOutput(){
+var v=document.getElementById("output").value
+if(!v){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(v).then(function(){
+document.getElementById("status").innerText="Copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

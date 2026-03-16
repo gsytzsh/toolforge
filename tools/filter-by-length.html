@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Filter by Length – Filter Lines by Min/Max Length | ToolForge</title>
+<meta name="description" content="Free online tool to filter lines by minimum or maximum length. Keep or remove short/long lines. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/filter-by-length.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Filter by Length – Filter Lines by Min/Max Length | ToolForge">
+<meta property="og:description" content="Free online tool to filter lines by min/max length. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/filter-by-length.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Filter by Length – Filter Lines by Min/Max Length | ToolForge">
+<meta name="twitter:description" content="Free online tool to filter lines by min/max length. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Filter by Length</h1>
+<p class="subtitle">Filter lines by minimum and/or maximum character length. Keep only lines that match.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Input</h3>
+<label for="input" class="sr-only">Input text</label>
+<textarea id="input" rows="10" style="width:90%" aria-label="Input text"></textarea>
+<br><br>
+<label for="min">Min length:</label>
+<input id="min" type="number" min="0" value="0" style="width:80px;padding:6px;margin:0 8px">
+<label for="max">Max length:</label>
+<input id="max" type="number" min="0" placeholder="No limit" style="width:80px;padding:6px;margin-left:8px">
+<br><br>
+<button onclick="run()">Filter Lines</button>
+<h3>Result</h3>
+<label for="output" class="sr-only">Output text</label>
+<textarea id="output" rows="10" style="width:90%" aria-label="Output text"></textarea>
+<section class="tool-seo">
+<h3>About Filter by Length</h3>
+<p>This tool filters lines by minimum and/or maximum character length. Leave min at 0 or max empty for no limit.</p>
+<p>It is useful for cleaning keyword lists, filtering URLs, validating line lengths and preparing data for systems with length limits.</p>
+</section>
+</main>
+<script>
+function run(){
+var lines=document.getElementById("input").value.split(/\r?\n/)
+var minLen=parseInt(document.getElementById("min").value,10)||0
+var maxVal=document.getElementById("max").value
+var maxLen=maxVal===""?Infinity:parseInt(maxVal,10)||Infinity
+var out=lines.filter(function(l){
+var len=l.length
+return len>=minLen&&len<=maxLen
+})
+document.getElementById("output").value=out.join("\n")
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RSA Key Generator – Generate RSA Key Pair + Encrypt Decrypt Demo | ToolForge</title>
+<meta name="description" content="Free online RSA key pair generator with encrypt/decrypt demo using Web Crypto API. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/rsa-key-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="RSA Key Generator – RSA Key Pair + Encrypt Decrypt Demo | ToolForge">
+<meta property="og:description" content="RSA key pair generator with encrypt/decrypt demo.">
+<meta property="og:url" content="https://www.toolforge.site/tools/rsa-key-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RSA Key Generator – RSA Key Pair + Encrypt Decrypt Demo | ToolForge">
+<meta name="twitter:description" content="RSA key pair generator with encrypt/decrypt demo.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>RSA Key Generator</h1>
+<p class="subtitle">Generate RSA-OAEP key pair and demo encrypt/decrypt using Web Crypto API.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<button onclick="generateKeys()">Generate Key Pair</button>
+<p id="status" class="inline-status"></p>
+
+<h3>Public Key (SPKI, base64)</h3>
+<textarea id="pubKey" rows="4" style="width:90%" readonly placeholder="Click Generate"></textarea>
+<button type="button" onclick="copyPub()">Copy Public Key</button>
+
+<h3>Private Key (PKCS#8, base64)</h3>
+<textarea id="privKey" rows="6" style="width:90%" readonly placeholder="Click Generate"></textarea>
+<button type="button" onclick="copyPriv()">Copy Private Key</button>
+
+<hr>
+
+<h3>Encrypt (use public key)</h3>
+<label for="plain">Plain text (short, RSA has size limit)</label>
+<textarea id="plain" rows="2" style="width:90%" placeholder="Short message"></textarea>
+<button onclick="encryptDemo()">Encrypt</button>
+
+<h3>Decrypt (use private key)</h3>
+<label for="cipher">Cipher text (base64)</label>
+<textarea id="cipher" rows="4" style="width:90%" placeholder="Paste encrypted output"></textarea>
+<button onclick="decryptDemo()">Decrypt</button>
+
+<h3>Result</h3>
+<textarea id="result" rows="3" style="width:90%" readonly></textarea>
+<button type="button" onclick="copyResult()">Copy Result</button>
+
+<section class="tool-seo">
+<h3>About RSA Key Generator</h3>
+<p>This tool generates RSA-OAEP 2048-bit key pairs in the browser. Includes a demo to encrypt with the public key and decrypt with the private key.</p>
+<p>Useful for learning RSA, testing key exchange and small message encryption. Note: RSA has a small payload limit (~190 bytes for 2048-bit).</p>
+</section>
+</main>
+<script>
+var keyPair=null
+async function generateKeys(){
+try{
+keyPair=await crypto.subtle.generateKey({name:"RSA-OAEP",modulusLength:2048,publicExponent:new Uint8Array([1,0,1]),hash:"SHA-256"},true,["encrypt","decrypt"])
+var pub=await crypto.subtle.exportKey("spki",keyPair.publicKey)
+var priv=await crypto.subtle.exportKey("pkcs8",keyPair.privateKey)
+document.getElementById("pubKey").value=btoa(String.fromCharCode.apply(null,new Uint8Array(pub)))
+document.getElementById("privKey").value=btoa(String.fromCharCode.apply(null,new Uint8Array(priv)))
+setStatus("Key pair generated.",0)
+}catch(e){setStatus("Error: "+e.message,1)}
+}
+async function encryptDemo(){
+if(!keyPair){setStatus("Generate key pair first.",1);return}
+var plain=document.getElementById("plain").value
+if(!plain){setStatus("Enter plain text.",1);return}
+try{
+var enc=new TextEncoder()
+var ct=await crypto.subtle.encrypt({name:"RSA-OAEP"},keyPair.publicKey,enc.encode(plain))
+document.getElementById("cipher").value=btoa(String.fromCharCode.apply(null,new Uint8Array(ct)))
+document.getElementById("result").value=document.getElementById("cipher").value
+setStatus("Encrypted.",0)
+}catch(e){setStatus("Error: "+e.message,1)}
+}
+async function decryptDemo(){
+if(!keyPair){setStatus("Generate key pair first.",1);return}
+var cipher=document.getElementById("cipher").value.trim()
+if(!cipher){setStatus("Enter cipher text.",1);return}
+try{
+var raw=Uint8Array.from(atob(cipher),c=>c.charCodeAt(0))
+var dec=await crypto.subtle.decrypt({name:"RSA-OAEP"},keyPair.privateKey,raw)
+document.getElementById("result").value=new TextDecoder().decode(dec)
+setStatus("Decrypted.",0)
+}catch(e){setStatus("Decrypt failed: "+e.message,1)}
+}
+function setStatus(msg,err){var s=document.getElementById("status");s.innerText=msg;s.style.color=err?"#b91c1c":"#16a34a"}
+function copyPub(){copy("pubKey","Public key copied.")}
+function copyPriv(){copy("privKey","Private key copied.")}
+function copyResult(){copy("result","Result copied.")}
+function copy(id,msg){
+var v=document.getElementById(id).value
+if(!v){setStatus("Nothing to copy.",1);return}
+navigator.clipboard.writeText(v).then(function(){setStatus(msg,0)}).catch(function(){setStatus("Copy failed.",1)})
+}
+</script>
+</body>
+</html>

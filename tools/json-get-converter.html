@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JSON to GET Converter – JSON Query String Online | ToolForge</title>
+<meta name="description" content="Free online JSON to GET query string and GET to JSON converter. Convert JSON objects to URL query parameters and back. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/json-get-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="JSON to GET Converter – JSON Query String Online | ToolForge">
+<meta property="og:description" content="Free online JSON to GET query string and GET to JSON converter. Convert JSON objects to URL query parameters and back. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/json-get-converter.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JSON to GET Converter – JSON Query String Online | ToolForge">
+<meta name="twitter:description" content="Free online JSON to GET query string and GET to JSON converter. Convert JSON objects to URL query parameters and back. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>JSON ⇄ GET Converter</h1>
+<p class="subtitle">Convert JSON objects to GET query string and GET query string back to JSON.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>JSON</h3>
+<label for="json" class="sr-only">JSON input</label>
+<textarea id="json" rows="10" style="width:90%;font-family:monospace" placeholder='{"name":"John","age":30,"tags":["a","b"]}' aria-label="JSON input"></textarea>
+<br><br>
+<div class="tool-actions">
+<button type="button" onclick="jsonToGet()">JSON → GET</button>
+<button type="button" onclick="getToJson()">GET → JSON</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
+<h3 style="margin-top:24px">GET Query String</h3>
+<label for="get" class="sr-only">GET query string input</label>
+<textarea id="get" rows="6" style="width:90%;font-family:monospace" placeholder="name=John&amp;age=30&amp;tags=a&amp;tags=b" aria-label="GET query string input"></textarea>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About JSON ⇄ GET Converter</h3>
+<p>This converter transforms JSON objects into GET query strings (e.g. ?key=value&amp;arr=a&amp;arr=b) and parses query strings back into JSON. Handles nested objects and arrays in a flat key-value style.</p>
+<p>It is useful for building API URLs, testing query parameters, or converting between structured data and URL formats.</p>
+</section>
+</main>
+<script>
+function setStatus(msg,isError){
+var el=document.getElementById("status");
+el.innerText=msg;
+el.style.color=isError?"#b91c1c":"#16a34a";
+}
+function jsonToQuery(obj,prefix){
+var pairs=[];
+for(var k in obj){
+if(!obj.hasOwnProperty(k)) continue;
+var key=prefix?prefix+"["+k+"]":k;
+var v=obj[k];
+if(v===null||v===undefined) continue;
+if(Array.isArray(v)){
+for(var i=0;i<v.length;i++) pairs.push(encodeURIComponent(key)+"="+encodeURIComponent(String(v[i])));
+}else if(typeof v==="object"){
+pairs=pairs.concat(jsonToQuery(v,key));
+}else{
+pairs.push(encodeURIComponent(key)+"="+encodeURIComponent(String(v)));
+}
+}
+return pairs;
+}
+function jsonToGet(){
+try{
+var input=document.getElementById("json").value.trim();
+var obj=JSON.parse(input||"{}");
+var pairs=jsonToQuery(obj);
+document.getElementById("get").value=pairs.join("&");
+setStatus("Converted to GET.",false);
+}catch(e){
+setStatus("JSON error: "+e.message,true);
+}
+}
+function getToJson(){
+try{
+var input=document.getElementById("get").value.trim();
+var obj={};
+if(input){
+var params=new URLSearchParams(input.replace(/^\?/,""));
+params.forEach(function(v,k){
+if(obj.hasOwnProperty(k)){
+if(!Array.isArray(obj[k])) obj[k]=[obj[k]];
+obj[k].push(v);
+}else{
+obj[k]=v;
+}
+});
+for(var key in obj){
+if(obj.hasOwnProperty(key)&&Array.isArray(obj[key])&&obj[key].length===1) obj[key]=obj[key][0];
+}
+}
+document.getElementById("json").value=JSON.stringify(obj,null,2);
+setStatus("Converted to JSON.",false);
+}catch(e){
+setStatus("Error: "+e.message,true);
+}
+}
+function copyResult(){
+var v=document.getElementById("get").value||document.getElementById("json").value;
+if(!v){
+setStatus("Nothing to copy.",true);
+return;
+}
+navigator.clipboard.writeText(v).then(function(){
+setStatus("Copied.",false);
+}).catch(function(){
+setStatus("Copy failed.",true);
+});
+}
+</script>
+</body>
+</html>

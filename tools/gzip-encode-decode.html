@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gzip Encode Decode – Gzip Compress Decompress Online | ToolForge</title>
+<meta name="description" content="Free online Gzip compress and decompress tool. Encode text to gzip and decode gzip back to text in your browser. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/gzip-encode-decode.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Gzip Encode Decode – Gzip Compress Decompress Online | ToolForge">
+<meta property="og:description" content="Free online Gzip compress and decompress tool. Encode text to gzip and decode gzip back to text in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/gzip-encode-decode.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gzip Encode Decode – Gzip Compress Decompress Online | ToolForge">
+<meta name="twitter:description" content="Free online Gzip compress and decompress tool. Encode text to gzip and decode gzip back to text in your browser. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/pako@2/dist/pako.min.js"></script>
+</head>
+<body>
+<main class="container">
+<h1>Gzip Encode Decode</h1>
+<p class="subtitle">Compress text to gzip and decompress gzip back to text. Uses pako in the browser.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Text</h3>
+<label for="text" class="sr-only">Text input</label>
+<textarea id="text" rows="6" style="width:90%;font-family:monospace" placeholder="Enter text to compress" aria-label="Text input"></textarea>
+<br><br>
+<div class="tool-actions">
+<button type="button" onclick="compress()">Compress (Gzip)</button>
+<button type="button" onclick="decompress()">Decompress (Gzip)</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
+<h3 style="margin-top:24px">Gzip (Base64)</h3>
+<label for="gzip" class="sr-only">Gzip Base64 input</label>
+<textarea id="gzip" rows="6" style="width:90%;font-family:monospace" placeholder="Base64-encoded gzip data" aria-label="Gzip Base64 input"></textarea>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Gzip Encode Decode</h3>
+<p>This gzip tool compresses text to gzip format and decompresses gzip data back to text. The compressed output is Base64-encoded for easy copy and paste. Uses the pako library in the browser.</p>
+<p>It is useful for testing compression, debugging HTTP content-encoding, or preparing small payloads for gzip transfer.</p>
+</section>
+</main>
+<script>
+function setStatus(msg,isError){
+var el=document.getElementById("status");
+el.innerText=msg;
+el.style.color=isError?"#b91c1c":"#16a34a";
+}
+function compress(){
+try{
+var text=document.getElementById("text").value;
+var enc=new TextEncoder().encode(text);
+var compressed=pako.gzip(enc);
+var b64=btoa(String.fromCharCode.apply(null,compressed));
+document.getElementById("gzip").value=b64;
+setStatus("Compressed.",false);
+}catch(e){
+setStatus("Error: "+e.message,true);
+}
+}
+function decompress(){
+try{
+var b64=document.getElementById("gzip").value.replace(/\s/g,"");
+if(!b64){
+setStatus("Enter gzip data (Base64).",true);
+return;
+}
+var binary=atob(b64);
+var bytes=new Uint8Array(binary.length);
+for(var i=0;i<binary.length;i++) bytes[i]=binary.charCodeAt(i);
+var decompressed=pako.ungzip(bytes);
+var text=new TextDecoder().decode(decompressed);
+document.getElementById("text").value=text;
+setStatus("Decompressed.",false);
+}catch(e){
+setStatus("Error: "+e.message,true);
+}
+}
+function copyResult(){
+var v=document.getElementById("gzip").value||document.getElementById("text").value;
+if(!v){
+setStatus("Nothing to copy.",true);
+return;
+}
+navigator.clipboard.writeText(v).then(function(){
+setStatus("Copied.",false);
+}).catch(function(){
+setStatus("Copy failed.",true);
+});
+}
+</script>
+</body>
+</html>

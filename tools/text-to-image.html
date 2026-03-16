@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Text to Image – Convert Text to Image Online | ToolForge</title>
+<meta name="description" content="Free online Text to Image tool to convert text into an image. Customize font, size and color, then download as PNG. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/text-to-image.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Text to Image – Convert Text to Image Online | ToolForge">
+<meta property="og:description" content="Free online Text to Image tool. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/text-to-image.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Text to Image – Convert Text to Image Online | ToolForge">
+<meta name="twitter:description" content="Free online Text to Image tool. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Text to Image</h1>
+<p class="subtitle">Convert text into an image. Set font, size and color, then download as PNG.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Text</h3>
+<label for="text" class="sr-only">Text</label>
+<textarea id="text" rows="4" style="width:90%" placeholder="Enter text to convert" aria-label="Text"></textarea>
+<h3>Options</h3>
+<p>
+<label>Font size: <input id="size" type="number" value="24" min="8" max="200" style="width:70px"></label>
+<label style="margin-left:16px">Font: <select id="font"><option value="Arial">Arial</option><option value="Georgia">Georgia</option><option value="Times New Roman">Times New Roman</option><option value="Courier New">Courier New</option><option value="Verdana">Verdana</option></select></label>
+<label style="margin-left:16px">Color: <input id="color" type="color" value="#000000"></label>
+<label style="margin-left:16px">Background: <input id="bg" type="color" value="#ffffff"></label>
+</p>
+<div class="tool-actions">
+<button type="button" onclick="generate()">Generate Image</button>
+<button type="button" onclick="downloadImg()">Download PNG</button>
+</div>
+<h3>Preview</h3>
+<canvas id="canvas" style="border:1px solid #ddd;max-width:100%"></canvas>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About Text to Image</h3>
+<p>This tool converts text into an image using canvas. You can set font, size and colors, then download the result as PNG.</p>
+<p>It is useful for creating simple text graphics, social media quotes and placeholder images without external software.</p>
+</section>
+</main>
+<script>
+var canvas=document.getElementById("canvas")
+var ctx=canvas.getContext("2d")
+function generate(){
+var text=document.getElementById("text").value||"Sample text"
+var size=parseInt(document.getElementById("size").value,10)||24
+var font=document.getElementById("font").value||"Arial"
+var color=document.getElementById("color").value||"#000000"
+var bg=document.getElementById("bg").value||"#ffffff"
+ctx.font=size+"px "+font
+var m=ctx.measureText(text)
+var w=Math.ceil(m.width)+40
+var h=size+40
+canvas.width=w
+canvas.height=h
+ctx.fillStyle=bg
+ctx.fillRect(0,0,w,h)
+ctx.fillStyle=color
+ctx.font=size+"px "+font
+ctx.textBaseline="middle"
+ctx.fillText(text,20,h/2)
+document.getElementById("status").innerText="Image generated."
+document.getElementById("status").style.color="#16a34a"
+}
+function downloadImg(){
+if(!canvas.width){document.getElementById("status").innerText="Generate an image first.";document.getElementById("status").style.color="#b91c1c";return}
+var a=document.createElement("a")
+a.href=canvas.toDataURL("image/png")
+a.download="text-image.png"
+a.click()
+document.getElementById("status").innerText="Download started."
+document.getElementById("status").style.color="#16a34a"
+}
+document.getElementById("text").addEventListener("input",generate)
+document.getElementById("size").addEventListener("change",generate)
+document.getElementById("font").addEventListener("change",generate)
+document.getElementById("color").addEventListener("input",generate)
+document.getElementById("bg").addEventListener("input",generate)
+</script>
+</body>
+</html>

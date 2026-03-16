@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JSON to Postman Converter – Postman Collection Format | ToolForge</title>
+<meta name="description" content="Free online JSON to Postman collection format converter. Convert JSON to Postman format and Postman collection back to JSON. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/json-postman-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="JSON to Postman Converter – Postman Collection Format | ToolForge">
+<meta property="og:description" content="Free online JSON to Postman collection format converter. Convert JSON to Postman format and Postman collection back to JSON. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/json-postman-converter.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JSON to Postman Converter – Postman Collection Format | ToolForge">
+<meta name="twitter:description" content="Free online JSON to Postman collection format converter. Convert JSON to Postman format and Postman collection back to JSON. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>JSON ⇄ Postman Converter</h1>
+<p class="subtitle">Convert JSON to Postman collection format and Postman collection back to JSON.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>JSON</h3>
+<label for="json" class="sr-only">JSON input</label>
+<textarea id="json" rows="10" style="width:90%;font-family:monospace" placeholder='{"url":"https://api.example.com","method":"GET","headers":{"Accept":"application/json"}}' aria-label="JSON input"></textarea>
+<br><br>
+<div class="tool-actions">
+<button type="button" onclick="jsonToPostman()">JSON → Postman</button>
+<button type="button" onclick="postmanToJson()">Postman → JSON</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
+<h3 style="margin-top:24px">Postman Collection</h3>
+<label for="postman" class="sr-only">Postman format input</label>
+<textarea id="postman" rows="14" style="width:90%;font-family:monospace" placeholder='Postman Collection v2.1 format' aria-label="Postman format input"></textarea>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About JSON ⇄ Postman Converter</h3>
+<p>This converter transforms simple request JSON (URL, method, headers, body) into Postman Collection v2.1 format and extracts request data from Postman collections back to JSON.</p>
+<p>It is useful when creating Postman collections from API docs, converting cURL or JSON requests to Postman, or extracting request config from existing collections.</p>
+</section>
+</main>
+<script>
+function setStatus(msg,isError){
+var el=document.getElementById("status");
+el.innerText=msg;
+el.style.color=isError?"#b91c1c":"#16a34a";
+}
+function jsonToPostman(){
+try{
+var input=document.getElementById("json").value.trim();
+var req=JSON.parse(input||"{}");
+var item={
+name:req.name||"Request",
+request:{
+method:(req.method||"GET").toUpperCase(),
+header:[],
+url:req.url||""
+}
+};
+if(req.headers){
+for(var k in req.headers){
+if(req.headers.hasOwnProperty(k)) item.request.header.push({key:k,value:String(req.headers[k]),type:"text"});
+}
+}
+if(req.body){
+item.request.body={mode:"raw",raw:typeof req.body==="string"?req.body:JSON.stringify(req.body,null,2)};
+}
+var collection={
+info:{name:"Converted",schema:"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"},
+item:[item]
+};
+document.getElementById("postman").value=JSON.stringify(collection,null,2);
+setStatus("Converted to Postman.",false);
+}catch(e){
+setStatus("JSON error: "+e.message,true);
+}
+}
+function postmanToJson(){
+try{
+var input=document.getElementById("postman").value.trim();
+var col=JSON.parse(input||"{}");
+var items=col.item||[];
+var reqs=[];
+function extract(item){
+if(item.request){
+var r={method:item.request.method||"GET",url:item.request.url||""};
+if(item.request.header&&item.request.header.length) r.headers={};
+item.request.header.forEach(function(h){ r.headers[h.key]=h.value; });
+if(item.request.body&&item.request.body.raw) r.body=item.request.body.raw;
+reqs.push(r);
+}
+if(item.item) item.item.forEach(extract);
+}
+items.forEach(extract);
+document.getElementById("json").value=JSON.stringify(reqs.length===1?reqs[0]:reqs,null,2);
+setStatus("Converted to JSON.",false);
+}catch(e){
+setStatus("Postman parse error: "+e.message,true);
+}
+}
+function copyResult(){
+var v=document.getElementById("postman").value||document.getElementById("json").value;
+if(!v){
+setStatus("Nothing to copy.",true);
+return;
+}
+navigator.clipboard.writeText(v).then(function(){
+setStatus("Copied.",false);
+}).catch(function(){
+setStatus("Copy failed.",true);
+});
+}
+</script>
+</body>
+</html>

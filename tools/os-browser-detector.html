@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OS Browser Detector – Detect OS and Browser Info | ToolForge</title>
+<meta name="description" content="Free online OS and browser detector. See your navigator info: OS, browser, user agent, platform. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/os-browser-detector.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="OS Browser Detector – Detect OS and Browser Info | ToolForge">
+<meta property="og:description" content="Detect OS and browser info from navigator.">
+<meta property="og:url" content="https://www.toolforge.site/tools/os-browser-detector.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OS Browser Detector – Detect OS and Browser Info | ToolForge">
+<meta name="twitter:description" content="Detect OS and browser info from navigator.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.info-table{width:100%;max-width:600px;border-collapse:collapse}
+.info-table td{padding:8px 12px;border-bottom:1px solid #eee}
+.info-table td:first-child{font-weight:600;width:140px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>OS Browser Detector</h1>
+<p class="subtitle">Detect OS and browser info from navigator. Shows your current environment.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<h3>Detected Info</h3>
+<table class="info-table">
+<tbody id="info"></tbody>
+</table>
+
+<h3>Raw User Agent</h3>
+<pre id="ua" style="word-break:break-all;font-size:0.85rem"></pre>
+<button type="button" onclick="copyUa()">Copy User Agent</button>
+<p id="status" class="inline-status"></p>
+
+<section class="tool-seo">
+<h3>About OS Browser Detector</h3>
+<p>This tool displays OS and browser information derived from the navigator object. Useful for debugging, compatibility checks and understanding client environment.</p>
+<p>Note: User agent strings can be spoofed; use for development reference only.</p>
+</section>
+</main>
+<script>
+function detectOS(ua){
+if(/Windows NT 10/.test(ua)) return "Windows 10/11"
+if(/Windows/.test(ua)) return "Windows"
+if(/Mac OS X/.test(ua)) return "macOS"
+if(/Linux/.test(ua)) return "Linux"
+if(/Android/.test(ua)) return "Android"
+if(/iPhone|iPad/.test(ua)) return "iOS"
+return "Unknown"
+}
+function detectBrowser(ua){
+if(/Edg\//.test(ua)) return "Edge"
+if(/Chrome\//.test(ua)&&!/Edg/.test(ua)) return "Chrome"
+if(/Firefox\//.test(ua)) return "Firefox"
+if(/Safari\//.test(ua)&&!/Chrome/.test(ua)) return "Safari"
+if(/OPR\//.test(ua)) return "Opera"
+return "Unknown"
+}
+var n=navigator
+var ua=n.userAgent
+var rows=[
+["OS",detectOS(ua)],
+["Browser",detectBrowser(ua)],
+["Platform",n.platform||"-"],
+["Language",n.language||"-"],
+["Languages",n.languages?n.languages.join(", "):"-"],
+["Cookie Enabled",n.cookieEnabled?"Yes":"No"],
+["Online",n.onLine?"Yes":"No"],
+["Hardware Concurrency",n.hardwareConcurrency||"-"],
+["Device Memory (GB)",n.deviceMemory||"-"],
+["Max Touch Points",n.maxTouchPoints||0]
+]
+var tbody=document.getElementById("info")
+rows.forEach(function(r){
+var tr=document.createElement("tr")
+tr.innerHTML="<td>"+r[0]+"</td><td>"+r[1]+"</td>"
+tbody.appendChild(tr)
+})
+document.getElementById("ua").textContent=ua
+function copyUa(){
+navigator.clipboard.writeText(ua).then(function(){
+document.getElementById("status").innerText="User agent copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

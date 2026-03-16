@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>UBB to HTML Converter – UBB HTML Convert Online | ToolForge</title>
+<meta name="description" content="Free online UBB to HTML and HTML to UBB converter. Convert forum UBB tags to HTML and back for bulletin boards and web content. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/ubb-html-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="UBB to HTML Converter – UBB HTML Convert Online | ToolForge">
+<meta property="og:description" content="Free online UBB to HTML and HTML to UBB converter. Convert forum UBB tags to HTML and back for bulletin boards and web content. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/ubb-html-converter.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UBB to HTML Converter – UBB HTML Convert Online | ToolForge">
+<meta name="twitter:description" content="Free online UBB to HTML and HTML to UBB converter. Convert forum UBB tags to HTML and back for bulletin boards and web content. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>UBB ⇄ HTML Converter</h1>
+<p class="subtitle">Convert UBB forum tags to HTML and HTML back to UBB for bulletin boards and web content.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>UBB</h3>
+<label for="ubb" class="sr-only">UBB input</label>
+<textarea id="ubb" rows="8" style="width:90%;font-family:monospace" placeholder="[b]bold[/b] [i]italic[/i] [url=https://example.com]link[/url]" aria-label="UBB input"></textarea>
+<br><br>
+<div class="tool-actions">
+<button type="button" onclick="ubbToHtml()">UBB → HTML</button>
+<button type="button" onclick="htmlToUbb()">HTML → UBB</button>
+</div>
+<h3 style="margin-top:24px">HTML</h3>
+<label for="html" class="sr-only">HTML input</label>
+<textarea id="html" rows="8" style="width:90%;font-family:monospace" placeholder="&lt;b&gt;bold&lt;/b&gt; &lt;i&gt;italic&lt;/i&gt; &lt;a href=&quot;https://example.com&quot;&gt;link&lt;/a&gt;" aria-label="HTML input"></textarea>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About UBB ⇄ HTML Converter</h3>
+<p>This UBB and HTML converter helps you switch between UBB forum tags and HTML for bulletin boards, comments and web content. UBB tags like [b], [i], [url] are converted to equivalent HTML elements.</p>
+<p>It is useful when migrating forum content, editing bulletin board posts or preparing text for systems that use UBB or HTML formatting.</p>
+</section>
+</main>
+<script>
+function setStatus(msg,isError){
+var el=document.getElementById("status");
+el.innerText=msg;
+el.style.color=isError?"#b91c1c":"#16a34a";
+}
+function ubbToHtml(){
+var ubb=document.getElementById("ubb").value;
+var html=ubb
+.replace(/\[b\]([\s\S]*?)\[\/b\]/gi,"<b>$1</b>")
+.replace(/\[i\]([\s\S]*?)\[\/i\]/gi,"<i>$1</i>")
+.replace(/\[u\]([\s\S]*?)\[\/u\]/gi,"<u>$1</u>")
+.replace(/\[s\]([\s\S]*?)\[\/s\]/gi,"<s>$1</s>")
+.replace(/\[url=([^\]]+)\]([\s\S]*?)\[\/url\]/gi,'<a href="$1">$2</a>')
+.replace(/\[url\]([\s\S]*?)\[\/url\]/gi,'<a href="$1">$1</a>')
+.replace(/\[img\]([\s\S]*?)\[\/img\]/gi,'<img src="$1" alt="">')
+.replace(/\[code\]([\s\S]*?)\[\/code\]/gi,'<pre><code>$1</code></pre>')
+.replace(/\[quote\]([\s\S]*?)\[\/quote\]/gi,'<blockquote>$1</blockquote>')
+.replace(/\n/g,"<br>");
+document.getElementById("html").value=html;
+setStatus("UBB converted to HTML.",false);
+}
+function htmlToUbb(){
+var html=document.getElementById("html").value;
+var ubb=html
+.replace(/<br\s*\/?>/gi,"\n")
+.replace(/<b>([\s\S]*?)<\/b>/gi,"[b]$1[/b]")
+.replace(/<i>([\s\S]*?)<\/i>/gi,"[i]$1[/i]")
+.replace(/<u>([\s\S]*?)<\/u>/gi,"[u]$1[/u]")
+.replace(/<s>([\s\S]*?)<\/s>/gi,"[s]$1[/s]")
+.replace(/<a\s+href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi,"[url=$1]$2[/url]")
+.replace(/<img[^>]+src=["']([^"']+)["'][^>]*>/gi,"[img]$1[/img]")
+.replace(/<pre><code>([\s\S]*?)<\/code><\/pre>/gi,"[code]$1[/code]")
+.replace(/<blockquote>([\s\S]*?)<\/blockquote>/gi,"[quote]$1[/quote]");
+document.getElementById("ubb").value=ubb;
+setStatus("HTML converted to UBB.",false);
+}
+</script>
+</body>
+</html>

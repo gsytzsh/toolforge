@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Test Data Generator – Names, Emails, Phone Numbers | ToolForge</title>
+<meta name="description" content="Free online test data generator. Generate fake names, emails and phone numbers in English for testing. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/test-data-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Test Data Generator – Names, Emails, Phone Numbers | ToolForge">
+<meta property="og:description" content="Generate test data: names, emails, phone numbers.">
+<meta property="og:url" content="https://www.toolforge.site/tools/test-data-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Test Data Generator – Names, Emails, Phone Numbers | ToolForge">
+<meta name="twitter:description" content="Generate test data: names, emails, phone numbers.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Test Data Generator</h1>
+<p class="subtitle">Generate fake names, emails and phone numbers (English) for testing.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="count">Count</label>
+<input id="count" type="number" min="1" max="50" value="5" style="width:80px">
+<br><br>
+
+<label><input type="checkbox" id="names" checked> Names</label><br>
+<label><input type="checkbox" id="emails" checked> Emails</label><br>
+<label><input type="checkbox" id="phones" checked> Phone numbers</label><br>
+<br>
+
+<button onclick="generate()">Generate</button>
+
+<h3>Result</h3>
+<textarea id="output" rows="16" style="width:90%" readonly></textarea>
+<button type="button" onclick="copyOutput()">Copy</button>
+<p id="status" class="inline-status"></p>
+
+<section class="tool-seo">
+<h3>About Test Data Generator</h3>
+<p>This tool generates random test data: English names, email addresses and US-style phone numbers for forms and demos.</p>
+<p>Useful for development, QA and prototyping without real user data.</p>
+</section>
+</main>
+<script>
+var first=["James","John","Robert","Michael","David","William","Richard","Joseph","Thomas","Charles","Mary","Patricia","Jennifer","Linda","Elizabeth","Barbara","Susan","Jessica","Sarah","Karen"]
+var last=["Smith","Johnson","Williams","Brown","Jones","Garcia","Miller","Davis","Rodriguez","Martinez","Wilson","Anderson","Taylor","Thomas","Moore","Jackson","Martin","Lee","Thompson","White"]
+var domains=["example.com","test.com","demo.org","fake.net","sample.io"]
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)]}
+function rand(n){return Math.floor(Math.random()*n)}
+function generate(){
+var count=Math.min(50,Math.max(1,parseInt(document.getElementById("count").value,10)||1))
+var wantNames=document.getElementById("names").checked
+var wantEmails=document.getElementById("emails").checked
+var wantPhones=document.getElementById("phones").checked
+var out=[]
+for(var i=0;i<count;i++){
+var parts=[]
+if(wantNames) parts.push(pick(first)+" "+pick(last))
+if(wantEmails) parts.push((pick(first).toLowerCase()+"."+pick(last).toLowerCase()+rand(999)+"@"+pick(domains)))
+if(wantPhones) parts.push("("+rand(900)+200+") "+rand(900)+100+"-"+rand(9000)+1000)
+if(parts.length) out.push(parts.join(" | "))
+}
+document.getElementById("output").value=out.join("\n")
+document.getElementById("status").innerText="Generated "+count+" record(s)."
+document.getElementById("status").style.color="#16a34a"
+}
+function copyOutput(){
+var v=document.getElementById("output").value
+if(!v){
+document.getElementById("status").innerText="Nothing to copy."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+navigator.clipboard.writeText(v).then(function(){
+document.getElementById("status").innerText="Copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

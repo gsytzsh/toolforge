@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Text Interval Generator – Insert Separator Between Lines | ToolForge</title>
+<meta name="description" content="Free online tool to insert a separator between lines of text. Add comma, newline or custom delimiter. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/text-interval-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Text Interval Generator – Insert Separator Between Lines | ToolForge">
+<meta property="og:description" content="Free online tool to insert separator between lines. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/text-interval-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Text Interval Generator – Insert Separator Between Lines | ToolForge">
+<meta name="twitter:description" content="Free online tool to insert separator between lines. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Text Interval Generator</h1>
+<p class="subtitle">Insert a separator between each line of text. Use comma, newline or a custom delimiter.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Input</h3>
+<label for="input" class="sr-only">Input text</label>
+<textarea id="input" rows="10" style="width:90%" aria-label="Input text"></textarea>
+<br><br>
+<label for="sep">Separator:</label>
+<input id="sep" value="," placeholder="e.g. , or \n or |" style="width:200px;padding:6px;margin-left:8px">
+<br><br>
+<button onclick="run()">Insert Separator</button>
+<h3>Result</h3>
+<label for="output" class="sr-only">Output text</label>
+<textarea id="output" rows="10" style="width:90%" aria-label="Output text"></textarea>
+<section class="tool-seo">
+<h3>About Text Interval Generator</h3>
+<p>This tool inserts a separator (comma, pipe, newline or custom string) between each line of text.</p>
+<p>It is useful for converting line lists to comma-separated values, building SQL IN clauses or formatting text for APIs.</p>
+</section>
+</main>
+<script>
+function run(){
+var lines=document.getElementById("input").value.split(/\r?\n/)
+var sep=document.getElementById("sep").value.replace(/\\n/g,"\n").replace(/\\t/g,"\t")
+document.getElementById("output").value=lines.join(sep)
+}
+</script>
+</body>
+</html>

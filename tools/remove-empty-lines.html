@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Remove Empty Lines – Strip Blank Lines from Text | ToolForge</title>
+<meta name="description" content="Free online tool to remove empty lines from text. Strip blank lines and trim whitespace. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/remove-empty-lines.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Remove Empty Lines – Strip Blank Lines from Text | ToolForge">
+<meta property="og:description" content="Free online tool to remove empty lines from text. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/remove-empty-lines.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Remove Empty Lines – Strip Blank Lines from Text | ToolForge">
+<meta name="twitter:description" content="Free online tool to remove empty lines from text. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Remove Empty Lines</h1>
+<p class="subtitle">Remove empty or blank lines from text. Optionally treat whitespace-only lines as empty.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>Input</h3>
+<label for="input" class="sr-only">Input text</label>
+<textarea id="input" rows="10" style="width:90%" aria-label="Input text"></textarea>
+<br><br>
+<label><input type="checkbox" id="trim" checked> Also remove whitespace-only lines</label>
+<br><br>
+<button onclick="run()">Remove Empty Lines</button>
+<h3>Result</h3>
+<label for="output" class="sr-only">Output text</label>
+<textarea id="output" rows="10" style="width:90%" aria-label="Output text"></textarea>
+<section class="tool-seo">
+<h3>About Remove Empty Lines</h3>
+<p>This tool removes empty lines from pasted text. You can optionally treat lines that contain only spaces or tabs as empty.</p>
+<p>It is useful for cleaning up pasted content, logs, exported data and any text with excessive blank lines.</p>
+</section>
+</main>
+<script>
+function run(){
+var lines=document.getElementById("input").value.split(/\r?\n/)
+var trim=document.getElementById("trim").checked
+var out=lines.filter(function(l){return trim?l.trim()!=="":l!==""})
+document.getElementById("output").value=out.join("\n")
+}
+</script>
+</body>
+</html>

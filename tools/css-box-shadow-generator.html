@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CSS Box Shadow Generator – Live Preview | ToolForge</title>
+<meta name="description" content="Free online CSS box-shadow generator with live preview. Adjust offset, blur, spread and color. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/css-box-shadow-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="CSS Box Shadow Generator – Live Preview | ToolForge">
+<meta property="og:description" content="Free online CSS box-shadow generator with live preview.">
+<meta property="og:url" content="https://www.toolforge.site/tools/css-box-shadow-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS Box Shadow Generator – Live Preview | ToolForge">
+<meta name="twitter:description" content="Free online CSS box-shadow generator with live preview.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+#preview-box{width:160px;height:100px;background:#fff;border:1px solid #e5e7eb;margin:16px 0}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>CSS Box Shadow Generator</h1>
+<p class="subtitle">Generate box-shadow CSS with live preview. Adjust offset, blur, spread and color.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:420px">
+<div><label for="h">Horizontal (px)</label><input id="h" type="number" value="4" style="width:80px"></div>
+<div><label for="v">Vertical (px)</label><input id="v" type="number" value="6" style="width:80px"></div>
+<div><label for="blur">Blur (px)</label><input id="blur" type="number" min="0" value="12" style="width:80px"></div>
+<div><label for="spread">Spread (px)</label><input id="spread" type="number" value="0" style="width:80px"></div>
+<div><label for="color">Color</label><input id="color" type="text" value="#000000" style="width:100px"></div>
+<div><label for="opacity">Opacity (0–1)</label><input id="opacity" type="number" min="0" max="1" step="0.1" value="0.15" style="width:80px"></div>
+</div>
+
+<h3>Live Preview</h3>
+<div id="preview-box"></div>
+
+<h3>CSS Output</h3>
+<pre id="output">box-shadow: 4px 6px 12px 0 rgba(0,0,0,0.15);</pre>
+<button type="button" onclick="copyCss()">Copy CSS</button>
+<p id="status" class="inline-status"></p>
+
+<section class="tool-seo">
+<h3>About CSS Box Shadow Generator</h3>
+<p>This tool generates CSS box-shadow values with a live preview. Adjust horizontal and vertical offset, blur radius, spread and color.</p>
+<p>Useful for designing card shadows, buttons and depth effects without trial and error.</p>
+</section>
+</main>
+<script>
+function hexToRgba(hex,a){
+if(hex.startsWith("#")) hex=hex.slice(1)
+if(hex.length===3) hex=hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2]
+var r=parseInt(hex.slice(0,2),16),g=parseInt(hex.slice(2,4),16),b=parseInt(hex.slice(4,6),16)
+return "rgba("+r+","+g+","+b+","+a+")"
+}
+function update(){
+var h=parseInt(document.getElementById("h").value,10)||0
+var v=parseInt(document.getElementById("v").value,10)||0
+var blur=parseInt(document.getElementById("blur").value,10)||0
+var spread=parseInt(document.getElementById("spread").value,10)||0
+var color=document.getElementById("color").value.trim()||"#000000"
+var opacity=parseFloat(document.getElementById("opacity").value)||0.15
+var rgba=hexToRgba(color,opacity)
+var box=document.getElementById("preview-box")
+box.style.boxShadow=h+"px "+v+"px "+blur+"px "+spread+"px "+rgba
+document.getElementById("output").textContent="box-shadow: "+h+"px "+v+"px "+blur+"px "+spread+"px "+rgba+";"
+}
+["h","v","blur","spread","color","opacity"].forEach(function(id){
+document.getElementById(id).addEventListener("input",update)
+document.getElementById(id).addEventListener("change",update)
+})
+update()
+function copyCss(){
+var v=document.getElementById("output").textContent
+navigator.clipboard.writeText(v).then(function(){
+document.getElementById("status").innerText="Copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

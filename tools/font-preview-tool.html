@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Font Preview Tool – Preview Fonts with Custom Text | ToolForge</title>
+<meta name="description" content="Free online font preview tool. Input text, select font family and see live preview. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/font-preview-tool.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Font Preview Tool – Preview Fonts with Custom Text | ToolForge">
+<meta property="og:description" content="Preview fonts with custom text.">
+<meta property="og:url" content="https://www.toolforge.site/tools/font-preview-tool.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Font Preview Tool – Preview Fonts with Custom Text | ToolForge">
+<meta name="twitter:description" content="Preview fonts with custom text.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+#preview{min-height:120px;padding:24px;border:1px solid #e5e7eb;background:#fff;margin:16px 0;font-size:1.5rem}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Font Preview Tool</h1>
+<p class="subtitle">Input text, select font family and see live preview.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="text">Sample text</label>
+<input id="text" type="text" value="The quick brown fox jumps over the lazy dog. 0123456789" style="width:90%">
+<br><br>
+
+<label for="font">Font family</label>
+<select id="font" style="width:90%">
+<option value="Arial, sans-serif">Arial</option>
+<option value="'Times New Roman', serif">Times New Roman</option>
+<option value="Georgia, serif">Georgia</option>
+<option value="'Courier New', monospace">Courier New</option>
+<option value="Verdana, sans-serif">Verdana</option>
+<option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+<option value="Impact, sans-serif">Impact</option>
+<option value="'Comic Sans MS', cursive">Comic Sans MS</option>
+<option value="'Lucida Console', monospace">Lucida Console</option>
+<option value="'Palatino Linotype', serif">Palatino Linotype</option>
+<option value="Tahoma, sans-serif">Tahoma</option>
+<option value="system-ui, sans-serif">system-ui</option>
+<option value="'Segoe UI', sans-serif">Segoe UI</option>
+<option value="'Apple Color Emoji', 'Segoe UI Emoji', sans-serif">Emoji</option>
+</select>
+<br><br>
+
+<label for="size">Font size (px)</label>
+<input id="size" type="number" min="8" max="120" value="24" style="width:80px">
+<br><br>
+
+<h3>Preview</h3>
+<div id="preview"></div>
+
+<section class="tool-seo">
+<h3>About Font Preview Tool</h3>
+<p>This tool lets you preview different font families with your own text. Useful for typography decisions and design mockups.</p>
+<p>Fonts shown are those installed on your system. Web fonts require separate loading.</p>
+</section>
+</main>
+<script>
+function update(){
+var el=document.getElementById("preview")
+el.textContent=document.getElementById("text").value||"Sample text"
+el.style.fontFamily=document.getElementById("font").value
+el.style.fontSize=(document.getElementById("size").value||24)+"px"
+}
+["text","font","size"].forEach(function(id){
+document.getElementById(id).addEventListener("input",update)
+document.getElementById(id).addEventListener("change",update)
+})
+update()
+</script>
+</body>
+</html>

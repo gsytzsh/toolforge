@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HTTP Headers Reference – Request & Response Headers Table | ToolForge</title>
+<meta name="description" content="Free online HTTP headers reference for request and response headers. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/http-headers-reference.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="HTTP Headers Reference – Request & Response Headers Table | ToolForge">
+<meta property="og:description" content="Free online HTTP headers reference. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/http-headers-reference.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP Headers Reference – Request & Response Headers Table | ToolForge">
+<meta name="twitter:description" content="Free online HTTP headers reference. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem}
+.ref-table th,.ref-table td{border:1px solid #eee;padding:8px 12px;text-align:left}
+.ref-table th{background:#f8fafc;font-weight:600}
+.ref-table code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:0.9em}
+.ref-section{margin-top:24px}
+.ref-section h3{font-size:1rem;color:#475569;margin-bottom:8px}
+.ref-table input{width:100%;max-width:200px;padding:6px;border:1px solid #ddd;border-radius:4px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>HTTP Headers Reference</h1>
+<p class="subtitle">Reference table for common HTTP request and response headers.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="filter" class="sr-only">Filter</label>
+<input id="filter" placeholder="Search headers" style="width:100%;max-width:400px;padding:10px;margin-bottom:16px;border:1px solid #ddd;border-radius:6px" aria-label="Filter">
+
+<div class="ref-section">
+<h3>Request Headers</h3>
+<table class="ref-table">
+<thead><tr><th>Header</th><th>Description</th></tr></thead>
+<tbody id="req"></tbody>
+</table>
+</div>
+
+<div class="ref-section">
+<h3>Response Headers</h3>
+<table class="ref-table">
+<thead><tr><th>Header</th><th>Description</th></tr></thead>
+<tbody id="res"></tbody>
+</table>
+</div>
+
+<section class="tool-seo">
+<h3>About HTTP Headers Reference</h3>
+<p>This reference lists common HTTP request and response headers used in web development and API work.</p>
+<p>It is useful for debugging, CORS configuration, caching and understanding HTTP communication.</p>
+</section>
+</main>
+<script>
+var req=[
+["Accept","Content types the client accepts"],
+["Accept-Encoding","Encodings (gzip, deflate, br)"],
+["Accept-Language","Preferred languages"],
+["Authorization","Credentials (Bearer, Basic)"],
+["Cache-Control","Caching directives"],
+["Content-Type","Request body MIME type"],
+["Cookie","Stored cookies"],
+["Origin","Request origin (CORS)"],
+["Referer","Referring URL"],
+["User-Agent","Client identifier"],
+["X-Requested-With","XMLHttpRequest for AJAX"]
+]
+var res=[
+["Cache-Control","Caching directives"],
+["Content-Type","Response MIME type"],
+["Content-Length","Response body size"],
+["Set-Cookie","Set cookie value"],
+["Access-Control-Allow-Origin","CORS allowed origin"],
+["Access-Control-Allow-Methods","CORS allowed methods"],
+["Access-Control-Allow-Headers","CORS allowed headers"],
+["Location","Redirect URL (3xx)"],
+["ETag","Resource version for cache"],
+["Last-Modified","Resource modification date"],
+["X-Frame-Options","Clickjacking protection"],
+["X-Content-Type-Options","MIME sniffing protection"],
+["Strict-Transport-Security","HSTS"]
+]
+function render(){
+var q=(document.getElementById("filter").value||"").toLowerCase().trim()
+function filterRows(arr){
+return arr.filter(function(r){return !q||r[0].toLowerCase().indexOf(q)!==-1||r[1].toLowerCase().indexOf(q)!==-1})
+}
+function fill(id,arr){
+var tbody=document.getElementById(id)
+tbody.innerHTML=""
+filterRows(arr).forEach(function(r){
+var tr=document.createElement("tr")
+tr.innerHTML="<td><code>"+r[0]+"</code></td><td>"+r[1]+"</td>"
+tbody.appendChild(tr)
+})
+}
+fill("req",req)
+fill("res",res)
+}
+document.getElementById("filter").addEventListener("input",render)
+render()
+</script>
+</body>
+</html>

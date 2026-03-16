@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Batch Open URLs – Open Multiple Links at Once | ToolForge</title>
+<meta name="description" content="Free online Batch Open URLs tool to open multiple links. Paste URLs, generate link list or open in new tabs (subject to popup blocker). Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/batch-open-urls.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Batch Open URLs – Open Multiple Links at Once | ToolForge">
+<meta property="og:description" content="Free online Batch Open URLs tool. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/batch-open-urls.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Batch Open URLs – Open Multiple Links at Once | ToolForge">
+<meta name="twitter:description" content="Free online Batch Open URLs tool. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>Batch Open URLs</h1>
+<p class="subtitle">Paste URLs (one per line), then open all in new tabs or copy as link list.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>URLs (one per line)</h3>
+<label for="urls" class="sr-only">URLs</label>
+<textarea id="urls" rows="8" style="width:90%" placeholder="https://example.com/page1&#10;https://example.com/page2" aria-label="URLs"></textarea>
+<div class="tool-actions">
+<button type="button" onclick="openAll()">Open All in New Tabs</button>
+<button type="button" onclick="copyLinks()">Copy as HTML Links</button>
+<button type="button" onclick="copyPlain()">Copy Plain URLs</button>
+</div>
+<p id="status" class="inline-status"></p>
+<p class="tool-seo" style="margin-top:16px;font-size:0.9rem;color:#6b7280">Note: Browsers may block opening many tabs at once. If blocked, use "Copy as HTML Links" and paste into a new tab, or open links one by one.</p>
+<section class="tool-seo">
+<h3>About Batch Open URLs</h3>
+<p>This tool helps you open multiple URLs at once. Paste a list of URLs and open them in new tabs, or copy as HTML links for use elsewhere.</p>
+<p>It is useful for checking multiple pages, bulk link verification and opening a set of bookmarks quickly.</p>
+</section>
+</main>
+<script>
+function getUrls(){
+return document.getElementById("urls").value.split(/\r?\n/).map(function(s){return s.trim()}).filter(function(s){return s&&(s.startsWith("http://")||s.startsWith("https://"))})
+}
+function openAll(){
+var list=getUrls()
+if(!list.length){document.getElementById("status").innerText="Paste at least one valid URL.";document.getElementById("status").style.color="#b91c1c";return}
+list.forEach(function(u){window.open(u,"_blank","noopener")})
+document.getElementById("status").innerText="Opened "+list.length+" tab(s). Popup blocker may have blocked some."
+document.getElementById("status").style.color="#16a34a"
+}
+function copyLinks(){
+var list=getUrls()
+if(!list.length){document.getElementById("status").innerText="Paste at least one valid URL.";document.getElementById("status").style.color="#b91c1c";return}
+var html=list.map(function(u){return '<a href="'+u+'" target="_blank">'+u+'</a>'}).join("\n")
+navigator.clipboard.writeText(html).then(function(){document.getElementById("status").innerText="Copied "+list.length+" links as HTML.";document.getElementById("status").style.color="#16a34a"}).catch(function(){document.getElementById("status").innerText="Copy failed.";document.getElementById("status").style.color="#b91c1c"})
+}
+function copyPlain(){
+var list=getUrls()
+if(!list.length){document.getElementById("status").innerText="Paste at least one valid URL.";document.getElementById("status").style.color="#b91c1c";return}
+navigator.clipboard.writeText(list.join("\n")).then(function(){document.getElementById("status").innerText="Copied "+list.length+" URLs.";document.getElementById("status").style.color="#16a34a"}).catch(function(){document.getElementById("status").innerText="Copy failed.";document.getElementById("status").style.color="#b91c1c"})
+}
+</script>
+</body>
+</html>

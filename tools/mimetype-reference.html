@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MIME Type Reference – Common File Types Table | ToolForge</title>
+<meta name="description" content="Free online MIME type reference for common file types. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/mimetype-reference.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="MIME Type Reference – Common File Types Table | ToolForge">
+<meta property="og:description" content="Free online MIME type reference. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/mimetype-reference.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MIME Type Reference – Common File Types Table | ToolForge">
+<meta name="twitter:description" content="Free online MIME type reference. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem}
+.ref-table th,.ref-table td{border:1px solid #eee;padding:8px 12px;text-align:left}
+.ref-table th{background:#f8fafc;font-weight:600}
+.ref-table code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:0.9em}
+.ref-table input{width:100%;max-width:200px;padding:6px;border:1px solid #ddd;border-radius:4px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>MIME Type Reference</h1>
+<p class="subtitle">Reference table for common MIME types and file extensions.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="filter" class="sr-only">Filter</label>
+<input id="filter" placeholder="Search by MIME type or extension" style="width:100%;max-width:400px;padding:10px;margin-bottom:16px;border:1px solid #ddd;border-radius:6px" aria-label="Filter">
+
+<h3>Common MIME Types</h3>
+<table class="ref-table">
+<thead><tr><th>MIME Type</th><th>Extensions</th><th>Description</th></tr></thead>
+<tbody id="body"></tbody>
+</table>
+
+<section class="tool-seo">
+<h3>About MIME Type Reference</h3>
+<p>This reference lists common MIME types used in Content-Type headers, file uploads and web APIs.</p>
+<p>It is useful for configuring servers, validating uploads and setting correct Content-Type in HTTP responses.</p>
+</section>
+</main>
+<script>
+var mimes=[
+["text/html",".html,.htm","HTML document"],
+["text/plain",".txt","Plain text"],
+["text/css",".css","CSS stylesheet"],
+["text/javascript",".js,.mjs","JavaScript"],
+["application/json",".json","JSON data"],
+["application/xml",".xml","XML document"],
+["application/pdf",".pdf","PDF document"],
+["image/jpeg",".jpg,.jpeg","JPEG image"],
+["image/png",".png","PNG image"],
+["image/gif",".gif","GIF image"],
+["image/webp",".webp","WebP image"],
+["image/svg+xml",".svg","SVG image"],
+["image/x-icon",".ico","Favicon"],
+["audio/mpeg",".mp3","MP3 audio"],
+["audio/wav",".wav","WAV audio"],
+["video/mp4",".mp4","MP4 video"],
+["video/webm",".webm","WebM video"],
+["application/octet-stream",".bin","Binary"],
+["application/zip",".zip","ZIP archive"],
+["application/gzip",".gz,.gzip","Gzip"],
+["application/x-tar",".tar","TAR archive"],
+["font/woff",".woff","WOFF font"],
+["font/woff2",".woff2","WOFF2 font"],
+["application/x-www-form-urlencoded","—","Form data"],
+["multipart/form-data","—","File upload"]
+]
+function render(){
+var q=(document.getElementById("filter").value||"").toLowerCase().trim()
+var tbody=document.getElementById("body")
+tbody.innerHTML=""
+mimes.forEach(function(m){
+if(q&&m[0].toLowerCase().indexOf(q)===-1&&m[1].toLowerCase().indexOf(q)===-1&&m[2].toLowerCase().indexOf(q)===-1)return
+var tr=document.createElement("tr")
+tr.innerHTML="<td><code>"+m[0]+"</code></td><td><code>"+m[1]+"</code></td><td>"+m[2]+"</td>"
+tbody.appendChild(tr)
+})
+}
+document.getElementById("filter").addEventListener("input",render)
+render()
+</script>
+</body>
+</html>

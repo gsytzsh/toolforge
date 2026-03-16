@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>IP to Number Converter – IP Number Convert Online | ToolForge</title>
+<meta name="description" content="Free online IP to number and number to IP converter. Convert IPv4 addresses to decimal numbers and back. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/ip-number-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="IP to Number Converter – IP Number Convert Online | ToolForge">
+<meta property="og:description" content="Free online IP to number and number to IP converter. Convert IPv4 addresses to decimal numbers and back. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/ip-number-converter.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IP to Number Converter – IP Number Convert Online | ToolForge">
+<meta name="twitter:description" content="Free online IP to number and number to IP converter. Convert IPv4 addresses to decimal numbers and back. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>IP ⇄ Number Converter</h1>
+<p class="subtitle">Convert IPv4 addresses to decimal numbers and decimal numbers back to IP.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<h3>IP Address</h3>
+<label for="ip" class="sr-only">IP input</label>
+<textarea id="ip" rows="3" style="width:90%;font-family:monospace" placeholder="192.168.1.1" aria-label="IP input"></textarea>
+<br><br>
+<div class="tool-actions">
+<button type="button" onclick="ipToNumber()">IP → Number</button>
+<button type="button" onclick="numberToIp()">Number → IP</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+</div>
+<h3 style="margin-top:24px">Number</h3>
+<label for="num" class="sr-only">Number input</label>
+<textarea id="num" rows="3" style="width:90%;font-family:monospace" placeholder="3232235777" aria-label="Number input"></textarea>
+<p id="status" class="inline-status"></p>
+<section class="tool-seo">
+<h3>About IP ⇄ Number Converter</h3>
+<p>This converter transforms IPv4 addresses to 32-bit decimal numbers and decimal numbers back to IP. Useful for database storage, range comparisons and IP arithmetic.</p>
+<p>It is useful when storing IPs as integers, comparing IP ranges, or converting between formats for APIs and databases.</p>
+</section>
+</main>
+<script>
+function setStatus(msg,isError){
+var el=document.getElementById("status");
+el.innerText=msg;
+el.style.color=isError?"#b91c1c":"#16a34a";
+}
+function ipToNum(ip){
+var parts=ip.trim().split(".");
+if(parts.length!==4) return null;
+var n=0;
+for(var i=0;i<4;i++){
+var p=parseInt(parts[i],10);
+if(isNaN(p)||p<0||p>255) return null;
+n=(n<<8)+p;
+}
+return n>>>0;
+}
+function numToIp(n){
+n=parseInt(n,10);
+if(isNaN(n)||n<0||n>4294967295) return null;
+return [(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join(".");
+}
+function ipToNumber(){
+var ip=document.getElementById("ip").value.trim();
+var n=ipToNum(ip);
+if(n===null){
+setStatus("Invalid IP address.",true);
+return;
+}
+document.getElementById("num").value=String(n);
+setStatus("Converted.",false);
+}
+function numberToIp(){
+var num=document.getElementById("num").value.trim();
+var ip=numToIp(num);
+if(ip===null){
+setStatus("Invalid number (0–4294967295).",true);
+return;
+}
+document.getElementById("ip").value=ip;
+setStatus("Converted.",false);
+}
+function copyResult(){
+var v=document.getElementById("num").value||document.getElementById("ip").value;
+if(!v){
+setStatus("Nothing to copy.",true);
+return;
+}
+navigator.clipboard.writeText(v).then(function(){
+setStatus("Copied.",false);
+}).catch(function(){
+setStatus("Copy failed.",true);
+});
+}
+</script>
+</body>
+</html>

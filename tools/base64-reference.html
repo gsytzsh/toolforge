@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Base64 Reference – Base64 Character Set Table | ToolForge</title>
+<meta name="description" content="Free online Base64 character set reference table. Index, character and binary values. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/base64-reference.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Base64 Reference – Base64 Character Set Table | ToolForge">
+<meta property="og:description" content="Free online Base64 character set reference. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/base64-reference.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Base64 Reference – Base64 Character Set Table | ToolForge">
+<meta name="twitter:description" content="Free online Base64 character set reference. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem}
+.ref-table th,.ref-table td{border:1px solid #eee;padding:8px 12px;text-align:left}
+.ref-table th{background:#f8fafc;font-weight:600}
+.ref-table code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:0.9em}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Base64 Reference</h1>
+<p class="subtitle">Base64 character set: index 0–63 maps to A–Z, a–z, 0–9, +, /.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<h3>Base64 Alphabet</h3>
+<table class="ref-table">
+<thead><tr><th>Index</th><th>Char</th><th>Binary (6-bit)</th><th>Index</th><th>Char</th><th>Binary (6-bit)</th></tr></thead>
+<tbody id="body"></tbody>
+</table>
+
+<p style="margin-top:16px"><strong>Padding:</strong> <code>=</code> used when output length is not a multiple of 4.</p>
+
+<section class="tool-seo">
+<h3>About Base64 Reference</h3>
+<p>Base64 encodes binary data using 64 ASCII characters: A–Z (0–25), a–z (26–51), 0–9 (52–61), + (62), / (63).</p>
+<p>It is useful for understanding Base64 encoding, debugging encoded strings and implementing custom encoders.</p>
+</section>
+</main>
+<script>
+var chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+var tbody=document.getElementById("body")
+for(var i=0;i<64;i+=2){
+var c1=chars[i],c2=chars[i+1]
+var b1=i.toString(2).padStart(6,"0"),b2=(i+1).toString(2).padStart(6,"0")
+var tr=document.createElement("tr")
+tr.innerHTML="<td>"+i+"</td><td><code>"+c1+"</code></td><td><code>"+b1+"</code></td><td>"+(i+1)+"</td><td><code>"+c2+"</code></td><td><code>"+b2+"</code></td>"
+tbody.appendChild(tr)
+}
+</script>
+</body>
+</html>

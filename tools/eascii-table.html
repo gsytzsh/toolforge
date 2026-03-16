@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Extended ASCII Table – EASCII Character Codes 128–255 | ToolForge</title>
+<meta name="description" content="Free online Extended ASCII table (128–255) with decimal, hex and character codes. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/eascii-table.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Extended ASCII Table – EASCII Character Codes 128–255 | ToolForge">
+<meta property="og:description" content="Free online Extended ASCII table (128–255). Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/eascii-table.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Extended ASCII Table – EASCII Character Codes 128–255 | ToolForge">
+<meta name="twitter:description" content="Free online Extended ASCII table (128–255). Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem}
+.ref-table th,.ref-table td{border:1px solid #eee;padding:8px 12px;text-align:left}
+.ref-table th{background:#f8fafc;font-weight:600}
+.ref-table input{width:100%;max-width:120px;padding:6px;border:1px solid #ddd;border-radius:4px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Extended ASCII Table</h1>
+<p class="subtitle">Reference table for Extended ASCII character codes (128–255): decimal, hex and character.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="filter" class="sr-only">Filter</label>
+<input id="filter" placeholder="Search by decimal, hex or character" style="width:100%;max-width:400px;padding:10px;margin-bottom:16px;border:1px solid #ddd;border-radius:6px" aria-label="Filter">
+
+<h3>Extended ASCII (128–255)</h3>
+<table class="ref-table">
+<thead><tr><th>Dec</th><th>Hex</th><th>Char</th><th>Dec</th><th>Hex</th><th>Char</th></tr></thead>
+<tbody id="body"></tbody>
+</table>
+
+<section class="tool-seo">
+<h3>About Extended ASCII Table</h3>
+<p>This Extended ASCII table lists character codes from 128 to 255 in decimal, hex and character form. Values 128–255 vary by encoding (Latin-1, Windows-1252, etc.).</p>
+<p>It is useful for encoding references, special character lookups and debugging extended character display issues.</p>
+</section>
+</main>
+<script>
+var tbody=document.getElementById("body")
+function render(){
+var q=(document.getElementById("filter").value||"").toLowerCase().trim()
+tbody.innerHTML=""
+for(var i=128;i<256;i+=2){
+var c1=String.fromCharCode(i),c2=String.fromCharCode(i+1)
+var dec1=""+i,hex1=i.toString(16).toUpperCase(),dec2=""+(i+1),hex2=(i+1).toString(16).toUpperCase()
+if(q&&dec1.indexOf(q)===-1&&hex1.toLowerCase().indexOf(q)===-1&&c1.indexOf(q)===-1&&dec2.indexOf(q)===-1&&hex2.toLowerCase().indexOf(q)===-1&&c2.indexOf(q)===-1)continue
+var tr=document.createElement("tr")
+tr.innerHTML="<td>"+i+"</td><td>"+hex1+"</td><td>"+escapeHtml(c1)+"</td><td>"+(i+1)+"</td><td>"+hex2+"</td><td>"+escapeHtml(c2)+"</td>"
+tbody.appendChild(tr)
+}
+}
+function escapeHtml(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML}
+document.getElementById("filter").addEventListener("input",render)
+render()
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CMYK Color Reference – CMYK Color Table | ToolForge</title>
+<meta name="description" content="Free online CMYK color reference table. Common CMYK values for print design. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/cmyk-reference.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="CMYK Color Reference – CMYK Color Table | ToolForge">
+<meta property="og:description" content="CMYK color reference table for print design.">
+<meta property="og:url" content="https://www.toolforge.site/tools/cmyk-reference.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CMYK Color Reference – CMYK Color Table | ToolForge">
+<meta name="twitter:description" content="CMYK color reference table for print design.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem}
+.ref-table th,.ref-table td{border:1px solid #eee;padding:8px 12px;text-align:left}
+.ref-table th{background:#f8fafc;font-weight:600}
+.ref-table .swatch{width:40px;height:24px;border:1px solid #ccc}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>CMYK Color Reference</h1>
+<p class="subtitle">Common CMYK values for print design. C=Cyan, M=Magenta, Y=Yellow, K=Black (0–100%).</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<table class="ref-table">
+<thead><tr><th>Color</th><th>CMYK</th><th>HEX</th><th>Swatch</th></tr></thead>
+<tbody id="body"></tbody>
+</table>
+
+<section class="tool-seo">
+<h3>About CMYK Color Reference</h3>
+<p>CMYK (Cyan, Magenta, Yellow, Key/Black) is used in print. Values are 0–100%. This reference lists common colors with approximate HEX equivalents for screen preview.</p>
+<p>Useful for print design, branding and color matching between screen and print.</p>
+</section>
+</main>
+<script>
+var colors=[
+{name:"Black",cmyk:"0,0,0,100",hex:"#000000"},
+{name:"White",cmyk:"0,0,0,0",hex:"#ffffff"},
+{name:"Red",cmyk:"0,100,100,0",hex:"#ed1c24"},
+{name:"Blue",cmyk:"100,50,0,0",hex:"#0066ff"},
+{name:"Green",cmyk:"100,0,100,0",hex:"#00a651"},
+{name:"Yellow",cmyk:"0,0,100,0",hex:"#fff200"},
+{name:"Cyan",cmyk:"100,0,0,0",hex:"#00aeef"},
+{name:"Magenta",cmyk:"0,100,0,0",hex:"#ec008c"},
+{name:"Orange",cmyk:"0,60,100,0",hex:"#f7941d"},
+{name:"Purple",cmyk:"50,100,0,0",hex:"#92278f"},
+{name:"Navy",cmyk:"100,80,0,50",hex:"#1b1464"},
+{name:"Gray 50%",cmyk:"0,0,0,50",hex:"#808080"},
+{name:"Warm Gray",cmyk:"0,0,0,30",hex:"#b3b3b3"},
+{name:"Cool Gray",cmyk:"0,0,0,60",hex:"#666666"},
+{name:"Pantone 286",cmyk:"100,60,0,10",hex:"#0033a0"},
+{name:"Pantone 185",cmyk:"0,100,100,0",hex:"#e4002b"}
+]
+var tbody=document.getElementById("body")
+colors.forEach(function(c){
+var tr=document.createElement("tr")
+tr.innerHTML="<td>"+c.name+"</td><td><code>"+c.cmyk+"</code></td><td><code>"+c.hex+"</code></td><td><span class=\"swatch\" style=\"background:"+c.hex+"\"></span></td>"
+tbody.appendChild(tr)
+})
+</script>
+</body>
+</html>

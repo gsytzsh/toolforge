@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Operator Precedence Reference – JS, Python, C | ToolForge</title>
+<meta name="description" content="Free online operator precedence reference for JavaScript, Python and C. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/operator-precedence-reference.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Operator Precedence Reference – JS, Python, C | ToolForge">
+<meta property="og:description" content="Free online operator precedence reference. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/operator-precedence-reference.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Operator Precedence Reference – JS, Python, C | ToolForge">
+<meta name="twitter:description" content="Free online operator precedence reference. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem}
+.ref-table th,.ref-table td{border:1px solid #eee;padding:8px 12px;text-align:left}
+.ref-table th{background:#f8fafc;font-weight:600}
+.ref-table code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:0.9em}
+.ref-section{margin-top:24px}
+.ref-section h3{font-size:1rem;color:#475569;margin-bottom:8px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Operator Precedence Reference</h1>
+<p class="subtitle">Operator precedence for JavaScript, Python and C (highest to lowest).</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<div class="ref-section">
+<h3>JavaScript / C-style</h3>
+<table class="ref-table">
+<thead><tr><th>Precedence</th><th>Operators</th><th>Associativity</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>()</code> <code>[]</code> <code>.</code> <code>new</code></td><td>L→R</td></tr>
+<tr><td>2</td><td><code>!</code> <code>~</code> <code>++</code> <code>--</code> <code>+</code> <code>-</code> <code>typeof</code> <code>void</code> <code>delete</code></td><td>R→L</td></tr>
+<tr><td>3</td><td><code>*</code> <code>/</code> <code>%</code></td><td>L→R</td></tr>
+<tr><td>4</td><td><code>+</code> <code>-</code></td><td>L→R</td></tr>
+<tr><td>5</td><td><code>&lt;&lt;</code> <code>&gt;&gt;</code> <code>&gt;&gt;&gt;</code></td><td>L→R</td></tr>
+<tr><td>6</td><td><code>&lt;</code> <code>&lt;=</code> <code>&gt;</code> <code>&gt;=</code> <code>instanceof</code></td><td>L→R</td></tr>
+<tr><td>7</td><td><code>==</code> <code>!=</code> <code>===</code> <code>!==</code></td><td>L→R</td></tr>
+<tr><td>8</td><td><code>&amp;</code></td><td>L→R</td></tr>
+<tr><td>9</td><td><code>^</code></td><td>L→R</td></tr>
+<tr><td>10</td><td><code>|</code></td><td>L→R</td></tr>
+<tr><td>11</td><td><code>&amp;&amp;</code></td><td>L→R</td></tr>
+<tr><td>12</td><td><code>||</code></td><td>L→R</td></tr>
+<tr><td>13</td><td><code>? :</code></td><td>R→L</td></tr>
+<tr><td>14</td><td><code>=</code> <code>+=</code> <code>-=</code> <code>*=</code> <code>/=</code> etc.</td><td>R→L</td></tr>
+<tr><td>15</td><td><code>,</code></td><td>L→R</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="ref-section">
+<h3>Python</h3>
+<table class="ref-table">
+<thead><tr><th>Precedence</th><th>Operators</th><th>Associativity</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>()</code> <code>[]</code> <code>{}</code> <code>.</code></td><td>L→R</td></tr>
+<tr><td>2</td><td><code>**</code></td><td>R→L</td></tr>
+<tr><td>3</td><td><code>+x</code> <code>-x</code> <code>~x</code> <code>not</code></td><td>R→L</td></tr>
+<tr><td>4</td><td><code>*</code> <code>/</code> <code>//</code> <code>%</code></td><td>L→R</td></tr>
+<tr><td>5</td><td><code>+</code> <code>-</code></td><td>L→R</td></tr>
+<tr><td>6</td><td><code>&lt;&lt;</code> <code>&gt;&gt;</code></td><td>L→R</td></tr>
+<tr><td>7</td><td><code>&amp;</code></td><td>L→R</td></tr>
+<tr><td>8</td><td><code>^</code></td><td>L→R</td></tr>
+<tr><td>9</td><td><code>|</code></td><td>L→R</td></tr>
+<tr><td>10</td><td><code>in</code> <code>not in</code> <code>is</code> <code>is not</code> <code>&lt;</code> <code>&lt;=</code> <code>&gt;</code> <code>&gt;=</code> <code>!=</code> <code>==</code></td><td>L→R</td></tr>
+<tr><td>11</td><td><code>not</code></td><td>R→L</td></tr>
+<tr><td>12</td><td><code>and</code></td><td>L→R</td></tr>
+<tr><td>13</td><td><code>or</code></td><td>L→R</td></tr>
+<tr><td>14</td><td><code>if else</code> (conditional)</td><td>R→L</td></tr>
+<tr><td>15</td><td><code>:=</code> (walrus) <code>=</code> <code>+=</code> etc.</td><td>R→L</td></tr>
+</tbody>
+</table>
+</div>
+
+<section class="tool-seo">
+<h3>About Operator Precedence Reference</h3>
+<p>This reference shows operator precedence for JavaScript, Python and C-style languages. Higher numbers = lower precedence.</p>
+<p>It is useful when reading or writing expressions to understand evaluation order without extra parentheses.</p>
+</section>
+</main>
+</body>
+</html>

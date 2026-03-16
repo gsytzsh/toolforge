@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>XPath Tester – Evaluate XPath on HTML/XML | ToolForge</title>
+<meta name="description" content="Free online XPath tester. Evaluate XPath expressions on sample HTML or XML. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/xpath-tester.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="XPath Tester – Evaluate XPath on HTML/XML | ToolForge">
+<meta property="og:description" content="Evaluate XPath on sample HTML/XML.">
+<meta property="og:url" content="https://www.toolforge.site/tools/xpath-tester.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XPath Tester – Evaluate XPath on HTML/XML | ToolForge">
+<meta name="twitter:description" content="Evaluate XPath on sample HTML/XML.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+<h1>XPath Tester</h1>
+<p class="subtitle">Evaluate XPath expressions on sample HTML or XML.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="doc">HTML/XML document</label>
+<textarea id="doc" rows="12" style="width:90%" placeholder="<root><item id='1'>A</item><item id='2'>B</item></root>"><root>
+  <item id="1">Apple</item>
+  <item id="2">Banana</item>
+  <item id="3">Cherry</item>
+  <section><title>Fruits</title><p>Fresh</p></section>
+</root></textarea>
+<br><br>
+
+<label for="xpath">XPath expression</label>
+<input id="xpath" type="text" value="//item" placeholder="//item" style="width:90%">
+<br><br>
+
+<button onclick="evaluate()">Evaluate</button>
+
+<h3>Result</h3>
+<pre id="result"></pre>
+<p id="status" class="inline-status"></p>
+
+<section class="tool-seo">
+<h3>About XPath Tester</h3>
+<p>This tool evaluates XPath expressions against sample HTML or XML. Uses the browser's native XPath evaluator.</p>
+<p>Useful for scraping, XML parsing and testing XPath before using in code.</p>
+</section>
+</main>
+<script>
+function evaluate(){
+var docStr=document.getElementById("doc").value.trim()
+var xpathStr=document.getElementById("xpath").value.trim()
+if(!docStr||!xpathStr){
+document.getElementById("status").innerText="Enter document and XPath."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+try{
+var parser=new DOMParser()
+var doc=parser.parseFromString(docStr,"text/xml")
+if(doc.querySelector("parsererror")){
+document.getElementById("result").textContent="Parse error: "+doc.querySelector("parsererror").textContent
+document.getElementById("status").innerText="Invalid XML/HTML."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+var result=doc.evaluate(xpathStr,doc,null,XPathResult.ANY_TYPE,null)
+var nodes=[]
+var node=result.iterateNext()
+while(node){
+nodes.push(node.outerHTML||node.textContent||node.nodeValue)
+node=result.iterateNext()
+}
+document.getElementById("result").textContent=nodes.length?nodes.join("\n\n"):"No matches"
+document.getElementById("status").innerText=nodes.length+" match(es)."
+document.getElementById("status").style.color="#16a34a"
+}catch(e){
+document.getElementById("result").textContent="Error: "+e.message
+document.getElementById("status").innerText="XPath error."
+document.getElementById("status").style.color="#b91c1c"
+}
+}
+</script>
+</body>
+</html>

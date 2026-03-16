@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Opposite Color Calculator – Complementary Color from Hex | ToolForge</title>
+<meta name="description" content="Free online opposite color calculator. Get complementary/opposite color from hex. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/opposite-color-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Opposite Color Calculator – Complementary Color from Hex | ToolForge">
+<meta property="og:description" content="Get complementary/opposite color from hex.">
+<meta property="og:url" content="https://www.toolforge.site/tools/opposite-color-calculator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Opposite Color Calculator – Complementary Color from Hex | ToolForge">
+<meta name="twitter:description" content="Get complementary/opposite color from hex.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.swatch{display:inline-block;width:80px;height:50px;border:1px solid #ccc;vertical-align:middle;margin-right:8px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Opposite Color Calculator</h1>
+<p class="subtitle">Get complementary/opposite color from hex (255 - each channel).</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="hex">Input color (hex)</label>
+<input id="hex" type="text" value="#3498db" placeholder="#3498db" style="width:120px">
+<span class="swatch" id="swIn"></span>
+<br><br>
+
+<button onclick="calc()">Get Opposite</button>
+
+<h3>Result</h3>
+<p><span class="swatch" id="swOut"></span> <strong>HEX:</strong> <span id="hexResult"></span></p>
+<p><strong>RGB:</strong> <span id="rgbResult"></span></p>
+<button type="button" onclick="copyHex()">Copy HEX</button>
+<p id="status" class="inline-status"></p>
+
+<section class="tool-seo">
+<h3>About Opposite Color Calculator</h3>
+<p>This tool computes the opposite color by inverting each RGB channel (255 - value). Useful for complementary colors and contrast.</p>
+<p>Note: For true color-wheel complement, use a dedicated color theory tool. This gives a simple invert.</p>
+</section>
+</main>
+<script>
+function parseHex(hex){
+if(hex.startsWith("#")) hex=hex.slice(1)
+if(hex.length===3) hex=hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2]
+if(!/^[0-9a-fA-F]{6}$/.test(hex)) return null
+return {r:parseInt(hex.slice(0,2),16),g:parseInt(hex.slice(2,4),16),b:parseInt(hex.slice(4,6),16)}
+}
+function toHex(n){var s=Math.round(Math.max(0,Math.min(255,n))).toString(16);return s.length===1?"0"+s:s}
+function calc(){
+var c=parseHex(document.getElementById("hex").value.trim())
+if(!c){
+document.getElementById("status").innerText="Invalid hex color."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+var r=255-c.r,g=255-c.g,b=255-c.b
+var hex="#"+toHex(r)+toHex(g)+toHex(b)
+document.getElementById("hexResult").textContent=hex
+document.getElementById("rgbResult").textContent=r+", "+g+", "+b
+document.getElementById("swIn").style.backgroundColor=document.getElementById("hex").value
+document.getElementById("swOut").style.backgroundColor=hex
+document.getElementById("status").innerText="Calculated."
+document.getElementById("status").style.color="#16a34a"
+}
+document.getElementById("hex").addEventListener("input",calc)
+calc()
+function copyHex(){
+var v=document.getElementById("hexResult").textContent
+if(!v) return
+navigator.clipboard.writeText(v).then(function(){
+document.getElementById("status").innerText="Copied."
+document.getElementById("status").style.color="#16a34a"
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+document.getElementById("status").style.color="#b91c1c"
+})
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Magic Bytes Reference – File Signatures Table | ToolForge</title>
+<meta name="description" content="Free online magic bytes and file signatures reference for identifying file types. Part of the ToolForge developer tools collection.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.toolforge.site/tools/magic-bytes-reference.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Magic Bytes Reference – File Signatures Table | ToolForge">
+<meta property="og:description" content="Free online magic bytes and file signatures reference. Part of the ToolForge developer tools collection.">
+<meta property="og:url" content="https://www.toolforge.site/tools/magic-bytes-reference.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Magic Bytes Reference – File Signatures Table | ToolForge">
+<meta name="twitter:description" content="Free online magic bytes and file signatures reference. Part of the ToolForge developer tools collection.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem}
+.ref-table th,.ref-table td{border:1px solid #eee;padding:8px 12px;text-align:left}
+.ref-table th{background:#f8fafc;font-weight:600}
+.ref-table code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:0.9em}
+.ref-table input{width:100%;max-width:200px;padding:6px;border:1px solid #ddd;border-radius:4px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Magic Bytes Reference</h1>
+<p class="subtitle">File signatures (magic bytes) for identifying file types by their header bytes.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+
+<label for="filter" class="sr-only">Filter</label>
+<input id="filter" placeholder="Search by hex, extension or type" style="width:100%;max-width:400px;padding:10px;margin-bottom:16px;border:1px solid #ddd;border-radius:6px" aria-label="Filter">
+
+<h3>Common File Signatures</h3>
+<table class="ref-table">
+<thead><tr><th>Hex (first bytes)</th><th>Extension</th><th>File Type</th></tr></thead>
+<tbody id="body"></tbody>
+</table>
+
+<section class="tool-seo">
+<h3>About Magic Bytes Reference</h3>
+<p>This reference lists magic bytes (file signatures) used to identify file types when the extension is missing or unreliable.</p>
+<p>It is useful for file validation, security checks and building file-type detection logic.</p>
+</section>
+</main>
+<script>
+var sigs=[
+["FF D8 FF",".jpg,.jpeg","JPEG image"],
+["89 50 4E 47 0D 0A 1A 0A",".png","PNG image"],
+["47 49 46 38 37 61","GIF87a","GIF image"],
+["47 49 46 38 39 61","GIF89a","GIF image (animated)"],
+["52 49 46 46","RIFF","WAV/WebP (RIFF)"],
+["25 50 44 46",".pdf","PDF document"],
+["50 4B 03 04",".zip,.docx,.xlsx","ZIP archive"],
+["50 4B 05 06",".zip","ZIP (empty)"],
+["1F 8B",".gz,.gzip","Gzip"],
+["42 5A 68",".bz2","Bzip2"],
+["7F 45 4C 46",".elf","ELF executable"],
+["CA FE BA BE",".class","Java class"],
+["D0 CF 11 E0",".doc,.xls,.ppt","Microsoft Office (OLE)"],
+["00 00 00",".mp4,.mov","MP4/MOV (ftyp)"],
+["FF FB","","MP3 (ID3 optional)"],
+["49 44 33",".mp3","MP3 (ID3)"],
+["3C 3F 78 6D 6C","<?xml",".xml","XML"],
+["7B 22",".json","JSON"],
+["3C 21 44 4F 43 54 59 50 45",".html","HTML document"],
+["EF BB BF","","UTF-8 BOM"],
+["FF FE","","UTF-16 LE BOM"],
+["FE FF","","UTF-16 BE BOM"]
+]
+function render(){
+var q=(document.getElementById("filter").value||"").toLowerCase().trim()
+var tbody=document.getElementById("body")
+tbody.innerHTML=""
+sigs.forEach(function(s){
+var hex=s[0],ext=s[1],type=s[2]
+if(q&&hex.toLowerCase().indexOf(q)===-1&&ext.toLowerCase().indexOf(q)===-1&&type.toLowerCase().indexOf(q)===-1)return
+var tr=document.createElement("tr")
+tr.innerHTML="<td><code>"+hex+"</code></td><td><code>"+ext+"</code></td><td>"+type+"</td>"
+tbody.appendChild(tr)
+})
+}
+document.getElementById("filter").addEventListener("input",render)
+render()
+</script>
+</body>
+</html>
