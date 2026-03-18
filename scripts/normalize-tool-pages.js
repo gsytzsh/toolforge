@@ -4,7 +4,7 @@ const path = require("path");
 
 const ROOT = path.resolve(__dirname, "..");
 const TOOLS_DIR = path.join(ROOT, "tools");
-const BASE_URL = (process.env.SITEMAP_BASE_URL || "https://www.toolforge.site").replace(/\/$/, "");
+const BASE_URL = (process.env.SITEMAP_BASE_URL || "https://toolforge.site").replace(/\/$/, "");
 
 function escapeAttr(value) {
   return String(value)

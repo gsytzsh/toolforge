@@ -10,7 +10,7 @@ const path = require("path");
 const ROOT = path.resolve(__dirname, "..");
 const TOOLS_LIST = path.join(ROOT, "tools-list.json");
 const CATEGORY_DIR = path.join(ROOT, "category");
-const BASE_URL = (process.env.SITEMAP_BASE_URL || "https://www.toolforge.site").replace(/\/$/, "");
+const BASE_URL = (process.env.SITEMAP_BASE_URL || "https://toolforge.site").replace(/\/$/, "");
 
 const CATEGORY_ORDER = [
   "JSON & Data", "Encoding & Decoding", "Text", "Images & Colors", "PDF & Export",

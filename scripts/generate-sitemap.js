@@ -3,7 +3,7 @@
  * Generate sitemap.xml from tools-list.json.
  * Run from project root: node scripts/generate-sitemap.js
  *
- * Optional env: SITEMAP_BASE_URL (default https://www.toolforge.site)
+ * Optional env: SITEMAP_BASE_URL (default https://toolforge.site)
  */
 
 const fs = require("fs");
@@ -13,7 +13,7 @@ const ROOT = path.resolve(__dirname, "..");
 const TOOLS_LIST = path.join(ROOT, "tools-list.json");
 const SITEMAP_OUT = path.join(ROOT, "sitemap.xml");
 
-const BASE_URL = (process.env.SITEMAP_BASE_URL || "https://www.toolforge.site").replace(/\/$/, "");
+const BASE_URL = (process.env.SITEMAP_BASE_URL || "https://toolforge.site").replace(/\/$/, "");
 const TODAY = new Date().toISOString().slice(0, 10);
 
 function escapeXml(s) {
