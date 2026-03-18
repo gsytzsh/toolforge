@@ -92,30 +92,37 @@ for(var i=0;i<node.attributes.length;i++){
 obj["@attributes"][node.attributes[i].name]=node.attributes[i].value
 }
 }
-var elementChildren=Array.from(node.childNodes).filter(function(child){
-return child.nodeType===1
-})
-var textChildren=Array.from(node.childNodes).filter(function(child){
-return child.nodeType===3 && child.textContent.trim()
-})
+var elementChildren=[]
+var textChildren=[]
+for(var j=0;j<node.childNodes.length;j++){
+if(node.childNodes[j].nodeType===1) elementChildren.push(node.childNodes[j])
+else if(node.childNodes[j].nodeType===3&&node.childNodes[j].textContent.trim()) textChildren.push(node.childNodes[j])
+}
 if(!elementChildren.length){
-if(textChildren.length && !node.attributes.length){
-return textChildren.map(function(child){ return child.textContent.trim() }).join(" ")
+if(textChildren.length&&!node.attributes.length){
+var textVal=""
+for(var k=0;k<textChildren.length;k++) textVal+=textChildren[k].textContent.trim()
+return textVal
 }
 if(textChildren.length){
-obj["#text"]=textChildren.map(function(child){ return child.textContent.trim() }).join(" ")
+var textVal2=""
+for(var m=0;m<textChildren.length;m++) textVal2+=textChildren[m].textContent.trim()
+obj["#text"]=textVal2
 }
 return obj
 }
-elementChildren.forEach(function(child){
+for(var n=0;n<elementChildren.length;n++){
+var child=elementChildren[n]
 var name=child.tagName
 var val=parseXmlToJson(child)
 if(obj[name]===undefined)obj[name]=val
 else if(Array.isArray(obj[name]))obj[name].push(val)
 else obj[name]=[obj[name],val]
-})
+}
 if(textChildren.length){
-obj["#text"]=textChildren.map(function(child){ return child.textContent.trim() }).join(" ")
+var textVal3=""
+for(var p=0;p<textChildren.length;p++) textVal3+=textChildren[p].textContent.trim()
+obj["#text"]=textVal3
 }
 return obj
 }

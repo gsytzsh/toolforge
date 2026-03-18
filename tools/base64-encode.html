@@ -73,12 +73,16 @@ return btoa(binary)
 }
 
 function base64ToText(base64){
+try{
 let binary=atob(base64.trim())
 let bytes=new Uint8Array(binary.length)
 for(let i=0;i<binary.length;i++){
 bytes[i]=binary.charCodeAt(i)
 }
 return new TextDecoder().decode(bytes)
+}catch(e){
+throw new Error("Invalid Base64 input")
+}
 }
 
 function convert(){

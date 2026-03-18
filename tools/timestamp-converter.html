@@ -73,10 +73,28 @@ let v=document.getElementById("input").value.trim()
 
 if(!v) return
 
-if(v.length==13) v=parseInt(v)
-else v=parseInt(v)*1000
+let num=parseInt(v,10)
 
-let date=new Date(v)
+if(isNaN(num)){
+document.getElementById("local").innerText="Invalid timestamp"
+document.getElementById("status").innerText="Invalid timestamp input."
+document.getElementById("status").style.color="#b91c1c"
+return
+}
+
+// Detect seconds vs milliseconds by value range
+// Seconds: ~10 digits (e.g., 1710000000)
+// Milliseconds: ~13 digits (e.g., 1710000000000)
+let timestamp
+if(num<10000000000){
+// 10 digits or less, treat as seconds
+timestamp=num*1000
+}else{
+// 11+ digits, treat as milliseconds
+timestamp=num
+}
+
+let date=new Date(timestamp)
 
 document.getElementById("local").innerText=date.toString()
 document.getElementById("utc").innerText=date.toUTCString()
