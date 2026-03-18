@@ -5,8 +5,8 @@
   var isToolPage=!!m;
   var currentFile=m?m[1]:null;
 
-  var KEY_NAV=["JSON & Data","Encoding & Decoding","Text","PDF & Export","Date & Time","Security & Tokens","Code & Formatting"];
-  var CAT_ORDER=["JSON & Data","Encoding & Decoding","Text","Images & Colors","PDF & Export","Date & Time","Time & Planning","Daily Productivity","Money & Decisions","Generators & Converters","Calculators","Security & Tokens","Web & Network","API & Data","Code & Formatting","Debug & Testing","Database","Schedules & Infra","SEO & Webmaster"];
+  var KEY_NAV=["JSON & API","Encoding & Decoding","Text Tools","Developer Tools","PDF & Export","Date & Time","Web & Network"];
+  var CAT_ORDER=["JSON & API","Encoding & Decoding","Text Tools","Images & Colors","PDF & Export","Date & Time","Productivity","Calculators","Generators","Unit Converters","Security & Tokens","Web & Network","SEO Tools","Developer Tools"];
 
   function sortTools(tools){
     return tools.slice().sort(function(a,b){

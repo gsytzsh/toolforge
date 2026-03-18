@@ -1,214 +1,1086 @@
 [
-{"file":"base64-encode","name":"Base64 Encode Decode","category":"Encoding & Decoding","popular":true,"tag":"Base64","popularOrder":3},
-{"file":"base64-image-viewer","name":"Base64 Image Viewer","category":"Encoding & Decoding"},
-{"file":"url-encode-decode","name":"URL Encode Decode","category":"Encoding & Decoding","popular":true,"tag":"URL","popularOrder":6},
-{"file":"html-escape","name":"HTML Escape Unescape","category":"Encoding & Decoding"},
-{"file":"json-viewer","name":"JSON Viewer","category":"JSON & Data","popular":true,"tag":"JSON","popularOrder":2},
-{"file":"json-diff","name":"JSON Diff","category":"JSON & Data"},
-{"file":"json-to-csv","name":"JSON CSV Converter","category":"JSON & Data"},
-{"file":"yaml-json-converter","name":"YAML JSON Converter","category":"JSON & Data"},
-{"file":"json-to-pdf","name":"JSON to PDF","category":"PDF & Export"},
-{"file":"csv-to-pdf","name":"CSV to PDF","category":"PDF & Export"},
-{"file":"xml-to-pdf","name":"XML to PDF","category":"PDF & Export"},
-{"file":"yaml-to-pdf","name":"YAML to PDF","category":"PDF & Export"},
-{"file":"excel-to-pdf","name":"Excel to PDF","category":"PDF & Export"},
-{"file":"tsv-to-pdf","name":"TSV to PDF","category":"PDF & Export"},
-{"file":"api-response-to-pdf","name":"API Response to PDF","category":"PDF & Export"},
-{"file":"form-to-pdf","name":"Filled Form to PDF","category":"PDF & Export"},
-{"file":"invoice-to-pdf","name":"Invoice to PDF","category":"PDF & Export"},
-{"file":"meeting-notes-to-pdf","name":"Meeting Notes to PDF","category":"PDF & Export"},
-{"file":"checklist-to-pdf","name":"Checklist to PDF","category":"PDF & Export"},
-{"file":"resume-to-pdf","name":"Resume to PDF","category":"PDF & Export"},
-{"file":"hash-generator","name":"Hash Generator","category":"Security & Tokens"},
-{"file":"password-generator","name":"Password Generator","category":"Security & Tokens","popular":true,"tag":"Password","popularOrder":5},
-{"file":"password-strength-checker","name":"Password Strength Checker","category":"Security & Tokens"},
-{"file":"jwt-generator","name":"JWT Generator","category":"Security & Tokens"},
-{"file":"image-to-pdf","name":"Images to PDF","category":"PDF & Export"},
-{"file":"image-to-base64","name":"Image to Base64","category":"Images & Colors"},
-{"file":"color-picker","name":"Color Picker","category":"Images & Colors"},
-{"file":"color-converter","name":"Color Converter","category":"Images & Colors"},
-{"file":"case-converter","name":"Case Converter","category":"Text"},
-{"file":"text-statistics","name":"Text Statistics","category":"Text"},
-{"file":"lorem-ipsum","name":"Lorem Ipsum Generator","category":"Text"},
-{"file":"slug-generator","name":"Slug Generator","category":"Text"},
-{"file":"emoji-stripper","name":"Emoji Remover","category":"Text"},
-{"file":"markdown-preview","name":"Markdown Toolkit","category":"Text"},
-{"file":"markdown-to-pdf","name":"Markdown to PDF","category":"PDF & Export"},
-{"file":"log-to-pdf","name":"Logs to PDF","category":"PDF & Export"},
-{"file":"notepad-to-pdf","name":"Notes to PDF","category":"PDF & Export"},
-{"file":"text-to-pdf","name":"Text to PDF","category":"PDF & Export"},
-{"file":"timestamp-converter","name":"Timestamp Converter","category":"Date & Time","popular":true,"tag":"Time","popularOrder":4},
-{"file":"timezone-converter","name":"Timezone Converter","category":"Date & Time"},
-{"file":"date-diff-calculator","name":"Date Diff Calculator","category":"Date & Time"},
-{"file":"calendar","name":"Calendar","category":"Date & Time"},
-{"file":"ip-info","name":"IP Info","category":"Web & Network"},
-{"file":"http-status-lookup","name":"HTTP Status Lookup","category":"Web & Network"},
-{"file":"http-status-reference","name":"HTTP Status Reference","category":"Web & Network"},
-{"file":"port-reference","name":"Port Reference","category":"Web & Network"},
-{"file":"http-header-parser","name":"HTTP Header Parser","category":"Web & Network"},
-{"file":"curl-to-fetch","name":"cURL to Fetch","category":"Web & Network"},
-{"file":"url-parser","name":"URL Parser","category":"Web & Network"},
-{"file":"user-agent-parser","name":"User Agent Parser","category":"Web & Network"},
-{"file":"url-to-qr","name":"QR Code Generator","category":"Web & Network"},
-{"file":"robots-txt-generator","name":"Robots.txt Generator","category":"SEO & Webmaster"},
-{"file":"sitemap-validator","name":"Sitemap Validator","category":"SEO & Webmaster"},
-{"file":"canonical-tag-generator","name":"Canonical Tag Generator","category":"SEO & Webmaster"},
-{"file":"hreflang-tag-generator","name":"Hreflang Tag Generator","category":"SEO & Webmaster"},
-{"file":"meta-tag-preview","name":"Meta Tag Preview","category":"SEO & Webmaster"},
-{"file":"open-graph-generator","name":"Open Graph Generator","category":"SEO & Webmaster"},
-{"file":"twitter-card-generator","name":"Twitter Card Generator","category":"SEO & Webmaster"},
-{"file":"utm-builder","name":"UTM Builder","category":"SEO & Webmaster"},
-{"file":"utm-parser","name":"UTM Parser","category":"SEO & Webmaster"},
-{"file":"robots-txt-tester","name":"Robots.txt Tester","category":"SEO & Webmaster"},
-{"file":"schema-markup-generator","name":"Schema Markup Generator","category":"SEO & Webmaster"},
-{"file":"schema-validator","name":"Schema Validator","category":"SEO & Webmaster"},
-{"file":"heading-structure-checker","name":"Heading Structure Checker","category":"SEO & Webmaster"},
-{"file":"schema-faq-generator","name":"Schema FAQ Generator","category":"SEO & Webmaster"},
-{"file":"breadcrumb-schema-generator","name":"Breadcrumb Schema Generator","category":"SEO & Webmaster"},
-{"file":"redirect-rule-generator","name":"Redirect Rule Generator","category":"SEO & Webmaster"},
-{"file":"x-robots-tag-generator","name":"X-Robots-Tag Generator","category":"SEO & Webmaster"},
-{"file":"meta-robots-generator","name":"Meta Robots Generator","category":"SEO & Webmaster"},
-{"file":"webpage-to-pdf","name":"Web Page to PDF","category":"PDF & Export"},
-{"file":"regex-tester","name":"Regex Tester","category":"Code & Formatting"},
-{"file":"html-to-pdf","name":"HTML to PDF","category":"PDF & Export"},
-{"file":"code-to-pdf","name":"Source Code to PDF","category":"PDF & Export"},
-{"file":"sql-to-pdf","name":"SQL to PDF","category":"PDF & Export"},
-{"file":"sql-formatter","name":"SQL Formatter","category":"Code & Formatting"},
-{"file":"cron-generator","name":"Cron Generator","category":"Code & Formatting"},
-{"file":"unix-permissions-calculator","name":"Unix Permissions Calculator","category":"Code & Formatting"},
-{"file":"uuid-generator","name":"UUID Generator","category":"Generators & Converters","popular":true,"tag":"UUID","popularOrder":1},
-{"file":"uuid-validator","name":"UUID Validator","category":"Generators & Converters"},
-{"file":"random-number-generator","name":"Random Number Generator","category":"Generators & Converters"},
-{"file":"percentage-calculator","name":"Percentage Calculator","category":"Generators & Converters"},
-{"file":"base-converter","name":"Base Converter","category":"Generators & Converters"},
-{"file":"byte-size-converter","name":"Byte Size Converter","category":"Generators & Converters"},
-{"file":"fraction-calculator","name":"Fraction Calculator","category":"Calculators"},
-{"file":"average-calculator","name":"Average Calculator","category":"Calculators"},
-{"file":"bmi-calculator","name":"BMI Calculator","category":"Calculators"},
-{"file":"loan-calculator","name":"Loan Calculator","category":"Calculators"},
-{"file":"compound-interest-calculator","name":"Compound Interest Calculator","category":"Calculators"},
-{"file":"gpa-calculator","name":"GPA Calculator","category":"Calculators"},
-{"file":"gcd-lcm-calculator","name":"GCD LCM Calculator","category":"Calculators"},
-{"file":"prime-checker","name":"Prime Number Checker","category":"Calculators"},
-{"file":"factorial-calculator","name":"Factorial Calculator","category":"Calculators"},
-{"file":"standard-deviation-calculator","name":"Standard Deviation Calculator","category":"Calculators"},
-{"file":"permutation-combination","name":"Permutation Combination","category":"Calculators"},
-{"file":"temperature-converter","name":"Temperature Converter","category":"Generators & Converters"},
-{"file":"length-converter","name":"Length Converter","category":"Generators & Converters"},
-{"file":"weight-converter","name":"Weight Converter","category":"Generators & Converters"},
-{"file":"roman-numerals","name":"Roman Numerals Converter","category":"Generators & Converters"},
-{"file":"ascii-table","name":"ASCII Table","category":"Code & Formatting"},
-{"file":"git-commands-reference","name":"Git Commands Reference","category":"Code & Formatting"},
-{"file":"frontend-shortcuts-reference","name":"Frontend Shortcuts Reference","category":"Code & Formatting"},
-{"file":"binary-calculator","name":"Binary Calculator","category":"Code & Formatting"},
-{"file":"number-to-words","name":"Number to Words","category":"Text"},
-{"file":"text-diff","name":"Text Diff","category":"Text"},
-{"file":"sort-lines","name":"Sort Lines","category":"Text"},
-{"file":"remove-duplicate-lines","name":"Remove Duplicate Lines","category":"Text"},
-{"file":"reverse-text","name":"Reverse Text","category":"Text"},
-{"file":"invert-case","name":"Invert Case","category":"Text"},
-{"file":"age-calculator","name":"Age Calculator","category":"Date & Time"},
-{"file":"leap-year-checker","name":"Leap Year Checker","category":"Date & Time"},
-{"file":"stopwatch","name":"Stopwatch","category":"Date & Time"},
-{"file":"countdown-timer","name":"Countdown Timer","category":"Date & Time"},
-{"file":"json-to-xml","name":"JSON XML Converter","category":"JSON & Data"},
-{"file":"scientific-calculator","name":"Scientific Calculator","category":"Calculators"},
-{"file":"grade-calculator","name":"Grade Calculator","category":"Calculators"},
-{"file":"simple-interest-calculator","name":"Simple Interest Calculator","category":"Calculators"},
-{"file":"notepad","name":"Notes & Lists","category":"Daily Productivity"},
-{"file":"line-number-adder","name":"Line Number Adder","category":"Text"},
-{"file":"remove-line-breaks","name":"Remove Line Breaks","category":"Text"},
-{"file":"find-replace","name":"Find and Replace","category":"Text"},
-{"file":"whitespace-remover","name":"Whitespace Remover","category":"Text"},
-{"file":"days-until-date","name":"Days Until Date","category":"Date & Time"},
-{"file":"week-number-calculator","name":"Week Number Calculator","category":"Date & Time"},
-{"file":"binary-to-text","name":"Binary to Text","category":"Encoding & Decoding"},
-{"file":"morse-code","name":"Morse Code","category":"Encoding & Decoding"},
-{"file":"dice-roller","name":"Dice Roller","category":"Generators & Converters"},
-{"file":"coin-flip","name":"Coin Flip","category":"Generators & Converters"},
-{"file":"random-yes-no","name":"Random Yes No","category":"Generators & Converters"},
-{"file":"css-minify","name":"CSS Minify","category":"Code & Formatting"},
-{"file":"xml-formatter","name":"XML Formatter","category":"Code & Formatting"},
-{"file":"hex-encode-decode","name":"Hex Encode Decode","category":"Encoding & Decoding"},
-{"file":"html-formatter","name":"HTML Formatter","category":"Code & Formatting","popular":true,"tag":"HTML","popularOrder":7},
-{"file":"js-beautify-minify","name":"JavaScript Beautify & Minify","category":"Code & Formatting","popular":true,"tag":"JS","popularOrder":8},
-{"file":"extract-emails","name":"Extract Emails","category":"Text"},
-{"file":"extract-urls","name":"Extract URLs","category":"Text"},
-{"file":"image-resizer","name":"Image Resize & Compress","category":"Images & Colors"},
-{"file":"area-converter","name":"Area Converter","category":"Generators & Converters"},
-{"file":"volume-converter","name":"Volume Converter","category":"Generators & Converters"},
-{"file":"speed-converter","name":"Speed Converter","category":"Generators & Converters"},
-{"file":"random-string-generator","name":"Token & String Generator","category":"Generators & Converters"},
-{"file":"qr-code-decoder","name":"QR Code Decoder","category":"Encoding & Decoding"},
-{"file":"jwt-inspector","name":"JWT Inspector & Decoder","category":"API & Data"},
-{"file":"json-path-tester","name":"JSON Path Tester","category":"API & Data"},
-{"file":"json-schema-generator","name":"JSON Schema Generator","category":"API & Data"},
-{"file":"http-request-builder","name":"HTTP Request Builder","category":"API & Data"},
-{"file":"curl-builder","name":"cURL Builder","category":"API & Data"},
-{"file":"regex-replace-tester","name":"Regex Replace Tester","category":"Debug & Testing"},
-{"file":"diff-patch-generator","name":"Diff Patch Generator","category":"Debug & Testing"},
-{"file":"url-rewrite-tester","name":"URL Rewrite Tester","category":"Debug & Testing"},
-{"file":"sql-query-builder","name":"SQL Query Builder","category":"Database"},
-{"file":"api-mock-generator","name":"API Mock Generator","category":"API & Data"},
-{"file":"sql-where-builder","name":"SQL WHERE Builder","category":"Database"},
-{"file":"graphql-query-builder","name":"GraphQL Query Builder","category":"API & Data"},
-{"file":"http-header-builder","name":"HTTP Header Builder","category":"Web & Network"},
-{"file":"webhook-payload-viewer","name":"Webhook Payload Viewer","category":"API & Data"},
-{"file":"pomodoro-timer","name":"Pomodoro Timer","category":"Time & Planning"},
-{"file":"working-days-calculator","name":"Working Days Calculator","category":"Time & Planning"},
-{"file":"meeting-time-finder","name":"Meeting Time Finder","category":"Time & Planning"},
-{"file":"sleep-calculator","name":"Sleep Calculator","category":"Time & Planning"},
-{"file":"reading-time-calculator","name":"Reading Time Calculator","category":"Daily Productivity"},
-{"file":"speech-time-calculator","name":"Speech Time Calculator","category":"Daily Productivity"},
-{"file":"unit-price-calculator","name":"Unit Price Calculator","category":"Money & Decisions"},
-{"file":"split-bill-calculator","name":"Split Bill & Tip Calculator","category":"Money & Decisions"},
-{"file":"currency-converter","name":"Currency Converter","category":"Money & Decisions"},
-{"file":"ubb-html-converter","name":"UBB HTML Converter","category":"Text"},
-{"file":"java-formatter","name":"Java Formatter","category":"Code & Formatting"},
-{"file":"gzip-encode-decode","name":"Gzip Encode Decode","category":"Encoding & Decoding"},
-{"file":"punycode-converter","name":"Punycode Converter","category":"Encoding & Decoding"},
-{"file":"crc32-calculator","name":"CRC32 Calculator","category":"Security & Tokens"},
-{"file":"json-get-converter","name":"JSON GET Converter","category":"JSON & Data"},
-{"file":"json-postman-converter","name":"JSON Postman Converter","category":"API & Data"},
-{"file":"ip-subnet-calculator","name":"IP Subnet Calculator","category":"Web & Network"},
-{"file":"ip-number-converter","name":"IP Number Converter","category":"Web & Network"},
-{"file":"camel-case-converter","name":"Camel Case Converter","category":"Text"},
-{"file":"eascii-table","name":"Extended ASCII Table","category":"Code & Formatting"},
-{"file":"web-dimensions-reference","name":"Web Dimensions Reference","category":"Code & Formatting"},
-{"file":"html-escape-reference","name":"HTML Escape Reference","category":"Code & Formatting"},
-{"file":"http-headers-reference","name":"HTTP Headers Reference","category":"Code & Formatting"},
-{"file":"mimetype-reference","name":"MIME Type Reference","category":"Code & Formatting"},
-{"file":"magic-bytes-reference","name":"Magic Bytes Reference","category":"Code & Formatting"},
-{"file":"keycode-reference","name":"KeyCode Reference","category":"Code & Formatting"},
-{"file":"linux-commands-reference","name":"Linux Commands Reference","category":"Code & Formatting"},
-{"file":"base64-reference","name":"Base64 Reference","category":"Code & Formatting"},
-{"file":"operator-precedence-reference","name":"Operator Precedence Reference","category":"Code & Formatting"},
-{"file":"remove-empty-lines","name":"Remove Empty Lines","category":"Text"},
-{"file":"text-interval-generator","name":"Text Interval Generator","category":"Text"},
-{"file":"filter-by-length","name":"Filter by Length","category":"Text"},
-{"file":"add-prefix-suffix","name":"Add Prefix Suffix","category":"Text"},
-{"file":"odd-even-lines","name":"Odd Even Lines","category":"Text"},
-{"file":"css-border-radius-generator","name":"CSS Border Radius Generator","category":"Images & Colors"},
-{"file":"css-box-shadow-generator","name":"CSS Box Shadow Generator","category":"Images & Colors"},
-{"file":"css-text-shadow-generator","name":"CSS Text Shadow Generator","category":"Images & Colors"},
-{"file":"color-midpoint-calculator","name":"Color Midpoint Calculator","category":"Images & Colors"},
-{"file":"opposite-color-calculator","name":"Opposite Color Calculator","category":"Images & Colors"},
-{"file":"cmyk-reference","name":"CMYK Color Reference","category":"Images & Colors"},
-{"file":"aes-encrypt-decrypt","name":"AES Encrypt Decrypt","category":"Code & Formatting"},
-{"file":"rsa-key-generator","name":"RSA Key Generator","category":"Code & Formatting"},
-{"file":"cdn-libraries-reference","name":"CDN Libraries Reference","category":"SEO & Webmaster"},
-{"file":"string-to-html-paragraphs","name":"String to HTML Paragraphs","category":"Text"},
-{"file":"mac-address-generator","name":"MAC Address Generator","category":"Generators & Converters"},
-{"file":"test-data-generator","name":"Test Data Generator","category":"Generators & Converters"},
-{"file":"xpath-tester","name":"XPath Tester","category":"Debug & Testing"},
-{"file":"url-batch-generator","name":"URL Batch Generator","category":"Debug & Testing"},
-{"file":"font-preview-tool","name":"Font Preview Tool","category":"Images & Colors"},
-{"file":"ppi-calculator","name":"PPI Calculator","category":"Calculators"},
-{"file":"batch-open-urls","name":"Batch Open URLs","category":"Debug & Testing"},
-{"file":"text-to-image","name":"Text to Image","category":"Images & Colors"},
-{"file":"svg-viewer-editor","name":"SVG Viewer & Editor","category":"Images & Colors"},
-{"file":"html-table-generator","name":"HTML Table Generator","category":"Code & Formatting"},
-{"file":"viewport-size","name":"Viewport Size","category":"Web & Network"},
-{"file":"word-frequency","name":"Word Frequency","category":"Text"},
-{"file":"unicode-reference","name":"Unicode Reference","category":"Code & Formatting"}
+  {
+    "file": "average-calculator",
+    "name": "Average Calculator",
+    "category": "Calculators"
+  },
+  {
+    "file": "bmi-calculator",
+    "name": "BMI Calculator",
+    "category": "Calculators"
+  },
+  {
+    "file": "compound-interest-calculator",
+    "name": "Compound Interest Calculator",
+    "category": "Calculators"
+  },
+  {
+    "file": "currency-converter",
+    "name": "Currency Converter",
+    "category": "Calculators"
+  },
+  {
+    "file": "factorial-calculator",
+    "name": "Factorial Calculator",
+    "category": "Calculators"
+  },
+  {
+    "file": "fraction-calculator",
+    "name": "Fraction Calculator",
+    "category": "Calculators"
+  },
+  {
+    "file": "gcd-lcm-calculator",
+    "name": "GCD LCM Calculator",
+    "category": "Calculators"
+  },
+  {
+    "file": "gpa-calculator",
+    "name": "GPA Calculator",
+    "category": "Calculators"
+  },
+  {
+    "file": "grade-calculator",
+    "name": "Grade Calculator",
+    "category": "Calculators"
+  },
+  {
+    "file": "loan-calculator",
+    "name": "Loan Calculator",
+    "category": "Calculators"
+  },
+  {
+    "file": "permutation-combination",
+    "name": "Permutation Combination",
+    "category": "Calculators"
+  },
+  {
+    "file": "ppi-calculator",
+    "name": "PPI Calculator",
+    "category": "Calculators"
+  },
+  {
+    "file": "prime-checker",
+    "name": "Prime Number Checker",
+    "category": "Calculators"
+  },
+  {
+    "file": "scientific-calculator",
+    "name": "Scientific Calculator",
+    "category": "Calculators"
+  },
+  {
+    "file": "simple-interest-calculator",
+    "name": "Simple Interest Calculator",
+    "category": "Calculators"
+  },
+  {
+    "file": "split-bill-calculator",
+    "name": "Split Bill & Tip Calculator",
+    "category": "Calculators"
+  },
+  {
+    "file": "standard-deviation-calculator",
+    "name": "Standard Deviation Calculator",
+    "category": "Calculators"
+  },
+  {
+    "file": "unit-price-calculator",
+    "name": "Unit Price Calculator",
+    "category": "Calculators"
+  },
+  {
+    "file": "age-calculator",
+    "name": "Age Calculator",
+    "category": "Date & Time"
+  },
+  {
+    "file": "calendar",
+    "name": "Calendar",
+    "category": "Date & Time"
+  },
+  {
+    "file": "countdown-timer",
+    "name": "Countdown Timer",
+    "category": "Date & Time"
+  },
+  {
+    "file": "date-diff-calculator",
+    "name": "Date Diff Calculator",
+    "category": "Date & Time"
+  },
+  {
+    "file": "days-until-date",
+    "name": "Days Until Date",
+    "category": "Date & Time"
+  },
+  {
+    "file": "leap-year-checker",
+    "name": "Leap Year Checker",
+    "category": "Date & Time"
+  },
+  {
+    "file": "meeting-time-finder",
+    "name": "Meeting Time Finder",
+    "category": "Date & Time"
+  },
+  {
+    "file": "pomodoro-timer",
+    "name": "Pomodoro Timer",
+    "category": "Date & Time"
+  },
+  {
+    "file": "sleep-calculator",
+    "name": "Sleep Calculator",
+    "category": "Date & Time"
+  },
+  {
+    "file": "stopwatch",
+    "name": "Stopwatch",
+    "category": "Date & Time"
+  },
+  {
+    "file": "timestamp-converter",
+    "name": "Timestamp Converter",
+    "category": "Date & Time",
+    "popular": true,
+    "tag": "Time",
+    "popularOrder": 4
+  },
+  {
+    "file": "timezone-converter",
+    "name": "Timezone Converter",
+    "category": "Date & Time"
+  },
+  {
+    "file": "week-number-calculator",
+    "name": "Week Number Calculator",
+    "category": "Date & Time"
+  },
+  {
+    "file": "working-days-calculator",
+    "name": "Working Days Calculator",
+    "category": "Date & Time"
+  },
+  {
+    "file": "aes-encrypt-decrypt",
+    "name": "AES Encrypt Decrypt",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "ascii-table",
+    "name": "ASCII Table",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "base64-reference",
+    "name": "Base64 Reference",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "batch-open-urls",
+    "name": "Batch Open URLs",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "binary-calculator",
+    "name": "Binary Calculator",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "cron-generator",
+    "name": "Cron Generator",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "css-minify",
+    "name": "CSS Minify",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "diff-patch-generator",
+    "name": "Diff Patch Generator",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "eascii-table",
+    "name": "Extended ASCII Table",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "frontend-shortcuts-reference",
+    "name": "Frontend Shortcuts Reference",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "git-commands-reference",
+    "name": "Git Commands Reference",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "html-escape-reference",
+    "name": "HTML Escape Reference",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "html-formatter",
+    "name": "HTML Formatter",
+    "category": "Developer Tools",
+    "popular": true,
+    "tag": "HTML",
+    "popularOrder": 7
+  },
+  {
+    "file": "html-table-generator",
+    "name": "HTML Table Generator",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "http-headers-reference",
+    "name": "HTTP Headers Reference",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "java-formatter",
+    "name": "Java Formatter",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "js-beautify-minify",
+    "name": "JavaScript Beautify & Minify",
+    "category": "Developer Tools",
+    "popular": true,
+    "tag": "JS",
+    "popularOrder": 8
+  },
+  {
+    "file": "keycode-reference",
+    "name": "KeyCode Reference",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "linux-commands-reference",
+    "name": "Linux Commands Reference",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "magic-bytes-reference",
+    "name": "Magic Bytes Reference",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "mimetype-reference",
+    "name": "MIME Type Reference",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "operator-precedence-reference",
+    "name": "Operator Precedence Reference",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "regex-replace-tester",
+    "name": "Regex Replace Tester",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "regex-tester",
+    "name": "Regex Tester",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "rsa-key-generator",
+    "name": "RSA Key Generator",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "sql-formatter",
+    "name": "SQL Formatter",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "sql-query-builder",
+    "name": "SQL Query Builder",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "sql-where-builder",
+    "name": "SQL WHERE Builder",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "unicode-reference",
+    "name": "Unicode Reference",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "unix-permissions-calculator",
+    "name": "Unix Permissions Calculator",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "url-batch-generator",
+    "name": "URL Batch Generator",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "url-rewrite-tester",
+    "name": "URL Rewrite Tester",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "web-dimensions-reference",
+    "name": "Web Dimensions Reference",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "xml-formatter",
+    "name": "XML Formatter",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "xpath-tester",
+    "name": "XPath Tester",
+    "category": "Developer Tools"
+  },
+  {
+    "file": "base64-encode",
+    "name": "Base64 Encode Decode",
+    "category": "Encoding & Decoding",
+    "popular": true,
+    "tag": "Base64",
+    "popularOrder": 3
+  },
+  {
+    "file": "base64-image-viewer",
+    "name": "Base64 Image Viewer",
+    "category": "Encoding & Decoding"
+  },
+  {
+    "file": "binary-to-text",
+    "name": "Binary to Text",
+    "category": "Encoding & Decoding"
+  },
+  {
+    "file": "gzip-encode-decode",
+    "name": "Gzip Encode Decode",
+    "category": "Encoding & Decoding"
+  },
+  {
+    "file": "hex-encode-decode",
+    "name": "Hex Encode Decode",
+    "category": "Encoding & Decoding"
+  },
+  {
+    "file": "html-escape",
+    "name": "HTML Escape Unescape",
+    "category": "Encoding & Decoding"
+  },
+  {
+    "file": "morse-code",
+    "name": "Morse Code",
+    "category": "Encoding & Decoding"
+  },
+  {
+    "file": "punycode-converter",
+    "name": "Punycode Converter",
+    "category": "Encoding & Decoding"
+  },
+  {
+    "file": "qr-code-decoder",
+    "name": "QR Code Decoder",
+    "category": "Encoding & Decoding"
+  },
+  {
+    "file": "url-encode-decode",
+    "name": "URL Encode Decode",
+    "category": "Encoding & Decoding",
+    "popular": true,
+    "tag": "URL",
+    "popularOrder": 6
+  },
+  {
+    "file": "coin-flip",
+    "name": "Coin Flip",
+    "category": "Generators"
+  },
+  {
+    "file": "dice-roller",
+    "name": "Dice Roller",
+    "category": "Generators"
+  },
+  {
+    "file": "mac-address-generator",
+    "name": "MAC Address Generator",
+    "category": "Generators"
+  },
+  {
+    "file": "random-number-generator",
+    "name": "Random Number Generator",
+    "category": "Generators"
+  },
+  {
+    "file": "random-yes-no",
+    "name": "Random Yes No",
+    "category": "Generators"
+  },
+  {
+    "file": "test-data-generator",
+    "name": "Test Data Generator",
+    "category": "Generators"
+  },
+  {
+    "file": "random-string-generator",
+    "name": "Token & String Generator",
+    "category": "Generators"
+  },
+  {
+    "file": "uuid-generator",
+    "name": "UUID Generator",
+    "category": "Generators",
+    "popular": true,
+    "tag": "UUID",
+    "popularOrder": 1
+  },
+  {
+    "file": "uuid-validator",
+    "name": "UUID Validator",
+    "category": "Generators"
+  },
+  {
+    "file": "cmyk-reference",
+    "name": "CMYK Color Reference",
+    "category": "Images & Colors"
+  },
+  {
+    "file": "color-converter",
+    "name": "Color Converter",
+    "category": "Images & Colors"
+  },
+  {
+    "file": "color-midpoint-calculator",
+    "name": "Color Midpoint Calculator",
+    "category": "Images & Colors"
+  },
+  {
+    "file": "color-picker",
+    "name": "Color Picker",
+    "category": "Images & Colors"
+  },
+  {
+    "file": "css-border-radius-generator",
+    "name": "CSS Border Radius Generator",
+    "category": "Images & Colors"
+  },
+  {
+    "file": "css-box-shadow-generator",
+    "name": "CSS Box Shadow Generator",
+    "category": "Images & Colors"
+  },
+  {
+    "file": "css-text-shadow-generator",
+    "name": "CSS Text Shadow Generator",
+    "category": "Images & Colors"
+  },
+  {
+    "file": "font-preview-tool",
+    "name": "Font Preview Tool",
+    "category": "Images & Colors"
+  },
+  {
+    "file": "image-resizer",
+    "name": "Image Resize & Compress",
+    "category": "Images & Colors"
+  },
+  {
+    "file": "image-to-base64",
+    "name": "Image to Base64",
+    "category": "Images & Colors"
+  },
+  {
+    "file": "opposite-color-calculator",
+    "name": "Opposite Color Calculator",
+    "category": "Images & Colors"
+  },
+  {
+    "file": "svg-viewer-editor",
+    "name": "SVG Viewer & Editor",
+    "category": "Images & Colors"
+  },
+  {
+    "file": "text-to-image",
+    "name": "Text to Image",
+    "category": "Images & Colors"
+  },
+  {
+    "file": "api-mock-generator",
+    "name": "API Mock Generator",
+    "category": "JSON & API"
+  },
+  {
+    "file": "curl-builder",
+    "name": "cURL Builder",
+    "category": "JSON & API"
+  },
+  {
+    "file": "graphql-query-builder",
+    "name": "GraphQL Query Builder",
+    "category": "JSON & API"
+  },
+  {
+    "file": "http-request-builder",
+    "name": "HTTP Request Builder",
+    "category": "JSON & API"
+  },
+  {
+    "file": "json-to-csv",
+    "name": "JSON CSV Converter",
+    "category": "JSON & API"
+  },
+  {
+    "file": "json-diff",
+    "name": "JSON Diff",
+    "category": "JSON & API"
+  },
+  {
+    "file": "json-get-converter",
+    "name": "JSON GET Converter",
+    "category": "JSON & API"
+  },
+  {
+    "file": "json-path-tester",
+    "name": "JSON Path Tester",
+    "category": "JSON & API"
+  },
+  {
+    "file": "json-postman-converter",
+    "name": "JSON Postman Converter",
+    "category": "JSON & API"
+  },
+  {
+    "file": "json-schema-generator",
+    "name": "JSON Schema Generator",
+    "category": "JSON & API"
+  },
+  {
+    "file": "json-viewer",
+    "name": "JSON Viewer",
+    "category": "JSON & API",
+    "popular": true,
+    "tag": "JSON",
+    "popularOrder": 2
+  },
+  {
+    "file": "json-to-xml",
+    "name": "JSON XML Converter",
+    "category": "JSON & API"
+  },
+  {
+    "file": "jwt-inspector",
+    "name": "JWT Inspector & Decoder",
+    "category": "JSON & API"
+  },
+  {
+    "file": "webhook-payload-viewer",
+    "name": "Webhook Payload Viewer",
+    "category": "JSON & API"
+  },
+  {
+    "file": "yaml-json-converter",
+    "name": "YAML JSON Converter",
+    "category": "JSON & API"
+  },
+  {
+    "file": "api-response-to-pdf",
+    "name": "API Response to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "checklist-to-pdf",
+    "name": "Checklist to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "csv-to-pdf",
+    "name": "CSV to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "excel-to-pdf",
+    "name": "Excel to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "form-to-pdf",
+    "name": "Filled Form to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "html-to-pdf",
+    "name": "HTML to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "image-to-pdf",
+    "name": "Images to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "invoice-to-pdf",
+    "name": "Invoice to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "json-to-pdf",
+    "name": "JSON to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "log-to-pdf",
+    "name": "Logs to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "markdown-to-pdf",
+    "name": "Markdown to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "meeting-notes-to-pdf",
+    "name": "Meeting Notes to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "notepad-to-pdf",
+    "name": "Notes to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "resume-to-pdf",
+    "name": "Resume to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "code-to-pdf",
+    "name": "Source Code to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "sql-to-pdf",
+    "name": "SQL to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "text-to-pdf",
+    "name": "Text to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "tsv-to-pdf",
+    "name": "TSV to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "webpage-to-pdf",
+    "name": "Web Page to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "xml-to-pdf",
+    "name": "XML to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "yaml-to-pdf",
+    "name": "YAML to PDF",
+    "category": "PDF & Export"
+  },
+  {
+    "file": "notepad",
+    "name": "Notes & Lists",
+    "category": "Productivity"
+  },
+  {
+    "file": "reading-time-calculator",
+    "name": "Reading Time Calculator",
+    "category": "Productivity"
+  },
+  {
+    "file": "speech-time-calculator",
+    "name": "Speech Time Calculator",
+    "category": "Productivity"
+  },
+  {
+    "file": "crc32-calculator",
+    "name": "CRC32 Calculator",
+    "category": "Security & Tokens"
+  },
+  {
+    "file": "hash-generator",
+    "name": "Hash Generator",
+    "category": "Security & Tokens"
+  },
+  {
+    "file": "jwt-generator",
+    "name": "JWT Generator",
+    "category": "Security & Tokens"
+  },
+  {
+    "file": "password-generator",
+    "name": "Password Generator",
+    "category": "Security & Tokens",
+    "popular": true,
+    "tag": "Password",
+    "popularOrder": 5
+  },
+  {
+    "file": "password-strength-checker",
+    "name": "Password Strength Checker",
+    "category": "Security & Tokens"
+  },
+  {
+    "file": "breadcrumb-schema-generator",
+    "name": "Breadcrumb Schema Generator",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "canonical-tag-generator",
+    "name": "Canonical Tag Generator",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "cdn-libraries-reference",
+    "name": "CDN Libraries Reference",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "heading-structure-checker",
+    "name": "Heading Structure Checker",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "hreflang-tag-generator",
+    "name": "Hreflang Tag Generator",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "meta-robots-generator",
+    "name": "Meta Robots Generator",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "meta-tag-preview",
+    "name": "Meta Tag Preview",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "open-graph-generator",
+    "name": "Open Graph Generator",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "redirect-rule-generator",
+    "name": "Redirect Rule Generator",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "robots-txt-generator",
+    "name": "Robots.txt Generator",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "robots-txt-tester",
+    "name": "Robots.txt Tester",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "schema-faq-generator",
+    "name": "Schema FAQ Generator",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "schema-markup-generator",
+    "name": "Schema Markup Generator",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "schema-validator",
+    "name": "Schema Validator",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "sitemap-validator",
+    "name": "Sitemap Validator",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "twitter-card-generator",
+    "name": "Twitter Card Generator",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "utm-builder",
+    "name": "UTM Builder",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "utm-parser",
+    "name": "UTM Parser",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "x-robots-tag-generator",
+    "name": "X-Robots-Tag Generator",
+    "category": "SEO Tools"
+  },
+  {
+    "file": "add-prefix-suffix",
+    "name": "Add Prefix Suffix",
+    "category": "Text Tools"
+  },
+  {
+    "file": "camel-case-converter",
+    "name": "Camel Case Converter",
+    "category": "Text Tools"
+  },
+  {
+    "file": "case-converter",
+    "name": "Case Converter",
+    "category": "Text Tools"
+  },
+  {
+    "file": "emoji-stripper",
+    "name": "Emoji Remover",
+    "category": "Text Tools"
+  },
+  {
+    "file": "extract-emails",
+    "name": "Extract Emails",
+    "category": "Text Tools"
+  },
+  {
+    "file": "extract-urls",
+    "name": "Extract URLs",
+    "category": "Text Tools"
+  },
+  {
+    "file": "filter-by-length",
+    "name": "Filter by Length",
+    "category": "Text Tools"
+  },
+  {
+    "file": "find-replace",
+    "name": "Find and Replace",
+    "category": "Text Tools"
+  },
+  {
+    "file": "invert-case",
+    "name": "Invert Case",
+    "category": "Text Tools"
+  },
+  {
+    "file": "line-number-adder",
+    "name": "Line Number Adder",
+    "category": "Text Tools"
+  },
+  {
+    "file": "lorem-ipsum",
+    "name": "Lorem Ipsum Generator",
+    "category": "Text Tools"
+  },
+  {
+    "file": "markdown-preview",
+    "name": "Markdown Toolkit",
+    "category": "Text Tools"
+  },
+  {
+    "file": "number-to-words",
+    "name": "Number to Words",
+    "category": "Text Tools"
+  },
+  {
+    "file": "odd-even-lines",
+    "name": "Odd Even Lines",
+    "category": "Text Tools"
+  },
+  {
+    "file": "remove-duplicate-lines",
+    "name": "Remove Duplicate Lines",
+    "category": "Text Tools"
+  },
+  {
+    "file": "remove-empty-lines",
+    "name": "Remove Empty Lines",
+    "category": "Text Tools"
+  },
+  {
+    "file": "remove-line-breaks",
+    "name": "Remove Line Breaks",
+    "category": "Text Tools"
+  },
+  {
+    "file": "reverse-text",
+    "name": "Reverse Text",
+    "category": "Text Tools"
+  },
+  {
+    "file": "slug-generator",
+    "name": "Slug Generator",
+    "category": "Text Tools"
+  },
+  {
+    "file": "sort-lines",
+    "name": "Sort Lines",
+    "category": "Text Tools"
+  },
+  {
+    "file": "string-to-html-paragraphs",
+    "name": "String to HTML Paragraphs",
+    "category": "Text Tools"
+  },
+  {
+    "file": "text-diff",
+    "name": "Text Diff",
+    "category": "Text Tools"
+  },
+  {
+    "file": "text-interval-generator",
+    "name": "Text Interval Generator",
+    "category": "Text Tools"
+  },
+  {
+    "file": "text-statistics",
+    "name": "Text Statistics",
+    "category": "Text Tools"
+  },
+  {
+    "file": "ubb-html-converter",
+    "name": "UBB HTML Converter",
+    "category": "Text Tools"
+  },
+  {
+    "file": "whitespace-remover",
+    "name": "Whitespace Remover",
+    "category": "Text Tools"
+  },
+  {
+    "file": "word-frequency",
+    "name": "Word Frequency",
+    "category": "Text Tools"
+  },
+  {
+    "file": "area-converter",
+    "name": "Area Converter",
+    "category": "Unit Converters"
+  },
+  {
+    "file": "base-converter",
+    "name": "Base Converter",
+    "category": "Unit Converters"
+  },
+  {
+    "file": "byte-size-converter",
+    "name": "Byte Size Converter",
+    "category": "Unit Converters"
+  },
+  {
+    "file": "length-converter",
+    "name": "Length Converter",
+    "category": "Unit Converters"
+  },
+  {
+    "file": "percentage-calculator",
+    "name": "Percentage Calculator",
+    "category": "Unit Converters"
+  },
+  {
+    "file": "roman-numerals",
+    "name": "Roman Numerals Converter",
+    "category": "Unit Converters"
+  },
+  {
+    "file": "speed-converter",
+    "name": "Speed Converter",
+    "category": "Unit Converters"
+  },
+  {
+    "file": "temperature-converter",
+    "name": "Temperature Converter",
+    "category": "Unit Converters"
+  },
+  {
+    "file": "volume-converter",
+    "name": "Volume Converter",
+    "category": "Unit Converters"
+  },
+  {
+    "file": "weight-converter",
+    "name": "Weight Converter",
+    "category": "Unit Converters"
+  },
+  {
+    "file": "curl-to-fetch",
+    "name": "cURL to Fetch",
+    "category": "Web & Network"
+  },
+  {
+    "file": "http-header-builder",
+    "name": "HTTP Header Builder",
+    "category": "Web & Network"
+  },
+  {
+    "file": "http-header-parser",
+    "name": "HTTP Header Parser",
+    "category": "Web & Network"
+  },
+  {
+    "file": "http-status-lookup",
+    "name": "HTTP Status Lookup",
+    "category": "Web & Network"
+  },
+  {
+    "file": "http-status-reference",
+    "name": "HTTP Status Reference",
+    "category": "Web & Network"
+  },
+  {
+    "file": "ip-info",
+    "name": "IP Info",
+    "category": "Web & Network"
+  },
+  {
+    "file": "ip-number-converter",
+    "name": "IP Number Converter",
+    "category": "Web & Network"
+  },
+  {
+    "file": "ip-subnet-calculator",
+    "name": "IP Subnet Calculator",
+    "category": "Web & Network"
+  },
+  {
+    "file": "port-reference",
+    "name": "Port Reference",
+    "category": "Web & Network"
+  },
+  {
+    "file": "url-to-qr",
+    "name": "QR Code Generator",
+    "category": "Web & Network"
+  },
+  {
+    "file": "url-parser",
+    "name": "URL Parser",
+    "category": "Web & Network"
+  },
+  {
+    "file": "user-agent-parser",
+    "name": "User Agent Parser",
+    "category": "Web & Network"
+  },
+  {
+    "file": "viewport-size",
+    "name": "Viewport Size",
+    "category": "Web & Network"
+  }
 ]

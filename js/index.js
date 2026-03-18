@@ -4,57 +4,47 @@
   let allTools = [];
 
   const KEY_NAV_CATEGORIES = [
-    "JSON & Data",
+    "JSON & API",
     "Encoding & Decoding",
-    "Text",
+    "Text Tools",
+    "Developer Tools",
     "PDF & Export",
     "Date & Time",
-    "Security & Tokens",
-    "Code & Formatting"
+    "Web & Network"
   ];
 
   const CATEGORY_ORDER = [
-    "JSON & Data",
+    "JSON & API",
     "Encoding & Decoding",
-    "Text",
+    "Text Tools",
     "Images & Colors",
     "PDF & Export",
     "Date & Time",
-    "Time & Planning",
-    "Daily Productivity",
-    "Money & Decisions",
-    "Generators & Converters",
+    "Productivity",
     "Calculators",
+    "Generators",
+    "Unit Converters",
     "Security & Tokens",
     "Web & Network",
-    "API & Data",
-    "Code & Formatting",
-    "Debug & Testing",
-    "Database",
-    "Schedules & Infra",
-    "SEO & Webmaster"
+    "SEO Tools",
+    "Developer Tools"
   ];
 
   const CATEGORY_DESCRIPTIONS = {
-    "JSON & Data": "Open, format, validate and convert JSON, CSV, XML and YAML for APIs, logs and structured data work.",
+    "JSON & API": "Open, format, validate and convert JSON, CSV, XML and YAML. Build and test API requests, inspect payloads and work with structured data.",
     "Encoding & Decoding": "Encode and decode Base64, URL, binary, hex and QR data for web, API and text-processing tasks.",
-    "Text": "Edit, clean, compare and transform text for writing, SEO, content cleanup and everyday copy work.",
+    "Text Tools": "Edit, clean, compare and transform text for writing, SEO, content cleanup and everyday copy work.",
     "Images & Colors": "Resize, compress and convert images, extract Base64 and use color tools for design and frontend work.",
     "PDF & Export": "Create browser-based PDFs from notes, tables, code, screenshots and uploaded files without extra software.",
     "Date & Time": "Convert timestamps, compare dates and work with calendars, week numbers, timers and time zones.",
-    "Time & Planning": "Plan meetings, focus sessions, countdowns and work schedules with simple time-planning tools.",
-    "Daily Productivity": "Manage notes, checklists and small everyday tasks with lightweight tools that open instantly in the browser.",
-    "Money & Decisions": "Split bills, compare prices and handle quick money, shopping and decision-making calculations.",
-    "Generators & Converters": "Generate random values and convert everyday units, numbers and formats in a few clicks.",
-    "Calculators": "Use focused calculators for percentages, loans, grades, statistics and other common number problems.",
+    "Productivity": "Manage notes, checklists and small everyday tasks with lightweight tools that open instantly in the browser.",
+    "Calculators": "Use focused calculators for percentages, loans, grades, statistics, health and other common number problems.",
+    "Generators": "Generate random values like UUIDs, passwords, numbers and test data in a few clicks.",
+    "Unit Converters": "Convert everyday units including length, weight, temperature, area, volume, speed and data size.",
     "Security & Tokens": "Generate passwords, inspect tokens, hash text and handle common browser-based security helper tasks.",
     "Web & Network": "Inspect URLs, IPs, headers, status codes and client details for web, hosting and network troubleshooting.",
-    "API & Data": "Build requests, inspect payloads, test paths and work faster with API and structured-data helper tools.",
-    "Code & Formatting": "Format code, minify snippets and clean structured text so it is easier to read, share and debug.",
-    "Debug & Testing": "Test regex, diffs, rewrites and other developer workflows before you apply changes in real projects.",
-    "Database": "Build SQL queries, WHERE clauses and other database helpers for faster drafting and testing.",
-    "Schedules & Infra": "Create cron schedules and other small infrastructure helpers for automation and operations work.",
-    "SEO & Webmaster": "Generate schema, meta tags, robots rules and other SEO and webmaster utilities for site optimization."
+    "SEO Tools": "Generate schema, meta tags, robots rules and other SEO utilities for site optimization.",
+    "Developer Tools": "Format code, test regex, build SQL queries and other developer workflows for coding and debugging."
   };
 
   function groupByCategory(list) {
