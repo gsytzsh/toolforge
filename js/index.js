@@ -3,15 +3,41 @@
 
   let allTools = [];
 
+  // Simplified top navigation: 5 scenario-based categories
   const KEY_NAV_CATEGORIES = [
     "JSON & API",
-    "Encoding & Decoding",
-    "Text Tools",
-    "Developer Tools",
-    "PDF & Export",
-    "Date & Time",
-    "Web & Network"
+    "Text & Data",
+    "Code & Dev",
+    "Converters",
+    "Calculators"
   ];
+
+  // Map detailed categories to simplified navigation groups
+  const CATEGORY_NAV_MAP = {
+    // JSON & API
+    "JSON & API": "JSON & API",
+
+    // Text & Data (Text + Encoding + Date/Time + Productivity)
+    "Text Tools": "Text & Data",
+    "Encoding & Decoding": "Text & Data",
+    "Date & Time": "Text & Data",
+    "Productivity": "Text & Data",
+
+    // Code & Dev (Developer Tools + Web/Network + SEO + PDF + Images)
+    "Developer Tools": "Code & Dev",
+    "Web & Network": "Code & Dev",
+    "SEO Tools": "Code & Dev",
+    "PDF & Export": "Code & Dev",
+    "Images & Colors": "Code & Dev",
+
+    // Converters (Unit Converters + Generators + Security)
+    "Unit Converters": "Converters",
+    "Generators": "Converters",
+    "Security & Tokens": "Converters",
+
+    // Calculators
+    "Calculators": "Calculators"
+  };
 
   const CATEGORY_ORDER = [
     "JSON & API",
@@ -117,15 +143,25 @@
   function renderTopNav(groups) {
     const menu = document.getElementById("top-nav-menu");
     if (!menu) return;
-    const otherCats = CATEGORY_ORDER.concat(
-      Object.keys(groups).filter(function(c) { return CATEGORY_ORDER.indexOf(c) === -1; })
-    ).filter(function(c) { return KEY_NAV_CATEGORIES.indexOf(c) === -1; })
-     .filter(function(c) { return groups[c] && groups[c].length > 0; });
 
     menu.innerHTML = "";
 
-    KEY_NAV_CATEGORIES.forEach(function(cat) {
-      const tools = groups[cat];
+    // Group tools by simplified navigation categories
+    const navGroups = {};
+    KEY_NAV_CATEGORIES.forEach(function(navCat) {
+      navGroups[navCat] = [];
+    });
+
+    // Map each detailed category to its navigation group
+    Object.keys(groups).forEach(function(cat) {
+      const navCat = CATEGORY_NAV_MAP[cat] || "Code & Dev";
+      if (navGroups[navCat]) {
+        navGroups[navCat] = navGroups[navCat].concat(groups[cat]);
+      }
+    });
+
+    KEY_NAV_CATEGORIES.forEach(function(navCat) {
+      const tools = navGroups[navCat];
       if (!tools || tools.length === 0) return;
       const sortedTools = sortTools(tools);
       const item = document.createElement("div");
@@ -133,7 +169,7 @@
       const trigger = document.createElement("button");
       trigger.className = "top-nav-trigger";
       trigger.type = "button";
-      trigger.textContent = cat + " ▾";
+      trigger.textContent = navCat + " ▾";
       trigger.setAttribute("aria-haspopup", "true");
       trigger.setAttribute("aria-expanded", "false");
       const dropdown = document.createElement("div");
@@ -150,42 +186,6 @@
       item.appendChild(dropdown);
       menu.appendChild(item);
     });
-
-    if (otherCats.length > 0) {
-      const item = document.createElement("div");
-      item.className = "top-nav-item";
-      const trigger = document.createElement("button");
-      trigger.className = "top-nav-trigger";
-      trigger.type = "button";
-      trigger.textContent = "Other ▾";
-      trigger.setAttribute("aria-haspopup", "true");
-      trigger.setAttribute("aria-expanded", "false");
-      const dropdown = document.createElement("div");
-      dropdown.className = "top-nav-dropdown top-nav-dropdown-other";
-      dropdown.setAttribute("role", "menu");
-      otherCats.forEach(function(cat) {
-        const tools = groups[cat];
-        if (!tools || tools.length === 0) return;
-        const sortedTools = sortTools(tools);
-        const group = document.createElement("div");
-        group.className = "top-nav-dropdown-group";
-        const groupTitle = document.createElement("div");
-        groupTitle.className = "top-nav-dropdown-group-title";
-        groupTitle.textContent = cat;
-        group.appendChild(groupTitle);
-        sortedTools.forEach(function(tool) {
-          const a = document.createElement("a");
-          a.href = "/tools/" + tool.file + ".html";
-          a.textContent = tool.name;
-          a.setAttribute("role", "menuitem");
-          group.appendChild(a);
-        });
-        dropdown.appendChild(group);
-      });
-      item.appendChild(trigger);
-      item.appendChild(dropdown);
-      menu.appendChild(item);
-    }
   }
 
   function renderPopularTools(tools) {

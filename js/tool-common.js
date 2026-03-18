@@ -5,8 +5,30 @@
   var isToolPage=!!m;
   var currentFile=m?m[1]:null;
 
-  var KEY_NAV=["JSON & API","Encoding & Decoding","Text Tools","Developer Tools","PDF & Export","Date & Time","Web & Network"];
+  // Simplified navigation: 5 scenario-based categories
+  var KEY_NAV=["JSON & API","Text & Data","Code & Dev","Converters","Calculators"];
+
+  // Map detailed categories to simplified navigation groups
+  var CATEGORY_NAV_MAP={
+    "JSON & API":"JSON & API",
+    "Text Tools":"Text & Data",
+    "Encoding & Decoding":"Text & Data",
+    "Date & Time":"Text & Data",
+    "Productivity":"Text & Data",
+    "Developer Tools":"Code & Dev",
+    "Web & Network":"Code & Dev",
+    "SEO Tools":"Code & Dev",
+    "PDF & Export":"Code & Dev",
+    "Images & Colors":"Code & Dev",
+    "Unit Converters":"Converters",
+    "Generators":"Converters",
+    "Security & Tokens":"Converters",
+    "Calculators":"Calculators"
+  };
+
   var CAT_ORDER=["JSON & API","Encoding & Decoding","Text Tools","Images & Colors","PDF & Export","Date & Time","Productivity","Calculators","Generators","Unit Converters","Security & Tokens","Web & Network","SEO Tools","Developer Tools"];
+
+  // eslint-disable-next-line no-unused-vars
 
   function sortTools(tools){
     return tools.slice().sort(function(a,b){
@@ -33,19 +55,27 @@
     }
     var menu=document.getElementById("tool-top-nav-menu")||header.querySelector(".top-nav-menu");
     if(!menu||menu.children.length>0)return;
-    var otherCats=CAT_ORDER.concat(Object.keys(byCat).filter(function(c){return CAT_ORDER.indexOf(c)===-1})).filter(function(c){return KEY_NAV.indexOf(c)===-1&&byCat[c]&&byCat[c].length>0});
-    KEY_NAV.forEach(function(cat){
-      var list=byCat[cat];
-      if(!list||!list.length)return;
+
+    // Group tools by simplified navigation categories
+    var navGroups={};
+    KEY_NAV.forEach(function(navCat){navGroups[navCat]=[];});
+    Object.keys(byCat).forEach(function(cat){
+      var navCat=CATEGORY_NAV_MAP[cat]||"Code & Dev";
+      if(navGroups[navCat]){navGroups[navCat]=navGroups[navCat].concat(byCat[cat]);}
+    });
+
+    KEY_NAV.forEach(function(navCat){
+      var tools=navGroups[navCat];
+      if(!tools||!tools.length)return;
       var item=document.createElement("div");
       item.className="top-nav-item";
       var btn=document.createElement("button");
       btn.className="top-nav-trigger";
       btn.type="button";
-      btn.textContent=cat+" ▾";
+      btn.textContent=navCat+" ▾";
       var drop=document.createElement("div");
       drop.className="top-nav-dropdown";
-      sortTools(list).forEach(function(t){
+      sortTools(tools).forEach(function(t){
         var a=document.createElement("a");
         a.href="/tools/"+t.file+".html";
         a.textContent=t.name;
@@ -55,33 +85,6 @@
       item.appendChild(drop);
       menu.appendChild(item);
     });
-    if(otherCats.length>0){
-      var item=document.createElement("div");
-      item.className="top-nav-item";
-      var btn=document.createElement("button");
-      btn.className="top-nav-trigger";
-      btn.type="button";
-      btn.textContent="Other ▾";
-      var drop=document.createElement("div");
-      drop.className="top-nav-dropdown top-nav-dropdown-other";
-      otherCats.forEach(function(cat){
-        var list=byCat[cat];
-        if(!list||!list.length)return;
-        var g=document.createElement("div");
-        g.className="top-nav-dropdown-group";
-        g.innerHTML="<div class=\"top-nav-dropdown-group-title\">"+escapeHtml(cat)+"</div>";
-        sortTools(list).forEach(function(t){
-          var a=document.createElement("a");
-          a.href="/tools/"+t.file+".html";
-          a.textContent=t.name;
-          g.appendChild(a);
-        });
-        drop.appendChild(g);
-      });
-      item.appendChild(btn);
-      item.appendChild(drop);
-      menu.appendChild(item);
-    }
   }
 
   function injectBackToTop(){
