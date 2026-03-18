@@ -16,6 +16,68 @@
 <meta name="twitter:description" content="Free online SHA-256 Hash Generator to hash text in your browser for checksums, integrity checks, test fixtures and security-related debugging. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Use Hash Generator",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "text": "Enter your text or select the token type."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "text": "Configure security options (length, algorithm, etc.)."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "text": "Click Generate or Hash to process."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "text": "Copy the secure value for your application."
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are generated passwords secure?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We use cryptographically secure random generation. For maximum security, use passwords of 16+ characters with mixed character types."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my input data stored?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All processing happens in your browser. Nothing is sent to our servers or stored."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What hash algorithms are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We support SHA-256 and other common algorithms using the Web Crypto API for secure hashing."
+      }
+    }
+  ]
+}
+</script>
 </head>
 
 <body>
@@ -47,6 +109,30 @@
 <h3>About Hash Generator</h3>
 <p>This hash generator creates a SHA-256 hash from text directly in the browser.</p>
 <p>It is useful for checksums, integrity checks, test fixtures and security-related debugging when you need a quick hash value without installing a separate tool.</p>
+</section>
+
+<section class="how-to-use">
+<h3>How to Use Hash Generator</h3>
+<ol class="how-to-steps">
+  <li><strong>Step 1:</strong> Enter your text or select the token type.</li>
+  <li><strong>Step 2:</strong> Configure security options (length, algorithm, etc.).</li>
+  <li><strong>Step 3:</strong> Click Generate or Hash to process.</li>
+  <li><strong>Step 4:</strong> Copy the secure value for your application.</li>
+</ol>
+</section>
+<section class="faq">
+<h3>Frequently Asked Questions</h3>
+<dl class="faq-list">
+
+  <dt>Are generated passwords secure?</dt>
+  <dd>Yes. We use cryptographically secure random generation. For maximum security, use passwords of 16+ characters with mixed character types.</dd>
+
+  <dt>Is my input data stored?</dt>
+  <dd>No. All processing happens in your browser. Nothing is sent to our servers or stored.</dd>
+
+  <dt>What hash algorithms are supported?</dt>
+  <dd>We support SHA-256 and other common algorithms using the Web Crypto API for secure hashing.</dd>
+</dl>
 </section>
 </main>
 

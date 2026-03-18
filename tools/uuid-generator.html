@@ -16,6 +16,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Use UUID Generator",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "text": "Configure the generation options (length, character sets, etc.)."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "text": "Click Generate to create your random value."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "text": "Review the generated result."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "text": "Copy the value to use it in your application."
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are the generated values secure?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We use cryptographically secure random number generators (crypto.getRandomValues) when available in your browser."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I generate multiple values at once?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Currently you can generate one value at a time. Click Generate again to create a new value."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a limit on how many I can generate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No limit. You can generate as many values as you need, all processed locally in your browser."
+      }
+    }
+  ]
+}
+</script>
 </head>
 
 <body>
@@ -40,6 +102,30 @@
 <h3>About UUID Generator</h3>
 <p>This UUID generator creates random UUID v4 values instantly for IDs, keys and test data.</p>
 <p>It is useful for mock records, database seeds, API testing and any workflow that needs unique identifiers without setting up code first.</p>
+</section>
+
+<section class="how-to-use">
+<h3>How to Use UUID Generator</h3>
+<ol class="how-to-steps">
+  <li><strong>Step 1:</strong> Configure the generation options (length, character sets, etc.).</li>
+  <li><strong>Step 2:</strong> Click Generate to create your random value.</li>
+  <li><strong>Step 3:</strong> Review the generated result.</li>
+  <li><strong>Step 4:</strong> Copy the value to use it in your application.</li>
+</ol>
+</section>
+<section class="faq">
+<h3>Frequently Asked Questions</h3>
+<dl class="faq-list">
+
+  <dt>Are the generated values secure?</dt>
+  <dd>Yes. We use cryptographically secure random number generators (crypto.getRandomValues) when available in your browser.</dd>
+
+  <dt>Can I generate multiple values at once?</dt>
+  <dd>Currently you can generate one value at a time. Click Generate again to create a new value.</dd>
+
+  <dt>Is there a limit on how many I can generate?</dt>
+  <dd>No limit. You can generate as many values as you need, all processed locally in your browser.</dd>
+</dl>
 </section>
 </main>
 
