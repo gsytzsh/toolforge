@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://toolforge.site/sitemap.xml
+
+# Crawl-delay (optional, for polite crawling)
+Crawl-delay: 1
