@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Page Not Found | ToolForge</title>
-<meta name="description" content="The page you're looking for doesn't exist. Browse ToolForge developer tools.">
+<meta name="description" content="The page you're looking for doesn't exist. Browse ToolForge developer tools including JSON formatter, Base64 tools, UUID generator and more.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://toolforge.site/">
 <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="stylesheet" href="/css/style.css">
@@ -23,6 +25,11 @@
 <h1>Page Not Found</h1>
 <p class="subtitle">The page you're looking for doesn't exist or has been moved.</p>
 <p><a href="/">← Back to all tools</a></p>
+
+<div style="max-width:500px;margin:24px auto;">
+<input id="search" placeholder="Search tools..." onkeyup="searchTools()" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:6px;font-size:16px;">
+</div>
+
 <h3>Popular Tools</h3>
 <p>
   <a href="/tools/json-viewer.html">JSON Viewer</a> ·
@@ -34,7 +41,28 @@
   <a href="/tools/html-formatter.html">HTML Formatter</a> ·
   <a href="/tools/js-beautify-minify.html">JS Beautify</a>
 </p>
+
+<h3>Browse Categories</h3>
+<p>
+  <a href="/category/json--data.html">JSON &amp; Data</a> ·
+  <a href="/category/encoding--decoding.html">Encoding &amp; Decoding</a> ·
+  <a href="/category/text.html">Text</a> ·
+  <a href="/category/pdf--export.html">PDF &amp; Export</a> ·
+  <a href="/category/date--time.html">Date &amp; Time</a> ·
+  <a href="/category/security--tokens.html">Security &amp; Tokens</a> ·
+  <a href="/category/seo--webmaster.html">SEO &amp; Webmaster</a> ·
+  <a href="/category/calculators.html">Calculators</a>
+</p>
 </main>
+<script src="/js/favorites.js"></script>
+<script src="/js/index.js"></script>
+<script>
+function searchTools(){
+var keyword=document.getElementById("search").value.toLowerCase().trim();
+if(!keyword){return;}
+window.location.href="/?q="+encodeURIComponent(keyword);
+}
+</script>
 <script src="/js/tool-common.js"></script>
 </body>
 </html>

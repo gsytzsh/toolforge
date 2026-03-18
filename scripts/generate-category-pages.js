@@ -97,7 +97,19 @@ function main() {
 <title>${escapeHtml(cat)} – Developer Tools | ToolForge</title>
 <meta name="description" content="${escapeHtml(desc)} Browse ${list.length} ${escapeHtml(cat)} tools. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
 <link rel="canonical" href="${BASE_URL}/category/${slug}.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="${escapeHtml(cat)} – Developer Tools | ToolForge">
+<meta property="og:description" content="${escapeHtml(desc)} Browse ${list.length} ${escapeHtml(cat)} tools.">
+<meta property="og:url" content="${BASE_URL}/category/${slug}.html">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="${escapeHtml(cat)} – Developer Tools | ToolForge">
+<meta name="twitter:description" content="${escapeHtml(desc)} Browse ${list.length} ${escapeHtml(cat)} tools.">
+
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>

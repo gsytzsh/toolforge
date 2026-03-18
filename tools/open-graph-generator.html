@@ -68,7 +68,8 @@ let lines=[
   '<meta property="og:url" content="'+url+'">'
 ]
 if(image){
-lines.push('<meta property="og:image" content="'+image+'">')
+lines.push('<meta property="og:image" content="'+image+'">
+<meta name="robots" content="index, follow">')
 }
 document.getElementById("output").value=lines.join("\n")
 setStatus("Open Graph tags generated.","#16a34a")
