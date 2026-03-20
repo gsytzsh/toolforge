@@ -31,22 +31,22 @@
     {
       "@type": "HowToStep",
       "position": 1,
-      "text": "Enter the URL, IP address or other network data."
+      "text": "enter a numeric HTTP status code"
     },
     {
       "@type": "HowToStep",
       "position": 2,
-      "text": "Select the analysis or lookup option you need."
+      "text": "Check whether you need client, server or redirect class references."
     },
     {
       "@type": "HowToStep",
       "position": 3,
-      "text": "Click the action button to get results."
+      "text": "Search the status table and view explanation text."
     },
     {
       "@type": "HowToStep",
       "position": 4,
-      "text": "Review the information for your troubleshooting."
+      "text": "Use the code description in incident notes or API diagnostics."
     }
   ]
 }
@@ -58,18 +58,26 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Is my data logged?",
+      "name": "What is HTTP Status Lookup mainly used for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. All lookups and analysis happen in your browser or through direct API calls. We don't store any of your queries."
+        "text": "HTTP Status Lookup is mainly used to look up HTTP status codes and their meanings for faster debugging."
       }
     },
     {
       "@type": "Question",
-      "name": "Why is some information missing?",
+      "name": "Does HTTP Status Lookup send my input to a server?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Some data depends on external APIs or the target server's response. If information is unavailable, it may be due to API limits or server restrictions."
+        "text": "For normal usage, HTTP Status Lookup processes data locally in your browser so you can test quickly without uploading project files."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can HTTP Status Lookup explain service-specific error bodies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It explains generic status semantics. Vendor-specific error details still come from the API's own response schema."
       }
     }
   ]
@@ -105,21 +113,24 @@
 <section class="how-to-use">
 <h3>How to Use HTTP Status Lookup</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Enter the URL, IP address or other network data.</li>
-  <li><strong>Step 2:</strong> Select the analysis or lookup option you need.</li>
-  <li><strong>Step 3:</strong> Click the action button to get results.</li>
-  <li><strong>Step 4:</strong> Review the information for your troubleshooting.</li>
+  <li><strong>Step 1:</strong> enter a numeric HTTP status code</li>
+  <li><strong>Step 2:</strong> Check whether you need client, server or redirect class references.</li>
+  <li><strong>Step 3:</strong> Search the status table and view explanation text.</li>
+  <li><strong>Step 4:</strong> Use the code description in incident notes or API diagnostics.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>Is my data logged?</dt>
-  <dd>No. All lookups and analysis happen in your browser or through direct API calls. We don't store any of your queries.</dd>
+  <dt>What is HTTP Status Lookup mainly used for?</dt>
+  <dd>HTTP Status Lookup is mainly used to look up HTTP status codes and their meanings for faster debugging.</dd>
 
-  <dt>Why is some information missing?</dt>
-  <dd>Some data depends on external APIs or the target server's response. If information is unavailable, it may be due to API limits or server restrictions.</dd>
+  <dt>Does HTTP Status Lookup send my input to a server?</dt>
+  <dd>For normal usage, HTTP Status Lookup processes data locally in your browser so you can test quickly without uploading project files.</dd>
+
+  <dt>Can HTTP Status Lookup explain service-specific error bodies?</dt>
+  <dd>It explains generic status semantics. Vendor-specific error details still come from the API's own response schema.</dd>
 </dl>
 </section>
 </main>

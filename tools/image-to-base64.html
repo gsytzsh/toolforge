@@ -28,22 +28,22 @@
     {
       "@type": "HowToStep",
       "position": 1,
-      "text": "Upload your image or enter the color value."
+      "text": "upload an image from your device"
     },
     {
       "@type": "HowToStep",
       "position": 2,
-      "text": "Adjust the settings (size, format, compression, etc.)."
+      "text": "Confirm output format and data URI requirements."
     },
     {
       "@type": "HowToStep",
       "position": 3,
-      "text": "Click Process to see the preview."
+      "text": "Generate Base64 string from image bytes."
     },
     {
       "@type": "HowToStep",
       "position": 4,
-      "text": "Download the processed image or copy the color code."
+      "text": "Copy Base64 output for HTML, CSS or API payloads."
     }
   ]
 }
@@ -55,26 +55,26 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What image formats are supported?",
+      "name": "What is Image to Base64 mainly used for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We support common formats including JPEG, PNG, WebP, and GIF for upload and export."
+        "text": "Image to Base64 is mainly used to convert image files to Base64 strings for embedding and transport."
       }
     },
     {
       "@type": "Question",
-      "name": "Is there a file size limit?",
+      "name": "Does Image to Base64 send my input to a server?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Most browsers handle images up to 10MB well. Larger files may cause performance issues."
+        "text": "For normal usage, Image to Base64 processes data locally in your browser so you can test quickly without uploading project files."
       }
     },
     {
       "@type": "Question",
-      "name": "Are color values accurate?",
+      "name": "When should I avoid embedding images as Base64?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. We use standard color conversion formulas for accurate HEX, RGB, HSL, and CMYK values."
+        "text": "Large Base64 payloads can increase document size and reduce cache efficiency. External assets are often better for big images."
       }
     }
   ]
@@ -113,24 +113,24 @@
 <section class="how-to-use">
 <h3>How to Use Image to Base64</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Upload your image or enter the color value.</li>
-  <li><strong>Step 2:</strong> Adjust the settings (size, format, compression, etc.).</li>
-  <li><strong>Step 3:</strong> Click Process to see the preview.</li>
-  <li><strong>Step 4:</strong> Download the processed image or copy the color code.</li>
+  <li><strong>Step 1:</strong> upload an image from your device</li>
+  <li><strong>Step 2:</strong> Confirm output format and data URI requirements.</li>
+  <li><strong>Step 3:</strong> Generate Base64 string from image bytes.</li>
+  <li><strong>Step 4:</strong> Copy Base64 output for HTML, CSS or API payloads.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What image formats are supported?</dt>
-  <dd>We support common formats including JPEG, PNG, WebP, and GIF for upload and export.</dd>
+  <dt>What is Image to Base64 mainly used for?</dt>
+  <dd>Image to Base64 is mainly used to convert image files to Base64 strings for embedding and transport.</dd>
 
-  <dt>Is there a file size limit?</dt>
-  <dd>Most browsers handle images up to 10MB well. Larger files may cause performance issues.</dd>
+  <dt>Does Image to Base64 send my input to a server?</dt>
+  <dd>For normal usage, Image to Base64 processes data locally in your browser so you can test quickly without uploading project files.</dd>
 
-  <dt>Are color values accurate?</dt>
-  <dd>Yes. We use standard color conversion formulas for accurate HEX, RGB, HSL, and CMYK values.</dd>
+  <dt>When should I avoid embedding images as Base64?</dt>
+  <dd>Large Base64 payloads can increase document size and reduce cache efficiency. External assets are often better for big images.</dd>
 </dl>
 </section>
 </main>
