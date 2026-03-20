@@ -6,7 +6,7 @@ Free online developer tools collection: JSON formatter, Base64 encoder, UUID gen
 
 ## Features
 
-- **210+ tools** across 18 categories
+- **212 tools** across 14 categories
 - **Category landing pages** – dedicated pages per category for SEO
 - **No backend required** – all tools run in the browser
 - **Static site** – HTML, CSS, vanilla JS
@@ -18,24 +18,20 @@ Free online developer tools collection: JSON formatter, Base64 encoder, UUID gen
 
 | Category | Examples |
 |----------|----------|
-| JSON & Data | JSON Viewer, JSON Diff, JSON to CSV/XML/YAML |
+| JSON & API | JSON Viewer, JSON Diff, JSON to CSV/XML/YAML |
 | Encoding & Decoding | Base64, URL Encode, HTML Escape, Hex, Morse Code, Gzip, Punycode |
-| Text | Case Converter, Lorem Ipsum, Slug, Word Frequency, Text Statistics |
+| Text Tools | Case Converter, Lorem Ipsum, Slug, Word Frequency, Text Statistics |
 | Images & Colors | Color Picker, Image to Base64, Image Resize, SVG Viewer |
 | PDF & Export | JSON/CSV/Excel/Image/Markdown/HTML to PDF |
 | Date & Time | Timestamp, Timezone, Calendar, Stopwatch, Countdown |
-| Security & Tokens | Password Generator, Hash, JWT, UUID |
-| SEO & Webmaster | Robots.txt, Sitemap, Schema, OG, UTM, Canonical |
-| Code & Formatting | Regex, SQL Formatter, HTML/XML Formatter, Cron, Unicode Reference |
-| Web & Network | IP Info, HTTP Status, cURL to Fetch, URL Parser, Viewport Size |
+| Productivity | Notes & Lists, Reading Time, Speech Time |
 | Calculators | Loan, BMI, Percentage, Scientific, Date Diff |
-| Time & Planning | Pomodoro, Working Days, Meeting Time Finder |
-| Daily Productivity | Notes & Lists, Reading Time, Speech Time |
-| Generators & Converters | UUID, Base Converter, Random Number |
-| Debug & Testing | Regex Tester, Diff Patch, XPath Tester |
-| API & Data | HTTP Request Builder, JWT Inspector, JSON Path |
-| Database | SQL Query Builder, SQL WHERE Builder |
-| Money & Decisions | Split Bill, Currency Converter, Unit Price |
+| Generators | UUID, Random Number, Random String |
+| Unit Converters | Length, Weight, Temperature, Area, Volume |
+| Security & Tokens | Password Generator, Hash, JWT, UUID |
+| Web & Network | IP Info, HTTP Status, URL Parser, Viewport Size |
+| SEO Tools | Robots.txt, Sitemap, Schema, OG, UTM, Canonical |
+| Developer Tools | Regex, SQL Formatter, HTML/XML Formatter, Cron, Unicode Reference |
 
 ## Project Structure
 
@@ -50,8 +46,8 @@ toolforge/
 ├── js/
 │   ├── index.js            # Homepage logic, search, categories, top nav
 │   └── tool-common.js      # Tool pages: top nav, breadcrumb, related tools, Schema
-├── tools/                  # 210+ tool pages (*.html)
-├── category/               # 18 category landing pages (generated)
+├── tools/                  # 212 tool pages (*.html)
+├── category/               # 14 category landing pages (generated)
 └── scripts/
     ├── build.js                    # Unified build (category pages + sitemap)
     ├── generate-sitemap.js         # Build sitemap from tools-list.json

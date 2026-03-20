@@ -3,42 +3,7 @@
 
   let allTools = [];
 
-  // Simplified top navigation: 5 scenario-based categories
-  const KEY_NAV_CATEGORIES = [
-    "JSON & API",
-    "Text & Data",
-    "Code & Dev",
-    "Converters",
-    "Calculators"
-  ];
-
-  // Map detailed categories to simplified navigation groups
-  const CATEGORY_NAV_MAP = {
-    // JSON & API
-    "JSON & API": "JSON & API",
-
-    // Text & Data (Text + Encoding + Date/Time + Productivity)
-    "Text Tools": "Text & Data",
-    "Encoding & Decoding": "Text & Data",
-    "Date & Time": "Text & Data",
-    "Productivity": "Text & Data",
-
-    // Code & Dev (Developer Tools + Web/Network + SEO + PDF + Images)
-    "Developer Tools": "Code & Dev",
-    "Web & Network": "Code & Dev",
-    "SEO Tools": "Code & Dev",
-    "PDF & Export": "Code & Dev",
-    "Images & Colors": "Code & Dev",
-
-    // Converters (Unit Converters + Generators + Security)
-    "Unit Converters": "Converters",
-    "Generators": "Converters",
-    "Security & Tokens": "Converters",
-
-    // Calculators
-    "Calculators": "Calculators"
-  };
-
+  // Navigation uses the same 14 canonical categories as tools-list.json.
   const CATEGORY_ORDER = [
     "JSON & API",
     "Encoding & Decoding",
@@ -55,6 +20,8 @@
     "SEO Tools",
     "Developer Tools"
   ];
+
+  const NAV_CATEGORIES = CATEGORY_ORDER.slice();
 
   const CATEGORY_DESCRIPTIONS = {
     "JSON & API": "Open, format, validate and convert JSON, CSV, XML and YAML. Build and test API requests, inspect payloads and work with structured data.",
@@ -146,22 +113,12 @@
 
     menu.innerHTML = "";
 
-    // Group tools by simplified navigation categories
-    const navGroups = {};
-    KEY_NAV_CATEGORIES.forEach(function(navCat) {
-      navGroups[navCat] = [];
-    });
+    const navOrder = NAV_CATEGORIES.concat(
+      Object.keys(groups).filter(function(c) { return NAV_CATEGORIES.indexOf(c) === -1; })
+    );
 
-    // Map each detailed category to its navigation group
-    Object.keys(groups).forEach(function(cat) {
-      const navCat = CATEGORY_NAV_MAP[cat] || "Code & Dev";
-      if (navGroups[navCat]) {
-        navGroups[navCat] = navGroups[navCat].concat(groups[cat]);
-      }
-    });
-
-    KEY_NAV_CATEGORIES.forEach(function(navCat) {
-      const tools = navGroups[navCat];
+    navOrder.forEach(function(navCat) {
+      const tools = groups[navCat];
       if (!tools || tools.length === 0) return;
       const sortedTools = sortTools(tools);
       const item = document.createElement("div");

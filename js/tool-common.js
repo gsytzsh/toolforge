@@ -5,27 +5,7 @@
   var isToolPage=!!m;
   var currentFile=m?m[1]:null;
 
-  // Simplified navigation: 5 scenario-based categories
-  var KEY_NAV=["JSON & API","Text & Data","Code & Dev","Converters","Calculators"];
-
-  // Map detailed categories to simplified navigation groups
-  var CATEGORY_NAV_MAP={
-    "JSON & API":"JSON & API",
-    "Text Tools":"Text & Data",
-    "Encoding & Decoding":"Text & Data",
-    "Date & Time":"Text & Data",
-    "Productivity":"Text & Data",
-    "Developer Tools":"Code & Dev",
-    "Web & Network":"Code & Dev",
-    "SEO Tools":"Code & Dev",
-    "PDF & Export":"Code & Dev",
-    "Images & Colors":"Code & Dev",
-    "Unit Converters":"Converters",
-    "Generators":"Converters",
-    "Security & Tokens":"Converters",
-    "Calculators":"Calculators"
-  };
-
+  // Navigation uses the same canonical categories as tools-list.json.
   var CAT_ORDER=["JSON & API","Encoding & Decoding","Text Tools","Images & Colors","PDF & Export","Date & Time","Productivity","Calculators","Generators","Unit Converters","Security & Tokens","Web & Network","SEO Tools","Developer Tools"];
 
   // eslint-disable-next-line no-unused-vars
@@ -56,16 +36,9 @@
     var menu=document.getElementById("tool-top-nav-menu")||header.querySelector(".top-nav-menu");
     if(!menu||menu.children.length>0)return;
 
-    // Group tools by simplified navigation categories
-    var navGroups={};
-    KEY_NAV.forEach(function(navCat){navGroups[navCat]=[];});
-    Object.keys(byCat).forEach(function(cat){
-      var navCat=CATEGORY_NAV_MAP[cat]||"Code & Dev";
-      if(navGroups[navCat]){navGroups[navCat]=navGroups[navCat].concat(byCat[cat]);}
-    });
-
-    KEY_NAV.forEach(function(navCat){
-      var tools=navGroups[navCat];
+    var navOrder=CAT_ORDER.concat(Object.keys(byCat).filter(function(c){return CAT_ORDER.indexOf(c)===-1;}));
+    navOrder.forEach(function(navCat){
+      var tools=byCat[navCat];
       if(!tools||!tools.length)return;
       var item=document.createElement("div");
       item.className="top-nav-item";
