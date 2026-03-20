@@ -26,22 +26,22 @@
     {
       "@type": "HowToStep",
       "position": 1,
-      "text": "Enter the date or time value."
+      "text": "Open Meeting Time Finder and enter your source input data in the main field."
     },
     {
       "@type": "HowToStep",
       "position": 2,
-      "text": "Select the target format or timezone if applicable."
+      "text": "Confirm timezone and timestamp precision (seconds vs milliseconds) where applicable."
     },
     {
       "@type": "HowToStep",
       "position": 3,
-      "text": "Click Convert or Calculate to see the result."
+      "text": "Run conversion/calculation and inspect date boundaries carefully."
     },
     {
       "@type": "HowToStep",
       "position": 4,
-      "text": "Copy the converted value for your use."
+      "text": "Copy normalized date-time values for logs, scheduling or APIs."
     }
   ]
 }
@@ -53,18 +53,26 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What timezone is used?",
+      "name": "What is Meeting Time Finder mainly used for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "By default, we use your browser's local timezone. Some tools let you select specific timezones for conversion."
+        "text": "Meeting Time Finder is mainly used to compare the same meeting hour across multiple UTC offsets."
       }
     },
     {
       "@type": "Question",
-      "name": "What is Unix timestamp?",
+      "name": "Does Meeting Time Finder send my input to a server?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Unix timestamp is the number of seconds (or milliseconds) since January 1, 1970 UTC. It's commonly used in programming and databases."
+        "text": "For normal usage, Meeting Time Finder processes data locally in your browser so you can work without uploading project files."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why can date results be off by hours or days?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Timezone offsets, daylight-saving changes and mixed UTC/local assumptions are the most common causes."
       }
     }
   ]
@@ -97,21 +105,24 @@
 <section class="how-to-use">
 <h3>How to Use Meeting Time Finder</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Enter the date or time value.</li>
-  <li><strong>Step 2:</strong> Select the target format or timezone if applicable.</li>
-  <li><strong>Step 3:</strong> Click Convert or Calculate to see the result.</li>
-  <li><strong>Step 4:</strong> Copy the converted value for your use.</li>
+  <li><strong>Step 1:</strong> Open Meeting Time Finder and enter your source input data in the main field.</li>
+  <li><strong>Step 2:</strong> Confirm timezone and timestamp precision (seconds vs milliseconds) where applicable.</li>
+  <li><strong>Step 3:</strong> Run conversion/calculation and inspect date boundaries carefully.</li>
+  <li><strong>Step 4:</strong> Copy normalized date-time values for logs, scheduling or APIs.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What timezone is used?</dt>
-  <dd>By default, we use your browser's local timezone. Some tools let you select specific timezones for conversion.</dd>
+  <dt>What is Meeting Time Finder mainly used for?</dt>
+  <dd>Meeting Time Finder is mainly used to compare the same meeting hour across multiple UTC offsets.</dd>
 
-  <dt>What is Unix timestamp?</dt>
-  <dd>Unix timestamp is the number of seconds (or milliseconds) since January 1, 1970 UTC. It's commonly used in programming and databases.</dd>
+  <dt>Does Meeting Time Finder send my input to a server?</dt>
+  <dd>For normal usage, Meeting Time Finder processes data locally in your browser so you can work without uploading project files.</dd>
+
+  <dt>Why can date results be off by hours or days?</dt>
+  <dd>Timezone offsets, daylight-saving changes and mixed UTC/local assumptions are the most common causes.</dd>
 </dl>
 </section>
 </main>
