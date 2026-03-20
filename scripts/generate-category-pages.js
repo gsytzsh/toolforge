@@ -35,6 +35,23 @@ const CATEGORY_DESCRIPTIONS = {
   "Developer Tools": "Format code, test regex, build SQL queries and other developer workflows for coding and debugging."
 };
 
+const CATEGORY_SEO_FOCUS = {
+  "JSON & API": "JSON formatter, JSON viewer, diff, schema and API helpers",
+  "Encoding & Decoding": "Base64, URL, HTML, binary, hex and gzip converters",
+  "Text Tools": "case conversion, line cleanup, slug and text analysis",
+  "Images & Colors": "image resize, Base64 image, SVG and color utilities",
+  "PDF & Export": "JSON, CSV, Excel, HTML and Markdown to PDF tools",
+  "Date & Time": "timestamp conversion, date diff, timezone and timer tools",
+  "Productivity": "notes, reading time and speech time helpers",
+  "Calculators": "loan, BMI, percentage, statistics and finance calculators",
+  "Generators": "UUID, random value and test data generators",
+  "Unit Converters": "length, weight, temperature, area and speed converters",
+  "Security & Tokens": "password, hash, JWT and encryption utilities",
+  "Web & Network": "URL, IP, HTTP header, status code and subnet tools",
+  "SEO Tools": "meta tags, robots, schema, sitemap and UTM utilities",
+  "Developer Tools": "regex, SQL/HTML/XML formatters and dev references"
+};
+
 function slugify(str) {
   return String(str).toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
 }
@@ -78,6 +95,11 @@ function main() {
 
     const slug = slugify(cat);
     const desc = CATEGORY_DESCRIPTIONS[cat] || `${cat} tools for developers.`;
+    const focus = CATEGORY_SEO_FOCUS[cat] || `${cat.toLowerCase()} utilities`;
+    const normalizedCat = String(cat).trim();
+    const categoryLabel = /tools$/i.test(normalizedCat) ? normalizedCat : `${normalizedCat} Tools`;
+    const title = `${categoryLabel} - Free Online ${focus} | ToolForge`;
+    const metaDesc = `Free online ${categoryLabel}: ${focus}. ${desc} Browse ${list.length} tools on ToolForge.`;
     const toolLinks = list
       .sort((a, b) => (a.popularOrder || 999) - (b.popularOrder || 999) || (a.name || "").localeCompare(b.name || ""))
       .map((t) => `    <li><a href="/tools/${t.file}.html">${escapeHtml(t.name)}</a></li>`)
@@ -87,21 +109,21 @@ function main() {
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>${escapeHtml(cat)} – Developer Tools | ToolForge</title>
-<meta name="description" content="${escapeHtml(desc)} Browse ${list.length} ${escapeHtml(cat)} tools. Part of the ToolForge developer tools collection.">
+<title>${escapeHtml(title)}</title>
+<meta name="description" content="${escapeHtml(metaDesc)}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="${BASE_URL}/category/${slug}.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="${escapeHtml(cat)} – Developer Tools | ToolForge">
-<meta property="og:description" content="${escapeHtml(desc)} Browse ${list.length} ${escapeHtml(cat)} tools.">
+<meta property="og:title" content="${escapeHtml(title)}">
+<meta property="og:description" content="${escapeHtml(metaDesc)}">
 <meta property="og:url" content="${BASE_URL}/category/${slug}.html">
 
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="${escapeHtml(cat)} – Developer Tools | ToolForge">
-<meta name="twitter:description" content="${escapeHtml(desc)} Browse ${list.length} ${escapeHtml(cat)} tools.">
+<meta name="twitter:title" content="${escapeHtml(title)}">
+<meta name="twitter:description" content="${escapeHtml(metaDesc)}">
 
 <link rel="stylesheet" href="/css/style.css">
 </head>
