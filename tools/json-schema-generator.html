@@ -26,22 +26,22 @@
     {
       "@type": "HowToStep",
       "position": 1,
-      "text": "Copy and paste your JSON data into the input field."
+      "text": "paste representative JSON samples into the input area"
     },
     {
       "@type": "HowToStep",
       "position": 2,
-      "text": "Select the operation you want to perform (format, validate, convert, etc.)."
+      "text": "Review inferred field types and optional keys before generating schema."
     },
     {
       "@type": "HowToStep",
       "position": 3,
-      "text": "Click the action button to process your data."
+      "text": "Generate the schema and inspect required properties and nested definitions."
     },
     {
       "@type": "HowToStep",
       "position": 4,
-      "text": "Review the result and click Copy to use it in your project."
+      "text": "Copy schema output into your API contracts, validators or documentation."
     }
   ]
 }
@@ -53,26 +53,26 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is JSON?",
+      "name": "What is JSON Schema Generator mainly used for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "JSON (JavaScript Object Notation) is a lightweight data format used for storing and exchanging data between systems. It uses human-readable key-value pairs and is commonly used in web APIs."
+        "text": "JSON Schema Generator is mainly used to generate JSON Schema from sample payloads so validation rules can be reused across services."
       }
     },
     {
       "@type": "Question",
-      "name": "Is my data sent to a server?",
+      "name": "Does JSON Schema Generator send my input to a server?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. All JSON processing happens entirely in your browser. Your data never leaves your device, ensuring complete privacy and security."
+        "text": "For normal usage, JSON Schema Generator processes data locally in your browser so you can test quickly without uploading project files."
       }
     },
     {
       "@type": "Question",
-      "name": "Can I use this for large JSON files?",
+      "name": "Why does JSON Schema Generator infer wrong types for some fields?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, but very large files (over 10MB) may cause browser performance issues. For best results, keep files under 5MB."
+        "text": "Type inference depends on sample data. Include diverse examples for fields that can vary, then adjust schema manually if needed."
       }
     }
   ]
@@ -102,24 +102,24 @@
 <section class="how-to-use">
 <h3>How to Use JSON Schema Generator</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Copy and paste your JSON data into the input field.</li>
-  <li><strong>Step 2:</strong> Select the operation you want to perform (format, validate, convert, etc.).</li>
-  <li><strong>Step 3:</strong> Click the action button to process your data.</li>
-  <li><strong>Step 4:</strong> Review the result and click Copy to use it in your project.</li>
+  <li><strong>Step 1:</strong> paste representative JSON samples into the input area</li>
+  <li><strong>Step 2:</strong> Review inferred field types and optional keys before generating schema.</li>
+  <li><strong>Step 3:</strong> Generate the schema and inspect required properties and nested definitions.</li>
+  <li><strong>Step 4:</strong> Copy schema output into your API contracts, validators or documentation.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is JSON?</dt>
-  <dd>JSON (JavaScript Object Notation) is a lightweight data format used for storing and exchanging data between systems. It uses human-readable key-value pairs and is commonly used in web APIs.</dd>
+  <dt>What is JSON Schema Generator mainly used for?</dt>
+  <dd>JSON Schema Generator is mainly used to generate JSON Schema from sample payloads so validation rules can be reused across services.</dd>
 
-  <dt>Is my data sent to a server?</dt>
-  <dd>No. All JSON processing happens entirely in your browser. Your data never leaves your device, ensuring complete privacy and security.</dd>
+  <dt>Does JSON Schema Generator send my input to a server?</dt>
+  <dd>For normal usage, JSON Schema Generator processes data locally in your browser so you can test quickly without uploading project files.</dd>
 
-  <dt>Can I use this for large JSON files?</dt>
-  <dd>Yes, but very large files (over 10MB) may cause browser performance issues. For best results, keep files under 5MB.</dd>
+  <dt>Why does JSON Schema Generator infer wrong types for some fields?</dt>
+  <dd>Type inference depends on sample data. Include diverse examples for fields that can vary, then adjust schema manually if needed.</dd>
 </dl>
 </section>
 </main>

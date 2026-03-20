@@ -26,22 +26,22 @@
     {
       "@type": "HowToStep",
       "position": 1,
-      "text": "Copy and paste your JSON data into the input field."
+      "text": "enter operation type, fields and variables"
     },
     {
       "@type": "HowToStep",
       "position": 2,
-      "text": "Select the operation you want to perform (format, validate, convert, etc.)."
+      "text": "Check argument names and nesting to match your GraphQL schema."
     },
     {
       "@type": "HowToStep",
       "position": 3,
-      "text": "Click the action button to process your data."
+      "text": "Generate query text for your request."
     },
     {
       "@type": "HowToStep",
       "position": 4,
-      "text": "Review the result and click Copy to use it in your project."
+      "text": "Copy the generated query into your client, resolver tests or docs."
     }
   ]
 }
@@ -53,26 +53,26 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is JSON?",
+      "name": "What is GraphQL Query Builder mainly used for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "JSON (JavaScript Object Notation) is a lightweight data format used for storing and exchanging data between systems. It uses human-readable key-value pairs and is commonly used in web APIs."
+        "text": "GraphQL Query Builder is mainly used to build GraphQL queries and mutations with correct field selection and variables."
       }
     },
     {
       "@type": "Question",
-      "name": "Is my data sent to a server?",
+      "name": "Does GraphQL Query Builder send my input to a server?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. All JSON processing happens entirely in your browser. Your data never leaves your device, ensuring complete privacy and security."
+        "text": "For normal usage, GraphQL Query Builder processes data locally in your browser so you can test quickly without uploading project files."
       }
     },
     {
       "@type": "Question",
-      "name": "Can I use this for large JSON files?",
+      "name": "Why does GraphQL Query Builder output still fail validation?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, but very large files (over 10MB) may cause browser performance issues. For best results, keep files under 5MB."
+        "text": "Server schema and local query assumptions may differ. Verify field names, variable types and required arguments against introspection docs."
       }
     }
   ]
@@ -117,24 +117,24 @@
 <section class="how-to-use">
 <h3>How to Use GraphQL Query Builder</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Copy and paste your JSON data into the input field.</li>
-  <li><strong>Step 2:</strong> Select the operation you want to perform (format, validate, convert, etc.).</li>
-  <li><strong>Step 3:</strong> Click the action button to process your data.</li>
-  <li><strong>Step 4:</strong> Review the result and click Copy to use it in your project.</li>
+  <li><strong>Step 1:</strong> enter operation type, fields and variables</li>
+  <li><strong>Step 2:</strong> Check argument names and nesting to match your GraphQL schema.</li>
+  <li><strong>Step 3:</strong> Generate query text for your request.</li>
+  <li><strong>Step 4:</strong> Copy the generated query into your client, resolver tests or docs.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is JSON?</dt>
-  <dd>JSON (JavaScript Object Notation) is a lightweight data format used for storing and exchanging data between systems. It uses human-readable key-value pairs and is commonly used in web APIs.</dd>
+  <dt>What is GraphQL Query Builder mainly used for?</dt>
+  <dd>GraphQL Query Builder is mainly used to build GraphQL queries and mutations with correct field selection and variables.</dd>
 
-  <dt>Is my data sent to a server?</dt>
-  <dd>No. All JSON processing happens entirely in your browser. Your data never leaves your device, ensuring complete privacy and security.</dd>
+  <dt>Does GraphQL Query Builder send my input to a server?</dt>
+  <dd>For normal usage, GraphQL Query Builder processes data locally in your browser so you can test quickly without uploading project files.</dd>
 
-  <dt>Can I use this for large JSON files?</dt>
-  <dd>Yes, but very large files (over 10MB) may cause browser performance issues. For best results, keep files under 5MB.</dd>
+  <dt>Why does GraphQL Query Builder output still fail validation?</dt>
+  <dd>Server schema and local query assumptions may differ. Verify field names, variable types and required arguments against introspection docs.</dd>
 </dl>
 </section>
 </main>
