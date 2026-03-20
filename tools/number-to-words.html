@@ -116,7 +116,7 @@
 </main>
 <script>
 var ones="zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split(" ")
-var tens="","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"
+var tens=["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"]
 function word(n){
 if(n<20)return ones[n]
 if(n<100)return tens[~~(n/10)]+(n%10?"-"+ones[n%10]:"")

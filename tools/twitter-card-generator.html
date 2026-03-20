@@ -159,8 +159,7 @@ if(image){
 lines.push('<meta name="twitter:image" content="'+image+'">')
 }
 if(site){
-lines.push('<meta name="twitter:site" content="'+site+'">
-<meta name="robots" content="index, follow">')
+lines.push('<meta name="twitter:site" content="'+site+'">')
 }
 document.getElementById("output").value=lines.join("\n")
 setStatus("Twitter card tags generated.","#16a34a")
