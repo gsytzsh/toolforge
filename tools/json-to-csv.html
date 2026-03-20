@@ -22,28 +22,31 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use JSON CSV Converter",
-  "step": [
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Copy and paste your JSON data into the input field."
+      "@type": "Question",
+      "name": "What is JSON CSV Converter mainly used for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JSON CSV Converter is mainly used to convert array-based JSON into tabular CSV for spreadsheets, BI tools or quick exports."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Select the operation you want to perform (format, validate, convert, etc.)."
+      "@type": "Question",
+      "name": "Does JSON CSV Converter send my input to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For normal usage, JSON CSV Converter processes data locally in your browser so you can test quickly without uploading project files."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Click the action button to process your data."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Review the result and click Copy to use it in your project."
+      "@type": "Question",
+      "name": "How are nested JSON fields handled in JSON to CSV?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nested values are typically flattened or stringified. For best results, pre-normalize deeply nested objects before converting."
+      }
     }
   ]
 }
@@ -51,31 +54,28 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@type": "HowTo",
+  "name": "How to Use JSON CSV Converter",
+  "step": [
     {
-      "@type": "Question",
-      "name": "What is JSON?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "JSON (JavaScript Object Notation) is a lightweight data format used for storing and exchanging data between systems. It uses human-readable key-value pairs and is commonly used in web APIs."
-      }
+      "@type": "HowToStep",
+      "position": 1,
+      "text": "paste JSON records or load your sample JSON"
     },
     {
-      "@type": "Question",
-      "name": "Is my data sent to a server?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. All JSON processing happens entirely in your browser. Your data never leaves your device, ensuring complete privacy and security."
-      }
+      "@type": "HowToStep",
+      "position": 2,
+      "text": "Review detected keys and ensure records share consistent field names before conversion."
     },
     {
-      "@type": "Question",
-      "name": "Can I use this for large JSON files?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, but very large files (over 10MB) may cause browser performance issues. For best results, keep files under 5MB."
-      }
+      "@type": "HowToStep",
+      "position": 3,
+      "text": "Start conversion to flatten rows and generate a CSV table."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "text": "Copy or download CSV output for Excel, Google Sheets or data import tasks."
     }
   ]
 }
@@ -127,24 +127,24 @@
 <section class="how-to-use">
 <h3>How to Use JSON CSV Converter</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Copy and paste your JSON data into the input field.</li>
-  <li><strong>Step 2:</strong> Select the operation you want to perform (format, validate, convert, etc.).</li>
-  <li><strong>Step 3:</strong> Click the action button to process your data.</li>
-  <li><strong>Step 4:</strong> Review the result and click Copy to use it in your project.</li>
+  <li><strong>Step 1:</strong> paste JSON records or load your sample JSON</li>
+  <li><strong>Step 2:</strong> Review detected keys and ensure records share consistent field names before conversion.</li>
+  <li><strong>Step 3:</strong> Start conversion to flatten rows and generate a CSV table.</li>
+  <li><strong>Step 4:</strong> Copy or download CSV output for Excel, Google Sheets or data import tasks.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is JSON?</dt>
-  <dd>JSON (JavaScript Object Notation) is a lightweight data format used for storing and exchanging data between systems. It uses human-readable key-value pairs and is commonly used in web APIs.</dd>
+  <dt>What is JSON CSV Converter mainly used for?</dt>
+  <dd>JSON CSV Converter is mainly used to convert array-based JSON into tabular CSV for spreadsheets, BI tools or quick exports.</dd>
 
-  <dt>Is my data sent to a server?</dt>
-  <dd>No. All JSON processing happens entirely in your browser. Your data never leaves your device, ensuring complete privacy and security.</dd>
+  <dt>Does JSON CSV Converter send my input to a server?</dt>
+  <dd>For normal usage, JSON CSV Converter processes data locally in your browser so you can test quickly without uploading project files.</dd>
 
-  <dt>Can I use this for large JSON files?</dt>
-  <dd>Yes, but very large files (over 10MB) may cause browser performance issues. For best results, keep files under 5MB.</dd>
+  <dt>How are nested JSON fields handled in JSON to CSV?</dt>
+  <dd>Nested values are typically flattened or stringified. For best results, pre-normalize deeply nested objects before converting.</dd>
 </dl>
 </section>
 </main>

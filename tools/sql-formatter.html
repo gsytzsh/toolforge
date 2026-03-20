@@ -26,28 +26,31 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use SQL Formatter",
-  "step": [
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Enter your code or data into the input field."
+      "@type": "Question",
+      "name": "What is SQL Formatter mainly used for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "SQL Formatter is mainly used to reformat SQL queries to improve readability and maintain consistent style."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Choose the formatting or validation option you need."
+      "@type": "Question",
+      "name": "Does SQL Formatter send my input to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For normal usage, SQL Formatter processes data locally in your browser so you can test quickly without uploading project files."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Click the process button to see the result."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy or download the output for your project."
+      "@type": "Question",
+      "name": "Will SQL Formatter validate query correctness?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Formatting improves readability but does not guarantee semantic correctness. Execute queries in your DB environment to validate."
+      }
     }
   ]
 }
@@ -55,31 +58,28 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@type": "HowTo",
+  "name": "How to Use SQL Formatter",
+  "step": [
     {
-      "@type": "Question",
-      "name": "What programming languages are supported?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Our tools support common languages including JavaScript, Python, Java, SQL, HTML, CSS, and more for formatting."
-      }
+      "@type": "HowToStep",
+      "position": 1,
+      "text": "paste raw SQL into the input panel"
     },
     {
-      "@type": "Question",
-      "name": "Is my code sent anywhere?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. All code formatting and analysis happens locally in your browser for complete privacy."
-      }
+      "@type": "HowToStep",
+      "position": 2,
+      "text": "Choose formatting preferences such as keyword casing and line breaks."
     },
     {
-      "@type": "Question",
-      "name": "Can I use this offline?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Once the page loads, all tools work without an internet connection."
-      }
+      "@type": "HowToStep",
+      "position": 3,
+      "text": "Format SQL and inspect clause structure."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "text": "Copy the cleaned query into your migration, notebook or review diff."
     }
   ]
 }
@@ -121,24 +121,24 @@
 <section class="how-to-use">
 <h3>How to Use SQL Formatter</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Enter your code or data into the input field.</li>
-  <li><strong>Step 2:</strong> Choose the formatting or validation option you need.</li>
-  <li><strong>Step 3:</strong> Click the process button to see the result.</li>
-  <li><strong>Step 4:</strong> Copy or download the output for your project.</li>
+  <li><strong>Step 1:</strong> paste raw SQL into the input panel</li>
+  <li><strong>Step 2:</strong> Choose formatting preferences such as keyword casing and line breaks.</li>
+  <li><strong>Step 3:</strong> Format SQL and inspect clause structure.</li>
+  <li><strong>Step 4:</strong> Copy the cleaned query into your migration, notebook or review diff.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What programming languages are supported?</dt>
-  <dd>Our tools support common languages including JavaScript, Python, Java, SQL, HTML, CSS, and more for formatting.</dd>
+  <dt>What is SQL Formatter mainly used for?</dt>
+  <dd>SQL Formatter is mainly used to reformat SQL queries to improve readability and maintain consistent style.</dd>
 
-  <dt>Is my code sent anywhere?</dt>
-  <dd>No. All code formatting and analysis happens locally in your browser for complete privacy.</dd>
+  <dt>Does SQL Formatter send my input to a server?</dt>
+  <dd>For normal usage, SQL Formatter processes data locally in your browser so you can test quickly without uploading project files.</dd>
 
-  <dt>Can I use this offline?</dt>
-  <dd>Yes. Once the page loads, all tools work without an internet connection.</dd>
+  <dt>Will SQL Formatter validate query correctness?</dt>
+  <dd>Formatting improves readability but does not guarantee semantic correctness. Execute queries in your DB environment to validate.</dd>
 </dl>
 </section>
 </main>

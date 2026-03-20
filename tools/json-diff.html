@@ -26,28 +26,31 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use JSON Diff",
-  "step": [
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Copy and paste your JSON data into the input field."
+      "@type": "Question",
+      "name": "What is JSON Diff mainly used for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JSON Diff is mainly used to compare two JSON documents and locate changed keys, values and structures."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Select the operation you want to perform (format, validate, convert, etc.)."
+      "@type": "Question",
+      "name": "Does JSON Diff send my input to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For normal usage, JSON Diff processes data locally in your browser so you can test quickly without uploading project files."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Click the action button to process your data."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Review the result and click Copy to use it in your project."
+      "@type": "Question",
+      "name": "Why do two JSON files look different even when data is equivalent?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ordering, whitespace and type mismatches can create noisy diffs. Normalize formatting and confirm value types before final comparison."
+      }
     }
   ]
 }
@@ -55,31 +58,28 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@type": "HowTo",
+  "name": "How to Use JSON Diff",
+  "step": [
     {
-      "@type": "Question",
-      "name": "What is JSON?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "JSON (JavaScript Object Notation) is a lightweight data format used for storing and exchanging data between systems. It uses human-readable key-value pairs and is commonly used in web APIs."
-      }
+      "@type": "HowToStep",
+      "position": 1,
+      "text": "paste JSON A and JSON B into the two input panels"
     },
     {
-      "@type": "Question",
-      "name": "Is my data sent to a server?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. All JSON processing happens entirely in your browser. Your data never leaves your device, ensuring complete privacy and security."
-      }
+      "@type": "HowToStep",
+      "position": 2,
+      "text": "Format both payloads first so key order and nesting are easier to compare."
     },
     {
-      "@type": "Question",
-      "name": "Can I use this for large JSON files?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, but very large files (over 10MB) may cause browser performance issues. For best results, keep files under 5MB."
-      }
+      "@type": "HowToStep",
+      "position": 3,
+      "text": "Run diff to highlight additions, deletions and modified fields."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "text": "Review the differences and copy the changed sections into your changelog or review note."
     }
   ]
 }
@@ -134,24 +134,24 @@
 <section class="how-to-use">
 <h3>How to Use JSON Diff</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Copy and paste your JSON data into the input field.</li>
-  <li><strong>Step 2:</strong> Select the operation you want to perform (format, validate, convert, etc.).</li>
-  <li><strong>Step 3:</strong> Click the action button to process your data.</li>
-  <li><strong>Step 4:</strong> Review the result and click Copy to use it in your project.</li>
+  <li><strong>Step 1:</strong> paste JSON A and JSON B into the two input panels</li>
+  <li><strong>Step 2:</strong> Format both payloads first so key order and nesting are easier to compare.</li>
+  <li><strong>Step 3:</strong> Run diff to highlight additions, deletions and modified fields.</li>
+  <li><strong>Step 4:</strong> Review the differences and copy the changed sections into your changelog or review note.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is JSON?</dt>
-  <dd>JSON (JavaScript Object Notation) is a lightweight data format used for storing and exchanging data between systems. It uses human-readable key-value pairs and is commonly used in web APIs.</dd>
+  <dt>What is JSON Diff mainly used for?</dt>
+  <dd>JSON Diff is mainly used to compare two JSON documents and locate changed keys, values and structures.</dd>
 
-  <dt>Is my data sent to a server?</dt>
-  <dd>No. All JSON processing happens entirely in your browser. Your data never leaves your device, ensuring complete privacy and security.</dd>
+  <dt>Does JSON Diff send my input to a server?</dt>
+  <dd>For normal usage, JSON Diff processes data locally in your browser so you can test quickly without uploading project files.</dd>
 
-  <dt>Can I use this for large JSON files?</dt>
-  <dd>Yes, but very large files (over 10MB) may cause browser performance issues. For best results, keep files under 5MB.</dd>
+  <dt>Why do two JSON files look different even when data is equivalent?</dt>
+  <dd>Ordering, whitespace and type mismatches can create noisy diffs. Normalize formatting and confirm value types before final comparison.</dd>
 </dl>
 </section>
 </main>

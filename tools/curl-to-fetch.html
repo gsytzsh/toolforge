@@ -25,28 +25,31 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use cURL to Fetch",
-  "step": [
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Enter the URL, IP address or other network data."
+      "@type": "Question",
+      "name": "What is cURL to Fetch mainly used for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "cURL to Fetch is mainly used to convert cURL commands into fetch code for frontend and Node.js workflows."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Select the analysis or lookup option you need."
+      "@type": "Question",
+      "name": "Does cURL to Fetch send my input to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For normal usage, cURL to Fetch processes data locally in your browser so you can test quickly without uploading project files."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Click the action button to get results."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Review the information for your troubleshooting."
+      "@type": "Question",
+      "name": "Are all cURL options supported when converting to fetch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common headers, methods and bodies are supported. Advanced options like retries or TLS flags may require manual edits."
+      }
     }
   ]
 }
@@ -54,23 +57,28 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@type": "HowTo",
+  "name": "How to Use cURL to Fetch",
+  "step": [
     {
-      "@type": "Question",
-      "name": "Is my data logged?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. All lookups and analysis happen in your browser or through direct API calls. We don't store any of your queries."
-      }
+      "@type": "HowToStep",
+      "position": 1,
+      "text": "paste a cURL command with headers and body"
     },
     {
-      "@type": "Question",
-      "name": "Why is some information missing?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Some data depends on external APIs or the target server's response. If information is unavailable, it may be due to API limits or server restrictions."
-      }
+      "@type": "HowToStep",
+      "position": 2,
+      "text": "Review method, headers and payload parsing after conversion."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "text": "Generate fetch code snippet."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "text": "Copy generated fetch code into your app or API test harness."
     }
   ]
 }
@@ -113,21 +121,24 @@
 <section class="how-to-use">
 <h3>How to Use cURL to Fetch</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Enter the URL, IP address or other network data.</li>
-  <li><strong>Step 2:</strong> Select the analysis or lookup option you need.</li>
-  <li><strong>Step 3:</strong> Click the action button to get results.</li>
-  <li><strong>Step 4:</strong> Review the information for your troubleshooting.</li>
+  <li><strong>Step 1:</strong> paste a cURL command with headers and body</li>
+  <li><strong>Step 2:</strong> Review method, headers and payload parsing after conversion.</li>
+  <li><strong>Step 3:</strong> Generate fetch code snippet.</li>
+  <li><strong>Step 4:</strong> Copy generated fetch code into your app or API test harness.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>Is my data logged?</dt>
-  <dd>No. All lookups and analysis happen in your browser or through direct API calls. We don't store any of your queries.</dd>
+  <dt>What is cURL to Fetch mainly used for?</dt>
+  <dd>cURL to Fetch is mainly used to convert cURL commands into fetch code for frontend and Node.js workflows.</dd>
 
-  <dt>Why is some information missing?</dt>
-  <dd>Some data depends on external APIs or the target server's response. If information is unavailable, it may be due to API limits or server restrictions.</dd>
+  <dt>Does cURL to Fetch send my input to a server?</dt>
+  <dd>For normal usage, cURL to Fetch processes data locally in your browser so you can test quickly without uploading project files.</dd>
+
+  <dt>Are all cURL options supported when converting to fetch?</dt>
+  <dd>Common headers, methods and bodies are supported. Advanced options like retries or TLS flags may require manual edits.</dd>
 </dl>
 </section>
 </main>

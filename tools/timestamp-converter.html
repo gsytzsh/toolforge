@@ -24,28 +24,31 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Timestamp Converter",
-  "step": [
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Enter the date or time value."
+      "@type": "Question",
+      "name": "What is Timestamp Converter mainly used for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Timestamp Converter is mainly used to convert Unix timestamps and readable dates when debugging logs, APIs and schedulers."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Select the target format or timezone if applicable."
+      "@type": "Question",
+      "name": "Does Timestamp Converter send my input to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For normal usage, Timestamp Converter processes data locally in your browser so you can test quickly without uploading project files."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Click Convert or Calculate to see the result."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy the converted value for your use."
+      "@type": "Question",
+      "name": "Why is my converted timestamp off by several hours?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Timezone mismatch is the usual cause. Confirm whether your source data is UTC or local time before converting."
+      }
     }
   ]
 }
@@ -53,23 +56,28 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@type": "HowTo",
+  "name": "How to Use Timestamp Converter",
+  "step": [
     {
-      "@type": "Question",
-      "name": "What timezone is used?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "By default, we use your browser's local timezone. Some tools let you select specific timezones for conversion."
-      }
+      "@type": "HowToStep",
+      "position": 1,
+      "text": "enter a Unix timestamp or a calendar date-time value"
     },
     {
-      "@type": "Question",
-      "name": "What is Unix timestamp?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Unix timestamp is the number of seconds (or milliseconds) since January 1, 1970 UTC. It's commonly used in programming and databases."
-      }
+      "@type": "HowToStep",
+      "position": 2,
+      "text": "Select seconds or milliseconds and confirm timezone context before converting."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "text": "Run conversion and inspect both machine and human-readable formats."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "text": "Copy converted time values for documentation, monitoring or request payloads."
     }
   ]
 }
@@ -121,21 +129,24 @@
 <section class="how-to-use">
 <h3>How to Use Timestamp Converter</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Enter the date or time value.</li>
-  <li><strong>Step 2:</strong> Select the target format or timezone if applicable.</li>
-  <li><strong>Step 3:</strong> Click Convert or Calculate to see the result.</li>
-  <li><strong>Step 4:</strong> Copy the converted value for your use.</li>
+  <li><strong>Step 1:</strong> enter a Unix timestamp or a calendar date-time value</li>
+  <li><strong>Step 2:</strong> Select seconds or milliseconds and confirm timezone context before converting.</li>
+  <li><strong>Step 3:</strong> Run conversion and inspect both machine and human-readable formats.</li>
+  <li><strong>Step 4:</strong> Copy converted time values for documentation, monitoring or request payloads.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What timezone is used?</dt>
-  <dd>By default, we use your browser's local timezone. Some tools let you select specific timezones for conversion.</dd>
+  <dt>What is Timestamp Converter mainly used for?</dt>
+  <dd>Timestamp Converter is mainly used to convert Unix timestamps and readable dates when debugging logs, APIs and schedulers.</dd>
 
-  <dt>What is Unix timestamp?</dt>
-  <dd>Unix timestamp is the number of seconds (or milliseconds) since January 1, 1970 UTC. It's commonly used in programming and databases.</dd>
+  <dt>Does Timestamp Converter send my input to a server?</dt>
+  <dd>For normal usage, Timestamp Converter processes data locally in your browser so you can test quickly without uploading project files.</dd>
+
+  <dt>Why is my converted timestamp off by several hours?</dt>
+  <dd>Timezone mismatch is the usual cause. Confirm whether your source data is UTC or local time before converting.</dd>
 </dl>
 </section>
 </main>

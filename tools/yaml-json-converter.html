@@ -24,28 +24,31 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use YAML JSON Converter",
-  "step": [
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Copy and paste your JSON data into the input field."
+      "@type": "Question",
+      "name": "What is YAML JSON Converter mainly used for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "YAML JSON Converter is mainly used to switch between YAML and JSON when working with configs, CI pipelines and API specs."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Select the operation you want to perform (format, validate, convert, etc.)."
+      "@type": "Question",
+      "name": "Does YAML JSON Converter send my input to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For normal usage, YAML JSON Converter processes data locally in your browser so you can test quickly without uploading project files."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Click the action button to process your data."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Review the result and click Copy to use it in your project."
+      "@type": "Question",
+      "name": "Why does YAML to JSON conversion break on some files?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Invalid indentation, tabs, anchors or malformed lists can fail parsing. Lint YAML first if conversion errors persist."
+      }
     }
   ]
 }
@@ -53,31 +56,28 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@type": "HowTo",
+  "name": "How to Use YAML JSON Converter",
+  "step": [
     {
-      "@type": "Question",
-      "name": "What is JSON?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "JSON (JavaScript Object Notation) is a lightweight data format used for storing and exchanging data between systems. It uses human-readable key-value pairs and is commonly used in web APIs."
-      }
+      "@type": "HowToStep",
+      "position": 1,
+      "text": "paste YAML or JSON source content"
     },
     {
-      "@type": "Question",
-      "name": "Is my data sent to a server?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. All JSON processing happens entirely in your browser. Your data never leaves your device, ensuring complete privacy and security."
-      }
+      "@type": "HowToStep",
+      "position": 2,
+      "text": "Choose conversion direction and quickly verify indentation and quoting before converting."
     },
     {
-      "@type": "Question",
-      "name": "Can I use this for large JSON files?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, but very large files (over 10MB) may cause browser performance issues. For best results, keep files under 5MB."
-      }
+      "@type": "HowToStep",
+      "position": 3,
+      "text": "Convert and inspect the output format for structural correctness."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "text": "Copy the converted content into your config file or deployment pipeline."
     }
   ]
 }
@@ -122,24 +122,24 @@
 <section class="how-to-use">
 <h3>How to Use YAML JSON Converter</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Copy and paste your JSON data into the input field.</li>
-  <li><strong>Step 2:</strong> Select the operation you want to perform (format, validate, convert, etc.).</li>
-  <li><strong>Step 3:</strong> Click the action button to process your data.</li>
-  <li><strong>Step 4:</strong> Review the result and click Copy to use it in your project.</li>
+  <li><strong>Step 1:</strong> paste YAML or JSON source content</li>
+  <li><strong>Step 2:</strong> Choose conversion direction and quickly verify indentation and quoting before converting.</li>
+  <li><strong>Step 3:</strong> Convert and inspect the output format for structural correctness.</li>
+  <li><strong>Step 4:</strong> Copy the converted content into your config file or deployment pipeline.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is JSON?</dt>
-  <dd>JSON (JavaScript Object Notation) is a lightweight data format used for storing and exchanging data between systems. It uses human-readable key-value pairs and is commonly used in web APIs.</dd>
+  <dt>What is YAML JSON Converter mainly used for?</dt>
+  <dd>YAML JSON Converter is mainly used to switch between YAML and JSON when working with configs, CI pipelines and API specs.</dd>
 
-  <dt>Is my data sent to a server?</dt>
-  <dd>No. All JSON processing happens entirely in your browser. Your data never leaves your device, ensuring complete privacy and security.</dd>
+  <dt>Does YAML JSON Converter send my input to a server?</dt>
+  <dd>For normal usage, YAML JSON Converter processes data locally in your browser so you can test quickly without uploading project files.</dd>
 
-  <dt>Can I use this for large JSON files?</dt>
-  <dd>Yes, but very large files (over 10MB) may cause browser performance issues. For best results, keep files under 5MB.</dd>
+  <dt>Why does YAML to JSON conversion break on some files?</dt>
+  <dd>Invalid indentation, tabs, anchors or malformed lists can fail parsing. Lint YAML first if conversion errors persist.</dd>
 </dl>
 </section>
 </main>

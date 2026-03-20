@@ -20,28 +20,31 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use UUID Generator",
-  "step": [
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Configure the generation options (length, character sets, etc.)."
+      "@type": "Question",
+      "name": "What is UUID Generator mainly used for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "UUID Generator is mainly used to create UUID values for IDs in databases, logs, test fixtures and API resources."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Click Generate to create your random value."
+      "@type": "Question",
+      "name": "Does UUID Generator send my input to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For normal usage, UUID Generator processes data locally in your browser so you can test quickly without uploading project files."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Review the generated result."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy the value to use it in your application."
+      "@type": "Question",
+      "name": "Can UUID Generator create collisions in normal usage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "UUID v4 collisions are extremely unlikely for typical workloads. They are suitable for most application identifiers."
+      }
     }
   ]
 }
@@ -49,31 +52,28 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@type": "HowTo",
+  "name": "How to Use UUID Generator",
+  "step": [
     {
-      "@type": "Question",
-      "name": "Are the generated values secure?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. We use cryptographically secure random number generators (crypto.getRandomValues) when available in your browser."
-      }
+      "@type": "HowToStep",
+      "position": 1,
+      "text": "open the generator and prepare to create a new UUID"
     },
     {
-      "@type": "Question",
-      "name": "Can I generate multiple values at once?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Currently you can generate one value at a time. Click Generate again to create a new value."
-      }
+      "@type": "HowToStep",
+      "position": 2,
+      "text": "Use generation controls if your workflow needs repeated values quickly."
     },
     {
-      "@type": "Question",
-      "name": "Is there a limit on how many I can generate?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No limit. You can generate as many values as you need, all processed locally in your browser."
-      }
+      "@type": "HowToStep",
+      "position": 3,
+      "text": "Generate a fresh UUID and confirm format."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "text": "Copy the UUID into your record, payload or fixture data."
     }
   ]
 }
@@ -107,24 +107,24 @@
 <section class="how-to-use">
 <h3>How to Use UUID Generator</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Configure the generation options (length, character sets, etc.).</li>
-  <li><strong>Step 2:</strong> Click Generate to create your random value.</li>
-  <li><strong>Step 3:</strong> Review the generated result.</li>
-  <li><strong>Step 4:</strong> Copy the value to use it in your application.</li>
+  <li><strong>Step 1:</strong> open the generator and prepare to create a new UUID</li>
+  <li><strong>Step 2:</strong> Use generation controls if your workflow needs repeated values quickly.</li>
+  <li><strong>Step 3:</strong> Generate a fresh UUID and confirm format.</li>
+  <li><strong>Step 4:</strong> Copy the UUID into your record, payload or fixture data.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>Are the generated values secure?</dt>
-  <dd>Yes. We use cryptographically secure random number generators (crypto.getRandomValues) when available in your browser.</dd>
+  <dt>What is UUID Generator mainly used for?</dt>
+  <dd>UUID Generator is mainly used to create UUID values for IDs in databases, logs, test fixtures and API resources.</dd>
 
-  <dt>Can I generate multiple values at once?</dt>
-  <dd>Currently you can generate one value at a time. Click Generate again to create a new value.</dd>
+  <dt>Does UUID Generator send my input to a server?</dt>
+  <dd>For normal usage, UUID Generator processes data locally in your browser so you can test quickly without uploading project files.</dd>
 
-  <dt>Is there a limit on how many I can generate?</dt>
-  <dd>No limit. You can generate as many values as you need, all processed locally in your browser.</dd>
+  <dt>Can UUID Generator create collisions in normal usage?</dt>
+  <dd>UUID v4 collisions are extremely unlikely for typical workloads. They are suitable for most application identifiers.</dd>
 </dl>
 </section>
 </main>

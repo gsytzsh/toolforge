@@ -20,28 +20,31 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use HTML Formatter",
-  "step": [
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Enter your code or data into the input field."
+      "@type": "Question",
+      "name": "What is HTML Formatter mainly used for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "HTML Formatter is mainly used to beautify raw HTML so markup is easier to read, debug and review."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Choose the formatting or validation option you need."
+      "@type": "Question",
+      "name": "Does HTML Formatter send my input to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For normal usage, HTML Formatter processes data locally in your browser so you can test quickly without uploading project files."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Click the process button to see the result."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy or download the output for your project."
+      "@type": "Question",
+      "name": "Why does formatted HTML output differ from my original spacing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Formatter tools normalize whitespace and indentation intentionally. Compare rendered DOM structure instead of exact spacing."
+      }
     }
   ]
 }
@@ -49,31 +52,28 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@type": "HowTo",
+  "name": "How to Use HTML Formatter",
+  "step": [
     {
-      "@type": "Question",
-      "name": "What programming languages are supported?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Our tools support common languages including JavaScript, Python, Java, SQL, HTML, CSS, and more for formatting."
-      }
+      "@type": "HowToStep",
+      "position": 1,
+      "text": "paste minified or compact HTML markup"
     },
     {
-      "@type": "Question",
-      "name": "Is my code sent anywhere?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. All code formatting and analysis happens locally in your browser for complete privacy."
-      }
+      "@type": "HowToStep",
+      "position": 2,
+      "text": "Check that your snippet is complete enough to parse correctly."
     },
     {
-      "@type": "Question",
-      "name": "Can I use this offline?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Once the page loads, all tools work without an internet connection."
-      }
+      "@type": "HowToStep",
+      "position": 3,
+      "text": "Run formatting to normalize indentation and line breaks."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "text": "Copy readable HTML back into your editor or code review comment."
     }
   ]
 }
@@ -105,24 +105,24 @@
 <section class="how-to-use">
 <h3>How to Use HTML Formatter</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Enter your code or data into the input field.</li>
-  <li><strong>Step 2:</strong> Choose the formatting or validation option you need.</li>
-  <li><strong>Step 3:</strong> Click the process button to see the result.</li>
-  <li><strong>Step 4:</strong> Copy or download the output for your project.</li>
+  <li><strong>Step 1:</strong> paste minified or compact HTML markup</li>
+  <li><strong>Step 2:</strong> Check that your snippet is complete enough to parse correctly.</li>
+  <li><strong>Step 3:</strong> Run formatting to normalize indentation and line breaks.</li>
+  <li><strong>Step 4:</strong> Copy readable HTML back into your editor or code review comment.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What programming languages are supported?</dt>
-  <dd>Our tools support common languages including JavaScript, Python, Java, SQL, HTML, CSS, and more for formatting.</dd>
+  <dt>What is HTML Formatter mainly used for?</dt>
+  <dd>HTML Formatter is mainly used to beautify raw HTML so markup is easier to read, debug and review.</dd>
 
-  <dt>Is my code sent anywhere?</dt>
-  <dd>No. All code formatting and analysis happens locally in your browser for complete privacy.</dd>
+  <dt>Does HTML Formatter send my input to a server?</dt>
+  <dd>For normal usage, HTML Formatter processes data locally in your browser so you can test quickly without uploading project files.</dd>
 
-  <dt>Can I use this offline?</dt>
-  <dd>Yes. Once the page loads, all tools work without an internet connection.</dd>
+  <dt>Why does formatted HTML output differ from my original spacing?</dt>
+  <dd>Formatter tools normalize whitespace and indentation intentionally. Compare rendered DOM structure instead of exact spacing.</dd>
 </dl>
 </section>
 </main>

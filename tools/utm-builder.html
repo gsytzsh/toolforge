@@ -20,28 +20,31 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use UTM Builder",
-  "step": [
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Enter your website URL or meta information."
+      "@type": "Question",
+      "name": "What is UTM Builder mainly used for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "UTM Builder is mainly used to build clean UTM campaign URLs for attribution and analytics reporting."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Configure the SEO parameters you want to generate."
+      "@type": "Question",
+      "name": "Does UTM Builder send my input to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For normal usage, UTM Builder processes data locally in your browser so you can test quickly without uploading project files."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Click Generate to create the tags or code."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy the output and add it to your webpage."
+      "@type": "Question",
+      "name": "Why do inconsistent UTM names hurt reporting?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Small naming differences split data into multiple buckets. Use a strict naming convention across teams."
+      }
     }
   ]
 }
@@ -49,31 +52,28 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@type": "HowTo",
+  "name": "How to Use UTM Builder",
+  "step": [
     {
-      "@type": "Question",
-      "name": "Do I need to know HTML?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Our tools generate the code for you. Just fill in your information and copy the output."
-      }
+      "@type": "HowToStep",
+      "position": 1,
+      "text": "enter base URL and campaign parameters"
     },
     {
-      "@type": "Question",
-      "name": "Where do I add the generated code?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Meta tags go in the <head> section of your HTML. Schema markup can be added as JSON-LD script anywhere on the page."
-      }
+      "@type": "HowToStep",
+      "position": 2,
+      "text": "Fill source, medium and campaign consistently to keep reports clean."
     },
     {
-      "@type": "Question",
-      "name": "Will this improve my SEO?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Proper meta tags and structured data help search engines understand your content better, which can improve visibility in search results."
-      }
+      "@type": "HowToStep",
+      "position": 3,
+      "text": "Generate tracking URL with encoded parameters."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "text": "Copy campaign link into ads, emails or social posts."
     }
   ]
 }
@@ -118,24 +118,24 @@ Term:
 <section class="how-to-use">
 <h3>How to Use UTM Builder</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Enter your website URL or meta information.</li>
-  <li><strong>Step 2:</strong> Configure the SEO parameters you want to generate.</li>
-  <li><strong>Step 3:</strong> Click Generate to create the tags or code.</li>
-  <li><strong>Step 4:</strong> Copy the output and add it to your webpage.</li>
+  <li><strong>Step 1:</strong> enter base URL and campaign parameters</li>
+  <li><strong>Step 2:</strong> Fill source, medium and campaign consistently to keep reports clean.</li>
+  <li><strong>Step 3:</strong> Generate tracking URL with encoded parameters.</li>
+  <li><strong>Step 4:</strong> Copy campaign link into ads, emails or social posts.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>Do I need to know HTML?</dt>
-  <dd>No. Our tools generate the code for you. Just fill in your information and copy the output.</dd>
+  <dt>What is UTM Builder mainly used for?</dt>
+  <dd>UTM Builder is mainly used to build clean UTM campaign URLs for attribution and analytics reporting.</dd>
 
-  <dt>Where do I add the generated code?</dt>
-  <dd>Meta tags go in the &lt;head&gt; section of your HTML. Schema markup can be added as JSON-LD script anywhere on the page.</dd>
+  <dt>Does UTM Builder send my input to a server?</dt>
+  <dd>For normal usage, UTM Builder processes data locally in your browser so you can test quickly without uploading project files.</dd>
 
-  <dt>Will this improve my SEO?</dt>
-  <dd>Proper meta tags and structured data help search engines understand your content better, which can improve visibility in search results.</dd>
+  <dt>Why do inconsistent UTM names hurt reporting?</dt>
+  <dd>Small naming differences split data into multiple buckets. Use a strict naming convention across teams.</dd>
 </dl>
 </section>
 </main>

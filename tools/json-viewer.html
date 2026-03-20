@@ -55,28 +55,31 @@ font-weight:bold;
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use JSON Viewer",
-  "step": [
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Copy and paste your JSON data into the input field."
+      "@type": "Question",
+      "name": "What is JSON Viewer mainly used for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JSON Viewer is mainly used to inspect, validate and format JSON quickly before sending payloads to APIs or saving config files."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Select the operation you want to perform (format, validate, convert, etc.)."
+      "@type": "Question",
+      "name": "Does JSON Viewer send my input to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For normal usage, JSON Viewer processes data locally in your browser so you can test quickly without uploading project files."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Click the action button to process your data."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Review the result and click Copy to use it in your project."
+      "@type": "Question",
+      "name": "Why does JSON Viewer fail on some payloads copied from logs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Log snippets often include trailing commas, single quotes or non-JSON prefixes. Remove those wrappers and validate again."
+      }
     }
   ]
 }
@@ -84,31 +87,28 @@ font-weight:bold;
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@type": "HowTo",
+  "name": "How to Use JSON Viewer",
+  "step": [
     {
-      "@type": "Question",
-      "name": "What is JSON?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "JSON (JavaScript Object Notation) is a lightweight data format used for storing and exchanging data between systems. It uses human-readable key-value pairs and is commonly used in web APIs."
-      }
+      "@type": "HowToStep",
+      "position": 1,
+      "text": "paste raw JSON into the editor"
     },
     {
-      "@type": "Question",
-      "name": "Is my data sent to a server?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. All JSON processing happens entirely in your browser. Your data never leaves your device, ensuring complete privacy and security."
-      }
+      "@type": "HowToStep",
+      "position": 2,
+      "text": "Use format and tree controls to expand or collapse nested objects while checking structure."
     },
     {
-      "@type": "Question",
-      "name": "Can I use this for large JSON files?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, but very large files (over 10MB) may cause browser performance issues. For best results, keep files under 5MB."
-      }
+      "@type": "HowToStep",
+      "position": 3,
+      "text": "Run format or validation to catch syntax errors and normalize indentation."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "text": "Copy the cleaned JSON output for your API request, logs or documentation."
     }
   ]
 }
@@ -153,24 +153,24 @@ font-weight:bold;
 <section class="how-to-use">
 <h3>How to Use JSON Viewer</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Copy and paste your JSON data into the input field.</li>
-  <li><strong>Step 2:</strong> Select the operation you want to perform (format, validate, convert, etc.).</li>
-  <li><strong>Step 3:</strong> Click the action button to process your data.</li>
-  <li><strong>Step 4:</strong> Review the result and click Copy to use it in your project.</li>
+  <li><strong>Step 1:</strong> paste raw JSON into the editor</li>
+  <li><strong>Step 2:</strong> Use format and tree controls to expand or collapse nested objects while checking structure.</li>
+  <li><strong>Step 3:</strong> Run format or validation to catch syntax errors and normalize indentation.</li>
+  <li><strong>Step 4:</strong> Copy the cleaned JSON output for your API request, logs or documentation.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is JSON?</dt>
-  <dd>JSON (JavaScript Object Notation) is a lightweight data format used for storing and exchanging data between systems. It uses human-readable key-value pairs and is commonly used in web APIs.</dd>
+  <dt>What is JSON Viewer mainly used for?</dt>
+  <dd>JSON Viewer is mainly used to inspect, validate and format JSON quickly before sending payloads to APIs or saving config files.</dd>
 
-  <dt>Is my data sent to a server?</dt>
-  <dd>No. All JSON processing happens entirely in your browser. Your data never leaves your device, ensuring complete privacy and security.</dd>
+  <dt>Does JSON Viewer send my input to a server?</dt>
+  <dd>For normal usage, JSON Viewer processes data locally in your browser so you can test quickly without uploading project files.</dd>
 
-  <dt>Can I use this for large JSON files?</dt>
-  <dd>Yes, but very large files (over 10MB) may cause browser performance issues. For best results, keep files under 5MB.</dd>
+  <dt>Why does JSON Viewer fail on some payloads copied from logs?</dt>
+  <dd>Log snippets often include trailing commas, single quotes or non-JSON prefixes. Remove those wrappers and validate again.</dd>
 </dl>
 </section>
 </main>

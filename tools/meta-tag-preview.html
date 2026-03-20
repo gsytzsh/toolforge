@@ -20,28 +20,31 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Meta Tag Preview",
-  "step": [
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Enter your website URL or meta information."
+      "@type": "Question",
+      "name": "What is Meta Tag Preview mainly used for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Meta Tag Preview is mainly used to preview title and meta description snippets before publishing SEO changes."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Configure the SEO parameters you want to generate."
+      "@type": "Question",
+      "name": "Does Meta Tag Preview send my input to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For normal usage, Meta Tag Preview processes data locally in your browser so you can test quickly without uploading project files."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Click Generate to create the tags or code."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy the output and add it to your webpage."
+      "@type": "Question",
+      "name": "What title and description length works best for previews?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Aim for concise titles and descriptions that communicate intent clearly; exact truncation depends on device and SERP layout."
+      }
     }
   ]
 }
@@ -49,31 +52,28 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@type": "HowTo",
+  "name": "How to Use Meta Tag Preview",
+  "step": [
     {
-      "@type": "Question",
-      "name": "Do I need to know HTML?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Our tools generate the code for you. Just fill in your information and copy the output."
-      }
+      "@type": "HowToStep",
+      "position": 1,
+      "text": "enter title, description and URL fields"
     },
     {
-      "@type": "Question",
-      "name": "Where do I add the generated code?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Meta tags go in the <head> section of your HTML. Schema markup can be added as JSON-LD script anywhere on the page."
-      }
+      "@type": "HowToStep",
+      "position": 2,
+      "text": "Adjust character length to avoid truncation in search results."
     },
     {
-      "@type": "Question",
-      "name": "Will this improve my SEO?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Proper meta tags and structured data help search engines understand your content better, which can improve visibility in search results."
-      }
+      "@type": "HowToStep",
+      "position": 3,
+      "text": "Generate and preview the snippet output."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "text": "Copy optimized meta tags into your page head template."
     }
   ]
 }
@@ -113,24 +113,24 @@
 <section class="how-to-use">
 <h3>How to Use Meta Tag Preview</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Enter your website URL or meta information.</li>
-  <li><strong>Step 2:</strong> Configure the SEO parameters you want to generate.</li>
-  <li><strong>Step 3:</strong> Click Generate to create the tags or code.</li>
-  <li><strong>Step 4:</strong> Copy the output and add it to your webpage.</li>
+  <li><strong>Step 1:</strong> enter title, description and URL fields</li>
+  <li><strong>Step 2:</strong> Adjust character length to avoid truncation in search results.</li>
+  <li><strong>Step 3:</strong> Generate and preview the snippet output.</li>
+  <li><strong>Step 4:</strong> Copy optimized meta tags into your page head template.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>Do I need to know HTML?</dt>
-  <dd>No. Our tools generate the code for you. Just fill in your information and copy the output.</dd>
+  <dt>What is Meta Tag Preview mainly used for?</dt>
+  <dd>Meta Tag Preview is mainly used to preview title and meta description snippets before publishing SEO changes.</dd>
 
-  <dt>Where do I add the generated code?</dt>
-  <dd>Meta tags go in the &lt;head&gt; section of your HTML. Schema markup can be added as JSON-LD script anywhere on the page.</dd>
+  <dt>Does Meta Tag Preview send my input to a server?</dt>
+  <dd>For normal usage, Meta Tag Preview processes data locally in your browser so you can test quickly without uploading project files.</dd>
 
-  <dt>Will this improve my SEO?</dt>
-  <dd>Proper meta tags and structured data help search engines understand your content better, which can improve visibility in search results.</dd>
+  <dt>What title and description length works best for previews?</dt>
+  <dd>Aim for concise titles and descriptions that communicate intent clearly; exact truncation depends on device and SERP layout.</dd>
 </dl>
 </section>
 </main>

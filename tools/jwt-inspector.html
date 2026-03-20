@@ -20,28 +20,31 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use JWT Inspector & Decoder",
-  "step": [
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Copy and paste your JSON data into the input field."
+      "@type": "Question",
+      "name": "What is JWT Inspector & Decoder mainly used for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JWT Inspector & Decoder is mainly used to decode JWT structure and inspect header, payload and expiry claims quickly."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Select the operation you want to perform (format, validate, convert, etc.)."
+      "@type": "Question",
+      "name": "Does JWT Inspector & Decoder send my input to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For normal usage, JWT Inspector & Decoder processes data locally in your browser so you can test quickly without uploading project files."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Click the action button to process your data."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Review the result and click Copy to use it in your project."
+      "@type": "Question",
+      "name": "Does JWT Inspector validate token signature automatically?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Decoding and signature validation are different steps. Use the correct secret/public key to verify signatures when needed."
+      }
     }
   ]
 }
@@ -49,31 +52,28 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@type": "HowTo",
+  "name": "How to Use JWT Inspector & Decoder",
+  "step": [
     {
-      "@type": "Question",
-      "name": "What is JSON?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "JSON (JavaScript Object Notation) is a lightweight data format used for storing and exchanging data between systems. It uses human-readable key-value pairs and is commonly used in web APIs."
-      }
+      "@type": "HowToStep",
+      "position": 1,
+      "text": "paste a JWT token into the input field"
     },
     {
-      "@type": "Question",
-      "name": "Is my data sent to a server?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. All JSON processing happens entirely in your browser. Your data never leaves your device, ensuring complete privacy and security."
-      }
+      "@type": "HowToStep",
+      "position": 2,
+      "text": "Inspect header and payload sections while checking timestamps and claims."
     },
     {
-      "@type": "Question",
-      "name": "Can I use this for large JSON files?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, but very large files (over 10MB) may cause browser performance issues. For best results, keep files under 5MB."
-      }
+      "@type": "HowToStep",
+      "position": 3,
+      "text": "Decode token data and review claim values."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "text": "Use decoded output to troubleshoot auth flow or token configuration."
     }
   ]
 }
@@ -106,24 +106,24 @@
 <section class="how-to-use">
 <h3>How to Use JWT Inspector &amp; Decoder</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Copy and paste your JSON data into the input field.</li>
-  <li><strong>Step 2:</strong> Select the operation you want to perform (format, validate, convert, etc.).</li>
-  <li><strong>Step 3:</strong> Click the action button to process your data.</li>
-  <li><strong>Step 4:</strong> Review the result and click Copy to use it in your project.</li>
+  <li><strong>Step 1:</strong> paste a JWT token into the input field</li>
+  <li><strong>Step 2:</strong> Inspect header and payload sections while checking timestamps and claims.</li>
+  <li><strong>Step 3:</strong> Decode token data and review claim values.</li>
+  <li><strong>Step 4:</strong> Use decoded output to troubleshoot auth flow or token configuration.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is JSON?</dt>
-  <dd>JSON (JavaScript Object Notation) is a lightweight data format used for storing and exchanging data between systems. It uses human-readable key-value pairs and is commonly used in web APIs.</dd>
+  <dt>What is JWT Inspector &amp; Decoder mainly used for?</dt>
+  <dd>JWT Inspector &amp; Decoder is mainly used to decode JWT structure and inspect header, payload and expiry claims quickly.</dd>
 
-  <dt>Is my data sent to a server?</dt>
-  <dd>No. All JSON processing happens entirely in your browser. Your data never leaves your device, ensuring complete privacy and security.</dd>
+  <dt>Does JWT Inspector &amp; Decoder send my input to a server?</dt>
+  <dd>For normal usage, JWT Inspector &amp; Decoder processes data locally in your browser so you can test quickly without uploading project files.</dd>
 
-  <dt>Can I use this for large JSON files?</dt>
-  <dd>Yes, but very large files (over 10MB) may cause browser performance issues. For best results, keep files under 5MB.</dd>
+  <dt>Does JWT Inspector validate token signature automatically?</dt>
+  <dd>Decoding and signature validation are different steps. Use the correct secret/public key to verify signatures when needed.</dd>
 </dl>
 </section>
 </main>

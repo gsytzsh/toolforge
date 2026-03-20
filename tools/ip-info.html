@@ -26,28 +26,31 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use IP Info",
-  "step": [
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Enter the URL, IP address or other network data."
+      "@type": "Question",
+      "name": "What is IP Info mainly used for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IP Info is mainly used to look up IP-related network details for diagnostics and traffic analysis."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Select the analysis or lookup option you need."
+      "@type": "Question",
+      "name": "Does IP Info always work fully offline?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IP Info does core rendering in your browser, but some network details may come from external lookup services depending on the feature."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Click the action button to get results."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Review the information for your troubleshooting."
+      "@type": "Question",
+      "name": "Why can geolocation results differ between providers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IP geolocation databases are estimates and update on different schedules, so city-level accuracy can vary."
+      }
     }
   ]
 }
@@ -55,23 +58,28 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@type": "HowTo",
+  "name": "How to Use IP Info",
+  "step": [
     {
-      "@type": "Question",
-      "name": "Is my data logged?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. All lookups and analysis happen in your browser or through direct API calls. We don't store any of your queries."
-      }
+      "@type": "HowToStep",
+      "position": 1,
+      "text": "enter an IP address or use your current client IP"
     },
     {
-      "@type": "Question",
-      "name": "Why is some information missing?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Some data depends on external APIs or the target server's response. If information is unavailable, it may be due to API limits or server restrictions."
-      }
+      "@type": "HowToStep",
+      "position": 2,
+      "text": "Confirm whether you need geolocation, ASN or connection metadata."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "text": "Fetch and inspect IP details returned by the tool."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "text": "Use the output for troubleshooting, audit notes or network triage."
     }
   ]
 }
@@ -113,21 +121,24 @@
 <section class="how-to-use">
 <h3>How to Use IP Info</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Enter the URL, IP address or other network data.</li>
-  <li><strong>Step 2:</strong> Select the analysis or lookup option you need.</li>
-  <li><strong>Step 3:</strong> Click the action button to get results.</li>
-  <li><strong>Step 4:</strong> Review the information for your troubleshooting.</li>
+  <li><strong>Step 1:</strong> enter an IP address or use your current client IP</li>
+  <li><strong>Step 2:</strong> Confirm whether you need geolocation, ASN or connection metadata.</li>
+  <li><strong>Step 3:</strong> Fetch and inspect IP details returned by the tool.</li>
+  <li><strong>Step 4:</strong> Use the output for troubleshooting, audit notes or network triage.</li>
 </ol>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>Is my data logged?</dt>
-  <dd>No. All lookups and analysis happen in your browser or through direct API calls. We don't store any of your queries.</dd>
+  <dt>What is IP Info mainly used for?</dt>
+  <dd>IP Info is mainly used to look up IP-related network details for diagnostics and traffic analysis.</dd>
 
-  <dt>Why is some information missing?</dt>
-  <dd>Some data depends on external APIs or the target server's response. If information is unavailable, it may be due to API limits or server restrictions.</dd>
+  <dt>Does IP Info always work fully offline?</dt>
+  <dd>IP Info does core rendering in your browser, but some network details may come from external lookup services depending on the feature.</dd>
+
+  <dt>Why can geolocation results differ between providers?</dt>
+  <dd>IP geolocation databases are estimates and update on different schedules, so city-level accuracy can vary.</dd>
 </dl>
 </section>
 </main>
