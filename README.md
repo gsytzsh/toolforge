@@ -37,7 +37,7 @@ Free online developer tools collection: JSON formatter, Base64 encoder, UUID gen
 
 ```
 toolforge/
-├── index.html              # Homepage
+├── index.html              # Homepage 
 ├── 404.html                # Custom 404 page
 ├── tools-list.json         # Tool catalog (name, category, popular)
 ├── sitemap.xml             # Generated sitemap
