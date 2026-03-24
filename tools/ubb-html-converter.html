@@ -3,49 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>UBB to HTML Converter – UBB HTML Convert Online | ToolForge</title>
-<meta name="description" content="Free online UBB to HTML and HTML to UBB converter. Convert forum UBB tags to HTML and back for bulletin boards and web content. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Convert UBB forum tags to HTML and HTML back to UBB for bulletin boards and legacy forum systems.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/ubb-html-converter.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="UBB to HTML Converter – UBB HTML Convert Online | ToolForge">
-<meta property="og:description" content="Free online UBB to HTML and HTML to UBB converter. Convert forum UBB tags to HTML and back for bulletin boards and web content. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Convert UBB forum tags to HTML and HTML back to UBB for bulletin boards and legacy forum systems.">
 <meta property="og:url" content="https://toolforge.site/tools/ubb-html-converter.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UBB to HTML Converter – UBB HTML Convert Online | ToolForge">
-<meta name="twitter:description" content="Free online UBB to HTML and HTML to UBB converter. Convert forum UBB tags to HTML and back for bulletin boards and web content. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Convert UBB forum tags to HTML and HTML back to UBB for bulletin boards and legacy forum systems.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use UBB HTML Converter",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Open UBB HTML Converter and enter your source input data in the main field."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Choose transformation options such as case, trimming, filtering or replacement rules."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Run processing and compare the transformed text with your expected result."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy cleaned text into documents, code comments or content pipelines."
-    }
-  ]
-}
-</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,26 +24,45 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is UBB HTML Converter mainly used for?",
+      "name": "What UBB tags are supported?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "UBB HTML Converter is mainly used to convert UBB forum tags to HTML and HTML back to UBB for bulletin boards and web content."
+        "text": "Supported tags include [b], [i], [u], [s], [url], [img], [code], and [quote]. Both inline and parameterized formats work."
       }
-    },
-    {
+    },    {
       "@type": "Question",
-      "name": "Does UBB HTML Converter send my input to a server?",
+      "name": "Can I convert HTML back to UBB?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, UBB HTML Converter processes data locally in your browser so you can work without uploading project files."
+        "text": "Yes. The converter handles common HTML elements like <b>, <i>, <u>, <a>, <img>, <pre><code>, and <blockquote>."
       }
-    },
-    {
+    },    {
       "@type": "Question",
-      "name": "Why does processed text differ from expectation?",
+      "name": "Does it preserve nested formatting?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Whitespace rules, hidden characters and line-ending differences are common reasons for unexpected text output."
+        "text": "Basic nesting is preserved, but deeply nested or mixed formatting may have limitations due to regex-based parsing."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What about custom UBB tags?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Custom tags like [youtube], [attachment], or forum-specific codes are not converted and pass through unchanged."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Are line breaks preserved?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Newlines are converted to <br> tags in UBB-to-HTML mode. HTML line breaks convert back to newlines in reverse mode."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Why use UBB instead of HTML?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "UBB is safer for user input as it prevents XSS attacks. Many legacy forums and bulletin boards still use UBB syntax."
       }
     }
   ]
@@ -101,28 +91,36 @@
 <p>This UBB and HTML converter helps you switch between UBB forum tags and HTML for bulletin boards, comments and web content. UBB tags like [b], [i], [url] are converted to equivalent HTML elements.</p>
 <p>It is useful when migrating forum content, editing bulletin board posts or preparing text for systems that use UBB or HTML formatting.</p>
 </section>
+<h3>UBB Tag Reference</h3>
+<table class="uni-table">
+<thead><tr><th>UBB</th><th>HTML</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td>[b]text[/b]</td><td>&lt;b&gt;text&lt;/b&gt;</td><td>Bold text</td></tr>
+<tr><td>[i]text[/i]</td><td>&lt;i&gt;text&lt;/i&gt;</td><td>Italic text</td></tr>
+<tr><td>[u]text[/u]</td><td>&lt;u&gt;text&lt;/u&gt;</td><td>Underlined text</td></tr>
+<tr><td>[url=X]Y[/url]</td><td>&lt;a href="X"&gt;Y&lt;/a&gt;</td><td>Hyperlink</td></tr>
+<tr><td>[img]src[/img]</td><td>&lt;img src="src"&gt;</td><td>Image embed</td></tr>
+<tr><td>[code]...[/code]</td><td>&lt;pre&gt;&lt;code&gt;...&lt;/code&gt;&lt;/pre&gt;</td><td>Code block</td></tr>
+<tr><td>[quote]...[/quote]</td><td>&lt;blockquote&gt;...&lt;/blockquote&gt;</td><td>Quote block</td></tr>
+</tbody>
+</table>
 
-<section class="how-to-use">
-<h3>How to Use UBB HTML Converter</h3>
-<ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Open UBB HTML Converter and enter your source input data in the main field.</li>
-  <li><strong>Step 2:</strong> Choose transformation options such as case, trimming, filtering or replacement rules.</li>
-  <li><strong>Step 3:</strong> Run processing and compare the transformed text with your expected result.</li>
-  <li><strong>Step 4:</strong> Copy cleaned text into documents, code comments or content pipelines.</li>
-</ol>
-</section>
+
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-
-  <dt>What is UBB HTML Converter mainly used for?</dt>
-  <dd>UBB HTML Converter is mainly used to convert UBB forum tags to HTML and HTML back to UBB for bulletin boards and web content.</dd>
-
-  <dt>Does UBB HTML Converter send my input to a server?</dt>
-  <dd>For normal usage, UBB HTML Converter processes data locally in your browser so you can work without uploading project files.</dd>
-
-  <dt>Why does processed text differ from expectation?</dt>
-  <dd>Whitespace rules, hidden characters and line-ending differences are common reasons for unexpected text output.</dd>
+  <dt>What UBB tags are supported?</dt>
+  <dd>Supported tags include [b], [i], [u], [s], [url], [img], [code], and [quote]. Both inline and parameterized formats work.</dd>
+  <dt>Can I convert HTML back to UBB?</dt>
+  <dd>Yes. The converter handles common HTML elements like <b>, <i>, <u>, <a>, <img>, <pre><code>, and <blockquote>.</dd>
+  <dt>Does it preserve nested formatting?</dt>
+  <dd>Basic nesting is preserved, but deeply nested or mixed formatting may have limitations due to regex-based parsing.</dd>
+  <dt>What about custom UBB tags?</dt>
+  <dd>Custom tags like [youtube], [attachment], or forum-specific codes are not converted and pass through unchanged.</dd>
+  <dt>Are line breaks preserved?</dt>
+  <dd>Newlines are converted to <br> tags in UBB-to-HTML mode. HTML line breaks convert back to newlines in reverse mode.</dd>
+  <dt>Why use UBB instead of HTML?</dt>
+  <dd>UBB is safer for user input as it prevents XSS attacks. Many legacy forums and bulletin boards still use UBB syntax.</dd>
 </dl>
 </section>
 </main>

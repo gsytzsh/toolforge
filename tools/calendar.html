@@ -58,50 +58,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "这个日历工具有什么特点？",
+      "name": "What features does this calendar tool offer?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "这是一个轻量级在线日历，支持浏览任意月份、快速定位今天、为特定日期添加备注。所有备注使用 localStorage 存储在浏览器本地，不会上传到服务器，关闭浏览器后数据依然保留。"
+        "text": "This is a lightweight online calendar that supports browsing any month, quickly navigating to today, and adding notes to specific dates. All notes are stored locally in your browser using localStorage, so data persists after closing the browser and is never uploaded to any server."
       }
     },
     {
       "@type": "Question",
-      "name": "如何在日历中添加日期备注？",
+      "name": "How do I add notes to a date in the calendar?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "点击任意日期格子选中该日期，然后在下方的备注输入框中输入内容，点击"保存"按钮。有备注的日期右上角会显示橙色圆点标记，再次点击可查看或编辑备注。"
+        "text": "Click any date cell to select it, then type your note in the text area below and click the Save button. Dates with notes display an orange dot marker in the top-right corner. Click a date with a dot to view or edit its note."
       }
     },
     {
       "@type": "Question",
-      "name": "备注数据存储在哪里？会同步吗？",
+      "name": "Where are calendar notes stored? Do they sync across devices?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "备注使用 HTML5 localStorage 存储在您的浏览器本地。数据不会上传到任何服务器，因此不会在不同设备间同步。清除浏览器数据会删除备注。适合个人轻量级使用。"
+        "text": "Notes are stored using HTML5 localStorage in your browser. Data never uploads to any server, so it does not sync across devices. Clearing browser data will delete notes. This is suitable for personal, lightweight use on a single device."
       }
     },
     {
       "@type": "Question",
-      "name": "日历如何显示今天和选中的日期？",
+      "name": "How does the calendar display today and selected dates?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "今天的日期用蓝色边框和阴影高亮显示。当前选中的日期用深色边框标记。点击"Today"按钮可快速返回今天。月份标题显示当前浏览的年月和时区信息。"
+        "text": "Today's date is highlighted with a blue border and shadow. The currently selected date uses a dark border. Click the Today button to quickly return to the current date. The month title shows the year-month and timezone information."
       }
     },
     {
       "@type": "Question",
-      "name": "日历的显示范围是什么？",
+      "name": "What is the calendar display range?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "日历网格显示 6 行×7 列共 42 天，确保完整覆盖任何月份（包括前后月份的补位日期）。星期标题显示英文缩写（Sun-Sat）。日期格子最小高度 72px，可容纳备注标记。"
+        "text": "The calendar grid displays 6 rows × 7 columns = 42 days, ensuring complete coverage of any month (including padding days from previous/next months). Weekday headers show English abbreviations (Sun-Sat). Date cells have a minimum height of 72px to accommodate note markers."
       }
     },
     {
       "@type": "Question",
-      "name": "如何使用 localStorage 存储日期备注？",
+      "name": "How does localStorage store date notes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "备注使用键值对存储，键名格式为"toolforge.calendar.note:YYYY-MM-DD"。ISO 日期格式确保唯一性。存储限制约 5-10MB，足够存储大量日期备注。使用 localStorage API 读写数据。"
+        "text": "Notes use key-value pairs with the format 'toolforge.calendar.note:YYYY-MM-DD'. ISO date format ensures uniqueness. Storage limit is approximately 5-10 MB, sufficient for many date notes. Uses the localStorage API for reading and writing data."
       }
     }
   ]
@@ -148,192 +148,192 @@
     </div>
   </div>
 <section class="tool-seo">
-<h3>关于日历工具</h3>
-<p>这是一个轻量级的在线日历工具，可浏览任意月份、快速定位今天、并为特定日期添加备注。所有备注使用 localStorage 存储在您的浏览器本地，不会上传到任何服务器。</p>
+<h3>About Calendar Tool</h3>
+<p>This is a lightweight online calendar tool that allows you to browse any month, quickly navigate to today, and add notes to specific dates. All notes are stored locally in your browser using localStorage and are never uploaded to any server.</p>
 
-<h4>日历界面说明</h4>
+<h4>Calendar Interface Elements</h4>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">元素</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">说明</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Element</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">月份标题</td>
-    <td style="border:1px solid #ddd;padding:8px">显示当前浏览的年月（如"January 2026"）</td>
+    <td style="border:1px solid #ddd;padding:8px">Month title</td>
+    <td style="border:1px solid #ddd;padding:8px">Displays current month and year (e.g., "January 2026")</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">时区信息</td>
-    <td style="border:1px solid #ddd;padding:8px">显示浏览器所在时区（如"Asia/Shanghai"）</td>
+    <td style="border:1px solid #ddd;padding:8px">Timezone info</td>
+    <td style="border:1px solid #ddd;padding:8px">Shows browser timezone (e.g., "Asia/Shanghai")</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">星期标题</td>
+    <td style="border:1px solid #ddd;padding:8px">Weekday headers</td>
     <td style="border:1px solid #ddd;padding:8px">Sun, Mon, Tue, Wed, Thu, Fri, Sat</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">日期格子</td>
-    <td style="border:1px solid #ddd;padding:8px">显示日期数字，可点击选中</td>
+    <td style="border:1px solid #ddd;padding:8px">Date cells</td>
+    <td style="border:1px solid #ddd;padding:8px">Display day numbers, clickable for selection</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">蓝色边框</td>
-    <td style="border:1px solid #ddd;padding:8px">标记今天是哪一天</td>
+    <td style="border:1px solid #ddd;padding:8px">Blue border</td>
+    <td style="border:1px solid #ddd;padding:8px">Marks today's date</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">深色边框</td>
-    <td style="border:1px solid #ddd;padding:8px">标记当前选中的日期</td>
+    <td style="border:1px solid #ddd;padding:8px">Dark border</td>
+    <td style="border:1px solid #ddd;padding:8px">Marks currently selected date</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">橙色圆点</td>
-    <td style="border:1px solid #ddd;padding:8px">表示该日期有备注</td>
+    <td style="border:1px solid #ddd;padding:8px">Orange dot</td>
+    <td style="border:1px solid #ddd;padding:8px">Indicates the date has a note</td>
   </tr>
 </table>
 
-<h4>功能按钮说明</h4>
+<h4>Function Buttons</h4>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">按钮</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">功能</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Button</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Function</th>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">← Prev</td>
-    <td style="border:1px solid #ddd;padding:8px">切换到上一个月</td>
+    <td style="border:1px solid #ddd;padding:8px">Navigate to previous month</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Today</td>
-    <td style="border:1px solid #ddd;padding:8px">快速返回今天的日期</td>
+    <td style="border:1px solid #ddd;padding:8px">Quickly return to today's date</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Next →</td>
-    <td style="border:1px solid #ddd;padding:8px">切换到下一个月</td>
+    <td style="border:1px solid #ddd;padding:8px">Navigate to next month</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Save</td>
-    <td style="border:1px solid #ddd;padding:8px">保存当前选中日期的备注</td>
+    <td style="border:1px solid #ddd;padding:8px">Save note for currently selected date</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Clear</td>
-    <td style="border:1px solid #ddd;padding:8px">清空当前日期的备注</td>
+    <td style="border:1px solid #ddd;padding:8px">Clear note for current date</td>
   </tr>
 </table>
 
-<h4>localStorage 存储机制</h4>
-<p>备注使用 HTML5 localStorage API 存储在浏览器本地：</p>
+<h4>localStorage Storage Mechanism</h4>
+<p>Notes are stored using the HTML5 localStorage API in your browser:</p>
 <pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
-存储键名格式：toolforge.calendar.note:YYYY-MM-DD
+Storage key format: toolforge.calendar.note:YYYY-MM-DD
 
-示例：
-键名：toolforge.calendar.note:2026-03-24
-值：下午 3 点开会
+Example:
+Key: toolforge.calendar.note:2026-03-24
+Value: Team meeting at 3 PM
 
-存储特点：
-- 数据永久保存，除非手动清除
-- 每个域名约 5-10MB 空间
-- 不会随浏览器关闭而丢失
-- 不同浏览器/设备不共享
+Storage characteristics:
+- Data persists permanently until manually cleared
+- Approximately 5-10 MB per domain
+- Does not disappear when browser closes
+- Not shared across different browsers/devices
 </pre>
 
-<h4>常见应用场景</h4>
+<h4>Common Use Cases</h4>
 <ul>
-  <li><strong>个人计划：</strong>记录每日待办事项、约会时间</li>
-  <li><strong>重要日期：</strong>标记生日、纪念日、截止日期</li>
-  <li><strong>工作安排：</strong>记录会议、项目里程碑</li>
-  <li><strong>学习笔记：</strong>为学习日期添加复习提醒</li>
-  <li><strong>轻量规划：</strong>不需要复杂功能的简单日历</li>
+  <li><strong>Personal planning:</strong> Record daily tasks and appointment times</li>
+  <li><strong>Important dates:</strong> Mark birthdays, anniversaries, deadlines</li>
+  <li><strong>Work scheduling:</strong> Record meetings and project milestones</li>
+  <li><strong>Study notes:</strong> Add review reminders for study dates</li>
+  <li><strong>Lightweight planning:</strong> Simple calendar without complex features</li>
 </ul>
 
-<h4>日期格式说明</h4>
-<p>日历使用 ISO 8601 日期格式（YYYY-MM-DD）：</p>
+<h4>Date Format Explanation</h4>
+<p>The calendar uses ISO 8601 date format (YYYY-MM-DD):</p>
 <ul>
-  <li><strong>ISO 格式：</strong>2026-03-24（年 - 月 - 日）</li>
-  <li><strong>优点：</strong>全球统一标准，排序方便，无歧义</li>
-  <li><strong>存储键名：</strong>使用前缀 + ISO 日期确保唯一性</li>
+  <li><strong>ISO format:</strong> 2026-03-24 (year-month-day)</li>
+  <li><strong>Advantages:</strong> Global standard, easy sorting, unambiguous</li>
+  <li><strong>Storage key:</strong> Uses prefix + ISO date to ensure uniqueness</li>
 </ul>
 
-<h4>浏览器兼容性</h4>
+<h4>Browser Compatibility</h4>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">浏览器</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">localStorage 支持</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Browser</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">localStorage Support</th>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Chrome</td>
-    <td style="border:1px solid #ddd;padding:8px">完全支持（所有版本）</td>
+    <td style="border:1px solid #ddd;padding:8px">Full support (all versions)</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Firefox</td>
-    <td style="border:1px solid #ddd;padding:8px">完全支持</td>
+    <td style="border:1px solid #ddd;padding:8px">Full support</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Safari</td>
-    <td style="border:1px solid #ddd;padding:8px">完全支持</td>
+    <td style="border:1px solid #ddd;padding:8px">Full support</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Edge</td>
-    <td style="border:1px solid #ddd;padding:8px">完全支持</td>
+    <td style="border:1px solid #ddd;padding:8px">Full support</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">移动浏览器</td>
-    <td style="border:1px solid #ddd;padding:8px">iOS Safari, Chrome 均支持</td>
+    <td style="border:1px solid #ddd;padding:8px">Mobile browsers</td>
+    <td style="border:1px solid #ddd;padding:8px">iOS Safari and Chrome all support</td>
   </tr>
 </table>
 
-<h4>数据隐私说明</h4>
+<h4>Data Privacy</h4>
 <ul>
-  <li><strong>本地存储：</strong>所有备注仅存储在您的浏览器中</li>
-  <li><strong>无服务器传输：</strong>数据不会发送到任何服务器</li>
-  <li><strong>无追踪：</strong>不收集任何个人信息或使用数据</li>
-  <li><strong>清除数据：</strong>可通过浏览器设置清除所有备注</li>
-  <li><strong>离线使用：</strong>页面加载后可离线使用</li>
+  <li><strong>Local storage:</strong> All notes are stored only in your browser</li>
+  <li><strong>No server transmission:</strong> Data is never sent to any server</li>
+  <li><strong>No tracking:</strong> No personal information or usage data collected</li>
+  <li><strong>Clear data:</strong> Can clear all notes via browser settings</li>
+  <li><strong>Offline use:</strong> Works offline after page loads</li>
 </ul>
 
-<h4>使用限制</h4>
+<h4>Usage Limitations</h4>
 <ul>
-  <li>存储空间限制：每个域名约 5-10MB</li>
-  <li>数据不跨设备同步（需手动导出导入）</li>
-  <li>清除浏览器数据会删除所有备注</li>
-  <li>仅支持文本备注，不支持附件</li>
+  <li>Storage limit: approximately 5-10 MB per domain</li>
+  <li>Data does not sync across devices (manual export/import required)</li>
+  <li>Clearing browser data deletes all notes</li>
+  <li>Text notes only, no file attachments supported</li>
 </ul>
 </section>
 
 <section class="how-to-use">
-<h3>如何使用日历工具</h3>
+<h3>How to Use Calendar Tool</h3>
 <ol class="how-to-steps">
-  <li><strong>浏览月份：</strong>使用"Prev"和"Next"按钮切换月份，或点击"Today"返回今天。</li>
-  <li><strong>选中日期：</strong>点击任意日期格子选中该日期。</li>
-  <li><strong>添加备注：</strong>在下方输入框中输入备注内容，点击"Save"保存。</li>
-  <li><strong>查看备注：</strong>点击有橙色圆点的日期可查看或编辑备注。</li>
-  <li><strong>清空备注：</strong>点击"Clear"按钮可删除当前日期的备注。</li>
+  <li><strong>Browse months:</strong> Use "Prev" and "Next" buttons to switch months, or click "Today" to return to current month.</li>
+  <li><strong>Select a date:</strong> Click any date cell to select it.</li>
+  <li><strong>Add a note:</strong> Type your note in the text area below and click "Save".</li>
+  <li><strong>View notes:</strong> Click a date with an orange dot to view or edit its note.</li>
+  <li><strong>Clear notes:</strong> Click "Clear" button to delete the note for current date.</li>
 </ol>
 
-<h4 style="margin-top:20px">提示</h4>
+<h4 style="margin-top:20px">Tips</h4>
 <ul>
-  <li>备注会自动保存在浏览器中，关闭页面后数据不丢失</li>
-  <li>橙色圆点标记表示该日期已有备注</li>
-  <li>蓝色边框标记今天，深色边框标记当前选中日期</li>
-  <li>清除浏览器缓存会删除所有备注数据</li>
-  <li>不同浏览器之间的数据不互通</li>
+  <li>Notes are automatically saved in your browser and persist after closing the page</li>
+  <li>Orange dot marker indicates a date has a note</li>
+  <li>Blue border marks today, dark border marks selected date</li>
+  <li>Clearing browser cache deletes all note data</li>
+  <li>Data is not shared between different browsers</li>
 </ul>
 </section>
 <section class="faq">
-<h3>常见问题解答</h3>
+<h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>这个日历工具有什么特点？</dt>
-  <dd>这是一个轻量级在线日历，支持浏览任意月份、快速定位今天、为特定日期添加备注。所有备注使用 localStorage 存储在浏览器本地，不会上传到服务器，关闭浏览器后数据依然保留。</dd>
+  <dt>What features does this calendar tool offer?</dt>
+  <dd>This is a lightweight online calendar that supports browsing any month, quickly navigating to today, and adding notes to specific dates. All notes are stored locally in your browser using localStorage, so data persists after closing the browser and is never uploaded to any server.</dd>
 
-  <dt>如何在日历中添加日期备注？</dt>
-  <dd>点击任意日期格子选中该日期，然后在下方的备注输入框中输入内容，点击"保存"按钮。有备注的日期右上角会显示橙色圆点标记，再次点击可查看或编辑备注。</dd>
+  <dt>How do I add notes to a date in the calendar?</dt>
+  <dd>Click any date cell to select it, then type your note in the text area below and click the Save button. Dates with notes display an orange dot marker in the top-right corner. Click a date with a dot to view or edit its note.</dd>
 
-  <dt>备注数据存储在哪里？会同步吗？</dt>
-  <dd>备注使用 HTML5 localStorage 存储在您的浏览器本地。数据不会上传到任何服务器，因此不会在不同设备间同步。清除浏览器数据会删除备注。适合个人轻量级使用。</dd>
+  <dt>Where are calendar notes stored? Do they sync across devices?</dt>
+  <dd>Notes are stored using HTML5 localStorage in your browser. Data never uploads to any server, so it does not sync across devices. Clearing browser data will delete notes. This is suitable for personal, lightweight use on a single device.</dd>
 
-  <dt>日历如何显示今天和选中的日期？</dt>
-  <dd>今天的日期用蓝色边框和阴影高亮显示。当前选中的日期用深色边框标记。点击"Today"按钮可快速返回今天。月份标题显示当前浏览的年月和时区信息。</dd>
+  <dt>How does the calendar display today and selected dates?</dt>
+  <dd>Today's date is highlighted with a blue border and shadow. The currently selected date uses a dark border. Click the Today button to quickly return to the current date. The month title shows the year-month and timezone information.</dd>
 
-  <dt>日历的显示范围是什么？</dt>
-  <dd>日历网格显示 6 行×7 列共 42 天，确保完整覆盖任何月份（包括前后月份的补位日期）。星期标题显示英文缩写（Sun-Sat）。日期格子最小高度 72px，可容纳备注标记。</dd>
+  <dt>What is the calendar display range?</dt>
+  <dd>The calendar grid displays 6 rows × 7 columns = 42 days, ensuring complete coverage of any month (including padding days from previous/next months). Weekday headers show English abbreviations (Sun-Sat). Date cells have a minimum height of 72px to accommodate note markers.</dd>
 
-  <dt>如何使用 localStorage 存储日期备注？</dt>
-  <dd>备注使用键值对存储，键名格式为"toolforge.calendar.note:YYYY-MM-DD"。ISO 日期格式确保唯一性。存储限制约 5-10MB，足够存储大量日期备注。使用 localStorage API 读写数据。</dd>
+  <dt>How does localStorage store date notes?</dt>
+  <dd>Notes use key-value pairs with the format 'toolforge.calendar.note:YYYY-MM-DD'. ISO date format ensures uniqueness. Storage limit is approximately 5-10 MB, sufficient for many date notes. Uses the localStorage API for reading and writing data.</dd>
 </dl>
 </section>
 </main>

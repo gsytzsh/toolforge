@@ -3,49 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>URL Batch Generator – Generate URLs from Base + Pattern | ToolForge</title>
-<meta name="description" content="Free online URL batch generator. Generate multiple URLs from base URL and pattern (e.g. /page-1, /page-2). Part of the ToolForge developer tools collection.">
+<meta name="description" content="Generate multiple URLs from base URL and pattern. Use {n} for the index placeholder.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/url-batch-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="URL Batch Generator – Generate URLs from Base + Pattern | ToolForge">
-<meta property="og:description" content="Batch generate URLs from base URL and pattern.">
+<meta property="og:description" content="Generate multiple URLs from base URL and pattern. Use {n} for the index placeholder.">
 <meta property="og:url" content="https://toolforge.site/tools/url-batch-generator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="URL Batch Generator – Generate URLs from Base + Pattern | ToolForge">
-<meta name="twitter:description" content="Batch generate URLs from base URL and pattern.">
+<meta name="twitter:description" content="Generate multiple URLs from base URL and pattern. Use {n} for the index placeholder.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use URL Batch Generator",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Open URL Batch Generator and enter your source input data in the main field."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Configure language-specific settings and formatting/validation options before running."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Execute the main action and review syntax, structure or generated code output."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy results into your editor, scripts or review notes."
-    }
-  ]
-}
-</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,26 +24,45 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is URL Batch Generator mainly used for?",
+      "name": "What pattern syntax does the generator use?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "URL Batch Generator is mainly used to generate multiple URLs from base URL and pattern. Use {n} for the index (1-based)."
+        "text": "The generator uses {n} as a placeholder for the numeric index. For example, /page-{n} with range 1-10 generates /page-1 through /page-10."
       }
-    },
-    {
+    },    {
       "@type": "Question",
-      "name": "Does URL Batch Generator send my input to a server?",
+      "name": "Can I generate URLs with query parameters?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, URL Batch Generator processes data locally in your browser so you can work without uploading project files."
+        "text": "Yes. Use patterns like ?page={n} or ?id={n}&sort=asc. The placeholder works in any part of the URL path or query string."
       }
-    },
-    {
+    },    {
       "@type": "Question",
-      "name": "How can I troubleshoot incorrect developer-tool output?",
+      "name": "What happens if start is greater than end?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Confirm input syntax, language mode and escaping rules; then test with a smaller sample to isolate issues."
+        "text": "The generator automatically swaps the values so you always get a valid range from the smaller to larger number."
+      }
+    },    {
+      "@type": "Question",
+      "name": "How do I generate zero-padded numbers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Add leading zeros in your pattern. Use {n} with the tool output, then post-process, or manually pad: page-001, page-002, etc."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Can I generate URLs for pagination?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Enter your base URL and use patterns like /page/{n} or ?p={n} with your desired page range."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is the maximum range I can generate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool handles ranges of hundreds efficiently. For very large batches (1000+), consider splitting into smaller ranges."
       }
     }
   ]
@@ -111,28 +101,33 @@
 <p>This tool generates a list of URLs from a base URL and a pattern. Use {n} as placeholder for the index (e.g. /page-{n} from 1 to 10).</p>
 <p>Useful for sitemaps, bulk requests and pagination URLs.</p>
 </section>
+<h3>URL Pattern Examples</h3>
+<table class="uni-table">
+<thead><tr><th>Use Case</th><th>Base URL</th><th>Pattern</th><th>Range</th></tr></thead>
+<tbody>
+<tr><td>Pagination</td><td>https://example.com</td><td>/page/{n}</td><td>1-50</td></tr>
+<tr><td>API endpoints</td><td>https://api.example.com</td><td>/users/{n}</td><td>1-100</td></tr>
+<tr><td>Query params</td><td>https://example.com</td><td>?page={n}</td><td>1-10</td></tr>
+<tr><td>Sitemap</td><td>https://example.com</td><td>/products/{n}.html</td><td>1-500</td></tr>
+</tbody>
+</table>
 
-<section class="how-to-use">
-<h3>How to Use URL Batch Generator</h3>
-<ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Open URL Batch Generator and enter your source input data in the main field.</li>
-  <li><strong>Step 2:</strong> Configure language-specific settings and formatting/validation options before running.</li>
-  <li><strong>Step 3:</strong> Execute the main action and review syntax, structure or generated code output.</li>
-  <li><strong>Step 4:</strong> Copy results into your editor, scripts or review notes.</li>
-</ol>
-</section>
+
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-
-  <dt>What is URL Batch Generator mainly used for?</dt>
-  <dd>URL Batch Generator is mainly used to generate multiple URLs from base URL and pattern. Use {n} for the index (1-based).</dd>
-
-  <dt>Does URL Batch Generator send my input to a server?</dt>
-  <dd>For normal usage, URL Batch Generator processes data locally in your browser so you can work without uploading project files.</dd>
-
-  <dt>How can I troubleshoot incorrect developer-tool output?</dt>
-  <dd>Confirm input syntax, language mode and escaping rules; then test with a smaller sample to isolate issues.</dd>
+  <dt>What pattern syntax does the generator use?</dt>
+  <dd>The generator uses {n} as a placeholder for the numeric index. For example, /page-{n} with range 1-10 generates /page-1 through /page-10.</dd>
+  <dt>Can I generate URLs with query parameters?</dt>
+  <dd>Yes. Use patterns like ?page={n} or ?id={n}&sort=asc. The placeholder works in any part of the URL path or query string.</dd>
+  <dt>What happens if start is greater than end?</dt>
+  <dd>The generator automatically swaps the values so you always get a valid range from the smaller to larger number.</dd>
+  <dt>How do I generate zero-padded numbers?</dt>
+  <dd>Add leading zeros in your pattern. Use {n} with the tool output, then post-process, or manually pad: page-001, page-002, etc.</dd>
+  <dt>Can I generate URLs for pagination?</dt>
+  <dd>Yes. Enter your base URL and use patterns like /page/{n} or ?p={n} with your desired page range.</dd>
+  <dt>What is the maximum range I can generate?</dt>
+  <dd>The tool handles ranges of hundreds efficiently. For very large batches (1000+), consider splitting into smaller ranges.</dd>
 </dl>
 </section>
 </main>

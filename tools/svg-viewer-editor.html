@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>SVG Viewer &amp; Editor – Preview and Edit SVG Online | ToolForge</title>
-<meta name="description" content="Free online SVG Viewer and Editor to preview, edit and validate SVG code in your browser. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Preview, edit and validate SVG code in your browser. Real-time rendering with instant feedback.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/svg-viewer-editor.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="SVG Viewer &amp; Editor – Preview and Edit SVG Online | ToolForge">
-<meta property="og:description" content="Free online SVG Viewer and Editor to preview, edit and validate SVG code in your browser.">
+<meta property="og:description" content="Preview, edit and validate SVG code in your browser. Real-time rendering with instant feedback.">
 <meta property="og:url" content="https://toolforge.site/tools/svg-viewer-editor.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVG Viewer &amp; Editor – Preview and Edit SVG Online | ToolForge">
-<meta name="twitter:description" content="Free online SVG Viewer and Editor to preview, edit and validate SVG code in your browser.">
+<meta name="twitter:description" content="Preview, edit and validate SVG code in your browser. Real-time rendering with instant feedback.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
@@ -26,59 +26,49 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use SVG Viewer & Editor",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "paste SVG code into the editor panel"
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Adjust attributes, viewBox and styles while previewing output."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Render SVG and inspect visual changes in real time."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy updated SVG markup back into your project."
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is SVG Viewer & Editor mainly used for?",
+      "name": "How does the preview work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "SVG Viewer & Editor is mainly used to preview and edit SVG markup directly in the browser."
+        "text": "The tool creates a Blob URL from your SVG code and renders it in an image element. Changes update the preview instantly."
       }
-    },
-    {
+    },    {
       "@type": "Question",
-      "name": "Does SVG Viewer & Editor send my input to a server?",
+      "name": "Can I edit SVG attributes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, SVG Viewer & Editor processes data locally in your browser so you can test quickly without uploading project files."
+        "text": "Edit the SVG code directly in the textarea. Change viewBox, colors, dimensions, or any attribute and click Preview."
       }
-    },
-    {
+    },    {
       "@type": "Question",
-      "name": "Why does an SVG render blank after editing?",
+      "name": "What SVG features are supported?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Invalid XML syntax, missing namespaces or incorrect viewBox values are common reasons for blank rendering."
+        "text": "All standard SVG 1.1 and SVG 2 features work: shapes, paths, gradients, filters, text, and animations."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Why does my SVG show an error?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Check for XML syntax errors, unclosed tags, invalid attribute values, or missing required elements."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Can I download the edited SVG?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Click Download to save the current SVG code as a .svg file to your local system."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Does it validate SVG syntax?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The preview itself acts as validation. If the SVG renders correctly, the syntax is valid. Errors show in the error panel."
       }
     }
   ]
@@ -113,28 +103,37 @@
 <h3>About SVG Viewer &amp; Editor</h3>
 <p>This SVG Viewer and Editor lets you paste or edit SVG markup and see the result live. Useful for debugging icons, tweaking vector graphics and validating SVG before embedding.</p>
 </section>
+<h3>SVG Element Reference</h3>
+<table class="uni-table">
+<thead><tr><th>Element</th><th>Purpose</th><th>Key Attributes</th></tr></thead>
+<tbody>
+<tr><td>&lt;svg&gt;</td><td>Root container</td><td>viewBox, width, height</td></tr>
+<tr><td>&lt;circle&gt;</td><td>Circle shape</td><td>cx, cy, r</td></tr>
+<tr><td>&lt;rect&gt;</td><td>Rectangle shape</td><td>x, y, width, height</td></tr>
+<tr><td>&lt;ellipse&gt;</td><td>Ellipse shape</td><td>cx, cy, rx, ry</td></tr>
+<tr><td>&lt;line&gt;</td><td>Line segment</td><td>x1, y1, x2, y2</td></tr>
+<tr><td>&lt;path&gt;</td><td>Complex shapes</td><td>d (path data)</td></tr>
+<tr><td>&lt;text&gt;</td><td>Text content</td><td>x, y, font-size</td></tr>
+<tr><td>&lt;g&gt;</td><td>Group elements</td><td>transform, class</td></tr>
+</tbody>
+</table>
 
-<section class="how-to-use">
-<h3>How to Use SVG Viewer &amp; Editor</h3>
-<ol class="how-to-steps">
-  <li><strong>Step 1:</strong> paste SVG code into the editor panel</li>
-  <li><strong>Step 2:</strong> Adjust attributes, viewBox and styles while previewing output.</li>
-  <li><strong>Step 3:</strong> Render SVG and inspect visual changes in real time.</li>
-  <li><strong>Step 4:</strong> Copy updated SVG markup back into your project.</li>
-</ol>
-</section>
+
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-
-  <dt>What is SVG Viewer &amp; Editor mainly used for?</dt>
-  <dd>SVG Viewer &amp; Editor is mainly used to preview and edit SVG markup directly in the browser.</dd>
-
-  <dt>Does SVG Viewer &amp; Editor send my input to a server?</dt>
-  <dd>For normal usage, SVG Viewer &amp; Editor processes data locally in your browser so you can test quickly without uploading project files.</dd>
-
-  <dt>Why does an SVG render blank after editing?</dt>
-  <dd>Invalid XML syntax, missing namespaces or incorrect viewBox values are common reasons for blank rendering.</dd>
+  <dt>How does the preview work?</dt>
+  <dd>The tool creates a Blob URL from your SVG code and renders it in an image element. Changes update the preview instantly.</dd>
+  <dt>Can I edit SVG attributes?</dt>
+  <dd>Edit the SVG code directly in the textarea. Change viewBox, colors, dimensions, or any attribute and click Preview.</dd>
+  <dt>What SVG features are supported?</dt>
+  <dd>All standard SVG 1.1 and SVG 2 features work: shapes, paths, gradients, filters, text, and animations.</dd>
+  <dt>Why does my SVG show an error?</dt>
+  <dd>Check for XML syntax errors, unclosed tags, invalid attribute values, or missing required elements.</dd>
+  <dt>Can I download the edited SVG?</dt>
+  <dd>Yes. Click Download to save the current SVG code as a .svg file to your local system.</dd>
+  <dt>Does it validate SVG syntax?</dt>
+  <dd>The preview itself acts as validation. If the SVG renders correctly, the syntax is valid. Errors show in the error panel.</dd>
 </dl>
 </section>
 </main>

@@ -4,17 +4,17 @@
 
 <meta charset="UTF-8">
 <title>Unix Permissions Calculator – chmod Calculator | ToolForge</title>
-<meta name="description" content="Free online Unix Permissions Calculator to build chmod numeric and symbolic permissions from read/write/execute flags. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Calculate chmod numeric and symbolic permissions from read/write/execute flags for user, group and others.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/unix-permissions-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Unix Permissions Calculator – chmod Calculator | ToolForge">
-<meta property="og:description" content="Free online Unix Permissions Calculator to build chmod numeric and symbolic permissions from read/write/execute flags. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Calculate chmod numeric and symbolic permissions from read/write/execute flags for user, group and others.">
 <meta property="og:url" content="https://toolforge.site/tools/unix-permissions-calculator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Unix Permissions Calculator – chmod Calculator | ToolForge">
-<meta name="twitter:description" content="Free online Unix Permissions Calculator to build chmod numeric and symbolic permissions from read/write/execute flags. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Calculate chmod numeric and symbolic permissions from read/write/execute flags for user, group and others.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -22,59 +22,49 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Unix Permissions Calculator",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Open Unix Permissions Calculator and enter your source input data in the main field."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Configure language-specific settings and formatting/validation options before running."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Execute the main action and review syntax, structure or generated code output."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy results into your editor, scripts or review notes."
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Unix Permissions Calculator mainly used for?",
+      "name": "What does chmod 755 mean?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Unix Permissions Calculator is mainly used to build chmod numeric and symbolic permissions from read/write/execute flags for user, group and others."
+        "text": "755 means owner has rwx (4+2+1=7), group has r-x (4+0+1=5), others have r-x (4+0+1=5). This is common for executable scripts where everyone can read and execute."
       }
-    },
-    {
+    },    {
       "@type": "Question",
-      "name": "Does Unix Permissions Calculator send my input to a server?",
+      "name": "What does chmod 644 mean?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Unix Permissions Calculator processes data locally in your browser so you can work without uploading project files."
+        "text": "644 means owner has rw- (4+2+0=6), group has r-- (4+0+0=4), others have r-- (4+0+0=4). This is standard for readable files that only the owner can modify."
       }
-    },
-    {
+    },    {
       "@type": "Question",
-      "name": "How can I troubleshoot incorrect developer-tool output?",
+      "name": "Why use symbolic vs numeric permissions?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Confirm input syntax, language mode and escaping rules; then test with a smaller sample to isolate issues."
+        "text": "Numeric (755) is concise for full permission sets. Symbolic (u+rwx,g+rx,o+rx) is clearer for modifying specific bits without affecting others."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is the sticky bit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The sticky bit (1000) on directories prevents users from deleting files they don't own. Commonly set on /tmp as 1777."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What do setuid and setgid bits do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Setuid (4000) runs executables with owner permissions. Setgid (2000) runs with group permissions or inherits group on directories."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is the umask value?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Umask subtracts from default permissions. A umask of 022 results in 755 for directories and 644 for files."
       }
     }
   ]
@@ -120,28 +110,37 @@
 <p>This Unix permissions calculator converts read, write and execute selections into chmod numeric and symbolic permission values.</p>
 <p>It is useful for server setup, deployment work and shell troubleshooting when you need to confirm the right permission combination before running `chmod`.</p>
 </section>
+<h3>Permission Values Reference</h3>
+<table class="uni-table">
+<thead><tr><th>Octal</th><th>Symbolic</th><th>Read</th><th>Write</th><th>Execute</th></tr></thead>
+<tbody>
+<tr><td>7</td><td>rwx</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>6</td><td>rw-</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+<tr><td>5</td><td>r-x</td><td>Yes</td><td>No</td><td>Yes</td></tr>
+<tr><td>4</td><td>r--</td><td>Yes</td><td>No</td><td>No</td></tr>
+<tr><td>3</td><td>-wx</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>2</td><td>-w-</td><td>No</td><td>Yes</td><td>No</td></tr>
+<tr><td>1</td><td>--x</td><td>No</td><td>No</td><td>Yes</td></tr>
+<tr><td>0</td><td>---</td><td>No</td><td>No</td><td>No</td></tr>
+</tbody>
+</table>
 
-<section class="how-to-use">
-<h3>How to Use Unix Permissions Calculator</h3>
-<ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Open Unix Permissions Calculator and enter your source input data in the main field.</li>
-  <li><strong>Step 2:</strong> Configure language-specific settings and formatting/validation options before running.</li>
-  <li><strong>Step 3:</strong> Execute the main action and review syntax, structure or generated code output.</li>
-  <li><strong>Step 4:</strong> Copy results into your editor, scripts or review notes.</li>
-</ol>
-</section>
+
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-
-  <dt>What is Unix Permissions Calculator mainly used for?</dt>
-  <dd>Unix Permissions Calculator is mainly used to build chmod numeric and symbolic permissions from read/write/execute flags for user, group and others.</dd>
-
-  <dt>Does Unix Permissions Calculator send my input to a server?</dt>
-  <dd>For normal usage, Unix Permissions Calculator processes data locally in your browser so you can work without uploading project files.</dd>
-
-  <dt>How can I troubleshoot incorrect developer-tool output?</dt>
-  <dd>Confirm input syntax, language mode and escaping rules; then test with a smaller sample to isolate issues.</dd>
+  <dt>What does chmod 755 mean?</dt>
+  <dd>755 means owner has rwx (4+2+1=7), group has r-x (4+0+1=5), others have r-x (4+0+1=5). This is common for executable scripts where everyone can read and execute.</dd>
+  <dt>What does chmod 644 mean?</dt>
+  <dd>644 means owner has rw- (4+2+0=6), group has r-- (4+0+0=4), others have r-- (4+0+0=4). This is standard for readable files that only the owner can modify.</dd>
+  <dt>Why use symbolic vs numeric permissions?</dt>
+  <dd>Numeric (755) is concise for full permission sets. Symbolic (u+rwx,g+rx,o+rx) is clearer for modifying specific bits without affecting others.</dd>
+  <dt>What is the sticky bit?</dt>
+  <dd>The sticky bit (1000) on directories prevents users from deleting files they don't own. Commonly set on /tmp as 1777.</dd>
+  <dt>What do setuid and setgid bits do?</dt>
+  <dd>Setuid (4000) runs executables with owner permissions. Setgid (2000) runs with group permissions or inherits group on directories.</dd>
+  <dt>What is the umask value?</dt>
+  <dd>Umask subtracts from default permissions. A umask of 022 results in 755 for directories and 644 for files.</dd>
 </dl>
 </section>
 </main>

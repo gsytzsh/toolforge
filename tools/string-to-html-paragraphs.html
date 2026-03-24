@@ -3,49 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>String to HTML Paragraphs – Convert Text to &lt;p&gt; Tags | ToolForge</title>
-<meta name="description" content="Free online tool to convert plain text to HTML paragraphs. Each line or block becomes a &lt;p&gt; tag. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Convert plain text to HTML paragraph tags. Each blank-line separated block becomes a <p> element.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/string-to-html-paragraphs.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="String to HTML Paragraphs – Convert Text to &lt;p&gt; Tags | ToolForge">
-<meta property="og:description" content="Convert plain text to HTML paragraphs.">
+<meta property="og:description" content="Convert plain text to HTML paragraph tags. Each blank-line separated block becomes a <p> element.">
 <meta property="og:url" content="https://toolforge.site/tools/string-to-html-paragraphs.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="String to HTML Paragraphs – Convert Text to &lt;p&gt; Tags | ToolForge">
-<meta name="twitter:description" content="Convert plain text to HTML paragraphs.">
+<meta name="twitter:description" content="Convert plain text to HTML paragraph tags. Each blank-line separated block becomes a <p> element.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use String to HTML Paragraphs",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Open String to HTML Paragraphs and enter your source input data in the main field."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Choose transformation options such as case, trimming, filtering or replacement rules."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Run processing and compare the transformed text with your expected result."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy cleaned text into documents, code comments or content pipelines."
-    }
-  ]
-}
-</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,26 +24,45 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is String to HTML Paragraphs mainly used for?",
+      "name": "How are paragraphs detected?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "String to HTML Paragraphs is mainly used to convert plain text to HTML paragraphs. Each paragraph (blank-line separated) becomes a &lt;p&gt; tag."
+        "text": "Paragraphs are blocks of text separated by one or more blank lines. Single line breaks within a block are preserved."
       }
-    },
-    {
+    },    {
       "@type": "Question",
-      "name": "Does String to HTML Paragraphs send my input to a server?",
+      "name": "Are special characters escaped?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, String to HTML Paragraphs processes data locally in your browser so you can work without uploading project files."
+        "text": "Yes. Ampersands, angle brackets, and quotes are automatically HTML-escaped to prevent markup injection."
       }
-    },
-    {
+    },    {
       "@type": "Question",
-      "name": "Why does processed text differ from expectation?",
+      "name": "Can I customize the output tags?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Whitespace rules, hidden characters and line-ending differences are common reasons for unexpected text output."
+        "text": "This tool outputs <p> tags only. For other elements like <div> or <span>, you would need to post-process the output."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What happens to leading/trailing whitespace?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each paragraph block is trimmed before wrapping. Internal whitespace within paragraphs is preserved."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Does it handle nested HTML?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Input is treated as plain text. Any HTML in the input will be escaped, not preserved as markup."
+      }
+    },    {
+      "@type": "Question",
+      "name": "How do I add CSS classes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Post-process the output with find/replace, changing <p> to <p class=&quot;your-class&quot;> as needed."
       }
     }
   ]
@@ -107,28 +97,34 @@ Third paragraph."></textarea>
 <p>This tool converts plain text into HTML paragraphs. Blocks separated by blank lines become individual &lt;p&gt; elements.</p>
 <p>Useful for CMS content, email templates and converting copy to HTML.</p>
 </section>
+<h3>HTML Paragraph Best Practices</h3>
+<table class="uni-table">
+<thead><tr><th>Element</th><th>Purpose</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>&lt;p&gt;</td><td>Paragraph text</td><td>Block-level, auto margins</td></tr>
+<tr><td>&lt;br&gt;</td><td>Line break</td><td>Inline break within block</td></tr>
+<tr><td>&lt;div&gt;</td><td>Generic container</td><td>No semantic meaning</td></tr>
+<tr><td>&lt;article&gt;</td><td>Self-contained content</td><td>Blog posts, articles</td></tr>
+<tr><td>&lt;section&gt;</td><td>Themed grouping</td><td>Chapter, tabbed content</td></tr>
+</tbody>
+</table>
 
-<section class="how-to-use">
-<h3>How to Use String to HTML Paragraphs</h3>
-<ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Open String to HTML Paragraphs and enter your source input data in the main field.</li>
-  <li><strong>Step 2:</strong> Choose transformation options such as case, trimming, filtering or replacement rules.</li>
-  <li><strong>Step 3:</strong> Run processing and compare the transformed text with your expected result.</li>
-  <li><strong>Step 4:</strong> Copy cleaned text into documents, code comments or content pipelines.</li>
-</ol>
-</section>
+
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-
-  <dt>What is String to HTML Paragraphs mainly used for?</dt>
-  <dd>String to HTML Paragraphs is mainly used to convert plain text to HTML paragraphs. Each paragraph (blank-line separated) becomes a &amp;lt;p&amp;gt; tag.</dd>
-
-  <dt>Does String to HTML Paragraphs send my input to a server?</dt>
-  <dd>For normal usage, String to HTML Paragraphs processes data locally in your browser so you can work without uploading project files.</dd>
-
-  <dt>Why does processed text differ from expectation?</dt>
-  <dd>Whitespace rules, hidden characters and line-ending differences are common reasons for unexpected text output.</dd>
+  <dt>How are paragraphs detected?</dt>
+  <dd>Paragraphs are blocks of text separated by one or more blank lines. Single line breaks within a block are preserved.</dd>
+  <dt>Are special characters escaped?</dt>
+  <dd>Yes. Ampersands, angle brackets, and quotes are automatically HTML-escaped to prevent markup injection.</dd>
+  <dt>Can I customize the output tags?</dt>
+  <dd>This tool outputs <p> tags only. For other elements like <div> or <span>, you would need to post-process the output.</dd>
+  <dt>What happens to leading/trailing whitespace?</dt>
+  <dd>Each paragraph block is trimmed before wrapping. Internal whitespace within paragraphs is preserved.</dd>
+  <dt>Does it handle nested HTML?</dt>
+  <dd>Input is treated as plain text. Any HTML in the input will be escaped, not preserved as markup.</dd>
+  <dt>How do I add CSS classes?</dt>
+  <dd>Post-process the output with find/replace, changing <p> to <p class="your-class"> as needed.</dd>
 </dl>
 </section>
 </main>

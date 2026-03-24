@@ -3,49 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Text Interval Generator – Insert Separator Between Lines | ToolForge</title>
-<meta name="description" content="Free online tool to insert a separator between lines of text. Add comma, newline or custom delimiter. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Insert separators between lines of text. Convert line lists to comma-separated values or custom delimited formats.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/text-interval-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Text Interval Generator – Insert Separator Between Lines | ToolForge">
-<meta property="og:description" content="Free online tool to insert separator between lines. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Insert separators between lines of text. Convert line lists to comma-separated values or custom delimited formats.">
 <meta property="og:url" content="https://toolforge.site/tools/text-interval-generator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Text Interval Generator – Insert Separator Between Lines | ToolForge">
-<meta name="twitter:description" content="Free online tool to insert separator between lines. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Insert separators between lines of text. Convert line lists to comma-separated values or custom delimited formats.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Text Interval Generator",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Open Text Interval Generator and enter your source input data in the main field."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Choose transformation options such as case, trimming, filtering or replacement rules."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Run processing and compare the transformed text with your expected result."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy cleaned text into documents, code comments or content pipelines."
-    }
-  ]
-}
-</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,26 +24,48 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Text Interval Generator mainly used for?",
+      "name": "What separators can I use?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Text Interval Generator is mainly used to insert a separator between each line of text. Use comma, newline or a custom delimiter."
+        "text": "Any string works: comma, pipe, semicolon, newline, tab, or custom text. Use 
+ for newline and 	 for tab."
       }
-    },
-    {
+    },    {
       "@type": "Question",
-      "name": "Does Text Interval Generator send my input to a server?",
+      "name": "How does it handle empty lines?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Text Interval Generator processes data locally in your browser so you can work without uploading project files."
+        "text": "Empty lines are preserved as empty entries. &quot;a
+
+b&quot; becomes &quot;a,,b&quot; with comma separator."
       }
-    },
-    {
+    },    {
       "@type": "Question",
-      "name": "Why does processed text differ from expectation?",
+      "name": "Can I remove the separator from the last item?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Whitespace rules, hidden characters and line-ending differences are common reasons for unexpected text output."
+        "text": "The tool adds separators between all lines. For SQL IN clauses or similar, you may need to trim the trailing separator manually."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What about trailing whitespace?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Line content is preserved as-is. Trim whitespace in your source text if needed before processing."
+      }
+    },    {
+      "@type": "Question",
+      "name": "How do I create an SQL IN clause?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Enter your values one per line, use comma separator, then wrap output in parentheses: (value1,value2,value3)."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Can I join without any separator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Enter an empty separator to concatenate all lines directly without any characters between them."
       }
     }
   ]
@@ -100,28 +93,37 @@
 <p>This tool inserts a separator (comma, pipe, newline or custom string) between each line of text.</p>
 <p>It is useful for converting line lists to comma-separated values, building SQL IN clauses or formatting text for APIs.</p>
 </section>
+<h3>Common Separator Use Cases</h3>
+<table class="uni-table">
+<thead><tr><th>Use Case</th><th>Separator</th><th>Example Output</th></tr></thead>
+<tbody>
+<tr><td>CSV export</td><td>,</td><td>item1,item2,item3</td></tr>
+<tr><td>SQL IN clause</td><td>','</td><td>'a','b','c'</td></tr>
+<tr><td>Log parsing</td><td>|</td><td>field1|field2|field3</td></tr>
+<tr><td>TSV export</td><td>\t</td><td>col1\tcol2\tcol3</td></tr>
+<tr><td>JSON array</td><td>", "</td><td>"a", "b", "c"</td></tr>
+</tbody>
+</table>
 
-<section class="how-to-use">
-<h3>How to Use Text Interval Generator</h3>
-<ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Open Text Interval Generator and enter your source input data in the main field.</li>
-  <li><strong>Step 2:</strong> Choose transformation options such as case, trimming, filtering or replacement rules.</li>
-  <li><strong>Step 3:</strong> Run processing and compare the transformed text with your expected result.</li>
-  <li><strong>Step 4:</strong> Copy cleaned text into documents, code comments or content pipelines.</li>
-</ol>
-</section>
+
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
+  <dt>What separators can I use?</dt>
+  <dd>Any string works: comma, pipe, semicolon, newline, tab, or custom text. Use 
+ for newline and 	 for tab.</dd>
+  <dt>How does it handle empty lines?</dt>
+  <dd>Empty lines are preserved as empty entries. "a
 
-  <dt>What is Text Interval Generator mainly used for?</dt>
-  <dd>Text Interval Generator is mainly used to insert a separator between each line of text. Use comma, newline or a custom delimiter.</dd>
-
-  <dt>Does Text Interval Generator send my input to a server?</dt>
-  <dd>For normal usage, Text Interval Generator processes data locally in your browser so you can work without uploading project files.</dd>
-
-  <dt>Why does processed text differ from expectation?</dt>
-  <dd>Whitespace rules, hidden characters and line-ending differences are common reasons for unexpected text output.</dd>
+b" becomes "a,,b" with comma separator.</dd>
+  <dt>Can I remove the separator from the last item?</dt>
+  <dd>The tool adds separators between all lines. For SQL IN clauses or similar, you may need to trim the trailing separator manually.</dd>
+  <dt>What about trailing whitespace?</dt>
+  <dd>Line content is preserved as-is. Trim whitespace in your source text if needed before processing.</dd>
+  <dt>How do I create an SQL IN clause?</dt>
+  <dd>Enter your values one per line, use comma separator, then wrap output in parentheses: (value1,value2,value3).</dd>
+  <dt>Can I join without any separator?</dt>
+  <dd>Yes. Enter an empty separator to concatenate all lines directly without any characters between them.</dd>
 </dl>
 </section>
 </main>

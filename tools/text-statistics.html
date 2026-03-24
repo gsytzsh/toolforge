@@ -4,17 +4,17 @@
 
 <meta charset="UTF-8">
 <title>Word Counter &amp; Text Statistics – Count Words, Characters and Lines | ToolForge</title>
-<meta name="description" content="Free online Word Counter and Text Statistics tool to count words, characters, lines and reading-related text metrics for writing, SEO and content editing. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Count words, characters, lines and calculate reading metrics for writing, SEO and content analysis.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/text-statistics.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Word Counter &amp; Text Statistics – Count Words, Characters and Lines | ToolForge">
-<meta property="og:description" content="Free online Word Counter and Text Statistics tool to count words, characters, lines and reading-related text metrics for writing, SEO and content editing. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Count words, characters, lines and calculate reading metrics for writing, SEO and content analysis.">
 <meta property="og:url" content="https://toolforge.site/tools/text-statistics.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Word Counter &amp; Text Statistics – Count Words, Characters and Lines | ToolForge">
-<meta name="twitter:description" content="Free online Word Counter and Text Statistics tool to count words, characters, lines and reading-related text metrics for writing, SEO and content editing. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Count words, characters, lines and calculate reading metrics for writing, SEO and content analysis.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -22,59 +22,49 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Text Statistics",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Open Text Statistics and enter your source input data in the main field."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Choose transformation options such as case, trimming, filtering or replacement rules."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Run processing and compare the transformed text with your expected result."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy cleaned text into documents, code comments or content pipelines."
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Text Statistics mainly used for?",
+      "name": "How are words counted?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Text Statistics is mainly used to count words, characters and lines in one place for writing, SEO, editing and content analysis."
+        "text": "Words are counted by splitting on whitespace. Hyphenated words count as one. Numbers and symbols with spaces count separately."
       }
-    },
-    {
+    },    {
       "@type": "Question",
-      "name": "Does Text Statistics send my input to a server?",
+      "name": "What is the difference between character counts?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Text Statistics processes data locally in your browser so you can work without uploading project files."
+        "text": "Characters with spaces includes all characters. Characters without spaces excludes whitespace. UTF-8 bytes shows storage size."
       }
-    },
-    {
+    },    {
       "@type": "Question",
-      "name": "Why does processed text differ from expectation?",
+      "name": "How is reading time calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Whitespace rules, hidden characters and line-ending differences are common reasons for unexpected text output."
+        "text": "Average reading speed is ~200-250 words per minute. The tool divides word count by 200 to estimate minutes needed."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Why does byte count differ from character count?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "UTF-8 uses 1-4 bytes per character. ASCII characters use 1 byte, but emoji and special Unicode characters use more."
+      }
+    },    {
+      "@type": "Question",
+      "name": "How are lines counted?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lines are counted by newline characters. A single paragraph without breaks is 1 line. Each line break increments the count."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Is this accurate for non-English text?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Word counting varies by language. Chinese and Japanese don't use spaces, so word counts may be less accurate for those languages."
       }
     }
   ]
@@ -116,28 +106,34 @@
 <p>The Text Statistics &amp; Word Counter tool lets you count words, characters and lines in one place for writing, SEO and content analysis.</p>
 <p>It is useful for editing copy, cleaning pasted text, comparing content and making small text transformations directly in the browser.</p>
 </section>
+<h3>Text Analysis Standards</h3>
+<table class="uni-table">
+<thead><tr><th>Metric</th><th>Standard</th><th>Formula</th></tr></thead>
+<tbody>
+<tr><td>Reading time</td><td>200 wpm</td><td>Words / 200</td></tr>
+<tr><td>Speaking time</td><td>130 wpm</td><td>Words / 130</td></tr>
+<tr><td>Twitter limit</td><td>280 chars</td><td>Character count</td></tr>
+<tr><td>SEO meta desc</td><td>150-160 chars</td><td>Character count</td></tr>
+<tr><td>Academic page</td><td>~500 words</td><td>Word count</td></tr>
+</tbody>
+</table>
 
-<section class="how-to-use">
-<h3>How to Use Text Statistics</h3>
-<ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Open Text Statistics and enter your source input data in the main field.</li>
-  <li><strong>Step 2:</strong> Choose transformation options such as case, trimming, filtering or replacement rules.</li>
-  <li><strong>Step 3:</strong> Run processing and compare the transformed text with your expected result.</li>
-  <li><strong>Step 4:</strong> Copy cleaned text into documents, code comments or content pipelines.</li>
-</ol>
-</section>
+
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-
-  <dt>What is Text Statistics mainly used for?</dt>
-  <dd>Text Statistics is mainly used to count words, characters and lines in one place for writing, SEO, editing and content analysis.</dd>
-
-  <dt>Does Text Statistics send my input to a server?</dt>
-  <dd>For normal usage, Text Statistics processes data locally in your browser so you can work without uploading project files.</dd>
-
-  <dt>Why does processed text differ from expectation?</dt>
-  <dd>Whitespace rules, hidden characters and line-ending differences are common reasons for unexpected text output.</dd>
+  <dt>How are words counted?</dt>
+  <dd>Words are counted by splitting on whitespace. Hyphenated words count as one. Numbers and symbols with spaces count separately.</dd>
+  <dt>What is the difference between character counts?</dt>
+  <dd>Characters with spaces includes all characters. Characters without spaces excludes whitespace. UTF-8 bytes shows storage size.</dd>
+  <dt>How is reading time calculated?</dt>
+  <dd>Average reading speed is ~200-250 words per minute. The tool divides word count by 200 to estimate minutes needed.</dd>
+  <dt>Why does byte count differ from character count?</dt>
+  <dd>UTF-8 uses 1-4 bytes per character. ASCII characters use 1 byte, but emoji and special Unicode characters use more.</dd>
+  <dt>How are lines counted?</dt>
+  <dd>Lines are counted by newline characters. A single paragraph without breaks is 1 line. Each line break increments the count.</dd>
+  <dt>Is this accurate for non-English text?</dt>
+  <dd>Word counting varies by language. Chinese and Japanese don't use spaces, so word counts may be less accurate for those languages.</dd>
 </dl>
 </section>
 </main>

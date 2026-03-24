@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Unicode Reference – Unicode Character Codes &amp; Symbols | ToolForge</title>
-<meta name="description" content="Free online Unicode reference table with code points, hex and characters. Search symbols and copy Unicode. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Browse Unicode code points, hex codes and characters. Search symbols and copy Unicode characters instantly.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/unicode-reference.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Unicode Reference – Unicode Character Codes &amp; Symbols | ToolForge">
-<meta property="og:description" content="Free online Unicode reference table with code points, hex and characters.">
+<meta property="og:description" content="Browse Unicode code points, hex codes and characters. Search symbols and copy Unicode characters instantly.">
 <meta property="og:url" content="https://toolforge.site/tools/unicode-reference.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Unicode Reference – Unicode Character Codes &amp; Symbols | ToolForge">
-<meta name="twitter:description" content="Free online Unicode reference table with code points, hex and characters.">
+<meta name="twitter:description" content="Browse Unicode code points, hex codes and characters. Search symbols and copy Unicode characters instantly.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
@@ -31,59 +31,49 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Unicode Reference",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "enter a character or code point to look up"
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Switch between hex and decimal representations as needed."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Resolve character details and encoding information."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Use output in text processing, escaping or debugging workflows."
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Unicode Reference mainly used for?",
+      "name": "What is a Unicode code point?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Unicode Reference is mainly used to inspect Unicode code points and character metadata quickly."
+        "text": "A code point is a numeric value assigned to each character. Written as U+XXXX where X is hexadecimal. For example, U+0041 is Latin capital letter A."
       }
-    },
-    {
+    },    {
       "@type": "Question",
-      "name": "Does Unicode Reference send my input to a server?",
+      "name": "What is the difference between UTF-8 and UTF-16?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Unicode Reference processes data locally in your browser so you can test quickly without uploading project files."
+        "text": "UTF-8 uses 1-4 bytes per code point and is ASCII-compatible. UTF-16 uses 2-4 bytes and is common in Windows and Java. Both encode the same Unicode characters."
       }
-    },
-    {
+    },    {
       "@type": "Question",
-      "name": "Why do Unicode characters display differently across apps?",
+      "name": "What are surrogate pairs?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Font support, normalization and rendering engines vary, which can change appearance for the same code point."
+        "text": "Surrogate pairs combine two 16-bit values to represent code points above U+FFFF. Used in UTF-16 for characters like emoji (U+1F600)."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Why do some Unicode characters display as boxes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Missing font glyphs cause box display. The character exists in Unicode but your font or system lacks the visual representation."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is Unicode normalization?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Normalization ensures equivalent sequences have the same binary form. NFC composes characters, NFD decomposes them. Important for string comparison."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is the valid Unicode range?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Valid code points range from U+0000 to U+10FFFF. Some ranges are reserved, private use, or non-characters."
       }
     }
   ]
@@ -119,28 +109,36 @@
 <h3>About Unicode Reference</h3>
 <p>This Unicode reference shows code points in U+hex and decimal with their characters. Useful for symbol lookups, copy-paste and encoding reference.</p>
 </section>
+<h3>Unicode Block Reference</h3>
+<table class="uni-table">
+<thead><tr><th>Block</th><th>Range</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td>Basic Latin</td><td>U+0000-007F</td><td>ASCII characters, control codes</td></tr>
+<tr><td>Latin-1 Supplement</td><td>U+0080-00FF</td><td>Western European letters</td></tr>
+<tr><td>General Punctuation</td><td>U+2000-206F</td><td>Spaces, dashes, quotes</td></tr>
+<tr><td>Arrows</td><td>U+2190-21FF</td><td>Directional arrows</td></tr>
+<tr><td>Mathematical Operators</td><td>U+2200-22FF</td><td>Math symbols</td></tr>
+<tr><td>Box Drawing</td><td>U+2500-257F</td><td>Line drawing characters</td></tr>
+<tr><td>Emoji</td><td>U+1F600-1F64F</td><td>Emoticons</td></tr>
+</tbody>
+</table>
 
-<section class="how-to-use">
-<h3>How to Use Unicode Reference</h3>
-<ol class="how-to-steps">
-  <li><strong>Step 1:</strong> enter a character or code point to look up</li>
-  <li><strong>Step 2:</strong> Switch between hex and decimal representations as needed.</li>
-  <li><strong>Step 3:</strong> Resolve character details and encoding information.</li>
-  <li><strong>Step 4:</strong> Use output in text processing, escaping or debugging workflows.</li>
-</ol>
-</section>
+
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-
-  <dt>What is Unicode Reference mainly used for?</dt>
-  <dd>Unicode Reference is mainly used to inspect Unicode code points and character metadata quickly.</dd>
-
-  <dt>Does Unicode Reference send my input to a server?</dt>
-  <dd>For normal usage, Unicode Reference processes data locally in your browser so you can test quickly without uploading project files.</dd>
-
-  <dt>Why do Unicode characters display differently across apps?</dt>
-  <dd>Font support, normalization and rendering engines vary, which can change appearance for the same code point.</dd>
+  <dt>What is a Unicode code point?</dt>
+  <dd>A code point is a numeric value assigned to each character. Written as U+XXXX where X is hexadecimal. For example, U+0041 is Latin capital letter A.</dd>
+  <dt>What is the difference between UTF-8 and UTF-16?</dt>
+  <dd>UTF-8 uses 1-4 bytes per code point and is ASCII-compatible. UTF-16 uses 2-4 bytes and is common in Windows and Java. Both encode the same Unicode characters.</dd>
+  <dt>What are surrogate pairs?</dt>
+  <dd>Surrogate pairs combine two 16-bit values to represent code points above U+FFFF. Used in UTF-16 for characters like emoji (U+1F600).</dd>
+  <dt>Why do some Unicode characters display as boxes?</dt>
+  <dd>Missing font glyphs cause box display. The character exists in Unicode but your font or system lacks the visual representation.</dd>
+  <dt>What is Unicode normalization?</dt>
+  <dd>Normalization ensures equivalent sequences have the same binary form. NFC composes characters, NFD decomposes them. Important for string comparison.</dd>
+  <dt>What is the valid Unicode range?</dt>
+  <dd>Valid code points range from U+0000 to U+10FFFF. Some ranges are reserved, private use, or non-characters.</dd>
 </dl>
 </section>
 </main>
