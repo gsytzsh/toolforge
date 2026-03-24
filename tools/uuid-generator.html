@@ -24,56 +24,43 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is UUID Generator mainly used for?",
+      "name": "What is a UUID and how is it structured?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "UUID Generator is mainly used to create UUID values for IDs in databases, logs, test fixtures and API resources."
+        "text": "A UUID (Universally Unique Identifier) is a 128-bit number used to uniquely identify information in computer systems. The standard format is 32 hexadecimal digits displayed in 5 groups separated by hyphens: 8-4-4-4-12 (e.g., 550e8400-e29b-41d4-a716-446655440000). UUID v4, the most common version, uses random numbers for 122 of the 128 bits."
       }
     },
     {
       "@type": "Question",
-      "name": "Does UUID Generator send my input to a server?",
+      "name": "How unique are UUID v4 values?",",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, UUID Generator processes data locally in your browser so you can test quickly without uploading project files."
+        "text": "UUID v4 has 122 random bits, giving 2^122 (approximately 5.3 x 10^36) possible values. The collision probability is extremely low: you'd need to generate about 2.71 quintillion UUIDs to have a 1 in a billion chance of a single collision. For practical purposes, UUIDs can be considered unique."
       }
     },
     {
       "@type": "Question",
-      "name": "Can UUID Generator create collisions in normal usage?",
+      "name": "What are common use cases for UUIDs?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "UUID v4 collisions are extremely unlikely for typical workloads. They are suitable for most application identifiers."
+        "text": "Common UUID use cases include: database primary keys (especially in distributed systems), API resource identifiers, session IDs, transaction IDs, file naming in distributed storage, tracking events in analytics, and generating unique test data."
       }
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use UUID Generator",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "open the generator and prepare to create a new UUID"
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Use generation controls if your workflow needs repeated values quickly."
+      "@type": "Question",
+      "name": "Is this UUID generator cryptographically secure?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. This tool uses the browser's crypto.randomUUID() API, which is backed by a cryptographically secure random number generator (CSPRNG). The generated UUIDs are suitable for security-sensitive applications like session tokens and access keys."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Generate a fresh UUID and confirm format."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy the UUID into your record, payload or fixture data."
+      "@type": "Question",
+      "name": "What is the difference between UUID versions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "UUID has several versions: v1 (time-based + MAC address), v2 (time-based with user identity), v3 (MD5 hash-based), v4 (random), v5 (SHA-1 hash-based). Version 4 is most common because it doesn't require coordination and provides sufficient uniqueness for most applications."
+      }
     }
   ]
 }
@@ -100,31 +87,120 @@
 
 <section class="tool-seo">
 <h3>About UUID Generator</h3>
-<p>This UUID generator creates random UUID v4 values instantly for IDs, keys and test data.</p>
-<p>It is useful for mock records, database seeds, API testing and any workflow that needs unique identifiers without setting up code first.</p>
+<p>This UUID generator creates random UUID v4 values instantly in your browser using the cryptographically secure Web Crypto API. No data is sent to any server, making it safe for generating sensitive identifiers like session tokens or access keys.</p>
+
+<h4>What Is a UUID?</h4>
+<p>A UUID (Universally Unique Identifier) is a 128-bit number used to uniquely identify information in computer systems. The standard text representation is 32 hexadecimal digits displayed in 5 groups separated by hyphens:</p>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:14px;overflow:auto">xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx</pre>
+
+<p>The format breakdown:</p>
+<ul>
+  <li><strong>8 hex digits</strong> - First group</li>
+  <li><strong>4 hex digits</strong> - Second group</li>
+  <li><strong>4 hex digits</strong> - Third group (starts with version number, 4 for random)</li>
+  <li><strong>4 hex digits</strong> - Fourth group (first digit indicates variant)</li>
+  <li><strong>12 hex digits</strong> - Fifth group</li>
+</ul>
+
+<h4>UUID Version Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Version</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Generation Method</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>v1</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Timestamp + MAC address</td>
+    <td style="border:1px solid #ddd;padding:8px">Time-ordered IDs (reveals generation time)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>v3</code></td>
+    <td style="border:1px solid #ddd;padding:8px">MD5 hash of namespace + name</td>
+    <td style="border:1px solid #ddd;padding:8px">Deterministic IDs from strings</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>v4</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Random numbers</td>
+    <td style="border:1px solid #ddd;padding:8px">General purpose (this tool)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>v5</code></td>
+    <td style="border:1px solid #ddd;padding:8px">SHA-1 hash of namespace + name</td>
+    <td style="border:1px solid #ddd;padding:8px">Deterministic IDs (better than v3)</td>
+  </tr>
+</table>
+
+<h4>UUID v4 Uniqueness</h4>
+<p>UUID v4 uses 122 random bits, providing approximately 5.3 × 10³⁶ possible values. To put this in perspective:</p>
+<ul>
+  <li>You'd need to generate about <strong>2.71 quintillion</strong> UUIDs to have a 1 in a billion chance of a single collision</li>
+  <li>If you generated 1,000 UUIDs every second, it would take about <strong>85 years</strong> to reach a 50% chance of collision</li>
+  <li>The number of possible UUIDs is greater than the number of atoms on Earth</li>
+</ul>
+
+<h4>Common UUID Use Cases</h4>
+<ul>
+  <li><strong>Database Primary Keys:</strong> Especially in distributed databases where auto-increment won't work</li>
+  <li><strong>API Resource Identifiers:</strong> Unique IDs for REST/GraphQL resources</li>
+  <li><strong>Session Tokens:</strong> Secure, unpredictable session identifiers</li>
+  <li><strong>Transaction IDs:</strong> Track operations across distributed systems</li>
+  <li><strong>File Naming:</strong> Unique filenames in distributed storage (S3, etc.)</li>
+  <li><strong>Analytics Events:</strong> Track user actions with unique event IDs</li>
+  <li><strong>Test Data:</strong> Generate realistic mock data for development</li>
+</ul>
+
+<h4>Example UUIDs</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+550e8400-e29b-41d4-a716-446655440000
+6ba7b810-9dad-11d1-80b4-00c04fd430c8
+f47ac10b-58cc-4372-a567-0e02b2c3d479
+</pre>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use UUID Generator</h3>
+<h3>How to Generate UUIDs</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> open the generator and prepare to create a new UUID</li>
-  <li><strong>Step 2:</strong> Use generation controls if your workflow needs repeated values quickly.</li>
-  <li><strong>Step 3:</strong> Generate a fresh UUID and confirm format.</li>
-  <li><strong>Step 4:</strong> Copy the UUID into your record, payload or fixture data.</li>
+  <li><strong>Click "Generate UUID":</strong> The tool will instantly create a new random UUID v4 value.</li>
+  <li><strong>Review the UUID:</strong> The generated UUID appears in standard format (8-4-4-4-12 hexadecimal).</li>
+  <li><strong>Copy the UUID:</strong> Click "Copy UUID" to copy the value to your clipboard.</li>
+  <li><strong>Generate more:</strong> Click "Generate UUID" again anytime you need another unique value.</li>
 </ol>
+
+<h4 style="margin-top:20px">UUID Format Reference</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px">
+Position:  xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
+           1       2    3    4    5
+
+Group 1: 8 hex digits (32 bits)
+Group 2: 4 hex digits (16 bits)
+Group 3: 4 hex digits (16 bits, starts with version '4')
+Group 4: 4 hex digits (16 bits, variant indicator)
+Group 5: 12 hex digits (48 bits)
+</pre>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is UUID Generator mainly used for?</dt>
-  <dd>UUID Generator is mainly used to create UUID values for IDs in databases, logs, test fixtures and API resources.</dd>
+  <dt>What is a UUID and how is it structured?</dt>
+  <dd>A UUID (Universally Unique Identifier) is a 128-bit number used to uniquely identify information in computer systems. The standard format is 32 hexadecimal digits displayed in 5 groups separated by hyphens: 8-4-4-4-12 (e.g., 550e8400-e29b-41d4-a716-446655440000). UUID v4, the most common version, uses random numbers for 122 of the 128 bits.</dd>
 
-  <dt>Does UUID Generator send my input to a server?</dt>
-  <dd>For normal usage, UUID Generator processes data locally in your browser so you can test quickly without uploading project files.</dd>
+  <dt>How unique are UUID v4 values?</dt>
+  <dd>UUID v4 has 122 random bits, giving 2^122 (approximately 5.3 x 10^36) possible values. The collision probability is extremely low: you'd need to generate about 2.71 quintillion UUIDs to have a 1 in a billion chance of a single collision. For practical purposes, UUIDs can be considered unique.</dd>
 
-  <dt>Can UUID Generator create collisions in normal usage?</dt>
-  <dd>UUID v4 collisions are extremely unlikely for typical workloads. They are suitable for most application identifiers.</dd>
+  <dt>What are common use cases for UUIDs?</dt>
+  <dd>Common UUID use cases include: database primary keys (especially in distributed systems), API resource identifiers, session IDs, transaction IDs, file naming in distributed storage, tracking events in analytics, and generating unique test data.</dd>
+
+  <dt>Is this UUID generator cryptographically secure?</dt>
+  <dd>Yes. This tool uses the browser's crypto.randomUUID() API, which is backed by a cryptographically secure random number generator (CSPRNG). The generated UUIDs are suitable for security-sensitive applications like session tokens and access keys.</dd>
+
+  <dt>What is the difference between UUID versions?</dt>
+  <dd>UUID has several versions: v1 (time-based + MAC address), v2 (time-based with user identity), v3 (MD5 hash-based), v4 (random), v5 (SHA-1 hash-based). Version 4 is most common because it doesn't require coordination and provides sufficient uniqueness for most applications.</dd>
+
+  <dt>Can I use UUIDs as database primary keys?</dt>
+  <dd>Yes, UUIDs are excellent for distributed database primary keys because they can be generated independently without coordination. However, consider using UUID v7 (time-ordered) if you need index-friendly sequential IDs, as random v4 UUIDs can cause index fragmentation.</dd>
 </dl>
 </section>
 </main>

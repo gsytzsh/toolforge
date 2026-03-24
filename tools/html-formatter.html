@@ -24,56 +24,35 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is HTML Formatter mainly used for?",
+      "name": "What is HTML formatting and why is it useful?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "HTML Formatter is mainly used to beautify raw HTML so markup is easier to read, debug and review."
+        "text": "HTML formatting (also called beautification or pretty-print) restructures HTML code with consistent indentation and line breaks, making it easier to read, debug, and review. This is especially helpful for minified HTML, generated markup, or copied code snippets that lack proper formatting."
       }
     },
     {
       "@type": "Question",
-      "name": "Does HTML Formatter send my input to a server?",
+      "name": "Does this tool modify my HTML content?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, HTML Formatter processes data locally in your browser so you can test quickly without uploading project files."
+        "text": "No. The formatter only changes whitespace and indentation - all tags, attributes, and text content remain unchanged. However, note that insignificant whitespace (like spaces between inline elements) may be normalized, which does not affect rendering."
       }
     },
     {
       "@type": "Question",
-      "name": "Why does formatted HTML output differ from my original spacing?",
+      "name": "What types of HTML can this formatter handle?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Formatter tools normalize whitespace and indentation intentionally. Compare rendered DOM structure instead of exact spacing."
+        "text": "This formatter handles standard HTML5 markup including nested elements, attributes, comments, and text nodes. It works best with complete HTML fragments. For very large documents or template syntax (like Handlebars, Blade), results may vary."
       }
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use HTML Formatter",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "paste minified or compact HTML markup"
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Check that your snippet is complete enough to parse correctly."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Run formatting to normalize indentation and line breaks."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy readable HTML back into your editor or code review comment."
+      "@type": "Question",
+      "name": "Why does the output structure look different from my input?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The formatter uses the browser's DOM parser, which automatically corrects some HTML errors (like unclosed tags or missing parents). For example, <li> tags get wrapped in <ul> if missing. This ensures valid output but may differ from malformed input."
+      }
     }
   ]
 }
@@ -98,31 +77,94 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About HTML Formatter</h3>
-<p>This HTML formatter makes pasted markup easier to read by reindenting tags and spacing nested elements more clearly. It is useful when inspecting generated HTML, debugging templates or cleaning up copied snippets.</p>
-<p>For quick browser-based formatting of small and medium code blocks, it provides a simple way to improve readability before copying code back into your editor.</p>
+<p>This HTML formatter beautifies and reindents HTML code entirely in your browser, making it easier to read, debug, and review. Whether you're working with minified output from build tools, generated markup from templates, or copied snippets from documentation, this tool helps you quickly understand the structure.</p>
+
+<h4>Why Format HTML?</h4>
+<p>HTML formatting (also called beautification or pretty-print) adds consistent indentation and line breaks to your markup. This is useful for:</p>
+<ul>
+  <li><strong>Debugging:</strong> Find unclosed tags, nesting issues, and structural problems</li>
+  <li><strong>Code Review:</strong> Review changes in pull requests or team communications</li>
+  <li><strong>Learning:</strong> Understand the structure of complex HTML from websites</li>
+  <li><strong>Documentation:</strong> Present clean, readable HTML in tutorials or guides</li>
+</ul>
+
+<h4>How the Formatter Works</h4>
+<p>The formatter uses the browser's built-in DOM parser to parse your HTML, then reconstructs it with proper indentation:</p>
+<ol>
+  <li>Input HTML is parsed into a DOM tree structure</li>
+  <li>Each node (elements, text, comments) is processed recursively</li>
+  <li>Opening tags are indented based on their nesting depth</li>
+  <li>Closing tags align with their corresponding opening tags</li>
+  <li>Text content is trimmed and placed on appropriate lines</li>
+</ol>
+
+<h4>Example: Before and After</h4>
+<p><strong>Input (minified):</strong></p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:12px;overflow:auto"><div class="card"><h3>Title</h3><p>Content here</p><ul><li>Item 1</li><li>Item 2</li></ul></div></pre>
+
+<p><strong>Output (formatted):</strong></p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:12px;overflow:auto">&lt;div class="card"&gt;
+  &lt;h3&gt;Title&lt;/h3&gt;
+  &lt;p&gt;Content here&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;
+    &lt;li&gt;Item 2&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</pre>
+
+<h4>Formatting Notes</h4>
+<ul>
+  <li><strong>Indentation:</strong> Uses 2 spaces per nesting level</li>
+  <li><strong>Attributes:</strong> Preserved exactly as written</li>
+  <li><strong>Comments:</strong> Kept intact with proper indentation</li>
+  <li><strong>Self-closing tags:</strong> Handled correctly (e.g., <code>&lt;img /&gt;</code>, <code>&lt;br /&gt;</code>)</li>
+  <li><strong>Inline elements:</strong> May have whitespace normalized (does not affect rendering)</li>
+</ul>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Minified HTML:</strong> Read output from HTML minifiers or build tools</li>
+  <li><strong>Template debugging:</strong> Inspect rendered template output</li>
+  <li><strong>Web scraping:</strong> Clean up fetched HTML for analysis</li>
+  <li><strong>Email HTML:</strong> Review email template structure</li>
+  <li><strong>CMS content:</strong> Examine generated page markup</li>
+</ul>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use HTML Formatter</h3>
+<h3>How to Format HTML</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> paste minified or compact HTML markup</li>
-  <li><strong>Step 2:</strong> Check that your snippet is complete enough to parse correctly.</li>
-  <li><strong>Step 3:</strong> Run formatting to normalize indentation and line breaks.</li>
-  <li><strong>Step 4:</strong> Copy readable HTML back into your editor or code review comment.</li>
+  <li><strong>Paste your HTML:</strong> Copy minified, compact, or poorly-formatted HTML into the input box above.</li>
+  <li><strong>Click Format:</strong> The tool will parse your HTML and rebuild it with consistent indentation.</li>
+  <li><strong>Review the output:</strong> Check that the formatted structure looks correct and all tags are properly nested.</li>
+  <li><strong>Copy the result:</strong> Click "Copy Result" to paste the beautified HTML into your editor or documentation.</li>
 </ol>
+
+<h4 style="margin-top:20px">Tips for Best Results</h4>
+<ul>
+  <li>Ensure your HTML is complete (matching opening/closing tags)</li>
+  <li>For template code (Handlebars, Blade, etc.), some syntax may be altered</li>
+  <li>Very large documents may take a moment to process</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is HTML Formatter mainly used for?</dt>
-  <dd>HTML Formatter is mainly used to beautify raw HTML so markup is easier to read, debug and review.</dd>
+  <dt>What is HTML formatting and why is it useful?</dt>
+  <dd>HTML formatting (also called beautification or pretty-print) restructures HTML code with consistent indentation and line breaks, making it easier to read, debug, and review. This is especially helpful for minified HTML, generated markup, or copied code snippets that lack proper formatting.</dd>
 
-  <dt>Does HTML Formatter send my input to a server?</dt>
-  <dd>For normal usage, HTML Formatter processes data locally in your browser so you can test quickly without uploading project files.</dd>
+  <dt>Does this tool modify my HTML content?</dt>
+  <dd>No. The formatter only changes whitespace and indentation - all tags, attributes, and text content remain unchanged. However, note that insignificant whitespace (like spaces between inline elements) may be normalized, which does not affect rendering.</dd>
 
-  <dt>Why does formatted HTML output differ from my original spacing?</dt>
-  <dd>Formatter tools normalize whitespace and indentation intentionally. Compare rendered DOM structure instead of exact spacing.</dd>
+  <dt>What types of HTML can this formatter handle?</dt>
+  <dd>This formatter handles standard HTML5 markup including nested elements, attributes, comments, and text nodes. It works best with complete HTML fragments. For very large documents or template syntax (like Handlebars, Blade), results may vary.</dd>
+
+  <dt>Why does the output structure look different from my input?</dt>
+  <dd>The formatter uses the browser's DOM parser, which automatically corrects some HTML errors (like unclosed tags or missing parents). For example, <li> tags get wrapped in <ul> if missing. This ensures valid output but may differ from malformed input.</dd>
+
+  <dt>Can I format SVG or XML with this tool?</dt>
+  <dd>This tool is designed for HTML. While it may work with simple SVG, complex SVG or XML documents are better handled by dedicated formatters that preserve namespaces and processing instructions.</dd>
 </dl>
 </section>
 </main>

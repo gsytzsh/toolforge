@@ -20,59 +20,38 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use CSS Minify",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Open CSS Minify and enter your source input data in the main field."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Configure language-specific settings and formatting/validation options before running."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Execute the main action and review syntax, structure or generated code output."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy results into your editor, scripts or review notes."
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is CSS Minify mainly used for?",
+      "name": "What is CSS minification and why is it important?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "CSS Minify is mainly used to remove comments and collapse whitespace to minify CSS."
+        "text": "CSS minification removes unnecessary characters (comments, whitespace, optional semicolons) from stylesheets without changing functionality. This reduces file size, leading to faster page loads, lower bandwidth usage, and improved Core Web Vitals scores. A typical CSS file can be reduced by 20-40% through minification."
       }
     },
     {
       "@type": "Question",
-      "name": "Does CSS Minify send my input to a server?",
+      "name": "What does this CSS minifier remove?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, CSS Minify processes data locally in your browser so you can work without uploading project files."
+        "text": "This minifier removes: CSS comments (/* ... */), extra whitespace between selectors and values, trailing semicolons in some cases, and spaces around colons, commas, and braces. The actual CSS rules and values remain unchanged."
       }
     },
     {
       "@type": "Question",
-      "name": "How can I troubleshoot incorrect developer-tool output?",
+      "name": "Will minified CSS still work in all browsers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Confirm input syntax, language mode and escaping rules; then test with a smaller sample to isolate issues."
+        "text": "Yes. Minified CSS is functionally identical to the original - only non-essential characters are removed. All modern browsers (Chrome, Firefox, Safari, Edge) parse minified CSS exactly the same as formatted CSS."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I minify CSS for production or development?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Minify CSS for production deployments to optimize performance. Keep unminified versions for development and debugging, as minified code is harder to read. Many build pipelines automatically minify during deployment while keeping source maps for debugging."
       }
     }
   ]
@@ -94,31 +73,130 @@
 <textarea id="output" rows="8" style="width:90%;font-family:monospace" readonly aria-label="Output text"></textarea>
 <section class="tool-seo">
 <h3>About CSS Minify</h3>
-<p>This CSS minify tool removes comments and collapses whitespace to produce a more compact stylesheet.</p>
-<p>It is useful for quick frontend optimization, embedding CSS inline and cleaning small snippets before shipping or sharing them.</p>
+<p>This CSS minifier removes comments and extra whitespace from your stylesheets, producing a more compact file that loads faster in browsers. Minification is a key optimization step for production deployments, helping improve page load times and reduce bandwidth costs.</p>
+
+<h4>Why Minify CSS?</h4>
+<p>CSS minification provides several benefits:</p>
+<ul>
+  <li><strong>Faster page loads:</strong> Smaller files download quicker, especially on mobile networks</li>
+  <li><strong>Reduced bandwidth:</strong> Less data transferred means lower hosting costs</li>
+  <li><strong>Better Core Web Vitals:</strong> Smaller CSS improves LCP (Largest Contentful Paint) scores</li>
+  <li><strong>SEO benefits:</strong> Page speed is a ranking factor for search engines</li>
+</ul>
+
+<h4>What Gets Removed During Minification</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Element</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Removed?</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Comments</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>/* comment */</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Extra whitespace</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>color: red;</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Spaces around braces</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>body { margin: 0; }</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Newlines</td>
+    <td style="border:1px solid #ddd;padding:8px">Line breaks between rules</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">CSS rules</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>.class { color: red; }</code></td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Property values</td>
+    <td style="border:1px solid #ddd;padding:8px">Actual style values</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+  </tr>
+</table>
+
+<h4>Example: Before and After</h4>
+<p><strong>Input (formatted CSS):</strong></p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:12px;overflow:auto">
+/* Main styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+</pre>
+
+<p><strong>Output (minified CSS):</strong></p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:12px;overflow:auto">
+body{margin:0;padding:0;font-family:Arial,sans-serif}.container{max-width:1200px;margin:0 auto}
+</pre>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Keep source files:</strong> Always keep unminified versions for development and debugging</li>
+  <li><strong>Use source maps:</strong> Generate source maps to map minified code back to original</li>
+  <li><strong>Automate minification:</strong> Use build tools (Webpack, Gulp, etc.) to minify during deployment</li>
+  <li><strong>Test after minifying:</strong> Verify the minified CSS renders correctly before deploying</li>
+  <li><strong>Consider CSS compression:</strong> Enable gzip/brotli compression on your server for additional size reduction</li>
+</ul>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Production deployment:</strong> Minify CSS before deploying to production servers</li>
+  <li><strong>Inline CSS:</strong> Minify critical CSS for inline embedding in HTML <code>&lt;head&gt;</code></li>
+  <li><strong>Email templates:</strong> Reduce email template size for faster loading</li>
+  <li><strong>Code sharing:</strong> Share compact CSS snippets in documentation or forums</li>
+  <li><strong>Quick optimization:</strong> Quickly optimize CSS without setting up build tools</li>
+</ul>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use CSS Minify</h3>
+<h3>How to Minify CSS</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Open CSS Minify and enter your source input data in the main field.</li>
-  <li><strong>Step 2:</strong> Configure language-specific settings and formatting/validation options before running.</li>
-  <li><strong>Step 3:</strong> Execute the main action and review syntax, structure or generated code output.</li>
-  <li><strong>Step 4:</strong> Copy results into your editor, scripts or review notes.</li>
+  <li><strong>Paste your CSS:</strong> Copy your CSS code into the input box above.</li>
+  <li><strong>Click Minify:</strong> The tool will remove comments and extra whitespace automatically.</li>
+  <li><strong>Review the output:</strong> Check that the minified CSS looks correct (no missing rules or values).</li>
+  <li><strong>Copy the result:</strong> Click the minified output box to select all, then copy to your clipboard.</li>
 </ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Minified CSS is harder to read - keep a copy of the original for debugging</li>
+  <li>Test minified CSS in a staging environment before deploying to production</li>
+  <li>For large projects, consider automated build tools for consistent minification</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is CSS Minify mainly used for?</dt>
-  <dd>CSS Minify is mainly used to remove comments and collapse whitespace to minify CSS.</dd>
+  <dt>What is CSS minification and why is it important?</dt>
+  <dd>CSS minification removes unnecessary characters (comments, whitespace, optional semicolons) from stylesheets without changing functionality. This reduces file size, leading to faster page loads, lower bandwidth usage, and improved Core Web Vitals scores. A typical CSS file can be reduced by 20-40% through minification.</dd>
 
-  <dt>Does CSS Minify send my input to a server?</dt>
-  <dd>For normal usage, CSS Minify processes data locally in your browser so you can work without uploading project files.</dd>
+  <dt>What does this CSS minifier remove?</dt>
+  <dd>This minifier removes: CSS comments (/* ... */), extra whitespace between selectors and values, trailing semicolons in some cases, and spaces around colons, commas, and braces. The actual CSS rules and values remain unchanged.</dd>
 
-  <dt>How can I troubleshoot incorrect developer-tool output?</dt>
-  <dd>Confirm input syntax, language mode and escaping rules; then test with a smaller sample to isolate issues.</dd>
+  <dt>Will minified CSS still work in all browsers?</dt>
+  <dd>Yes. Minified CSS is functionally identical to the original - only non-essential characters are removed. All modern browsers (Chrome, Firefox, Safari, Edge) parse minified CSS exactly the same as formatted CSS.</dd>
+
+  <dt>Should I minify CSS for production or development?</dt>
+  <dd>Minify CSS for production deployments to optimize performance. Keep unminified versions for development and debugging, as minified code is harder to read. Many build pipelines automatically minify during deployment while keeping source maps for debugging.</dd>
+
+  <dt>Does minification affect CSS specificity or cascade order?</dt>
+  <dd>No. Minification only removes whitespace and comments - it does not change selector order, specificity, or cascade behavior. The minified CSS will apply styles in exactly the same way as the original.</dd>
 </dl>
 </section>
 </main>
