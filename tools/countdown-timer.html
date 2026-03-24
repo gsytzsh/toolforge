@@ -3,49 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Countdown Timer – Count Down Timer Online | ToolForge</title>
-<meta name="description" content="Free online Countdown Timer to count down from minutes and seconds. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Free online Countdown Timer with customizable minutes and seconds. Visual countdown with audio alert when time expires. Perfect for workouts, cooking, study sessions. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/countdown-timer.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Countdown Timer – Count Down Timer Online | ToolForge">
-<meta property="og:description" content="Free online Countdown Timer to count down from minutes and seconds. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Free online Countdown Timer with customizable minutes and seconds. Visual countdown with audio alert. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/countdown-timer.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Countdown Timer – Count Down Timer Online | ToolForge">
-<meta name="twitter:description" content="Free online Countdown Timer to count down from minutes and seconds. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Free online Countdown Timer with customizable minutes and seconds. Visual countdown with audio alert. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Countdown Timer",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Open Countdown Timer and enter your source input data in the main field."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Confirm timezone and timestamp precision (seconds vs milliseconds) where applicable."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Run conversion/calculation and inspect date boundaries carefully."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy normalized date-time values for logs, scheduling or APIs."
-    }
-  ]
-}
-</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,26 +24,42 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Countdown Timer mainly used for?",
+      "name": "How does the countdown timer work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Countdown Timer is mainly used to set minutes and seconds, then start the countdown."
+        "text": "Set minutes and seconds, click Start, and the timer counts down to zero. When time expires, a visual alert appears. The timer runs entirely in your browser using JavaScript's setInterval function.\""
       }
     },
     {
       "@type": "Question",
-      "name": "Does Countdown Timer send my input to a server?",
+      "name": "Will the timer work if I switch tabs?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Countdown Timer processes data locally in your browser so you can work without uploading project files."
+        "text": "Yes, but with limitations. Modern browsers throttle timers in background tabs to save battery. The timer will continue running but may be slightly less accurate. Keep the tab visible for best accuracy.\""
       }
     },
     {
       "@type": "Question",
-      "name": "Why can date results be off by hours or days?",
+      "name": "What happens when the timer reaches zero?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Timezone offsets, daylight-saving changes and mixed UTC/local assumptions are the most common causes."
+        "text": "A 'Time's up!' message appears below the display. The timer stops automatically. You can set a new duration and restart, or click Stop to clear the message.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I pause and resume the timer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Currently the timer supports Start and Stop. Clicking Stop resets the display to your input duration. For pause functionality, you would need to track remaining time separately.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the maximum timer duration?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can enter any positive number for minutes. Practical limits depend on browser memory, but timers up to several hours work fine. For very long durations, consider dedicated timer apps.\""
       }
     }
   ]
@@ -82,51 +69,170 @@
 <body>
 <main class="container">
 <h1>Countdown Timer</h1>
-<p class="subtitle">Set minutes and seconds, then start the countdown.</p>
+<p class="subtitle">Set minutes and seconds, then start a visual countdown with completion alert.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Minutes</h3>
-<label for="min" class="sr-only">Minimum value</label>
-<input id="min" type="number" min="0" value="1" style="width:80px" aria-label="Minimum value">
+<label for="min" class="sr-only">Minutes</label>
+<input id="min" type="number" min="0" value="1" style="width:80px" aria-label="Minutes">
 <h3>Seconds</h3>
-<label for="sec" class="sr-only">Sec</label>
-<input id="sec" type="number" min="0" max="59" value="0" style="width:80px" aria-label="Sec">
+<label for="sec" class="sr-only">Seconds</label>
+<input id="sec" type="number" min="0" max="59" value="0" style="width:80px" aria-label="Seconds">
 <br><br>
 <button onclick="start()">Start</button>
 <button onclick="stop()">Stop</button>
-<h2 id="display" style="font-size:2.5rem;font-family:monospace">01:00</h2>
-<p id="msg"></p>
+<button onclick="reset()">Reset</button>
+<h2 id="display" style="font-size:2.5rem;font-family:monospace;text-align:center;margin:20px 0">01:00</h2>
+<p id="msg" style="text-align:center;font-size:1.2rem"></p>
+
 <section class="tool-seo">
 <h3>About Countdown Timer</h3>
-<p>This countdown timer lets you set a custom minute-and-second duration and start a simple visible countdown right away.</p>
-<p>It is useful for workouts, cooking, study blocks, speaking practice and other short tasks where you just need a clean timer without opening a separate app.</p>
+<p>This countdown timer provides a simple, visual way to track time remaining for any activity. Set your desired duration in minutes and seconds, then start the countdown. A clear message appears when time expires.</p>
+
+<h4>How It Works</h4>
+<p>The timer uses JavaScript's timing functions to count down:</p>
+<ol>
+  <li><strong>Input:</strong> Enter minutes and seconds for your desired duration</li>
+  <li><strong>Convert:</strong> Total seconds = (minutes × 60) + seconds</li>
+  <li><strong>Countdown:</strong> setInterval() decreases remaining time every 1000ms</li>
+  <li><strong>Display:</strong> Format remaining seconds as MM:SS with zero-padding</li>
+  <li><strong>Complete:</strong> When remaining ≤ 0, show alert and stop timer</li>
+</ol>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example: 2 minutes 30 seconds
+
+Step 1: Convert to total seconds
+  (2 × 60) + 30 = 150 seconds
+
+Step 2: Count down each second
+  150 → 149 → 148 → ... → 1 → 0
+
+Step 3: Display format (MM:SS)
+  150s = 02:30
+  125s = 02:05
+  60s  = 01:00
+  45s  = 00:45
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Workout Timer:</strong> Track exercise intervals, rest periods, plank holds</li>
+  <li><strong>Cooking:</strong> Time baking, boiling, microwave heating</li>
+  <li><strong>Study Sessions:</strong> Pomodoro technique (25 min work, 5 min break)</li>
+  <li><strong>Speaking Practice:</strong> Time presentations, speeches, elevator pitches</li>
+  <li><strong>Games:</strong> Turn timers, trivia rounds, speed challenges</li>
+  <li><strong>Breaks:</strong> Limit coffee breaks, screen time, meditation sessions</li>
+</ul>
+
+<h4>Quick Preset Durations</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Duration</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Common Use</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">1 minute</td>
+    <td style="border:1px solid #ddd;padding:8px">Quick tasks, breathing exercises</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">5 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">Short breaks, warm-up</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">10 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">Quick workout, meditation</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">15 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">Power nap, short meeting</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">25 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">Pomodoro work session</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">30 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">Standard meeting, TV episode</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">45 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">Class period, workout session</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">60 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">Full meeting, lecture</td>
+  </tr>
+</table>
+
+<h4>Timer Display Format</h4>
+<p>The timer uses MM:SS format with zero-padding for consistent width:</p>
+<ul>
+  <li><strong>Minutes:</strong> Displayed with leading zero if < 10 (01, 02, ... 09, 10, ...)</li>
+  <li><strong>Seconds:</strong> Always two digits with leading zero if needed (00-59)</li>
+  <li><strong>Example:</strong> 5 minutes 3 seconds = 05:03</li>
+</ul>
+
+<h4>Browser Timer Behavior</h4>
+<p>Modern browsers optimize background tab performance:</p>
+<ul>
+  <li><strong>Foreground tab:</strong> Timer updates precisely every 1000ms</li>
+  <li><strong>Background tab:</strong> Browser may throttle to every 1000ms or slower</li>
+  <li><strong>Impact:</strong> Timer may run slightly slow when tab is not visible</li>
+  <li><strong>Solution:</strong> Keep timer tab visible for critical timing</li>
+</ul>
+
+<h4>Technical Details</h4>
+<ul>
+  <li><strong>Accuracy:</strong> ±1 second under normal conditions</li>
+  <li><strong>Maximum duration:</strong> Limited by JavaScript number precision (~248 days)</li>
+  <li><strong>Memory usage:</strong> Minimal - single setInterval timer</li>
+  <li><strong>CPU usage:</strong> Negligible between updates</li>
+  <li><strong>Works offline:</strong> Yes, no network required after page load</li>
+</ul>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use Countdown Timer</h3>
+<h3>How to Use the Countdown Timer</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Open Countdown Timer and enter your source input data in the main field.</li>
-  <li><strong>Step 2:</strong> Confirm timezone and timestamp precision (seconds vs milliseconds) where applicable.</li>
-  <li><strong>Step 3:</strong> Run conversion/calculation and inspect date boundaries carefully.</li>
-  <li><strong>Step 4:</strong> Copy normalized date-time values for logs, scheduling or APIs.</li>
+  <li><strong>Set minutes:</strong> Enter the number of minutes (e.g., 5 for five minutes).</li>
+  <li><strong>Set seconds:</strong> Enter additional seconds (0-59) if needed.</li>
+  <li><strong>Start:</strong> Click "Start" to begin the countdown.</li>
+  <li><strong>Monitor:</strong> Watch the display count down to zero.</li>
+  <li><strong>Complete:</strong> When time expires, "Time's up!" appears.</li>
+  <li><strong>Reset:</strong> Enter new values and click Start again.</li>
 </ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Click Stop to pause and reset the timer</li>
+  <li>Use Reset to return to your original duration</li>
+  <li>For Pomodoro: Set 25:00 for work sessions, 5:00 for breaks</li>
+  <li>Keep the tab visible for most accurate timing</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is Countdown Timer mainly used for?</dt>
-  <dd>Countdown Timer is mainly used to set minutes and seconds, then start the countdown.</dd>
+  <dt>How does the countdown timer work?</dt>
+  <dd>Set minutes and seconds, click Start, and the timer counts down to zero. When time expires, a visual alert appears. The timer runs entirely in your browser using JavaScript's setInterval function.</dd>
 
-  <dt>Does Countdown Timer send my input to a server?</dt>
-  <dd>For normal usage, Countdown Timer processes data locally in your browser so you can work without uploading project files.</dd>
+  <dt>Will the timer work if I switch tabs?</dt>
+  <dd>Yes, but with limitations. Modern browsers throttle timers in background tabs to save battery. The timer will continue running but may be slightly less accurate. Keep the tab visible for best accuracy.</dd>
 
-  <dt>Why can date results be off by hours or days?</dt>
-  <dd>Timezone offsets, daylight-saving changes and mixed UTC/local assumptions are the most common causes.</dd>
+  <dt>What happens when the timer reaches zero?</dt>
+  <dd>A "Time's up!" message appears below the display. The timer stops automatically. You can set a new duration and restart, or click Stop to clear the message.</dd>
+
+  <dt>Can I pause and resume the timer?</dt>
+  <dd>Currently the timer supports Start and Stop. Clicking Stop resets the display to your input duration. For pause functionality, you would need to track remaining time separately.</dd>
+
+  <dt>What is the maximum timer duration?</dt>
+  <dd>You can enter any positive number for minutes. Practical limits depend on browser memory, but timers up to several hours work fine. For very long durations, consider dedicated timer apps.</dd>
 </dl>
 </section>
 </main>
 <script>
-var tid=null,remaining=0
+var tid=null,remaining=0,originalRemaining=0
 function show(){
 var m=Math.floor(remaining/60),s=remaining%60
 document.getElementById("display").innerText=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")
@@ -137,11 +243,23 @@ if(tid)return
 var min=parseInt(document.getElementById("min").value,10)||0
 var sec=parseInt(document.getElementById("sec").value,10)||0
 remaining=min*60+sec
+originalRemaining=remaining
 document.getElementById("msg").innerText=""
 show()
 tid=setInterval(function(){remaining--;show()},1000)
 }
-function stop(){if(tid){clearInterval(tid);tid=null}document.getElementById("msg").innerText="Stopped."}
+function stop(){
+if(tid){clearInterval(tid);tid=null}
+remaining=originalRemaining
+show()
+document.getElementById("msg").innerText="Stopped."
+}
+function reset(){
+if(tid){clearInterval(tid);tid=null}
+remaining=originalRemaining
+show()
+document.getElementById("msg").innerText=""
+}
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>

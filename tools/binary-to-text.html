@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Binary to Text – Encode and Decode Binary Online | ToolForge</title>
-<meta name="description" content="Free online Binary to Text tool: encode text to binary or decode binary to ASCII. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Free online Binary to Text tool: encode text to binary or decode binary to ASCII/UTF-8. Learn how computers store text as binary data. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/binary-to-text.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Binary to Text – Encode and Decode Binary Online | ToolForge">
-<meta property="og:description" content="Free online Binary to Text tool: encode text to binary or decode binary to ASCII. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Free online Binary to Text tool: encode text to binary or decode binary to ASCII/UTF-8. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/binary-to-text.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Binary to Text – Encode and Decode Binary Online | ToolForge">
-<meta name="twitter:description" content="Free online Binary to Text tool: encode text to binary or decode binary to ASCII. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Free online Binary to Text tool: encode text to binary or decode binary to ASCII/UTF-8. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
@@ -24,59 +24,46 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Binary to Text",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Open Binary to Text and enter your source input data in the main field."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Select encode or decode mode and confirm the expected input/output format."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Run conversion and inspect whether special characters are preserved correctly."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy the transformed value for your request, payload or debugging workflow."
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Binary to Text mainly used for?",
+      "name": "How does text become binary?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Binary to Text is mainly used to encode text to binary or decode binary to text. Use 8 bits per character."
+        "text": "Text is converted to binary using character encoding standards. ASCII uses 7 bits per character (0-127). Extended ASCII and UTF-8 use 8+ bits. Each character maps to a numeric code, which is then represented in binary.\""
       }
     },
     {
       "@type": "Question",
-      "name": "Does Binary to Text send my input to a server?",
+      "name": "What is ASCII encoding?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Binary to Text processes data locally in your browser so you can work without uploading project files."
+        "text": "ASCII (American Standard Code for Information Interchange) uses 7 bits to represent 128 characters: letters (A-Z, a-z), digits (0-9), punctuation, and control codes. Example: 'A' = 65 = 01000001 in binary.\""
       }
     },
     {
       "@type": "Question",
-      "name": "What should I check if conversion fails?",
+      "name": "What is UTF-8 encoding?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Check invalid characters, bad padding, wrong mode selection and mixed text/binary assumptions."
+        "text": "UTF-8 is a variable-length encoding supporting all Unicode characters. ASCII characters (0-127) use 1 byte. Extended characters use 2-4 bytes. UTF-8 is backward compatible with ASCII and is the web standard.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why use 8 bits per character?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "8 bits (1 byte) can represent 256 values (0-255), covering extended ASCII and providing room for special characters. Computers process data in byte-sized chunks, making 8-bit encoding efficient for storage and transmission.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if binary has wrong length?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Binary text encoding requires lengths divisible by 8 (for 8-bit encoding). If not divisible by 8, the data is incomplete or corrupted. Each character needs exactly 8 bits for proper decoding.\""
       }
     }
   ]
@@ -86,7 +73,7 @@
 <body>
 <main class="container">
 <h1>Binary to Text</h1>
-<p class="subtitle">Encode text to binary or decode binary to text. Use 8 bits per character.</p>
+<p class="subtitle">Encode text to binary or decode binary to text using 8-bit ASCII encoding.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <div style="margin-bottom:16px">
@@ -95,7 +82,7 @@
 </div>
 
 <div id="panel-decode">
-<h3>Binary</h3>
+<h3>Binary Input</h3>
 <label for="bin" class="sr-only">Binary input</label>
 <textarea id="bin" rows="6" style="width:90%" placeholder="01001000 01101001" aria-label="Binary input"></textarea>
 <br><br>
@@ -103,13 +90,13 @@
 <button onclick="decode()">Decode</button>
 <button type="button" onclick="copyDecodeOutput()">Copy Result</button>
 </div>
-<h3>Text</h3>
+<h3>Text Output</h3>
 <textarea id="text-out" rows="6" style="width:90%" readonly aria-label="Text output"></textarea>
 <p id="err" style="color:#b91c1c"></p>
 </div>
 
 <div id="panel-encode" style="display:none">
-<h3>Text</h3>
+<h3>Text Input</h3>
 <label for="text-in" class="sr-only">Text input</label>
 <textarea id="text-in" rows="6" style="width:90%" placeholder="Hello" aria-label="Text input"></textarea>
 <br><br>
@@ -119,38 +106,195 @@
 <button onclick="encode()">Encode</button>
 <button type="button" onclick="copyEncodeOutput()">Copy Result</button>
 </div>
-<h3>Binary</h3>
+<h3>Binary Output</h3>
 <textarea id="bin-out" rows="6" style="width:90%" readonly aria-label="Binary output"></textarea>
 <p id="status" class="inline-status"></p>
 </div>
 
 <section class="tool-seo">
-<h3>About Binary to Text</h3>
-<p>The Binary to Text tool lets you encode text to binary or decode binary strings to ASCII text. Use 8 bits per character. Optionally add space between bytes when encoding.</p>
-<p>It is useful when working with encoded values, copied payloads, browser-safe strings and quick debugging tasks across common text formats.</p>
+<h3>About Binary to Text Converter</h3>
+<p>The Binary to Text tool converts between human-readable text and binary (base-2) representation using 8-bit ASCII encoding. Encode any text to binary or decode binary strings back to readable characters.</p>
+
+<h4>Character Encoding Fundamentals</h4>
+<p>Computers store text as numbers using character encoding standards:</p>
+<ul>
+  <li><strong>ASCII:</strong> 7-bit encoding for 128 basic characters (A-Z, a-z, 0-9, punctuation)</li>
+  <li><strong>Extended ASCII:</strong> 8-bit encoding for 256 characters (includes accented letters)</li>
+  <li><strong>UTF-8:</strong> Variable-length encoding supporting all Unicode characters</li>
+</ul>
+
+<h4>ASCII Character Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Character</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Decimal</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Binary</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Hex</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">A</td>
+    <td style="border:1px solid #ddd;padding:8px">65</td>
+    <td style="border:1px solid #ddd;padding:8px">01000001</td>
+    <td style="border:1px solid #ddd;padding:8px">0x41</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">B</td>
+    <td style="border:1px solid #ddd;padding:8px">66</td>
+    <td style="border:1px solid #ddd;padding:8px">01000010</td>
+    <td style="border:1px solid #ddd;padding:8px">0x42</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">a</td>
+    <td style="border:1px solid #ddd;padding:8px">97</td>
+    <td style="border:1px solid #ddd;padding:8px">01100001</td>
+    <td style="border:1px solid #ddd;padding:8px">0x61</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">0</td>
+    <td style="border:1px solid #ddd;padding:8px">48</td>
+    <td style="border:1px solid #ddd;padding:8px">00110000</td>
+    <td style="border:1px solid #ddd;padding:8px">0x30</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Space</td>
+    <td style="border:1px solid #ddd;padding:8px">32</td>
+    <td style="border:1px solid #ddd;padding:8px">00100000</td>
+    <td style="border:1px solid #ddd;padding:8px">0x20</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">!</td>
+    <td style="border:1px solid #ddd;padding:8px">33</td>
+    <td style="border:1px solid #ddd;padding:8px">00100001</td>
+    <td style="border:1px solid #ddd;padding:8px">0x21</td>
+  </tr>
+</table>
+
+<h4>Encoding Example: "Hello"</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Text:    H       e       l       l       o
+ASCII:   72      101     108     108     111
+Binary:  01001000 01100101 01101100 01101100 01101111
+
+With spaces: 01001000 01100101 01101100 01101100 01101111
+Without:     0100100001100101011011000110110001101111
+</pre>
+
+<h4>Decoding Example</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Binary: 01001000 01101001 00100000 01010111 01101111 01110010 01101100 01100100
+        |______| |______| |______| |______| |______| |______| |______| |______|
+           |         |         |         |         |         |         |         |
+          72       105       32        87       111      114      108      100
+           |         |         |         |         |         |         |         |
+           H         i               W         o         r         l         d
+
+Result: "Hi World"
+</pre>
+
+<h4>Why Binary Encoding Matters</h4>
+<ul>
+  <li><strong>Data Storage:</strong> All files (documents, images, programs) are stored as binary</li>
+  <li><strong>Network Transmission:</strong> Data sent over networks is serialized as binary</li>
+  <li><strong>Debugging:</strong> Understanding binary helps diagnose encoding issues</li>
+  <li><strong>Cryptography:</strong> Encryption algorithms operate on binary data</li>
+  <li><strong>Low-level Programming:</strong> Working with bytes requires binary understanding</li>
+</ul>
+
+<h4>Common Binary Patterns</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Binary</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Decimal</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Character</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">00000000</td>
+    <td style="border:1px solid #ddd;padding:8px">0</td>
+    <td style="border:1px solid #ddd;padding:8px">NULL (control)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">00001010</td>
+    <td style="border:1px solid #ddd;padding:8px">10</td>
+    <td style="border:1px solid #ddd;padding:8px">LF (newline)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">00001101</td>
+    <td style="border:1px solid #ddd;padding:8px">13</td>
+    <td style="border:1px solid #ddd;padding:8px">CR (carriage return)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">00100000</td>
+    <td style="border:1px solid #ddd;padding:8px">32</td>
+    <td style="border:1px solid #ddd;padding:8px">Space</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">00110000</td>
+    <td style="border:1px solid #ddd;padding:8px">48</td>
+    <td style="border:1px solid #ddd;padding:8px">'0' (digit zero)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">01000001</td>
+    <td style="border:1px solid #ddd;padding:8px">65</td>
+    <td style="border:1px solid #ddd;padding:8px">'A' (uppercase)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">01100001</td>
+    <td style="border:1px solid #ddd;padding:8px">97</td>
+    <td style="border:1px solid #ddd;padding:8px">'a' (lowercase)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">01111111</td>
+    <td style="border:1px solid #ddd;padding:8px">127</td>
+    <td style="border:1px solid #ddd;padding:8px">DEL (delete)</td>
+  </tr>
+</table>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use Binary to Text</h3>
+<h3>How to Convert Binary to Text</h3>
+
+<h4>Decode Binary to Text</h4>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Open Binary to Text and enter your source input data in the main field.</li>
-  <li><strong>Step 2:</strong> Select encode or decode mode and confirm the expected input/output format.</li>
-  <li><strong>Step 3:</strong> Run conversion and inspect whether special characters are preserved correctly.</li>
-  <li><strong>Step 4:</strong> Copy the transformed value for your request, payload or debugging workflow.</li>
+  <li><strong>Paste binary:</strong> Enter your binary string (with or without spaces between bytes).</li>
+  <li><strong>Click Decode:</strong> The tool converts each 8-bit group to its ASCII character.</li>
+  <li><strong>View result:</strong> The decoded text appears in the output box.</li>
+  <li><strong>Copy output:</strong> Click "Copy Result" to use the decoded text elsewhere.</li>
 </ol>
+
+<h4>Encode Text to Binary</h4>
+<ol class="how-to-steps">
+  <li><strong>Enter text:</strong> Type or paste the text you want to encode.</li>
+  <li><strong>Choose format:</strong> Check "Space between bytes" for readable output with spaces.</li>
+  <li><strong>Click Encode:</strong> Each character is converted to its 8-bit binary representation.</li>
+  <li><strong>Copy output:</strong> Click "Copy Result" to use the binary string elsewhere.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Spaces between binary digits are optional when decoding - the tool handles both formats</li>
+  <li>Binary length must be divisible by 8 for valid decoding</li>
+  <li>Only 0 and 1 are valid binary characters</li>
+  <li>Use spaces in encoded output for better readability</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is Binary to Text mainly used for?</dt>
-  <dd>Binary to Text is mainly used to encode text to binary or decode binary to text. Use 8 bits per character.</dd>
+  <dt>How does text become binary?</dt>
+  <dd>Text is converted to binary using character encoding standards. ASCII uses 7 bits per character (0-127). Extended ASCII and UTF-8 use 8+ bits. Each character maps to a numeric code, which is then represented in binary.</dd>
 
-  <dt>Does Binary to Text send my input to a server?</dt>
-  <dd>For normal usage, Binary to Text processes data locally in your browser so you can work without uploading project files.</dd>
+  <dt>What is ASCII encoding?</dt>
+  <dd>ASCII (American Standard Code for Information Interchange) uses 7 bits to represent 128 characters: letters (A-Z, a-z), digits (0-9), punctuation, and control codes. Example: 'A' = 65 = 01000001 in binary.</dd>
 
-  <dt>What should I check if conversion fails?</dt>
-  <dd>Check invalid characters, bad padding, wrong mode selection and mixed text/binary assumptions.</dd>
+  <dt>What is UTF-8 encoding?</dt>
+  <dd>UTF-8 is a variable-length encoding supporting all Unicode characters. ASCII characters (0-127) use 1 byte. Extended characters use 2-4 bytes. UTF-8 is backward compatible with ASCII and is the web standard.</dd>
+
+  <dt>Why use 8 bits per character?</dt>
+  <dd>8 bits (1 byte) can represent 256 values (0-255), covering extended ASCII and providing room for special characters. Computers process data in byte-sized chunks, making 8-bit encoding efficient for storage and transmission.</dd>
+
+  <dt>What happens if binary has wrong length?</dt>
+  <dd>Binary text encoding requires lengths divisible by 8 (for 8-bit encoding). If not divisible by 8, the data is incomplete or corrupted. Each character needs exactly 8 bits for proper decoding.</dd>
 </dl>
 </section>
 </main>

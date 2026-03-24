@@ -3,49 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Add Prefix Suffix – Add Prefix and/or Suffix to Each Line | ToolForge</title>
-<meta name="description" content="Free online tool to add prefix and/or suffix to each line of text. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Free online tool to add prefix and/or suffix to each line of text instantly. Format lists for SQL, markdown, code arrays, and more. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/add-prefix-suffix.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Add Prefix Suffix – Add Prefix and/or Suffix to Each Line | ToolForge">
-<meta property="og:description" content="Free online tool to add prefix and/or suffix to each line. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Free online tool to add prefix and/or suffix to each line of text instantly. Format lists for SQL, markdown, code arrays, and more. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/add-prefix-suffix.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Add Prefix Suffix – Add Prefix and/or Suffix to Each Line | ToolForge">
-<meta name="twitter:description" content="Free online tool to add prefix and/or suffix to each line. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Free online tool to add prefix and/or suffix to each line of text instantly. Format lists for SQL, markdown, code arrays, and more. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Add Prefix Suffix",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Open Add Prefix Suffix and enter your source input data in the main field."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Choose transformation options such as case, trimming, filtering or replacement rules."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Run processing and compare the transformed text with your expected result."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy cleaned text into documents, code comments or content pipelines."
-    }
-  ]
-}
-</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,26 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Add Prefix Suffix mainly used for?",
+      "name": "How does the prefix/suffix addition work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Add Prefix Suffix is mainly used to add a prefix and/or suffix to each line of text."
+        "text": "The tool splits input by line breaks, prepends the prefix and appends the suffix to each line, then joins them back. Empty lines are preserved. Escape sequences like \\n and \\t in prefix/suffix are converted to actual newlines and tabs."
       }
     },
     {
       "@type": "Question",
-      "name": "Does Add Prefix Suffix send my input to a server?",
+      "name": "What are common use cases for adding prefixes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Add Prefix Suffix processes data locally in your browser so you can work without uploading project files."
+        "text": "Common prefix use cases: bullet points (- or *), SQL values (VALUES ('...'),), code comments (// or #), array elements (, for CSV), log tags ([INFO], [ERROR]), and markdown list items (- or 1.)."
       }
     },
     {
       "@type": "Question",
-      "name": "Why does processed text differ from expectation?",
+      "name": "What are common use cases for adding suffixes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Whitespace rules, hidden characters and line-ending differences are common reasons for unexpected text output."
+        "text": "Common suffix use cases: SQL commas for value lists, semicolons for statements (;), JavaScript array commas, trailing commas for config files, pipe symbols for log parsing, and closing quotes or brackets."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I add both prefix and suffix at the same time?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, enter values in both fields. For example, prefix with \"['\" and suffix with \"']\" wraps each line as a quoted string in brackets: ['item1'], ['item2']."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I format a JavaScript array from a list?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use prefix: \"  '\" (two spaces and quote) and suffix: \"',\" (quote and comma). For the last line, manually remove the trailing comma. Wrap with [ and ] brackets for a complete array literal."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I create SQL INSERT values from a list?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use prefix: \"('\" and suffix: \"'),\" to get ('value1'), ('value2'), etc. Remove the trailing comma from the last line, then prepend \"INSERT INTO table (column) VALUES\" for a complete statement."
       }
     }
   ]
@@ -100,31 +95,167 @@
 <textarea id="output" rows="10" style="width:90%" aria-label="Output text"></textarea>
 <section class="tool-seo">
 <h3>About Add Prefix and Suffix</h3>
-<p>This tool adds a prefix and/or suffix to each line of text. Useful for bullet lists, SQL values, config entries and more.</p>
-<p>It is useful for formatting line lists into markdown, code, or structured data without manual editing.</p>
+<p>This tool adds a prefix and/or suffix to each line of text instantly. It's useful for formatting lists into SQL statements, markdown bullet points, code arrays, config entries, log tags, and other structured data formats without manual editing.</p>
+
+<h4>Common Prefix Examples</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Prefix</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example Output</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Markdown bullets</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>- </code></td>
+    <td style="border:1px solid #ddd;padding:8px">- item1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">SQL values</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>('</code></td>
+    <td style="border:1px solid #ddd;padding:8px">('value1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Code comments</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>// </code></td>
+    <td style="border:1px solid #ddd;padding:8px">// line1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Log tags</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>[INFO] </code></td>
+    <td style="border:1px solid #ddd;padding:8px">[INFO] message</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">JavaScript strings</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>'</code></td>
+    <td style="border:1px solid #ddd;padding:8px">'text</td>
+  </tr>
+</table>
+
+<h4>Common Suffix Examples</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Suffix</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example Output</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">SQL value separator</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>'),</code></td>
+    <td style="border:1px solid #ddd;padding:8px">value1'),</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Statement terminator</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>;</code></td>
+    <td style="border:1px solid #ddd;padding:8px">line1;</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Array comma</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>,</code></td>
+    <td style="border:1px solid #ddd;padding:8px">item1,</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Closing quote</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>'</code></td>
+    <td style="border:1px solid #ddd;padding:8px">text'</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Log pipe separator</td>
+    <td style="border:1px solid #ddd;padding:8px"><code> |</code></td>
+    <td style="border:1px solid #ddd;padding:8px">msg |</td>
+  </tr>
+</table>
+
+<h4>Combined Prefix + Suffix Examples</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+SQL INSERT values:
+  Prefix: "('", Suffix: "'),"
+  Input:  apple
+          banana
+          cherry
+  Output: ('apple'),
+          ('banana'),
+          ('cherry'),
+
+JavaScript array:
+  Prefix: "  '", Suffix: "',"
+  Input:  red
+          green
+          blue
+  Output:   'red',
+            'green',
+            'blue',
+
+Markdown list with bold:
+  Prefix: "- **", Suffix: "**"
+  Input:  item1
+          item2
+  Output: - **item1**
+          - **item2**
+</pre>
+
+<h4>Special Characters and Escape Sequences</h4>
+<p>The tool supports escape sequences in prefix and suffix fields:</p>
+<ul>
+  <li><code>\n</code> - Newline character</li>
+  <li><code>\t</code> - Tab character</li>
+  <li><code>\\</code> - Literal backslash</li>
+</ul>
+<p>Example: Use prefix "<code>\t- </code>" to add a tab followed by a bullet point.</p>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>SQL Formatting:</strong> Convert lists to VALUES clauses for INSERT statements</li>
+  <li><strong>Code Generation:</strong> Create array literals, enum values, or constant lists</li>
+  <li><strong>Markdown Editing:</strong> Add bullet points, checkboxes, or numbered list markers</li>
+  <li><strong>Log Processing:</strong> Add timestamps, log levels, or tags to each line</li>
+  <li><strong>Config Files:</strong> Format YAML lists, JSON arrays, or INI entries</li>
+  <li><strong>Data Preparation:</strong> Wrap values in quotes, brackets, or other delimiters</li>
+</ul>
+
+<h4>Line Ending Behavior</h4>
+<p>The tool preserves empty lines in the input. Each line (including empty ones) receives the prefix and suffix. Line endings are normalized to LF (\n) in the output.</p>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use Add Prefix Suffix</h3>
+<h3>How to Add Prefix and Suffix to Lines</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Open Add Prefix Suffix and enter your source input data in the main field.</li>
-  <li><strong>Step 2:</strong> Choose transformation options such as case, trimming, filtering or replacement rules.</li>
-  <li><strong>Step 3:</strong> Run processing and compare the transformed text with your expected result.</li>
-  <li><strong>Step 4:</strong> Copy cleaned text into documents, code comments or content pipelines.</li>
+  <li><strong>Enter text:</strong> Paste or type the lines you want to modify.</li>
+  <li><strong>Enter prefix:</strong> Type what should appear at the start of each line (e.g., "- " for bullets).</li>
+  <li><strong>Enter suffix:</strong> Type what should appear at the end of each line (e.g., "," for arrays).</li>
+  <li><strong>Click Add Prefix/Suffix:</strong> Each line is instantly prefixed and/or suffixed.</li>
+  <li><strong>Copy result:</strong> Use the formatted output in your code, config, or document.</li>
 </ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Leave prefix or suffix empty to add only one or the other</li>
+  <li>Use escape sequences \n and \t for newlines and tabs</li>
+  <li>Remove trailing commas from the last line manually if needed</li>
+  <li>Combine with other tools for complex text transformations</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is Add Prefix Suffix mainly used for?</dt>
-  <dd>Add Prefix Suffix is mainly used to add a prefix and/or suffix to each line of text.</dd>
+  <dt>How does the prefix/suffix addition work?</dt>
+  <dd>The tool splits input by line breaks, prepends the prefix and appends the suffix to each line, then joins them back. Empty lines are preserved. Escape sequences like \n and \t in prefix/suffix are converted to actual newlines and tabs.</dd>
 
-  <dt>Does Add Prefix Suffix send my input to a server?</dt>
-  <dd>For normal usage, Add Prefix Suffix processes data locally in your browser so you can work without uploading project files.</dd>
+  <dt>What are common use cases for adding prefixes?</dt>
+  <dd>Common prefix use cases: bullet points (- or *), SQL values (VALUES ('...'),), code comments (// or #), array elements (, for CSV), log tags ([INFO], [ERROR]), and markdown list items (- or 1.).</dd>
 
-  <dt>Why does processed text differ from expectation?</dt>
-  <dd>Whitespace rules, hidden characters and line-ending differences are common reasons for unexpected text output.</dd>
+  <dt>What are common use cases for adding suffixes?</dt>
+  <dd>Common suffix use cases: SQL commas for value lists, semicolons for statements (;), JavaScript array commas, trailing commas for config files, pipe symbols for log parsing, and closing quotes or brackets.</dd>
+
+  <dt>Can I add both prefix and suffix at the same time?</dt>
+  <dd>Yes, enter values in both fields. For example, prefix with "['" and suffix with "']" wraps each line as a quoted string in brackets: ['item1'], ['item2'].
+</dd>
+
+  <dt>How do I format a JavaScript array from a list?</dt>
+  <dd>Use prefix: "  '" (two spaces and quote) and suffix: "'," (quote and comma). For the last line, manually remove the trailing comma. Wrap with [ and ] brackets for a complete array literal.</dd>
+
+  <dt>How do I create SQL INSERT values from a list?</dt>
+  <dd>Use prefix: "('" and suffix: "')," to get ('value1'), ('value2'), etc. Remove the trailing comma from the last line, then prepend "INSERT INTO table (column) VALUES" for a complete statement.</dd>
 </dl>
 </section>
 </main>

@@ -30,56 +30,35 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is SQL Formatter mainly used for?",
+      "name": "What is SQL formatting and why is it useful?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "SQL Formatter is mainly used to reformat SQL queries to improve readability and maintain consistent style."
+        "text": "SQL formatting (also called pretty-print) restructures SQL queries with consistent indentation and line breaks, making complex queries easier to read, review, and debug. This is especially helpful for minified SQL from ORMs, generated queries, or copied code that lacks proper formatting."
       }
     },
     {
       "@type": "Question",
-      "name": "Does SQL Formatter send my input to a server?",
+      "name": "What SQL statements does this formatter support?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, SQL Formatter processes data locally in your browser so you can test quickly without uploading project files."
+        "text": "This formatter handles common SQL statements including SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, and DROP. It recognizes keywords, handles string literals, and formats JOIN clauses, subqueries, and WHERE conditions with appropriate indentation."
       }
     },
     {
       "@type": "Question",
-      "name": "Will SQL Formatter validate query correctness?",
+      "name": "Does the formatter validate SQL syntax?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Formatting improves readability but does not guarantee semantic correctness. Execute queries in your DB environment to validate."
+        "text": "No. This formatter only improves readability by restructuring whitespace and indentation. It does not validate SQL syntax or guarantee the query will run correctly. Always test formatted queries in your database environment before using in production."
       }
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use SQL Formatter",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "paste raw SQL into the input panel"
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Choose formatting preferences such as keyword casing and line breaks."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Format SQL and inspect clause structure."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy the cleaned query into your migration, notebook or review diff."
+      "@type": "Question",
+      "name": "What SQL dialects are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This formatter works with standard SQL syntax common to MySQL, PostgreSQL, SQLite, SQL Server, and Oracle. However, dialect-specific features (like procedural SQL or vendor-specific functions) may not format perfectly."
+      }
     }
   ]
 }
@@ -114,31 +93,107 @@
 
 <section class="tool-seo">
 <h3>About SQL Formatter</h3>
-<p>This SQL formatter rewrites SQL queries into a cleaner, more readable layout.</p>
-<p>It is useful for query reviews, debugging complex statements and sharing SQL in tickets, docs or pull requests without a messy one-line query.</p>
+<p>This SQL formatter rewrites SQL queries into a cleaner, more readable layout, making it easier to understand complex joins, subqueries, and nested conditions. Whether you're debugging ORM-generated SQL, reviewing database migrations, or preparing queries for documentation, this tool helps you quickly improve readability.</p>
+
+<h4>Why Format SQL?</h4>
+<p>SQL formatting provides several benefits:</p>
+<ul>
+  <li><strong>Easier debugging:</strong> Spot syntax errors and logic issues more quickly</li>
+  <li><strong>Better code reviews:</strong> Clear structure helps teammates understand your queries</li>
+  <li><strong>Consistent style:</strong> Maintain uniform formatting across team SQL code</li>
+  <li><strong>Faster onboarding:</strong> New team members can understand existing queries more easily</li>
+</ul>
+
+<h4>How the Formatter Works</h4>
+<p>The formatter uses a token-based approach to parse and restructure SQL:</p>
+<ol>
+  <li>Input SQL is tokenized into keywords, operators, identifiers, and literals</li>
+  <li>String literals and quoted identifiers are preserved exactly</li>
+  <li>SQL keywords (SELECT, FROM, WHERE, etc.) trigger new lines with appropriate indentation</li>
+  <li>Parentheses increase/decrease indentation level for nested queries</li>
+  <li>Commas trigger line breaks for column and value lists</li>
+</ol>
+
+<h4>Example: Before and After</h4>
+<p><strong>Input (minified SQL):</strong></p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:12px;overflow:auto">SELECT u.id,u.name,o.total FROM users u JOIN orders o ON u.id=o.user_id WHERE o.total>100 ORDER BY o.total DESC;</pre>
+
+<p><strong>Output (formatted SQL):</strong></p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:12px;overflow:auto">SELECT
+  u.id,
+  u.name,
+  o.total
+FROM
+  users u
+  JOIN orders o ON u.id = o.user_id
+WHERE
+  o.total > 100
+ORDER BY
+  o.total DESC;</pre>
+
+<h4>Supported SQL Keywords</h4>
+<p>The formatter recognizes and formats around these common SQL keywords:</p>
+<ul>
+  <li><strong>Data manipulation:</strong> SELECT, INSERT, UPDATE, DELETE, MERGE</li>
+  <li><strong>Query clauses:</strong> FROM, WHERE, GROUP BY, HAVING, ORDER BY, LIMIT, OFFSET</li>
+  <li><strong>Joins:</strong> JOIN, LEFT JOIN, RIGHT JOIN, INNER JOIN, OUTER JOIN, CROSS JOIN</li>
+  <li><strong>Set operations:</strong> UNION, INTERSECT, EXCEPT</li>
+  <li><strong>DDL:</strong> CREATE, ALTER, DROP, TRUNCATE</li>
+</ul>
+
+<h4>Formatting Notes</h4>
+<ul>
+  <li><strong>Indentation:</strong> Uses 2 spaces per nesting level</li>
+  <li><strong>Keywords:</strong> Converted to uppercase for consistency</li>
+  <li><strong>String literals:</strong> Preserved exactly as written (including case)</li>
+  <li><strong>Comments:</strong> Basic support for SQL comments (-- and /* */)</li>
+  <li><strong>Parentheses:</strong> Subqueries in parentheses get indented blocks</li>
+</ul>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>ORM debugging:</strong> Format generated SQL from Entity Framework, Hibernate, etc.</li>
+  <li><strong>Query optimization:</strong> Review execution plans with readable queries</li>
+  <li><strong>Code reviews:</strong> Present clean SQL in pull requests</li>
+  <li><strong>Documentation:</strong> Include formatted SQL in technical docs</li>
+  <li><strong>Learning SQL:</strong> Understand query structure when studying SQL</li>
+</ul>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use SQL Formatter</h3>
+<h3>How to Format SQL</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> paste raw SQL into the input panel</li>
-  <li><strong>Step 2:</strong> Choose formatting preferences such as keyword casing and line breaks.</li>
-  <li><strong>Step 3:</strong> Format SQL and inspect clause structure.</li>
-  <li><strong>Step 4:</strong> Copy the cleaned query into your migration, notebook or review diff.</li>
+  <li><strong>Paste your SQL:</strong> Copy minified or poorly-formatted SQL into the input box above.</li>
+  <li><strong>Click Format:</strong> The tool will parse and restructure your SQL with consistent indentation.</li>
+  <li><strong>Review the output:</strong> Check that the formatted query structure looks correct and all clauses are properly indented.</li>
+  <li><strong>Copy the result:</strong> Click "Copy Result" to paste the formatted SQL into your editor or documentation.</li>
 </ol>
+
+<h4 style="margin-top:20px">Tips for Best Results</h4>
+<ul>
+  <li>Ensure your SQL is syntactically complete (matching parentheses, quotes)</li>
+  <li>For dialect-specific SQL, verify the formatted output still works in your database</li>
+  <li>Very long queries may take a moment to process</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is SQL Formatter mainly used for?</dt>
-  <dd>SQL Formatter is mainly used to reformat SQL queries to improve readability and maintain consistent style.</dd>
+  <dt>What is SQL formatting and why is it useful?</dt>
+  <dd>SQL formatting (also called pretty-print) restructures SQL queries with consistent indentation and line breaks, making complex queries easier to read, review, and debug. This is especially helpful for minified SQL from ORMs, generated queries, or copied code that lacks proper formatting.</dd>
 
-  <dt>Does SQL Formatter send my input to a server?</dt>
-  <dd>For normal usage, SQL Formatter processes data locally in your browser so you can test quickly without uploading project files.</dd>
+  <dt>What SQL statements does this formatter support?</dt>
+  <dd>This formatter handles common SQL statements including SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, and DROP. It recognizes keywords, handles string literals, and formats JOIN clauses, subqueries, and WHERE conditions with appropriate indentation.</dd>
 
-  <dt>Will SQL Formatter validate query correctness?</dt>
-  <dd>Formatting improves readability but does not guarantee semantic correctness. Execute queries in your DB environment to validate.</dd>
+  <dt>Does the formatter validate SQL syntax?</dt>
+  <dd>No. This formatter only improves readability by restructuring whitespace and indentation. It does not validate SQL syntax or guarantee the query will run correctly. Always test formatted queries in your database environment before using in production.</dd>
+
+  <dt>What SQL dialects are supported?</dt>
+  <dd>This formatter works with standard SQL syntax common to MySQL, PostgreSQL, SQLite, SQL Server, and Oracle. However, dialect-specific features (like procedural SQL or vendor-specific functions) may not format perfectly.</dd>
+
+  <dt>Can this formatter handle stored procedures or functions?</dt>
+  <dd>Basic formatting is supported, but complex procedural SQL (BEGIN...END blocks, DECLARE statements, etc.) may not format perfectly. For heavy procedural SQL, consider using your database's dedicated formatting tools.</dd>
 </dl>
 </section>
 </main>

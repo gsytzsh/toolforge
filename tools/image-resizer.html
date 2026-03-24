@@ -20,59 +20,54 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Image Resize & Compress",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "upload an image file to the resizer"
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Set target width, height and keep-aspect preferences."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Resize image and preview output dimensions."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Download resized file for websites, apps or social media."
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Image Resize & Compress mainly used for?",
+      "name": "How does image resizing work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Image Resize & Compress is mainly used to resize images for web performance and layout constraints."
+        "text": "Image resizing changes the pixel dimensions of an image. When downscaling, the browser combines multiple pixels into one using interpolation algorithms. When upscaling, new pixels are created by estimating values between existing ones. This tool uses canvas-based resizing with bilinear interpolation.\""
       }
     },
     {
       "@type": "Question",
-      "name": "Does Image Resize & Compress send my input to a server?",
+      "name": "What is the difference between PNG, JPEG, and WebP?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Image Resize & Compress processes data locally in your browser so you can test quickly without uploading project files."
+        "text": "PNG uses lossless compression (preserves all detail, larger files, supports transparency). JPEG uses lossy compression (smaller files, some quality loss, no transparency). WebP is a modern format offering both lossy and lossless compression with better compression than JPEG/PNG at similar quality.\""
       }
     },
     {
       "@type": "Question",
-      "name": "Why does image quality drop after resizing?",
+      "name": "What does image quality setting do?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Aggressive downscaling or compression settings reduce detail. Tune output size and quality together."
+        "text": "Quality (0.1 to 1.0) controls compression level for JPEG and WebP formats. Lower quality = smaller file size but more compression artifacts. Quality 0.8 is a good balance for web use. PNG is lossless so quality setting has no effect on PNG output.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why should I resize images for web?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Large images slow down page loads, increase bandwidth costs, and hurt Core Web Vitals scores. Resizing images to their display dimensions reduces file size dramatically. For example, a 4000px photo displayed at 400px wastes 90%+ of its data. Optimized images improve SEO and user experience.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What size should I use for common use cases?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common sizes: Avatar (150-400px square), Thumbnail (200-400px wide), Blog featured image (800-1200px wide), Full-width hero (1920px wide), Product images (800-1500px wide), Social media OG images (1200x630px). Always consider your layout's maximum display width.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this tool preserve aspect ratio?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. If you only enter width OR height (leave the other empty), the tool automatically calculates the missing dimension to maintain the original aspect ratio. If you enter both, the image will be stretched to fit those exact dimensions.\""
       }
     }
   ]
@@ -122,29 +117,159 @@ Quality:
 <h3>About Image Resizer</h3>
 <p>This image resizer lets you change image dimensions directly in your browser without uploading files to a server. It is useful for thumbnails, avatars, blog images, product images and quick content publishing tasks.</p>
 <p>You can resize by width or height while keeping the original aspect ratio, preview the result and download the new image in one step.</p>
+
+<h4>How Image Resizing Works</h4>
+<p>This tool uses HTML5 Canvas for client-side image processing:</p>
+<ol>
+  <li><strong>Load:</strong> Original image is loaded into memory via FileReader API</li>
+  <li><strong>Scale:</strong> Canvas is resized to target dimensions</li>
+  <li><strong>Render:</strong> Image is drawn onto canvas at new size using browser's built-in interpolation</li>
+  <li><strong>Export:</strong> Canvas is exported to selected format (PNG/JPEG/WebP) with quality setting</li>
+</ol>
+
+<h4>Image Format Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Compression</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Transparency</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Best For</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">PNG</td>
+    <td style="border:1px solid #ddd;padding:8px">Lossless</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes (alpha channel)</td>
+    <td style="border:1px solid #ddd;padding:8px">Logos, screenshots, graphics</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">JPEG</td>
+    <td style="border:1px solid #ddd;padding:8px">Lossy</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+    <td style="border:1px solid #ddd;padding:8px">Photos, complex images</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">WebP</td>
+    <td style="border:1px solid #ddd;padding:8px">Lossy/Lossless</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">Modern web (best compression)</td>
+  </tr>
+</table>
+
+<h4>Recommended Image Sizes</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Recommended Size</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Avatar</td>
+    <td style="border:1px solid #ddd;padding:8px">200x200 to 400x400 px</td>
+    <td style="border:1px solid #ddd;padding:8px">JPEG/WebP</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Thumbnail</td>
+    <td style="border:1px solid #ddd;padding:8px">200-400 px wide</td>
+    <td style="border:1px solid #ddd;padding:8px">JPEG/WebP</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Blog featured</td>
+    <td style="border:1px solid #ddd;padding:8px">800-1200 px wide</td>
+    <td style="border:1px solid #ddd;padding:8px">JPEG/WebP</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Product image</td>
+    <td style="border:1px solid #ddd;padding:8px">800-1500 px wide</td>
+    <td style="border:1px solid #ddd;padding:8px">JPEG/WebP</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Full-width hero</td>
+    <td style="border:1px solid #ddd;padding:8px">1920 px wide</td>
+    <td style="border:1px solid #ddd;padding:8px">JPEG/WebP</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Social OG image</td>
+    <td style="border:1px solid #ddd;padding:8px">1200x630 px</td>
+    <td style="border:1px solid #ddd;padding:8px">JPEG</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Logo</td>
+    <td style="border:1px solid #ddd;padding:8px">Original dimensions</td>
+    <td style="border:1px solid #ddd;padding:8px">PNG</td>
+  </tr>
+</table>
+
+<h4>Understanding Quality Settings</h4>
+<p>Quality controls the compression level for JPEG and WebP formats:</p>
+<ul>
+  <li><strong>1.0 (Maximum):</strong> Minimal compression, largest file size</li>
+  <li><strong>0.8-0.9 (High):</strong> Good quality, reasonable file size (recommended)</li>
+  <li><strong>0.6-0.7 (Medium):</strong> Noticeable compression, smaller files</li>
+  <li><strong>0.4-0.5 (Low):</strong> Visible artifacts, much smaller files</li>
+  <li><strong>0.1-0.3 (Minimum):</strong> Heavy artifacts, smallest files</li>
+</ul>
+
+<h4>Why Resize Images for Web?</h4>
+<ul>
+  <li><strong>Faster page loads:</strong> Smaller images download quicker, especially on mobile</li>
+  <li><strong>Better Core Web Vitals:</strong> Image size directly impacts LCP (Largest Contentful Paint)</li>
+  <li><strong>Reduced bandwidth:</strong> Lower hosting costs and CDN expenses</li>
+  <li><strong>Improved SEO:</strong> Page speed is a Google ranking factor</li>
+  <li><strong>Better UX:</strong> Users don't wait for slow-loading images</li>
+</ul>
+
+<h4>Aspect Ratio Explained</h4>
+<p>Aspect ratio is the proportional relationship between width and height:</p>
+<ul>
+  <li><strong>1:1 (Square):</strong> 400x400, 800x800 - Avatars, Instagram posts</li>
+  <li><strong>4:3:</strong> 800x600, 1024x768 - Traditional photos</li>
+  <li><strong>16:9:</strong> 1920x1080, 1280x720 - Widescreen, YouTube thumbnails</li>
+  <li><strong>3:2:</strong> 600x400, 900x600 - DSLR photos</li>
+</ul>
+<p>When you enter only one dimension (width OR height), this tool automatically calculates the other to preserve aspect ratio.</p>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use Image Resize &amp; Compress</h3>
+<h3>How to Resize Images</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> upload an image file to the resizer</li>
-  <li><strong>Step 2:</strong> Set target width, height and keep-aspect preferences.</li>
-  <li><strong>Step 3:</strong> Resize image and preview output dimensions.</li>
-  <li><strong>Step 4:</strong> Download resized file for websites, apps or social media.</li>
+  <li><strong>Upload image:</strong> Click the file input to select an image from your device.</li>
+  <li><strong>Set dimensions:</strong> Enter target width or height (leave one empty for automatic aspect ratio).</li>
+  <li><strong>Choose format:</strong> Select PNG (lossless), JPEG (photos), or WebP (modern web).</li>
+  <li><strong>Adjust quality:</strong> Set compression level (0.8 recommended for web use).</li>
+  <li><strong>Process and preview:</strong> Click "Process Image" to resize and see the result.</li>
+  <li><strong>Download:</strong> Click the download link to save the resized image.</li>
 </ol>
+
+<h4 style="margin-top:20px">Tips for Best Results</h4>
+<ul>
+  <li>Resize to your layout's maximum display width - no larger</li>
+  <li>Use WebP for best compression with modern browsers</li>
+  <li>Keep quality at 0.8 for good balance of size and quality</li>
+  <li>For transparent images, use PNG or WebP (not JPEG)</li>
+  <li>Consider creating multiple sizes for responsive images</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is Image Resize &amp; Compress mainly used for?</dt>
-  <dd>Image Resize &amp; Compress is mainly used to resize images for web performance and layout constraints.</dd>
+  <dt>How does image resizing work?</dt>
+  <dd>Image resizing changes the pixel dimensions of an image. When downscaling, the browser combines multiple pixels into one using interpolation algorithms. When upscaling, new pixels are created by estimating values between existing ones. This tool uses canvas-based resizing with bilinear interpolation.</dd>
 
-  <dt>Does Image Resize &amp; Compress send my input to a server?</dt>
-  <dd>For normal usage, Image Resize &amp; Compress processes data locally in your browser so you can test quickly without uploading project files.</dd>
+  <dt>What is the difference between PNG, JPEG, and WebP?</dt>
+  <dd>PNG uses lossless compression (preserves all detail, larger files, supports transparency). JPEG uses lossy compression (smaller files, some quality loss, no transparency). WebP is a modern format offering both lossy and lossless compression with better compression than JPEG/PNG at similar quality.</dd>
 
-  <dt>Why does image quality drop after resizing?</dt>
-  <dd>Aggressive downscaling or compression settings reduce detail. Tune output size and quality together.</dd>
+  <dt>What does image quality setting do?</dt>
+  <dd>Quality (0.1 to 1.0) controls compression level for JPEG and WebP formats. Lower quality = smaller file size but more compression artifacts. Quality 0.8 is a good balance for web use. PNG is lossless so quality setting has no effect on PNG output.</dd>
+
+  <dt>Why should I resize images for web?</dt>
+  <dd>Large images slow down page loads, increase bandwidth costs, and hurt Core Web Vitals scores. Resizing images to their display dimensions reduces file size dramatically. For example, a 4000px photo displayed at 400px wastes 90%+ of its data. Optimized images improve SEO and user experience.</dd>
+
+  <dt>What size should I use for common use cases?</dt>
+  <dd>Common sizes: Avatar (150-400px square), Thumbnail (200-400px wide), Blog featured image (800-1200px wide), Full-width hero (1920px wide), Product images (800-1500px wide), Social media OG images (1200x630px). Always consider your layout's maximum display width.</dd>
+
+  <dt>Does this tool preserve aspect ratio?</dt>
+  <dd>Yes. If you only enter width OR height (leave the other empty), the tool automatically calculates the missing dimension to maintain the original aspect ratio. If you enter both, the image will be stretched to fit those exact dimensions.</dd>
 </dl>
 </section>
 </main>

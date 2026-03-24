@@ -3,49 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Find and Replace – Replace Text Online with Optional Regex | ToolForge</title>
-<meta name="description" content="Free online Find and Replace tool to replace text with optional regex support for quick edits, repeated wording changes and browser-side cleanup. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Free online Find and Replace tool to replace text with optional regex support. Global replace, case-sensitive matching, and pattern-based substitution for powerful text editing. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/find-replace.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Find and Replace – Replace Text Online with Optional Regex | ToolForge">
-<meta property="og:description" content="Free online Find and Replace tool to replace text with optional regex support for quick edits, repeated wording changes and browser-side cleanup. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Free online Find and Replace tool to replace text with optional regex support for quick edits and text cleanup. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/find-replace.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Find and Replace – Replace Text Online with Optional Regex | ToolForge">
-<meta name="twitter:description" content="Free online Find and Replace tool to replace text with optional regex support for quick edits, repeated wording changes and browser-side cleanup. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Free online Find and Replace tool to replace text with optional regex support for quick edits and text cleanup. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Find and Replace",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Open Find and Replace and enter your source input data in the main field."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Choose transformation options such as case, trimming, filtering or replacement rules."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Run processing and compare the transformed text with your expected result."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy cleaned text into documents, code comments or content pipelines."
-    }
-  ]
-}
-</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,26 +24,42 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Find and Replace mainly used for?",
+      "name": "How does find and replace work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Find and Replace is mainly used to replace one string with another in pasted text, with optional regex support for smarter matching."
+        "text": "Find and replace searches for a specific string or pattern in text and replaces all occurrences with a new value. In regex mode, you can use patterns like \\d+ to match numbers or [A-Z] for uppercase letters.\""
       }
     },
     {
       "@type": "Question",
-      "name": "Does Find and Replace send my input to a server?",
+      "name": "What is regex mode and when should I use it?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Find and Replace processes data locally in your browser so you can work without uploading project files."
+        "text": "Regex (regular expression) mode enables pattern-based matching instead of literal text. Use it for complex searches like 'all numbers', 'email addresses', or 'words starting with capital'. Enable the Regex checkbox to use it.\""
       }
     },
     {
       "@type": "Question",
-      "name": "Why does processed text differ from expectation?",
+      "name": "How do I replace all occurrences?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Whitespace rules, hidden characters and line-ending differences are common reasons for unexpected text output."
+        "text": "Both 'Replace' and 'Replace all' buttons replace all occurrences globally. Enter your find text and replacement text, then click either button. The result appears in the output box below.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use capture groups in replacements?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, in regex mode you can use capture groups. Use $1, $2, etc. in the replacement to reference captured groups. Example: Find '(\\w+), (\\w+)' Replace '$2 $1' converts 'Doe, John' to 'John Doe'.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the replacement case-sensitive?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, by default matching is case-sensitive. 'hello' won't match 'Hello' or 'HELLO'. In regex mode, add the 'i' flag pattern or use character classes like [Hh]ello for case-insensitive matching.\""
       }
     }
   ]
@@ -82,51 +69,215 @@
 <body>
 <main class="container">
 <h1>Find and Replace</h1>
-<p class="subtitle">Replace one string with another in pasted text, with optional regex support for smarter matching.</p>
+<p class="subtitle">Replace text with literal strings or regex patterns.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Find</h3>
 <label for="find" class="sr-only">Find</label>
-<input id="find" style="width:90%" placeholder="Text or regex" aria-label="Find">
-<label><input type="checkbox" id="regex"> Regex</label>
+<input id="find" style="width:90%" placeholder="Text or regex pattern to find" aria-label="Find">
+<label><input type="checkbox" id="regex"> Enable Regex mode</label>
 <h3>Replace with</h3>
-<label for="repl" class="sr-only">Repl</label>
-<input id="repl" style="width:90%" placeholder="Replacement" aria-label="Repl">
-<h3>Text</h3>
+<label for="repl" class="sr-only">Replace</label>
+<input id="repl" style="width:90%" placeholder="Replacement text" aria-label="Replace">
+<h3>Input Text</h3>
 <label for="text" class="sr-only">Text input</label>
 <textarea id="text" rows="10" style="width:90%" aria-label="Text input"></textarea>
 <br><br>
-<button onclick="run()">Replace</button>
-<button onclick="replaceAll()">Replace all</button>
+<button onclick="run()">Replace All</button>
+<button type="button" onclick="copyResult()">Copy Result</button>
+<button type="button" onclick="clearAll()">Clear</button>
 <h3>Result</h3>
 <label for="output" class="sr-only">Output text</label>
 <textarea id="output" rows="10" style="width:90%" aria-label="Output text"></textarea>
+<p id="status" style="color:#666"></p>
 <section class="tool-seo">
 <h3>About Find and Replace</h3>
-<p>This find-and-replace tool swaps one string for another in pasted text, with optional regex support.</p>
-<p>It is useful for quick text cleanup, repeated wording changes and small browser-side edits when opening a full editor would be unnecessary.</p>
+<p>This find and replace tool searches for text patterns and replaces them with your specified value. It supports both literal string matching and regular expressions (regex) for advanced pattern-based substitution.</p>
+
+<h4>Basic vs Regex Mode</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Feature</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Basic Mode</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Regex Mode</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Matching</td>
+    <td style="border:1px solid #ddd;padding:8px">Literal text</td>
+    <td style="border:1px solid #ddd;padding:8px">Patterns</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Wildcards</td>
+    <td style="border:1px solid #ddd;padding:8px">Not supported</td>
+    <td style="border:1px solid #ddd;padding:8px">.*, \d, \w, etc.</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Capture Groups</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes ($1, $2...)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Character Classes</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+    <td style="border:1px solid #ddd;padding:8px">[A-Z], [0-9], etc.</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Best For</td>
+    <td style="border:1px solid #ddd;padding:8px">Simple replacements</td>
+    <td style="border:1px solid #ddd;padding:8px">Complex patterns</td>
+  </tr>
+</table>
+
+<h4>Common Regex Patterns</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Pattern</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Matches</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example Match</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>\d+</code></td>
+    <td style="border:1px solid #ddd;padding:8px">One or more digits</td>
+    <td style="border:1px solid #ddd;padding:8px">123, 42, 0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>\w+</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Word characters</td>
+    <td style="border:1px solid #ddd;padding:8px">hello, user_123</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>[A-Z]</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Uppercase letters</td>
+    <td style="border:1px solid #ddd;padding:8px">A, B, C</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>\s+</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Whitespace</td>
+    <td style="border:1px solid #ddd;padding:8px">" ", "\t", "\n"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>.*</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Any characters (greedy)</td>
+    <td style="border:1px solid #ddd;padding:8px">anything</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>^word</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Starts with "word"</td>
+    <td style="border:1px solid #ddd;padding:8px">word at line start</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>word$</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Ends with "word"</td>
+    <td style="border:1px solid #ddd;padding:8px">word at line end</td>
+  </tr>
+</table>
+
+<h4>Replacement Examples</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Remove all numbers
+Find: \d+
+Replace: (empty)
+Input: "I have 123 apples and 456 oranges"
+Output: "I have  apples and  oranges"
+
+Example 2: Swap first and last name
+Find: (\w+), (\w+)
+Replace: $2 $1
+Input: "Doe, John"
+Output: "John Doe"
+
+Example 3: Replace multiple spaces with single
+Find: \s+
+Replace: " "
+Input: "too    many   spaces"
+Output: "too many spaces"
+
+Example 4: Wrap numbers in brackets
+Find: (\d+)
+Replace: [$1]
+Input: "I have 42 dollars"
+Output: "I have [42] dollars"
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Data Cleanup:</strong> Remove unwanted characters, normalize whitespace</li>
+  <li><strong>Code Refactoring:</strong> Rename variables, update function calls</li>
+  <li><strong>Content Editing:</strong> Fix repeated typos, update terminology</li>
+  <li><strong>Log Processing:</strong> Extract or mask sensitive data</li>
+  <li><strong>Format Conversion:</strong> Transform CSV, JSON, or other formats</li>
+  <li><strong>Text Transformation:</strong> Case changes, reordering fields</li>
+</ul>
+
+<h4>Special Characters in Basic Mode</h4>
+<p>In basic mode, these characters are treated literally:</p>
+<ul>
+  <li><code>.</code> dot</li>
+  <li><code>*</code> asterisk</li>
+  <li><code>+</code> plus</li>
+  <li><code>?</code> question mark</li>
+  <li><code>[</code> <code>]</code> brackets</li>
+  <li><code>(</code> <code>)</code> parentheses</li>
+  <li><code>^</code> <code>$</code> caret and dollar</li>
+  <li><code>\</code> backslash</li>
+</ul>
+<p>In regex mode, these have special meaning for pattern matching.</p>
+
+<h4>Using Capture Groups</h4>
+<p>Capture groups let you reuse matched text in replacements:</p>
+<ol>
+  <li>Wrap part of pattern in parentheses: <code>(pattern)</code></li>
+  <li>Reference in replacement: <code>$1</code>, <code>$2</code>, etc.</li>
+  <li><code>$1</code> = first group, <code>$2</code> = second group</li>
+</ol>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example: Convert date format from MM/DD/YYYY to YYYY-MM-DD
+
+Find: (\d{2})/(\d{2})/(\d{4})
+Replace: $3-$1-$2
+
+Input: "12/25/2024"
+Output: "2024-12-25"
+</pre>
 </section>
 
 <section class="how-to-use">
 <h3>How to Use Find and Replace</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Open Find and Replace and enter your source input data in the main field.</li>
-  <li><strong>Step 2:</strong> Choose transformation options such as case, trimming, filtering or replacement rules.</li>
-  <li><strong>Step 3:</strong> Run processing and compare the transformed text with your expected result.</li>
-  <li><strong>Step 4:</strong> Copy cleaned text into documents, code comments or content pipelines.</li>
+  <li><strong>Enter find text:</strong> Type the text or regex pattern to search for.</li>
+  <li><strong>Enter replacement:</strong> Type what should replace found matches.</li>
+  <li><strong>Enable regex (optional):</strong> Check the box if using regex patterns.</li>
+  <li><strong>Paste input text:</strong> Enter the text to process.</li>
+  <li><strong>Click Replace All:</strong> All occurrences are replaced in the output.</li>
+  <li><strong>Copy result:</strong> Use the output in your documents or code.</li>
 </ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Test regex patterns on small text first</li>
+  <li>Use capture groups for complex rearrangements</li>
+  <li>Empty replacement deletes all matches</li>
+  <li>Special characters need escaping in basic mode</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is Find and Replace mainly used for?</dt>
-  <dd>Find and Replace is mainly used to replace one string with another in pasted text, with optional regex support for smarter matching.</dd>
+  <dt>How does find and replace work?</dt>
+  <dd>Find and replace searches for a specific string or pattern in text and replaces all occurrences with a new value. In regex mode, you can use patterns like \d+ to match numbers or [A-Z] for uppercase letters.</dd>
 
-  <dt>Does Find and Replace send my input to a server?</dt>
-  <dd>For normal usage, Find and Replace processes data locally in your browser so you can work without uploading project files.</dd>
+  <dt>What is regex mode and when should I use it?</dt>
+  <dd>Regex (regular expression) mode enables pattern-based matching instead of literal text. Use it for complex searches like 'all numbers', 'email addresses', or 'words starting with capital'. Enable the Regex checkbox to use it.</dd>
 
-  <dt>Why does processed text differ from expectation?</dt>
-  <dd>Whitespace rules, hidden characters and line-ending differences are common reasons for unexpected text output.</dd>
+  <dt>How do I replace all occurrences?</dt>
+  <dd>Both 'Replace' and 'Replace all' buttons replace all occurrences globally. Enter your find text and replacement text, then click either button. The result appears in the output box below.</dd>
+
+  <dt>Can I use capture groups in replacements?</dt>
+  <dd>Yes, in regex mode you can use capture groups. Use $1, $2, etc. in the replacement to reference captured groups. Example: Find '(\w+), (\w+)' Replace '$2 $1' converts 'Doe, John' to 'John Doe'.</dd>
+
+  <dt>Is the replacement case-sensitive?</dt>
+  <dd>Yes, by default matching is case-sensitive. 'hello' won't match 'Hello' or 'HELLO'. In regex mode, add the 'i' flag pattern or use character classes like [Hh]ello for case-insensitive matching.</dd>
 </dl>
 </section>
 </main>
@@ -136,13 +287,34 @@ var f=document.getElementById("find").value
 var r=document.getElementById("repl").value
 var t=document.getElementById("text").value
 var useRegex=document.getElementById("regex").checked
-if(!f){document.getElementById("output").value=t;return}
+if(!f){document.getElementById("output").value=t;document.getElementById("status").innerText="No find pattern entered.";return}
 try{
 var result=useRegex?t.replace(new RegExp(f,"g"),r):t.split(f).join(r)
 document.getElementById("output").value=result
+var count=(t.match(new RegExp(useRegex?f:f.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),"g"))||[]).length
+document.getElementById("status").innerText=count+" replacement(s) made."
 }catch(e){document.getElementById("output").value="Regex error: "+e.message}
 }
-function replaceAll(){run()}
+function copyResult(){
+var value=document.getElementById("output").value
+if(!value){
+document.getElementById("status").innerText="Nothing to copy."
+return
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Result copied."
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed."
+})
+}
+function clearAll(){
+document.getElementById("find").value=""
+document.getElementById("repl").value=""
+document.getElementById("text").value=""
+document.getElementById("output").value=""
+document.getElementById("status").innerText=""
+document.getElementById("regex").checked=false
+}
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>

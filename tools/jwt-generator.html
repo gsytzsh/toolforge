@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <title>JWT Generator – Create Test JSON Web Tokens Online | ToolForge</title>
-
 <meta name="description" content="Free online JWT Generator to create test JSON Web Tokens from header, payload and secret using HS256 HMAC for auth and API development. Part of the ToolForge developer tools collection.">
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/jwt-generator.html">
 <meta property="og:type" content="website">
@@ -18,9 +15,7 @@
 <meta name="twitter:title" content="JWT Generator – Create Test JSON Web Tokens Online | ToolForge">
 <meta name="twitter:description" content="Free online JWT Generator to create test JSON Web Tokens from header, payload and secret using HS256 HMAC for auth and API development. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
-
 <link rel="stylesheet" href="/css/style.css">
-
 
 <script type="application/ld+json">
 {
@@ -29,56 +24,51 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is JWT Generator mainly used for?",
+      "name": "What is a JWT and how does it work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "JWT Generator is mainly used to create test JWT tokens for authentication demos and development environments."
+        "text": "A JWT (JSON Web Token) is a compact, URL-safe token format consisting of three parts: header (algorithm and token type), payload (claims/data), and signature (verification). The signature is created by signing the base64-encoded header and payload with a secret key, ensuring the token hasn't been tampered with.\""
       }
     },
     {
       "@type": "Question",
-      "name": "Does JWT Generator send my input to a server?",
+      "name": "What is the difference between HS256 and RS256?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, JWT Generator processes data locally in your browser so you can test quickly without uploading project files."
+        "text": "HS256 uses symmetric encryption - the same secret key signs and verifies tokens. RS256 uses asymmetric encryption - a private key signs, and a public key verifies. HS256 is simpler for single-service apps; RS256 is better for distributed systems where verification happens separately from signing.\""
       }
     },
     {
       "@type": "Question",
-      "name": "Should JWT Generator be used for production secrets?",
+      "name": "What claims should I include in a JWT payload?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Use it for development and testing. Production token signing should happen in controlled backend infrastructure."
+        "text": "Common registered claims: 'sub' (subject/user ID), 'iss' (issuer), 'aud' (audience), 'exp' (expiration), 'iat' (issued at), 'nbf' (not before). Custom claims can include user roles, permissions, or application-specific data. Avoid putting sensitive data in payloads - JWTs are encoded, not encrypted.\""
       }
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use JWT Generator",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "enter header, payload and signing key data"
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Choose signing algorithm and set claims like exp, iat and issuer."
+      "@type": "Question",
+      "name": "How do I validate a JWT token?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Validation involves: 1) Verify the signature using the secret/public key, 2) Check the 'exp' claim hasn't passed, 3) Verify 'iss' matches expected issuer, 4) Check 'aud' if audience validation is required, 5) Optionally verify 'nbf' (not before) claim. Never trust unsigned tokens.\""
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Generate the JWT string for your test case."
+      "@type": "Question",
+      "name": "Can JWTs be decrypted to reveal sensitive data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. JWT payloads are base64url encoded, not encrypted. Anyone can decode a JWT to read its contents. Never include passwords, credit cards, or other sensitive data in JWT payloads. Use JWE (JSON Web Encryption) if you need encrypted tokens.\""
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy token output to Postman, frontend auth tests or local API calls."
+      "@type": "Question",
+      "name": "What is JWT token expiration and why is it important?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Token expiration (the 'exp' claim) limits how long a token remains valid. Short-lived tokens reduce the impact of token theft. Best practice: use short expiration (15-60 minutes) for access tokens, implement refresh token rotation for long-term sessions.\""
+      }
     }
   ]
 }
@@ -136,31 +126,185 @@
 
 <section class="tool-seo">
 <h3>About JWT Generator</h3>
-<p>This JWT generator creates JSON Web Tokens from a header, payload and secret for testing purposes.</p>
-<p>It is useful for auth flows, local API testing and token format experiments when you need a sample JWT without wiring up a backend signer.</p>
+<p>This JWT generator creates JSON Web Tokens from custom header, payload, and secret key inputs using HS256 HMAC signing. It's designed for developers who need to quickly generate test tokens for authentication flows, API testing, and local development without setting up a full backend signing infrastructure.</p>
+
+<h4>JWT Structure Explained</h4>
+<p>A JSON Web Token consists of three parts separated by dots:</p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+xxxxx.yyyyy.zzzzz
+ |     |      |
+ |     |      +-- Signature (HMAC-SHA256 signed)
+ |     +--------- Payload (claims/data)
+ +--------------- Header (algorithm info)
+</pre>
+
+<ul>
+  <li><strong>Header:</strong> Contains algorithm (alg) and token type (typ). Typically <code>{"alg":"HS256","typ":"JWT"}</code></li>
+  <li><strong>Payload:</strong> Contains claims - user data, roles, expiration, etc.</li>
+  <li><strong>Signature:</strong> Created by signing <code>base64Url(header) + "." + base64Url(payload)</code> with the secret</li>
+</ul>
+
+<h4>Common JWT Claims</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Claim</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Name</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>sub</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Subject</td>
+    <td style="border:1px solid #ddd;padding:8px">User or entity identifier</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>iss</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Issuer</td>
+    <td style="border:1px solid #ddd;padding:8px">Token issuer (your service name)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>aud</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Audience</td>
+    <td style="border:1px solid #ddd;padding:8px">Intended recipient of token</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>exp</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Expiration</td>
+    <td style="border:1px solid #ddd;padding:8px">Token expiry (Unix timestamp)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>iat</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Issued At</td>
+    <td style="border:1px solid #ddd;padding:8px">Token creation time (Unix timestamp)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>nbf</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Not Before</td>
+    <td style="border:1px solid #ddd;padding:8px">Token becomes valid after this time</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>jti</code></td>
+    <td style="border:1px solid #ddd;padding:8px">JWT ID</td>
+    <td style="border:1px solid #ddd;padding:8px">Unique token identifier</td>
+  </tr>
+</table>
+
+<h4>JWT Algorithm Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Algorithm</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Key</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>HS256</code></td>
+    <td style="border:1px solid #ddd;padding:8px">HMAC + SHA-256</td>
+    <td style="border:1px solid #ddd;padding:8px">Symmetric (shared secret)</td>
+    <td style="border:1px solid #ddd;padding:8px">Single service auth (this tool)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>HS512</code></td>
+    <td style="border:1px solid #ddd;padding:8px">HMAC + SHA-512</td>
+    <td style="border:1px solid #ddd;padding:8px">Symmetric (shared secret)</td>
+    <td style="border:1px solid #ddd;padding:8px">Higher security requirements</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>RS256</code></td>
+    <td style="border:1px solid #ddd;padding:8px">RSA + SHA-256</td>
+    <td style="border:1px solid #ddd;padding:8px">Asymmetric (private/public)</td>
+    <td style="border:1px solid #ddd;padding:8px">Distributed systems, OAuth 2.0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>ES256</code></td>
+    <td style="border:1px solid #ddd;padding:8px">ECDSA + P-256</td>
+    <td style="border:1px solid #ddd;padding:8px">Asymmetric (elliptic curve)</td>
+    <td style="border:1px solid #ddd;padding:8px">Mobile apps, IoT devices</td>
+  </tr>
+</table>
+
+<h4>Example JWT Payload</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+{
+  "sub": "1234567890",
+  "name": "John Doe",
+  "email": "john@example.com",
+  "role": "admin",
+  "iat": 1516239022,
+  "exp": 1516242622
+}
+</pre>
+
+<h4>Security Best Practices</h4>
+<ul>
+  <li><strong>Use HTTPS:</strong> Always transmit JWTs over encrypted connections</li>
+  <li><strong>Short expiration:</strong> Set brief token lifetimes (15-60 minutes)</li>
+  <li><strong>Strong secrets:</strong> Use at least 256-bit random secrets for HS256</li>
+  <li><strong>Don't store sensitive data:</strong> Payloads can be decoded by anyone</li>
+  <li><strong>Implement refresh tokens:</strong> Use short-lived access tokens with refresh rotation</li>
+  <li><strong>Validate signatures:</strong> Never trust unsigned or improperly verified tokens</li>
+  <li><strong>Check all claims:</strong> Verify exp, iat, iss, aud as appropriate</li>
+</ul>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>API Authentication:</strong> Stateless auth for REST/GraphQL APIs</li>
+  <li><strong>Session Management:</strong> Replace server-side sessions with signed tokens</li>
+  <li><strong>Microservices:</strong> Pass user context between services</li>
+  <li><strong>SSO (Single Sign-On):strong> Share authentication across domains</li>
+  <li><strong>Testing:</strong> Generate test tokens for development (this tool)</li>
+</ul>
+
+<h4>Testing JWT Tokens</h4>
+<p>When testing with this generator:</p>
+<ol>
+  <li>Set header algorithm to match your backend (default: HS256)</li>
+  <li>Add required claims to payload (user ID, roles, expiration)</li>
+  <li>Use the same secret key your backend uses for verification</li>
+  <li>Copy the generated token to Postman, curl, or your test suite</li>
+  <li>Verify your backend accepts and correctly parses the token</li>
+</ol>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use JWT Generator</h3>
+<h3>How to Generate JWT Tokens</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> enter header, payload and signing key data</li>
-  <li><strong>Step 2:</strong> Choose signing algorithm and set claims like exp, iat and issuer.</li>
-  <li><strong>Step 3:</strong> Generate the JWT string for your test case.</li>
-  <li><strong>Step 4:</strong> Copy token output to Postman, frontend auth tests or local API calls.</li>
+  <li><strong>Configure header:</strong> The default header <code>{"alg":"HS256","typ":"JWT"}</code> works for most cases.</li>
+  <li><strong>Add payload claims:</strong> Include user data, roles, and standard claims (sub, exp, iat).</li>
+  <li><strong>Enter secret key:</strong> Use the same secret your application uses for token verification.</li>
+  <li><strong>Click Generate:</strong> The tool signs the token using HMAC-SHA256 algorithm.</li>
+  <li><strong>Copy the token:</strong> Use the generated JWT in your Authorization header as <code>Bearer &lt;token&gt;</code>.</li>
 </ol>
+
+<h4 style="margin-top:20px">Tips for JWT Testing</h4>
+<ul>
+  <li>Include an <code>exp</code> claim to test expiration handling</li>
+  <li>Use meaningful <code>sub</code> values to identify test users</li>
+  <li>Add custom claims for role-based access testing</li>
+  <li>Keep a list of test tokens for different user scenarios</li>
+  <li>Never use production secrets in development tools</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is JWT Generator mainly used for?</dt>
-  <dd>JWT Generator is mainly used to create test JWT tokens for authentication demos and development environments.</dd>
+  <dt>What is a JWT and how does it work?</dt>
+  <dd>A JWT (JSON Web Token) is a compact, URL-safe token format consisting of three parts: header (algorithm and token type), payload (claims/data), and signature (verification). The signature is created by signing the base64-encoded header and payload with a secret key, ensuring the token hasn't been tampered with.</dd>
 
-  <dt>Does JWT Generator send my input to a server?</dt>
-  <dd>For normal usage, JWT Generator processes data locally in your browser so you can test quickly without uploading project files.</dd>
+  <dt>What is the difference between HS256 and RS256?</dt>
+  <dd>HS256 uses symmetric encryption - the same secret key signs and verifies tokens. RS256 uses asymmetric encryption - a private key signs, and a public key verifies. HS256 is simpler for single-service apps; RS256 is better for distributed systems where verification happens separately from signing.</dd>
 
-  <dt>Should JWT Generator be used for production secrets?</dt>
-  <dd>Use it for development and testing. Production token signing should happen in controlled backend infrastructure.</dd>
+  <dt>What claims should I include in a JWT payload?</dt>
+  <dd>Common registered claims: 'sub' (subject/user ID), 'iss' (issuer), 'aud' (audience), 'exp' (expiration), 'iat' (issued at), 'nbf' (not before). Custom claims can include user roles, permissions, or application-specific data. Avoid putting sensitive data in payloads - JWTs are encoded, not encrypted.</dd>
+
+  <dt>How do I validate a JWT token?</dt>
+  <dd>Validation involves: 1) Verify the signature using the secret/public key, 2) Check the 'exp' claim hasn't passed, 3) Verify 'iss' matches expected issuer, 4) Check 'aud' if audience validation is required, 5) Optionally verify 'nbf' (not before) claim. Never trust unsigned tokens.</dd>
+
+  <dt>Can JWTs be decrypted to reveal sensitive data?</dt>
+  <dd>Yes. JWT payloads are base64url encoded, not encrypted. Anyone can decode a JWT to read its contents. Never include passwords, credit cards, or other sensitive data in JWT payloads. Use JWE (JSON Web Encryption) if you need encrypted tokens.</dd>
+
+  <dt>What is JWT token expiration and why is it important?</dt>
+  <dd>Token expiration (the 'exp' claim) limits how long a token remains valid. Short-lived tokens reduce the impact of token theft. Best practice: use short expiration (15-60 minutes) for access tokens, implement refresh token rotation for long-term sessions.</dd>
 </dl>
 </section>
 </main>
@@ -259,5 +403,4 @@ document.getElementById("status").style.color="#b91c1c"
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>
 </body>
-
 </html>

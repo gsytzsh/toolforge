@@ -2,50 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>ASCII Table – ASCII Character Codes | ToolForge</title>
-<meta name="description" content="Free online ASCII table with decimal, hex and character codes. Part of the ToolForge developer tools collection.">
+<title>ASCII Table – Complete ASCII Character Codes Reference (0-127) | ToolForge</title>
+<meta name="description" content="Free online ASCII table with decimal, hex, binary and character codes for all 128 ASCII characters. Essential reference for developers, programmers, and encoding work. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/ascii-table.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="ASCII Table – ASCII Character Codes | ToolForge">
-<meta property="og:description" content="Free online ASCII table with decimal, hex and character codes. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Free online ASCII table with decimal, hex, binary and character codes for all 128 ASCII characters. Essential reference for developers, programmers, and encoding work. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/ascii-table.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ASCII Table – ASCII Character Codes | ToolForge">
-<meta name="twitter:description" content="Free online ASCII table with decimal, hex and character codes. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="ASCII Table – Complete ASCII Character Codes Reference (0-127) | ToolForge">
+<meta name="twitter:description" content="Free online ASCII table with decimal, hex, binary and character codes for all 128 ASCII characters. Essential reference for developers, programmers, and encoding work. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use ASCII Table",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "search by character or numeric code"
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Check decimal, hex and binary columns based on your need."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Locate the target ASCII entry in the table."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Use code mappings in parsing, protocol or embedded tasks."
-    }
-  ]
-}
-</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,26 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is ASCII Table mainly used for?",
+      "name": "What is ASCII and how does it work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "ASCII Table is mainly used to reference ASCII codes for control and printable characters."
+        "text": "ASCII (American Standard Code for Information Interchange) is a 7-bit character encoding standard using values 0-127. Each character maps to a unique number: letters (A=65, a=97), digits (0=48), punctuation, and control codes. ASCII enables consistent text representation across systems."
       }
     },
     {
       "@type": "Question",
-      "name": "Does ASCII Table send my input to a server?",
+      "name": "What are ASCII control characters?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, ASCII Table processes data locally in your browser so you can test quickly without uploading project files."
+        "text": "Control characters (0-31 and 127) are non-printing codes for device control: NUL (0), TAB (9), LF/Line Feed (10), CR/Carriage Return (13), ESC (27), DEL (127). They originated from teletype machines for paper control, not character display."
       }
     },
     {
       "@type": "Question",
-      "name": "Does ASCII Table include extended non-ASCII characters?",
+      "name": "Why does ASCII only go up to 127?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Core ASCII is 7-bit only. Extended sets are encoding-specific and should be treated separately."
+        "text": "ASCII uses 7 bits, giving 2^7 = 128 possible values (0-127). The 8th bit was originally used for parity checking. Extended ASCII (128-255) uses the full 8 bits but isn't standardized - different systems use different character sets for those values."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert between ASCII decimal and hex?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "To convert decimal to hex: divide by 16, use remainder as hex digit. Example: 65 ÷ 16 = 4 remainder 1, so 65 = 0x41. To convert hex to decimal: multiply first digit by 16, add second. Example: 0x4A = (4×16) + 10 = 74."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the relationship between ASCII and Unicode?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Unicode extends ASCII - the first 128 Unicode code points (U+0000 to U+007F) are identical to ASCII. Unicode adds characters for all world languages, symbols, and emoji in higher ranges (up to U+10FFFF). UTF-8 encoding preserves ASCII compatibility."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are common ASCII codes I should memorize?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Key codes: Space=32, '0'=48 (digits are sequential), 'A'=65 (uppercase sequential), 'a'=97 (lowercase sequential). Uppercase to lowercase differs by 32. These patterns make case conversion and digit extraction simple bit operations."
       }
     }
   ]
@@ -91,31 +86,211 @@
 </table>
 <section class="tool-seo">
 <h3>About ASCII Table</h3>
-<p>This ASCII table lists standard ASCII character codes from 0 to 127 in decimal, hex and character form.</p>
-<p>It is useful for encoding references, control-character lookups and low-level text debugging when you need to identify exact character values.</p>
+<p>This ASCII table lists all 128 standard ASCII character codes (0-127) with decimal, hexadecimal, and character representations. ASCII (American Standard Code for Information Interchange) is the foundational character encoding for modern computing.</p>
+
+<h4>ASCII Character Ranges</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Range</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Name</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">0-31</td>
+    <td style="border:1px solid #ddd;padding:8px">Control characters</td>
+    <td style="border:1px solid #ddd;padding:8px">Non-printing device control codes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">32</td>
+    <td style="border:1px solid #ddd;padding:8px">Space</td>
+    <td style="border:1px solid #ddd;padding:8px">Whitespace character</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">33-47</td>
+    <td style="border:1px solid #ddd;padding:8px">Punctuation</td>
+    <td style="border:1px solid #ddd;padding:8px">Symbols and punctuation marks</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">48-57</td>
+    <td style="border:1px solid #ddd;padding:8px">Digits</td>
+    <td style="border:1px solid #ddd;padding:8px">Numeric characters 0-9</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">58-64</td>
+    <td style="border:1px solid #ddd;padding:8px">Punctuation</td>
+    <td style="border:1px solid #ddd;padding:8px">More symbols and punctuation</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">65-90</td>
+    <td style="border:1px solid #ddd;padding:8px">Uppercase</td>
+    <td style="border:1px solid #ddd;padding:8px">Letters A-Z</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">91-96</td>
+    <td style="border:1px solid #ddd;padding:8px">Punctuation</td>
+    <td style="border:1px solid #ddd;padding:8px">Brackets and symbols</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">97-122</td>
+    <td style="border:1px solid #ddd;padding:8px">Lowercase</td>
+    <td style="border:1px solid #ddd;padding:8px">Letters a-z</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">123-126</td>
+    <td style="border:1px solid #ddd;padding:8px">Punctuation</td>
+    <td style="border:1px solid #ddd;padding:8px">Final symbols</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">127</td>
+    <td style="border:1px solid #ddd;padding:8px">DEL</td>
+    <td style="border:1px solid #ddd;padding:8px">Delete control character</td>
+  </tr>
+</table>
+
+<h4>Key ASCII Control Characters</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Dec</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Hex</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Name</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">0</td>
+    <td style="border:1px solid #ddd;padding:8px">0x00</td>
+    <td style="border:1px solid #ddd;padding:8px">NUL</td>
+    <td style="border:1px solid #ddd;padding:8px">Null character (string terminator in C)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">9</td>
+    <td style="border:1px solid #ddd;padding:8px">0x09</td>
+    <td style="border:1px solid #ddd;padding:8px">TAB</td>
+    <td style="border:1px solid #ddd;padding:8px">Horizontal tab</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">10</td>
+    <td style="border:1px solid #ddd;padding:8px">0x0A</td>
+    <td style="border:1px solid #ddd;padding:8px">LF</td>
+    <td style="border:1px solid #ddd;padding:8px">Line feed (newline in Unix)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">13</td>
+    <td style="border:1px solid #ddd;padding:8px">0x0D</td>
+    <td style="border:1px solid #ddd;padding:8px">CR</td>
+    <td style="border:1px solid #ddd;padding:8px">Carriage return (used in Mac/Windows)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">27</td>
+    <td style="border:1px solid #ddd;padding:8px">0x1B</td>
+    <td style="border:1px solid #ddd;padding:8px">ESC</td>
+    <td style="border:1px solid #ddd;padding:8px">Escape (starts ANSI escape sequences)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">32</td>
+    <td style="border:1px solid #ddd;padding:8px">0x20</td>
+    <td style="border:1px solid #ddd;padding:8px">SP</td>
+    <td style="border:1px solid #ddd;padding:8px">Space (first printable character)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">127</td>
+    <td style="border:1px solid #ddd;padding:8px">0x7F</td>
+    <td style="border:1px solid #ddd;padding:8px">DEL</td>
+    <td style="border:1px solid #ddd;padding:8px">Delete (rubout)</td>
+  </tr>
+</table>
+
+<h4>ASCII Patterns and Relationships</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Useful ASCII Patterns:
+
+Digits (0-9):     48-57 (0x30-0x39)
+  - '0' = 48, '1' = 49, ... '9' = 57
+  - To convert digit char to int: char - 48 or char - '0'
+
+Uppercase (A-Z):  65-90 (0x41-0x5A)
+  - 'A' = 65, 'B' = 66, ... 'Z' = 90
+
+Lowercase (a-z):  97-122 (0x61-0x7A)
+  - 'a' = 97, 'b' = 98, ... 'z' = 122
+
+Case Conversion:
+  - Upper to lower: char + 32
+  - Lower to upper: char - 32
+  - Using bit ops: char | 0x20 (to lower), char & 0xDF (to upper)
+
+Why 32? Bit 5 (0x20) is the case bit:
+  - Uppercase: bit 5 = 0
+  - Lowercase: bit 5 = 1
+</pre>
+
+<h4>ASCII vs Unicode</h4>
+<p>ASCII is a 7-bit encoding with 128 characters. Unicode is a universal character set supporting all writing systems:</p>
+<ul>
+  <li><strong>ASCII range in Unicode:</strong> U+0000 to U+007F (identical to ASCII)</li>
+  <li><strong>Latin-1 Supplement:</strong> U+0080 to U+00FF (extended Latin characters)</li>
+  <li><strong>Basic Multilingual Plane:</strong> U+0000 to U+FFFF (most common characters)</li>
+  <li><strong>Full Unicode:</strong> Up to U+10FFFF (over 1 million code points)</li>
+</ul>
+<p>UTF-8 encoding is backward-compatible with ASCII - ASCII bytes are valid UTF-8.</p>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Character Encoding:</strong> Convert between characters and numeric codes</li>
+  <li><strong>Protocol Implementation:</strong> Handle control characters in communication protocols</li>
+  <li><strong>String Parsing:</strong> Identify whitespace, digits, or special characters</li>
+  <li><strong>Case Conversion:</strong> Implement uppercase/lowercase transformations</li>
+  <li><strong>Data Validation:</strong> Check if characters are within expected ASCII ranges</li>
+  <li><strong>Embedded Systems:</strong> Work with limited character sets in constrained environments</li>
+</ul>
+
+<h4>Hex to Decimal Conversion</h4>
+<p>ASCII hex values use base-16. To convert:</p>
+<ul>
+  <li>Hex to decimal: (first_digit × 16) + second_digit</li>
+  <li>Example: 0x4A = (4 × 16) + 10 = 74 (letter 'J')</li>
+  <li>Decimal to hex: divide by 16, use remainder</li>
+  <li>Example: 97 ÷ 16 = 6 remainder 1, so 97 = 0x61</li>
+</ul>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use ASCII Table</h3>
+<h3>How to Use the ASCII Table</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> search by character or numeric code</li>
-  <li><strong>Step 2:</strong> Check decimal, hex and binary columns based on your need.</li>
-  <li><strong>Step 3:</strong> Locate the target ASCII entry in the table.</li>
-  <li><strong>Step 4:</strong> Use code mappings in parsing, protocol or embedded tasks.</li>
+  <li><strong>Find decimal code:</strong> Locate the decimal value (0-127) in the Dec column.</li>
+  <li><strong>Read hex code:</strong> The adjacent Hex column shows the hexadecimal equivalent.</li>
+  <li><strong>View character:</strong> The Char column displays the printable character (blank for control codes).</li>
+  <li><strong>Use the code:</strong> Apply the ASCII value in your encoding, parsing, or protocol work.</li>
 </ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Control characters (0-31, 127) don't display - they're device control codes</li>
+  <li>Hex values are useful for escape sequences (\x41 = 'A')</li>
+  <li>Digits, uppercase, and lowercase are sequential - use math for conversions</li>
+  <li>Case differs by bit 5 (0x20) - useful for bit manipulation</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is ASCII Table mainly used for?</dt>
-  <dd>ASCII Table is mainly used to reference ASCII codes for control and printable characters.</dd>
+  <dt>What is ASCII and how does it work?</dt>
+  <dd>ASCII (American Standard Code for Information Interchange) is a 7-bit character encoding standard using values 0-127. Each character maps to a unique number: letters (A=65, a=97), digits (0=48), punctuation, and control codes. ASCII enables consistent text representation across systems.</dd>
 
-  <dt>Does ASCII Table send my input to a server?</dt>
-  <dd>For normal usage, ASCII Table processes data locally in your browser so you can test quickly without uploading project files.</dd>
+  <dt>What are ASCII control characters?</dt>
+  <dd>Control characters (0-31 and 127) are non-printing codes for device control: NUL (0), TAB (9), LF/Line Feed (10), CR/Carriage Return (13), ESC (27), DEL (127). They originated from teletype machines for paper control, not character display.</dd>
 
-  <dt>Does ASCII Table include extended non-ASCII characters?</dt>
-  <dd>Core ASCII is 7-bit only. Extended sets are encoding-specific and should be treated separately.</dd>
+  <dt>Why does ASCII only go up to 127?</dt>
+  <dd>ASCII uses 7 bits, giving 2^7 = 128 possible values (0-127). The 8th bit was originally used for parity checking. Extended ASCII (128-255) uses the full 8 bits but isn't standardized - different systems use different character sets for those values.</dd>
+
+  <dt>How do I convert between ASCII decimal and hex?</dt>
+  <dd>To convert decimal to hex: divide by 16, use remainder as hex digit. Example: 65 ÷ 16 = 4 remainder 1, so 65 = 0x41. To convert hex to decimal: multiply first digit by 16, add second. Example: 0x4A = (4×16) + 10 = 74.</dd>
+
+  <dt>What is the relationship between ASCII and Unicode?</dt>
+  <dd>Unicode extends ASCII - the first 128 Unicode code points (U+0000 to U+007F) are identical to ASCII. Unicode adds characters for all world languages, symbols, and emoji in higher ranges (up to U+10FFFF). UTF-8 encoding preserves ASCII compatibility.</dd>
+
+  <dt>What are common ASCII codes I should memorize?</dt>
+  <dd>Key codes: Space=32, '0'=48 (digits are sequential), 'A'=65 (uppercase sequential), 'a'=97 (lowercase sequential). Uppercase to lowercase differs by 32. These patterns make case conversion and digit extraction simple bit operations.</dd>
 </dl>
 </section>
 </main>

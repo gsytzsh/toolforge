@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Base64 Reference – Base64 Character Set Table | ToolForge</title>
-<meta name="description" content="Free online Base64 character set reference table. Index, character and binary values. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Free online Base64 character set reference table with index, character and binary values. Essential reference for understanding Base64 encoding. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/base64-reference.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Base64 Reference – Base64 Character Set Table | ToolForge">
-<meta property="og:description" content="Free online Base64 character set reference. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Free online Base64 character set reference table with index, character and binary values. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/base64-reference.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Base64 Reference – Base64 Character Set Table | ToolForge">
-<meta name="twitter:description" content="Free online Base64 character set reference. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Free online Base64 character set reference table with index, character and binary values. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
@@ -26,59 +26,46 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Base64 Reference",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Open Base64 Reference and enter your source input data in the main field."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Configure language-specific settings and formatting/validation options before running."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Execute the main action and review syntax, structure or generated code output."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy results into your editor, scripts or review notes."
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Base64 Reference mainly used for?",
+      "name": "What is the Base64 character set?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Base64 Reference is mainly used to base64 character set: index 0–63 maps to A–Z, a–z, 0–9, +, /."
+        "text": "Base64 uses 64 characters: uppercase A-Z (indices 0-25), lowercase a-z (indices 26-51), digits 0-9 (indices 52-61), plus + (index 62), and forward slash / (index 63). Padding uses = character.\""
       }
     },
     {
       "@type": "Question",
-      "name": "Does Base64 Reference send my input to a server?",
+      "name": "How does Base64 encoding work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Base64 Reference processes data locally in your browser so you can work without uploading project files."
+        "text": "Base64 processes binary data in 6-bit groups. Each 6-bit value (0-63) maps to a character in the Base64 alphabet. Three bytes (24 bits) become four Base64 characters. Padding (=) is added if input isn't divisible by 3.\""
       }
     },
     {
       "@type": "Question",
-      "name": "How can I troubleshoot incorrect developer-tool output?",
+      "name": "What is URL-safe Base64?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Confirm input syntax, language mode and escaping rules; then test with a smaller sample to isolate issues."
+        "text": "URL-safe Base64 (Base64URL) replaces + with - and / with _ to make the output safe for URLs and filenames. It's commonly used in JWT tokens and OAuth parameters. Padding is often omitted.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does Base64 use 6 bits per character?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Six bits provides exactly 64 values (2^6 = 64), matching the 64-character alphabet. This allows efficient encoding: 3 bytes (24 bits) encode to exactly 4 Base64 characters with no waste.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Base64 padding and when is it used?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Padding (=) is added to make the Base64 output length a multiple of 4. One = means 2 bytes of input (16 bits → 3 chars + padding). Two = means 1 byte of input (8 bits → 2 chars + padding).\""
       }
     }
   ]
@@ -88,10 +75,10 @@
 <body>
 <main class="container">
 <h1>Base64 Reference</h1>
-<p class="subtitle">Base64 character set: index 0–63 maps to A–Z, a–z, 0–9, +, /.</p>
+<p class="subtitle">Complete Base64 character set reference: index 0-63 maps to A-Z, a-z, 0-9, +, /</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
-<h3>Base64 Alphabet</h3>
+<h3>Base64 Alphabet Table</h3>
 <table class="ref-table">
 <thead><tr><th>Index</th><th>Char</th><th>Binary (6-bit)</th><th>Index</th><th>Char</th><th>Binary (6-bit)</th></tr></thead>
 <tbody id="body"></tbody>
@@ -101,31 +88,187 @@
 
 <section class="tool-seo">
 <h3>About Base64 Reference</h3>
-<p>Base64 encodes binary data using 64 ASCII characters: A–Z (0–25), a–z (26–51), 0–9 (52–61), + (62), / (63).</p>
-<p>It is useful for understanding Base64 encoding, debugging encoded strings and implementing custom encoders.</p>
+<p>This Base64 reference table shows the complete character set used in Base64 encoding. Each of the 64 characters corresponds to a 6-bit value (0-63), enabling binary-to-text conversion.</p>
+
+<h4>Base64 Character Set Breakdown</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Characters</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Indices</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Count</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>A-Z</code> (uppercase)</td>
+    <td style="border:1px solid #ddd;padding:8px">0-25</td>
+    <td style="border:1px solid #ddd;padding:8px">26</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>a-z</code> (lowercase)</td>
+    <td style="border:1px solid #ddd;padding:8px">26-51</td>
+    <td style="border:1px solid #ddd;padding:8px">26</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>0-9</code> (digits)</td>
+    <td style="border:1px solid #ddd;padding:8px">52-61</td>
+    <td style="border:1px solid #ddd;padding:8px">10</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>+</code> (plus)</td>
+    <td style="border:1px solid #ddd;padding:8px">62</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>/</code> (slash)</td>
+    <td style="border:1px solid #ddd;padding:8px">63</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+  </tr>
+</table>
+
+<h4>How Base64 Encoding Works</h4>
+<p>Base64 converts binary data to ASCII text using these steps:</p>
+<ol>
+  <li><strong>Group bytes:</strong> Input is split into groups of 3 bytes (24 bits)</li>
+  <li><strong>Split to 6-bit:</strong> Each 24-bit group becomes four 6-bit values</li>
+  <li><strong>Map to characters:</strong> Each 6-bit value (0-63) maps to a Base64 character</li>
+  <li><strong>Add padding:</strong> If input isn't divisible by 3, add = padding</li>
+</ol>
+
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example: Encoding "ABC" (ASCII: 65, 66, 67)
+
+Binary:  01000001 01000010 01000011
+Grouped: 010000 010101 000010 01000011
+         |      | |      | |      | |      |
+         16     21 2      17
+Chars:   Q      Y  B      R
+
+Result:  "QUJD" (4 Base64 characters from 3 input bytes)
+</pre>
+
+<h4>Base64 Encoding Examples</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Input</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Bytes</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Base64 Output</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>""</code> (empty)</td>
+    <td style="border:1px solid #ddd;padding:8px">0</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>""</code> (empty)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>"A"</code></td>
+    <td style="border:1px solid #ddd;padding:8px">1 (65)</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>QQ==</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>"AB"</code></td>
+    <td style="border:1px solid #ddd;padding:8px">2 (65, 66)</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>QUI=</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>"ABC"</code></td>
+    <td style="border:1px solid #ddd;padding:8px">3 (65, 66, 67)</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>QUJD</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>"Hello"</code></td>
+    <td style="border:1px solid #ddd;padding:8px">5</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>SGVsbG8=</code></td>
+  </tr>
+</table>
+
+<h4>URL-Safe Base64 (Base64URL)</h4>
+<p>Standard Base64 uses <code>+</code> and <code>/</code> which have special meaning in URLs. Base64URL replaces these characters:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Variant</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Char 62</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Char 63</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Padding</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Standard Base64</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>+</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>/</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Required</td>
+    <td style="border:1px solid #ddd;padding:8px">General purpose</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Base64URL</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>-</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>_</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Optional</td>
+    <td style="border:1px solid #ddd;padding:8px">URLs, JWT, OAuth</td>
+  </tr>
+</table>
+
+<h4>Size Overhead</h4>
+<p>Base64 encoding increases data size:</p>
+<ul>
+  <li><strong>Ratio:</strong> 4 output characters per 3 input bytes</li>
+  <li><strong>Overhead:</strong> Approximately 33.3% increase</li>
+  <li><strong>Formula:</strong> <code>encodedSize = ceil(originalSize / 3) × 4</code></li>
+  <li><strong>With padding:</strong> Up to 2 padding characters may be added</li>
+</ul>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Input Size    → Output Size (approx)
+100 bytes     → 136 bytes
+1 KB          → 1.36 KB
+100 KB        → 136 KB
+1 MB          → 1.36 MB
+</pre>
+
+<h4>Common Applications</h4>
+<ul>
+  <li><strong>Data URLs:</strong> Embed images in HTML/CSS (<code>data:image/png;base64,...</code>)</li>
+  <li><strong>Email:</strong> MIME encoding for attachments (quoted-printable, base64)</li>
+  <li><strong>JWT tokens:</strong> Encode header and payload using Base64URL</li>
+  <li><strong>API authentication:</strong> HTTP Basic Auth (<code>Authorization: Basic base64(user:pass)</code>)</li>
+  <li><strong>Binary in JSON/XML:</strong> Include binary data in text-based formats</li>
+</ul>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use Base64 Reference</h3>
+<h3>How to Use This Reference</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Open Base64 Reference and enter your source input data in the main field.</li>
-  <li><strong>Step 2:</strong> Configure language-specific settings and formatting/validation options before running.</li>
-  <li><strong>Step 3:</strong> Execute the main action and review syntax, structure or generated code output.</li>
-  <li><strong>Step 4:</strong> Copy results into your editor, scripts or review notes.</li>
+  <li><strong>Find a character:</strong> Look up any Base64 character to see its index (0-63).</li>
+  <li><strong>Understand binary:</strong> See the 6-bit binary representation for each character.</li>
+  <li><strong>Decode manually:</strong> Convert Base64 characters to 6-bit values, then combine to bytes.</li>
+  <li><strong>Verify encoding:</strong> Check that your Base64 output uses only valid characters.</li>
 </ol>
+
+<h4 style="margin-top:20px">Quick Reference</h4>
+<ul>
+  <li><code>A-Z</code> = indices 0-25</li>
+  <li><code>a-z</code> = indices 26-51</li>
+  <li><code>0-9</code> = indices 52-61</li>
+  <li><code>+</code> = index 62</li>
+  <li><code>/</code> = index 63</li>
+  <li><code>=</code> = padding (not in alphabet)</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is Base64 Reference mainly used for?</dt>
-  <dd>Base64 Reference is mainly used to base64 character set: index 0–63 maps to A–Z, a–z, 0–9, +, /.</dd>
+  <dt>What is the Base64 character set?</dt>
+  <dd>Base64 uses 64 characters: uppercase A-Z (indices 0-25), lowercase a-z (indices 26-51), digits 0-9 (indices 52-61), plus + (index 62), and forward slash / (index 63). Padding uses = character.</dd>
 
-  <dt>Does Base64 Reference send my input to a server?</dt>
-  <dd>For normal usage, Base64 Reference processes data locally in your browser so you can work without uploading project files.</dd>
+  <dt>How does Base64 encoding work?</dt>
+  <dd>Base64 processes binary data in 6-bit groups. Each 6-bit value (0-63) maps to a character in the Base64 alphabet. Three bytes (24 bits) become four Base64 characters. Padding (=) is added if input isn't divisible by 3.</dd>
 
-  <dt>How can I troubleshoot incorrect developer-tool output?</dt>
-  <dd>Confirm input syntax, language mode and escaping rules; then test with a smaller sample to isolate issues.</dd>
+  <dt>What is URL-safe Base64?</dt>
+  <dd>URL-safe Base64 (Base64URL) replaces + with - and / with _ to make the output safe for URLs and filenames. It's commonly used in JWT tokens and OAuth parameters. Padding is often omitted.</dd>
+
+  <dt>Why does Base64 use 6 bits per character?</dt>
+  <dd>Six bits provides exactly 64 values (2^6 = 64), matching the 64-character alphabet. This allows efficient encoding: 3 bytes (24 bits) encode to exactly 4 Base64 characters with no waste.</dd>
+
+  <dt>What is Base64 padding and when is it used?</dt>
+  <dd>Padding (=) is added to make the Base64 output length a multiple of 4. One = means 2 bytes of input (16 bits → 3 chars + padding). Two = means 1 byte of input (8 bits → 2 chars + padding).</dd>
 </dl>
 </section>
 </main>

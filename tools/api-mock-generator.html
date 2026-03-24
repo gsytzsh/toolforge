@@ -2,50 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>API Mock Generator – Create Mock API Responses Online | ToolForge</title>
-<meta name="description" content="Free online API Mock Generator to create mock request and response definitions for frontend development, API demos, docs and prototype work. Part of the ToolForge developer tools collection.">
+<title>API Mock Generator – Create Mock API Responses for Frontend Testing | ToolForge</title>
+<meta name="description" content="Free online API Mock Generator to create mock request/response definitions for frontend development, testing, and API documentation. Generate realistic mock data instantly. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/api-mock-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="API Mock Generator – Create Mock API Responses Online | ToolForge">
-<meta property="og:description" content="Free online API Mock Generator to create mock request and response definitions for frontend development, API demos, docs and prototype work. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Free online API Mock Generator to create mock request/response definitions for frontend development, testing, and API documentation. Generate realistic mock data instantly. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/api-mock-generator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="API Mock Generator – Create Mock API Responses Online | ToolForge">
-<meta name="twitter:description" content="Free online API Mock Generator to create mock request and response definitions for frontend development, API demos, docs and prototype work. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="API Mock Generator – Create Mock API Responses for Frontend Testing | ToolForge">
+<meta name="twitter:description" content="Free online API Mock Generator to create mock request/response definitions for frontend development, testing, and API documentation. Generate realistic mock data instantly. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use API Mock Generator",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "enter sample fields or payload structure for the mock response"
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Set response shape, sample values and status behavior for your test case."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Generate mock payload output."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy mock response data into fixtures or local mock servers."
-    }
-  ]
-}
-</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,26 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is API Mock Generator mainly used for?",
+      "name": "What is a mock API response?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "API Mock Generator is mainly used to create mock API responses quickly for frontend and integration testing."
+        "text": "A mock API response is a simulated server response that mimics the structure and behavior of a real API. It contains a request definition (method, URL) and response definition (status code, headers, body). Mocks allow frontend development to proceed without a live backend."
       }
     },
     {
       "@type": "Question",
-      "name": "Does API Mock Generator send my input to a server?",
+      "name": "Why use mock API responses in development?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, API Mock Generator processes data locally in your browser so you can test quickly without uploading project files."
+        "text": "Mocks enable parallel development - frontend teams can build UIs while backend APIs are still in development. They also provide consistent, predictable responses for testing edge cases (errors, empty states) that are hard to reproduce with live APIs."
       }
     },
     {
       "@type": "Question",
-      "name": "Can API Mock Generator replace full backend integration tests?",
+      "name": "What should a good mock response include?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Mocks speed up UI and contract testing, but they should complement, not replace, end-to-end backend validation."
+        "text": "A good mock includes: realistic status codes (200, 400, 404, 500), appropriate headers (Content-Type, Cache-Control), and a body matching the expected API schema. Use realistic sample data - actual names, valid email formats, proper date formats (ISO 8601)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I mock different HTTP status codes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Set the status code field to simulate different scenarios: 200 for success, 201 for resource created, 400 for bad request, 401 for unauthorized, 404 for not found, 500 for server error. Adjust the response body to match - error messages for 4xx/5xx codes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are common mock API use cases?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common uses: frontend development before backend is ready, unit/integration testing with predictable responses, API documentation with example payloads, prototyping and demos, load testing with simulated data, and training environments without production access."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I integrate mocks into my test suite?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Copy the generated mock object into your test fixtures. In Jest, use jest.mock() or MSW (Mock Service Worker) to intercept requests. In Cypress, use cy.intercept(). For unit tests, pass the mock directly to components or services that expect API responses."
       }
     }
   ]
@@ -113,31 +108,218 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About API Mock Generator</h3>
-<p>This API mock generator creates a lightweight mock request and response object for testing and documentation.</p>
-<p>It is useful for frontend development, API demos, contract discussions and prototype work when a real backend is not ready yet.</p>
+<p>This API mock generator creates lightweight mock request and response objects for testing and documentation. It generates JavaScript code that can be used directly in frontend applications, test suites, or API documentation.</p>
+
+<h4>Mock Response Structure</h4>
+<p>The generated mock contains two main parts:</p>
+<ol>
+  <li><strong>Request Definition:</strong> HTTP method and endpoint URL</li>
+  <li><strong>Response Definition:</strong> Status code, headers, and body</li>
+</ol>
+
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Generated Mock Example:
+
+const mock = {
+  request: {
+    method: "GET",
+    url: "/api/users"
+  },
+  response: {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: {
+      "success": true,
+      "data": {
+        "id": 1,
+        "name": "John Doe",
+        "email": "john@example.com"
+      }
+    }
+  }
+};
+
+return new Response(JSON.stringify(mock.response.body), {
+  status: mock.response.status,
+  headers: mock.response.headers
+});
+</pre>
+
+<h4>Common HTTP Status Codes for Mocks</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Status Code</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Meaning</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">200</td>
+    <td style="border:1px solid #ddd;padding:8px">OK</td>
+    <td style="border:1px solid #ddd;padding:8px">Successful GET, PUT, PATCH</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">201</td>
+    <td style="border:1px solid #ddd;padding:8px">Created</td>
+    <td style="border:1px solid #ddd;padding:8px">Successful resource creation (POST)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">204</td>
+    <td style="border:1px solid #ddd;padding:8px">No Content</td>
+    <td style="border:1px solid #ddd;padding:8px">Successful DELETE (empty body)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">400</td>
+    <td style="border:1px solid #ddd;padding:8px">Bad Request</td>
+    <td style="border:1px solid #ddd;padding:8px">Invalid input, validation errors</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">401</td>
+    <td style="border:1px solid #ddd;padding:8px">Unauthorized</td>
+    <td style="border:1px solid #ddd;padding:8px">Missing or invalid authentication</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">403</td>
+    <td style="border:1px solid #ddd;padding:8px">Forbidden</td>
+    <td style="border:1px solid #ddd;padding:8px">Insufficient permissions</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">404</td>
+    <td style="border:1px solid #ddd;padding:8px">Not Found</td>
+    <td style="border:1px solid #ddd;padding:8px">Resource doesn't exist</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">500</td>
+    <td style="border:1px solid #ddd;padding:8px">Server Error</td>
+    <td style="border:1px solid #ddd;padding:8px">Simulate backend failures</td>
+  </tr>
+</table>
+
+<h4>Common Response Headers</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Header</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example Value</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Purpose</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Content-Type</td>
+    <td style="border:1px solid #ddd;padding:8px">application/json</td>
+    <td style="border:1px solid #ddd;padding:8px">Response body format</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Cache-Control</td>
+    <td style="border:1px solid #ddd;padding:8px">no-store</td>
+    <td style="border:1px solid #ddd;padding:8px">Prevent caching</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">X-RateLimit-Limit</td>
+    <td style="border:1px solid #ddd;padding:8px">100</td>
+    <td style="border:1px solid #ddd;padding:8px">Rate limit info</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">X-Request-ID</td>
+    <td style="border:1px solid #ddd;padding:8px">abc-123-xyz</td>
+    <td style="border:1px solid #ddd;padding:8px">Request tracking</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Set-Cookie</td>
+    <td style="border:1px solid #ddd;padding:8px">session=abc123; HttpOnly</td>
+    <td style="border:1px solid #ddd;padding:8px">Session management</td>
+  </tr>
+</table>
+
+<h4>Mock Data Best Practices</h4>
+<ul>
+  <li><strong>Use realistic data:</strong> Valid email formats, proper phone numbers, real-looking names</li>
+  <li><strong>Follow schemas:</strong> Match the expected API contract - field names, types, nesting</li>
+  <li><strong>Include edge cases:</strong> Empty arrays, null values, max-length strings</li>
+  <li><strong>ISO 8601 dates:</strong> Use "2025-01-15T10:30:00Z" format for timestamps</li>
+  <li><strong>Consistent IDs:</strong> Use integers or UUIDs consistently across mocks</li>
+  <li><strong>Error messages:</strong> Include user-friendly error messages for 4xx/5xx responses</li>
+</ul>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Frontend Development:</strong> Build UIs before backend APIs are ready</li>
+  <li><strong>Unit Testing:</strong> Provide predictable responses for component tests</li>
+  <li><strong>Integration Testing:</strong> Test API client behavior with various status codes</li>
+  <li><strong>API Documentation:</strong> Show example request/response pairs</li>
+  <li><strong>Prototyping:</strong> Demo applications without live backend</li>
+  <li><strong>Training:</strong> Create safe environments for learning APIs</li>
+</ul>
+
+<h4>Integration with Testing Libraries</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Jest + MSW (Mock Service Worker)
+import { rest } from 'msw';
+
+rest.get('/api/users', (req, res, ctx) => {
+  return res(
+    ctx.status(200),
+    ctx.json({
+      success: true,
+      data: { id: 1, name: 'John Doe' }
+    })
+  );
+});
+
+// Cypress
+cy.intercept('GET', '/api/users', {
+  statusCode: 200,
+  body: { success: true, data: {...} }
+});
+
+// Fetch API mock
+const mockResponse = new Response(
+  JSON.stringify({ success: true }),
+  { status: 200, headers: { 'Content-Type': 'application/json' } }
+);
+</pre>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use API Mock Generator</h3>
+<h3>How to Generate Mock API Responses</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> enter sample fields or payload structure for the mock response</li>
-  <li><strong>Step 2:</strong> Set response shape, sample values and status behavior for your test case.</li>
-  <li><strong>Step 3:</strong> Generate mock payload output.</li>
-  <li><strong>Step 4:</strong> Copy mock response data into fixtures or local mock servers.</li>
+  <li><strong>Select HTTP method:</strong> Choose GET, POST, PUT, PATCH, or DELETE.</li>
+  <li><strong>Enter endpoint URL:</strong> Type the API path (e.g., /api/users).</li>
+  <li><strong>Set status code:</strong> Enter the response status (200, 404, 500, etc.).</li>
+  <li><strong>Add headers:</strong> Enter response headers in Key: Value format, one per line.</li>
+  <li><strong>Enter response body:</strong> Paste or type JSON for the response payload.</li>
+  <li><strong>Click Generate Mock:</strong> JavaScript code with the mock object appears.</li>
+  <li><strong>Copy mock:</strong> Use the generated code in your tests or application.</li>
 </ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Use valid JSON in the body field - invalid JSON shows an error</li>
+  <li>Headers are optional - leave empty for minimal mocks</li>
+  <li>Generate multiple mocks for different scenarios (success, error, empty)</li>
+  <li>Match your mock structure to the actual API schema</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is API Mock Generator mainly used for?</dt>
-  <dd>API Mock Generator is mainly used to create mock API responses quickly for frontend and integration testing.</dd>
+  <dt>What is a mock API response?</dt>
+  <dd>A mock API response is a simulated server response that mimics the structure and behavior of a real API. It contains a request definition (method, URL) and response definition (status code, headers, body). Mocks allow frontend development to proceed without a live backend.</dd>
 
-  <dt>Does API Mock Generator send my input to a server?</dt>
-  <dd>For normal usage, API Mock Generator processes data locally in your browser so you can test quickly without uploading project files.</dd>
+  <dt>Why use mock API responses in development?</dt>
+  <dd>Mocks enable parallel development - frontend teams can build UIs while backend APIs are still in development. They also provide consistent, predictable responses for testing edge cases (errors, empty states) that are hard to reproduce with live APIs.</dd>
 
-  <dt>Can API Mock Generator replace full backend integration tests?</dt>
-  <dd>Mocks speed up UI and contract testing, but they should complement, not replace, end-to-end backend validation.</dd>
+  <dt>What should a good mock response include?</dt>
+  <dd>A good mock includes: realistic status codes (200, 400, 404, 500), appropriate headers (Content-Type, Cache-Control), and a body matching the expected API schema. Use realistic sample data - actual names, valid email formats, proper date formats (ISO 8601).</dd>
+
+  <dt>How do I mock different HTTP status codes?</dt>
+  <dd>Set the status code field to simulate different scenarios: 200 for success, 201 for resource created, 400 for bad request, 401 for unauthorized, 404 for not found, 500 for server error. Adjust the response body to match - error messages for 4xx/5xx codes.</dd>
+
+  <dt>What are common mock API use cases?</dt>
+  <dd>Common uses: frontend development before backend is ready, unit/integration testing with predictable responses, API documentation with example payloads, prototyping and demos, load testing with simulated data, and training environments without production access.</dd>
+
+  <dt>How do I integrate mocks into my test suite?</dt>
+  <dd>Copy the generated mock object into your test fixtures. In Jest, use jest.mock() or MSW (Mock Service Worker) to intercept requests. In Cypress, use cy.intercept(). For unit tests, pass the mock directly to components or services that expect API responses.</dd>
 </dl>
 </section>
 </main>

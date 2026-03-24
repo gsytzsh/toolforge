@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>BMI Calculator – Body Mass Index Calculator | ToolForge</title>
-<meta name="description" content="Free online BMI Calculator to compute Body Mass Index from height and weight. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Free online BMI Calculator to compute Body Mass Index from height and weight. Understand BMI categories and health implications. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/bmi-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="BMI Calculator – Body Mass Index Calculator | ToolForge">
-<meta property="og:description" content="Free online BMI Calculator to compute Body Mass Index from height and weight. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Free online BMI Calculator to compute Body Mass Index from height and weight. Understand BMI categories and health implications. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/bmi-calculator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BMI Calculator – Body Mass Index Calculator | ToolForge">
-<meta name="twitter:description" content="Free online BMI Calculator to compute Body Mass Index from height and weight. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Free online BMI Calculator to compute Body Mass Index from height and weight. Understand BMI categories and health implications. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,56 +24,43 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is BMI Calculator mainly used for?",
+      "name": "What is BMI and how is it calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "BMI Calculator is mainly used to calculate body mass index from height and weight inputs."
+        "text": "BMI (Body Mass Index) is a measure of body fat based on height and weight. Formula: BMI = weight (kg) / height (m)². For imperial units: BMI = 703 × weight (lbs) / height (in)². Results categorize as underweight, normal, overweight, or obese.\""
       }
     },
     {
       "@type": "Question",
-      "name": "Does BMI Calculator send my input to a server?",
+      "name": "What are the BMI categories?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, BMI Calculator processes data locally in your browser so you can test quickly without uploading project files."
+        "text": "WHO BMI categories: Underweight (< 18.5), Normal weight (18.5-24.9), Overweight (25-29.9), Obese Class I (30-34.9), Obese Class II (35-39.9), Obese Class III (≥ 40). Categories apply to adults 20+ years.\""
       }
     },
     {
       "@type": "Question",
-      "name": "Is BMI enough to evaluate overall health?",
+      "name": "What are the limitations of BMI?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "BMI is a useful indicator but not a full health assessment. Body composition and medical context also matter."
+        "text": "BMI doesn't distinguish muscle from fat, so athletes may be classified overweight despite low body fat. It doesn't account for bone density, age, sex, or fat distribution. BMI is a screening tool, not a diagnostic measure of health.\""
       }
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use BMI Calculator",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "enter your height and weight values"
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Select metric or imperial units before calculating."
+      "@type": "Question",
+      "name": "Is BMI different for men and women?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, BMI categories are the same for adult men and women. However, women naturally have higher body fat percentage than men at the same BMI. BMI doesn't account for these physiological differences.\""
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Calculate BMI score and category."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Review the range as a quick screening reference, not a medical diagnosis."
+      "@type": "Question",
+      "name": "What is a healthy BMI range?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For most adults, a BMI between 18.5 and 24.9 is considered healthy. However, optimal BMI varies by individual factors including age, muscle mass, bone density, and overall health. Consult healthcare providers for personalized guidance.\""
+      }
     }
   ]
 }
@@ -82,7 +69,7 @@
 <body>
 <main class="container">
 <h1>BMI Calculator</h1>
-<p class="subtitle">Enter your height and weight to get your Body Mass Index and category.</p>
+<p class="subtitle">Enter your height and weight to calculate Body Mass Index and health category.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Height (cm)</h3>
 <label for="height" class="sr-only">Height</label>
@@ -97,31 +84,159 @@
 <p>Category: <span id="cat"></span></p>
 <section class="tool-seo">
 <h3>About BMI Calculator</h3>
-<p>This BMI calculator uses height and weight to estimate Body Mass Index and show the standard BMI category.</p>
-<p>It is useful for quick wellness checks, fitness tracking and routine health planning when you want a simple body-weight reference point.</p>
+<p>This BMI calculator computes your Body Mass Index using the standard WHO formula and classifies the result into standard health categories. BMI is widely used as a quick screening tool for weight-related health assessment.</p>
+
+<h4>BMI Formula</h4>
+<p><strong>Metric units:</strong></p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:14px">
+BMI = weight (kg) / height (m)²
+
+Example: 70 kg / (1.70 m)² = 70 / 2.89 = 24.2
+</pre>
+
+<p><strong>Imperial units:</strong></p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:14px">
+BMI = 703 × weight (lbs) / height (in)²
+
+Example: 703 × 154 lbs / (67 in)² = 108262 / 4489 = 24.1
+</pre>
+
+<h4>BMI Categories (WHO Standard)</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Category</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">BMI Range</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Health Risk</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Underweight</td>
+    <td style="border:1px solid #ddd;padding:8px">&lt; 18.5</td>
+    <td style="border:1px solid #ddd;padding:8px">Malnutrition risk</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Normal weight</td>
+    <td style="border:1px solid #ddd;padding:8px">18.5 - 24.9</td>
+    <td style="border:1px solid #ddd;padding:8px">Low risk</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Overweight</td>
+    <td style="border:1px solid #ddd;padding:8px">25 - 29.9</td>
+    <td style="border:1px solid #ddd;padding:8px">Moderate risk</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Obese Class I</td>
+    <td style="border:1px solid #ddd;padding:8px">30 - 34.9</td>
+    <td style="border:1px solid #ddd;padding:8px">High risk</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Obese Class II</td>
+    <td style="border:1px solid #ddd;padding:8px">35 - 39.9</td>
+    <td style="border:1px solid #ddd;padding:8px">Very high risk</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Obese Class III</td>
+    <td style="border:1px solid #ddd;padding:8px">≥ 40</td>
+    <td style="border:1px solid #ddd;padding:8px">Extremely high risk</td>
+  </tr>
+</table>
+
+<h4>Health Implications by Category</h4>
+<ul>
+  <li><strong>Underweight:</strong> May indicate malnutrition, eating disorders, or underlying health conditions. Increased risk of osteoporosis and weakened immune function.</li>
+  <li><strong>Normal:</strong> Associated with lowest risk of weight-related health problems. Maintain with balanced diet and regular exercise.</li>
+  <li><strong>Overweight:</strong> Increased risk of cardiovascular disease, type 2 diabetes, and certain cancers. Lifestyle modifications recommended.</li>
+  <li><strong>Obese:</strong> Significantly elevated risk of heart disease, stroke, diabetes, sleep apnea, and joint problems. Medical intervention may be beneficial.</li>
+</ul>
+
+<h4>BMI Limitations</h4>
+<p>While useful for population-level screening, BMI has important limitations:</p>
+<ul>
+  <li><strong>Doesn't measure body composition:</strong> Cannot distinguish between muscle and fat mass</li>
+  <li><strong>Athletes:</strong> May be classified as overweight/obese due to high muscle mass</li>
+  <li><strong>Elderly:</strong> May underestimate fat due to muscle loss with age</li>
+  <li><strong>Ethnicity:</strong> Health risks may vary at same BMI across different ethnic groups</li>
+  <li><strong>Fat distribution:</strong> Doesn't account for visceral fat (more dangerous than subcutaneous)</li>
+</ul>
+
+<h4>Better Health Indicators</h4>
+<p>For comprehensive health assessment, consider alongside BMI:</p>
+<ul>
+  <li><strong>Waist circumference:</strong> > 40" (men) or > 35" (women) indicates higher risk</li>
+  <li><strong>Body fat percentage:</strong> More accurate measure of body composition</li>
+  <li><strong>Blood pressure:</strong> Key indicator of cardiovascular health</li>
+  <li><strong>Blood markers:</strong> Cholesterol, blood sugar, inflammation markers</li>
+  <li><strong>Fitness level:</strong> Cardiorespiratory fitness is independent health predictor</li>
+</ul>
+
+<h4>Example Calculations</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Height</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Weight</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">BMI</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Category</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">160 cm</td>
+    <td style="border:1px solid #ddd;padding:8px">50 kg</td>
+    <td style="border:1px solid #ddd;padding:8px">19.5</td>
+    <td style="border:1px solid #ddd;padding:8px">Normal</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">170 cm</td>
+    <td style="border:1px solid #ddd;padding:8px">70 kg</td>
+    <td style="border:1px solid #ddd;padding:8px">24.2</td>
+    <td style="border:1px solid #ddd;padding:8px">Normal</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">175 cm</td>
+    <td style="border:1px solid #ddd;padding:8px">85 kg</td>
+    <td style="border:1px solid #ddd;padding:8px">27.8</td>
+    <td style="border:1px solid #ddd;padding:8px">Overweight</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">180 cm</td>
+    <td style="border:1px solid #ddd;padding:8px">100 kg</td>
+    <td style="border:1px solid #ddd;padding:8px">30.9</td>
+    <td style="border:1px solid #ddd;padding:8px">Obese I</td>
+  </tr>
+</table>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use BMI Calculator</h3>
+<h3>How to Calculate Your BMI</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> enter your height and weight values</li>
-  <li><strong>Step 2:</strong> Select metric or imperial units before calculating.</li>
-  <li><strong>Step 3:</strong> Calculate BMI score and category.</li>
-  <li><strong>Step 4:</strong> Review the range as a quick screening reference, not a medical diagnosis.</li>
+  <li><strong>Enter height:</strong> Input your height in centimeters (e.g., 170 for 170cm).</li>
+  <li><strong>Enter weight:</strong> Input your weight in kilograms (e.g., 70 for 70kg).</li>
+  <li><strong>Calculate:</strong> Click "Calculate BMI" to compute your Body Mass Index.</li>
+  <li><strong>Review results:</strong> Your BMI score and category appear instantly.</li>
 </ol>
+
+<h4 style="margin-top:20px">Unit Conversions</h4>
+<ul>
+  <li><strong>Height:</strong> inches × 2.54 = centimeters</li>
+  <li><strong>Weight:</strong> pounds ÷ 2.205 = kilograms</li>
+  <li><strong>Example:</strong> 5'9" (69 inches) = 175 cm; 165 lbs = 75 kg</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is BMI Calculator mainly used for?</dt>
-  <dd>BMI Calculator is mainly used to calculate body mass index from height and weight inputs.</dd>
+  <dt>What is BMI and how is it calculated?</dt>
+  <dd>BMI (Body Mass Index) is a measure of body fat based on height and weight. Formula: BMI = weight (kg) / height (m)². For imperial units: BMI = 703 × weight (lbs) / height (in)². Results categorize as underweight, normal, overweight, or obese.</dd>
 
-  <dt>Does BMI Calculator send my input to a server?</dt>
-  <dd>For normal usage, BMI Calculator processes data locally in your browser so you can test quickly without uploading project files.</dd>
+  <dt>What are the BMI categories?</dt>
+  <dd>WHO BMI categories: Underweight (&lt; 18.5), Normal weight (18.5-24.9), Overweight (25-29.9), Obese Class I (30-34.9), Obese Class II (35-39.9), Obese Class III (≥ 40). Categories apply to adults 20+ years.</dd>
 
-  <dt>Is BMI enough to evaluate overall health?</dt>
-  <dd>BMI is a useful indicator but not a full health assessment. Body composition and medical context also matter.</dd>
+  <dt>What are the limitations of BMI?</dt>
+  <dd>BMI doesn't distinguish muscle from fat, so athletes may be classified overweight despite low body fat. It doesn't account for bone density, age, sex, or fat distribution. BMI is a screening tool, not a diagnostic measure of health.</dd>
+
+  <dt>Is BMI different for men and women?</dt>
+  <dd>No, BMI categories are the same for adult men and women. However, women naturally have higher body fat percentage than men at the same BMI. BMI doesn't account for these physiological differences.</dd>
+
+  <dt>What is a healthy BMI range?</dt>
+  <dd>For most adults, a BMI between 18.5 and 24.9 is considered healthy. However, optimal BMI varies by individual factors including age, muscle mass, bone density, and overall health. Consult healthcare providers for personalized guidance.</dd>
 </dl>
 </section>
 </main>

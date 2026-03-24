@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Age Calculator – Calculate Age from Birth Date | ToolForge</title>
-<meta name="description" content="Free online Age Calculator to compute age from date of birth. Part of the ToolForge developer tools collection.">
+<title>Age Calculator – Calculate Exact Age from Birth Date in Years, Months, Days | ToolForge</title>
+<meta name="description" content="Free online Age Calculator to compute exact age from date of birth in years, months, and days. Calculate age for forms, eligibility, and records. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/age-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Age Calculator – Calculate Age from Birth Date | ToolForge">
-<meta property="og:description" content="Free online Age Calculator to compute age from date of birth. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Free online Age Calculator to compute exact age from date of birth in years, months, and days. Calculate age for forms, eligibility, and records. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/age-calculator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Age Calculator – Calculate Age from Birth Date | ToolForge">
-<meta name="twitter:description" content="Free online Age Calculator to compute age from date of birth. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Age Calculator – Calculate Exact Age from Birth Date in Years, Months, Days | ToolForge">
+<meta name="twitter:description" content="Free online Age Calculator to compute exact age from date of birth in years, months, and days. Calculate age for forms, eligibility, and records. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,56 +24,51 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Age Calculator mainly used for?",
+      "name": "How is age calculated from date of birth?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Age Calculator is mainly used to calculate exact age and date differences for planning and records."
+        "text": "Age is calculated by finding the difference between the current date and birth date. First, subtract years. If the birth month/day hasn't occurred yet this year, subtract 1 from years and adjust months. Days are calculated by borrowing from the previous month if needed."
       }
     },
     {
       "@type": "Question",
-      "name": "Does Age Calculator send my input to a server?",
+      "name": "Why does age calculation require careful date handling?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Age Calculator processes data locally in your browser so you can test quickly without uploading project files."
+        "text": "Months have different lengths (28-31 days), and leap years add complexity. Simply dividing total days by 365 gives inaccurate results. Proper calculation accounts for varying month lengths and whether the birthday has occurred this year."
       }
     },
     {
       "@type": "Question",
-      "name": "Why can age differ by one day across systems?",
+      "name": "What happens if I enter a future date?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Timezone cutoffs and date parsing rules can shift boundary calculations. Keep date format and timezone consistent."
+        "text": "Future dates are invalid for age calculation since age represents time already lived. The tool displays an error message: 'Date of birth must be in the past.' This prevents nonsensical negative age results."
       }
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Age Calculator",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "enter birth date and target date if needed"
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Confirm date format and timezone context for accurate day counts."
+      "@type": "Question",
+      "name": "How does timezone affect age calculation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Age calculators use the browser's local timezone. Someone born at 11:30 PM on Dec 31 in one timezone might be Jan 1 in another. For most purposes, the browser's date is sufficient, but legal documents may require specific timezone handling."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Calculate age in years, months and days."
+      "@type": "Question",
+      "name": "What is the most accurate way to express age?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Expressing age as 'X years, Y months, Z days' is most precise for forms and records. For everyday use, years alone suffices. Legal contexts often require 'attained age' - completed years only, ignoring partial years."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Use output in forms, planning tools or eligibility checks."
+      "@type": "Question",
+      "name": "Can I calculate age for a specific date (not today)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This tool calculates age from birth date to today. For historical age calculations (e.g., 'How old was I on Jan 1, 2020?'), you'd need a date difference calculator that accepts both start and end dates."
+      }
     }
   ]
 }
@@ -93,31 +88,204 @@
 <p id="result"></p>
 <section class="tool-seo">
 <h3>About Age Calculator</h3>
-<p>This age calculator works out a person's age from a date of birth in years, months and days using the current date.</p>
-<p>It is useful for forms, eligibility checks, school or insurance paperwork and any case where you need an exact age without counting manually.</p>
+<p>This age calculator computes a person's age from a date of birth in years, months, and days using the current date. It provides precise age information suitable for forms, eligibility checks, school or insurance paperwork, and any situation requiring exact age without manual counting.</p>
+
+<h4>How Age Calculation Works</h4>
+<p>Age calculation involves more than simple subtraction due to varying month lengths:</p>
+<ol>
+  <li><strong>Year Difference:</strong> Subtract birth year from current year</li>
+  <li><strong>Month Adjustment:</strong> If birth month > current month, subtract 1 from years</li>
+  <li><strong>Day Adjustment:</strong> If birth day > current day, borrow days from previous month</li>
+  <li><strong>Final Result:</strong> Combine adjusted years, months, and days</li>
+</ol>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example Calculation:
+
+Birth Date: March 15, 1990
+Current Date: January 10, 2025
+
+Step 1: Year diff = 2025 - 1990 = 35
+Step 2: Month diff = 1 (Jan) - 3 (Mar) = -2 → subtract 1 from years
+        Years = 35 - 1 = 34
+Step 3: Day diff = 10 - 15 = -5 → borrow from previous month
+        Days in December = 31
+        Days = 31 + 10 - 15 = 26
+        Months = 12 - 2 = 10
+
+Result: 34 years, 10 months, 26 days
+</pre>
+
+<h4>Days in Each Month</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Month</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Days</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Note</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">January</td>
+    <td style="border:1px solid #ddd;padding:8px">31</td>
+    <td style="border:1px solid #ddd;padding:8px"></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">February</td>
+    <td style="border:1px solid #ddd;padding:8px">28 or 29</td>
+    <td style="border:1px solid #ddd;padding:8px">29 in leap years</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">March</td>
+    <td style="border:1px solid #ddd;padding:8px">31</td>
+    <td style="border:1px solid #ddd;padding:8px"></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">April</td>
+    <td style="border:1px solid #ddd;padding:8px">30</td>
+    <td style="border:1px solid #ddd;padding:8px"></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">May</td>
+    <td style="border:1px solid #ddd;padding:8px">31</td>
+    <td style="border:1px solid #ddd;padding:8px"></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">June</td>
+    <td style="border:1px solid #ddd;padding:8px">30</td>
+    <td style="border:1px solid #ddd;padding:8px"></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">July</td>
+    <td style="border:1px solid #ddd;padding:8px">31</td>
+    <td style="border:1px solid #ddd;padding:8px"></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">August</td>
+    <td style="border:1px solid #ddd;padding:8px">31</td>
+    <td style="border:1px solid #ddd;padding:8px"></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">September</td>
+    <td style="border:1px solid #ddd;padding:8px">30</td>
+    <td style="border:1px solid #ddd;padding:8px"></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">October</td>
+    <td style="border:1px solid #ddd;padding:8px">31</td>
+    <td style="border:1px solid #ddd;padding:8px"></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">November</td>
+    <td style="border:1px solid #ddd;padding:8px">30</td>
+    <td style="border:1px solid #ddd;padding:8px"></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">December</td>
+    <td style="border:1px solid #ddd;padding:8px">31</td>
+    <td style="border:1px solid #ddd;padding:8px"></td>
+  </tr>
+</table>
+
+<h4>Leap Year Rules</h4>
+<p>February has 29 days in leap years. A year is a leap year if:</p>
+<ul>
+  <li>Divisible by 4 AND not divisible by 100, OR</li>
+  <li>Divisible by 400</li>
+</ul>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Examples:
+- 2024: Leap year (divisible by 4)
+- 2000: Leap year (divisible by 400)
+- 1900: Not a leap year (divisible by 100, not 400)
+- 2025: Not a leap year
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Form Filling:</strong> Get exact age for applications, visas, insurance</li>
+  <li><strong>Eligibility Checks:</strong> Verify age requirements for services or benefits</li>
+  <li><strong>School Records:</strong> Calculate student age for enrollment or sports</li>
+  <li><strong>Medical Records:</strong> Document patient age precisely for treatment</li>
+  <li><strong>Genealogy:</strong> Determine ages at specific life events</li>
+  <li><strong>Legal Documents:</strong> Provide attested age for contracts or filings</li>
+</ul>
+
+<h4>Age Expression Formats</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Years only</td>
+    <td style="border:1px solid #ddd;padding:8px">34 years</td>
+    <td style="border:1px solid #ddd;padding:8px">Everyday use, general reference</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Years + months</td>
+    <td style="border:1px solid #ddd;padding:8px">34 years, 10 months</td>
+    <td style="border:1px solid #ddd;padding:8px">Child development, medical records</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Years + months + days</td>
+    <td style="border:1px solid #ddd;padding:8px">34y 10m 26d</td>
+    <td style="border:1px solid #ddd;padding:8px">Legal forms, precise records</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Total days</td>
+    <td style="border:1px solid #ddd;padding:8px">12,734 days</td>
+    <td style="border:1px solid #ddd;padding:8px">Milestone celebrations</td>
+  </tr>
+</table>
+
+<h4>Timezone Considerations</h4>
+<p>Age calculation uses the browser's local timezone. This means:</p>
+<ul>
+  <li>Someone born at 11:30 PM on Dec 31 in New York is Jan 1 in London</li>
+  <li>For most purposes, browser date is sufficient</li>
+  <li>Legal documents may require specific timezone or UTC</li>
+  <li>Travel across date lines can create ambiguous birth dates</li>
+</ul>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use Age Calculator</h3>
+<h3>How to Calculate Age from Date of Birth</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> enter birth date and target date if needed</li>
-  <li><strong>Step 2:</strong> Confirm date format and timezone context for accurate day counts.</li>
-  <li><strong>Step 3:</strong> Calculate age in years, months and days.</li>
-  <li><strong>Step 4:</strong> Use output in forms, planning tools or eligibility checks.</li>
+  <li><strong>Enter birth date:</strong> Use the date picker to select date of birth.</li>
+  <li><strong>Click Calculate Age:</strong> The tool computes age from birth date to today.</li>
+  <li><strong>View result:</strong> Age appears in years, months, and days format.</li>
+  <li><strong>Use output:</strong> Copy the result for forms, records, or eligibility checks.</li>
 </ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>The calculator uses your browser's current date and timezone</li>
+  <li>Future dates show an error - birth dates must be in the past</li>
+  <li>For age on a specific historical date, use a date difference calculator</li>
+  <li>Leap year birthdays (Feb 29) are handled correctly by the browser</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is Age Calculator mainly used for?</dt>
-  <dd>Age Calculator is mainly used to calculate exact age and date differences for planning and records.</dd>
+  <dt>How is age calculated from date of birth?</dt>
+  <dd>Age is calculated by finding the difference between the current date and birth date. First, subtract years. If the birth month/day hasn't occurred yet this year, subtract 1 from years and adjust months. Days are calculated by borrowing from the previous month if needed.</dd>
 
-  <dt>Does Age Calculator send my input to a server?</dt>
-  <dd>For normal usage, Age Calculator processes data locally in your browser so you can test quickly without uploading project files.</dd>
+  <dt>Why does age calculation require careful date handling?</dt>
+  <dd>Months have different lengths (28-31 days), and leap years add complexity. Simply dividing total days by 365 gives inaccurate results. Proper calculation accounts for varying month lengths and whether the birthday has occurred this year.</dd>
 
-  <dt>Why can age differ by one day across systems?</dt>
-  <dd>Timezone cutoffs and date parsing rules can shift boundary calculations. Keep date format and timezone consistent.</dd>
+  <dt>What happens if I enter a future date?</dt>
+  <dd>Future dates are invalid for age calculation since age represents time already lived. The tool displays an error message: 'Date of birth must be in the past.' This prevents nonsensical negative age results.</dd>
+
+  <dt>How does timezone affect age calculation?</dt>
+  <dd>Age calculators use the browser's local timezone. Someone born at 11:30 PM on Dec 31 in one timezone might be Jan 1 in another. For most purposes, the browser's date is sufficient, but legal documents may require specific timezone handling.</dd>
+
+  <dt>What is the most accurate way to express age?</dt>
+  <dd>Expressing age as 'X years, Y months, Z days' is most precise for forms and records. For everyday use, years alone suffices. Legal contexts often require 'attained age' - completed years only, ignoring partial years.</dd>
+
+  <dt>Can I calculate age for a specific date (not today)?</dt>
+  <dd>This tool calculates age from birth date to today. For historical age calculations (e.g., 'How old was I on Jan 1, 2020?'), you'd need a date difference calculator that accepts both start and end dates.</dd>
 </dl>
 </section>
 </main>

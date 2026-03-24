@@ -3,49 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Extract URLs – Find Links in Text Online | ToolForge</title>
-<meta name="description" content="Free online Extract URLs tool to find and list all HTTP and HTTPS links in plain text. Useful for cleaning logs, scraping and redirects. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Free online Extract URLs tool to find and list all HTTP and HTTPS links in plain text. Deduplicated output for log analysis, content scraping, and link extraction. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/extract-urls.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Extract URLs – Find Links in Text Online | ToolForge">
-<meta property="og:description" content="Free online Extract URLs tool to find and list all HTTP and HTTPS links in plain text. Useful for cleaning logs, scraping and redirects. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Free online Extract URLs tool to find and list all HTTP and HTTPS links in plain text. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/extract-urls.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Extract URLs – Find Links in Text Online | ToolForge">
-<meta name="twitter:description" content="Free online Extract URLs tool to find and list all HTTP and HTTPS links in plain text. Useful for cleaning logs, scraping and redirects. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Free online Extract URLs tool to find and list all HTTP and HTTPS links in plain text. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Extract URLs",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Open Extract URLs and enter your source input data in the main field."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Choose transformation options such as case, trimming, filtering or replacement rules."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Run processing and compare the transformed text with your expected result."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy cleaned text into documents, code comments or content pipelines."
-    }
-  ]
-}
-</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,26 +24,42 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Extract URLs mainly used for?",
+      "name": "How does URL extraction work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Extract URLs is mainly used to find all HTTP and HTTPS links inside any block of text."
+        "text": "URL extraction uses regex patterns to match HTTP and HTTPS URLs. The pattern looks for the protocol (http:// or https://), domain name, and optional path/query parameters. All matches are collected and deduplicated.\""
       }
     },
     {
       "@type": "Question",
-      "name": "Does Extract URLs send my input to a server?",
+      "name": "What URL formats are supported?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Extract URLs processes data locally in your browser so you can work without uploading project files."
+        "text": "Full URLs with http:// or https:// protocol. Supports subdomains, paths, query strings, fragments, and port numbers. Examples: https://example.com, http://api.domain.com:8080/v1/users?id=123\""
       }
     },
     {
       "@type": "Question",
-      "name": "Why does processed text differ from expectation?",
+      "name": "Are relative URLs extracted?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Whitespace rules, hidden characters and line-ending differences are common reasons for unexpected text output."
+        "text": "No, only absolute URLs with http:// or https:// protocol are extracted. Relative URLs like /page/path or //cdn.example.com are not matched. This ensures only complete, usable URLs are returned.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the output deduplicated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, duplicate URLs are automatically removed. Each unique URL appears only once in the output, regardless of how many times it appears in the input text.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What about FTP or other protocols?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This tool only extracts HTTP and HTTPS URLs. Other protocols like FTP, mailto, tel, or file:// are not supported. Most web-related use cases only require HTTP/HTTPS links.\""
       }
     }
   ]
@@ -82,55 +69,224 @@
 <body>
 <main class="container">
 <h1>Extract URLs</h1>
-<p class="subtitle">Find all HTTP and HTTPS links inside any block of text.</p>
+<p class="subtitle">Find and extract all HTTP/HTTPS links from any text.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
-<h3>Text</h3>
+<h3>Input Text</h3>
 <label for="text" class="sr-only">Text input</label>
-<textarea id="text" rows="10" style="width:90%;font-family:monospace" placeholder="Paste text containing https://example.com links here" aria-label="Text input"></textarea>
+<textarea id="text" rows="10" style="width:90%;font-family:monospace" placeholder="Paste text containing URLs here&#10;Example: Visit https://example.com or http://test.org/page for more info" aria-label="Text input"></textarea>
 <br><br>
 <button type="button" onclick="extractUrls()">Extract URLs</button>
-<h3 style="margin-top:20px">Found URLs</h3>
+<button type="button" onclick="copyResult()">Copy Result</button>
+<button type="button" onclick="clearAll()">Clear</button>
+<h3 style="margin-top:20px">Extracted URLs</h3>
 <label for="output" class="sr-only">Output text</label>
 <textarea id="output" rows="10" style="width:90%;font-family:monospace" readonly aria-label="Output text"></textarea>
 <p id="count" style="color:#666;margin-top:6px"></p>
 <section class="tool-seo">
-<h3>About Extract URLs</h3>
-<p>This URL extractor finds HTTP and HTTPS links inside pasted text and returns a deduplicated list. It is useful when reviewing redirect chains, scraped content, logs, marketing text or imported documents.</p>
-<p>The output is easy to copy into spreadsheets, crawl tools or QA workflows when you need to inspect links in bulk.</p>
+<h3>About URL Extractor</h3>
+<p>This URL extractor scans any text and finds all HTTP and HTTPS links using regex pattern matching. Results are automatically deduplicated, providing a clean list of unique URLs for further processing or analysis.</p>
+
+<h4>URL Pattern Explained</h4>
+<p>The regex matches standard web URL formats:</p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Pattern: https?://[^\s"'&lt;&gt;()]+
+
+Breakdown:
+https?      → http or https (s is optional)
+://         → Protocol separator
+[^\s"'&lt;&gt;()]+ → One or more characters that aren't
+               whitespace, quotes, or brackets
+</pre>
+
+<h4>Supported URL Formats</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Component</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Supported</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Basic URL</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>https://example.com</code></td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">With path</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>https://example.com/page/subpage</code></td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">With query</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>https://example.com/search?q=test</code></td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">With fragment</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>https://example.com/page#section</code></td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">With port</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>http://localhost:8080/api</code></td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Subdomain</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>https://api.v2.company.com</code></td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Relative URL</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>/page/path</code></td>
+    <td style="border:1px solid #ddd;padding:8px">✗ No</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">FTP/other</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>ftp://files.com/doc.pdf</code></td>
+    <td style="border:1px solid #ddd;padding:8px">✗ No</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Log Analysis:</strong> Extract visited URLs from browser or server logs</li>
+  <li><strong>Content Scraping:</strong> Pull all links from web pages or documents</li>
+  <li><strong>SEO Auditing:</strong> Collect internal and external links for analysis</li>
+  <li><strong>Redirect Tracking:</strong> Find all URLs in redirect chains</li>
+  <li><strong>Link Verification:</strong> Extract URLs before running link checker tools</li>
+  <li><strong>Research:</strong> Collect source URLs from articles or papers</li>
+  <li><strong>Social Media:</strong> Extract links from posts, comments, or messages</li>
+</ul>
+
+<h4>URL Extraction Example</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Input Text:
+"Check out https://example.com and https://example.com again.
+ Also visit http://test.org/page?id=123#section for details.
+ The API at https://api.company.com:8080/v1/users is documented
+ at https://docs.company.com/api."
+
+Extracted URLs (deduplicated):
+- https://example.com
+- http://test.org/page?id=123#section
+- https://api.company.com:8080/v1/users
+- https://docs.company.com/api
+
+Total: 4 unique URLs found
+</pre>
+
+<h4>URL Structure Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Part</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Protocol</td>
+    <td style="border:1px solid #ddd;padding:8px">http or https</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>https://</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Domain</td>
+    <td style="border:1px solid #ddd;padding:8px">Website address</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>example.com</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Port</td>
+    <td style="border:1px solid #ddd;padding:8px">Optional port number</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>:8080</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Path</td>
+    <td style="border:1px solid #ddd;padding:8px">Resource location</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>/api/users</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Query</td>
+    <td style="border:1px solid #ddd;padding:8px">Parameters</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>?id=123&name=test</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Fragment</td>
+    <td style="border:1px solid #ddd;padding:8px">Page section</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>#section1</code></td>
+  </tr>
+</table>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>HTTP/HTTPS only:</strong> FTP, mailto, tel, and other protocols not supported</li>
+  <li><strong>No relative URLs:</strong> Paths like /page aren't extracted</li>
+  <li><strong>No validation:</strong> Doesn't check if URLs are accessible</li>
+  <li><strong>Parentheses:</strong> URLs ending in ) may include trailing paren</li>
+  <li><strong>Encoded URLs:</strong> Punycode international domains may not match perfectly</li>
+</ul>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use Extract URLs</h3>
+<h3>How to Extract URLs from Text</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Open Extract URLs and enter your source input data in the main field.</li>
-  <li><strong>Step 2:</strong> Choose transformation options such as case, trimming, filtering or replacement rules.</li>
-  <li><strong>Step 3:</strong> Run processing and compare the transformed text with your expected result.</li>
-  <li><strong>Step 4:</strong> Copy cleaned text into documents, code comments or content pipelines.</li>
+  <li><strong>Paste text:</strong> Enter or paste the text containing URLs.</li>
+  <li><strong>Click Extract:</strong> The tool scans for all HTTP/HTTPS links.</li>
+  <li><strong>Review results:</strong> Unique URLs appear in the output box.</li>
+  <li><strong>Copy output:</strong> Click "Copy Result" to use the URL list elsewhere.</li>
 </ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Works with HTML, plain text, markdown, and code</li>
+  <li>Duplicates are automatically removed</li>
+  <li>Each URL appears on a separate line</li>
+  <li>Full URLs with protocol are required</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is Extract URLs mainly used for?</dt>
-  <dd>Extract URLs is mainly used to find all HTTP and HTTPS links inside any block of text.</dd>
+  <dt>How does URL extraction work?</dt>
+  <dd>URL extraction uses regex patterns to match HTTP and HTTPS URLs. The pattern looks for the protocol (http:// or https://), domain name, and optional path/query parameters. All matches are collected and deduplicated.</dd>
 
-  <dt>Does Extract URLs send my input to a server?</dt>
-  <dd>For normal usage, Extract URLs processes data locally in your browser so you can work without uploading project files.</dd>
+  <dt>What URL formats are supported?</dt>
+  <dd>Full URLs with http:// or https:// protocol. Supports subdomains, paths, query strings, fragments, and port numbers. Examples: https://example.com, http://api.domain.com:8080/v1/users?id=123</dd>
 
-  <dt>Why does processed text differ from expectation?</dt>
-  <dd>Whitespace rules, hidden characters and line-ending differences are common reasons for unexpected text output.</dd>
+  <dt>Are relative URLs extracted?</dt>
+  <dd>No, only absolute URLs with http:// or https:// protocol are extracted. Relative URLs like /page/path or //cdn.example.com are not matched. This ensures only complete, usable URLs are returned.</dd>
+
+  <dt>Is the output deduplicated?</dt>
+  <dd>Yes, duplicate URLs are automatically removed. Each unique URL appears only once in the output, regardless of how many times it appears in the input text.</dd>
+
+  <dt>What about FTP or other protocols?</dt>
+  <dd>This tool only extracts HTTP and HTTPS URLs. Other protocols like FTP, mailto, tel, or file:// are not supported. Most web-related use cases only require HTTP/HTTPS links.</dd>
 </dl>
 </section>
 </main>
 <script>
 function extractUrls(){
   var text=document.getElementById("text").value;
-  var pattern=/(https?:\/\/[^\s"'<>]+)/gi;
+  var pattern=/(https?:\/\/[^\s"'&lt;&gt;()]+)/gi;
   var matches=text.match(pattern)||[];
   var unique=Array.from(new Set(matches));
   document.getElementById("output").value=unique.join("\n");
   document.getElementById("count").innerText=unique.length+" unique URL(s) found.";
+}
+function copyResult(){
+  var value=document.getElementById("output").value;
+  if(!value){
+    document.getElementById("count").innerText="Nothing to copy.";
+    return;
+  }
+  navigator.clipboard.writeText(value).then(function(){
+    document.getElementById("count").innerText="URLs copied to clipboard.";
+  }).catch(function(){
+    document.getElementById("count").innerText="Copy failed.";
+  });
+}
+function clearAll(){
+  document.getElementById("text").value="";
+  document.getElementById("output").value="";
+  document.getElementById("count").innerText="";
 }
 </script>
 <script src="/js/favorites.js"></script>

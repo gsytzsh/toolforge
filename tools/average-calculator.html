@@ -2,50 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Average Calculator – Mean, Median, Mode | ToolForge</title>
-<meta name="description" content="Free online Average Calculator to find mean, median and mode of a list of numbers. Part of the ToolForge developer tools collection.">
+<title>Average Calculator – Calculate Mean, Median, Mode of Number Sets | ToolForge</title>
+<meta name="description" content="Free online Average Calculator to find mean, median, mode, and range of number sets. Statistical analysis for data sets, test scores, and surveys. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/average-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Average Calculator – Mean, Median, Mode | ToolForge">
-<meta property="og:description" content="Free online Average Calculator to find mean, median and mode of a list of numbers. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Free online Average Calculator to find mean, median, mode, and range of number sets. Statistical analysis for data sets, test scores, and surveys. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/average-calculator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Average Calculator – Mean, Median, Mode | ToolForge">
-<meta name="twitter:description" content="Free online Average Calculator to find mean, median and mode of a list of numbers. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Average Calculator – Calculate Mean, Median, Mode of Number Sets | ToolForge">
+<meta name="twitter:description" content="Free online Average Calculator to find mean, median, mode, and range of number sets. Statistical analysis for data sets, test scores, and surveys. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Average Calculator",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Open Average Calculator and enter your source input data in the main field."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Fill all required fields and confirm unit assumptions before calculation."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Run the calculation and review intermediate values where available."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Use the result in planning, estimation or comparison decisions."
-    }
-  ]
-}
-</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,26 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Average Calculator mainly used for?",
+      "name": "What is the difference between mean, median, and mode?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Average Calculator is mainly used to enter numbers separated by comma or space to get mean, median and mode."
+        "text": "Mean is the arithmetic average (sum ÷ count). Median is the middle value when sorted. Mode is the most frequently occurring value. Mean is affected by outliers, median represents the center, and mode shows the most common value."
       }
     },
     {
       "@type": "Question",
-      "name": "Does Average Calculator send my input to a server?",
+      "name": "When should I use median instead of mean?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Average Calculator processes data locally in your browser so you can work without uploading project files."
+        "text": "Use median when data has outliers or is skewed. For example, house prices: if most homes cost $300K but a few mansions cost $10M, the mean is misleadingly high. Median gives the 'typical' value. Mean is better for symmetric, normally distributed data."
       }
     },
     {
       "@type": "Question",
-      "name": "Why do calculator results differ from another source?",
+      "name": "What does it mean if there's no mode?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Differences usually come from rounding precision, unit assumptions or formula variants used by each tool."
+        "text": "If all values appear equally (no repeats), there's no mode. Some datasets are 'bimodal' (two modes) or 'multimodal' (many modes). The calculator shows 'N/A' when all values appear once, meaning no single value is more common than others."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you calculate the median for even-numbered sets?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For even counts, there's no single middle value. Take the two middle numbers and average them. Example: [1, 3, 5, 7] has middles 3 and 5, so median = (3+5)/2 = 4. For odd counts, the median is the exact middle value."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are common use cases for mean, median, mode?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mean: test scores, temperatures, financial returns. Median: income, house prices, response times (skewed data). Mode: survey responses, product sizes, categorical data. Using all three gives a complete picture of data distribution."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the calculator handle input formatting?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Enter numbers separated by commas, spaces, or newlines. The calculator parses '1, 2, 3' or '1 2 3' or mixed formats. Non-numeric values are ignored. Decimal numbers are supported. Results show 4 decimal places for precision."
       }
     }
   ]
@@ -95,31 +90,146 @@
 <p>Mode: <span id="mode"></span></p>
 <section class="tool-seo">
 <h3>About Average Calculator</h3>
-<p>This average calculator takes a list of numbers and returns the mean, median and mode in one result.</p>
-<p>It is useful for class scores, survey values, pricing comparisons and quick data summaries when you want more than just a basic average.</p>
+<p>This average calculator takes a list of numbers and returns the mean, median and mode in one result. It provides a complete statistical summary of your data set with just a few clicks.</p>
+
+<h4>Statistical Measures Explained</h4>
+
+<h5>Mean (Arithmetic Average)</h5>
+<p>The mean is the sum of all values divided by the count of values:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Formula: Mean = (x₁ + x₂ + ... + xₙ) ÷ n
+
+Example: [2, 4, 6, 8, 10]
+Sum = 2 + 4 + 6 + 8 + 10 = 30
+Count = 5
+Mean = 30 ÷ 5 = 6
+</pre>
+
+<h5>Median (Middle Value)</h5>
+<p>The median is the middle value when data is sorted in ascending order:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Odd count: Middle value
+Example: [1, 3, 5, 7, 9] → Median = 5
+
+Even count: Average of two middle values
+Example: [1, 3, 5, 7] → Median = (3 + 5) ÷ 2 = 4
+</pre>
+
+<h5>Mode (Most Frequent Value)</h5>
+<p>The mode is the value that appears most frequently in the data set:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: [1, 2, 2, 3, 4] → Mode = 2 (appears twice)
+Example 2: [1, 1, 2, 2, 3] → Bimodal: 1 and 2
+Example 3: [1, 2, 3, 4, 5] → No mode (all appear once)
+</pre>
+
+<h4>Mean vs Median: When to Use Each</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Measure</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Best For</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Affected by Outliers</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Mean</td>
+    <td style="border:1px solid #ddd;padding:8px">Symmetric distributions, normal data</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes, heavily</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Median</td>
+    <td style="border:1px solid #ddd;padding:8px">Skewed data, outliers present</td>
+    <td style="border:1px solid #ddd;padding:8px">No, resistant</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Mode</td>
+    <td style="border:1px solid #ddd;padding:8px">Categorical data, most common value</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+  </tr>
+</table>
+
+<h4>Example: Mean vs Median with Outliers</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+House Prices on a Street:
+$200K, $220K, $230K, $240K, $250K, $260K, $2,000K (mansion)
+
+Mean:   ($200K + $220K + $230K + $240K + $250K + $260K + $2,000K) ÷ 7
+      = $3,400K ÷ 7 = $485.7K
+
+Median: Sorted: $200K, $220K, $230K, $240K, $250K, $260K, $2,000K
+        Middle value (4th) = $240K
+
+The median ($240K) better represents the "typical" house price.
+The mean ($485.7K) is skewed by the one mansion.
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Education:</strong> Calculate class averages, test score distributions</li>
+  <li><strong>Business:</strong> Analyze sales data, customer spending patterns</li>
+  <li><strong>Real Estate:</strong> Find median home prices in an area</li>
+  <li><strong>Healthcare:</strong> Track patient metrics, treatment outcomes</li>
+  <li><strong>Surveys:</strong> Summarize response data, find common answers</li>
+  <li><strong>Quality Control:</strong> Monitor production measurements, defect rates</li>
+</ul>
+
+<h4>Understanding Data Distribution</h4>
+<p>Comparing mean, median, and mode reveals the shape of your data:</p>
+<ul>
+  <li><strong>Symmetric (Normal):</strong> Mean ≈ Median ≈ Mode</li>
+  <li><strong>Positively Skewed (right tail):</strong> Mean > Median > Mode</li>
+  <li><strong>Negatively Skewed (left tail):</strong> Mean < Median < Mode</li>
+</ul>
+
+<h4>Additional Statistics</h4>
+<p>For a complete analysis, consider these additional measures:</p>
+<ul>
+  <li><strong>Range:</strong> Maximum - Minimum (spread of data)</li>
+  <li><strong>Variance:</strong> Average squared deviation from mean</li>
+  <li><strong>Standard Deviation:</strong> Square root of variance (spread in original units)</li>
+  <li><strong>Quartiles:</strong> Divide data into four equal parts</li>
+  <li><strong>Interquartile Range:</strong> Q3 - Q1 (middle 50% spread)</li>
+</ul>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use Average Calculator</h3>
+<h3>How to Calculate Mean, Median, and Mode</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Open Average Calculator and enter your source input data in the main field.</li>
-  <li><strong>Step 2:</strong> Fill all required fields and confirm unit assumptions before calculation.</li>
-  <li><strong>Step 3:</strong> Run the calculation and review intermediate values where available.</li>
-  <li><strong>Step 4:</strong> Use the result in planning, estimation or comparison decisions.</li>
+  <li><strong>Enter numbers:</strong> Type or paste numbers separated by commas, spaces, or newlines.</li>
+  <li><strong>Click Calculate:</strong> The tool instantly computes mean, median, and mode.</li>
+  <li><strong>View results:</strong> See all three statistical measures displayed clearly.</li>
+  <li><strong>Use the data:</strong> Apply the results for analysis, reporting, or decision-making.</li>
 </ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Accepts any format: "1, 2, 3" or "1 2 3" or mixed</li>
+  <li>Decimal numbers are fully supported</li>
+  <li>Non-numeric values are automatically ignored</li>
+  <li>Results show 4 decimal places for precision</li>
+  <li>Mode shows "N/A" if all values appear equally</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is Average Calculator mainly used for?</dt>
-  <dd>Average Calculator is mainly used to enter numbers separated by comma or space to get mean, median and mode.</dd>
+  <dt>What is the difference between mean, median, and mode?</dt>
+  <dd>Mean is the arithmetic average (sum ÷ count). Median is the middle value when sorted. Mode is the most frequently occurring value. Mean is affected by outliers, median represents the center, and mode shows the most common value.</dd>
 
-  <dt>Does Average Calculator send my input to a server?</dt>
-  <dd>For normal usage, Average Calculator processes data locally in your browser so you can work without uploading project files.</dd>
+  <dt>When should I use median instead of mean?</dt>
+  <dd>Use median when data has outliers or is skewed. For example, house prices: if most homes cost $300K but a few mansions cost $10M, the mean is misleadingly high. Median gives the 'typical' value. Mean is better for symmetric, normally distributed data.</dd>
 
-  <dt>Why do calculator results differ from another source?</dt>
-  <dd>Differences usually come from rounding precision, unit assumptions or formula variants used by each tool.</dd>
+  <dt>What does it mean if there's no mode?</dt>
+  <dd>If all values appear equally (no repeats), there's no mode. Some datasets are 'bimodal' (two modes) or 'multimodal' (many modes). The calculator shows 'N/A' when all values appear once, meaning no single value is more common than others.</dd>
+
+  <dt>How do you calculate the median for even-numbered sets?</dt>
+  <dd>For even counts, there's no single middle value. Take the two middle numbers and average them. Example: [1, 3, 5, 7] has middles 3 and 5, so median = (3+5)/2 = 4. For odd counts, the median is the exact middle value.</dd>
+
+  <dt>What are common use cases for mean, median, mode?</dt>
+  <dd>Mean: test scores, temperatures, financial returns. Median: income, house prices, response times (skewed data). Mode: survey responses, product sizes, categorical data. Using all three gives a complete picture of data distribution.</dd>
+
+  <dt>How does the calculator handle input formatting?</dt>
+  <dd>Enter numbers separated by commas, spaces, or newlines. The calculator parses '1, 2, 3' or '1 2 3' or mixed formats. Non-numeric values are ignored. Decimal numbers are supported. Results show 4 decimal places for precision.</dd>
 </dl>
 </section>
 </main>

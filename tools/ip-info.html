@@ -1,27 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
-<title>IP Lookup &amp; IP Info Tool – Check IP Location and ASN | ToolForge</title>
-
+<title>IP Lookup & IP Info Tool – Check IP Location and ASN | ToolForge</title>
 <meta name="description" content="Free online IP Lookup and IP Info tool to check IP address location, city, region, country and ASN, and detect your current public IP in the browser. Part of the ToolForge developer tools collection.">
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/ip-info.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="IP Lookup &amp; IP Info Tool – Check IP Location and ASN | ToolForge">
+<meta property="og:title" content="IP Lookup & IP Info Tool – Check IP Location and ASN | ToolForge">
 <meta property="og:description" content="Free online IP Lookup and IP Info tool to check IP address location, city, region, country and ASN, and detect your current public IP in the browser. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/ip-info.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IP Lookup &amp; IP Info Tool – Check IP Location and ASN | ToolForge">
+<meta name="twitter:title" content="IP Lookup & IP Info Tool – Check IP Location and ASN | ToolForge">
 <meta name="twitter:description" content="Free online IP Lookup and IP Info tool to check IP address location, city, region, country and ASN, and detect your current public IP in the browser. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
-
 <link rel="stylesheet" href="/css/style.css">
-
 
 <script type="application/ld+json">
 {
@@ -30,56 +24,51 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is IP Info mainly used for?",
+      "name": "What is an IP address and what information does it reveal?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "IP Info is mainly used to look up IP-related network details for diagnostics and traffic analysis."
+        "text": "An IP address (Internet Protocol address) is a numerical label assigned to devices on a network. IPv4 uses 32-bit addresses (e.g., 192.168.1.1), while IPv6 uses 128-bit addresses. IP geolocation databases map IP ranges to approximate physical locations, ISPs, and organization data, but cannot pinpoint exact addresses.\""
       }
     },
     {
       "@type": "Question",
-      "name": "Does IP Info always work fully offline?",
+      "name": "What is ASN and why does it matter?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "IP Info does core rendering in your browser, but some network details may come from external lookup services depending on the feature."
+        "text": "ASN (Autonomous System Number) identifies a collection of IP networks under single administrative control. Each ISP, cloud provider, or large organization has an ASN. Knowing the ASN helps identify the network owner, detect hosting providers, and understand routing paths.\""
       }
     },
     {
       "@type": "Question",
-      "name": "Why can geolocation results differ between providers?",
+      "name": "Why do IP geolocation results differ between services?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "IP geolocation databases are estimates and update on different schedules, so city-level accuracy can vary."
+        "text": "Different services use different geolocation databases (MaxMind, IP2Location, etc.) that update on varying schedules. IP ranges can be reassigned, and databases may lag. City-level accuracy is typically 50-80%, while country-level is higher. Mobile/VPN IPs are especially difficult to locate precisely.\""
       }
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use IP Info",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "enter an IP address or use your current client IP"
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Confirm whether you need geolocation, ASN or connection metadata."
+      "@type": "Question",
+      "name": "Can IP lookup identify my exact home address?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. IP geolocation only provides approximate location data (city/region level). It cannot identify street addresses, apartment numbers, or precise coordinates. For most residential IPs, the location shown is the ISP's nearest point of presence, not your actual home.\""
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Fetch and inspect IP details returned by the tool."
+      "@type": "Question",
+      "name": "What is the difference between IPv4 and IPv6?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IPv4 uses 32-bit addresses (4.3 billion total), written as four decimal numbers (192.168.1.1). IPv6 uses 128-bit addresses, written as eight hexadecimal groups (2001:0db8:85a3::8a2e:0370:9f91). IPv6 was created to address IPv4 exhaustion and offers better security features.\""
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Use the output for troubleshooting, audit notes or network triage."
+      "@type": "Question",
+      "name": "Why does my IP show a different city than where I am?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common reasons: ISP assigns IPs from a central pool in a different city, you're using mobile data (tower location differs from your position), VPN/proxy usage, or the geolocation database is outdated. IP location reflects network registration, not GPS coordinates.\""
+      }
     }
   ]
 }
@@ -113,32 +102,142 @@
 <p id="status" class="inline-status"></p>
 
 <section class="tool-seo">
-<h3>About IP Info</h3>
-<p>This IP info tool helps you look up an IP address and quickly see location details such as city, region, country and ASN. It can also detect your current public IP directly in the browser.</p>
-<p>It is useful when checking traffic sources, debugging server logs, verifying VPN or proxy locations, or doing quick network troubleshooting without leaving the page.</p>
+<h3>About IP Info Lookup</h3>
+<p>This IP lookup tool retrieves geolocation and network information for any IP address, including city, region, country, timezone, and ASN (Autonomous System Number). It also detects your current public IP address directly in the browser without requiring page refresh.</p>
+
+<h4>Understanding IP Address Information</h4>
+<p>When you look up an IP address, several types of information are available:</p>
+<ul>
+  <li><strong>Geolocation:</strong> Approximate physical location (country, region, city)</li>
+  <li><strong>Network Data:</strong> ISP name, organization, connection type</li>
+  <li><strong>ASN:</strong> Autonomous System Number identifying the network operator</li>
+  <li><strong>Timezone:</strong> Local timezone for the IP's registered location</li>
+  <li><strong>Postal Code:</strong> Approximate postal/ZIP code area</li>
+</ul>
+
+<h4>IP Address Format Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Address Space</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">IPv4</td>
+    <td style="border:1px solid #ddd;padding:8px">4 decimal octets</td>
+    <td style="border:1px solid #ddd;padding:8px">192.168.1.1</td>
+    <td style="border:1px solid #ddd;padding:8px">~4.3 billion</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">IPv6</td>
+    <td style="border:1px solid #ddd;padding:8px">8 hex groups</td>
+    <td style="border:1px solid #ddd;padding:8px">2001:db8::1</td>
+    <td style="border:1px solid #ddd;padding:8px">~3.4×10³⁸</td>
+  </tr>
+</table>
+
+<h4>What is ASN (Autonomous System Number)?</h4>
+<p>An Autonomous System (AS) is a collection of IP networks under single administrative control. Each AS has a unique number assigned by regional internet registries:</p>
+<ul>
+  <li><strong>Format:</strong> AS followed by number (e.g., AS15169 for Google)</li>
+  <li><strong>Purpose:</strong> Identifies network operators for BGP routing</li>
+  <li><strong>Usage:</strong> Helps identify ISPs, cloud providers, content delivery networks</li>
+</ul>
+
+<h4>Common IP Ranges</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Range</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Purpose</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">10.0.0.0 - 10.255.255.255</td>
+    <td style="border:1px solid #ddd;padding:8px">Private network</td>
+    <td style="border:1px solid #ddd;padding:8px">10.0.0.1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">172.16.0.0 - 172.31.255.255</td>
+    <td style="border:1px solid #ddd;padding:8px">Private network</td>
+    <td style="border:1px solid #ddd;padding:8px">172.16.0.1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">192.168.0.0 - 192.168.255.255</td>
+    <td style="border:1px solid #ddd;padding:8px">Private network</td>
+    <td style="border:1px solid #ddd;padding:8px">192.168.1.1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">127.0.0.0 - 127.255.255.255</td>
+    <td style="border:1px solid #ddd;padding:8px">Loopback (localhost)</td>
+    <td style="border:1px solid #ddd;padding:8px">127.0.0.1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">0.0.0.0 - 0.255.255.255</td>
+    <td style="border:1px solid #ddd;padding:8px">Current network</td>
+    <td style="border:1px solid #ddd;padding:8px">0.0.0.0</td>
+  </tr>
+</table>
+
+<h4>Why IP Geolocation Varies</h4>
+<p>IP geolocation is an estimate, not an exact science. Several factors affect accuracy:</p>
+<ul>
+  <li><strong>Database Differences:</strong> Services use different providers (MaxMind, IP2Location, etc.)</li>
+  <li><strong>Update Frequency:</strong> IP assignments change; databases update on different schedules</li>
+  <li><strong>Mobile Networks:</strong> Cell tower IPs may register to carrier headquarters</li>
+  <li><strong>VPNs/Proxies:</strong> Traffic appears to originate from VPN server location</li>
+  <li><strong>Corporate Networks:</strong> Large companies may have centralized IP allocation</li>
+</ul>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Security Analysis:</strong> Identify suspicious login locations, detect proxy/VPN usage</li>
+  <li><strong>Log Analysis:</strong> Understand traffic sources, geographic distribution of visitors</li>
+  <li><strong>Network Troubleshooting:</strong> Verify routing, identify network operators</li>
+  <li><strong>Compliance:</strong> Check geographic restrictions, verify user locations</li>
+  <li><strong>Fraud Detection:</strong> Flag mismatched billing/shipping IP locations</li>
+</ul>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use IP Info</h3>
+<h3>How to Look Up IP Information</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> enter an IP address or use your current client IP</li>
-  <li><strong>Step 2:</strong> Confirm whether you need geolocation, ASN or connection metadata.</li>
-  <li><strong>Step 3:</strong> Fetch and inspect IP details returned by the tool.</li>
-  <li><strong>Step 4:</strong> Use the output for troubleshooting, audit notes or network triage.</li>
+  <li><strong>View your IP:</strong> Your current public IP is displayed automatically at the top of the page.</li>
+  <li><strong>Enter an IP:</strong> Type any IPv4 or IPv6 address into the input field.</li>
+  <li><strong>Click Lookup:</strong> The tool queries multiple geolocation databases for comprehensive results.</li>
+  <li><strong>Review results:</strong> View location data, ASN, ISP, timezone, and other network details.</li>
+  <li><strong>Copy output:</strong> Click "Copy Result" to save the IP information for reports or analysis.</li>
 </ol>
+
+<h4 style="margin-top:20px">Tips for IP Analysis</h4>
+<ul>
+  <li>Private IP ranges (10.x.x.x, 192.168.x.x) won't have geolocation data</li>
+  <li>VPN/proxy IPs will show the server location, not the user's actual location</li>
+  <li>Mobile IPs often show carrier headquarters rather than current position</li>
+  <li>For best results, use multiple lookup services to cross-reference</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is IP Info mainly used for?</dt>
-  <dd>IP Info is mainly used to look up IP-related network details for diagnostics and traffic analysis.</dd>
+  <dt>What is an IP address and what information does it reveal?</dt>
+  <dd>An IP address (Internet Protocol address) is a numerical label assigned to devices on a network. IPv4 uses 32-bit addresses (e.g., 192.168.1.1), while IPv6 uses 128-bit addresses. IP geolocation databases map IP ranges to approximate physical locations, ISPs, and organization data, but cannot pinpoint exact addresses.</dd>
 
-  <dt>Does IP Info always work fully offline?</dt>
-  <dd>IP Info does core rendering in your browser, but some network details may come from external lookup services depending on the feature.</dd>
+  <dt>What is ASN and why does it matter?</dt>
+  <dd>ASN (Autonomous System Number) identifies a collection of IP networks under single administrative control. Each ISP, cloud provider, or large organization has an ASN. Knowing the ASN helps identify the network owner, detect hosting providers, and understand routing paths.</dd>
 
-  <dt>Why can geolocation results differ between providers?</dt>
-  <dd>IP geolocation databases are estimates and update on different schedules, so city-level accuracy can vary.</dd>
+  <dt>Why do IP geolocation results differ between services?</dt>
+  <dd>Different services use different geolocation databases (MaxMind, IP2Location, etc.) that update on varying schedules. IP ranges can be reassigned, and databases may lag. City-level accuracy is typically 50-80%, while country-level is higher. Mobile/VPN IPs are especially difficult to locate precisely.</dd>
+
+  <dt>Can IP lookup identify my exact home address?</dt>
+  <dd>No. IP geolocation only provides approximate location data (city/region level). It cannot identify street addresses, apartment numbers, or precise coordinates. For most residential IPs, the location shown is the ISP's nearest point of presence, not your actual home.</dd>
+
+  <dt>What is the difference between IPv4 and IPv6?</dt>
+  <dd>IPv4 uses 32-bit addresses (4.3 billion total), written as four decimal numbers (192.168.1.1). IPv6 uses 128-bit addresses, written as eight hexadecimal groups (2001:0db8:85a3::8a2e:0370:9f91). IPv6 was created to address IPv4 exhaustion and offers better security features.</dd>
+
+  <dt>Why does my IP show a different city than where I am?</dt>
+  <dd>Common reasons: ISP assigns IPs from a central pool in a different city, you're using mobile data (tower location differs from your position), VPN/proxy usage, or the geolocation database is outdated. IP location reflects network registration, not GPS coordinates.</dd>
 </dl>
 </section>
 </main>
@@ -430,5 +529,4 @@ loadSelfIP()
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>
 </body>
-
 </html>

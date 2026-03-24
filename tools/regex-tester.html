@@ -3,49 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Regex Tester – Test JavaScript Regular Expressions Online | ToolForge</title>
-<meta name="description" content="Free online Regex Tester to test JavaScript regular expressions against sample text, inspect matches and debug flags, groups and patterns. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Free online Regex Tester to test JavaScript regular expressions against sample text, inspect matches, debug flags, capture groups and patterns in real-time. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/regex-tester.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Regex Tester – Test JavaScript Regular Expressions Online | ToolForge">
-<meta property="og:description" content="Free online Regex Tester to test JavaScript regular expressions against sample text, inspect matches and debug flags, groups and patterns. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Free online Regex Tester to test JavaScript regular expressions against sample text, inspect matches, debug flags, capture groups and patterns in real-time.">
 <meta property="og:url" content="https://toolforge.site/tools/regex-tester.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Regex Tester – Test JavaScript Regular Expressions Online | ToolForge">
-<meta name="twitter:description" content="Free online Regex Tester to test JavaScript regular expressions against sample text, inspect matches and debug flags, groups and patterns. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Free online Regex Tester to test JavaScript regular expressions against sample text, inspect matches, debug flags, capture groups and patterns in real-time.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Regex Tester",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Open Regex Tester and enter your source input data in the main field."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Configure language-specific settings and formatting/validation options before running."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Execute the main action and review syntax, structure or generated code output."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy results into your editor, scripts or review notes."
-    }
-  ]
-}
-</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,26 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Regex Tester mainly used for?",
+      "name": "What is regex and how does pattern matching work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Regex Tester is mainly used to test JavaScript regular expressions against sample text, inspect matches and debug patterns instantly."
+        "text": "Regex (regular expressions) is a sequence of characters that defines a search pattern. The regex engine processes your pattern and compares it against input text character by character, using backtracking to try different matching paths when needed. Metacharacters like ., *, +, ? have special meanings that control matching behavior.\""
       }
     },
     {
       "@type": "Question",
-      "name": "Does Regex Tester send my input to a server?",
+      "name": "What regex flags does JavaScript support?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Regex Tester processes data locally in your browser so you can work without uploading project files."
+        "text": "JavaScript supports these regex flags: g (global - find all matches), i (case-insensitive), m (multiline - ^ and $ match line boundaries), s (dotAll - . matches newlines), u (Unicode), y (sticky - matches from current index). This tool uses the 'g' flag by default.\""
       }
     },
     {
       "@type": "Question",
-      "name": "How can I troubleshoot incorrect developer-tool output?",
+      "name": "What are capture groups and how do I use them?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Confirm input syntax, language mode and escaping rules; then test with a smaller sample to isolate issues."
+        "text": "Capture groups (parentheses in regex) extract matched substrings for later use. Use (pattern) for numbered groups, (?:pattern) for non-capturing groups, and (?<name>pattern) for named groups. Access captured values via match arrays or the groups property.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is my regex matching too much or too little?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common causes: greedy quantifiers (*, +) match as much as possible - use lazy versions (*?, +?) for minimal matching. Unescaped special characters (. matches any char) can cause unexpected matches. Character classes [^abc] negate - ensure this is intentional.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between match() and matchAll()?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "match() with /g flag returns array of matched strings only. matchAll() returns iterator with full match objects including capture groups, indices, and named groups. Use matchAll() when you need detailed match information beyond just the matched text.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I escape special characters in regex?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Escape these metacharacters with backslash: . * + ? ^ $ { } ( ) | [ ] \\. To match a literal dot use \\., literal asterisk use \\*, etc. In JavaScript strings, use double backslash (\\\\) because \\ itself needs escaping.\""
       }
     }
   ]
@@ -110,31 +105,193 @@
 
 <section class="tool-seo">
 <h3>About Regex Tester</h3>
-<p>This regex tester lets you try JavaScript regular expressions against sample text and inspect every match instantly.</p>
-<p>It is useful for validating input rules, cleaning text, debugging capture groups and checking whether a pattern behaves as expected before using it in code.</p>
+<p>This regex tester lets you validate JavaScript regular expressions against sample text and inspect every match, capture group, and pattern behavior in real-time. Whether you're debugging a complex pattern, learning regex syntax, or verifying email/URL validation rules, this tool provides immediate visual feedback.</p>
+
+<h4>How Regex Pattern Matching Works</h4>
+<p>The JavaScript regex engine processes your pattern through several steps:</p>
+<ol>
+  <li><strong>Compilation:</strong> The pattern string is compiled into an internal representation</li>
+  <li><strong>Matching:</strong> Engine compares pattern against input text character by character</li>
+  <li><strong>Backtracking:</strong> When a path fails, engine backtracks to try alternative matches</li>
+  <li><strong>Result:</strong> Returns matched substrings, capture groups, and position information</li>
+</ol>
+
+<h4>JavaScript Regex Flags</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Flag</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Name</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Effect</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>g</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Global</td>
+    <td style="border:1px solid #ddd;padding:8px">Find all matches (not just first)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>i</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Case-insensitive</td>
+    <td style="border:1px solid #ddd;padding:8px">Ignore case when matching</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>m</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Multiline</td>
+    <td style="border:1px solid #ddd;padding:8px">^ and $ match line boundaries</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>s</code></td>
+    <td style="border:1px solid #ddd;padding:8px">dotAll</td>
+    <td style="border:1px solid #ddd;padding:8px">. matches newline characters</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>u</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Unicode</td>
+    <td style="border:1px solid #ddd;padding:8px">Enable full Unicode support</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>y</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Sticky</td>
+    <td style="border:1px solid #ddd;padding:8px">Match from current index only</td>
+  </tr>
+</table>
+
+<h4>Common Regex Patterns</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Pattern</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example Match</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>\d+</code></td>
+    <td style="border:1px solid #ddd;padding:8px">One or more digits</td>
+    <td style="border:1px solid #ddd;padding:8px">123, 42, 0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>[a-zA-Z]+</code></td>
+    <td style="border:1px solid #ddd;padding:8px">One or more letters</td>
+    <td style="border:1px solid #ddd;padding:8px">hello, World, abc</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>\w+</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Word characters (alphanumeric + _)</td>
+    <td style="border:1px solid #ddd;padding:8px">user_name, test123</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>\s+</code></td>
+    <td style="border:1px solid #ddd;padding:8px">One or more whitespace</td>
+    <td style="border:1px solid #ddd;padding:8px">" ", "\t", "\n"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>^\w+@\w+\.\w+$</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Simple email pattern</td>
+    <td style="border:1px solid #ddd;padding:8px">user@example.com</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>https?://\S+</code></td>
+    <td style="border:1px solid #ddd;padding:8px">HTTP/HTTPS URLs</td>
+    <td style="border:1px solid #ddd;padding:8px">https://example.com</td>
+  </tr>
+</table>
+
+<h4>Capture Groups Explained</h4>
+<p>Capture groups extract matched substrings for later use:</p>
+<ul>
+  <li><strong>Basic group:</strong> <code>(pattern)</code> - Creates numbered capture group</li>
+  <li><strong>Non-capturing:</strong> <code>(?:pattern)</code> - Groups without capturing</li>
+  <li><strong>Named group:</strong> <code>(?&lt;name&gt;pattern)</code> - Creates named capture group</li>
+  <li><strong>Backreference:</strong> <code>\1</code> or <code>\k&lt;name&gt;</code> - References earlier group</li>
+</ul>
+
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Pattern with capture groups
+const regex = /(\w+)@(\w+\.\w+)/g
+const text = "Contact: user@example.com"
+const match = text.match(regex)
+// match[0] = "user@example.com" (full match)
+// Group 1 = "user" (username)
+// Group 2 = "example.com" (domain)
+</pre>
+
+<h4>Greedy vs Lazy Quantifiers</h4>
+<p>Quantifiers control how many times a pattern element matches:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Greedy</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Lazy</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Behavior</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>*</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>*?</code></td>
+    <td style="border:1px solid #ddd;padding:8px">0 or more (greedy vs lazy)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>+</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>+?</code></td>
+    <td style="border:1px solid #ddd;padding:8px">1 or more (greedy vs lazy)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>?</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>??</code></td>
+    <td style="border:1px solid #ddd;padding:8px">0 or 1 (greedy vs lazy)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>{n,m}</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>{n,m}?</code></td>
+    <td style="border:1px solid #ddd;padding:8px">n to m (greedy vs lazy)</td>
+  </tr>
+</table>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Greedy: matches as much as possible
+/&lt;.*&gt;/.exec("&lt;div&gt;hello&lt;/div&gt;")  // "&lt;div&gt;hello&lt;/div&gt;"
+
+// Lazy: matches as little as possible
+/&lt;.*?&gt;/.exec("&lt;div&gt;hello&lt;/div&gt;")  // "&lt;div&gt;"
+</pre>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use Regex Tester</h3>
+<h3>How to Test Regular Expressions</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Open Regex Tester and enter your source input data in the main field.</li>
-  <li><strong>Step 2:</strong> Configure language-specific settings and formatting/validation options before running.</li>
-  <li><strong>Step 3:</strong> Execute the main action and review syntax, structure or generated code output.</li>
-  <li><strong>Step 4:</strong> Copy results into your editor, scripts or review notes.</li>
+  <li><strong>Enter your pattern:</strong> Type your regex pattern in the "Regex pattern" field (e.g., <code>\d+</code>).</li>
+  <li><strong>Enter test text:</strong> Paste or type the text you want to test against in the "Text" field.</li>
+  <li><strong>Click Test:</strong> The tool will execute your regex and display all matches.</li>
+  <li><strong>Review results:</strong> Examine matched substrings to verify your pattern works correctly.</li>
+  <li><strong>Refine and retest:</strong> Adjust your pattern as needed and click Test again.</li>
 </ol>
+
+<h4 style="margin-top:20px">Tips for Effective Regex Testing</h4>
+<ul>
+  <li>Start with simple patterns and gradually add complexity</li>
+  <li>Test edge cases: empty strings, special characters, unexpected input</li>
+  <li>Use character classes <code>[]</code> instead of alternation <code>|</code> for single characters</li>
+  <li>Anchor patterns with <code>^</code> and <code>$</code> when matching entire strings</li>
+  <li>Escape special characters when matching literal text</li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is Regex Tester mainly used for?</dt>
-  <dd>Regex Tester is mainly used to test JavaScript regular expressions against sample text, inspect matches and debug patterns instantly.</dd>
+  <dt>What is regex and how does pattern matching work?</dt>
+  <dd>Regex (regular expressions) is a sequence of characters that defines a search pattern. The regex engine processes your pattern and compares it against input text character by character, using backtracking to try different matching paths when needed. Metacharacters like ., *, +, ? have special meanings that control matching behavior.</dd>
 
-  <dt>Does Regex Tester send my input to a server?</dt>
-  <dd>For normal usage, Regex Tester processes data locally in your browser so you can work without uploading project files.</dd>
+  <dt>What regex flags does JavaScript support?</dt>
+  <dd>JavaScript supports these regex flags: g (global - find all matches), i (case-insensitive), m (multiline - ^ and $ match line boundaries), s (dotAll - . matches newlines), u (Unicode), y (sticky - matches from current index). This tool uses the 'g' flag by default.</dd>
 
-  <dt>How can I troubleshoot incorrect developer-tool output?</dt>
-  <dd>Confirm input syntax, language mode and escaping rules; then test with a smaller sample to isolate issues.</dd>
+  <dt>What are capture groups and how do I use them?</dt>
+  <dd>Capture groups (parentheses in regex) extract matched substrings for later use. Use (pattern) for numbered groups, (?:pattern) for non-capturing groups, and (?&lt;name&gt;pattern) for named groups. Access captured values via match arrays or the groups property.</dd>
+
+  <dt>Why is my regex matching too much or too little?</dt>
+  <dd>Common causes: greedy quantifiers (*, +) match as much as possible - use lazy versions (*?, +?) for minimal matching. Unescaped special characters (. matches any char) can cause unexpected matches. Character classes [^abc] negate - ensure this is intentional.</dd>
+
+  <dt>What is the difference between match() and matchAll()?</dt>
+  <dd>match() with /g flag returns array of matched strings only. matchAll() returns iterator with full match objects including capture groups, indices, and named groups. Use matchAll() when you need detailed match information beyond just the matched text.</dd>
+
+  <dt>How do I escape special characters in regex?</dt>
+  <dd>Escape these metacharacters with backslash: . * + ? ^ $ { } ( ) | [ ] \. To match a literal dot use \., literal asterisk use \*, etc. In JavaScript strings, use double backslash (\\) because \ itself needs escaping.</dd>
 </dl>
 </section>
 </main>
