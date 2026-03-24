@@ -20,44 +20,7 @@
   }
 
   function injectTopNav(tools){
-    var byCat={};
-    tools.forEach(function(t){
-      var c=t.category||"Other";
-      if(!byCat[c])byCat[c]=[];
-      byCat[c].push(t);
-    });
-    var header=document.querySelector(".top-nav");
-    if(!header){
-      header=document.createElement("header");
-      header.className="top-nav";
-      header.innerHTML='<a href="/" class="top-nav-brand">ToolForge</a><button type="button" class="top-nav-toggle" id="tool-top-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span class="top-nav-toggle-bar"></span><span class="top-nav-toggle-bar"></span><span class="top-nav-toggle-bar"></span></button><nav id="tool-top-nav-menu" class="top-nav-menu" aria-label="Tool categories"></nav>';
-      document.body.insertBefore(header,document.body.firstChild);
-    }
-    var menu=document.getElementById("tool-top-nav-menu")||header.querySelector(".top-nav-menu");
-    if(!menu||menu.children.length>0)return;
-
-    var navOrder=CAT_ORDER.concat(Object.keys(byCat).filter(function(c){return CAT_ORDER.indexOf(c)===-1;}));
-    navOrder.forEach(function(navCat){
-      var tools=byCat[navCat];
-      if(!tools||!tools.length)return;
-      var item=document.createElement("div");
-      item.className="top-nav-item";
-      var btn=document.createElement("button");
-      btn.className="top-nav-trigger";
-      btn.type="button";
-      btn.textContent=navCat+" ▾";
-      var drop=document.createElement("div");
-      drop.className="top-nav-dropdown";
-      sortTools(tools).forEach(function(t){
-        var a=document.createElement("a");
-        a.href="/tools/"+t.file+".html";
-        a.textContent=t.name;
-        drop.appendChild(a);
-      });
-      item.appendChild(btn);
-      item.appendChild(drop);
-      menu.appendChild(item);
-    });
+    // Header navigation removed
   }
 
   function injectBackToTop(){
@@ -76,31 +39,11 @@
   }
 
   function initMobileNav(){
-    var toggle=document.getElementById("tool-top-nav-toggle");
-    var menu=document.getElementById("tool-top-nav-menu");
-    var header=document.querySelector(".top-nav");
-    if(!toggle||!menu||!header)return;
-    toggle.addEventListener("click",function(){
-      var open=header.classList.toggle("top-nav-open");
-      toggle.setAttribute("aria-expanded",open?"true":"false");
-    });
-    var triggers=menu.querySelectorAll(".top-nav-trigger");
-    for(var i=0;i<triggers.length;i++){
-      triggers[i].addEventListener("click",function(e){
-        if(window.innerWidth>768)return;
-        e.preventDefault();
-        var item=e.target.closest(".top-nav-item");
-        item.classList.toggle("top-nav-item-open");
-      });
-    }
-    menu.addEventListener("click",function(e){
-      if(e.target.tagName==="A")header.classList.remove("top-nav-open");
-    });
+    // Mobile navigation removed
   }
 
   fetch("/tools-list.json").then(function(r){return r.json()}).then(function(tools){
-    injectTopNav(tools);
-    initMobileNav();
+    // Navigation removed
     injectBackToTop();
     if(!isToolPage)return;
     var current=null;
