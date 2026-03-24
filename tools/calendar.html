@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Calendar – Online Calendar with Notes | ToolForge</title>
-<meta name="description" content="Free online Calendar tool to browse months and attach quick notes to specific dates, stored locally in your browser. Part of the ToolForge developer tools collection.">
+<title>Calendar – Online Calendar with Date Notes | ToolForge</title>
+<meta name="description" content="Free online Calendar tool to browse months and attach quick notes to specific dates. Notes stored locally in browser. Lightweight planning and reminder tool. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/calendar.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Calendar – Online Calendar with Notes | ToolForge">
-<meta property="og:description" content="Free online Calendar tool to browse months and attach quick notes to specific dates, stored locally in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Free online Calendar tool to browse months and attach quick notes to specific dates. Notes stored locally in browser. Lightweight planning and reminder tool. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/calendar.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Calendar – Online Calendar with Notes | ToolForge">
-<meta name="twitter:description" content="Free online Calendar tool to browse months and attach quick notes to specific dates, stored locally in your browser. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Calendar – Online Calendar with Date Notes | ToolForge">
+<meta name="twitter:description" content="Free online Calendar tool to browse months and attach quick notes to specific dates. Notes stored locally in browser. Lightweight planning and reminder tool. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -54,59 +54,54 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Calendar",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Open Calendar and enter your source input data in the main field."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Confirm timezone and timestamp precision (seconds vs milliseconds) where applicable."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Run conversion/calculation and inspect date boundaries carefully."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy normalized date-time values for logs, scheduling or APIs."
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Calendar mainly used for?",
+      "name": "这个日历工具有什么特点？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Calendar is mainly used to browse months, see today at a glance and attach quick notes to specific dates, all stored locally in your browser."
+        "text": "这是一个轻量级在线日历，支持浏览任意月份、快速定位今天、为特定日期添加备注。所有备注使用 localStorage 存储在浏览器本地，不会上传到服务器，关闭浏览器后数据依然保留。"
       }
     },
     {
       "@type": "Question",
-      "name": "Does Calendar send my input to a server?",
+      "name": "如何在日历中添加日期备注？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Calendar processes data locally in your browser so you can work without uploading project files."
+        "text": "点击任意日期格子选中该日期，然后在下方的备注输入框中输入内容，点击"保存"按钮。有备注的日期右上角会显示橙色圆点标记，再次点击可查看或编辑备注。"
       }
     },
     {
       "@type": "Question",
-      "name": "Why can date results be off by hours or days?",
+      "name": "备注数据存储在哪里？会同步吗？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Timezone offsets, daylight-saving changes and mixed UTC/local assumptions are the most common causes."
+        "text": "备注使用 HTML5 localStorage 存储在您的浏览器本地。数据不会上传到任何服务器，因此不会在不同设备间同步。清除浏览器数据会删除备注。适合个人轻量级使用。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "日历如何显示今天和选中的日期？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "今天的日期用蓝色边框和阴影高亮显示。当前选中的日期用深色边框标记。点击"Today"按钮可快速返回今天。月份标题显示当前浏览的年月和时区信息。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "日历的显示范围是什么？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "日历网格显示 6 行×7 列共 42 天，确保完整覆盖任何月份（包括前后月份的补位日期）。星期标题显示英文缩写（Sun-Sat）。日期格子最小高度 72px，可容纳备注标记。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "如何使用 localStorage 存储日期备注？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "备注使用键值对存储，键名格式为"toolforge.calendar.note:YYYY-MM-DD"。ISO 日期格式确保唯一性。存储限制约 5-10MB，足够存储大量日期备注。使用 localStorage API 读写数据。"
       }
     }
   ]
@@ -153,32 +148,192 @@
     </div>
   </div>
 <section class="tool-seo">
-<h3>About Calendar</h3>
-<p>This calendar tool lets you browse months, see today at a glance and attach quick notes to specific dates, all stored locally in your browser.</p>
-<p>It is useful for lightweight personal planning, reminder notes and date-based organization when you want something simpler than a full calendar app.</p>
+<h3>关于日历工具</h3>
+<p>这是一个轻量级的在线日历工具，可浏览任意月份、快速定位今天、并为特定日期添加备注。所有备注使用 localStorage 存储在您的浏览器本地，不会上传到任何服务器。</p>
+
+<h4>日历界面说明</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">元素</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">说明</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">月份标题</td>
+    <td style="border:1px solid #ddd;padding:8px">显示当前浏览的年月（如"January 2026"）</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">时区信息</td>
+    <td style="border:1px solid #ddd;padding:8px">显示浏览器所在时区（如"Asia/Shanghai"）</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">星期标题</td>
+    <td style="border:1px solid #ddd;padding:8px">Sun, Mon, Tue, Wed, Thu, Fri, Sat</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">日期格子</td>
+    <td style="border:1px solid #ddd;padding:8px">显示日期数字，可点击选中</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">蓝色边框</td>
+    <td style="border:1px solid #ddd;padding:8px">标记今天是哪一天</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">深色边框</td>
+    <td style="border:1px solid #ddd;padding:8px">标记当前选中的日期</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">橙色圆点</td>
+    <td style="border:1px solid #ddd;padding:8px">表示该日期有备注</td>
+  </tr>
+</table>
+
+<h4>功能按钮说明</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">按钮</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">功能</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">← Prev</td>
+    <td style="border:1px solid #ddd;padding:8px">切换到上一个月</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Today</td>
+    <td style="border:1px solid #ddd;padding:8px">快速返回今天的日期</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Next →</td>
+    <td style="border:1px solid #ddd;padding:8px">切换到下一个月</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Save</td>
+    <td style="border:1px solid #ddd;padding:8px">保存当前选中日期的备注</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Clear</td>
+    <td style="border:1px solid #ddd;padding:8px">清空当前日期的备注</td>
+  </tr>
+</table>
+
+<h4>localStorage 存储机制</h4>
+<p>备注使用 HTML5 localStorage API 存储在浏览器本地：</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+存储键名格式：toolforge.calendar.note:YYYY-MM-DD
+
+示例：
+键名：toolforge.calendar.note:2026-03-24
+值：下午 3 点开会
+
+存储特点：
+- 数据永久保存，除非手动清除
+- 每个域名约 5-10MB 空间
+- 不会随浏览器关闭而丢失
+- 不同浏览器/设备不共享
+</pre>
+
+<h4>常见应用场景</h4>
+<ul>
+  <li><strong>个人计划：</strong>记录每日待办事项、约会时间</li>
+  <li><strong>重要日期：</strong>标记生日、纪念日、截止日期</li>
+  <li><strong>工作安排：</strong>记录会议、项目里程碑</li>
+  <li><strong>学习笔记：</strong>为学习日期添加复习提醒</li>
+  <li><strong>轻量规划：</strong>不需要复杂功能的简单日历</li>
+</ul>
+
+<h4>日期格式说明</h4>
+<p>日历使用 ISO 8601 日期格式（YYYY-MM-DD）：</p>
+<ul>
+  <li><strong>ISO 格式：</strong>2026-03-24（年 - 月 - 日）</li>
+  <li><strong>优点：</strong>全球统一标准，排序方便，无歧义</li>
+  <li><strong>存储键名：</strong>使用前缀 + ISO 日期确保唯一性</li>
+</ul>
+
+<h4>浏览器兼容性</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">浏览器</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">localStorage 支持</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Chrome</td>
+    <td style="border:1px solid #ddd;padding:8px">完全支持（所有版本）</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Firefox</td>
+    <td style="border:1px solid #ddd;padding:8px">完全支持</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Safari</td>
+    <td style="border:1px solid #ddd;padding:8px">完全支持</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Edge</td>
+    <td style="border:1px solid #ddd;padding:8px">完全支持</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">移动浏览器</td>
+    <td style="border:1px solid #ddd;padding:8px">iOS Safari, Chrome 均支持</td>
+  </tr>
+</table>
+
+<h4>数据隐私说明</h4>
+<ul>
+  <li><strong>本地存储：</strong>所有备注仅存储在您的浏览器中</li>
+  <li><strong>无服务器传输：</strong>数据不会发送到任何服务器</li>
+  <li><strong>无追踪：</strong>不收集任何个人信息或使用数据</li>
+  <li><strong>清除数据：</strong>可通过浏览器设置清除所有备注</li>
+  <li><strong>离线使用：</strong>页面加载后可离线使用</li>
+</ul>
+
+<h4>使用限制</h4>
+<ul>
+  <li>存储空间限制：每个域名约 5-10MB</li>
+  <li>数据不跨设备同步（需手动导出导入）</li>
+  <li>清除浏览器数据会删除所有备注</li>
+  <li>仅支持文本备注，不支持附件</li>
+</ul>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use Calendar</h3>
+<h3>如何使用日历工具</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Open Calendar and enter your source input data in the main field.</li>
-  <li><strong>Step 2:</strong> Confirm timezone and timestamp precision (seconds vs milliseconds) where applicable.</li>
-  <li><strong>Step 3:</strong> Run conversion/calculation and inspect date boundaries carefully.</li>
-  <li><strong>Step 4:</strong> Copy normalized date-time values for logs, scheduling or APIs.</li>
+  <li><strong>浏览月份：</strong>使用"Prev"和"Next"按钮切换月份，或点击"Today"返回今天。</li>
+  <li><strong>选中日期：</strong>点击任意日期格子选中该日期。</li>
+  <li><strong>添加备注：</strong>在下方输入框中输入备注内容，点击"Save"保存。</li>
+  <li><strong>查看备注：</strong>点击有橙色圆点的日期可查看或编辑备注。</li>
+  <li><strong>清空备注：</strong>点击"Clear"按钮可删除当前日期的备注。</li>
 </ol>
+
+<h4 style="margin-top:20px">提示</h4>
+<ul>
+  <li>备注会自动保存在浏览器中，关闭页面后数据不丢失</li>
+  <li>橙色圆点标记表示该日期已有备注</li>
+  <li>蓝色边框标记今天，深色边框标记当前选中日期</li>
+  <li>清除浏览器缓存会删除所有备注数据</li>
+  <li>不同浏览器之间的数据不互通</li>
+</ul>
 </section>
 <section class="faq">
-<h3>Frequently Asked Questions</h3>
+<h3>常见问题解答</h3>
 <dl class="faq-list">
 
-  <dt>What is Calendar mainly used for?</dt>
-  <dd>Calendar is mainly used to browse months, see today at a glance and attach quick notes to specific dates, all stored locally in your browser.</dd>
+  <dt>这个日历工具有什么特点？</dt>
+  <dd>这是一个轻量级在线日历，支持浏览任意月份、快速定位今天、为特定日期添加备注。所有备注使用 localStorage 存储在浏览器本地，不会上传到服务器，关闭浏览器后数据依然保留。</dd>
 
-  <dt>Does Calendar send my input to a server?</dt>
-  <dd>For normal usage, Calendar processes data locally in your browser so you can work without uploading project files.</dd>
+  <dt>如何在日历中添加日期备注？</dt>
+  <dd>点击任意日期格子选中该日期，然后在下方的备注输入框中输入内容，点击"保存"按钮。有备注的日期右上角会显示橙色圆点标记，再次点击可查看或编辑备注。</dd>
 
-  <dt>Why can date results be off by hours or days?</dt>
-  <dd>Timezone offsets, daylight-saving changes and mixed UTC/local assumptions are the most common causes.</dd>
+  <dt>备注数据存储在哪里？会同步吗？</dt>
+  <dd>备注使用 HTML5 localStorage 存储在您的浏览器本地。数据不会上传到任何服务器，因此不会在不同设备间同步。清除浏览器数据会删除备注。适合个人轻量级使用。</dd>
+
+  <dt>日历如何显示今天和选中的日期？</dt>
+  <dd>今天的日期用蓝色边框和阴影高亮显示。当前选中的日期用深色边框标记。点击"Today"按钮可快速返回今天。月份标题显示当前浏览的年月和时区信息。</dd>
+
+  <dt>日历的显示范围是什么？</dt>
+  <dd>日历网格显示 6 行×7 列共 42 天，确保完整覆盖任何月份（包括前后月份的补位日期）。星期标题显示英文缩写（Sun-Sat）。日期格子最小高度 72px，可容纳备注标记。</dd>
+
+  <dt>如何使用 localStorage 存储日期备注？</dt>
+  <dd>备注使用键值对存储，键名格式为"toolforge.calendar.note:YYYY-MM-DD"。ISO 日期格式确保唯一性。存储限制约 5-10MB，足够存储大量日期备注。使用 localStorage API 读写数据。</dd>
 </dl>
 </section>
 </main>

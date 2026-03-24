@@ -3,18 +3,18 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Byte Size Converter – Convert Bytes, KB, MB, GB | ToolForge</title>
-<meta name="description" content="Free online Byte Size Converter to convert between bytes, KB, MB, GB and TB. Part of the ToolForge developer tools collection.">
+<title>Byte Size Converter – Convert Bytes, KB, MB, GB, TB Storage Units | ToolForge</title>
+<meta name="description" content="Free online Byte Size Converter to convert between bytes, KB, MB, GB and TB. Essential tool for file sizes, storage capacity, and bandwidth calculations. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/byte-size-converter.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Byte Size Converter – Convert Bytes, KB, MB, GB | ToolForge">
-<meta property="og:description" content="Free online Byte Size Converter to convert between bytes, KB, MB, GB and TB. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Free online Byte Size Converter to convert between bytes, KB, MB, GB and TB. Essential tool for file sizes, storage capacity, and bandwidth calculations. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/byte-size-converter.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Byte Size Converter – Convert Bytes, KB, MB, GB | ToolForge">
-<meta name="twitter:description" content="Free online Byte Size Converter to convert between bytes, KB, MB, GB and TB. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Byte Size Converter – Convert Bytes, KB, MB, GB, TB Storage Units | ToolForge">
+<meta name="twitter:description" content="Free online Byte Size Converter to convert between bytes, KB, MB, GB and TB. Essential tool for file sizes, storage capacity, and bandwidth calculations. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -22,59 +22,54 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Byte Size Converter",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "Open Byte Size Converter and enter your source input data in the main field."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Confirm source and target units to avoid conversion-base mismatches."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Run conversion and compare values across units."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Use converted values in specs, calculations or reports."
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Byte Size Converter mainly used for?",
+      "name": "什么是字节单位（Bytes, KB, MB, GB, TB）？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Byte Size Converter is mainly used to convert between bytes, KB, MB, GB and TB for file sizes, storage and bandwidth."
+        "text": "字节是计算机存储的基本单位。1 KB = 1024 Bytes，1 MB = 1024 KB，1 GB = 1024 MB，1 TB = 1024 GB。这是二进制换算（2 的 10 次方 = 1024），用于内存、文件大小等计算。"
       }
     },
     {
       "@type": "Question",
-      "name": "Does Byte Size Converter send my input to a server?",
+      "name": "为什么存储设备标称容量与实际显示不符？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Byte Size Converter processes data locally in your browser so you can work without uploading project files."
+        "text": "硬盘厂商使用十进制（1GB = 10 亿字节），而操作系统使用二进制（1GB = 1024^3 字节）。因此 500GB 硬盘在 Windows 中显示约 465GB。差异约 7%，属于正常现象而非质量问题。"
       }
     },
     {
       "@type": "Question",
-      "name": "What causes incorrect conversion results?",
+      "name": "KiB、MiB 与 KB、MB 有什么区别？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Most issues come from wrong unit selection, decimal separator confusion or misread original measurements."
+        "text": "KiB（Kibibyte）= 1024 Bytes，MiB（Mebibyte）= 1024 KiB，这是 IEC 标准的二进制前缀。KB、MB 严格来说是十进制（1000 进制），但常被混用。技术上 KiB 更准确表示 1024 进制。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "如何估算文件下载时间？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "下载时间 = 文件大小 ÷ 网速。注意单位转换：1 MB/s = 8 Mbps。例如 100MB 文件在 10MB/s 速度下需 10 秒；在 10Mbps（1.25MB/s）下需 80 秒。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "常见文件大小参考值有哪些？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "参考值：纯文本 1KB/页，MP3 歌曲 3-5MB，高清照片 2-8MB，1080P 电影 2-4GB，4K 电影 15-50GB，大型游戏 50-150GB。这些值帮助快速估算存储空间需求。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "带宽单位 Mbps 与 MB/s 如何换算？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "1 Byte = 8 bits，所以 1 MB/s = 8 Mbps。100Mbps 宽带理论下载速度为 12.5MB/s。运营商用 Mbps 标称，实际下载用 MB/s 显示，注意 8 倍关系。"
       }
     }
   ]
@@ -107,32 +102,202 @@
 <p>TB: <span id="tb"></span></p>
 
 <section class="tool-seo">
-<h3>About Byte Size Converter</h3>
-<p>This byte size converter switches between bytes, KB, MB, GB and TB for file sizes, storage and bandwidth values.</p>
-<p>It is useful for hosting plans, upload limits, storage estimates and technical documentation when size values need to be compared across units.</p>
+<h3>关于字节大小转换器</h3>
+<p>此字节大小转换器可在 bytes、KB、MB、GB 和 TB 之间进行转换，适用于文件大小、存储容量和带宽值的计算。它采用二进制换算标准（1024 进制），符合计算机系统的实际计算方式。</p>
+
+<h4>字节单位换算公式</h4>
+<p>计算机存储使用 2 的 10 次方（1024）进制：</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+换算关系：
+
+1 KB (Kilobyte) = 1,024 Bytes
+1 MB (Megabyte) = 1,024 KB = 1,048,576 Bytes
+1 GB (Gigabyte) = 1,024 MB = 1,073,741,824 Bytes
+1 TB (Terabyte) = 1,024 GB = 1,099,511,627,776 Bytes
+
+换算示例：
+1048576 Bytes = 1024 KB = 1 MB
+</pre>
+
+<h4>存储单位对比表</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">单位</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">符号</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">字节数（二进制）</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">常见用途</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Byte</td>
+    <td style="border:1px solid #ddd;padding:8px">B</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+    <td style="border:1px solid #ddd;padding:8px">单个字符</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Kilobyte</td>
+    <td style="border:1px solid #ddd;padding:8px">KB</td>
+    <td style="border:1px solid #ddd;padding:8px">1,024</td>
+    <td style="border:1px solid #ddd;padding:8px">小文档、图标</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Megabyte</td>
+    <td style="border:1px solid #ddd;padding:8px">MB</td>
+    <td style="border:1px solid #ddd;padding:8px">1,048,576</td>
+    <td style="border:1px solid #ddd;padding:8px">音乐、照片</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Gigabyte</td>
+    <td style="border:1px solid #ddd;padding:8px">GB</td>
+    <td style="border:1px solid #ddd;padding:8px">1,073,741,824</td>
+    <td style="border:1px solid #ddd;padding:8px">电影、游戏</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Terabyte</td>
+    <td style="border:1px solid #ddd;padding:8px">TB</td>
+    <td style="border:1px solid #ddd;padding:8px">1,099,511,627,776</td>
+    <td style="border:1px solid #ddd;padding:8px">硬盘、云存储</td>
+  </tr>
+</table>
+
+<h4>二进制前缀（IEC 标准）vs 十进制前缀（SI 标准）</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">类型</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">前缀</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">换算因子</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">使用场景</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">二进制</td>
+    <td style="border:1px solid #ddd;padding:8px">KiB, MiB, GiB</td>
+    <td style="border:1px solid #ddd;padding:8px">1024 (2^10)</td>
+    <td style="border:1px solid #ddd;padding:8px">内存、操作系统</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">十进制</td>
+    <td style="border:1px solid #ddd;padding:8px">KB, MB, GB</td>
+    <td style="border:1px solid #ddd;padding:8px">1000 (10^3)</td>
+    <td style="border:1px solid #ddd;padding:8px">硬盘厂商标称</td>
+  </tr>
+</table>
+
+<h4>常见文件大小参考</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">文件类型</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">大小范围</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">纯文本文档</td>
+    <td style="border:1px solid #ddd;padding:8px">1-50 KB</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Word 文档</td>
+    <td style="border:1px solid #ddd;padding:8px">100 KB - 10 MB</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">MP3 歌曲（3 分钟）</td>
+    <td style="border:1px solid #ddd;padding:8px">3-5 MB</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">高清照片</td>
+    <td style="border:1px solid #ddd;padding:8px">2-8 MB</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">1080P 电影</td>
+    <td style="border:1px solid #ddd;padding:8px">2-4 GB</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">4K 电影</td>
+    <td style="border:1px solid #ddd;padding:8px">15-50 GB</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">大型 PC 游戏</td>
+    <td style="border:1px solid #ddd;padding:8px">50-150 GB</td>
+  </tr>
+</table>
+
+<h4>带宽与下载速度换算</h4>
+<p>网络带宽通常用 Mbps（Megabits per second）表示，而下载速度用 MB/s（Megabytes per second）：</p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+换算公式：1 Byte = 8 bits
+所以：1 MB/s = 8 Mbps
+
+常见宽带速度对照：
+  10 Mbps  → 1.25 MB/s
+  50 Mbps  → 6.25 MB/s
+  100 Mbps → 12.5 MB/s
+  200 Mbps → 25 MB/s
+  500 Mbps → 62.5 MB/s
+  1000 Mbps (1Gbps) → 125 MB/s
+
+下载时间估算：
+  文件大小 ÷ 下载速度 = 时间
+  100MB ÷ 10MB/s = 10 秒
+</pre>
+
+<h4>常见应用场景</h4>
+<ul>
+  <li><strong>存储规划：</strong>计算需要多大硬盘或云存储空间</li>
+  <li><strong>带宽估算：</strong>根据文件大小和网速计算下载时间</li>
+  <li><strong>上传限制：</strong>确认文件是否符合邮件或平台大小限制</li>
+  <li><strong>技术文档：</strong>在文档中统一使用正确的存储单位</li>
+  <li><strong> hosting 方案：</strong>比较不同主机方案的存储空间</li>
+  <li><strong>数据迁移：</strong>估算传输大量数据所需时间</li>
+</ul>
+
+<h4>为什么硬盘标称与显示容量不同</h4>
+<p>硬盘厂商使用十进制计算（1GB = 10 亿字节），而 Windows 等系统使用二进制（1GB = 1024^3 字节）：</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+500GB 硬盘实际容量计算：
+
+厂商标称：500,000,000,000 字节（十进制）
+Windows 显示：500,000,000,000 ÷ 1024 ÷ 1024 ÷ 1024 ≈ 465.66 GiB
+
+差异比例：(500 - 465.66) ÷ 500 ≈ 6.87%
+
+这是正常现象，不是质量问题。
+</pre>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use Byte Size Converter</h3>
+<h3>如何使用字节大小转换器</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> Open Byte Size Converter and enter your source input data in the main field.</li>
-  <li><strong>Step 2:</strong> Confirm source and target units to avoid conversion-base mismatches.</li>
-  <li><strong>Step 3:</strong> Run conversion and compare values across units.</li>
-  <li><strong>Step 4:</strong> Use converted values in specs, calculations or reports.</li>
+  <li><strong>输入数值：</strong>在输入框中输入字节数或带单位的数值。</li>
+  <li><strong>点击转换：</strong>工具会自动计算并显示所有单位的等价值。</li>
+  <li><strong>查看结果：</strong>结果同时显示为 KB、MB、GB 和 TB。</li>
+  <li><strong>复制使用：</strong>可将转换结果用于文档、报告或计算中。</li>
 </ol>
+
+<h4 style="margin-top:20px">提示</h4>
+<ul>
+  <li>结果保留 4 位小数，自动去除末尾零</li>
+  <li>支持输入任意大小的数值</li>
+  <li>所有计算基于 1024 进制（二进制标准）</li>
+  <li>适合估算文件大小、存储容量和传输时间</li>
+</ul>
 </section>
 <section class="faq">
-<h3>Frequently Asked Questions</h3>
+<h3>常见问题解答</h3>
 <dl class="faq-list">
 
-  <dt>What is Byte Size Converter mainly used for?</dt>
-  <dd>Byte Size Converter is mainly used to convert between bytes, KB, MB, GB and TB for file sizes, storage and bandwidth.</dd>
+  <dt>什么是字节单位（Bytes, KB, MB, GB, TB）？</dt>
+  <dd>字节是计算机存储的基本单位。1 KB = 1024 Bytes，1 MB = 1024 KB，1 GB = 1024 MB，1 TB = 1024 GB。这是二进制换算（2 的 10 次方 = 1024），用于内存、文件大小等计算。</dd>
 
-  <dt>Does Byte Size Converter send my input to a server?</dt>
-  <dd>For normal usage, Byte Size Converter processes data locally in your browser so you can work without uploading project files.</dd>
+  <dt>为什么存储设备标称容量与实际显示不符？</dt>
+  <dd>硬盘厂商使用十进制（1GB = 10 亿字节），而操作系统使用二进制（1GB = 1024^3 字节）。因此 500GB 硬盘在 Windows 中显示约 465GB。差异约 7%，属于正常现象而非质量问题。</dd>
 
-  <dt>What causes incorrect conversion results?</dt>
-  <dd>Most issues come from wrong unit selection, decimal separator confusion or misread original measurements.</dd>
+  <dt>KiB、MiB 与 KB、MB 有什么区别？</dt>
+  <dd>KiB（Kibibyte）= 1024 Bytes，MiB（Mebibyte）= 1024 KiB，这是 IEC 标准的二进制前缀。KB、MB 严格来说是十进制（1000 进制），但常被混用。技术上 KiB 更准确表示 1024 进制。</dd>
+
+  <dt>如何估算文件下载时间？</dt>
+  <dd>下载时间 = 文件大小 ÷ 网速。注意单位转换：1 MB/s = 8 Mbps。例如 100MB 文件在 10MB/s 速度下需 10 秒；在 10Mbps（1.25MB/s）下需 80 秒。</dd>
+
+  <dt>常见文件大小参考值有哪些？</dt>
+  <dd>参考值：纯文本 1KB/页，MP3 歌曲 3-5MB，高清照片 2-8MB，1080P 电影 2-4GB，4K 电影 15-50GB，大型游戏 50-150GB。这些值帮助快速估算存储空间需求。</dd>
+
+  <dt>带宽单位 Mbps 与 MB/s 如何换算？</dt>
+  <dd>1 Byte = 8 bits，所以 1 MB/s = 8 Mbps。100Mbps 宽带理论下载速度为 12.5MB/s。运营商用 Mbps 标称，实际下载用 MB/s 显示，注意 8 倍关系。</dd>
 </dl>
 </section>
 </main>

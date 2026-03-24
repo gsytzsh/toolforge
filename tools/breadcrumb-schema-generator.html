@@ -2,50 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Breadcrumb Schema Generator – Create Breadcrumb JSON-LD Online | ToolForge</title>
-<meta name="description" content="Free online Breadcrumb Schema Generator to create BreadcrumbList JSON-LD markup for SEO. Part of the ToolForge developer tools collection.">
+<title>Breadcrumb Schema Generator – Generate BreadcrumbList JSON-LD for SEO | ToolForge</title>
+<meta name="description" content="Free online Breadcrumb Schema Generator to create BreadcrumbList JSON-LD markup for SEO. Generate structured data breadcrumbs for Google Search. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/breadcrumb-schema-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Breadcrumb Schema Generator – Create Breadcrumb JSON-LD Online | ToolForge">
-<meta property="og:description" content="Free online Breadcrumb Schema Generator to create BreadcrumbList JSON-LD markup for SEO. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Free online Breadcrumb Schema Generator to create BreadcrumbList JSON-LD markup for SEO. Generate structured data breadcrumbs for Google Search. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/breadcrumb-schema-generator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Breadcrumb Schema Generator – Create Breadcrumb JSON-LD Online | ToolForge">
-<meta name="twitter:description" content="Free online Breadcrumb Schema Generator to create BreadcrumbList JSON-LD markup for SEO. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Breadcrumb Schema Generator – Generate BreadcrumbList JSON-LD for SEO | ToolForge">
+<meta name="twitter:description" content="Free online Breadcrumb Schema Generator to create BreadcrumbList JSON-LD markup for SEO. Generate structured data breadcrumbs for Google Search. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Breadcrumb Schema Generator",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "enter breadcrumb labels and URLs in order"
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Confirm path order from homepage to current page."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Generate BreadcrumbList JSON-LD output."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Add markup to template and test in validators."
-    }
-  ]
-}
-</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,26 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Breadcrumb Schema Generator mainly used for?",
+      "name": "什么是 Breadcrumb Schema（面包屑模式）？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Breadcrumb Schema Generator is mainly used to generate breadcrumb structured data to clarify site hierarchy for search engines."
+        "text": "Breadcrumb Schema 是 schema.org 定义的 BreadcrumbList 结构化数据类型，用于向搜索引擎展示网站的层级导航路径。它由 itemListElement 数组组成，每个 ListItem 包含 position（位置）、name（名称）和 item（URL）。"
       }
     },
     {
       "@type": "Question",
-      "name": "Does Breadcrumb Schema Generator send my input to a server?",
+      "name": "为什么要在 SEO 中使用面包屑结构化数据？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Breadcrumb Schema Generator processes data locally in your browser so you can test quickly without uploading project files."
+        "text": "Google 使用面包屑结构化数据来理解页面在网站层级中的位置，可能在搜索结果中显示面包屑导航而非完整 URL。这能提升点击率、改善用户体验，并帮助搜索引擎更好地抓取网站结构。"
       }
     },
     {
       "@type": "Question",
-      "name": "Should breadcrumb schema match on-page breadcrumb links exactly?",
+      "name": "面包屑结构化数据的正确格式是什么？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, keep labels and URLs consistent between visible breadcrumbs and schema for stronger clarity signals."
+        "text": "必须使用 BreadcrumbList 类型，itemListElement 数组包含至少两个 ListItem。每个 ListItem 必须有 position（从 1 开始的整数）、name（面包屑标签）和 item（完整 URL， homepage 除外可省略）。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "面包屑的顺序应该如何排列？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "从左到右（或从首页到当前页）：position 1 是首页，position 2 是父级分类，最后是当前页面。例如：首页 > 博客 > 技术文章 > 具体文章。最后一个 item 可以是当前页面 URL 或省略。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "如何在网页中部署面包屑结构化数据？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "将生成的 JSON-LD 代码放入页面的 <head> 或 <body> 中。确保与页面上可见的面包屑导航保持一致。部署后用 Google Rich Results Test 或 Schema Markup Validator 验证。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "面包屑结构化数据的常见错误有哪些？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "常见错误：缺少 required 字段（position、name）、URL 不是绝对路径、itemListElement 少于两项、position 不连续、结构化数据与页面实际导航不一致。这些会导致 Google 忽略或降权处理。"
       }
     }
   ]
@@ -95,32 +90,177 @@
 <textarea id="output" rows="14" class="pdf-editor pdf-editor-mono" aria-label="Breadcrumb schema output" readonly></textarea>
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
-<h3>About Breadcrumb Schema Generator</h3>
-<p>This breadcrumb schema generator creates BreadcrumbList JSON-LD markup for structured navigation paths.</p>
-<p>It is useful for category trees, article paths and nested site navigation when you want search engines to better understand page hierarchy.</p>
+<h3>关于 Breadcrumb Schema 生成器</h3>
+<p>此面包屑 Schema 生成器可创建符合 schema.org 标准的 BreadcrumbList JSON-LD 结构化数据。它帮助搜索引擎理解网站的层级导航结构，可能在 Google 搜索结果中显示更友好的面包屑导航而非完整 URL。</p>
+
+<h4>BreadcrumbList 结构说明</h4>
+<ol>
+  <li><strong>BreadcrumbList：</strong>根类型，包含整个面包屑列表</li>
+  <li><strong>itemListElement：</strong>数组，包含所有面包屑项</li>
+  <li><strong>ListItem：</strong>每个面包屑项的类型</li>
+  <li><strong>position：</strong>该项在路径中的位置（从 1 开始）</li>
+  <li><strong>name：</strong>显示给用户的标签文本</li>
+  <li><strong>item：</strong>该项指向的完整 URL</li>
+</ol>
+
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+生成的 JSON-LD 示例：
+
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://example.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "博客",
+      "item": "https://example.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "技术文章",
+      "item": "https://example.com/blog/tech/"
+    }
+  ]
+}
+</pre>
+
+<h4>输入格式说明</h4>
+<p>每行输入一个面包屑项，使用 <code>Name :: URL</code> 格式：</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+输入示例：
+
+首页 :: https://example.com/
+产品分类 :: https://example.com/products/
+电子产品 :: https://example.com/products/electronics/
+手机 :: https://example.com/products/electronics/phones/
+
+每行结构：标签名 :: 完整 URL
+顺序：从首页到当前页面
+</pre>
+
+<h4>SEO 最佳实践</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">要点</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">说明</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">与页面导航一致</td>
+    <td style="border:1px solid #ddd;padding:8px">结构化数据必须与页面上可见的面包屑链接匹配</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">使用绝对 URL</td>
+    <td style="border:1px solid #ddd;padding:8px">item 字段必须是完整的 URL（包含协议）</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">至少两项</td>
+    <td style="border:1px solid #ddd;padding:8px">BreadcrumbList 必须包含至少两个 ListItem</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">position 连续</td>
+    <td style="border:1px solid #ddd;padding:8px">位置编号必须从 1 开始且连续递增</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">首页可省略 URL</td>
+    <td style="border:1px solid #ddd;padding:8px">首页的 item 字段可以省略</td>
+  </tr>
+</table>
+
+<h4>常见应用场景</h4>
+<ul>
+  <li><strong>电商网站：</strong>展示分类层级（首页 > 分类 > 子分类 > 产品）</li>
+  <li><strong>博客/新闻：</strong>文章路径（首页 > 栏目 > 文章标题）</li>
+  <li><strong>文档站点：</strong>文档层级（首页 > 章节 > 页面）</li>
+  <li><strong>论坛：</strong>版块导航（首页 > 大区 > 版块 > 主题）</li>
+  <li><strong>企业网站：</strong>页面层级（首页 > 关于我们 > 团队介绍）</li>
+</ul>
+
+<h4>验证工具</h4>
+<p>部署面包屑结构化数据后，建议使用以下工具验证：</p>
+<ul>
+  <li><strong>Google Rich Results Test：</strong>测试是否符合 Google 富媒体搜索结果要求</li>
+  <li><strong>Schema Markup Validator：</strong>schema.org 官方验证工具</li>
+  <li><strong>Google Search Console：</strong>监控结构化数据状态和错误</li>
+</ul>
+
+<h4>常见错误及避免方法</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">错误</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">影响</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">解决方案</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">缺少 position</td>
+    <td style="border:1px solid #ddd;padding:8px">验证失败</td>
+    <td style="border:1px solid #ddd;padding:8px">为每个 ListItem 添加 position</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">URL 使用相对路径</td>
+    <td style="border:1px solid #ddd;padding:8px">Google 可能忽略</td>
+    <td style="border:1px solid #ddd;padding:8px">使用完整绝对 URL</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">只有一项</td>
+    <td style="border:1px solid #ddd;padding:8px">不符合要求</td>
+    <td style="border:1px solid #ddd;padding:8px">至少包含两项</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">与页面导航不一致</td>
+    <td style="border:1px solid #ddd;padding:8px">可能被降权</td>
+    <td style="border:1px solid #ddd;padding:8px">保持结构化数据与可见导航一致</td>
+  </tr>
+</table>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use Breadcrumb Schema Generator</h3>
+<h3>如何使用面包屑 Schema 生成器</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> enter breadcrumb labels and URLs in order</li>
-  <li><strong>Step 2:</strong> Confirm path order from homepage to current page.</li>
-  <li><strong>Step 3:</strong> Generate BreadcrumbList JSON-LD output.</li>
-  <li><strong>Step 4:</strong> Add markup to template and test in validators.</li>
+  <li><strong>输入面包屑项：</strong>每行输入一个项，格式为"标签名 :: URL"。</li>
+  <li><strong>确认顺序：</strong>从首页开始，依次到当前页面。</li>
+  <li><strong>点击生成：</strong>工具会生成符合 schema.org 标准的 JSON-LD 代码。</li>
+  <li><strong>复制使用：</strong>将生成的代码放入网页的&lt;head&gt;或&lt;body&gt;中。</li>
+  <li><strong>验证测试：</strong>使用 Google Rich Results Test 验证部署效果。</li>
 </ol>
+
+<h4 style="margin-top:20px">提示</h4>
+<ul>
+  <li>每行必须包含"::"分隔符，前面是标签，后面是 URL</li>
+  <li>URL 必须是完整格式（包含 https://）</li>
+  <li>position 会自动从 1 开始递增</li>
+  <li>至少需要输入两个面包屑项</li>
+  <li>最后一个 URL 可以是当前页面，也可以省略</li>
+</ul>
 </section>
 <section class="faq">
-<h3>Frequently Asked Questions</h3>
+<h3>常见问题解答</h3>
 <dl class="faq-list">
 
-  <dt>What is Breadcrumb Schema Generator mainly used for?</dt>
-  <dd>Breadcrumb Schema Generator is mainly used to generate breadcrumb structured data to clarify site hierarchy for search engines.</dd>
+  <dt>什么是 Breadcrumb Schema（面包屑模式）？</dt>
+  <dd>Breadcrumb Schema 是 schema.org 定义的 BreadcrumbList 结构化数据类型，用于向搜索引擎展示网站的层级导航路径。它由 itemListElement 数组组成，每个 ListItem 包含 position（位置）、name（名称）和 item（URL）。</dd>
 
-  <dt>Does Breadcrumb Schema Generator send my input to a server?</dt>
-  <dd>For normal usage, Breadcrumb Schema Generator processes data locally in your browser so you can test quickly without uploading project files.</dd>
+  <dt>为什么要在 SEO 中使用面包屑结构化数据？</dt>
+  <dd>Google 使用面包屑结构化数据来理解页面在网站层级中的位置，可能在搜索结果中显示面包屑导航而非完整 URL。这能提升点击率、改善用户体验，并帮助搜索引擎更好地抓取网站结构。</dd>
 
-  <dt>Should breadcrumb schema match on-page breadcrumb links exactly?</dt>
-  <dd>Yes, keep labels and URLs consistent between visible breadcrumbs and schema for stronger clarity signals.</dd>
+  <dt>面包屑结构化数据的正确格式是什么？</dt>
+  <dd>必须使用 BreadcrumbList 类型，itemListElement 数组包含至少两个 ListItem。每个 ListItem 必须有 position（从 1 开始的整数）、name（面包屑标签）和 item（完整 URL，homepage 除外可省略）。</dd>
+
+  <dt>面包屑的顺序应该如何排列？</dt>
+  <dd>从左到右（或从首页到当前页）：position 1 是首页，position 2 是父级分类，最后是当前页面。例如：首页 &gt; 博客 &gt; 技术文章 &gt; 具体文章。最后一个 item 可以是当前页面 URL 或省略。</dd>
+
+  <dt>如何在网页中部署面包屑结构化数据？</dt>
+  <dd>将生成的 JSON-LD 代码放入页面的 &lt;head&gt; 或 &lt;body&gt; 中。确保与页面上可见的面包屑导航保持一致。部署后用 Google Rich Results Test 或 Schema Markup Validator 验证。</dd>
+
+  <dt>面包屑结构化数据的常见错误有哪些？</dt>
+  <dd>常见错误：缺少 required 字段（position、name）、URL 不是绝对路径、itemListElement 少于两项、position 不连续、结构化数据与页面实际导航不一致。这些会导致 Google 忽略或降权处理。</dd>
 </dl>
 </section>
 </main>
