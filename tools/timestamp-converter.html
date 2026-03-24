@@ -28,56 +28,35 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Timestamp Converter mainly used for?",
+      "name": "What is a Unix timestamp and how is it calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Timestamp Converter is mainly used to convert Unix timestamps and readable dates when debugging logs, APIs and schedulers."
+        "text": "A Unix timestamp (also called POSIX time or epoch time) represents the number of seconds or milliseconds that have elapsed since January 1, 1970, 00:00:00 UTC (the Unix epoch). It does not count leap seconds. For example, the timestamp 1710000000 represents March 9, 2024, at a specific moment in time."
       }
     },
     {
       "@type": "Question",
-      "name": "Does Timestamp Converter send my input to a server?",
+      "name": "What is the difference between timestamp in seconds vs milliseconds?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Timestamp Converter processes data locally in your browser so you can test quickly without uploading project files."
+        "text": "Unix timestamps can be expressed in seconds (10 digits, e.g., 1710000000) or milliseconds (13 digits, e.g., 1710000000000). JavaScript, Java, and many modern systems use milliseconds, while Unix/Linux systems, databases, and APIs often use seconds. This tool automatically detects and handles both formats."
       }
     },
     {
       "@type": "Question",
-      "name": "Why is my converted timestamp off by several hours?",
+      "name": "Why is my timestamp conversion off by hours or a day?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Timezone mismatch is the usual cause. Confirm whether your source data is UTC or local time before converting."
+        "text": "Timezone confusion is the most common cause. Unix timestamps are always in UTC. When you see a converted date, make sure you know whether it's showing local time or UTC. Daylight Saving Time (DST) transitions can also cause apparent hour shifts. Always verify the timezone context when comparing timestamps across systems."
       }
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Timestamp Converter",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "enter a Unix timestamp or a calendar date-time value"
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Select seconds or milliseconds and confirm timezone context before converting."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Run conversion and inspect both machine and human-readable formats."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy converted time values for documentation, monitoring or request payloads."
+      "@type": "Question",
+      "name": "What is the Year 2038 problem?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Systems that store Unix timestamps as 32-bit signed integers will overflow on January 19, 2038, because the maximum value (2,147,483,647 seconds) will be reached. After this point, timestamps will wrap to negative values. Modern systems use 64-bit integers, which can represent dates for billions of years."
+      }
     }
   ]
 }
@@ -122,31 +101,102 @@
 
 <section class="tool-seo">
 <h3>About Unix Timestamp Converter</h3>
-<p>This Unix timestamp converter switches between Unix timestamps and human-readable dates in both local time and UTC.</p>
-<p>It is useful for logs, API payloads, database records and debugging work when you need to understand or generate exact machine-friendly time values.</p>
+<p>This Unix timestamp converter converts between Unix timestamps and human-readable dates entirely in your browser. It handles both seconds (10 digits) and milliseconds (13 digits) automatically, and displays results in both local time and UTC for easy comparison.</p>
+
+<h4>What Is a Unix Timestamp?</h4>
+<p>A Unix timestamp (also called epoch time or POSIX time) represents a specific moment in time as the number of seconds or milliseconds that have elapsed since <strong>January 1, 1970, 00:00:00 UTC</strong> (the Unix epoch). The timestamp itself is always in UTC, regardless of your timezone.</p>
+
+<h4>Seconds vs Milliseconds</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Unit</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Digits</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Common Uses</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Seconds</td>
+    <td style="border:1px solid #ddd;padding:8px">10</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>1710000000</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Unix/Linux, databases, PHP, Python</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Milliseconds</td>
+    <td style="border:1px solid #ddd;padding:8px">13</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>1710000000000</code></td>
+    <td style="border:1px solid #ddd;padding:8px">JavaScript, Java, mobile apps</td>
+  </tr>
+</table>
+
+<h4>Common Timestamp Use Cases</h4>
+<ul>
+  <li><strong>API Development:</strong> Many APIs return timestamps for created_at, updated_at fields</li>
+  <li><strong>Database Records:</strong> SQLite, MySQL, and PostgreSQL often store dates as Unix timestamps</li>
+  <li><strong>Log Files:</strong> Server logs frequently use timestamps for precise event ordering</li>
+  <li><strong>Scheduling Systems:</strong> Cron jobs, timers, and reminders use timestamps for trigger times</li>
+  <li><strong>Authentication:</strong> JWT tokens and session expiry times are often timestamp-based</li>
+</ul>
+
+<h4>Timezone Reference</h4>
+<ul>
+  <li><strong>UTC (Coordinated Universal Time):</strong> The standard time reference used by servers and APIs worldwide</li>
+  <li><strong>Local Time:</strong> Your computer's current timezone, which may observe Daylight Saving Time</li>
+  <li><strong>GMT vs UTC:</strong> GMT is a timezone (Greenwich Mean Time), while UTC is a time standard. For practical purposes, they are often used interchangeably.</li>
+</ul>
+
+<h4>Example Conversions</h4>
+<p><strong>Timestamp to Date:</strong></p>
+<ul>
+  <li>Input: <code>1710000000</code></li>
+  <li>Output: March 9, 2024 at 13:20:00 (local time varies by timezone)</li>
+</ul>
+
+<p><strong>Date to Timestamp:</strong></p>
+<ul>
+  <li>Input: <code>2025-01-01 00:00:00</code></li>
+  <li>Output: <code>1735689600</code> (seconds) or <code>1735689600000</code> (milliseconds)</li>
+</ul>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use Timestamp Converter</h3>
+<h3>How to Convert Timestamps</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> enter a Unix timestamp or a calendar date-time value</li>
-  <li><strong>Step 2:</strong> Select seconds or milliseconds and confirm timezone context before converting.</li>
-  <li><strong>Step 3:</strong> Run conversion and inspect both machine and human-readable formats.</li>
-  <li><strong>Step 4:</strong> Copy converted time values for documentation, monitoring or request payloads.</li>
+  <li><strong>Enter your value:</strong> Type a Unix timestamp (like 1710000000) or a human-readable date (like 2024-03-09 12:00:00) into the input box.</li>
+  <li><strong>Choose conversion direction:</strong> Click "Timestamp → Date" to convert a timestamp to a readable date, or "Date → Timestamp" to convert a date to a timestamp.</li>
+  <li><strong>Review the results:</strong> The tool displays the converted date/time in both local time and UTC, along with timestamps in both seconds and milliseconds.</li>
+  <li><strong>Copy the output:</strong> Click "Copy Result" to copy all converted values to your clipboard for use in documentation, APIs, or debugging.</li>
 </ol>
+
+<h4 style="margin-top:20px">Quick Reference</h4>
+<p><strong>Current timestamp (seconds):</strong> <span id="quick-sec" style="font-family:monospace;background:#f5f5f5;padding:4px 8px;border-radius:4px">--</span></p>
+<p><strong>Current timestamp (milliseconds):</strong> <span id="quick-ms" style="font-family:monospace;background:#f5f5f5;padding:4px 8px;border-radius:4px">--</span></p>
+
+<script>
+setInterval(function(){
+  var now=new Date()
+  document.getElementById("quick-sec").innerText=Math.floor(now.getTime()/1000)
+  document.getElementById("quick-ms").innerText=now.getTime()
+},1000)
+</script>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is Timestamp Converter mainly used for?</dt>
-  <dd>Timestamp Converter is mainly used to convert Unix timestamps and readable dates when debugging logs, APIs and schedulers.</dd>
+  <dt>What is a Unix timestamp and how is it calculated?</dt>
+  <dd>A Unix timestamp (also called POSIX time or epoch time) represents the number of seconds or milliseconds that have elapsed since January 1, 1970, 00:00:00 UTC (the Unix epoch). It does not count leap seconds. For example, the timestamp 1710000000 represents March 9, 2024, at a specific moment in time.</dd>
 
-  <dt>Does Timestamp Converter send my input to a server?</dt>
-  <dd>For normal usage, Timestamp Converter processes data locally in your browser so you can test quickly without uploading project files.</dd>
+  <dt>What is the difference between timestamp in seconds vs milliseconds?</dt>
+  <dd>Unix timestamps can be expressed in seconds (10 digits, e.g., 1710000000) or milliseconds (13 digits, e.g., 1710000000000). JavaScript, Java, and many modern systems use milliseconds, while Unix/Linux systems, databases, and APIs often use seconds. This tool automatically detects and handles both formats.</dd>
 
-  <dt>Why is my converted timestamp off by several hours?</dt>
-  <dd>Timezone mismatch is the usual cause. Confirm whether your source data is UTC or local time before converting.</dd>
+  <dt>Why is my timestamp conversion off by hours or a day?</dt>
+  <dd>Timezone confusion is the most common cause. Unix timestamps are always in UTC. When you see a converted date, make sure you know whether it's showing local time or UTC. Daylight Saving Time (DST) transitions can also cause apparent hour shifts. Always verify the timezone context when comparing timestamps across systems.</dd>
+
+  <dt>What is the Year 2038 problem?</dt>
+  <dd>Systems that store Unix timestamps as 32-bit signed integers will overflow on January 19, 2038, because the maximum value (2,147,483,647 seconds) will be reached. After this point, timestamps will wrap to negative values. Modern systems use 64-bit integers, which can represent dates for billions of years.</dd>
+
+  <dt>How do I convert a timestamp to my local timezone?</dt>
+  <dd>This tool automatically displays results in both local time and UTC. For manual conversion, add or subtract your timezone offset from the UTC time. For example, if you're in UTC+8, add 8 hours to the UTC result.</dd>
 </dl>
 </section>
 </main>

@@ -24,56 +24,35 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Base64 Encode Decode mainly used for?",
+      "name": "What is Base64 encoding and how does it work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Base64 Encode Decode is mainly used to encode plain text to Base64 or decode Base64 strings during API debugging and header checks."
+        "text": "Base64 is a binary-to-text encoding scheme that represents binary data in ASCII string format. It works by grouping every 3 bytes (24 bits) of input data into 4 groups of 6 bits each, then mapping each 6-bit group to one of 64 printable ASCII characters (A-Z, a-z, 0-9, +, /). If the input length is not divisible by 3, padding characters (=) are added."
       }
     },
     {
       "@type": "Question",
-      "name": "Does Base64 Encode Decode send my input to a server?",
+      "name": "Is Base64 encryption? Can I use it to hide secrets?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, Base64 Encode Decode processes data locally in your browser so you can test quickly without uploading project files."
+        "text": "No. Base64 is encoding, not encryption. Anyone can decode a Base64 string back to the original data. Never use Base64 to hide passwords, API keys, or sensitive information. For secure encoding, use encryption algorithms like AES first, then optionally encode the encrypted output with Base64."
       }
     },
     {
       "@type": "Question",
-      "name": "Is Base64 output secure for storing secrets?",
+      "name": "Why does my Base64 string contain invalid characters?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. Base64 is only an encoding format. Use encryption or proper secret storage for sensitive values."
+        "text": "Valid Base64 characters are A-Z, a-z, 0-9, +, /, and = for padding. If you see other characters, the string may be URL-encoded Base64 (which uses - and _ instead of + and /) or corrupted. This tool handles standard Base64. For URL-safe Base64, replace + with - and / with _."
       }
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use Base64 Encode Decode",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "type plain text or paste an existing Base64 string"
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Select encode or decode mode based on the data you are handling."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Run conversion and verify output instantly."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy the converted value into your request body, header or test data."
+      "@type": "Question",
+      "name": "What are common use cases for Base64?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common uses include: embedding images in HTML/CSS (data URIs), encoding binary data in JSON/XML APIs, storing complex data in cookies or localStorage, email attachments (MIME), and representing cryptographic keys or certificates in text format."
+      }
     }
   ]
 }
@@ -118,31 +97,110 @@
 
 <section class="tool-seo">
 <h3>About Base64 Encode Decode</h3>
-<p>This Base64 encode decode tool converts plain text to Base64 and turns Base64 back into readable text in a single page.</p>
-<p>It is useful for API payloads, auth headers, browser testing and other debugging tasks where encoded text needs to be checked or transformed quickly.</p>
+<p>This Base64 encoder/decoder converts text to Base64 and decodes Base64 strings back to readable text entirely in your browser. No data is sent to any server, making it safe for encoding sensitive API responses, configuration data, or debugging authentication headers.</p>
+
+<h4>How Base64 Encoding Works</h4>
+<p>Base64 encoding transforms binary data into ASCII text by:</p>
+<ol>
+  <li>Grouping input bytes into sets of 3 (24 bits total)</li>
+  <li>Splitting each group into 4 chunks of 6 bits</li>
+  <li>Mapping each 6-bit value (0-63) to a character from the Base64 alphabet</li>
+  <li>Adding <code>=</code> padding if the input length is not divisible by 3</li>
+</ol>
+
+<h4>Base64 Character Set</h4>
+<p>The standard Base64 alphabet uses 64 characters:</p>
+<ul>
+  <li><strong>A-Z</strong> (26 uppercase letters)</li>
+  <li><strong>a-z</strong> (26 lowercase letters)</li>
+  <li><strong>0-9</strong> (10 digits)</li>
+  <li><strong>+</strong> and <strong>/</strong> (2 special characters)</li>
+  <li><strong>=</strong> for padding (not part of the encoding itself)</li>
+</ul>
+
+<h4>Common Base64 Use Cases</h4>
+<ul>
+  <li><strong>Data URIs:</strong> Embed images directly in HTML/CSS: <code>&lt;img src="data:image/png;base64,..."&gt;</code></li>
+  <li><strong>API Authentication:</strong> HTTP Basic Auth encodes credentials as Base64</li>
+  <li><strong>JSON/XML Payloads:</strong> Include binary data (images, files) in text-based formats</li>
+  <li><strong>Email Attachments:</strong> MIME encoding uses Base64 for non-text content</li>
+  <li><strong>Certificates and Keys:</strong> PEM format uses Base64 to represent cryptographic data</li>
+</ul>
+
+<h4>Example: Encoding "Hello"</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Step</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Data</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Original text</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>Hello</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">ASCII bytes</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>72 101 108 108 111</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Binary</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>01001000 01100101 01101100 01101100 01101111</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Regrouped (6-bit)</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>010010 000110 010101 101100 011011 000110 1111</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Base64 indices</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>18 6 21 44 27 6 60</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Base64 output</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>SGVsbG8=</code></td>
+  </tr>
+</table>
+
+<h4>Important: Base64 Is Not Encryption</h4>
+<p>Base64 encoding provides <strong>no security</strong>. Anyone can decode a Base64 string to recover the original data. Use encryption (like AES) if you need to protect sensitive information.</p>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use Base64 Encode Decode</h3>
+<h3>How to Encode or Decode Base64</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> type plain text or paste an existing Base64 string</li>
-  <li><strong>Step 2:</strong> Select encode or decode mode based on the data you are handling.</li>
-  <li><strong>Step 3:</strong> Run conversion and verify output instantly.</li>
-  <li><strong>Step 4:</strong> Copy the converted value into your request body, header or test data.</li>
+  <li><strong>Choose mode:</strong> Select "Text to Base64" for encoding, or "Base64 to Text" for decoding.</li>
+  <li><strong>Enter your data:</strong> Type or paste your text (for encoding) or Base64 string (for decoding) into the input box.</li>
+  <li><strong>Click Convert:</strong> The tool will process your input and display the result in the output box.</li>
+  <li><strong>Copy the result:</strong> Click "Copy Result" to copy the converted value to your clipboard.</li>
+  <li><strong>Swap if needed:</strong> Use the "Swap" button to quickly switch between encode and decode modes.</li>
 </ol>
+
+<h4 style="margin-top:20px">Example Conversions</h4>
+<p><strong>Encode example:</strong></p>
+<ul>
+  <li>Input: <code>Hello, World!</code></li>
+  <li>Output: <code>SGVsbG8sIFdvcmxkIQ==</code></li>
+</ul>
+
+<p><strong>Decode example:</strong></p>
+<ul>
+  <li>Input: <code>VGhpcyBpcyBhIHRlc3Q=</code></li>
+  <li>Output: <code>This is a test</code></li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is Base64 Encode Decode mainly used for?</dt>
-  <dd>Base64 Encode Decode is mainly used to encode plain text to Base64 or decode Base64 strings during API debugging and header checks.</dd>
+  <dt>What is Base64 encoding and how does it work?</dt>
+  <dd>Base64 is a binary-to-text encoding scheme that represents binary data in ASCII string format. It works by grouping every 3 bytes (24 bits) of input data into 4 groups of 6 bits each, then mapping each 6-bit group to one of 64 printable ASCII characters (A-Z, a-z, 0-9, +, /). If the input length is not divisible by 3, padding characters (=) are added.</dd>
 
-  <dt>Does Base64 Encode Decode send my input to a server?</dt>
-  <dd>For normal usage, Base64 Encode Decode processes data locally in your browser so you can test quickly without uploading project files.</dd>
+  <dt>Is Base64 encryption? Can I use it to hide secrets?</dt>
+  <dd>No. Base64 is encoding, not encryption. Anyone can decode a Base64 string back to the original data. Never use Base64 to hide passwords, API keys, or sensitive information. For secure encoding, use encryption algorithms like AES first, then optionally encode the encrypted output with Base64.</dd>
 
-  <dt>Is Base64 output secure for storing secrets?</dt>
-  <dd>No. Base64 is only an encoding format. Use encryption or proper secret storage for sensitive values.</dd>
+  <dt>Why does my Base64 string contain invalid characters?</dt>
+  <dd>Valid Base64 characters are A-Z, a-z, 0-9, +, /, and = for padding. If you see other characters, the string may be URL-encoded Base64 (which uses - and _ instead of + and /) or corrupted. This tool handles standard Base64. For URL-safe Base64, replace + with - and / with _.</dd>
+
+  <dt>What are common use cases for Base64?</dt>
+  <dd>Common uses include: embedding images in HTML/CSS (data URIs), encoding binary data in JSON/XML APIs, storing complex data in cookies or localStorage, email attachments (MIME), and representing cryptographic keys or certificates in text format.</dd>
 </dl>
 </section>
 </main>
