@@ -24,56 +24,43 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is JWT Inspector & Decoder mainly used for?",
+      "name": "What is a JWT and how is it structured?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "JWT Inspector & Decoder is mainly used to decode JWT structure and inspect header, payload and expiry claims quickly."
+        "text": "A JWT (JSON Web Token) is a compact, URL-safe token format for securely transmitting information between parties. It consists of three parts separated by dots: Header (algorithm and token type), Payload (claims and data), and Signature (verification). The format is: xxxxx.yyyyy.zzzzz where each part is Base64Url encoded."
       }
     },
     {
       "@type": "Question",
-      "name": "Does JWT Inspector & Decoder send my input to a server?",
+      "name": "Can this tool verify JWT signatures?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, JWT Inspector & Decoder processes data locally in your browser so you can test quickly without uploading project files."
+        "text": "This tool decodes and displays JWT header and payload contents, but does not verify signatures. Signature verification requires the original secret key (for HMAC) or public key (for RSA/ECDSA) and should be done on your server. Never share your secret keys with online tools."
       }
     },
     {
       "@type": "Question",
-      "name": "Does JWT Inspector validate token signature automatically?",
+      "name": "What do exp, iat, and nbf claims mean?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Decoding and signature validation are different steps. Use the correct secret/public key to verify signatures when needed."
+        "text": "These are standard JWT timestamp claims: 'exp' (expiration time) - token expires after this time, 'iat' (issued at) - when the token was created, 'nbf' (not before) - token is invalid before this time. All are Unix timestamps in seconds."
       }
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use JWT Inspector & Decoder",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "paste a JWT token into the input field"
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Inspect header and payload sections while checking timestamps and claims."
+      "@type": "Question",
+      "name": "Is it safe to decode JWTs with online tools?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This tool runs entirely in your browser - tokens are never sent to any server. However, avoid pasting production tokens with sensitive claims or long validity periods. For highly sensitive tokens, use offline tools or inspect them directly in your application code."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Decode token data and review claim values."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Use decoded output to troubleshoot auth flow or token configuration."
+      "@type": "Question",
+      "name": "What algorithms are commonly used for JWT signing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common JWT algorithms include: HS256 (HMAC with SHA-256, symmetric key), RS256 (RSA with SHA-256, asymmetric), ES256 (ECDSA with P-256 and SHA-256), and none (unsigned, not recommended). The algorithm is specified in the token header."
+      }
     }
   ]
 }
@@ -98,32 +85,124 @@
 <pre id="meta"></pre>
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
-<h3>About JWT Inspector &amp; Decoder</h3>
-<p>This JWT inspector decodes the header and payload of a JSON Web Token and helps you inspect claims, timestamps and signature parts.</p>
-<p>It is useful for auth debugging, token expiration checks and API troubleshooting when you need to read a JWT without sending it to a server.</p>
+<h3>About JWT Inspector & Decoder</h3>
+<p>This JWT inspector decodes JSON Web Tokens entirely in your browser, displaying the header, payload, and token metadata without sending any data to a server. It's designed for developers who need to quickly inspect token contents during authentication debugging.</p>
+
+<h4>JWT Structure</h4>
+<p>A JWT consists of three Base64Url-encoded parts separated by dots:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Header.Payload.Signature
+
+Example:
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.
+SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+</pre>
+
+<h4>Header Contents</h4>
+<p>The header typically contains two fields:</p>
+<ul>
+  <li><strong>alg:</strong> The signing algorithm (e.g., HS256, RS256, ES256)</li>
+  <li><strong>typ:</strong> The token type, usually "JWT"</li>
+</ul>
+
+<h4>Payload Claims</h4>
+<p>The payload contains claims (statements about an entity and additional data):</p>
+<ul>
+  <li><strong>Registered claims:</strong> Standard fields like <code>iss</code> (issuer), <code>sub</code> (subject), <code>aud</code> (audience), <code>exp</code> (expiration), <code>nbf</code> (not before), <code>iat</code> (issued at), <code>jti</code> (JWT ID)</li>
+  <li><strong>Public claims:</strong> Custom fields defined by your application (e.g., <code>userId</code>, <code>role</code>, <code>email</code>)</li>
+  <li><strong>Private claims:</strong> Custom claims agreed upon between parties</li>
+</ul>
+
+<h4>Common JWT Algorithms</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Algorithm</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Key Required</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>HS256</code></td>
+    <td style="border:1px solid #ddd;padding:8px">HMAC + SHA-256</td>
+    <td style="border:1px solid #ddd;padding:8px">Symmetric (shared secret)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>RS256</code></td>
+    <td style="border:1px solid #ddd;padding:8px">RSA + SHA-256</td>
+    <td style="border:1px solid #ddd;padding:8px">Asymmetric (private/public key pair)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>ES256</code></td>
+    <td style="border:1px solid #ddd;padding:8px">ECDSA + P-256</td>
+    <td style="border:1px solid #ddd;padding:8px">Asymmetric (elliptic curve)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>none</code></td>
+    <td style="border:1px solid #ddd;padding:8px">No signature</td>
+    <td style="border:1px solid #ddd;padding:8px">Not recommended for production</td>
+  </tr>
+</table>
+
+<h4>Security Notes</h4>
+<ul>
+  <li><strong>Decoding ≠ Verification:</strong> Anyone can decode a JWT. The signature must be verified to trust the contents.</li>
+  <li><strong>Never trust unsigned tokens:</strong> Tokens with <code>"alg": "none"</code> have no signature and can be forged.</li>
+  <li><strong>Check expiration:</strong> Always validate the <code>exp</code> claim on your server.</li>
+  <li><strong>Use HTTPS:</strong> JWTs transmitted over HTTP can be intercepted and reused.</li>
+</ul>
+
+<h4>Example JWT Payload</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+{
+  "sub": "user-12345",
+  "name": "John Doe",
+  "email": "john@example.com",
+  "role": "admin",
+  "iat": 1710000000,
+  "exp": 1710086400
+}
+</pre>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use JWT Inspector &amp; Decoder</h3>
+<h3>How to Inspect a JWT Token</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> paste a JWT token into the input field</li>
-  <li><strong>Step 2:</strong> Inspect header and payload sections while checking timestamps and claims.</li>
-  <li><strong>Step 3:</strong> Decode token data and review claim values.</li>
-  <li><strong>Step 4:</strong> Use decoded output to troubleshoot auth flow or token configuration.</li>
+  <li><strong>Paste your JWT:</strong> Copy the full JWT token (all three parts separated by dots) into the input box.</li>
+  <li><strong>Click "Inspect JWT":</strong> The tool will decode the Base64Url-encoded header and payload sections.</li>
+  <li><strong>Review the contents:</strong> Examine the header (algorithm, token type), payload (claims, user data), and token info (expiration status, timestamps).</li>
+  <li><strong>Copy or clear:</strong> Click "Copy Inspection" to copy the decoded contents, or clear the input to inspect another token.</li>
 </ol>
+
+<h4 style="margin-top:20px">Understanding the Output</h4>
+<p><strong>Header:</strong> Shows the signing algorithm and token type as JSON.</p>
+<p><strong>Payload:</strong> Displays all claims including user data and timestamps in readable JSON format.</p>
+<p><strong>Token Info:</strong> Shows expiration status, human-readable dates for timestamp claims, and whether a signature is present.</p>
+
+<h4 style="margin-top:20px">Example JWT</h4>
+<p>You can test with this sample JWT (HS256, expired):</p>
+<pre style="background:#f5f5f5;padding:8px;border-radius:4px;font-size:11px;overflow:auto;word-break:break-all">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</pre>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is JWT Inspector &amp; Decoder mainly used for?</dt>
-  <dd>JWT Inspector &amp; Decoder is mainly used to decode JWT structure and inspect header, payload and expiry claims quickly.</dd>
+  <dt>What is a JWT and how is it structured?</dt>
+  <dd>A JWT (JSON Web Token) is a compact, URL-safe token format for securely transmitting information between parties. It consists of three parts separated by dots: Header (algorithm and token type), Payload (claims and data), and Signature (verification). The format is: xxxxx.yyyyy.zzzzz where each part is Base64Url encoded.</dd>
 
-  <dt>Does JWT Inspector &amp; Decoder send my input to a server?</dt>
-  <dd>For normal usage, JWT Inspector &amp; Decoder processes data locally in your browser so you can test quickly without uploading project files.</dd>
+  <dt>Can this tool verify JWT signatures?</dt>
+  <dd>This tool decodes and displays JWT header and payload contents, but does not verify signatures. Signature verification requires the original secret key (for HMAC) or public key (for RSA/ECDSA) and should be done on your server. Never share your secret keys with online tools.</dd>
 
-  <dt>Does JWT Inspector validate token signature automatically?</dt>
-  <dd>Decoding and signature validation are different steps. Use the correct secret/public key to verify signatures when needed.</dd>
+  <dt>What do exp, iat, and nbf claims mean?</dt>
+  <dd>These are standard JWT timestamp claims: 'exp' (expiration time) - token expires after this time, 'iat' (issued at) - when the token was created, 'nbf' (not before) - token is invalid before this time. All are Unix timestamps in seconds.</dd>
+
+  <dt>Is it safe to decode JWTs with online tools?</dt>
+  <dd>This tool runs entirely in your browser - tokens are never sent to any server. However, avoid pasting production tokens with sensitive claims or long validity periods. For highly sensitive tokens, use offline tools or inspect them directly in your application code.</dd>
+
+  <dt>What algorithms are commonly used for JWT signing?</dt>
+  <dd>Common JWT algorithms include: HS256 (HMAC with SHA-256, symmetric key), RS256 (RSA with SHA-256, asymmetric), ES256 (ECDSA with P-256 and SHA-256), and none (unsigned, not recommended). The algorithm is specified in the token header.</dd>
+
+  <dt>Why is my JWT showing as invalid or malformed?</dt>
+  <dd>Common causes include: missing parts (JWT must have 3 dot-separated sections), invalid Base64Url encoding, extra whitespace or characters, or using an unsupported algorithm. Ensure you copied the complete token including all three parts.</dd>
 </dl>
 </section>
 </main>

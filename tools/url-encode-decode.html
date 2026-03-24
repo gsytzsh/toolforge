@@ -31,56 +31,35 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is URL Encode Decode mainly used for?",
+      "name": "What is URL encoding and why is it necessary?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "URL Encode Decode is mainly used to encode and decode URLs or query parameters safely for links, redirects and API calls."
+        "text": "URL encoding (also called percent-encoding) converts characters into a format that can be safely transmitted over the internet. Special characters like spaces, ampersands, and non-ASCII characters must be encoded because they have reserved meanings in URLs or are not valid in certain contexts. For example, a space becomes %20, and Chinese characters get encoded as multiple percent-encoded bytes."
       }
     },
     {
       "@type": "Question",
-      "name": "Does URL Encode Decode send my input to a server?",
+      "name": "What characters need to be encoded in a URL?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For normal usage, URL Encode Decode processes data locally in your browser so you can test quickly without uploading project files."
+        "text": "The following characters typically need encoding: spaces (%20), special symbols (<, >, #, %, {, }, |, \, ^, ~, [, ], `, @), and non-ASCII characters (Unicode). Reserved characters like ? & = / : have special meanings in URL structure and should only be encoded when they appear in parameter values, not as structural separators."
       }
     },
     {
       "@type": "Question",
-      "name": "Should I encode an entire URL or only query parameters?",
+      "name": "What is the difference between encodeURI and encodeURIComponent?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Usually encode parameter values, not separators like '?' '&' '='. Encoding the whole URL can make routing unreadable."
+        "text": "encodeURI() encodes a complete URI but preserves reserved characters that have structural meaning (? & = / : @). encodeURIComponent() encodes all special characters and should be used for individual URL parameter values. For example, encodeURI('https://example.com?a=1&b=2') keeps the ? and &, while encodeURIComponent would encode them as %3F and %26."
       }
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Use URL Encode Decode",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "text": "paste a full URL, query string or parameter value"
     },
     {
-      "@type": "HowToStep",
-      "position": 2,
-      "text": "Choose encode or decode mode to match your workflow."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 3,
-      "text": "Convert and verify reserved characters are handled correctly."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 4,
-      "text": "Copy the final URL string back into your app, script or browser test."
+      "@type": "Question",
+      "name": "Why does my encoded URL look different in the browser address bar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Modern browsers automatically decode percent-encoded characters in the address bar for display purposes, showing a more readable version. However, the actual URL being sent to the server remains encoded. This is a visual convenience feature and does not affect how the URL functions."
+      }
     }
   ]
 }
@@ -118,31 +97,125 @@
 
 <section class="tool-seo">
 <h3>About URL Encode / Decode</h3>
-<p>The URL Encode / Decode tool lets you encode and decode URLs and query strings safely for HTTP requests, redirects and API calls.</p>
-<p>It is useful when working with encoded values, copied payloads, browser-safe strings and quick debugging tasks across common text formats.</p>
+<p>This URL encode/decode tool converts text to and from percent-encoded format entirely in your browser. URL encoding (also called percent-encoding) is necessary because certain characters have special meanings in URLs or are not safe for transmission in HTTP requests.</p>
+
+<h4>Why URL Encoding Is Necessary</h4>
+<p>URLs can only contain a limited set of characters (ASCII letters, digits, and a few special characters). When you need to include:</p>
+<ul>
+  <li><strong>Spaces:</strong> Encoded as <code>%20</code> or sometimes <code>+</code></li>
+  <li><strong>Non-ASCII characters:</strong> Chinese, Japanese, emoji, etc. get encoded as multiple byte sequences</li>
+  <li><strong>Special symbols:</strong> Characters like <code>&lt; &gt; # % { } | \ ^ ~ [ ] `</code> must be encoded</li>
+  <li><strong>Reserved characters in values:</strong> When <code>? & = / : @</code> appear in parameter values (not as separators)</li>
+</ul>
+
+<h4>Common URL Encoding Examples</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Character</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Encoded</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code> </code> (space)</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>%20</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Space character</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>&</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>%26</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Query parameter separator</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>=</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>%3D</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Key-value separator</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>?</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>%3F</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Query string start</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>#</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>%23</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Fragment identifier</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>你好</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>%E4%BD%A0%E5%A5%BD</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Chinese characters</td>
+  </tr>
+</table>
+
+<h4>encodeURI vs encodeURIComponent</h4>
+<p>JavaScript provides two encoding functions with different behaviors:</p>
+<ul>
+  <li><strong>encodeURI():</strong> Encodes a complete URL but preserves reserved characters (<code>? & = / : @</code>). Use for full URLs.</li>
+  <li><strong>encodeURIComponent():</strong> Encodes all special characters. Use for individual parameter values.</li>
+</ul>
+
+<p><strong>Example:</strong></p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Input: https://example.com/search?q=hello world&type=article
+
+encodeURI result:
+https://example.com/search?q=hello%20world&type=article
+(keeps ? and & as-is)
+
+encodeURIComponent result:
+https%3A%2F%2Fexample.com%2Fsearch%3Fq%3Dhello%20world%26type%3Darticle
+(encodes everything)
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Query Parameters:</strong> Encoding parameter values that contain spaces or special characters</li>
+  <li><strong>Redirect URLs:</strong> Passing URLs as parameters (e.g., <code>?redirect=https://...</code>)</li>
+  <li><strong>API Requests:</strong> Ensuring request bodies and headers are properly formatted</li>
+  <li><strong>Data URIs:</strong> Embedding data in URLs for tracking or state management</li>
+</ul>
 </section>
 
 <section class="how-to-use">
-<h3>How to Use URL Encode Decode</h3>
+<h3>How to Encode or Decode URLs</h3>
 <ol class="how-to-steps">
-  <li><strong>Step 1:</strong> paste a full URL, query string or parameter value</li>
-  <li><strong>Step 2:</strong> Choose encode or decode mode to match your workflow.</li>
-  <li><strong>Step 3:</strong> Convert and verify reserved characters are handled correctly.</li>
-  <li><strong>Step 4:</strong> Copy the final URL string back into your app, script or browser test.</li>
+  <li><strong>Enter your text:</strong> Type or paste the URL or text you want to encode/decode into the input box.</li>
+  <li><strong>Choose operation:</strong> Click "Encode" to convert text to percent-encoded format, or "Decode" to convert back to readable text.</li>
+  <li><strong>Review the result:</strong> The encoded or decoded text appears in the output box below.</li>
+  <li><strong>Copy or clear:</strong> Click "Copy Result" to copy the output, or "Clear" to start over.</li>
 </ol>
+
+<h4 style="margin-top:20px">Example Conversions</h4>
+<p><strong>Encode example:</strong></p>
+<ul>
+  <li>Input: <code>https://example.com/search?q=hello world</code></li>
+  <li>Output: <code>https%3A%2F%2Fexample.com%2Fsearch%3Fq%3Dhello%20world</code></li>
+</ul>
+
+<p><strong>Decode example:</strong></p>
+<ul>
+  <li>Input: <code>%E4%BD%A0%E5%A5%BD%EF%BC%8C%E4%B8%96%E7%95%8C</code></li>
+  <li>Output: <code>你好，世界</code></li>
+</ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is URL Encode Decode mainly used for?</dt>
-  <dd>URL Encode Decode is mainly used to encode and decode URLs or query parameters safely for links, redirects and API calls.</dd>
+  <dt>What is URL encoding and why is it necessary?</dt>
+  <dd>URL encoding (also called percent-encoding) converts characters into a format that can be safely transmitted over the internet. Special characters like spaces, ampersands, and non-ASCII characters must be encoded because they have reserved meanings in URLs or are not valid in certain contexts. For example, a space becomes %20, and Chinese characters get encoded as multiple percent-encoded bytes.</dd>
 
-  <dt>Does URL Encode Decode send my input to a server?</dt>
-  <dd>For normal usage, URL Encode Decode processes data locally in your browser so you can test quickly without uploading project files.</dd>
+  <dt>What characters need to be encoded in a URL?</dt>
+  <dd>The following characters typically need encoding: spaces (%20), special symbols (<, >, #, %, {, }, |, \, ^, ~, [, ], `, @), and non-ASCII characters (Unicode). Reserved characters like ? & = / : have special meanings in URL structure and should only be encoded when they appear in parameter values, not as structural separators.</dd>
 
-  <dt>Should I encode an entire URL or only query parameters?</dt>
-  <dd>Usually encode parameter values, not separators like '?' '&amp;' '='. Encoding the whole URL can make routing unreadable.</dd>
+  <dt>What is the difference between encodeURI and encodeURIComponent?</dt>
+  <dd>encodeURI() encodes a complete URI but preserves reserved characters that have structural meaning (? & = / : @). encodeURIComponent() encodes all special characters and should be used for individual URL parameter values. For example, encodeURI('https://example.com?a=1&b=2') keeps the ? and &, while encodeURIComponent would encode them as %3F and %26.</dd>
+
+  <dt>Why does my encoded URL look different in the browser address bar?</dt>
+  <dd>Modern browsers automatically decode percent-encoded characters in the address bar for display purposes, showing a more readable version. However, the actual URL being sent to the server remains encoded. This is a visual convenience feature and does not affect how the URL functions.</dd>
+
+  <dt>Can I decode a URL that was encoded multiple times?</dt>
+  <dd>Yes, but you need to decode it the same number of times it was encoded. Double-encoded URLs contain percent signs that are themselves encoded (e.g., %2520 instead of %20). Decode once to get %20, then decode again to get the space character.</dd>
 </dl>
 </section>
 </main>
