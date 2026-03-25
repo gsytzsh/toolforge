@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Factorial Calculator?",
+      "name": "What is a factorial and how is it calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Factorial Calculator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "The factorial of n (denoted n!) is the product of all positive integers from 1 to n. Formula: n! = n × (n-1) × ... × 2 × 1. By convention, 0! = 1. Example: 5! = 5×4×3×2×1 = 120. Factorials grow extremely fast: 10! = 3,628,800, 20! ≈ 2.4 quintillion."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What are factorials used for in mathematics?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Factorials are fundamental in: combinatorics (counting permutations and combinations), probability theory (calculating odds), calculus (Taylor series coefficients), statistics (binomial distributions), and algebra (binomial theorem). They count the number of ways to arrange n distinct objects."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the recursive formula for factorials?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "The recursive definition is: n! = n × (n-1)! with base case 0! = 1. This means 5! = 5 × 4! = 5 × 24 = 120. Recursive formulas are elegant but iterative calculation is more efficient for large numbers to avoid stack overflow in programming."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How fast do factorials grow?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Factorials grow faster than exponential functions. Stirling's approximation: n! ≈ √(2πn) × (n/e)^n. For large n: 10! = 3.6M, 15! = 1.3T, 20! = 2.4 quintillion, 52! ≈ 8×10^67 (more than atoms in the observable universe). JavaScript can accurately compute up to 170! before overflow."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What is the double factorial notation?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Double factorial (n!!) multiplies every other integer: n!! = n × (n-2) × (n-4) × ... For odd n: 7!! = 7×5×3×1 = 105. For even n: 8!! = 8×6×4×2 = 384. By convention: 0!! = 1 and (-1)!! = 1. Used in combinatorics and special function theory."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How do you calculate permutations and combinations using factorials?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Permutations (order matters): P(n,r) = n!/(n-r)!. Combinations (order doesn't matter): C(n,r) = n!/(r!×(n-r)!). Example: From 52 cards, there are C(52,5) = 2,598,960 possible 5-card hands, but P(52,5) = 311,875,200 ordered sequences."</
       }
     }
   ]
@@ -85,23 +90,103 @@
 <h3>About Factorial Calculator</h3>
 <p>This factorial calculator computes `n!` for a non-negative integer.</p>
 <p>It is useful for permutations, combinations, probability problems and classroom math where factorial values come up often.</p>
+
+<h4>Factorial Formula and Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Factorial definition:
+// n! = n × (n-1) × (n-2) × ... × 2 × 1
+// 0! = 1 (by convention)
+
+// Examples:
+// 0! = 1
+// 1! = 1
+// 2! = 2 × 1 = 2
+// 3! = 3 × 2 × 1 = 6
+// 4! = 4 × 3 × 2 × 1 = 24
+// 5! = 5 × 4 × 3 × 2 × 1 = 120
+// 10! = 3,628,800
+// 20! = 2,432,902,008,176,640,000
+
+// JavaScript implementation (iterative):
+function factorial(n) {
+  let result = 1;
+  for (let i = 2; i <= n; i++) {
+    result *= i;
+  }
+  return result;
+}
+</pre>
+
+<h4>Factorial Values Reference Table</h4>
+<table class="ref-table">
+<thead><tr><th>n</th><th>n!</th><th>Scientific Notation</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>1</td><td>1×10^0</td></tr>
+<tr><td>1</td><td>1</td><td>1×10^0</td></tr>
+<tr><td>2</td><td>2</td><td>2×10^0</td></tr>
+<tr><td>3</td><td>6</td><td>6×10^0</td></tr>
+<tr><td>4</td><td>24</td><td>2.4×10^1</td></tr>
+<tr><td>5</td><td>120</td><td>1.2×10^2</td></tr>
+<tr><td>6</td><td>720</td><td>7.2×10^2</td></tr>
+<tr><td>7</td><td>5,040</td><td>5.04×10^3</td></tr>
+<tr><td>8</td><td>40,320</td><td>4.03×10^4</td></tr>
+<tr><td>9</td><td>362,880</td><td>3.63×10^5</td></tr>
+<tr><td>10</td><td>3,628,800</td><td>3.63×10^6</td></tr>
+<tr><td>15</td><td>1,307,674,368,000</td><td>1.31×10^12</td></tr>
+<tr><td>20</td><td>2,432,902,008,176,640,000</td><td>2.43×10^18</td></tr>
+</tbody>
+</table>
+
+<h4>Permutations and Combinations</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Permutations (order matters):
+// P(n,r) = n! / (n-r)!
+// Example: Arrange 3 books from 5: P(5,3) = 5!/2! = 60
+
+// Combinations (order doesn't matter):
+// C(n,r) = n! / (r! × (n-r)!)
+// Example: Choose 3 books from 5: C(5,3) = 5!/(3!×2!) = 10
+
+// Binomial coefficient (n choose r):
+// C(n,r) = n! / (r! × (n-r)!)
+// Used in binomial theorem: (a+b)^n = Σ C(n,k) × a^(n-k) × b^k
+</pre>
+
+<h4>Stirling's Approximation</h4>
+<p>For large n, factorial can be approximated:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+n! ≈ √(2πn) × (n/e)^n
+
+// More accurate version:
+n! ≈ √(2πn) × (n/e)^n × (1 + 1/(12n))
+
+// Example: 10!
+// Exact: 3,628,800
+// Stirling: √(20π) × (10/e)^10 ≈ 3,598,696
+// Error: ~0.8%
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Factorial Calculator?</dt>
-  <dd>Factorial Calculator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is a factorial and how is it calculated?</dt>
+  <dd>The factorial of n (denoted n!) is the product of all positive integers from 1 to n. Formula: n! = n × (n-1) × ... × 2 × 1. By convention, 0! = 1. Example: 5! = 5×4×3×2×1 = 120. Factorials grow extremely fast: 10! = 3,628,800, 20! ≈ 2.4 quintillion.</dd>
+
+  <dt>What are factorials used for in mathematics?</dt>
+  <dd>Factorials are fundamental in: combinatorics (counting permutations and combinations), probability theory (calculating odds), calculus (Taylor series coefficients), statistics (binomial distributions), and algebra (binomial theorem). They count the number of ways to arrange n distinct objects.</dd>
+
+  <dt>What is the recursive formula for factorials?</dt>
+  <dd>The recursive definition is: n! = n × (n-1)! with base case 0! = 1. This means 5! = 5 × 4! = 5 × 24 = 120. Recursive formulas are elegant but iterative calculation is more efficient for large numbers to avoid stack overflow in programming.</dd>
+
+  <dt>How fast do factorials grow?</dt>
+  <dd>Factorials grow faster than exponential functions. Stirling's approximation: n! ≈ √(2πn) × (n/e)^n. For large n: 10! = 3.6M, 15! = 1.3T, 20! = 2.4 quintillion, 52! ≈ 8×10^67 (more than atoms in the observable universe). JavaScript can accurately compute up to 170! before overflow.</dd>
+
+  <dt>What is the double factorial notation?</dt>
+  <dd>Double factorial (n!!) multiplies every other integer: n!! = n × (n-2) × (n-4) × ... For odd n: 7!! = 7×5×3×1 = 105. For even n: 8!! = 8×6×4×2 = 384. By convention: 0!! = 1 and (-1)!! = 1. Used in combinatorics and special function theory.</dd>
+
+  <dt>How do you calculate permutations and combinations using factorials?</dt>
+  <dd>Permutations (order matters): P(n,r) = n!/(n-r)!. Combinations (order doesn't matter): C(n,r) = n!/(r!×(n-r)!). Example: From 52 cards, there are C(52,5) = 2,598,960 possible 5-card hands, but P(52,5) = 311,875,200 ordered sequences.</dd>
 </dl>
 </section>
 </main>

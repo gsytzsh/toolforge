@@ -26,45 +26,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Date Diff Calculator?",
+      "name": "How is the difference between two dates calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Date Diff Calculator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Date difference is calculated by converting both dates to milliseconds since Unix epoch (January 1, 1970), subtracting the values, and dividing by 86,400,000 (milliseconds per day). The formula: days = (date2 - date1) / 86400000. UTC time is used to avoid timezone and daylight saving time issues."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the Unix epoch and why is it used?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "The Unix epoch is January 1, 1970 00:00:00 UTC. All dates are represented as milliseconds elapsed since this point. Using a fixed reference point simplifies date arithmetic, enables cross-platform consistency, and avoids calendar complexity like leap years and varying month lengths."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How do you handle leap years in date calculations?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Leap years add February 29th, making the year 366 days instead of 365. A year is a leap year if: divisible by 4, except century years must be divisible by 400. JavaScript's Date object handles leap years automatically when calculating differences."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are common use cases for date difference calculations?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Common uses include: project duration tracking, billing period calculation, subscription length, vacation day counting, deadline countdowns, age calculation, loan term computation, contract period verification, and time-between-events analysis in analytics."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How do timezone differences affect date calculations?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Timezones can cause off-by-one errors when dates span midnight boundaries. Using UTC (ISO 8601 format with 'T00:00:00Z') ensures consistent results regardless of user location. Local timezone calculations may produce different results for users in different regions."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What is ISO 8601 date format?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "ISO 8601 is the international standard for date/time representation: YYYY-MM-DD (e.g., 2024-03-25). It sorts chronologically, is unambiguous across locales, and is natively supported by JavaScript's Date constructor. The full format includes time: YYYY-MM-DDTHH:mm:ss.sssZ."</
       }
     }
   ]
@@ -101,23 +106,82 @@
 <h3>About Date Diff Calculator</h3>
 <p>This date difference calculator tells you how many days fall between two dates.</p>
 <p>It is useful for project planning, billing periods, subscription windows, travel schedules and other cases where you need a clear day count between milestones.</p>
+
+<h4>Date Difference Calculation Formula</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Calculate days between two dates
+function daysBetween(date1, date2) {
+  // Convert to milliseconds since epoch
+  const ms1 = new Date(date1 + "T00:00:00Z").getTime();
+  const ms2 = new Date(date2 + "T00:00:00Z").getTime();
+
+  // Calculate difference in milliseconds
+  const diff = ms2 - ms1;
+
+  // Convert to days (1000ms * 60s * 60m * 24h)
+  const days = diff / 86400000;
+
+  return days;
+}
+
+// Example: 2024-01-01 to 2024-12-31 = 365 days
+</pre>
+
+<h4>Leap Year Rules</h4>
+<table class="ref-table">
+<thead><tr><th>Condition</th><th>Rule</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td>Divisible by 4</td><td>Leap year</td><td>2024, 2028, 2032</td></tr>
+<tr><td>Divisible by 100</td><td>Not leap year</td><td>1900, 2100, 2200</td></tr>
+<tr><td>Divisible by 400</td><td>Leap year</td><td>2000, 2400, 2800</td></tr>
+</tbody>
+</table>
+
+<h4>Common Date Formats</h4>
+<table class="ref-table">
+<thead><tr><th>Format</th><th>Example</th><th>Standard</th></tr></thead>
+<tbody>
+<tr><td>ISO 8601</td><td>2024-03-25</td><td>International standard</td></tr>
+<tr><td>US Format</td><td>03/25/2024</td><td>MM/DD/YYYY</td></tr>
+<tr><td>European Format</td><td>25/03/2024</td><td>DD/MM/YYYY</td></tr>
+<tr><td>Unix Timestamp</td><td>1711324800</td><td>Seconds since epoch</td></tr>
+</tbody>
+</table>
+
+<h4>Days per Month Reference</h4>
+<table class="ref-table">
+<thead><tr><th>Month</th><th>Days</th><th>Month</th><th>Days</th></tr></thead>
+<tbody>
+<tr><td>January</td><td>31</td><td>July</td><td>31</td></tr>
+<tr><td>February</td><td>28 or 29</td><td>August</td><td>31</td></tr>
+<tr><td>March</td><td>31</td><td>September</td><td>30</td></tr>
+<tr><td>April</td><td>30</td><td>October</td><td>31</td></tr>
+<tr><td>May</td><td>31</td><td>November</td><td>30</td></tr>
+<tr><td>June</td><td>30</td><td>December</td><td>31</td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Date Diff Calculator?</dt>
-  <dd>Date Diff Calculator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How is the difference between two dates calculated?</dt>
+  <dd>Date difference is calculated by converting both dates to milliseconds since Unix epoch (January 1, 1970), subtracting the values, and dividing by 86,400,000 (milliseconds per day). The formula: days = (date2 - date1) / 86400000. UTC time is used to avoid timezone and daylight saving time issues.</dd>
+
+  <dt>What is the Unix epoch and why is it used?</dt>
+  <dd>The Unix epoch is January 1, 1970 00:00:00 UTC. All dates are represented as milliseconds elapsed since this point. Using a fixed reference point simplifies date arithmetic, enables cross-platform consistency, and avoids calendar complexity like leap years and varying month lengths.</dd>
+
+  <dt>How do you handle leap years in date calculations?</dt>
+  <dd>Leap years add February 29th, making the year 366 days instead of 365. A year is a leap year if: divisible by 4, except century years must be divisible by 400. JavaScript's Date object handles leap years automatically when calculating differences.</dd>
+
+  <dt>What are common use cases for date difference calculations?</dt>
+  <dd>Common uses include: project duration tracking, billing period calculation, subscription length, vacation day counting, deadline countdowns, age calculation, loan term computation, contract period verification, and time-between-events analysis in analytics.</dd>
+
+  <dt>How do timezone differences affect date calculations?</dt>
+  <dd>Timezones can cause off-by-one errors when dates span midnight boundaries. Using UTC (ISO 8601 format with 'T00:00:00Z') ensures consistent results regardless of user location. Local timezone calculations may produce different results for users in different regions.</dd>
+
+  <dt>What is ISO 8601 date format?</dt>
+  <dd>ISO 8601 is the international standard for date/time representation: YYYY-MM-DD (e.g., 2024-03-25). It sorts chronologically, is unambiguous across locales, and is natively supported by JavaScript's Date constructor. The full format includes time: YYYY-MM-DDTHH:mm:ss.sssZ.</dd>
 </dl>
 </section>
 </main>

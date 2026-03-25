@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Fraction Calculator?",
+      "name": "How do you add or subtract fractions with different denominators?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Fraction Calculator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "To add/subtract fractions with different denominators, find a common denominator (usually the product or LCM), convert each fraction, then add/subtract numerators. Formula: a/b + c/d = (ad + bc)/bd. Example: 1/3 + 1/4 = 4/12 + 3/12 = 7/12. Result is simplified using GCD."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do you multiply and divide fractions?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Multiply fractions: multiply numerators and denominators directly. a/b × c/d = ac/bd. Divide fractions: multiply by reciprocal. a/b ÷ c/d = a/b × d/c = ad/bc. Example: 2/3 × 3/4 = 6/12 = 1/2. Example: 2/3 ÷ 3/4 = 2/3 × 4/3 = 8/9."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the GCD method for simplifying fractions?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "After computing a result, divide both numerator and denominator by their Greatest Common Divisor. GCD is found using Euclidean algorithm: gcd(a,b) = gcd(b, a mod b). Example: 12/18 simplifies to 2/3 because gcd(12,18) = 6, so 12÷6=2 and 18÷6=3."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the relationship between GCD and LCM?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "For any two positive integers a and b: a × b = gcd(a,b) × lcm(a,b). This means lcm(a,b) = |a×b| / gcd(a,b). Example: For 12 and 18, gcd=6, so lcm = (12×18)/6 = 36. This relationship is used to compute LCM efficiently."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How do you handle negative fractions?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "A negative fraction can have the negative sign in numerator, denominator, or in front. Convention places it in front or in numerator. If denominator is negative, multiply both numerator and denominator by -1. Example: 3/(-4) = -3/4, (-3)/(-4) = 3/4."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What are improper fractions and mixed numbers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Improper fractions have numerator ≥ denominator (e.g., 7/3). Mixed numbers combine whole number and fraction (e.g., 2 1/3). Conversion: 7/3 = 2 remainder 1, so 7/3 = 2 1/3. Reverse: 2 1/3 = (2×3+1)/3 = 7/3. This tool outputs improper fractions in simplified form."
       }
     }
   ]
@@ -93,23 +98,64 @@
 <h3>About Fraction Calculator</h3>
 <p>This fraction calculator adds, subtracts, multiplies or divides two fractions and simplifies the result to lowest terms.</p>
 <p>It is useful for homework, measurement math, recipe adjustments and other situations where working with fractions is clearer than converting everything to decimals.</p>
+
+<h4>Fraction Arithmetic Formulas</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Addition: a/b + c/d = (ad + bc) / bd
+// Subtraction: a/b - c/d = (ad - bc) / bd
+// Multiplication: a/b × c/d = ac / bd
+// Division: a/b ÷ c/d = a/b × d/c = ad / bc
+
+// Examples:
+// 1/3 + 1/4 = (1×4 + 1×3) / (3×4) = 7/12
+// 2/5 - 1/3 = (2×3 - 1×5) / (5×3) = 1/15
+// 3/4 × 2/5 = (3×2) / (4×5) = 6/20 = 3/10
+// 2/3 ÷ 4/5 = 2/3 × 5/4 = 10/12 = 5/6
+</pre>
+
+<h4>GCD and LCM Relationship</h4>
+<table class="ref-table">
+<thead><tr><th>Concept</th><th>Formula</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td>GCD (Euclidean)</td><td>gcd(a,b) = gcd(b, a mod b)</td><td>gcd(48,18) = 6</td></tr>
+<tr><td>LCM from GCD</td><td>lcm(a,b) = |a×b| / gcd(a,b)</td><td>lcm(12,18) = 36</td></tr>
+<tr><td>Product Rule</td><td>a×b = gcd(a,b) × lcm(a,b)</td><td>12×18 = 6×36 = 216</td></tr>
+</tbody>
+</table>
+
+<h4>Fraction Simplification Examples</h4>
+<table class="ref-table">
+<thead><tr><th>Original</th><th>GCD</th><th>Simplified</th></tr></thead>
+<tbody>
+<tr><td>8/12</td><td>4</td><td>2/3</td></tr>
+<tr><td>15/25</td><td>5</td><td>3/5</td></tr>
+<tr><td>24/36</td><td>12</td><td>2/3</td></tr>
+<tr><td>42/56</td><td>14</td><td>3/4</td></tr>
+<tr><td>100/150</td><td>50</td><td>2/3</td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Fraction Calculator?</dt>
-  <dd>Fraction Calculator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How do you add or subtract fractions with different denominators?</dt>
+  <dd>To add/subtract fractions with different denominators, find a common denominator (usually the product or LCM), convert each fraction, then add/subtract numerators. Formula: a/b + c/d = (ad + bc)/bd. Example: 1/3 + 1/4 = 4/12 + 3/12 = 7/12. Result is simplified using GCD.</dd>
+
+  <dt>How do you multiply and divide fractions?</dt>
+  <dd>Multiply fractions: multiply numerators and denominators directly. a/b × c/d = ac/bd. Divide fractions: multiply by reciprocal. a/b ÷ c/d = a/b × d/c = ad/bc. Example: 2/3 × 3/4 = 6/12 = 1/2. Example: 2/3 ÷ 3/4 = 2/3 × 4/3 = 8/9.</dd>
+
+  <dt>What is the GCD method for simplifying fractions?</dt>
+  <dd>After computing a result, divide both numerator and denominator by their Greatest Common Divisor. GCD is found using Euclidean algorithm: gcd(a,b) = gcd(b, a mod b). Example: 12/18 simplifies to 2/3 because gcd(12,18) = 6, so 12÷6=2 and 18÷6=3.</dd>
+
+  <dt>What is the relationship between GCD and LCM?</dt>
+  <dd>For any two positive integers a and b: a × b = gcd(a,b) × lcm(a,b). This means lcm(a,b) = |a×b| / gcd(a,b). Example: For 12 and 18, gcd=6, so lcm = (12×18)/6 = 36. This relationship is used to compute LCM efficiently.</dd>
+
+  <dt>How do you handle negative fractions?</dt>
+  <dd>A negative fraction can have the negative sign in numerator, denominator, or in front. Convention places it in front or in numerator. If denominator is negative, multiply both numerator and denominator by -1. Example: 3/(-4) = -3/4, (-3)/(-4) = 3/4.</dd>
+
+  <dt>What are improper fractions and mixed numbers?</dt>
+  <dd>Improper fractions have numerator ≥ denominator (e.g., 7/3). Mixed numbers combine whole number and fraction (e.g., 2 1/3). Conversion: 7/3 = 2 remainder 1, so 7/3 = 2 1/3. Reverse: 2 1/3 = (2×3+1)/3 = 7/3. This tool outputs improper fractions in simplified form.</dd>
 </dl>
 </section>
 </main>

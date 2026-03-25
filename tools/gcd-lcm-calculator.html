@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Gcd Lcm Calculator?",
+      "name": "What is the Euclidean algorithm for finding GCD?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Gcd Lcm Calculator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "The Euclidean algorithm finds GCD by repeated division: gcd(a,b) = gcd(b, a mod b), continuing until remainder is 0. Example: gcd(48,18) = gcd(18,48 mod 18) = gcd(18,12) = gcd(12,6) = gcd(6,0) = 6. This method is efficient with O(log min(a,b)) time complexity."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How is LCM calculated using GCD?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "LCM is calculated using the formula: lcm(a,b) = |a×b| / gcd(a,b). This relationship exists because the product of two numbers equals the product of their GCD and LCM. Example: lcm(12,18) = (12×18)/6 = 36. This avoids listing multiples and is computationally efficient."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is prime factorization method for GCD and LCM?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Prime factorization breaks numbers into prime factors. For GCD, take the lowest power of each common prime. For LCM, take the highest power of each prime. Example: 60 = 2²×3×5, 48 = 2⁴×3. GCD = 2²×3 = 12, LCM = 2⁴×3×5 = 240."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are coprime (relatively prime) numbers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Two numbers are coprime if their GCD is 1, meaning they share no common factors other than 1. Example: 8 and 15 are coprime (gcd=1) even though neither is prime. Consecutive integers are always coprime. For coprime a,b: lcm(a,b) = a×b."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What are common use cases for GCD and LCM?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "GCD is used for: simplifying fractions, dividing items into equal groups, finding largest tile size for flooring. LCM is used for: finding common denominators, scheduling repeating events, gear rotation synchronization, adding periodic tasks with different cycles."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How do you handle negative numbers in GCD/LCM calculations?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "GCD is always positive by convention. gcd(-a,b) = gcd(a,b) = gcd(a,-b). The algorithm uses absolute values. LCM is also typically expressed as positive. Most calculators return gcd(-48,18) = 6 and lcm(-12,18) = 36, treating inputs as their absolute values."
       }
     }
   ]
@@ -89,23 +94,70 @@
 <h3>About GCD &amp; LCM Calculator</h3>
 <p>This GCD and LCM calculator finds the greatest common divisor and least common multiple for two integers.</p>
 <p>It is useful for simplifying fractions, comparing repeating cycles and solving number problems where shared factors or common multiples matter.</p>
+
+<h4>Euclidean Algorithm Implementation</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Euclidean algorithm for GCD
+function gcd(a, b) {
+  return b ? gcd(b, a % b) : Math.abs(a);
+}
+
+// Example trace: gcd(48, 18)
+// gcd(48, 18) → gcd(18, 12) → gcd(12, 6) → gcd(6, 0) → 6
+
+// LCM using GCD relationship
+function lcm(a, b) {
+  return Math.abs(a * b) / gcd(a, b);
+}
+
+// Time complexity: O(log min(a,b))
+</pre>
+
+<h4>GCD and LCM Examples</h4>
+<table class="ref-table">
+<thead><tr><th>Numbers</th><th>GCD</th><th>LCM</th><th>Product Check</th></tr></thead>
+<tbody>
+<tr><td>12, 18</td><td>6</td><td>36</td><td>12×18 = 6×36 = 216</td></tr>
+<tr><td>24, 36</td><td>12</td><td>72</td><td>24×36 = 12×72 = 864</td></tr>
+<tr><td>15, 25</td><td>5</td><td>75</td><td>15×25 = 5×75 = 375</td></tr>
+<tr><td>7, 13</td><td>1</td><td>91</td><td>7×13 = 1×91 = 91 (coprime)</td></tr>
+<tr><td>48, 60</td><td>12</td><td>240</td><td>48×60 = 12×240 = 11520</td></tr>
+</tbody>
+</table>
+
+<h4>Prime Factorization Method</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// For a = 60 = 2² × 3 × 5
+// For b = 48 = 2⁴ × 3
+
+// GCD: Take lowest power of common primes
+// gcd = 2² × 3 = 12
+
+// LCM: Take highest power of all primes
+// lcm = 2⁴ × 3 × 5 = 240
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Gcd Lcm Calculator?</dt>
-  <dd>Gcd Lcm Calculator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the Euclidean algorithm for finding GCD?</dt>
+  <dd>The Euclidean algorithm finds GCD by repeated division: gcd(a,b) = gcd(b, a mod b), continuing until remainder is 0. Example: gcd(48,18) = gcd(18,48 mod 18) = gcd(18,12) = gcd(12,6) = gcd(6,0) = 6. This method is efficient with O(log min(a,b)) time complexity.</dd>
+
+  <dt>How is LCM calculated using GCD?</dt>
+  <dd>LCM is calculated using the formula: lcm(a,b) = |a×b| / gcd(a,b). This relationship exists because the product of two numbers equals the product of their GCD and LCM. Example: lcm(12,18) = (12×18)/6 = 36. This avoids listing multiples and is computationally efficient.</dd>
+
+  <dt>What is prime factorization method for GCD and LCM?</dt>
+  <dd>Prime factorization breaks numbers into prime factors. For GCD, take the lowest power of each common prime. For LCM, take the highest power of each prime. Example: 60 = 2²×3×5, 48 = 2⁴×3. GCD = 2²×3 = 12, LCM = 2⁴×3×5 = 240.</dd>
+
+  <dt>What are coprime (relatively prime) numbers?</dt>
+  <dd>Two numbers are coprime if their GCD is 1, meaning they share no common factors other than 1. Example: 8 and 15 are coprime (gcd=1) even though neither is prime. Consecutive integers are always coprime. For coprime a,b: lcm(a,b) = a×b.</dd>
+
+  <dt>What are common use cases for GCD and LCM?</dt>
+  <dd>GCD is used for: simplifying fractions, dividing items into equal groups, finding largest tile size for flooring. LCM is used for: finding common denominators, scheduling repeating events, gear rotation synchronization, adding periodic tasks with different cycles.</dd>
+
+  <dt>How do you handle negative numbers in GCD/LCM calculations?</dt>
+  <dd>GCD is always positive by convention. gcd(-a,b) = gcd(a,b) = gcd(a,-b). The algorithm uses absolute values. LCM is also typically expressed as positive. Most calculators return gcd(-48,18) = 6 and lcm(-12,18) = 36, treating inputs as their absolute values.</dd>
 </dl>
 </section>
 </main>

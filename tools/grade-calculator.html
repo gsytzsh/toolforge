@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Grade Calculator?",
+      "name": "How is the final exam grade calculated using weighted averages?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Grade Calculator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "The formula is: Final Needed = (Target - (1-w)×Current) / w, where w is the final weight as a decimal. Example: If current grade is 80%, final weight is 30%, and target is 85%: Final = (85 - 0.7×80) / 0.3 = (85 - 56) / 0.3 = 96.7%. This shows how much the final can change your grade."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What does final exam weight mean?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Final exam weight is the percentage of your total course grade determined by the final exam. If the final is worth 30%, then 70% of your grade comes from previous work. A higher weight means the final has more impact. A 50% weight means the final can dramatically raise or lower your grade."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What happens if the needed final grade is over 100%?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "If the calculation returns a value over 100%, it means the target grade is mathematically impossible given the current grade and final weight. Example: With 60% current grade and 40% final weight, the maximum possible course grade is 0.6×60 + 0.4×100 = 76%. You cannot reach 80% even with a perfect final."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do you calculate course grade with multiple components?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Multiply each component score by its weight and sum: Grade = w1×s1 + w2×s2 + ... Example: Homework 20% (90%), Midterm 30% (85%), Final 50% (?): Current = 0.2×90 + 0.3×85 = 43.5 out of 50 possible = 87% current average for completed work."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What is a passing grade in most systems?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "In the US system, D (60-69%) is typically the minimum passing grade for undergraduate courses, though some programs require C (70%). Graduate programs often require B (80%). In percentage terms, 60% or 70% are common thresholds. Some institutions use pass/fail instead of letter grades."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How can I raise my grade before the final?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Check if there are missing assignments, extra credit opportunities, or grade disputes. Calculate the impact of each remaining component. Focus study time on high-weight categories. If the final is 50% of the grade, improving final prep has more impact than perfecting minor assignments worth 5%."
       }
     }
   ]
@@ -91,23 +96,71 @@
 <h3>About Grade Calculator</h3>
 <p>This grade calculator shows the score you need on a final exam to reach a target course grade.</p>
 <p>It is useful for exam planning, course tracking and deciding how much a final assessment can realistically change your overall result.</p>
+
+<h4>Weighted Grade Formula</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Final exam needed score formula:
+// Final = (Target - (1 - w) × Current) / w
+
+// Where:
+// - Target = desired course grade (%)
+// - Current = current grade before final (%)
+// - w = final exam weight (as decimal, e.g., 30% = 0.3)
+
+// Example: Current=80%, Weight=30%, Target=85%
+// Final = (85 - 0.7 × 80) / 0.3
+// Final = (85 - 56) / 0.3 = 96.7%
+</pre>
+
+<h4>Common Grading Scales</h4>
+<table class="ref-table">
+<thead><tr><th>Letter</th><th>Percentage</th><th>GPA (4.0)</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>90-100%</td><td>4.0</td></tr>
+<tr><td>A-</td><td>87-89%</td><td>3.7</td></tr>
+<tr><td>B+</td><td>83-86%</td><td>3.3</td></tr>
+<tr><td>B</td><td>80-82%</td><td>3.0</td></tr>
+<tr><td>B-</td><td>77-79%</td><td>2.7</td></tr>
+<tr><td>C+</td><td>73-76%</td><td>2.3</td></tr>
+<tr><td>C</td><td>70-72%</td><td>2.0</td></tr>
+<tr><td>D</td><td>60-69%</td><td>1.0</td></tr>
+<tr><td>F</td><td>0-59%</td><td>0.0</td></tr>
+</tbody>
+</table>
+
+<h4>Final Weight Impact Examples</h4>
+<table class="ref-table">
+<thead><tr><th>Current</th><th>Final Wt</th><th>Need for 85%</th><th>Max Possible</th></tr></thead>
+<tbody>
+<tr><td>80%</td><td>20%</td><td>95%</td><td>96%</td></tr>
+<tr><td>80%</td><td>30%</td><td>96.7%</td><td>94%</td></tr>
+<tr><td>80%</td><td>40%</td><td>98.3%</td><td>92%</td></tr>
+<tr><td>70%</td><td>30%</td><td>113% (impossible)</td><td>79%</td></tr>
+<tr><td>90%</td><td>30%</td><td>73.3%</td><td>100%</td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Grade Calculator?</dt>
-  <dd>Grade Calculator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How is the final exam grade calculated using weighted averages?</dt>
+  <dd>The formula is: Final Needed = (Target - (1-w)×Current) / w, where w is the final weight as a decimal. Example: If current grade is 80%, final weight is 30%, and target is 85%: Final = (85 - 0.7×80) / 0.3 = (85 - 56) / 0.3 = 96.7%. This shows how much the final can change your grade.</dd>
+
+  <dt>What does final exam weight mean?</dt>
+  <dd>Final exam weight is the percentage of your total course grade determined by the final exam. If the final is worth 30%, then 70% of your grade comes from previous work. A higher weight means the final has more impact. A 50% weight means the final can dramatically raise or lower your grade.</dd>
+
+  <dt>What happens if the needed final grade is over 100%?</dt>
+  <dd>If the calculation returns a value over 100%, it means the target grade is mathematically impossible given the current grade and final weight. Example: With 60% current grade and 40% final weight, the maximum possible course grade is 0.6×60 + 0.4×100 = 76%. You cannot reach 80% even with a perfect final.</dd>
+
+  <dt>How do you calculate course grade with multiple components?</dt>
+  <dd>Multiply each component score by its weight and sum: Grade = w1×s1 + w2×s2 + ... Example: Homework 20% (90%), Midterm 30% (85%), Final 50% (?): Current = 0.2×90 + 0.3×85 = 43.5 out of 50 possible = 87% current average for completed work.</dd>
+
+  <dt>What is a passing grade in most systems?</dt>
+  <dd>In the US system, D (60-69%) is typically the minimum passing grade for undergraduate courses, though some programs require C (70%). Graduate programs often require B (80%). In percentage terms, 60% or 70% are common thresholds. Some institutions use pass/fail instead of letter grades.</dd>
+
+  <dt>How can I raise my grade before the final?</dt>
+  <dd>Check if there are missing assignments, extra credit opportunities, or grade disputes. Calculate the impact of each remaining component. Focus study time on high-weight categories. If the final is 50% of the grade, improving final prep has more impact than perfecting minor assignments worth 5%.</dd>
 </dl>
 </section>
 </main>

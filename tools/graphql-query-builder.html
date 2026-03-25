@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Graphql Query Builder?",
+      "name": "What is GraphQL query syntax?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Graphql Query Builder is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "GraphQL queries start with operation type (query/mutation), followed by optional operation name, then selection set in braces. Fields are listed inside. Arguments go in parentheses after field name. Example: query GetUser { user(id: 1) { id name email } }. Fields return nested objects or scalars."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between query and mutation?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Query is for reading data (GET equivalent), mutation is for modifying data (POST/PUT/DELETE equivalent). Queries can run in parallel, mutations execute serially. Convention: queries use 'query' keyword (can be omitted for simple queries), mutations always use 'mutation' keyword. Example mutation: mutation CreateUser { createUser(name: \"John\") { id } }."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How do GraphQL arguments work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Arguments are key-value pairs in parentheses after field names. Types include: Int, Float, String, Boolean, ID, enums, input objects. Example: user(id: 1, includePosts: true, limit: 10). Multiple arguments are comma-separated. Argument values can be variables: user(id: $userId)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are GraphQL fragments and when to use them?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Fragments are reusable field selections defined once and referenced with ...fragmentName. Useful for shared field sets across queries. Example: fragment UserFields on User { id name email }. Query: query { user { ...UserFields posts { ...UserFields } } }. Reduces duplication in complex queries."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What are GraphQL directives?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Directives modify query execution. Built-in: @include(if: Boolean) includes field only if true, @skip(if: Boolean) skips field if true. Example: user { id name email @include(if: $includeEmail) }. Custom directives can be defined in schema. Directives enable conditional field fetching."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How do you handle GraphQL errors and null values?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "GraphQL returns partial data on error. Nullable fields return null on error, non-nullable (field!) cause parent to bubble null. Example: type User { id: ID! name: String }. If name resolver fails, entire User object becomes null. Error array in response contains error details with message, locations, path."
       }
     }
   ]
@@ -102,23 +107,86 @@
 <h3>About GraphQL Query Builder</h3>
 <p>This GraphQL query builder helps you assemble a simple query or mutation from fields and arguments.</p>
 <p>It is useful for API exploration, schema demos, onboarding docs and quick experiments when you want a readable GraphQL starting point without typing every brace manually.</p>
+
+<h4>GraphQL Query Structure</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Basic query syntax:
+query OperationName {
+  rootField(argument: value) {
+    nestedField1
+    nestedField2
+  }
+}
+
+// Example - Query:
+query GetUser {
+  user(id: 1) {
+    id
+    name
+    email
+    posts {
+      title
+      content
+    }
+  }
+}
+
+// Example - Mutation:
+mutation CreateUser {
+  createUser(input: {name: "John", email: "john@example.com"}) {
+    id
+    name
+  }
+}
+</pre>
+
+<h4>GraphQL Argument Types</h4>
+<table class="ref-table">
+<thead><tr><th>Type</th><th>Example</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td>ID</td><td>id: 1</td><td>Unique identifier</td></tr>
+<tr><td>String</td><td>name: "John"</td><td>Text value</td></tr>
+<tr><td>Int</td><td>age: 25</td><td>Integer number</td></tr>
+<tr><td>Float</td><td>price: 19.99</td><td>Decimal number</td></tr>
+<tr><td>Boolean</td><td>active: true</td><td>true or false</td></tr>
+<tr><td>Enum</td><td>status: ACTIVE</td><td>Predefined value</td></tr>
+<tr><td>Input Object</td><td>input: {name: "J"}</td><td>Complex object</td></tr>
+</tbody>
+</table>
+
+<h4>Query vs Mutation Comparison</h4>
+<table class="ref-table">
+<thead><tr><th>Aspect</th><th>Query</th><th>Mutation</th></tr></thead>
+<tbody>
+<tr><td>Purpose</td><td>Read/fetch data</td><td>Modify/create data</td></tr>
+<tr><td>Execution</td><td>Parallel</td><td>Serial (one at a time)</td></tr>
+<tr><td>Keyword</td><td>Optional (can omit)</td><td>Required</td></tr>
+<tr><td>REST equivalent</td><td>GET</td><td>POST/PUT/DELETE</td></tr>
+<tr><td>Return type</td><td>Any type</td><td>Usually the modified object</td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Graphql Query Builder?</dt>
-  <dd>Graphql Query Builder is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is GraphQL query syntax?</dt>
+  <dd>GraphQL queries start with operation type (query/mutation), followed by optional operation name, then selection set in braces. Fields are listed inside. Arguments go in parentheses after field name. Example: query GetUser { user(id: 1) { id name email } }. Fields return nested objects or scalars.</dd>
+
+  <dt>What is the difference between query and mutation?</dt>
+  <dd>Query is for reading data (GET equivalent), mutation is for modifying data (POST/PUT/DELETE equivalent). Queries can run in parallel, mutations execute serially. Convention: queries use 'query' keyword (can be omitted for simple queries), mutations always use 'mutation' keyword. Example mutation: mutation CreateUser { createUser(name: "John") { id } }.</dd>
+
+  <dt>How do GraphQL arguments work?</dt>
+  <dd>Arguments are key-value pairs in parentheses after field names. Types include: Int, Float, String, Boolean, ID, enums, input objects. Example: user(id: 1, includePosts: true, limit: 10). Multiple arguments are comma-separated. Argument values can be variables: user(id: $userId).</dd>
+
+  <dt>What are GraphQL fragments and when to use them?</dt>
+  <dd>Fragments are reusable field selections defined once and referenced with ...fragmentName. Useful for shared field sets across queries. Example: fragment UserFields on User { id name email }. Query: query { user { ...UserFields posts { ...UserFields } } }. Reduces duplication in complex queries.</dd>
+
+  <dt>What are GraphQL directives?</dt>
+  <dd>Directives modify query execution. Built-in: @include(if: Boolean) includes field only if true, @skip(if: Boolean) skips field if true. Example: user { id name email @include(if: $includeEmail) }. Custom directives can be defined in schema. Directives enable conditional field fetching.</dd>
+
+  <dt>How do you handle GraphQL errors and null values?</dt>
+  <dd>GraphQL returns partial data on error. Nullable fields return null on error, non-nullable (field!) cause parent to bubble null. Example: type User { id: ID! name: String }. If name resolver fails, entire User object becomes null. Error array in response contains error details with message, locations, path.</dd>
 </dl>
 </section>
 </main>

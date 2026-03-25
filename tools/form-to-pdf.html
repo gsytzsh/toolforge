@@ -26,45 +26,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Form To Pdf?",
+      "name": "How does html2canvas capture form data for PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Form To Pdf is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "html2canvas reads the rendered DOM state, including user-entered form values displayed in input fields. It captures the visual representation pixel-by-pixel onto a canvas element, then exports as PNG. The PNG is embedded into jsPDF. This preserves exact visual layout but creates image-based (non-searchable) PDFs."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between image-based and text-based PDFs?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Image-based PDFs (from html2canvas) contain raster images where text cannot be selected, searched, or copied. Text-based PDFs (from direct jsPDF text calls) have proper text layers that are searchable and accessible. Image-based approach preserves complex layouts; text-based offers better quality and smaller file sizes."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What are common use cases for form-to-PDF conversion?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Common uses include: contact form submissions, support ticket documentation, order confirmations, registration records, survey responses, application forms, feedback collection, internal request workflows, and client intake forms. PDFs provide immutable records suitable for archiving and sharing."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do you ensure form data privacy during PDF generation?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Client-side PDF generation (no server upload) ensures data never leaves the user's browser. The PDF is generated locally using JavaScript libraries and downloaded directly. No form data is transmitted to external servers, logged, or stored. This approach is suitable for sensitive information when server-side processing is not required."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What HTML elements are supported by html2canvas?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "html2canvas supports most standard HTML elements: div, span, p, h1-h6, tables, forms, inputs, textareas, selects, images (with CORS), canvas, SVG (partial). Limitations include: some CSS properties (grid, complex gradients), web fonts (must be loaded), box-shadow rendering variations, and pseudo-elements (::before, ::after) may not render correctly."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What PDF page size is used for form exports?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Standard A4 size (595×842 points at 72 DPI) is used with portrait orientation. Margins are typically 36-40 points. The captured form image is scaled to fit the page width (approximately 520 points usable width). Multi-page forms automatically generate additional pages as needed."</
       }
     }
   ]
@@ -104,23 +109,87 @@ Subject:
 <h3>About Form to PDF</h3>
 <p>This Form to PDF tool turns a simple filled form into a printable PDF. It is useful for lightweight request forms, contact-style documents and small internal workflows.</p>
 <p>The rendered form is generated entirely in your browser and can be exported without sending data to a server.</p>
+
+<h4>Form to PDF Generation Process</h4>
+<ol>
+  <li><strong>Form Input:</strong> User fills in form fields (name, email, subject, message)</li>
+  <li><strong>HTML Rendering:</strong> Form data rendered as styled HTML preview with labels and values</li>
+  <li><strong>Capture:</strong> html2canvas captures the preview div as PNG image at 2x scale</li>
+  <li><strong>PDF Creation:</strong> jsPDF creates A4 document and embeds the PNG image</li>
+  <li><strong>Multi-page Handling:</strong> If content exceeds page height, additional pages are added automatically</li>
+  <li><strong>Download:</strong> PDF saved as "form-to-pdf.pdf" to user's downloads folder</li>
+</ol>
+
+<h4>html2canvas Implementation</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Capture form preview as PNG
+async function downloadPdf() {
+  const element = document.getElementById("preview");
+
+  const canvas = await html2canvas(element, {
+    scale: 2,                    // 2x for sharper output
+    backgroundColor: "#ffffff",  // White background
+    useCORS: true                // Allow cross-origin images
+  });
+
+  const imageData = canvas.toDataURL("image/png");
+
+  // Create PDF (A4, portrait, points)
+  const pdf = new jsPDF("p", "pt", "a4");
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const imgWidth = pageWidth - 40;  // 20pt margins each side
+  const imgHeight = canvas.height * imgWidth / canvas.width;
+
+  pdf.addImage(imageData, "PNG", 20, 20, imgWidth, imgHeight);
+  pdf.save("form-to-pdf.pdf");
+}
+</pre>
+
+<h4>PDF Page Size Reference</h4>
+<table class="ref-table">
+<thead><tr><th>Size</th><th>Dimensions (points)</th><th>Dimensions (mm)</th><th>Use Case</th></tr></thead>
+<tbody>
+<tr><td>A4</td><td>595 × 842</td><td>210 × 297</td><td>Standard documents (default)</td></tr>
+<tr><td>Letter</td><td>612 × 792</td><td>216 × 279</td><td>North American standard</td></tr>
+<tr><td>A5</td><td>420 × 595</td><td>148 × 210</td><td>Compact forms, booklets</td></tr>
+<tr><td>Legal</td><td>612 × 1008</td><td>216 × 356</td><td>Legal documents</td></tr>
+</tbody>
+</table>
+
+<h4>Form Field Types Supported</h4>
+<table class="ref-table">
+<thead><tr><th>Field Type</th><th>HTML Element</th><th>PDF Output</th></tr></thead>
+<tbody>
+<tr><td>Text Input</td><td>&lt;input type="text"&gt;</td><td>Rendered as displayed</td></tr>
+<tr><td>Email</td><td>&lt;input type="email"&gt;</td><td>Rendered as displayed</td></tr>
+<tr><td>Textarea</td><td>&lt;textarea&gt;</td><td>Multi-line with whitespace preserved</td></tr>
+<tr><td>Select</td><td>&lt;select&gt;</td><td>Selected option shown</td></tr>
+<tr><td>Checkbox</td><td>&lt;input type="checkbox"&gt;</td><td>Checked/unchecked state</td></tr>
+<tr><td>Radio</td><td>&lt;input type="radio"&gt;</td><td>Selected state</td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Form To Pdf?</dt>
-  <dd>Form To Pdf is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How does html2canvas capture form data for PDF?</dt>
+  <dd>html2canvas reads the rendered DOM state, including user-entered form values displayed in input fields. It captures the visual representation pixel-by-pixel onto a canvas element, then exports as PNG. The PNG is embedded into jsPDF. This preserves exact visual layout but creates image-based (non-searchable) PDFs.</dd>
+
+  <dt>What is the difference between image-based and text-based PDFs?</dt>
+  <dd>Image-based PDFs (from html2canvas) contain raster images where text cannot be selected, searched, or copied. Text-based PDFs (from direct jsPDF text calls) have proper text layers that are searchable and accessible. Image-based approach preserves complex layouts; text-based offers better quality and smaller file sizes.</dd>
+
+  <dt>What are common use cases for form-to-PDF conversion?</dt>
+  <dd>Common uses include: contact form submissions, support ticket documentation, order confirmations, registration records, survey responses, application forms, feedback collection, internal request workflows, and client intake forms. PDFs provide immutable records suitable for archiving and sharing.</dd>
+
+  <dt>How do you ensure form data privacy during PDF generation?</dt>
+  <dd>Client-side PDF generation (no server upload) ensures data never leaves the user's browser. The PDF is generated locally using JavaScript libraries and downloaded directly. No form data is transmitted to external servers, logged, or stored. This approach is suitable for sensitive information when server-side processing is not required.</dd>
+
+  <dt>What HTML elements are supported by html2canvas?</dt>
+  <dd>html2canvas supports most standard HTML elements: div, span, p, h1-h6, tables, forms, inputs, textareas, selects, images (with CORS), canvas, SVG (partial). Limitations include: some CSS properties (grid, complex gradients), web fonts (must be loaded), box-shadow rendering variations, and pseudo-elements (::before, ::after) may not render correctly.</dd>
+
+  <dt>What PDF page size is used for form exports?</dt>
+  <dd>Standard A4 size (595×842 points at 72 DPI) is used with portrait orientation. Margins are typically 36-40 points. The captured form image is scaled to fit the page width (approximately 520 points usable width). Multi-page forms automatically generate additional pages as needed.</dd>
 </dl>
 </section>
 </main>

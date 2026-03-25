@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Dice Roller?",
+      "name": "What is the probability distribution of dice rolls?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Dice Roller is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Single dice have uniform distribution (each face has equal 1/n probability). Multiple dice create bell-shaped distributions: 2d6 produces sums 2-12 with 7 being most likely (6/36 = 16.67%). The central limit theorem applies: more dice create more normal distributions centered around the mean (n × (sides+1)/2)."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What does NdS notation mean in dice rolling?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "NdS notation means 'N dice with S sides'. Example: 2d6 = roll two 6-sided dice, 1d20 = roll one 20-sided die, 3d8 = roll three 8-sided dice. Results are summed unless specified otherwise. Modifiers like 2d6+3 add bonus to the total."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How does computer random number generation work for dice?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Computers use pseudo-random number generators (PRNGs) like Math.random() which produce values 0 to 1. For dice: result = floor(random() × sides) + 1. This gives uniform distribution across 1 to sides. For cryptographic fairness, use crypto.getRandomValues() instead."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are common polyhedral dice used in gaming?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Standard RPG dice sets include: d4 (tetrahedron), d6 (cube), d8 (octahedron), d10 (pentagonal trapezohedron), d12 (dodecahedron), d20 (icosahedron). d20 is central to D&D 5e for attack rolls and skill checks. d100 (percentile) uses two d10s for 1-100 range."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How do you calculate expected value for dice rolls?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Expected value for 1dS is (S+1)/2. For NdS: E = N × (S+1)/2. Examples: 1d6 = 3.5, 2d6 = 7, 1d20 = 10.5, 3d6 = 10.5. This represents the long-term average. Individual rolls vary, but over many rolls the average approaches expected value."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What is advantage/disadvantage in dice rolling?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Advantage means roll twice and take the higher result; disadvantage means roll twice and take the lower. In D&D 5e, advantage on 1d20 increases average from 10.5 to ~13.8 (+3.3 bonus equivalent). This mechanic replaces flat modifiers for more dramatic swing potential."</
       }
     }
   ]
@@ -89,23 +94,86 @@
 <h3>About Dice Roller</h3>
 <p>This dice roller simulates common dice rolls such as `2d6` or `1d20`.</p>
 <p>It is useful for tabletop games, classroom activities, probability demos and any quick situation where you need virtual dice.</p>
+
+<h4>Understanding NdS Dice Notation</h4>
+<p>Dice notation uses the format NdS where N is the number of dice and S is the number of sides:</p>
+<ul>
+  <li><strong>1d6:</strong> One 6-sided die (results: 1-6)</li>
+  <li><strong>2d6:</strong> Two 6-sided dice (results: 2-12, bell curve)</li>
+  <li><strong>1d20:</strong> One 20-sided die (results: 1-20, uniform)</li>
+  <li><strong>3d8:</strong> Three 8-sided dice (results: 3-24)</li>
+  <li><strong>4d6 drop lowest:</strong> Roll four d6, drop the lowest (common for D&D stats)</li>
+</ul>
+
+<h4>Dice Probability Reference</h4>
+<table class="ref-table">
+<thead><tr><th>Dice</th><th>Min</th><th>Max</th><th>Mean</th><th>Common Use</th></tr></thead>
+<tbody>
+<tr><td>1d4</td><td>1</td><td>4</td><td>2.5</td><td>Small damage, random options</td></tr>
+<tr><td>1d6</td><td>1</td><td>6</td><td>3.5</td><td>Standard dice, board games</td></tr>
+<tr><td>1d8</td><td>1</td><td>8</td><td>4.5</td><td>Medium weapon damage</td></tr>
+<tr><td>1d10</td><td>1</td><td>10</td><td>5.5</td><td>Percentile (with another d10)</td></tr>
+<tr><td>1d12</td><td>1</td><td>12</td><td>6.5</td><td>Large weapon damage</td></tr>
+<tr><td>1d20</td><td>1</td><td>20</td><td>10.5</td><td>D&D attack rolls, skill checks</td></tr>
+</tbody>
+</table>
+
+<h4>Expected Value Calculation</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Expected value for 1dS = (S + 1) / 2
+// Expected value for NdS = N × (S + 1) / 2
+
+// Examples:
+// 1d6:  (6 + 1) / 2 = 3.5
+// 2d6:  2 × (6 + 1) / 2 = 7
+// 1d20: (20 + 1) / 2 = 10.5
+// 3d6:  3 × (6 + 1) / 2 = 10.5
+// 4d6:  4 × (6 + 1) / 2 = 14
+
+// JavaScript implementation:
+function rollDice(n, sides) {
+  let rolls = [];
+  for (let i = 0; i < n; i++) {
+    rolls.push(Math.floor(Math.random() * sides) + 1);
+  }
+  return { rolls, sum: rolls.reduce((a, b) => a + b, 0) };
+}
+</pre>
+
+<h4>Common Dice Systems</h4>
+<table class="ref-table">
+<thead><tr><th>System</th><th>Primary Dice</th><th>Mechanic</th></tr></thead>
+<tbody>
+<tr><td>D&D 5e</td><td>d20, d4-d12</td><td>Roll d20 + modifiers vs DC</td></tr>
+<tr><td>Pathfinder</td><td>d20, d4-d12</td><td>Similar to D&D 5e</td></tr>
+<tr><td>World of Darkness</td><td>d10</td><td>Roll pool, count successes (8+)</td></tr>
+<tr><td>FATE</td><td>d6 (Fudge)</td><td>4dF with -/blank/+ faces</td></tr>
+<tr><td>GURPS</td><td>d6</td><td>Roll 3d6, low is good</td></tr>
+<tr><td>Savage Worlds</td><td>d4-d12</td><td>Roll trait die + wild die (d6)</td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Dice Roller?</dt>
-  <dd>Dice Roller is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the probability distribution of dice rolls?</dt>
+  <dd>Single dice have uniform distribution (each face has equal 1/n probability). Multiple dice create bell-shaped distributions: 2d6 produces sums 2-12 with 7 being most likely (6/36 = 16.67%). The central limit theorem applies: more dice create more normal distributions centered around the mean (n × (sides+1)/2).</dd>
+
+  <dt>What does NdS notation mean in dice rolling?</dt>
+  <dd>NdS notation means 'N dice with S sides'. Example: 2d6 = roll two 6-sided dice, 1d20 = roll one 20-sided die, 3d8 = roll three 8-sided dice. Results are summed unless specified otherwise. Modifiers like 2d6+3 add bonus to the total.</dd>
+
+  <dt>How does computer random number generation work for dice?</dt>
+  <dd>Computers use pseudo-random number generators (PRNGs) like Math.random() which produce values 0 to 1. For dice: result = floor(random() × sides) + 1. This gives uniform distribution across 1 to sides. For cryptographic fairness, use crypto.getRandomValues() instead.</dd>
+
+  <dt>What are common polyhedral dice used in gaming?</dt>
+  <dd>Standard RPG dice sets include: d4 (tetrahedron), d6 (cube), d8 (octahedron), d10 (pentagonal trapezohedron), d12 (dodecahedron), d20 (icosahedron). d20 is central to D&D 5e for attack rolls and skill checks. d100 (percentile) uses two d10s for 1-100 range.</dd>
+
+  <dt>How do you calculate expected value for dice rolls?</dt>
+  <dd>Expected value for 1dS is (S+1)/2. For NdS: E = N × (S+1)/2. Examples: 1d6 = 3.5, 2d6 = 7, 1d20 = 10.5, 3d6 = 10.5. This represents the long-term average. Individual rolls vary, but over many rolls the average approaches expected value.</dd>
+
+  <dt>What is advantage/disadvantage in dice rolling?</dt>
+  <dd>Advantage means roll twice and take the higher result; disadvantage means roll twice and take the lower. In D&D 5e, advantage on 1d20 increases average from 10.5 to ~13.8 (+3.3 bonus equivalent). This mechanic replaces flat modifiers for more dramatic swing potential.</dd>
 </dl>
 </section>
 </main>

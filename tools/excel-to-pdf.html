@@ -27,45 +27,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Excel To Pdf?",
+      "name": "How does Excel to PDF conversion work in the browser?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Excel To Pdf is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "The tool uses SheetJS (xlsx) library to parse Excel binary data in the browser. It reads .xlsx files into JSON format, renders the data as an HTML table, then uses html2canvas to capture the table as an image and jsPDF to embed it in a PDF document. All processing happens client-side without server upload."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What Excel file formats are supported?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Supported formats include: .xlsx (Excel 2007+, Office Open XML), .xls (Excel 97-2003, BIFF8), and .csv (Comma-Separated Values). The .xlsx format is recommended for full feature support including multiple worksheets, formatting, and formulas. CSV files are treated as single-sheet data."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the difference between XLSX and XLS formats?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "XLSX (Office Open XML) uses XML-based compressed storage, supports larger spreadsheets (1M+ rows), and has better data recovery. XLS (BIFF8) is Microsoft's proprietary binary format with 65K row limits. XLSX files are smaller and more compatible with modern tools."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How are multiple worksheets handled?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "The tool reads all worksheet names from the workbook and displays them in a dropdown selector. Users can choose which sheet to render and export. Each sheet is processed independently. To export multiple sheets, convert each sheet separately or use a tool that supports multi-sheet PDF generation."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What are the limitations of browser-based Excel conversion?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Limitations include: complex formatting may not render exactly, charts and images may not display, formulas are evaluated as static values, pivot tables become plain data, and macros/VBA are not executed. For complex spreadsheets, desktop Excel or server-side conversion is recommended."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What is SheetJS and how does it work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "SheetJS (xlsx) is a JavaScript library that parses and writes spreadsheet data. It reads binary file data, parses the Office Open XML structure, extracts worksheet data into JSON arrays, and can write data back to spreadsheet format. It's widely used for client-side spreadsheet processing."</
       }
     }
   ]
@@ -98,23 +103,87 @@ Worksheet:
 <h3>About Excel to PDF</h3>
 <p>This Excel to PDF tool reads worksheet data in your browser, renders a table preview and exports it as a PDF. It works well for lightweight spreadsheets, reports and tabular exports.</p>
 <p>Files stay on your device during conversion, making it suitable for quick frontend-only use.</p>
+
+<h4>Excel to PDF Conversion Process</h4>
+<ol>
+  <li><strong>File Upload:</strong> User selects .xlsx, .xls, or .csv file</li>
+  <li><strong>Binary Parsing:</strong> SheetJS reads file as ArrayBuffer and parses workbook structure</li>
+  <li><strong>Sheet Selection:</strong> User chooses which worksheet to export</li>
+  <li><strong>Data Extraction:</strong> Worksheet converted to JSON array using sheet_to_json()</li>
+  <li><strong>HTML Rendering:</strong> Data rendered as styled HTML table</li>
+  <li><strong>Capture:</strong> html2canvas captures table as PNG image</li>
+  <li><strong>PDF Generation:</strong> jsPDF embeds image in A4 landscape PDF</li>
+</ol>
+
+<h4>SheetJS Implementation</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Load Excel file
+function loadWorkbook() {
+  const file = document.getElementById("excel-file").files[0];
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    const data = new Uint8Array(e.target.result);
+    const workbook = XLSX.read(data, { type: "array" });
+
+    // Get sheet names
+    workbook.SheetNames.forEach(name => {
+      const sheet = workbook.Sheets[name];
+      const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+      // rows is now a 2D array [[cell1, cell2], [cell3, cell4]]
+    });
+  };
+
+  reader.readAsArrayBuffer(file);
+}
+</pre>
+
+<h4>Supported File Formats</h4>
+<table class="ref-table">
+<thead><tr><th>Format</th><th>Extension</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td>Excel 2007+</td><td>.xlsx</td><td>Office Open XML (recommended)</td></tr>
+<tr><td>Excel 97-2003</td><td>.xls</td><td>BIFF8 binary format</td></tr>
+<tr><td>CSV</td><td>.csv</td><td>Comma-separated values</td></tr>
+<tr><td>Excel Macro</td><td>.xlsm</td><td>Macro-enabled workbook</td></tr>
+<tr><td>Excel Binary</td><td>.xlsb</td><td>Binary workbook format</td></tr>
+</tbody>
+</table>
+
+<h4>Excel vs PDF Comparison</h4>
+<table class="ref-table">
+<thead><tr><th>Feature</th><th>Excel</th><th>PDF</th></tr></thead>
+<tbody>
+<tr><td>Editing</td><td>Full editing support</td><td>Read-only (typically)</td></tr>
+<tr><td>Formulas</td><td>Live calculations</td><td>Static values only</td></tr>
+<tr><td>Formatting</td><td>Cell styles, conditional</td><td>Fixed layout</td></tr>
+<tr><td>Portability</td><td>Requires spreadsheet app</td><td>Universal viewer support</td></tr>
+<tr><td>Print Ready</td><td>Setup required</td><td>Always print-ready</td></tr>
+<tr><td>File Size</td><td>Larger with data</td><td>Compressed, optimized</td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Excel To Pdf?</dt>
-  <dd>Excel To Pdf is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How does Excel to PDF conversion work in the browser?</dt>
+  <dd>The tool uses SheetJS (xlsx) library to parse Excel binary data in the browser. It reads .xlsx files into JSON format, renders the data as an HTML table, then uses html2canvas to capture the table as an image and jsPDF to embed it in a PDF document. All processing happens client-side without server upload.</dd>
+
+  <dt>What Excel file formats are supported?</dt>
+  <dd>Supported formats include: .xlsx (Excel 2007+, Office Open XML), .xls (Excel 97-2003, BIFF8), and .csv (Comma-Separated Values). The .xlsx format is recommended for full feature support including multiple worksheets, formatting, and formulas. CSV files are treated as single-sheet data.</dd>
+
+  <dt>What is the difference between XLSX and XLS formats?</dt>
+  <dd>XLSX (Office Open XML) uses XML-based compressed storage, supports larger spreadsheets (1M+ rows), and has better data recovery. XLS (BIFF8) is Microsoft's proprietary binary format with 65K row limits. XLSX files are smaller and more compatible with modern tools.</dd>
+
+  <dt>How are multiple worksheets handled?</dt>
+  <dd>The tool reads all worksheet names from the workbook and displays them in a dropdown selector. Users can choose which sheet to render and export. Each sheet is processed independently. To export multiple sheets, convert each sheet separately or use a tool that supports multi-sheet PDF generation.</dd>
+
+  <dt>What are the limitations of browser-based Excel conversion?</dt>
+  <dd>Limitations include: complex formatting may not render exactly, charts and images may not display, formulas are evaluated as static values, pivot tables become plain data, and macros/VBA are not executed. For complex spreadsheets, desktop Excel or server-side conversion is recommended.</dd>
+
+  <dt>What is SheetJS and how does it work?</dt>
+  <dd>SheetJS (xlsx) is a JavaScript library that parses and writes spreadsheet data. It reads binary file data, parses the Office Open XML structure, extracts worksheet data into JSON arrays, and can write data back to spreadsheet format. It's widely used for client-side spreadsheet processing.</dd>
 </dl>
 </section>
 </main>
