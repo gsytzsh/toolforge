@@ -3,25 +3,81 @@
 <head>
 <meta charset="UTF-8">
 <title>Robots.txt Generator – Create Robots.txt Online | ToolForge</title>
-<meta name="description" content="Free online Robots.txt Generator to create a robots.txt file for search engines with user-agent, allow, disallow and sitemap rules. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Robots.txt Generator creates robots.txt files with User-agent, Allow, Disallow, and Sitemap directives. Includes crawler reference, path pattern guide, and SEO best practices. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/robots-txt-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Robots.txt Generator – Create Robots.txt Online | ToolForge">
-<meta property="og:description" content="Free online Robots.txt Generator to create a robots.txt file for search engines with user-agent, allow, disallow and sitemap rules. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Robots.txt Generator creates robots.txt files with User-agent, Allow, Disallow, and Sitemap directives. Includes crawler reference, path pattern guide, and SEO best practices. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/robots-txt-generator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Robots.txt Generator – Create Robots.txt Online | ToolForge">
-<meta name="twitter:description" content="Free online Robots.txt Generator to create a robots.txt file for search engines with user-agent, allow, disallow and sitemap rules. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Robots.txt Generator creates robots.txt files with User-agent, Allow, Disallow, and Sitemap directives. Includes crawler reference, path pattern guide, and SEO best practices. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a robots.txt file and how does it work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A robots.txt file is a plain text file in your website's root directory that tells search engine crawlers which URLs they can or cannot access. It uses the Robots Exclusion Protocol with directives like User-agent, Allow, Disallow, and Sitemap. Crawlers read this file before accessing your site and respect the rules specified for their user-agent."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the common robots.txt directives?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common directives include: User-agent (specifies which crawler the rules apply to), Disallow (blocks access to specific paths), Allow (permits access to specific paths within a blocked directory), Sitemap (provides XML sitemap location), Crawl-delay (requests delay between requests), and Host (specifies preferred domain). Each directive appears on its own line."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I block all crawlers from my site?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "To block all crawlers, use: User-agent: * followed by Disallow: /. This tells all crawlers they cannot access any part of your site. However, note that robots.txt is not a security mechanism - determined crawlers can ignore it, and blocked pages may still appear in search results if linked from other sites."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I allow all crawlers to access my site?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "To allow all crawlers full access, use: User-agent: * followed by Disallow: (empty). An empty Disallow directive means nothing is blocked. Alternatively, you can omit the Disallow line entirely. You can also add Sitemap: https://example.com/sitemap.xml to help crawlers find your content."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does robots.txt prevent pages from appearing in Google?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, robots.txt only prevents crawling, not indexing. If a blocked page is linked from other websites, Google may still index its URL without content. To prevent indexing, use noindex meta tags or password protection. For sensitive data, use server-side authentication. Robots.txt is a request, not a security measure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between Allow and Disallow?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Disallow blocks crawlers from accessing specified paths. Allow permits access to specific paths that would otherwise be blocked by a broader Disallow rule. For example, Disallow: /admin/ blocks the entire admin folder, but Allow: /admin/public/ permits access to the public subfolder within admin."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <main class="container">
 <h1>Robots.txt Generator</h1>
-<p class="subtitle">Create a robots.txt file for search engines and website crawlers.</p>
+<p class="subtitle">Create robots.txt files with User-agent, Allow, Disallow, and Sitemap directives for search engine crawlers.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <p>User-agent:
 <label for="user-agent" class="sr-only">User-agent</label>
@@ -45,25 +101,302 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Robots.txt Generator</h3>
-<p>This robots.txt generator helps you build a valid robots.txt file with common directives such as User-agent, Allow, Disallow and Sitemap.</p>
-<p>It is useful when launching a site, blocking low-value paths, guiding search crawlers and making sure important pages are discoverable without exposing sections you do not want indexed.</p>
+<p>This robots.txt generator creates properly formatted robots.txt files using the Robots Exclusion Protocol. It supports User-agent, Allow, Disallow, and Sitemap directives, helping you control how search engine crawlers access and index your website content.</p>
+<p>It is useful for blocking admin panels from search results, preventing duplicate content indexing, directing crawlers to your sitemap, managing crawl budget on large sites, protecting sensitive directories, and ensuring search engines focus on your most important content.</p>
+
+<h4>Robots.txt File Structure</h4>
+<p>A robots.txt file follows a simple line-based format:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Basic Structure:
+  User-agent: [crawler-name]
+  Disallow: [path]
+  Allow: [path]
+
+  Sitemap: [sitemap-url]
+
+Example robots.txt:
+  User-agent: *
+  Disallow: /admin/
+  Disallow: /private/
+  Allow: /public/
+
+  Sitemap: https://example.com/sitemap.xml
+
+Key Points:
+  - Each directive on its own line
+  - Format: Directive: value
+  - Blank lines separate rule groups
+  - Lines starting with # are comments
+  - File must be in website root (/robots.txt)
+  - Case-sensitive paths (/Admin/ ≠ /admin/)
+  - No quotes around values
+</pre>
+
+<h4>Common Crawler User-Agent Names</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Search Engine</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">User-Agent String</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Google (General)</td>
+    <td style="border:1px solid #ddd;padding:8px">Googlebot</td>
+    <td style="border:1px solid #ddd;padding:8px">Main Google crawler</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Google Images</td>
+    <td style="border:1px solid #ddd;padding:8px">Googlebot-Image</td>
+    <td style="border:1px solid #ddd;padding:8px">Indexes images for Google Images</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Google News</td>
+    <td style="border:1px solid #ddd;padding:8px">Googlebot-News</td>
+    <td style="border:1px solid #ddd;padding:8px">Indexes news content</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Google Video</td>
+    <td style="border:1px solid #ddd;padding:8px">Googlebot-Video</td>
+    <td style="border:1px solid #ddd;padding:8px">Indexes video content</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Bing</td>
+    <td style="border:1px solid #ddd;padding:8px">bingbot</td>
+    <td style="border:1px solid #ddd;padding:8px">Microsoft Bing crawler</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Yahoo</td>
+    <td style="border:1px solid #ddd;padding:8px">Slurp</td>
+    <td style="border:1px solid #ddd;padding:8px">Yahoo Search (powered by Bing)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">DuckDuckGo</td>
+    <td style="border:1px solid #ddd;padding:8px">DuckDuckBot</td>
+    <td style="border:1px solid #ddd;padding:8px">DuckDuckGo search engine</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Baidu</td>
+    <td style="border:1px solid #ddd;padding:8px">Baiduspider</td>
+    <td style="border:1px solid #ddd;padding:8px">Chinese search engine</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Yandex</td>
+    <td style="border:1px solid #ddd;padding:8px">YandexBot</td>
+    <td style="border:1px solid #ddd;padding:8px">Russian search engine</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Facebook</td>
+    <td style="border:1px solid #ddd;padding:8px">facebookexternalhit</td>
+    <td style="border:1px solid #ddd;padding:8px">Link preview generator</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Twitter</td>
+    <td style="border:1px solid #ddd;padding:8px">Twitterbot</td>
+    <td style="border:1px solid #ddd;padding:8px">Twitter card preview</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">All Crawlers</td>
+    <td style="border:1px solid #ddd;padding:8px">*</td>
+    <td style="border:1px solid #ddd;padding:8px">Wildcard for all crawlers</td>
+  </tr>
+</table>
+
+<h4>Common Robots.txt Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Allow All Crawlers (Default)
+  User-agent: *
+  Disallow:
+
+  Sitemap: https://example.com/sitemap.xml
+
+Example 2: Block All Crawlers
+  User-agent: *
+  Disallow: /
+
+Example 3: Block Specific Folders
+  User-agent: *
+  Disallow: /admin/
+  Disallow: /private/
+  Disallow: /temp/
+  Disallow: /cgi-bin/
+
+Example 4: Block Specific Crawler
+  User-agent: Googlebot
+  Disallow: /admin/
+
+  User-agent: *
+  Disallow: /private/
+
+Example 5: Allow Subfolder in Blocked Directory
+  User-agent: *
+  Disallow: /admin/
+  Allow: /admin/public/
+
+Example 6: Block Specific File Types
+  User-agent: *
+  Disallow: /*.pdf$
+  Disallow: /*.doc$
+  Disallow: /*.xls$
+
+Example 7: Multiple Sitemaps
+  User-agent: *
+  Disallow:
+
+  Sitemap: https://example.com/sitemap.xml
+  Sitemap: https://example.com/sitemap-news.xml
+  Sitemap: https://example.com/sitemap-images.xml
+</pre>
+
+<h4>Path Pattern Matching</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Path Matching Rules:
+
+1. Exact Match:
+   Disallow: /admin
+   Blocks: /admin (exact URL path)
+   Does NOT block: /admin/ or /admin/page
+
+2. Directory Match (with trailing slash):
+   Disallow: /admin/
+   Blocks: /admin/, /admin/page, /admin/anything
+   Does NOT block: /admin (no trailing slash)
+
+3. Wildcard Match (*):
+   Disallow: /*.pdf
+   Blocks: All URLs ending in .pdf
+   Disallow: /admin/*
+   Blocks: Everything under /admin/
+
+4. End-of-URL Anchor ($):
+   Disallow: /*.pdf$
+   Blocks: URLs that END with .pdf
+   Disallow: /page.html$
+   Blocks: Only /page.html at URL end
+
+5. Pattern Examples:
+   /admin          - Matches exact path
+   /admin/         - Matches directory and contents
+   /*.pdf$         - Matches PDF files at URL end
+   /admin/*.html   - Matches HTML files in /admin/
+   /*?             - Matches single character after /
+   /page*          - Matches /page, /page1, /page2, etc.
+
+Important: Google supports * and $ wildcards.
+Other crawlers may not support wildcards.
+</pre>
+
+<h4>Robots.txt Best Practices</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Practice</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Recommendation</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">File location</td>
+    <td style="border:1px solid #ddd;padding:8px">Must be in root directory (https://domain.com/robots.txt)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">File size</td>
+    <td style="border:1px solid #ddd;padding:8px">Google limit: 500 KB maximum</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Character encoding</td>
+    <td style="border:1px solid #ddd;padding:8px">Use UTF-8 encoding for international characters</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Case sensitivity</td>
+    <td style="border:1px solid #ddd;padding:8px">Paths are case-sensitive (/Admin/ ≠ /admin/)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Comments</td>
+    <td style="border:1px solid #ddd;padding:8px">Use # for comments to document your rules</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Testing</td>
+    <td style="border:1px solid #ddd;padding:8px">Always test in Google Search Console before deploying</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Sitemap location</td>
+    <td style="border:1px solid #ddd;padding:8px">Include Sitemap directive to help crawlers find content</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Crawl-delay</td>
+    <td style="border:1px solid #ddd;padding:8px">Use sparingly; Google ignores this directive</td>
+  </tr>
+</table>
+
+<h4>Common Mistakes to Avoid</h4>
+<ul>
+  <li><strong>Blocking CSS/JS files:</strong> Blocking resources Google needs to render pages can hurt rankings. Allow /css/ and /js/ directories.</li>
+  <li><strong>Using robots.txt for security:</strong> Robots.txt is not a security measure. Anyone can access blocked URLs. Use authentication for sensitive content.</li>
+  <li><strong>Blocking already-indexed pages:</strong> If a page is already indexed, blocking it with robots.txt won't remove it from search results. Use noindex or removal tools.</li>
+  <li><strong>Incorrect path syntax:</strong> Paths must start with / (forward slash). Disallow: admin is invalid; use Disallow: /admin/.</li>
+  <li><strong>Forgetting the sitemap:</strong> Always include your sitemap URL to help crawlers discover all your content efficiently.</li>
+  <li><strong>Over-blocking content:</strong> Be careful with wildcards. Disallow: /*.php could block important pages unintentionally.</li>
+  <li><strong>Not testing changes:</strong> Always test robots.txt changes in Google Search Console before deploying to production.</li>
+</ul>
+
+<h4>Testing and Validation</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Testing Tools:
+
+1. Google Search Console - Robots.txt Tester
+   - Access via: Search Console → Settings → robots.txt
+   - Tests against Googlebot behavior
+   - Shows which URLs are blocked
+   - Validates syntax and warns of issues
+
+2. Bing Webmaster Tools
+   - Similar testing functionality for Bing
+   - Shows how bingbot interprets rules
+
+3. Manual Testing:
+   - Visit: https://yourdomain.com/robots.txt
+   - Verify file is accessible (HTTP 200)
+   - Check for typos and syntax errors
+   - Ensure paths match your URL structure
+
+4. URL Inspection:
+   - Use Search Console URL Inspection tool
+   - Check if specific URLs are blocked
+   - View crawling status
+
+Common Error Messages:
+  - "Unable to fetch" - File not accessible
+  - "Syntax error" - Invalid directive format
+  - "Warning: Blocked by robots.txt" - URL blocked from crawling
+</pre>
+
+<h4>SEO Impact of Robots.txt</h4>
+<ul>
+  <li><strong>Crawl budget optimization:</strong> Blocking low-value pages (admin, search results, filters) helps crawlers focus on important content.</li>
+  <li><strong>Duplicate content prevention:</strong> Block printer-friendly versions, session IDs, and filtered product listings to avoid duplicate content issues.</li>
+  <li><strong>Server load reduction:</strong> Blocking aggressive crawlers or specific paths can reduce server load during high-traffic periods.</li>
+  <li><strong>Staging site protection:</strong> Block search engines from development/staging sites to prevent premature indexing.</li>
+  <li><strong>Not a ranking factor:</strong> Proper robots.txt usage doesn't directly improve rankings, but it helps crawlers efficiently discover and index your content.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Robots Txt Generator?</dt>
-  <dd>Robots Txt Generator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is a robots.txt file and how does it work?</dt>
+  <dd>A robots.txt file is a plain text file in your website's root directory that tells search engine crawlers which URLs they can or cannot access. It uses the Robots Exclusion Protocol with directives like User-agent, Allow, Disallow, and Sitemap. Crawlers read this file before accessing your site and respect the rules specified for their user-agent.</dd>
+
+  <dt>What are the common robots.txt directives?</dt>
+  <dd>Common directives include: User-agent (specifies which crawler the rules apply to), Disallow (blocks access to specific paths), Allow (permits access to specific paths within a blocked directory), Sitemap (provides XML sitemap location), Crawl-delay (requests delay between requests), and Host (specifies preferred domain). Each directive appears on its own line.</dd>
+
+  <dt>How do I block all crawlers from my site?</dt>
+  <dd>To block all crawlers, use: User-agent: * followed by Disallow: /. This tells all crawlers they cannot access any part of your site. However, note that robots.txt is not a security mechanism - determined crawlers can ignore it, and blocked pages may still appear in search results if linked from other sites.</dd>
+
+  <dt>How do I allow all crawlers to access my site?</dt>
+  <dd>To allow all crawlers full access, use: User-agent: * followed by Disallow: (empty). An empty Disallow directive means nothing is blocked. Alternatively, you can omit the Disallow line entirely. You can also add Sitemap: https://example.com/sitemap.xml to help crawlers find your content.</dd>
+
+  <dt>Does robots.txt prevent pages from appearing in Google?</dt>
+  <dd>No, robots.txt only prevents crawling, not indexing. If a blocked page is linked from other websites, Google may still index its URL without content. To prevent indexing, use noindex meta tags or password protection. For sensitive data, use server-side authentication. Robots.txt is a request, not a security measure.</dd>
+
+  <dt>What is the difference between Allow and Disallow?</dt>
+  <dd>Disallow blocks crawlers from accessing specified paths. Allow permits access to specific paths that would otherwise be blocked by a broader Disallow rule. For example, Disallow: /admin/ blocks the entire admin folder, but Allow: /admin/public/ permits access to the public subfolder within admin.</dd>
 </dl>
 </section>
 </main>

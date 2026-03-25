@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Scientific Calculator – Online Scientific Calculator | ToolForge</title>
-<meta name="description" content="Free online Scientific Calculator with sin, cos, tan, sqrt, log, power. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Scientific Calculator performs trigonometric, logarithmic, exponential, and algebraic operations with function reference, constant values, and order of operations explanation. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/scientific-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Scientific Calculator – Online Scientific Calculator | ToolForge">
-<meta property="og:description" content="Free online Scientific Calculator with sin, cos, tan, sqrt, log, power. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Scientific Calculator performs trigonometric, logarithmic, exponential, and algebraic operations with function reference, constant values, and order of operations explanation. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/scientific-calculator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Scientific Calculator – Online Scientific Calculator | ToolForge">
-<meta name="twitter:description" content="Free online Scientific Calculator with sin, cos, tan, sqrt, log, power. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Scientific Calculator performs trigonometric, logarithmic, exponential, and algebraic operations with function reference, constant values, and order of operations explanation. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Scientific Calculator?",
+      "name": "What functions does this scientific calculator support?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Scientific Calculator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "This calculator supports: trigonometric functions (sin, cos, tan with degree input), inverse trig functions (asin, acos, atan), logarithms (log base 10, ln natural log), exponentials (e^x, 10^x), roots (sqrt, cbrt), powers (x^y using ^ operator), and constants (π, e). Standard arithmetic (+, -, *, /) and parentheses are supported."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "Does the calculator use degrees or radians?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Trigonometric functions (sin, cos, tan) accept input in degrees by default for user convenience. Behind the scenes, degrees are converted to radians before calculation since JavaScript's Math functions require radians. For example, sin(90) = 1, sin(30) = 0.5. Inverse trig functions return values in degrees."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the order of operations (PEMDAS)?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Order of operations is: 1) Parentheses, 2) Exponents and roots, 3) Multiplication and division (left to right), 4) Addition and subtraction (left to right). This is commonly remembered as PEMDAS (Please Excuse My Dear Aunt Sally). Example: 2 + 3 × 4 = 14, not 20, because multiplication comes before addition."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are the common mathematical constants?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Common constants include: π (pi) ≈ 3.14159 (circle ratio), e ≈ 2.71828 (natural base), φ (golden ratio) ≈ 1.61803, √2 ≈ 1.41421. This calculator supports π (type 'pi' or 'π') and e. Constants can be used in expressions like '2 * pi * 5' for circle circumference."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How do logarithms work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Logarithms are the inverse of exponentiation. log₁₀(x) asks '10 to what power equals x?' ln(x) is the natural logarithm with base e. Properties: log(ab) = log(a) + log(b), log(a/b) = log(a) - log(b), log(aⁿ) = n × log(a). Common in science for pH, decibels, Richter scale, and exponential growth/decay."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What are the trigonometric functions used for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Trigonometric functions relate angles to side ratios in right triangles. sin(θ) = opposite/hypotenuse, cos(θ) = adjacent/hypotenuse, tan(θ) = opposite/adjacent. Used in physics (waves, oscillations), engineering (structural analysis), navigation (distance calculations), computer graphics (rotations), and signal processing (Fourier analysis)."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>Scientific Calculator</h1>
-<p class="subtitle">Basic scientific operations: sin, cos, tan (angles in degrees), sqrt, log, power.</p>
+<p class="subtitle">Perform trigonometric, logarithmic, exponential, and algebraic calculations with support for common mathematical functions and constants.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Expression</h3>
 <label for="expr" class="sr-only">Expression</label>
@@ -83,25 +88,341 @@
 <p id="result"></p>
 <section class="tool-seo">
 <h3>About Scientific Calculator</h3>
-<p>This scientific calculator handles common functions such as sine, cosine, tangent, square root, logarithms and powers.</p>
-<p>It is useful for engineering math, science homework and quick technical calculations when a basic calculator is not enough.</p>
+<p>This scientific calculator evaluates mathematical expressions containing trigonometric functions (sin, cos, tan), logarithms (log, ln), roots (sqrt), powers (^), and mathematical constants (π, e). It follows standard order of operations (PEMDAS) and accepts angles in degrees for trigonometric calculations.</p>
+<p>It is useful for engineering calculations, physics problems, mathematics homework, chemistry computations, financial modeling, statistics work, and any technical field requiring scientific notation and advanced mathematical functions beyond basic arithmetic.</p>
+
+<h4>Supported Functions Reference</h4>
+<p>Complete list of available mathematical operations:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Trigonometric Functions (angles in degrees):
+  sin(x)    - Sine of angle x in degrees
+  cos(x)    - Cosine of angle x in degrees
+  tan(x)    - Tangent of angle x in degrees
+  asin(x)   - Arc sine, returns angle in degrees
+  acos(x)   - Arc cosine, returns angle in degrees
+  atan(x)   - Arc tangent, returns angle in degrees
+
+Logarithmic Functions:
+  log(x)    - Logarithm base 10 (common log)
+  ln(x)     - Natural logarithm (base e)
+
+Exponential Functions:
+  exp(x)    - e raised to power x (e^x)
+  10^x      - 10 raised to power x
+
+Root Functions:
+  sqrt(x)   - Square root of x
+  cbrt(x)   - Cube root of x
+
+Power Operation:
+  x ^ y     - x raised to power y
+
+Constants:
+  pi, π     - 3.141592653589793...
+  e         - 2.718281828459045...
+
+Arithmetic Operators:
+  + - * /   - Addition, subtraction, multiplication, division
+  %         - Modulo (remainder)
+  ()        - Parentheses for grouping
+
+Example Expressions:
+  sin(30) + cos(60)           = 0.5 + 0.5 = 1
+  log(100)                    = 2
+  ln(e)                       = 1
+  sqrt(16) * 2                = 8
+  2 ^ 8                       = 256
+  pi * 5 ^ 2                  = 78.54 (circle area)
+  (2 + 3) * 4                 = 20
+</pre>
+
+<h4>Order of Operations (PEMDAS)</h4>
+<p>Expressions are evaluated following standard mathematical precedence:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Precedence Order (highest to lowest):
+
+1. Parentheses ()
+   - Innermost evaluated first
+   - (2 + 3) * 4 = 5 * 4 = 20
+
+2. Functions and Exponents
+   - sin(30), sqrt(16), 2^3
+   - 2^3 + 1 = 8 + 1 = 9
+
+3. Multiplication and Division (*, /)
+   - Left to right
+   - 10 / 2 * 3 = 5 * 3 = 15
+
+4. Addition and Subtraction (+, -)
+   - Left to right
+   - 10 - 3 + 2 = 7 + 2 = 9
+
+Common Mistakes:
+
+  2 + 3 * 4     = 14  (NOT 20)
+  (2 + 3) * 4   = 20  (parentheses change order)
+
+  8 / 2 * 2     = 8   (NOT 2)
+  8 / (2 * 2)   = 2   (parentheses required)
+
+  2 ^ 3 ^ 2     = 64  (right to left: 3^2=9, then 2^9=512)
+  (2 ^ 3) ^ 2   = 64  (left to right: 2^3=8, then 8^2=64)
+</pre>
+
+<h4>Trigonometric Function Values</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Angle</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">sin(θ)</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">cos(θ)</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">tan(θ)</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">0°</td>
+    <td style="border:1px solid #ddd;padding:8px">0</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+    <td style="border:1px solid #ddd;padding:8px">0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">30°</td>
+    <td style="border:1px solid #ddd;padding:8px">0.5</td>
+    <td style="border:1px solid #ddd;padding:8px">√3/2 ≈ 0.866</td>
+    <td style="border:1px solid #ddd;padding:8px">1/√3 ≈ 0.577</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">45°</td>
+    <td style="border:1px solid #ddd;padding:8px">√2/2 ≈ 0.707</td>
+    <td style="border:1px solid #ddd;padding:8px">√2/2 ≈ 0.707</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">60°</td>
+    <td style="border:1px solid #ddd;padding:8px">√3/2 ≈ 0.866</td>
+    <td style="border:1px solid #ddd;padding:8px">0.5</td>
+    <td style="border:1px solid #ddd;padding:8px">√3 ≈ 1.732</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">90°</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+    <td style="border:1px solid #ddd;padding:8px">0</td>
+    <td style="border:1px solid #ddd;padding:8px">undefined</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">180°</td>
+    <td style="border:1px solid #ddd;padding:8px">0</td>
+    <td style="border:1px solid #ddd;padding:8px">-1</td>
+    <td style="border:1px solid #ddd;padding:8px">0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">270°</td>
+    <td style="border:1px solid #ddd;padding:8px">-1</td>
+    <td style="border:1px solid #ddd;padding:8px">0</td>
+    <td style="border:1px solid #ddd;padding:8px">undefined</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">360°</td>
+    <td style="border:1px solid #ddd;padding:8px">0</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+    <td style="border:1px solid #ddd;padding:8px">0</td>
+  </tr>
+</table>
+
+<h4>Logarithm Properties</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Logarithm Rules:
+
+Product Rule:
+  log(a × b) = log(a) + log(b)
+  Example: log(1000) = log(10 × 100) = log(10) + log(100) = 1 + 2 = 3
+
+Quotient Rule:
+  log(a / b) = log(a) - log(b)
+  Example: log(100/10) = log(100) - log(10) = 2 - 1 = 1
+
+Power Rule:
+  log(aⁿ) = n × log(a)
+  Example: log(1000) = log(10³) = 3 × log(10) = 3 × 1 = 3
+
+Change of Base:
+  log_b(x) = log(x) / log(b)
+  Example: log₂(8) = log(8) / log(2) = 0.903 / 0.301 ≈ 3
+
+Common Logarithm Values (base 10):
+  log(1)      = 0
+  log(10)     = 1
+  log(100)    = 2
+  log(1000)   = 3
+  log(0.1)    = -1
+  log(0.01)   = -2
+
+Natural Logarithm Values (base e):
+  ln(1)       = 0
+  ln(e)       = 1
+  ln(e²)      = 2
+  ln(10)      ≈ 2.303
+</pre>
+
+<h4>Mathematical Constants</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Constant</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Symbol</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Value</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Pi</td>
+    <td style="border:1px solid #ddd;padding:8px">π, pi</td>
+    <td style="border:1px solid #ddd;padding:8px">3.14159265359...</td>
+    <td style="border:1px solid #ddd;padding:8px">Circle circumference/diameter ratio</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Euler's Number</td>
+    <td style="border:1px solid #ddd;padding:8px">e</td>
+    <td style="border:1px solid #ddd;padding:8px">2.71828182845...</td>
+    <td style="border:1px solid #ddd;padding:8px">Natural logarithm base, exponential growth</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Golden Ratio</td>
+    <td style="border:1px solid #ddd;padding:8px">φ, phi</td>
+    <td style="border:1px solid #ddd;padding:8px">1.61803398875...</td>
+    <td style="border:1px solid #ddd;padding:8px">Art, architecture, nature proportion</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Square Root of 2</td>
+    <td style="border:1px solid #ddd;padding:8px">√2</td>
+    <td style="border:1px solid #ddd;padding:8px">1.41421356237...</td>
+    <td style="border:1px solid #ddd;padding:8px">Diagonal of unit square, Pythagorean</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Square Root of 3</td>
+    <td style="border:1px solid #ddd;padding:8px">√3</td>
+    <td style="border:1px solid #ddd;padding:8px">1.73205080757...</td>
+    <td style="border:1px solid #ddd;padding:8px">Height of equilateral triangle</td>
+  </tr>
+</table>
+
+<h4>Example Calculations</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Geometry:
+  Circle area (r=5):     pi * 5^2 = 78.54
+  Circle circumference:  2 * pi * 5 = 31.42
+  Sphere volume (r=3):   (4/3) * pi * 3^3 = 113.10
+  Triangle area (b=10,h=6):  0.5 * 10 * 6 = 30
+
+Physics:
+  Kinetic energy (m=10,v=5):  0.5 * 10 * 5^2 = 125
+  Force (m=5,a=9.8):     5 * 9.8 = 49 N
+  Wave frequency (T=0.02):  1 / 0.02 = 50 Hz
+  Pendulum period (L=1):  2 * pi * sqrt(1/9.8) ≈ 2.01 s
+
+Finance:
+  Compound interest (P=1000,r=5%,t=10):  1000 * (1.05)^10 = 1628.89
+  Present value (FV=1000,r=5%,t=5):  1000 / (1.05)^5 = 783.53
+
+Statistics:
+  Z-score (x=85,μ=75,σ=10):  (85-75) / 10 = 1.0
+  Standard deviation sample: sqrt(Σ(x-μ)²/(n-1))
+
+Trigonometry:
+  Right triangle (θ=30°,hyp=10):
+    opposite = 10 * sin(30) = 5
+    adjacent = 10 * cos(30) = 8.66
+</pre>
+
+<h4>Scientific Notation</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Scientific Notation Format:
+  a × 10ⁿ where 1 ≤ |a| < 10
+
+Examples:
+  Speed of light:     299,792,458 m/s = 2.998 × 10⁸ m/s
+  Planck constant:    6.626 × 10⁻³⁴ J·s
+  Avogadro's number:  6.022 × 10²³ mol⁻¹
+  Earth mass:         5.972 × 10²⁴ kg
+  Electron charge:    1.602 × 10⁻¹⁹ C
+
+Calculator Input:
+  Use 'e' notation: 2.998e8 = 299,792,458
+  6.022e23 = 602,200,000,000,000,000,000,000
+  1.602e-19 = 0.0000000000000000001602
+
+Note: In this calculator, 'e' alone represents
+Euler's number. Use 'e' notation only in the
+form XeY where X and Y are numbers.
+</pre>
+
+<h4>Common Formulas Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Field</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Formula</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Pythagorean Theorem</td>
+    <td style="border:1px solid #ddd;padding:8px">a² + b² = c²</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Quadratic Formula</td>
+    <td style="border:1px solid #ddd;padding:8px">x = (-b ± √(b²-4ac)) / 2a</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Circle Area</td>
+    <td style="border:1px solid #ddd;padding:8px">A = πr²</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Sphere Volume</td>
+    <td style="border:1px solid #ddd;padding:8px">V = (4/3)πr³</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Newton's Second Law</td>
+    <td style="border:1px solid #ddd;padding:8px">F = ma</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Kinetic Energy</td>
+    <td style="border:1px solid #ddd;padding:8px">KE = ½mv²</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Ohm's Law</td>
+    <td style="border:1px solid #ddd;padding:8px">V = IR</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">pH Calculation</td>
+    <td style="border:1px solid #ddd;padding:8px">pH = -log[H⁺]</td>
+  </tr>
+</table>
+
+<h4>Error Conditions</h4>
+<ul>
+  <li><strong>Division by zero:</strong> Expressions like 1/0 return "Infinity" or "Error"</li>
+  <li><strong>Negative square root:</strong> sqrt(-1) returns "NaN" (not a number) for real-valued calculations</li>
+  <li><strong>Invalid syntax:</strong> Missing parentheses or malformed expressions show "Error: Invalid"</li>
+  <li><strong>Domain errors:</strong> log(0), log(negative), asin(>1), acos(>1) return "NaN" or "Infinity"</li>
+  <li><strong>Overflow:</strong> Extremely large results (10^1000) return "Infinity"</li>
+  <li><strong>Underflow:</strong> Extremely small results may round to 0</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Scientific Calculator?</dt>
-  <dd>Scientific Calculator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What functions does this scientific calculator support?</dt>
+  <dd>This calculator supports: trigonometric functions (sin, cos, tan with degree input), inverse trig functions (asin, acos, atan), logarithms (log base 10, ln natural log), exponentials (e^x, 10^x), roots (sqrt, cbrt), powers (x^y using ^ operator), and constants (π, e). Standard arithmetic (+, -, *, /) and parentheses are supported.</dd>
+
+  <dt>Does the calculator use degrees or radians?</dt>
+  <dd>Trigonometric functions (sin, cos, tan) accept input in degrees by default for user convenience. Behind the scenes, degrees are converted to radians before calculation since JavaScript's Math functions require radians. For example, sin(90) = 1, sin(30) = 0.5. Inverse trig functions return values in degrees.</dd>
+
+  <dt>What is the order of operations (PEMDAS)?</dt>
+  <dd>Order of operations is: 1) Parentheses, 2) Exponents and roots, 3) Multiplication and division (left to right), 4) Addition and subtraction (left to right). This is commonly remembered as PEMDAS (Please Excuse My Dear Aunt Sally). Example: 2 + 3 × 4 = 14, not 20, because multiplication comes before addition.</dd>
+
+  <dt>What are the common mathematical constants?</dt>
+  <dd>Common constants include: π (pi) ≈ 3.14159 (circle ratio), e ≈ 2.71828 (natural base), φ (golden ratio) ≈ 1.61803, √2 ≈ 1.41421. This calculator supports π (type 'pi' or 'π') and e. Constants can be used in expressions like '2 * pi * 5' for circle circumference.</dd>
+
+  <dt>How do logarithms work?</dt>
+  <dd>Logarithms are the inverse of exponentiation. log₁₀(x) asks '10 to what power equals x?' ln(x) is the natural logarithm with base e. Properties: log(ab) = log(a) + log(b), log(a/b) = log(a) - log(b), log(aⁿ) = n × log(a). Common in science for pH, decibels, Richter scale, and exponential growth/decay.</dd>
+
+  <dt>What are the trigonometric functions used for?</dt>
+  <dd>Trigonometric functions relate angles to side ratios in right triangles. sin(θ) = opposite/hypotenuse, cos(θ) = adjacent/hypotenuse, tan(θ) = opposite/adjacent. Used in physics (waves, oscillations), engineering (structural analysis), navigation (distance calculations), computer graphics (rotations), and signal processing (Fourier analysis).</dd>
 </dl>
 </section>
 </main>

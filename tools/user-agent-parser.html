@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>User Agent Parser – Analyze Browser User Agents | ToolForge</title>
-<meta name="description" content="Free online User Agent Parser to detect browser, OS and show the full User-Agent string. Parse any UA or view your current environment. Part of the ToolForge developer tools collection.">
+<meta name="description" content="User Agent Parser analyzes browser User-Agent strings to detect browser name, version, operating system, and device type. Essential for analytics, debugging, and responsive testing. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/user-agent-parser.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="User Agent Parser – Analyze Browser User Agents | ToolForge">
-<meta property="og:description" content="Free online User Agent Parser to detect browser, OS and show the full User-Agent string. Parse any UA or view your current environment. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="User Agent Parser analyzes browser User-Agent strings to detect browser name, version, operating system, and device type. Essential for analytics, debugging, and responsive testing. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/user-agent-parser.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="User Agent Parser – Analyze Browser User Agents | ToolForge">
-<meta name="twitter:description" content="Free online User Agent Parser to detect browser, OS and show the full User-Agent string. Parse any UA or view your current environment. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="User Agent Parser analyzes browser User-Agent strings to detect browser name, version, operating system, and device type. Essential for analytics, debugging, and responsive testing. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
@@ -31,45 +31,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is User Agent Parser?",
+      "name": "What is a User-Agent string?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "User Agent Parser is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "A User-Agent string is a text identifier sent by browsers with every HTTP request. It contains browser name/version, operating system, rendering engine, and sometimes device info. Example: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'. Servers use this for analytics, content negotiation, and browser-specific fixes."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I parse a User-Agent string?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "User-Agent parsing uses regex patterns to identify known browser signatures. Chrome includes 'Chrome/xyz' and 'AppleWebKit', Firefox has 'Firefox/xyz', Safari has 'Safari/' without 'Chrome', Edge has 'Edg/'. OS detection looks for 'Windows NT', 'Mac OS X', 'Linux', 'Android', 'iPhone'. The order matters—check Edge before Chrome since Edge also contains 'Chrome'."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Why do User-Agent strings look so complex?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "User-Agent strings are complex for historical compatibility. They include legacy identifiers (Mozilla/5.0) to avoid breaking old sites that did browser sniffing. Each browser adds its own tokens plus rendering engine info (AppleWebKit, Gecko, Trident). This results in long strings like 'Mozilla/5.0... AppleWebKit... Chrome... Safari' even though it's just Chrome."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is User-Agent spoofing?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "User-Agent spoofing is when a browser or tool sends a fake User-Agent string. Developers spoof to test how sites respond to different browsers. Some users spoof for privacy (blending into the crowd). Malicious actors may spoof to bypass browser-specific security rules. Never trust User-Agent for security decisions—use feature detection instead."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What information can I get from User-Agent?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "From User-Agent you can detect: browser name and version, operating system and version, rendering engine (WebKit, Gecko, Trident), device type (mobile, tablet, desktop), and sometimes device model. You cannot reliably get: screen size, installed plugins, JavaScript support, or precise hardware specs. For feature detection, use Modernizr or feature queries instead."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What is User-Agent Client Hints?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "User-Agent Client Hints (UA-CH) is a privacy-focused replacement for traditional User-Agent strings. Instead of sending full UA with every request, browsers send minimal info by default. Sites request specific data (browser version, OS, architecture) via HTTP headers or JavaScript APIs. This reduces fingerprinting surface while still enabling browser-specific functionality."
       }
     }
   ]
@@ -79,7 +84,7 @@
 <body>
 <main class="container">
 <h1>User Agent Parser</h1>
-<p class="subtitle">Analyze browser and operating system from a User-Agent string, or view your current environment.</p>
+<p class="subtitle">Analyze browser User-Agent strings to identify browser, operating system, rendering engine, and device information.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <div style="margin-bottom:16px">
@@ -109,26 +114,239 @@
 
 <section class="tool-seo">
 <h3>About User Agent Parser</h3>
-<p>This user agent parser analyzes a User-Agent string to identify browser, operating system and device details. Use the Current Environment tab to see your own browser and OS info.</p>
-<p>It is useful for analytics checks, support troubleshooting and request debugging when you need to understand what client environment a request came from.</p>
-<p>Note: User agent strings can be spoofed; use for development reference only.</p>
+<p>This User-Agent parser analyzes browser identification strings to extract browser name, version, operating system, rendering engine, and device type information. It supports both manual UA string parsing and displays your current browser environment.</p>
+<p>It is useful for analytics verification, debugging browser-specific issues, testing responsive designs, analyzing server logs, identifying bot traffic, verifying CDN cache rules, troubleshooting CSS/JS compatibility issues, and understanding what client information websites receive from visitors.</p>
+
+<h4>User-Agent String Structure</h4>
+<p>A typical modern browser User-Agent string follows this pattern:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Chrome on Windows:
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+
+Breakdown:
+├── Mozilla/5.0          - Historical compatibility token
+├── Windows NT 10.0      - Operating system
+├── Win64; x64           - Platform architecture
+├── AppleWebKit/537.36   - Rendering engine
+├── KHTML, like Gecko    - Engine lineage (for compatibility)
+├── Chrome/120.0.0.0     - Browser name and version
+└── Safari/537.36        - Safari compatibility token
+
+Firefox on macOS:
+Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:121.0)
+Gecko/20100101 Firefox/121.0
+
+Safari on iOS:
+Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)
+AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1
+</pre>
+
+<h4>Browser Detection Patterns</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Browser</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Detection Pattern</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Version Format</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Google Chrome</td>
+    <td style="border:1px solid #ddd;padding:8px">Chrome/xyz (not Edg)</td>
+    <td style="border:1px solid #ddd;padding:8px">Chrome/120.0.0.0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Microsoft Edge</td>
+    <td style="border:1px solid #ddd;padding:8px">Edg/xyz</td>
+    <td style="border:1px solid #ddd;padding:8px">Edg/120.0.0.0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Mozilla Firefox</td>
+    <td style="border:1px solid #ddd;padding:8px">Firefox/xyz</td>
+    <td style="border:1px solid #ddd;padding:8px">Firefox/121.0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Apple Safari</td>
+    <td style="border:1px solid #ddd;padding:8px">Safari/xyz (no Chrome)</td>
+    <td style="border:1px solid #ddd;padding:8px">Version/17.0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Opera</td>
+    <td style="border:1px solid #ddd;padding:8px">OPR/xyz</td>
+    <td style="border:1px solid #ddd;padding:8px">OPR/105.0.0.0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Samsung Internet</td>
+    <td style="border:1px solid #ddd;padding:8px">SamsungBrowser/xyz</td>
+    <td style="border:1px solid #ddd;padding:8px">SamsungBrowser/23.0</td>
+  </tr>
+</table>
+
+<h4>Operating System Detection</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">OS</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">UA Pattern</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Version Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Windows 10/11</td>
+    <td style="border:1px solid #ddd;padding:8px">Windows NT 10.0</td>
+    <td style="border:1px solid #ddd;padding:8px">Windows NT 10.0; Win64; x64</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">macOS</td>
+    <td style="border:1px solid #ddd;padding:8px">Mac OS X xyz</td>
+    <td style="border:1px solid #ddd;padding:8px">Mac OS X 10_15_7</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Linux</td>
+    <td style="border:1px solid #ddd;padding:8px">Linux; x86_64</td>
+    <td style="border:1px solid #ddd;padding:8px">Linux x86_64</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Android</td>
+    <td style="border:1px solid #ddd;padding:8px">Android xyz</td>
+    <td style="border:1px solid #ddd;padding:8px">Android 14</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">iOS</td>
+    <td style="border:1px solid #ddd;padding:8px">iPhone OS xyz</td>
+    <td style="border:1px solid #ddd;padding:8px">iPhone OS 17_0 like Mac OS X</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">ChromeOS</td>
+    <td style="border:1px solid #ddd;padding:8px">CrOS xyz</td>
+    <td style="border:1px solid #ddd;padding:8px">CrOS 15639.0.0</td>
+  </tr>
+</table>
+
+<h4>Device Type Detection</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Desktop:
+  - No "Mobile" or "Android" with "Mobile"
+  - Typically: Windows, macOS, Linux
+
+Mobile Phone:
+  - iPhone → "iPhone" in UA
+  - Android Phone → "Android" + "Mobile"
+  - Windows Phone → "Windows Phone" (legacy)
+
+Tablet:
+  - iPad → "iPad" in UA
+  - Android Tablet → "Android" without "Mobile"
+  - Some tablets spoof desktop UA (iPadOS 13+)
+
+Bot/Crawler:
+  - Contains "bot", "crawler", "spider"
+  - Examples: Googlebot, Bingbot, DuckDuckBot
+  - Often missing typical browser tokens
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Analytics Verification:</strong> Confirm tracking data correctly captures browser/OS distribution</li>
+  <li><strong>Bug Debugging:</strong> Reproduce issues reported from specific browser/OS combinations</li>
+  <li><strong>Log Analysis:</strong> Parse server logs to identify traffic patterns and bot activity</li>
+  <li><strong>Responsive Testing:</strong> Verify which devices trigger mobile/tablet layouts</li>
+  <li><strong>CDN Configuration:</strong> Set up browser-specific cache rules and optimizations</li>
+  <li><strong>Security Analysis:</strong> Identify suspicious User-Agent patterns in access logs</li>
+</ul>
+
+<h4>Rendering Engine Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Engine</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Used By</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">UA Token</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Blink</td>
+    <td style="border:1px solid #ddd;padding:8px">Chrome, Edge, Opera, Brave</td>
+    <td style="border:1px solid #ddd;padding:8px">AppleWebKit/537.36</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Gecko</td>
+    <td style="border:1px solid #ddd;padding:8px">Firefox, Firefox Focus</td>
+    <td style="border:1px solid #ddd;padding:8px">Gecko/20100101</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">WebKit</td>
+    <td style="border:1px solid #ddd;padding:8px">Safari, iOS Safari</td>
+    <td style="border:1px solid #ddd;padding:8px">AppleWebKit/605.x</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Trident</td>
+    <td style="border:1px solid #ddd;padding:8px">Internet Explorer 11 (legacy)</td>
+    <td style="border:1px solid #ddd;padding:8px">Trident/7.0</td>
+  </tr>
+</table>
+
+<h4>Navigator API Properties</h4>
+<p>Beyond User-Agent parsing, JavaScript provides additional browser information:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+navigator.userAgent        - Full UA string
+navigator.platform         - OS platform (Win32, MacIntel, Linux x86_64)
+navigator.language         - Primary language (en-US, zh-CN)
+navigator.languages        - Preferred languages array
+navigator.cookieEnabled    - Cookies enabled (true/false)
+navigator.onLine           - Online status (true/false)
+navigator.hardwareConcurrency - CPU cores (4, 8, 16)
+navigator.deviceMemory     - RAM in GB (4, 8, 16) - Chromium only
+navigator.maxTouchPoints   - Touch support (0 = no touch)
+navigator.webdriver        - Automation detection (true = Selenium/Puppeteer)
+</pre>
+
+<h4>Bot Detection Patterns</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Search Engine Bots:
+  Googlebot:    Googlebot/2.1 (+http://www.google.com/bot.html)
+  Bingbot:      Mozilla/5.0 (compatible; bingbot/2.0; ...)
+  DuckDuckBot:  DuckDuckBot/1.0 (+http://duckduckgo.com/duckduckbot.html)
+
+Social Media Bots:
+  Facebook:     facebookexternalhit/1.1
+  Twitter:      Twitterbot/1.0
+  LinkedIn:     LinkedInBot/1.0
+
+SEO/Analytics Bots:
+  AhrefsBot:    AhrefsBot/7.0
+  SemrushBot:   SemrushBot/7.0
+  MJ12bot:      MJ12bot/v1.4.8
+
+Note: Some bots now use full browser UA strings to appear as real users.
+Check for missing interactive features or use bot detection services.
+</pre>
+
+<h4>Limitations and Considerations</h4>
+<ul>
+  <li><strong>User-Agent Spoofing:</strong> Users and tools can send fake UA strings—never trust for security decisions</li>
+  <li><strong>Version Granularity:</strong> Some browsers omit minor versions or use generic tokens</li>
+  <li><strong>iPadOS Detection:</strong> iPadOS 13+ defaults to desktop UA, making tablet detection harder</li>
+  <li><strong>Privacy Initiatives:</strong> User-Agent Client Hints may replace traditional UA strings in the future</li>
+  <li><strong>Feature Detection:</strong> Prefer feature detection (Modernizr) over browser sniffing for compatibility</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is User Agent Parser?</dt>
-  <dd>User Agent Parser is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is a User-Agent string?</dt>
+  <dd>A User-Agent string is a text identifier sent by browsers with every HTTP request. It contains browser name/version, operating system, rendering engine, and sometimes device info. Example: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'. Servers use this for analytics, content negotiation, and browser-specific fixes.</dd>
+
+  <dt>How do I parse a User-Agent string?</dt>
+  <dd>User-Agent parsing uses regex patterns to identify known browser signatures. Chrome includes 'Chrome/xyz' and 'AppleWebKit', Firefox has 'Firefox/xyz', Safari has 'Safari/' without 'Chrome', Edge has 'Edg/'. OS detection looks for 'Windows NT', 'Mac OS X', 'Linux', 'Android', 'iPhone'. The order matters—check Edge before Chrome since Edge also contains 'Chrome'.</dd>
+
+  <dt>Why do User-Agent strings look so complex?</dt>
+  <dd>User-Agent strings are complex for historical compatibility. They include legacy identifiers (Mozilla/5.0) to avoid breaking old sites that did browser sniffing. Each browser adds its own tokens plus rendering engine info (AppleWebKit, Gecko, Trident). This results in long strings like 'Mozilla/5.0... AppleWebKit... Chrome... Safari' even though it's just Chrome.</dd>
+
+  <dt>What is User-Agent spoofing?</dt>
+  <dd>User-Agent spoofing is when a browser or tool sends a fake User-Agent string. Developers spoof to test how sites respond to different browsers. Some users spoof for privacy (blending into the crowd). Malicious actors may spoof to bypass browser-specific security rules. Never trust User-Agent for security decisions—use feature detection instead.</dd>
+
+  <dt>What information can I get from User-Agent?</dt>
+  <dd>From User-Agent you can detect: browser name and version, operating system and version, rendering engine (WebKit, Gecko, Trident), device type (mobile, tablet, desktop), and sometimes device model. You cannot reliably get: screen size, installed plugins, JavaScript support, or precise hardware specs. For feature detection, use Modernizr or feature queries instead.</dd>
+
+  <dt>What is User-Agent Client Hints?</dt>
+  <dd>User-Agent Client Hints (UA-CH) is a privacy-focused replacement for traditional User-Agent strings. Instead of sending full UA with every request, browsers send minimal info by default. Sites request specific data (browser version, OS, architecture) via HTTP headers or JavaScript APIs. This reduces fingerprinting surface while still enabling browser-specific functionality.</dd>
 </dl>
 </section>
 </main>
@@ -186,16 +404,52 @@ function parseUA(){
 let ua=document.getElementById("ua").value
 let browser="Unknown"
 let os="Unknown"
-if(ua.includes("Chrome")) browser="Chrome"
-if(ua.includes("Firefox")) browser="Firefox"
-if(ua.includes("Safari") && !ua.includes("Chrome")) browser="Safari"
-if(ua.includes("Edg")) browser="Edge"
-if(ua.includes("Windows")) os="Windows"
-if(ua.includes("Mac")) os="MacOS"
-if(ua.includes("Linux")) os="Linux"
-if(ua.includes("Android")) os="Android"
-if(ua.includes("iPhone")) os="iOS"
-let result={browser:browser,os:os,userAgent:ua}
+let engine="Unknown"
+let version=""
+
+// Browser detection (order matters!)
+if(/Edg\//.test(ua)){
+browser="Edge"
+version=ua.match(/Edg\/([\d.]+)/)?.[1]||""
+}else if(/Chrome\//.test(ua)&&!/Edg/.test(ua)&&!/OPR/.test(ua)&&!/SamsungBrowser/.test(ua)){
+browser="Chrome"
+version=ua.match(/Chrome\/([\d.]+)/)?.[1]||""
+}else if(/Firefox\//.test(ua)){
+browser="Firefox"
+version=ua.match(/Firefox\/([\d.]+)/)?.[1]||""
+}else if(/Safari\//.test(ua)&&!/Chrome/.test(ua)){
+browser="Safari"
+version=ua.match(/Version\/([\d.]+)/)?.[1]||""
+}else if(/OPR\//.test(ua)){
+browser="Opera"
+version=ua.match(/OPR\/([\d.]+)/)?.[1]||""
+}else if(/SamsungBrowser/.test(ua)){
+browser="Samsung Internet"
+version=ua.match(/SamsungBrowser\/([\d.]+)/)?.[1]||""
+}
+
+// OS detection
+if(/Windows NT 10/.test(ua)) os="Windows 10/11"
+else if(/Windows NT 6\.[123]/.test(ua)) os="Windows 7/8"
+else if(/Windows/.test(ua)) os="Windows"
+else if(/Mac OS X/.test(ua)) os="macOS"
+else if(/Android/.test(ua)) os="Android"
+else if(/iPhone|iPad/.test(ua)) os="iOS"
+else if(/Linux/.test(ua)) os="Linux"
+else if(/CrOS/.test(ua)) os="ChromeOS"
+
+// Engine detection
+if(/AppleWebKit/.test(ua)) engine="WebKit/Blink"
+if(/Gecko/.test(ua)&&!/AppleWebKit/.test(ua)) engine="Gecko"
+if(/Trident/.test(ua)) engine="Trident"
+
+let result={
+browser:browser,
+version:version,
+os:os,
+engine:engine,
+userAgent:ua
+}
 document.getElementById("result").innerText=JSON.stringify(result,null,2)
 }
 function copyUa(){

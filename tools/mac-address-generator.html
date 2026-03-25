@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>MAC Address Generator – Generate Random MAC Addresses | ToolForge</title>
-<meta name="description" content="Free online MAC address generator. Generate random MAC addresses in various formats. Part of the ToolForge developer tools collection.">
+<title>MAC Address Generator – Random MAC with OUI and Format Options | ToolForge</title>
+<meta name="description" content="Generate random MAC addresses in multiple formats: colon, dash, dot notation. Includes unicast/multicast option, OUI reference, and MAC address structure explanation. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/mac-address-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="MAC Address Generator – Generate Random MAC Addresses | ToolForge">
-<meta property="og:description" content="Generate random MAC addresses.">
+<meta property="og:title" content="MAC Address Generator – Random MAC with OUI and Format Options | ToolForge">
+<meta property="og:description" content="Generate random MAC addresses in multiple formats: colon, dash, dot notation. Includes unicast/multicast option, OUI reference, and MAC address structure explanation. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/mac-address-generator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MAC Address Generator – Generate Random MAC Addresses | ToolForge">
-<meta name="twitter:description" content="Generate random MAC addresses.">
+<meta name="twitter:title" content="MAC Address Generator – Random MAC with OUI and Format Options | ToolForge">
+<meta name="twitter:description" content="Generate random MAC addresses in multiple formats: colon, dash, dot notation. Includes unicast/multicast option, OUI reference, and MAC address structure explanation. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Mac Address Generator used for?",
+      "name": "What is a MAC address?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Mac Address Generator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "A MAC (Media Access Control) address is a 48-bit (6-byte) identifier assigned to network interfaces for communication at the data link layer. It consists of two parts: the first 24 bits (3 bytes) are the OUI (Organizationally Unique Identifier) assigned by IEEE to manufacturers, and the last 24 bits are the device-specific serial number assigned by the manufacturer."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What are the different MAC address formats?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "MAC addresses can be displayed in several formats: Colon-separated (AA:BB:CC:DD:EE:FF) - common in Linux and networking tools; Dash-separated (AA-BB-CC-DD-EE-FF) - used in Windows; Dot notation (AABB.CCDD.EEFF) - Cisco style; Plain hex (AABBCCDDEEFF) - compact form for databases and configuration files."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What is the difference between unicast and multicast MAC addresses?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "The least significant bit of the first octet determines unicast vs multicast: 0 = unicast (sent to one specific device), 1 = multicast (sent to a group). For example, 02:00:00:00:00:00 is unicast (02 in binary ends in 0), while 03:00:00:00:00:00 is multicast (03 in binary ends in 1). Broadcast address FF:FF:FF:FF:FF:FF reaches all devices on the local network."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is a locally administered MAC address?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "The second least significant bit of the first octet indicates administration: 0 = globally unique (assigned by IEEE/OUI), 1 = locally administered (set by software). Locally administered addresses are used for virtual machines, MAC spoofing, privacy features (randomized MACs in WiFi), and network testing. Example: 02:00:00:00:00:00 has the local bit set."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "Why generate random MAC addresses?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Random MAC generation is used for: VM and container networking (each needs a unique MAC), network testing and simulation, privacy protection (randomized MACs prevent tracking), lab environments (avoid conflicts with production), and software development (mock network interfaces). Always use locally administered range (02, 06, 0A, 0E) for generated addresses."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "Can MAC addresses be spoofed or changed?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Yes, most operating systems allow MAC address changes through software (MAC spoofing). This is legal for privacy and testing but may violate network policies. Uses include: privacy on public WiFi, bypassing MAC filtering (if authorized), testing network access controls, and virtualization. Many modern devices now use randomized MACs by default when scanning for networks."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>MAC Address Generator</h1>
-<p class="subtitle">Generate random MAC addresses. Choose format and count.</p>
+<p class="subtitle">Generate random MAC addresses in colon, dash, dot, or plain hex format with unicast/multicast selection.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <label for="count">Count</label>
@@ -88,34 +93,286 @@
 </select>
 <br><br>
 
+<label for="addressType">Address Type</label>
+<select id="addressType">
+<option value="unicast-local">Unicast, Locally Administered (02:xx:xx...)</option>
+<option value="multicast-local">Multicast, Locally Administered (03:xx:xx...)</option>
+<option value="unicast-global">Unicast, Globally Unique (random OUI)</option>
+<option value="random">Random (any type)</option>
+</select>
+<br><br>
+
 <button onclick="generate()">Generate</button>
+<button type="button" onclick="copyOutput()">Copy</button>
 
 <h3>Result</h3>
-<textarea id="output" rows="12" style="width:90%" readonly></textarea>
-<button type="button" onclick="copyOutput()">Copy</button>
+<textarea id="output" rows="12" style="width:90%;font-family:monospace" readonly></textarea>
 <p id="status" class="inline-status"></p>
 
 <section class="tool-seo">
 <h3>About MAC Address Generator</h3>
-<p>This tool generates random MAC (Media Access Control) addresses for testing, virtualization and network configuration.</p>
-<p>Useful for VM setup, network testing and placeholder values.</p>
+<p>This tool generates random MAC (Media Access Control) addresses for testing, virtualization, and network configuration. It supports multiple output formats and address types including unicast/multicast and locally administered addresses.</p>
+
+<h4>MAC Address Structure</h4>
+<p>A MAC address is a 48-bit (6-byte) identifier represented as 12 hexadecimal digits:</p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+MAC Address Format (48 bits / 6 bytes):
+
+┌─────────────────────────────────────────────────────────┐
+│  AA : BB : CC : DD : EE : FF                            │
+│  │         │         │         │         │         │   │
+│  └─ Octet 0 ─┘ └─ Octet 1 ─┘ ... └─ Octet 5 ─┘       │
+│                                                         │
+│  First 3 bytes (AA:BB:CC) = OUI (Manufacturer ID)      │
+│  Last 3 bytes (DD:EE:FF) = Device serial number        │
+└─────────────────────────────────────────────────────────┘
+
+First Octet Bit Structure:
+┌────────────────────────────────────────────┐
+│  Bit 0: Multicast flag (0=unicast, 1=multi)│
+│  Bit 1: Local flag (0=global, 1=local)     │
+│  Bits 2-7: OUI-specific bits               │
+└────────────────────────────────────────────┘
+
+Examples:
+  02:00:00:00:00:00 → Unicast, Locally Administered
+  03:00:00:00:00:00 → Multicast, Locally Administered
+  00:00:00:00:00:00 → Unicast, Globally Unique (OUI assigned)
+  FF:FF:FF:FF:FF:FF → Broadcast (special address)
+</pre>
+
+<h4>MAC Address Format Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format Name</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Common Use</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Colon-separated</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>02:1A:3F:B4:C7:2E</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Linux, macOS, networking tools</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Dash-separated</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>02-1A-3F-B4-C7-2E</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Windows, Hyper-V</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Dot notation (Cisco)</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>021A.3FB4.C72E</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Cisco IOS, enterprise networking</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Plain hex</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>021A3FB4C72E</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Databases, config files, APIs</td>
+  </tr>
+</table>
+
+<h4>Address Type Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">First Byte</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Unicast, Local</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>02</code>, <code>06</code>, <code>0A</code>, <code>0E</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Single device, software-assigned (recommended for VMs)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Multicast, Local</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>03</code>, <code>07</code>, <code>0B</code>, <code>0F</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Group address, software-assigned</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Unicast, Global</td>
+    <td style="border:1px solid #ddd;padding:8px">Even (00, 04, 08, etc.)</td>
+    <td style="border:1px solid #ddd;padding:8px">Hardware-assigned by manufacturer</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Multicast, Global</td>
+    <td style="border:1px solid #ddd;padding:8px">Odd (01, 05, 09, etc.)</td>
+    <td style="border:1px solid #ddd;padding:8px">Protocol addresses (e.g., spanning tree)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Broadcast</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>FF:FF:FF:FF:FF:FF</code></td>
+    <td style="border:1px solid #ddd;padding:8px">All devices on local network</td>
+  </tr>
+</table>
+
+<h4>Common OUI Assignments</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">OUI Prefix</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Manufacturer</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>00:00:0C</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Cisco Systems</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>00:04:5A</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Apple</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>00:0C:29</code></td>
+    <td style="border:1px solid #ddd;padding:8px">VMware</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>00:15:5D</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Microsoft Hyper-V</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>00:1A:2B</code></td>
+    <td style="border:1px solid #ddd;padding:8px">QEMU/KVM</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>00:50:56</code></td>
+    <td style="border:1px solid #ddd;padding:8px">VMware (alternate)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>08:00:27</code></td>
+    <td style="border:1px solid #ddd;padding:8px">VirtualBox</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>52:54:00</code></td>
+    <td style="border:1px solid #ddd;padding:8px">QEMU (alternate)</td>
+  </tr>
+</table>
+
+<h4>MAC Generation Algorithm</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript MAC Address Generation:
+
+function generateMAC(type, format) {
+  let bytes = [];
+
+  // Set first byte based on address type
+  switch(type) {
+    case 'unicast-local':
+      bytes[0] = 0x02;  // 0000 0010: local=1, multicast=0
+      break;
+    case 'multicast-local':
+      bytes[0] = 0x03;  // 0000 0011: local=1, multicast=1
+      break;
+    case 'unicast-global':
+      // Random even first byte (multicast bit = 0)
+      bytes[0] = Math.floor(Math.random() * 128) * 2;
+      break;
+    default: // random
+      bytes[0] = Math.floor(Math.random() * 256);
+  }
+
+  // Generate remaining 5 random bytes
+  for (let i = 1; i < 6; i++) {
+    bytes[i] = Math.floor(Math.random() * 256);
+  }
+
+  // Format output
+  const hex = bytes.map(b =>
+    b.toString(16).padStart(2, '0').toUpperCase()
+  );
+
+  switch(format) {
+    case 'colon': return hex.join(':');
+    case 'dash':  return hex.join('-');
+    case 'dot':   return hex.join('').match(/.{1,4}/g).join('.');
+    default:      return hex.join('');
+  }
+}
+
+// Usage:
+const mac = generateMAC('unicast-local', 'colon');
+console.log(mac);  // e.g., "02:A4:B7:C3:D8:E1"
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Virtual Machine Networking:</strong> Assign unique MACs to VMs in VirtualBox, VMware, KVM, Hyper-V</li>
+  <li><strong>Container Networks:</strong> Generate MACs for Docker bridge networks, Kubernetes CNI plugins</li>
+  <li><strong>Network Testing:</strong> Simulate multiple devices for load testing, switch testing</li>
+  <li><strong>Privacy Protection:</strong> Use randomized MACs on public WiFi to prevent tracking</li>
+  <li><strong>Lab Environments:</strong> Avoid MAC conflicts between lab and production networks</li>
+  <li><strong>Software Development:</strong> Mock network interfaces for testing network applications</li>
+  <li><strong>MAC Filtering Tests:</strong> Test network access control lists with various MAC patterns</li>
+</ul>
+
+<h4>Locally Administered vs Globally Unique</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Globally Unique MAC (OUI-assigned):
+  First byte: Even number (multicast bit = 0)
+  Second bit: 0 (global/administered by IEEE)
+  Example: 00:1A:2B:3C:4D:5E (QEMU OUI)
+  Use when: Emulating specific hardware, production systems
+
+Locally Administered MAC:
+  First byte: 02, 06, 0A, 0E, etc. (second bit = 1)
+  Second bit: 1 (locally administered)
+  Example: 02:00:00:00:00:01
+  Use when: VMs, testing, privacy, avoiding conflicts
+
+Why use locally administered for generated MACs:
+  - Avoids conflicts with real hardware MACs
+  - Clearly identifies software-generated addresses
+  - No IEEE registration required
+  - Safe for testing and development
+</pre>
+
+<h4>MAC Address Validation</h4>
+<p>Valid MAC addresses must meet these criteria:</p>
+<ul>
+  <li><strong>Length:</strong> Exactly 6 bytes (48 bits, 12 hex digits)</li>
+  <li><strong>Characters:</strong> Only hexadecimal (0-9, A-F, case insensitive)</li>
+  <li><strong>Format:</strong> Consistent separator (all colons, all dashes, or none)</li>
+  <li><strong>Broadcast:</strong> FF:FF:FF:FF:FF:FF is valid but reserved</li>
+  <li><strong>Null:</strong> 00:00:00:00:00:00 is typically invalid for real interfaces</li>
+</ul>
 </section>
 
+<section class="how-to-use">
+<h3>How to Generate MAC Addresses</h3>
+<ol class="how-to-steps">
+  <li><strong>Set count:</strong> Enter the number of MAC addresses to generate (1-100).</li>
+  <li><strong>Choose format:</strong> Select colon, dash, dot, or plain hex format.</li>
+  <li><strong>Select type:</strong> Choose unicast/multicast and local/global administration.</li>
+  <li><strong>Click Generate:</strong> Random MAC addresses are created instantly.</li>
+  <li><strong>Copy result:</strong> Click "Copy" to use the addresses elsewhere.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Use "Unicast, Locally Administered" for VM and container networking</li>
+  <li>Colon format works best for Linux/macOS; dash for Windows</li>
+  <li>Dot notation is required for Cisco device configurations</li>
+  <li>Generate multiple addresses at once for bulk VM deployments</li>
+  <li>Avoid FF:FF:FF:FF:FF:FF (broadcast) and 00:00:00:00:00:00 (null)</li>
+</ul>
+</section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Mac Address Generator used for?</dt>
-  <dd>Mac Address Generator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+
+  <dt>What is a MAC address?</dt>
+  <dd>A MAC (Media Access Control) address is a 48-bit (6-byte) identifier assigned to network interfaces for communication at the data link layer. It consists of two parts: the first 24 bits (3 bytes) are the OUI (Organizationally Unique Identifier) assigned by IEEE to manufacturers, and the last 24 bits are the device-specific serial number assigned by the manufacturer.</dd>
+
+  <dt>What are the different MAC address formats?</dt>
+  <dd>MAC addresses can be displayed in several formats: Colon-separated (AA:BB:CC:DD:EE:FF) - common in Linux and networking tools; Dash-separated (AA-BB-CC-DD-EE-FF) - used in Windows; Dot notation (AABB.CCDD.EEFF) - Cisco style; Plain hex (AABBCCDDEEFF) - compact form for databases and configuration files.</dd>
+
+  <dt>What is the difference between unicast and multicast MAC addresses?</dt>
+  <dd>The least significant bit of the first octet determines unicast vs multicast: 0 = unicast (sent to one specific device), 1 = multicast (sent to a group). For example, 02:00:00:00:00:00 is unicast (02 in binary ends in 0), while 03:00:00:00:00:00 is multicast (03 in binary ends in 1). Broadcast address FF:FF:FF:FF:FF:FF reaches all devices on the local network.</dd>
+
+  <dt>What is a locally administered MAC address?</dt>
+  <dd>The second least significant bit of the first octet indicates administration: 0 = globally unique (assigned by IEEE/OUI), 1 = locally administered (set by software). Locally administered addresses are used for virtual machines, MAC spoofing, privacy features (randomized MACs in WiFi), and network testing. Example: 02:00:00:00:00:00 has the local bit set.</dd>
+
+  <dt>Why generate random MAC addresses?</dt>
+  <dd>Random MAC generation is used for: VM and container networking (each needs a unique MAC), network testing and simulation, privacy protection (randomized MACs prevent tracking), lab environments (avoid conflicts with production), and software development (mock network interfaces). Always use locally administered range (02, 06, 0A, 0E) for generated addresses.</dd>
+
+  <dt>Can MAC addresses be spoofed or changed?</dt>
+  <dd>Yes, most operating systems allow MAC address changes through software (MAC spoofing). This is legal for privacy and testing but may violate network policies. Uses include: privacy on public WiFi, bypassing MAC filtering (if authorized), testing network access controls, and virtualization. Many modern devices now use randomized MACs by default when scanning for networks.</dd>
 </dl>
 </section>
 </main>
@@ -131,9 +388,20 @@ return s
 function generate(){
 var count=Math.min(100,Math.max(1,parseInt(document.getElementById("count").value,10)||1))
 var fmt=document.getElementById("format").value
+var addrType=document.getElementById("addressType").value
 var out=[]
 for(var i=0;i<count;i++){
-var bytes=[randomHex(),randomHex(),randomHex(),randomHex(),randomHex(),randomHex()]
+var bytes=[]
+// Set first byte based on address type
+var firstByte
+switch(addrType){
+case"unicast-local":firstByte=0x02;break
+case"multicast-local":firstByte=0x03;break
+case"unicast-global":firstByte=Math.floor(Math.random()*128)*2;break
+default:firstByte=Math.floor(Math.random()*256)
+}
+bytes[0]=firstByte.toString(16).padStart(2,"0").toUpperCase()
+for(var j=1;j<6;j++){bytes[j]=randomHex()}
 out.push(formatMac(bytes,fmt))
 }
 document.getElementById("output").value=out.join("\n")

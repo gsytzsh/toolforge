@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>JSON Schema Generator – Generate JSON Schema from Sample JSON | ToolForge</title>
-<meta name="description" content="Free online JSON Schema Generator to infer a basic schema from sample JSON objects and arrays for validation drafts, API docs and payload design. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Generate JSON Schema from sample JSON data. Infers types, properties, and structure for validation, API documentation, and payload design. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/json-schema-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="JSON Schema Generator – Generate JSON Schema from Sample JSON | ToolForge">
-<meta property="og:description" content="Free online JSON Schema Generator to infer a basic schema from sample JSON objects and arrays for validation drafts, API docs and payload design. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Generate JSON Schema from sample JSON data. Infers types, properties, and structure for validation and API documentation.">
 <meta property="og:url" content="https://toolforge.site/tools/json-schema-generator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JSON Schema Generator – Generate JSON Schema from Sample JSON | ToolForge">
-<meta name="twitter:description" content="Free online JSON Schema Generator to infer a basic schema from sample JSON objects and arrays for validation drafts, API docs and payload design. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Generate JSON Schema from sample JSON data.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Json Schema Generator used for?",
+      "name": "What is JSON Schema?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Json Schema Generator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "JSON Schema is a vocabulary for validating JSON documents. It defines the structure, data types, and constraints for JSON data. JSON Schema is used for API contracts, form validation, documentation, and ensuring data consistency. The schema itself is written in JSON format."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What are the basic JSON Schema types?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "JSON Schema supports these core types: string, number, integer, boolean, array, object, and null. The type keyword can be a single string or array of allowed types. Example: {\"type\": \"string\"} or {\"type\": [\"string\", \"null\"]} for nullable strings."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "How does JSON Schema inference work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Schema inference analyzes sample JSON to guess the structure: primitives become their type, arrays become {type: 'array', items: {...}}, objects become {type: 'object', properties: {...}, required: [...]}. Limitations: infers from first array item only, doesn't detect optional fields, may miss union types."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the $schema keyword?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "$schema declares which JSON Schema draft/version the schema uses. Example: \"$schema\": \"https://json-schema.org/draft/2020-12/schema\". This helps validators apply correct rules. Common versions: draft-07, draft/2019-09, draft/2020-12. Always include $schema for compatibility."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "How do I validate JSON against a schema?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Use a JSON Schema validator library: Ajv (JavaScript), jsonschema (Python), json-schema-validator (Java), or online tools. Validation checks if data matches the schema's type, required fields, formats, and constraints. Returns validation errors for mismatched data."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "What are common JSON Schema constraints?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "String: minLength, maxLength, pattern (regex), format (email, uri, date). Number: minimum, maximum, exclusiveMinimum, exclusiveMaximum. Array: minItems, maxItems, uniqueItems. Object: required, minProperties, maxProperties, additionalProperties. These constraints refine type definitions."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>JSON Schema Generator</h1>
-<p class="subtitle">Generate a basic JSON Schema draft from sample JSON for validation, docs and payload design.</p>
+<p class="subtitle">Generate a JSON Schema draft from sample JSON for validation, documentation, and API design.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <label for="json-input" class="sr-only">JSON input</label>
 <textarea id="json-input" rows="12" class="pdf-editor pdf-editor-mono" aria-label="JSON input" placeholder='{"id":1,"name":"ToolForge","active":true,"tags":["dev","json"]}'></textarea>
@@ -83,27 +88,161 @@
 <h3>Generated Schema</h3>
 <textarea id="schema-output" rows="16" class="pdf-editor pdf-editor-mono" aria-label="Generated schema" readonly></textarea>
 <p id="status" class="inline-status"></p>
+
 <section class="tool-seo">
 <h3>About JSON Schema Generator</h3>
-<p>This JSON schema generator creates a basic JSON Schema draft from sample JSON data in the browser.</p>
-<p>It is useful for API contracts, validation setup and shared data definitions when you want a quick schema starting point from real example payloads.</p>
+<p>This JSON Schema generator creates a schema draft by analyzing sample JSON data. It infers types (string, number, boolean, array, object, null), detects object properties, and marks all fields as required by default.</p>
+<p>The generated schema uses JSON Schema Draft 2020-12 format and serves as a starting point for API contracts, validation rules, and documentation. You may need to refine the output to add constraints like patterns, ranges, or optional fields.</p>
+
+<h4>JSON Schema Type Reference</h4>
+<table class="ref-table">
+<thead><tr><th>Type</th><th>Schema Example</th><th>Sample Value</th></tr></thead>
+<tbody>
+<tr><td><code>string</code></td><td><code>{"type": "string"}</code></td><td><code>"hello"</code></td></tr>
+<tr><td><code>number</code></td><td><code>{"type": "number"}</code></td><td><code>42.5</code></td></tr>
+<tr><td><code>integer</code></td><td><code>{"type": "integer"}</code></td><td><code>42</code></td></tr>
+<tr><td><code>boolean</code></td><td><code>{"type": "boolean"}</code></td><td><code>true</code></td></tr>
+<tr><td><code>array</code></td><td><code>{"type": "array", "items": {...}}</code></td><td><code>[1, 2, 3]</code></td></tr>
+<tr><td><code>object</code></td><td><code>{"type": "object", "properties": {...}}</code></td><td><code>{"key": "value"}</code></td></tr>
+<tr><td><code>null</code></td><td><code>{"type": "null"}</code></td><td><code>null</code></td></tr>
+</tbody>
+</table>
+
+<h4>Common String Formats</h4>
+<table class="ref-table">
+<thead><tr><th>Format</th><th>Description</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><code>email</code></td><td>Email address</td><td><code>user@example.com</code></td></tr>
+<tr><td><code>uri</code></td><td>Full URL</td><td><code>https://example.com</code></td></tr>
+<tr><td><code>date</code></td><td>ISO 8601 date</td><td><code>2026-03-25</code></td></tr>
+<tr><td><code>date-time</code></td><td>ISO 8601 datetime</td><td><code>2026-03-25T10:30:00Z</code></td></tr>
+<tr><td><code>time</code></td><td>ISO 8601 time</td><td><code>10:30:00Z</code></td></tr>
+<tr><td><code>uuid</code></td><td>UUID format</td><td><code>550e8400-e29b-41d4-a716-446655440000</code></td></tr>
+<tr><td><code>ipv4</code></td><td>IPv4 address</td><td><code>192.168.1.1</code></td></tr>
+<tr><td><code>ipv6</code></td><td>IPv6 address</td><td><code>2001:0db8:85a3::8a2e:0370:7334</code></td></tr>
+</tbody>
+</table>
+
+<h4>Schema Constraints Reference</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[a-zA-Z ]+$"
+    },
+    "age": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 150
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "website": {
+      "type": "string",
+      "format": "uri"
+    },
+    "tags": {
+      "type": "array",
+      "items": {"type": "string"},
+      "minItems": 1,
+      "maxItems": 10,
+      "uniqueItems": true
+    },
+    "metadata": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": true
+    }
+  },
+  "required": ["name", "email"]
+}
+</pre>
+
+<h4>Inference Algorithm</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+How this generator works:
+
+1. Parse JSON input
+2. For each value:
+   - null → {"type": "null"}
+   - boolean → {"type": "boolean"}
+   - number → {"type": "number"} (or "integer" if whole)
+   - string → {"type": "string"}
+   - array → {"type": "array", "items": schemaOf(firstElement)}
+   - object → {"type": "object", "properties": {...}, "required": [...]}
+3. Wrap in draft-2020-12 schema with $schema declaration
+
+Limitations:
+- Arrays: Only analyzes first item for items schema
+- Required: Marks ALL object fields as required
+- Unions: Doesn't detect multiple possible types
+- Enums: Doesn't infer allowed value sets
+- Formats: Doesn't detect email, uri, date formats
+- Constraints: Doesn't infer min/max lengths or values
+
+Refine the generated schema to add these details.
+</pre>
+
+<h4>Validation Example with Ajv</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Install: npm install ajv
+
+const Ajv = require('ajv');
+const ajv = new Ajv();
+
+const schema = {
+  "type": "object",
+  "properties": {
+    "name": {"type": "string"},
+    "age": {"type": "integer", "minimum": 0}
+  },
+  "required": ["name"]
+};
+
+const validate = ajv.compile(schema);
+
+const data1 = {name: "John", age: 30};
+const data2 = {age: 30}; // missing required name
+const data3 = {name: "John", age: -5}; // invalid minimum
+
+console.log(validate(data1)); // true
+console.log(validate.errors); // null
+
+console.log(validate(data2)); // false
+console.log(validate.errors); // [{keyword: "required", ...}]
+
+console.log(validate(data3)); // false
+console.log(validate.errors); // [{keyword: "minimum", ...}]
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Json Schema Generator used for?</dt>
-  <dd>Json Schema Generator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is JSON Schema?</dt>
+  <dd>JSON Schema is a vocabulary for validating JSON documents. It defines the structure, data types, and constraints for JSON data. JSON Schema is used for API contracts, form validation, documentation, and ensuring data consistency. The schema itself is written in JSON format.</dd>
+
+  <dt>What are the basic JSON Schema types?</dt>
+  <dd>JSON Schema supports these core types: string, number, integer, boolean, array, object, and null. The type keyword can be a single string or array of allowed types. Example: {"type": "string"} or {"type": ["string", "null"]} for nullable strings.</dd>
+
+  <dt>How does JSON Schema inference work?</dt>
+  <dd>Schema inference analyzes sample JSON to guess the structure: primitives become their type, arrays become {type: 'array', items: {...}}, objects become {type: 'object', properties: {...}, required: [...]}. Limitations: infers from first array item only, doesn't detect optional fields, may miss union types.</dd>
+
+  <dt>What is the $schema keyword?</dt>
+  <dd>$schema declares which JSON Schema draft/version the schema uses. Example: "$schema": "https://json-schema.org/draft/2020-12/schema". This helps validators apply correct rules. Common versions: draft-07, draft/2019-09, draft/2020-12. Always include $schema for compatibility.</dd>
+
+  <dt>How do I validate JSON against a schema?</dt>
+  <dd>Use a JSON Schema validator library: Ajv (JavaScript), jsonschema (Python), json-schema-validator (Java), or online tools. Validation checks if data matches the schema's type, required fields, formats, and constraints. Returns validation errors for mismatched data.</dd>
+
+  <dt>What are common JSON Schema constraints?</dt>
+  <dd>String: minLength, maxLength, pattern (regex), format (email, uri, date). Number: minimum, maximum, exclusiveMinimum, exclusiveMaximum. Array: minItems, maxItems, uniqueItems. Object: required, minProperties, maxProperties, additionalProperties. These constraints refine type definitions.</dd>
 </dl>
 </section>
 </main>

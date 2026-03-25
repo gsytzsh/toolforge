@@ -2,26 +2,82 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Canonical Tag Generator – Create Canonical Tags Online | ToolForge</title>
-<meta name="description" content="Free online Canonical Tag Generator to create rel=canonical tags for SEO and duplicate-content control. Part of the ToolForge developer tools collection.">
+<title>Canonical Tag Generator – Create SEO Canonical URLs | ToolForge</title>
+<meta name="description" content="Generate rel=canonical tags for SEO. Prevent duplicate content issues by specifying the preferred URL for search engine indexing.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/canonical-tag-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Canonical Tag Generator – Create Canonical Tags Online | ToolForge">
-<meta property="og:description" content="Free online Canonical Tag Generator to create rel=canonical tags for SEO and duplicate-content control. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Canonical Tag Generator – Create SEO Canonical URLs | ToolForge">
+<meta property="og:description" content="Generate rel=canonical tags for SEO to prevent duplicate content issues.">
 <meta property="og:url" content="https://toolforge.site/tools/canonical-tag-generator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Canonical Tag Generator – Create Canonical Tags Online | ToolForge">
-<meta name="twitter:description" content="Free online Canonical Tag Generator to create rel=canonical tags for SEO and duplicate-content control. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Canonical Tag Generator – Create SEO Canonical URLs | ToolForge">
+<meta name="twitter:description" content="Generate canonical tags to specify preferred URLs for search engines.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a canonical tag and why is it important for SEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A canonical tag (rel=canonical) tells search engines which URL is the preferred version when duplicate or similar content exists. This prevents duplicate content issues, consolidates ranking signals to one URL, and ensures the correct page appears in search results. Essential for e-commerce filters, pagination, and parameterized URLs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When should I use canonical tags?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use canonical tags when: you have printer-friendly versions of pages, URLs with tracking parameters create duplicates, e-commerce filters generate multiple URLs for same products, content is syndicated across domains, or you have HTTP/HTTPS or WWW/non-WWW duplicates."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the correct canonical tag format?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Place in the HTML head section: <link rel=\"canonical\" href=\"https://example.com/preferred-url/\">. Use absolute URLs (not relative paths). The canonical should point to itself (self-referential) or to the master version of duplicate content."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can canonical tags hurt SEO if used incorrectly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Common mistakes: canonicalizing all paginated pages to page 1 (loses indexation of deeper pages), pointing canonicals to non-existent URLs, creating canonical chains (A→B→C), or canonicalizing to a completely different page. Google may ignore incorrect canonicals."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between canonical tags and 301 redirects?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "301 redirects permanently send users and search engines from one URL to another (the old URL becomes inaccessible). Canonical tags keep both URLs accessible but tell search engines which one to index. Use 301 for permanently moved content, canonical for duplicate content that must remain accessible."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I handle canonical tags for mobile or AMP pages?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mobile pages should canonicalize to the desktop version. AMP pages should have a canonical pointing to the standard HTML version. The desktop version should NOT canonicalize to mobile/AMP. This bidirectional relationship helps Google understand the connection between versions."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <main class="container">
 <h1>Canonical Tag Generator</h1>
-<p class="subtitle">Generate a canonical tag for the preferred version of a page URL.</p>
+<p class="subtitle">Generate rel=canonical tags to specify the preferred URL for search engine indexing and prevent duplicate content issues.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <p>Canonical URL:
 <label for="canonical-url" class="sr-only">Canonical URL</label>
@@ -36,25 +92,135 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Canonical Tag Generator</h3>
-<p>This canonical tag generator creates a canonical link tag for the preferred version of a page URL.</p>
-<p>It is useful for duplicate-content control, filtered pages, parameter URLs and multi-path content where search engines need a clear signal about which page should rank.</p>
+<p>This canonical tag generator creates the HTML <code>rel="canonical"</code> link element for specifying the preferred version of a page URL. Search engines use canonical tags to consolidate ranking signals and avoid indexing duplicate content.</p>
+<p>The generated tag should be placed in the <code>&lt;head&gt;</code> section of your HTML document.</p>
+
+<h4>Canonical Tag Syntax</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+&lt;link rel="canonical" href="https://example.com/preferred-page/"&gt;
+
+Placement: Inside the &lt;head&gt; section of your HTML document.
+Format: Always use absolute URLs (including protocol and domain).
+Self-referential: Pages should canonicalize to themselves.
+</pre>
+
+<h4>When to Use Canonical Tags</h4>
+<table class="ref-table">
+<thead><tr><th>Scenario</th><th>Example</th><th>Canonical To</th></tr></thead>
+<tbody>
+<tr><td>URL Parameters</td><td>?utm_source=newsletter</td><td>Base URL without parameters</td></tr>
+<tr><td>E-commerce Filters</td><td>/shirts?color=red&size=m</td><td>/shirts/ category page</td></tr>
+<tr><td>Pagination</td><td>/blog/page/2/, /blog/page/3/</td><td>Each page to itself (or view-all)</td></tr>
+<tr><td>HTTP vs HTTPS</td><td>http://example.com/page</td><td>https://example.com/page</td></tr>
+<tr><td>WWW vs non-WWW</td><td>https://www.example.com</td><td>https://example.com (or vice versa)</td></tr>
+<tr><td>Printer-friendly Pages</td><td>/article?print=1</td><td>/article/ main page</td></tr>
+<tr><td>Content Syndication</td><td>Partner site republishing</td><td>Original source URL</td></tr>
+<tr><td>Mobile/AMP</td><td>m.example.com or AMP page</td><td>Desktop standard HTML version</td></tr>
+</tbody>
+</table>
+
+<h4>Complete HTML Example</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Product Page - Example Store&lt;/title&gt;
+
+    &lt;!-- Canonical tag --&gt;
+    &lt;link rel="canonical" href="https://example.com/products/blue-widget"&gt;
+
+    &lt;!-- Other meta tags --&gt;
+    &lt;meta name="description" content="Buy the blue widget..."&gt;
+    &lt;meta property="og:url" content="https://example.com/products/blue-widget"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Blue Widget&lt;/h1&gt;
+    ...
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<h4>Common Canonical Mistakes to Avoid</h4>
+<table class="ref-table">
+<thead><tr><th>Mistake</th><th>Problem</th><th>Correct Approach</th></tr></thead>
+<tbody>
+<tr><td>Canonical chains (A→B→C)</td><td>Search engines may get confused</td><td>Point all duplicates directly to final URL</td></tr>
+<tr><td>Canonical to 404 page</td><td>Page won't be indexed</td><td>Canonical to existing, relevant page</td></tr>
+<tr><td>Using relative URLs</td><td>May resolve incorrectly</td><td>Always use absolute URLs</td></tr>
+<tr><td>Canonicalizing paginated pages to page 1</td><td>Deeper pages won't be indexed</td><td>Each page canonicalizes to itself</td></tr>
+<tr><td>Mismatched content</td><td>Google may ignore canonical</td><td>Canonical only to substantially similar content</td></tr>
+<tr><td>Multiple canonicals per page</td><td>Conflicting signals</td><td>One canonical per page only</td></tr>
+</tbody>
+</table>
+
+<h4>Canonical Tags vs 301 Redirects</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Use 301 Redirect when:
+- Page has permanently moved
+- Old URL should NOT be accessible
+- You want users AND search engines to see new URL
+- Example: /old-product/ → /new-product/
+
+Use Canonical Tag when:
+- Duplicate content must remain accessible
+- Different URLs serve same content intentionally
+- You only need to guide search engines
+- Example: /product?color=red and /product?color=blue
+           both canonicalize to /product/
+</pre>
+
+<h4>Implementation Checklist</h4>
+<ul>
+  <li><strong>Use absolute URLs:</strong> Include https:// and full domain</li>
+  <li><strong>Place in head:</strong> Canonical must be in the <code>&lt;head&gt;</code> section</li>
+  <li><strong>Self-referential canonicals:</strong> Every page should have a canonical pointing to itself</li>
+  <li><strong>Consistent with hreflang:</strong> If using hreflang, canonical should match</li>
+  <li><strong>Update on URL changes:</strong> When URLs change, update canonicals accordingly</li>
+  <li><strong>Verify in Search Console:</strong> Check Google Search Console for canonical issues</li>
+  <li><strong>Avoid canonical chains:</strong> Point all duplicates directly to the preferred URL</li>
+</ul>
+
+<h4>Testing and Verification</h4>
+<p>After implementing canonical tags:</p>
+<ol>
+  <li>View page source and verify the tag is present</li>
+  <li>Use Google Search Console URL Inspection tool</li>
+  <li>Check the "Indexing" report for canonical warnings</li>
+  <li>Use third-party SEO audit tools to scan for issues</li>
+  <li>Monitor search results to ensure correct URLs are indexed</li>
+</ol>
+
+<h4>Special Cases</h4>
+<ul>
+  <li><strong>Cross-domain canonicals:</strong> Point to canonical URL on different domain for syndicated content</li>
+  <li><strong>Canonical + hreflang:</strong> Each language version canonicalizes to itself, hreflang connects translations</li>
+  <li><strong>Canonical in HTTP headers:</strong> For non-HTML files (PDFs), use <code>Link: &lt;url&gt;; rel="canonical"</code> header</li>
+  <li><strong>AMP canonicals:</strong> AMP pages point to standard HTML; HTML page references AMP via <code>rel="amphtml"</code></li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Canonical Tag Generator?</dt>
-  <dd>Canonical Tag Generator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is a canonical tag and why is it important for SEO?</dt>
+  <dd>A canonical tag (rel=canonical) tells search engines which URL is the preferred version when duplicate or similar content exists. This prevents duplicate content issues, consolidates ranking signals to one URL, and ensures the correct page appears in search results. Essential for e-commerce filters, pagination, and parameterized URLs.</dd>
+
+  <dt>When should I use canonical tags?</dt>
+  <dd>Use canonical tags when: you have printer-friendly versions of pages, URLs with tracking parameters create duplicates, e-commerce filters generate multiple URLs for same products, content is syndicated across domains, or you have HTTP/HTTPS or WWW/non-WWW duplicates.</dd>
+
+  <dt>What is the correct canonical tag format?</dt>
+  <dd>Place in the HTML head section: <link rel="canonical" href="https://example.com/preferred-url/">. Use absolute URLs (not relative paths). The canonical should point to itself (self-referential) or to the master version of duplicate content.</dd>
+
+  <dt>Can canonical tags hurt SEO if used incorrectly?</dt>
+  <dd>Yes. Common mistakes: canonicalizing all paginated pages to page 1 (loses indexation of deeper pages), pointing canonicals to non-existent URLs, creating canonical chains (A→B→C), or canonicalizing to a completely different page. Google may ignore incorrect canonicals.</dd>
+
+  <dt>What is the difference between canonical tags and 301 redirects?</dt>
+  <dd>301 redirects permanently send users and search engines from one URL to another (the old URL becomes inaccessible). Canonical tags keep both URLs accessible but tell search engines which one to index. Use 301 for permanently moved content, canonical for duplicate content that must remain accessible.</dd>
+
+  <dt>How do I handle canonical tags for mobile or AMP pages?</dt>
+  <dd>Mobile pages should canonicalize to the desktop version. AMP pages should have a canonical pointing to the standard HTML version. The desktop version should NOT canonicalize to mobile/AMP. This bidirectional relationship helps Google understand the connection between versions.</dd>
 </dl>
 </section>
 </main>

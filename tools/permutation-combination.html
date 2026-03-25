@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Permutation & Combination – nPr nCr Calculator | ToolForge</title>
-<meta name="description" content="Free online Permutation and Combination calculator (nPr, nCr). Part of the ToolForge developer tools collection.">
+<title>Permutation & Combination Calculator – nPr nCr with Formulas | ToolForge</title>
+<meta name="description" content="Calculate permutations (nPr) and combinations (nCr) with step-by-step formulas. Includes factorial reference, probability examples, and counting principles. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/permutation-combination.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Permutation &amp; Combination – nPr nCr Calculator | ToolForge">
-<meta property="og:description" content="Free online Permutation and Combination calculator (nPr, nCr). Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Permutation & Combination Calculator – nPr nCr with Formulas | ToolForge">
+<meta property="og:description" content="Calculate permutations (nPr) and combinations (nCr) with step-by-step formulas.">
 <meta property="og:url" content="https://toolforge.site/tools/permutation-combination.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Permutation &amp; Combination – nPr nCr Calculator | ToolForge">
-<meta name="twitter:description" content="Free online Permutation and Combination calculator (nPr, nCr). Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Permutation & Combination Calculator – nPr nCr with Formulas | ToolForge">
+<meta name="twitter:description" content="Calculate permutations (nPr) and combinations (nCr) with step-by-step formulas.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Permutation Combination used for?",
+      "name": "What is the difference between permutation and combination?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Permutation Combination is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "Permutation (nPr) counts arrangements where ORDER matters (e.g., passwords, race rankings, seating arrangements). Combination (nCr) counts selections where ORDER does NOT matter (e.g., lottery numbers, committee selection, pizza toppings). The key difference: permutations count different orderings as distinct, combinations treat them as the same."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the formula for permutation?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Permutation formula: nPr = n! / (n-r)! where n is total items and r is items selected. For example, 5P3 = 5!/(5-3)! = 120/2 = 60. This counts ways to arrange 3 items from 5 where order matters."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What is the formula for combination?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Combination formula: nCr = n! / (r! × (n-r)!) where n is total items and r is items selected. For example, 5C3 = 5!/(3!×2!) = 120/(6×2) = 10. This counts ways to select 3 items from 5 where order doesn't matter."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "When should I use factorial?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Factorial (n!) is used when: arranging all n items (n! ways), calculating permutations (nPr uses factorials), calculating combinations (nCr uses factorials), or solving probability problems. Factorial grows very fast: 10! = 3,628,800, so calculators are useful for large n."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What is 0! (zero factorial)?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "By mathematical convention, 0! = 1. This definition ensures formulas work correctly: nCn = n!/(n!×0!) = 1 (there's exactly one way to select all n items), and it maintains consistency in permutation/combination formulas."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How do I know when order matters?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Order matters (use permutation) when: positions/rankings differ (1st, 2nd, 3rd), arrangement creates different outcomes (ABC ≠ BAC), or sequence is important (passwords, codes). Order doesn't matter (use combination) when: selecting a group, all positions equivalent, or outcome is same regardless of sequence."
       }
     }
   ]
@@ -71,53 +76,366 @@
 </head>
 <body>
 <main class="container">
-<h1>Permutation & Combination</h1>
-<p class="subtitle">Enter n and r to get nPr (permutations) and nCr (combinations).</p>
+<h1>Permutation & Combination Calculator</h1>
+<p class="subtitle">Calculate nPr (permutations) and nCr (combinations) with factorial formulas.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
-<h3>n</h3>
-<label for="n" class="sr-only">N</label>
-<input id="n" type="number" min="0" placeholder="5" style="width:80px" aria-label="N">
-<h3>r</h3>
-<label for="r" class="sr-only">Annual rate percent</label>
-<input id="r" type="number" min="0" placeholder="2" style="width:80px" aria-label="Annual rate percent">
-<br><br>
-<button onclick="calc()">Calculate</button>
+
+<div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin:20px 0">
+<div>
+<label for="n" style="font-weight:bold">n (total items):</label>
+<input id="n" type="number" min="0" max="170" value="5" style="width:100px;margin-left:8px;padding:8px;font-size:14px">
+</div>
+<div>
+<label for="r" style="font-weight:bold">r (items selected):</label>
+<input id="r" type="number" min="0" max="170" value="3" style="width:100px;margin-left:8px;padding:8px;font-size:14px">
+</div>
+<button onclick="calc()" style="padding:8px 16px;font-size:14px">Calculate</button>
+</div>
+
 <h3>Result</h3>
-<p>nPr: <span id="pr"></span></p>
-<p>nCr: <span id="cr"></span></p>
+<div id="result" style="background:#f5f5f5;padding:16px;border-radius:8px"></div>
+<p id="status" class="inline-status"></p>
+
 <section class="tool-seo">
-<h3>About Permutation &amp; Combination</h3>
-<p>This permutation and combination calculator gives you `nPr` and `nCr` from values of `n` and `r`.</p>
-<p>It is useful for probability, counting problems, exam prep and planning scenarios where order matters in one case and not in the other.</p>
+<h3>About Permutation & Combination Calculator</h3>
+<p>This calculator computes permutations (nPr) and combinations (nCr) using factorial formulas. Permutations count arrangements where order matters, while combinations count selections where order doesn't matter. Both are fundamental concepts in probability theory, statistics, and combinatorics.</p>
+
+<h4>Formulas</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:14px;overflow:auto">
+Permutation (nPr):
+  nPr = n! / (n-r)!
+
+Combination (nCr):
+  nCr = n! / (r! × (n-r)!)
+
+Where:
+  n! = n × (n-1) × (n-2) × ... × 2 × 1
+  0! = 1 (by convention)
+
+Example: n=5, r=3
+  5P3 = 5!/(5-3)! = 120/2 = 60
+  5C3 = 5!/(3!×2!) = 120/(6×2) = 10
+</pre>
+
+<h4>JavaScript Implementation</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Factorial function with overflow protection
+function factorial(n) {
+  if (n < 0 || n > 170) return Infinity; // Beyond safe integer range
+  if (n === 0 || n === 1) return 1;
+  let result = 1;
+  for (let i = 2; i <= n; i++) {
+    result *= i;
+  }
+  return result;
+}
+
+// Permutation: nPr = n! / (n-r)!
+function permutation(n, r) {
+  if (r > n || r < 0) return 0;
+  return factorial(n) / factorial(n - r);
+}
+
+// Combination: nCr = n! / (r! × (n-r)!)
+function combination(n, r) {
+  if (r > n || r < 0) return 0;
+  return factorial(n) / (factorial(r) * factorial(n - r));
+}
+
+// Optimized combination (avoids large factorials)
+function combinationOptimized(n, r) {
+  if (r > n) return 0;
+  if (r === 0 || r === n) return 1;
+  if (r > n - r) r = n - r; // Use symmetry: nCr = nC(n-r)
+  let result = 1;
+  for (let i = 1; i <= r; i++) {
+    result = result * (n - i + 1) / i;
+  }
+  return result;
+}
+</pre>
+
+<h4>Factorial Reference Table</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">n</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">n!</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Scientific Notation</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">0</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+    <td style="border:1px solid #ddd;padding:8px">1 × 10⁰</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+    <td style="border:1px solid #ddd;padding:8px">1 × 10⁰</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">2</td>
+    <td style="border:1px solid #ddd;padding:8px">2</td>
+    <td style="border:1px solid #ddd;padding:8px">2 × 10⁰</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">3</td>
+    <td style="border:1px solid #ddd;padding:8px">6</td>
+    <td style="border:1px solid #ddd;padding:8px">6 × 10⁰</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">4</td>
+    <td style="border:1px solid #ddd;padding:8px">24</td>
+    <td style="border:1px solid #ddd;padding:8px">2.4 × 10¹</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">5</td>
+    <td style="border:1px solid #ddd;padding:8px">120</td>
+    <td style="border:1px solid #ddd;padding:8px">1.2 × 10²</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">6</td>
+    <td style="border:1px solid #ddd;padding:8px">720</td>
+    <td style="border:1px solid #ddd;padding:8px">7.2 × 10²</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">7</td>
+    <td style="border:1px solid #ddd;padding:8px">5,040</td>
+    <td style="border:1px solid #ddd;padding:8px">5.04 × 10³</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">8</td>
+    <td style="border:1px solid #ddd;padding:8px">40,320</td>
+    <td style="border:1px solid #ddd;padding:8px">4.03 × 10⁴</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">9</td>
+    <td style="border:1px solid #ddd;padding:8px">362,880</td>
+    <td style="border:1px solid #ddd;padding:8px">3.63 × 10⁵</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">10</td>
+    <td style="border:1px solid #ddd;padding:8px">3,628,800</td>
+    <td style="border:1px solid #ddd;padding:8px">3.63 × 10⁶</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">12</td>
+    <td style="border:1px solid #ddd;padding:8px">479,001,600</td>
+    <td style="border:1px solid #ddd;padding:8px">4.79 × 10⁸</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">15</td>
+    <td style="border:1px solid #ddd;padding:8px">1,307,674,368,000</td>
+    <td style="border:1px solid #ddd;padding:8px">1.31 × 10¹²</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">20</td>
+    <td style="border:1px solid #ddd;padding:8px">2,432,902,008,176,640,000</td>
+    <td style="border:1px solid #ddd;padding:8px">2.43 × 10¹⁸</td>
+  </tr>
+</table>
+
+<h4>Permutation vs Combination: When to Use Each</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Scenario</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Order Matters?</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Formula</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example (n=5, r=3)</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Race rankings (1st, 2nd, 3rd)</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">nPr</td>
+    <td style="border:1px solid #ddd;padding:8px">5P3 = 60 ways</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Committee selection</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+    <td style="border:1px solid #ddd;padding:8px">nCr</td>
+    <td style="border:1px solid #ddd;padding:8px">5C3 = 10 ways</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Password/PIN codes</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">nPr</td>
+    <td style="border:1px solid #ddd;padding:8px">Digits 0-9, 4 positions: 10P4</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Lottery numbers</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+    <td style="border:1px solid #ddd;padding:8px">nCr</td>
+    <td style="border:1px solid #ddd;padding:8px">Pick 6 from 49: 49C6</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Seating arrangement</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">nPr</td>
+    <td style="border:1px solid #ddd;padding:8px">5 people, 3 seats: 5P3</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Pizza toppings</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+    <td style="border:1px solid #ddd;padding:8px">nCr</td>
+    <td style="border:1px solid #ddd;padding:8px">Choose 3 from 10: 10C3</td>
+  </tr>
+</table>
+
+<h4>Worked Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Arranging Books on Shelf
+Q: How many ways to arrange 3 books from 5 different books?
+A: Order matters (book positions differ), so use permutation.
+   5P3 = 5!/(5-3)! = 120/2 = 60 ways
+
+Example 2: Selecting Team Members
+Q: How many ways to select 3 players from 5 players?
+A: Order doesn't matter (team is same regardless of selection order).
+   5C3 = 5!/(3!×2!) = 120/(6×2) = 10 ways
+
+Example 3: Lottery Probability
+Q: In a lottery picking 6 numbers from 49, what are the odds?
+A: Order doesn't matter, use combination.
+   49C6 = 49!/(6!×43!) = 13,983,816
+   Odds of winning: 1 in 13,983,816
+
+Example 4: Password Possibilities
+Q: How many 4-digit PINs using digits 0-9 without repetition?
+A: Order matters, use permutation.
+   10P4 = 10!/(10-4)! = 3,628,800/720 = 5,040 PINs
+</pre>
+
+<h4>Key Properties</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Property</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Formula</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Explanation</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Symmetry (Combinations)</td>
+    <td style="border:1px solid #ddd;padding:8px">nCr = nC(n-r)</td>
+    <td style="border:1px solid #ddd;padding:8px">Choosing r = leaving out (n-r)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Pascal's Identity</td>
+    <td style="border:1px solid #ddd;padding:8px">nCr = (n-1)C(r-1) + (n-1)Cr</td>
+    <td style="border:1px solid #ddd;padding:8px">Basis of Pascal's Triangle</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Permutation-Relation</td>
+    <td style="border:1px solid #ddd;padding:8px">nPr = nCr × r!</td>
+    <td style="border:1px solid #ddd;padding:8px">Permutation = Combination × arrange r</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Sum of Combinations</td>
+    <td style="border:1px solid #ddd;padding:8px">Σ(nCk) = 2ⁿ</td>
+    <td style="border:1px solid #ddd;padding:8px">Total subsets of n elements</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Zero case</td>
+    <td style="border:1px solid #ddd;padding:8px">nC0 = 1, nP0 = 1</td>
+    <td style="border:1px solid #ddd;padding:8px">One way to choose nothing</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Same case</td>
+    <td style="border:1px solid #ddd;padding:8px">nCn = 1, nPn = n!</td>
+    <td style="border:1px solid #ddd;padding:8px">One way to choose all; n! to arrange</td>
+  </tr>
+</table>
+
+<h4>Common Probability Applications</h4>
+<ul>
+  <li><strong>Poker hands:</strong> 5-card hands from 52 cards = 52C5 = 2,598,960 possible hands</li>
+  <li><strong>Committee formation:</strong> Select 5 from 12 people = 12C5 = 792 ways</li>
+  <li><strong>Menu planning:</strong> Choose 3 appetizers from 8 = 8C3 = 56 combinations</li>
+  <li><strong>Route planning:</strong> Visit 4 cities in order from 10 = 10P4 = 5,040 routes</li>
+  <li><strong>Exam questions:</strong> Answer 5 from 8 questions = 8C5 = 56 ways to choose</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Permutation Combination used for?</dt>
-  <dd>Permutation Combination is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is the difference between permutation and combination?</dt>
+  <dd>Permutation (nPr) counts arrangements where ORDER matters (e.g., passwords, race rankings, seating arrangements). Combination (nCr) counts selections where ORDER does NOT matter (e.g., lottery numbers, committee selection, pizza toppings). The key difference: permutations count different orderings as distinct, combinations treat them as the same.</dd>
+
+  <dt>What is the formula for permutation?</dt>
+  <dd>Permutation formula: nPr = n! / (n-r)! where n is total items and r is items selected. For example, 5P3 = 5!/(5-3)! = 120/2 = 60. This counts ways to arrange 3 items from 5 where order matters.</dd>
+
+  <dt>What is the formula for combination?</dt>
+  <dd>Combination formula: nCr = n! / (r! × (n-r)!) where n is total items and r is items selected. For example, 5C3 = 5!/(3!×2!) = 120/(6×2) = 10. This counts ways to select 3 items from 5 where order doesn't matter.</dd>
+
+  <dt>When should I use factorial?</dt>
+  <dd>Factorial (n!) is used when: arranging all n items (n! ways), calculating permutations (nPr uses factorials), calculating combinations (nCr uses factorials), or solving probability problems. Factorial grows very fast: 10! = 3,628,800, so calculators are useful for large n.</dd>
+
+  <dt>What is 0! (zero factorial)?</dt>
+  <dd>By mathematical convention, 0! = 1. This definition ensures formulas work correctly: nCn = n!/(n!×0!) = 1 (there's exactly one way to select all n items), and it maintains consistency in permutation/combination formulas.</dd>
+
+  <dt>How do I know when order matters?</dt>
+  <dd>Order matters (use permutation) when: positions/rankings differ (1st, 2nd, 3rd), arrangement creates different outcomes (ABC ≠ BAC), or sequence is important (passwords, codes). Order doesn't matter (use combination) when: selecting a group, all positions equivalent, or outcome is same regardless of sequence.</dd>
 </dl>
 </section>
 </main>
 <script>
-function fact(k){var f=1;for(var i=2;i<=k;i++)f*=i;return f}
-function calc(){
-var n=parseInt(document.getElementById("n").value,10)
-var r=parseInt(document.getElementById("r").value,10)
-if(isNaN(n)||isNaN(r)||n<0||r<0||r>n){document.getElementById("pr").innerText="";document.getElementById("cr").innerText="Enter n ≥ r ≥ 0.";return}
-document.getElementById("pr").innerText=fact(n)/fact(n-r)
-document.getElementById("cr").innerText=fact(n)/(fact(r)*fact(n-r))
+function factorial(n){
+if(n<0||n>170)return Infinity;
+if(n===0||n===1)return 1;
+var result=1;
+for(var i=2;i<=n;i++)result*=i;
+return result;
 }
+function permutation(n,r){
+if(r>n||r<0)return 0;
+return factorial(n)/factorial(n-r);
+}
+function combination(n,r){
+if(r>n||r<0)return 0;
+return factorial(n)/(factorial(r)*factorial(n-r));
+}
+function formatNumber(num){
+if(num===Infinity)return"Overflow (n too large)";
+if(num>=1e15)return num.toExponential(4);
+return num.toLocaleString();
+}
+function calc(){
+var n=parseInt(document.getElementById("n").value,10);
+var r=parseInt(document.getElementById("r").value,10);
+var resultDiv=document.getElementById("result");
+var status=document.getElementById("status");
+if(isNaN(n)||isNaN(r)){
+resultDiv.innerHTML="";
+status.innerText="Please enter valid numbers for n and r.";
+status.style.color="#b91c1c";
+return;
+}
+if(n<0||r<0){
+resultDiv.innerHTML="";
+status.innerText="n and r must be non-negative.";
+status.style.color="#b91c1c";
+return;
+}
+if(r>n){
+resultDiv.innerHTML="";
+status.innerText="r cannot be greater than n.";
+status.style.color="#b91c1c";
+return;
+}
+var nFact=factorial(n);
+var rFact=factorial(r);
+var nmrFact=factorial(n-r);
+var npr=permutation(n,r);
+var ncr=combination(n,r);
+var html="<table style=\"width:100%;border-collapse:collapse;font-size:14px\">";
+html+="<tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Formula (nPr)</strong></td><td style=\"padding:8px;border:1px solid #ddd\">nPr = n!/(n-r)! = "+formatNumber(nFact)+"/"+formatNumber(nmrFact)+"</td></tr>";
+html+="<tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Permutation Result</strong></td><td style=\"padding:8px;border:1px solid #ddd;font-weight:bold;font-size:18px\">"+formatNumber(npr)+"</td></tr>";
+html+="<tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Formula (nCr)</strong></td><td style=\"padding:8px;border:1px solid #ddd\">nCr = n!/(r!×(n-r)!) = "+formatNumber(nFact)+"/("+formatNumber(rFact)+"×"+formatNumber(nmrFact)+")</td></tr>";
+html+="<tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Combination Result</strong></td><td style=\"padding:8px;border:1px solid #ddd;font-weight:bold;font-size:18px\">"+formatNumber(ncr)+"</td></tr>";
+html+="</table>";
+resultDiv.innerHTML=html;
+status.innerText="Calculation complete.";
+status.style.color="#16a34a";
+}
+calc();
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>

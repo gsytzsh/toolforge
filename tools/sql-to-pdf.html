@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SQL to PDF – Convert SQL into PDF Online | ToolForge</title>
-<meta name="description" content="Free online SQL to PDF tool to upload or paste SQL, optionally format it, and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<title>SQL to PDF – Convert SQL Queries to PDF Documents | ToolForge</title>
+<meta name="description" content="Convert SQL queries to PDF documents with syntax formatting. Client-side conversion using jsPDF for documentation, sharing, and archiving SQL code.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/sql-to-pdf.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="SQL to PDF – Convert SQL into PDF Online | ToolForge">
-<meta property="og:description" content="Free online SQL to PDF tool to upload or paste SQL, optionally format it, and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="SQL to PDF – Convert SQL Queries to PDF Documents | ToolForge">
+<meta property="og:description" content="Convert SQL queries to PDF documents with syntax formatting. Client-side conversion using jsPDF.">
 <meta property="og:url" content="https://toolforge.site/tools/sql-to-pdf.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL to PDF – Convert SQL into PDF Online | ToolForge">
-<meta name="twitter:description" content="Free online SQL to PDF tool to upload or paste SQL, optionally format it, and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="SQL to PDF – Convert SQL Queries to PDF Documents | ToolForge">
+<meta name="twitter:description" content="Convert SQL queries to PDF documents with syntax formatting.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
@@ -25,45 +25,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Sql To Pdf used for?",
+      "name": "How does SQL to PDF conversion work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sql To Pdf is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "The tool uses jsPDF to create PDF documents client-side. SQL text is tokenized to identify keywords (SELECT, FROM, WHERE), then rendered using monospace font (Courier) for code preservation. Each line is wrapped to fit the page width with proper margins."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What SQL formatting is applied?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "The formatter tokenizes SQL and adds line breaks before keywords like SELECT, FROM, WHERE, JOIN, ORDER BY, GROUP BY, HAVING, LIMIT. Parentheses trigger indentation increases. Commas add line breaks for column lists. String literals are preserved exactly."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "Why use monospace font for SQL in PDFs?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Monospace fonts (Courier, Consolas, Monaco) ensure each character has equal width, making SQL code align properly. This is essential for readability, especially with nested queries, aligned columns, and indentation-based structure visualization."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What PDF page size is used?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "A4 size (595 x 842 points at 72 DPI) with 36-point margins. The usable width is 523 points. Text wraps at this width using jsPDF's splitTextToSize function to prevent content overflow."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "Can I include multiple SQL statements?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Yes. Paste multiple SQL statements separated by semicolons. The tool preserves all content and formats it as a continuous code block. Each statement flows into the next with proper spacing."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "What are common use cases for SQL to PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Common uses: documenting stored procedures for team handbooks, creating query specification documents, archiving complex queries for compliance, sharing SQL reviews with stakeholders, preparing training materials for database courses, and generating report specifications."
       }
     }
   ]
@@ -73,12 +78,12 @@
 <body>
 <main class="container">
 <h1>SQL to PDF</h1>
-<p class="subtitle">Upload or paste SQL, format it for readability, then export it as a PDF.</p>
+<p class="subtitle">Format SQL queries and export as PDF documentation. Client-side conversion with syntax-aware formatting.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Upload SQL File</h3>
 <label for="sql-file" class="sr-only">SQL file</label>
 <input id="sql-file" class="pdf-file-input" type="file" accept=".sql,.txt,text/plain,application/sql" onchange="loadSqlFile()" aria-label="SQL file">
-<p class="pdf-helper">You can upload a SQL file or paste SQL below.</p>
+<p class="pdf-helper">Upload a SQL file or paste SQL directly below.</p>
 <p>
 Title:
 <label for="doc-title" class="sr-only">Document title</label>
@@ -93,25 +98,168 @@ Title:
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About SQL to PDF</h3>
-<p>This SQL to PDF tool formats SQL for readability and exports it as a PDF using a monospace layout. It is useful for reviews, query sharing, training material and documentation.</p>
-<p>The conversion is handled entirely in your browser, so your SQL stays on your device.</p>
+<p>This SQL to PDF tool converts SQL queries into formatted PDF documents using client-side JavaScript processing. The tool includes a SQL formatter that tokenizes input and adds appropriate line breaks before keywords like SELECT, FROM, WHERE, JOIN, and ORDER BY.</p>
+<p>The conversion uses jsPDF library to generate PDF files with monospace font (Courier) for proper code alignment. All processing happens locally in your browser without any server upload.</p>
+
+<h4>SQL Formatting Algorithm</h4>
+<p>The formatter uses a tokenization approach to parse SQL:</p>
+<ol>
+  <li><strong>Tokenization:</strong> Split SQL into tokens (keywords, identifiers, operators, punctuation)</li>
+  <li><strong>String Handling:</strong> Preserve string literals (single/double quoted) exactly as written</li>
+  <li><strong>Keyword Detection:</strong> Identify SQL keywords that should start new lines</li>
+  <li><strong>Indentation Tracking:</strong> Increase indent after opening parentheses, decrease after closing</li>
+  <li><strong>Line Building:</strong> Assemble formatted output with appropriate line breaks and indentation</li>
+</ol>
+
+<h4>SQL Keywords That Trigger Line Breaks</h4>
+<table class="ref-table">
+<thead><tr><th>Keyword</th><th>Category</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td>SELECT</td><td>Data retrieval</td><td>SELECT col1, col2 FROM table</td></tr>
+<tr><td>FROM</td><td>Source specification</td><td>FROM users u</td></tr>
+<tr><td>WHERE</td><td>Filtering</td><td>WHERE active = 1</td></tr>
+<tr><td>GROUP BY</td><td>Aggregation</td><td>GROUP BY department_id</td></tr>
+<tr><td>HAVING</td><td>Group filtering</td><td>HAVING COUNT(*) > 5</td></tr>
+<tr><td>ORDER BY</td><td>Sorting</td><td>ORDER BY created_at DESC</td></tr>
+<tr><td>LIMIT / OFFSET</td><td>Pagination</td><td>LIMIT 10 OFFSET 20</td></tr>
+<tr><td>JOIN / ON</td><td>Table joining</td><td>LEFT JOIN orders ON u.id = orders.user_id</td></tr>
+<tr><td>VALUES</td><td>Insert data</td><td>VALUES (1, 'name'), (2, 'other')</td></tr>
+<tr><td>SET</td><td>Update assignment</td><td>SET name = 'new'</td></tr>
+</tbody>
+</table>
+
+<h4>PDF Generation Process</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Initialize PDF with A4 size (points unit)
+const pdf = new jsPDF('p', 'pt', 'a4');
+
+// Set fonts
+pdf.setFont('helvetica', 'bold');
+pdf.setFontSize(14);
+pdf.text(title, margin, y); // Title line
+
+// Switch to monospace for code
+pdf.setFont('courier', 'normal');
+pdf.setFontSize(9);
+
+// Process each line
+lines.forEach(line => {
+  const wrapped = pdf.splitTextToSize(line, usableWidth);
+  wrapped.forEach(segment => {
+    if (y > pageHeight - margin) {
+      pdf.addPage();
+      y = margin;
+    }
+    pdf.text(segment, margin, y);
+    y += 12; // Line height
+  });
+});
+
+pdf.save('sql-document.pdf');
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Query Documentation:</strong> Create readable documentation for complex stored procedures and views</li>
+  <li><strong>Code Review:</strong> Share SQL queries with team members in a universally readable format</li>
+  <li><strong>Training Materials:</strong> Generate handouts for database training sessions and workshops</li>
+  <li><strong>Compliance Archiving:</strong> Preserve audit queries and reporting SQL for regulatory requirements</li>
+  <li><strong>Specification Documents:</strong> Include SQL specifications in technical documentation packages</li>
+  <li><strong>Client Deliverables:</strong> Provide query definitions to clients who need PDF format</li>
+</ul>
+
+<h4>SQL Tokenization Implementation</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+function tokenizeSql(sql) {
+  let tokens = [];
+  let current = "";
+  let quote = null;
+
+  for (let i = 0; i < sql.length; i++) {
+    let ch = sql[i];
+
+    // Handle string literals
+    if (quote) {
+      current += ch;
+      if (ch === quote && sql[i-1] !== "\\") {
+        quote = null;
+      }
+      continue;
+    }
+
+    if (ch === "'" || ch === '"' || ch === "`") {
+      current += ch;
+      quote = ch;
+      continue;
+    }
+
+    // Handle whitespace
+    if (/\s/.test(ch)) {
+      if (current) {
+        tokens.push(current);
+        current = "";
+      }
+      continue;
+    }
+
+    // Handle punctuation
+    if (ch === "," || ch === "(" || ch === ")") {
+      if (current) {
+        tokens.push(current);
+        current = "";
+      }
+      tokens.push(ch);
+      continue;
+    }
+
+    current += ch;
+  }
+
+  if (current) tokens.push(current);
+  return tokens;
+}
+</pre>
+
+<h4>Font Selection for Code PDFs</h4>
+<table class="ref-table">
+<thead><tr><th>Font</th><th>Type</th><th>Best For</th></tr></thead>
+<tbody>
+<tr><td>Courier</td><td>Monospace</td><td>Standard code formatting (PDF built-in)</td></tr>
+<tr><td>Courier Bold</td><td>Monospace</td><td>Emphasized code sections</td></tr>
+<tr><td>Helvetica</td><td>Sans-serif</td><td>Titles and headings (PDF built-in)</td></tr>
+<tr><td>Times Roman</td><td>Serif</td><td>Document body text (PDF built-in)</td></tr>
+</tbody>
+</table>
+
+<h4>Page Layout Considerations</h4>
+<ul>
+  <li><strong>Margins:</strong> 36 points (0.5 inches) on all sides provides adequate white space</li>
+  <li><strong>Line Height:</strong> 12 points for 9pt font gives comfortable reading spacing</li>
+  <li><strong>Page Breaks:</strong> Automatic when content exceeds page height minus margin</li>
+  <li><strong>Text Wrapping:</strong> splitTextToSize handles word breaks at usable width</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Sql To Pdf used for?</dt>
-  <dd>Sql To Pdf is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>How does SQL to PDF conversion work?</dt>
+  <dd>The tool uses jsPDF to create PDF documents client-side. SQL text is tokenized to identify keywords (SELECT, FROM, WHERE), then rendered using monospace font (Courier) for code preservation. Each line is wrapped to fit the page width with proper margins.</dd>
+
+  <dt>What SQL formatting is applied?</dt>
+  <dd>The formatter tokenizes SQL and adds line breaks before keywords like SELECT, FROM, WHERE, JOIN, ORDER BY, GROUP BY, HAVING, LIMIT. Parentheses trigger indentation increases. Commas add line breaks for column lists. String literals are preserved exactly.</dd>
+
+  <dt>Why use monospace font for SQL in PDFs?</dt>
+  <dd>Monospace fonts (Courier, Consolas, Monaco) ensure each character has equal width, making SQL code align properly. This is essential for readability, especially with nested queries, aligned columns, and indentation-based structure visualization.</dd>
+
+  <dt>What PDF page size is used?</dt>
+  <dd>A4 size (595 x 842 points at 72 DPI) with 36-point margins. The usable width is 523 points. Text wraps at this width using jsPDF's splitTextToSize function to prevent content overflow.</dd>
+
+  <dt>Can I include multiple SQL statements?</dt>
+  <dd>Yes. Paste multiple SQL statements separated by semicolons. The tool preserves all content and formats it as a continuous code block. Each statement flows into the next with proper spacing.</dd>
+
+  <dt>What are common use cases for SQL to PDF?</dt>
+  <dd>Common uses: documenting stored procedures for team handbooks, creating query specification documents, archiving complex queries for compliance, sharing SQL reviews with stakeholders, preparing training materials for database courses, and generating report specifications.</dd>
 </dl>
 </section>
 </main>

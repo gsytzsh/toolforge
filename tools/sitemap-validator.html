@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Sitemap Validator – Validate Sitemap XML Online | ToolForge</title>
-<meta name="description" content="Free online Sitemap Validator to validate sitemap.xml files, count URLs and check the basic structure in your browser. Part of the ToolForge developer tools collection.">
+<title>Sitemap Validator – Validate XML Sitemap Structure and URLs | ToolForge</title>
+<meta name="description" content="Validate sitemap.xml files online. Check XML structure, count URLs, detect duplicates, verify sitemap index format. Includes sitemap best practices and SEO guidelines. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/sitemap-validator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Sitemap Validator – Validate Sitemap XML Online | ToolForge">
-<meta property="og:description" content="Free online Sitemap Validator to validate sitemap.xml files, count URLs and check the basic structure in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Sitemap Validator – Validate XML Sitemap Structure and URLs | ToolForge">
+<meta property="og:description" content="Validate sitemap.xml files online. Check XML structure, count URLs, detect duplicates, verify sitemap index format.">
 <meta property="og:url" content="https://toolforge.site/tools/sitemap-validator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sitemap Validator – Validate Sitemap XML Online | ToolForge">
-<meta name="twitter:description" content="Free online Sitemap Validator to validate sitemap.xml files, count URLs and check the basic structure in your browser. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Sitemap Validator – Validate XML Sitemap Structure and URLs | ToolForge">
+<meta name="twitter:description" content="Validate sitemap.xml files online. Check XML structure, count URLs, detect duplicates, verify sitemap index format.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Sitemap Validator used for?",
+      "name": "What is a sitemap and why is it important?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sitemap Validator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "A sitemap is an XML file that lists all important URLs on a website to help search engines discover and crawl content. It provides metadata about each URL (last modified date, change frequency, priority) and is essential for SEO, especially for large sites, new sites without many backlinks, and sites with deep page hierarchies."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between urlset and sitemapindex?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "A urlset is a standard sitemap containing individual URLs (up to 50,000 URLs max). A sitemapindex is a sitemap of sitemaps, used when a site exceeds 50,000 URLs or 50MB uncompressed. Each entry in a sitemapindex points to another sitemap file. Google can process both formats and will follow sitemapindex references automatically."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What are the sitemap XML requirements?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Sitemap XML must: use UTF-8 encoding, have proper XML declaration, use the sitemap.org namespace (http://www.sitemaps.org/schemas/sitemap/0.9), contain valid URL elements with <loc> tags, escape special characters (&, <, >), and be well-formed XML. File size must be under 50MB uncompressed with max 50,000 URLs per sitemap."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I submit a sitemap to Google?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Submit sitemaps via Google Search Console: verify site ownership, go to Sitemaps section, enter sitemap URL (e.g., sitemap.xml), click Submit. Also reference sitemap in robots.txt using 'Sitemap: https://example.com/sitemap.xml'. Google will crawl the sitemap and add URLs to its crawl queue."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What common sitemap errors should I avoid?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Common errors: including non-canonical URLs (redirects, 404s, noindex pages), exceeding 50,000 URLs or 50MB limit, using incorrect namespace, missing XML declaration, including URLs blocked by robots.txt, having duplicate URLs, not updating lastmod dates, and using absolute vs relative URL inconsistencies."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How often should I update my sitemap?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Update sitemaps whenever content changes: new pages added, URLs modified, content significantly updated. For dynamic sites, generate sitemaps automatically. For static sites, update manually after each change. Search engines use <lastmod> dates to prioritize crawling, so accurate dates improve crawl efficiency."
       }
     }
   ]
@@ -72,101 +77,413 @@
 <body>
 <main class="container">
 <h1>Sitemap Validator</h1>
-<p class="subtitle">Validate sitemap XML, count URLs and inspect the basic sitemap structure.</p>
+<p class="subtitle">Validate sitemap XML structure, count URLs, detect duplicates, and check sitemap compliance.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+
 <label for="sitemap-input" class="sr-only">Sitemap XML input</label>
-<textarea id="sitemap-input" rows="12" class="pdf-editor pdf-editor-mono" aria-label="Sitemap XML input" placeholder='<?xml version="1.0" encoding="UTF-8"?><urlset></urlset>'></textarea>
-<div class="tool-actions">
-<button type="button" onclick="validateSitemap()">Validate</button>
+<textarea id="sitemap-input" rows="12" style="width:90%;font-family:monospace;font-size:13px" aria-label="Sitemap XML input" placeholder="Paste sitemap XML here"></textarea>
+
+<div class="tool-actions" style="margin-top:16px">
+<button type="button" onclick="validateSitemap()">Validate Sitemap</button>
 <button type="button" onclick="copyReport()">Copy Report</button>
 </div>
-<h3>Validation Report</h3>
+
+<h3 style="margin-top:24px">Validation Report</h3>
 <label for="report" class="sr-only">Validation report</label>
-<textarea id="report" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Validation report" readonly></textarea>
+<textarea id="report" rows="10" style="width:90%;font-family:monospace;font-size:13px" aria-label="Validation report" readonly></textarea>
 <p id="status" class="inline-status"></p>
+
 <section class="tool-seo">
 <h3>About Sitemap Validator</h3>
-<p>This sitemap validator checks sitemap XML, counts URLs and helps you review the overall structure of a sitemap file.</p>
-<p>It is useful for indexing audits, migration checks and technical SEO reviews when you want to confirm that a sitemap is valid before submitting it to search engines.</p>
+<p>This sitemap validator parses XML sitemap files and reports on structure, URL count, duplicate detection, and format compliance. It supports both standard sitemaps (urlset) and sitemap indexes (sitemapindex), helping SEO specialists and developers verify sitemap correctness before submission to search engines.</p>
+<p>The validator uses browser-based XML parsing (DOMParser) to analyze sitemap structure without sending data to any server. All processing happens locally in your browser.</p>
+
+<h4>Sitemap XML Structure Overview</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://example.com/page1&lt;/loc&gt;
+    &lt;lastmod&gt;2026-01-15&lt;/lastmod&gt;
+    &lt;changefreq&gt;weekly&lt;/changefreq&gt;
+    &lt;priority&gt;0.8&lt;/priority&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://example.com/page2&lt;/loc&gt;
+    &lt;lastmod&gt;2026-01-10&lt;/lastmod&gt;
+  &lt;/url&gt;
+&lt;/urlset&gt;
+
+Elements:
+  &lt;loc&gt;     - Required. Absolute URL (including protocol)
+  &lt;lastmod&gt; - Optional. Last modification date (ISO 8601)
+  &lt;changefreq&gt; - Optional. always/hourly/daily/weekly/monthly/yearly/never
+  &lt;priority&gt; - Optional. 0.0 to 1.0 (default 0.5)
+</pre>
+
+<h4>Sitemap Index Format</h4>
+<p>For sites with more than 50,000 URLs or files larger than 50MB (uncompressed), use a sitemap index:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+  &lt;sitemap&gt;
+    &lt;loc&gt;https://example.com/sitemap1.xml&lt;/loc&gt;
+    &lt;lastmod&gt;2026-01-15&lt;/lastmod&gt;
+  &lt;/sitemap&gt;
+  &lt;sitemap&gt;
+    &lt;loc&gt;https://example.com/sitemap2.xml&lt;/loc&gt;
+    &lt;lastmod&gt;2026-01-14&lt;/lastmod&gt;
+  &lt;/sitemap&gt;
+&lt;/sitemapindex&gt;
+</pre>
+
+<h4>JavaScript Validation Algorithm</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Sitemap Validator Implementation
+
+function validateSitemap(xmlString) {
+  // Parse XML using DOMParser
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(xmlString, "text/xml");
+
+  // Check for parse errors
+  const parseError = doc.querySelector("parsererror");
+  if (parseError) {
+    return { valid: false, error: "Invalid XML: " + parseError.textContent };
+  }
+
+  const root = doc.documentElement;
+  const report = [];
+
+  // Check root element
+  report.push("Root element: " + root.nodeName);
+
+  if (root.nodeName === "urlset") {
+    // Standard sitemap
+    const urls = Array.from(doc.getElementsByTagName("url"));
+    const locs = urls.map(url => {
+      const loc = url.getElementsByTagName("loc")[0];
+      return loc ? loc.textContent.trim() : "";
+    }).filter(Boolean);
+
+    // Detect duplicates
+    const duplicates = locs.filter(
+      (loc, index) => locs.indexOf(loc) !== index
+    );
+
+    report.push("URL count: " + locs.length);
+    report.push("Duplicate URLs: " + duplicates.length);
+    report.push("Sample URLs: " + locs.slice(0, 5).join(", "));
+
+  } else if (root.nodeName === "sitemapindex") {
+    // Sitemap index
+    const sitemaps = Array.from(doc.getElementsByTagName("sitemap"));
+    report.push("Nested sitemap count: " + sitemaps.length);
+  }
+
+  return { valid: true, report: report };
+}
+</pre>
+
+<h4>Sitemap Requirements and Limits</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Requirement</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Specification</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Max URLs per sitemap</td>
+    <td style="border:1px solid #ddd;padding:8px">50,000 URLs</td>
+    <td style="border:1px solid #ddd;padding:8px">Use sitemapindex for more</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Max file size</td>
+    <td style="border:1px solid #ddd;padding:8px">50MB uncompressed</td>
+    <td style="border:1px solid #ddd;padding:8px">Compressed .gz doesn't count</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">URL format</td>
+    <td style="border:1px solid #ddd;padding:8px">Absolute URL required</td>
+    <td style="border:1px solid #ddd;padding:8px">Must include https://</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Encoding</td>
+    <td style="border:1px solid #ddd;padding:8px">UTF-8</td>
+    <td style="border:1px solid #ddd;padding:8px">Declare in XML header</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Namespace</td>
+    <td style="border:1px solid #ddd;padding:8px">sitemap.org/schemas/sitemap/0.9</td>
+    <td style="border:1px solid #ddd;padding:8px">Required for urlset</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Required element</td>
+    <td style="border:1px solid #ddd;padding:8px">&lt;loc&gt;</td>
+    <td style="border:1px solid #ddd;padding:8px">All other elements optional</td>
+  </tr>
+</table>
+
+<h4>Common Sitemap Errors</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Error</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Cause</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Fix</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Invalid XML</td>
+    <td style="border:1px solid #ddd;padding:8px">Missing closing tags, unescaped characters</td>
+    <td style="border:1px solid #ddd;padding:8px">Use XML validator, escape &amp; &lt; &gt;</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Relative URLs</td>
+    <td style="border:1px solid #ddd;padding:8px">Missing protocol/domain</td>
+    <td style="border:1px solid #ddd;padding:8px">Use full https://example.com/page</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Duplicate URLs</td>
+    <td style="border:1px solid #ddd;padding:8px">Same URL listed multiple times</td>
+    <td style="border:1px solid #ddd;padding:8px">Remove duplicates, canonicalize</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Wrong namespace</td>
+    <td style="border:1px solid #ddd;padding:8px">Missing or incorrect xmlns attribute</td>
+    <td style="border:1px solid #ddd;padding:8px">Add xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Exceeds limits</td>
+    <td style="border:1px solid #ddd;padding:8px">>50,000 URLs or >50MB</td>
+    <td style="border:1px solid #ddd;padding:8px">Split into multiple sitemaps with index</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Non-canonical URLs</td>
+    <td style="border:1px solid #ddd;padding:8px">Redirects, 404s, noindex pages</td>
+    <td style="border:1px solid #ddd;padding:8px">Only include canonical, indexable URLs</td>
+  </tr>
+</table>
+
+<h4>Sitemap Best Practices</h4>
+<ul>
+  <li><strong>Include only canonical URLs:</strong> Exclude redirects, 404s, noindex pages, and duplicate content</li>
+  <li><strong>Use absolute URLs:</strong> Always include full URL with protocol (https://example.com/page)</li>
+  <li><strong>Keep sitemaps updated:</strong> Update when content changes; accurate lastmod dates help crawl prioritization</li>
+  <li><strong>Split large sitemaps:</strong> Use sitemapindex when approaching 50,000 URLs or 50MB limit</li>
+  <li><strong>Reference in robots.txt:</strong> Add "Sitemap: https://example.com/sitemap.xml" to robots.txt</li>
+  <li><strong>Submit to Search Console:</strong> Submit via Google Search Console and Bing Webmaster Tools</li>
+  <li><strong>Use gzip compression:</strong> Compress sitemaps to .xml.gz for faster download (limit still 50MB uncompressed)</li>
+  <li><strong>Validate before submission:</strong> Check XML validity and structure before submitting to search engines</li>
+</ul>
+
+<h4>How to Submit Sitemap to Search Engines</h4>
+<ol>
+  <li><strong>Google Search Console:</strong>
+    <ul>
+      <li>Verify site ownership in Search Console</li>
+      <li>Navigate to "Sitemaps" in left menu</li>
+      <li>Enter sitemap URL (e.g., sitemap.xml)</li>
+      <li>Click "Submit"</li>
+      <li>Monitor coverage and errors in report</li>
+    </ul>
+  </li>
+  <li><strong>Bing Webmaster Tools:</strong>
+    <ul>
+      <li>Verify site in Bing Webmaster Tools</li>
+      <li>Go to "Sitemaps" section</li>
+      <li>Submit sitemap URL</li>
+      <li>Review crawl statistics</li>
+    </ul>
+  </li>
+  <li><strong>robots.txt reference:</strong>
+    <ul>
+      <li>Add line: <code>Sitemap: https://example.com/sitemap.xml</code></li>
+      <li>Place at top or bottom of robots.txt</li>
+      <li>Search engines discover sitemap automatically</li>
+    </ul>
+  </li>
+</ol>
+
+<h4>Sitemap Priority and Change Frequency Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Element</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Values</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Default</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">&lt;priority&gt;</td>
+    <td style="border:1px solid #ddd;padding:8px">0.0 to 1.0</td>
+    <td style="border:1px solid #ddd;padding:8px">0.5</td>
+    <td style="border:1px solid #ddd;padding:8px">Relative importance within site</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">&lt;changefreq&gt;</td>
+    <td style="border:1px solid #ddd;padding:8px">always/hourly/daily/weekly/monthly/yearly/never</td>
+    <td style="border:1px solid #ddd;padding:8px">N/A</td>
+    <td style="border:1px solid #ddd;padding:8px">Hint for crawlers (often ignored)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">&lt;lastmod&gt;</td>
+    <td style="border:1px solid #ddd;padding:8px">ISO 8601 date (YYYY-MM-DD)</td>
+    <td style="border:1px solid #ddd;padding:8px">N/A</td>
+    <td style="border:1px solid #ddd;padding:8px">Most important for crawl prioritization</td>
+  </tr>
+</table>
+
+<h4>Sitemap Example for Different Site Types</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+E-commerce Site Sitemap Structure:
+
+sitemap.xml (index file)
+├── sitemap-products.xml (product pages)
+├── sitemap-categories.xml (category pages)
+├── sitemap-brands.xml (brand pages)
+├── sitemap-blog.xml (blog posts)
+└── sitemap-static.xml (about, contact, etc.)
+
+Each sub-sitemap contains up to 50,000 URLs.
+Index file references all sub-sitemaps.
+Submit only the index file to Search Console.
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Sitemap Validator used for?</dt>
-  <dd>Sitemap Validator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is a sitemap and why is it important?</dt>
+  <dd>A sitemap is an XML file that lists all important URLs on a website to help search engines discover and crawl content. It provides metadata about each URL (last modified date, change frequency, priority) and is essential for SEO, especially for large sites, new sites without many backlinks, and sites with deep page hierarchies.</dd>
+
+  <dt>What is the difference between urlset and sitemapindex?</dt>
+  <dd>A urlset is a standard sitemap containing individual URLs (up to 50,000 URLs max). A sitemapindex is a sitemap of sitemaps, used when a site exceeds 50,000 URLs or 50MB uncompressed. Each entry in a sitemapindex points to another sitemap file. Google can process both formats and will follow sitemapindex references automatically.</dd>
+
+  <dt>What are the sitemap XML requirements?</dt>
+  <dd>Sitemap XML must: use UTF-8 encoding, have proper XML declaration, use the sitemap.org namespace (http://www.sitemaps.org/schemas/sitemap/0.9), contain valid URL elements with <loc> tags, escape special characters (&, <, >), and be well-formed XML. File size must be under 50MB uncompressed with max 50,000 URLs per sitemap.</dd>
+
+  <dt>How do I submit a sitemap to Google?</dt>
+  <dd>Submit sitemaps via Google Search Console: verify site ownership, go to Sitemaps section, enter sitemap URL (e.g., sitemap.xml), click Submit. Also reference sitemap in robots.txt using 'Sitemap: https://example.com/sitemap.xml'. Google will crawl the sitemap and add URLs to its crawl queue.</dd>
+
+  <dt>What common sitemap errors should I avoid?</dt>
+  <dd>Common errors: including non-canonical URLs (redirects, 404s, noindex pages), exceeding 50,000 URLs or 50MB limit, using incorrect namespace, missing XML declaration, including URLs blocked by robots.txt, having duplicate URLs, not updating lastmod dates, and using absolute vs relative URL inconsistencies.</dd>
+
+  <dt>How often should I update my sitemap?</dt>
+  <dd>Update sitemaps whenever content changes: new pages added, URLs modified, content significantly updated. For dynamic sites, generate sitemaps automatically. For static sites, update manually after each change. Search engines use <lastmod> dates to prioritize crawling, so accurate dates improve crawl efficiency.</dd>
 </dl>
 </section>
 </main>
 <script>
 function setStatus(message,color){
-let status=document.getElementById("status")
-status.innerText=message
-status.style.color=color
+var status=document.getElementById("status");
+status.innerText=message;
+status.style.color=color;
 }
+
 function validateSitemap(){
-let input=document.getElementById("sitemap-input").value.trim()
+var input=document.getElementById("sitemap-input").value.trim();
 if(!input){
-document.getElementById("report").value=""
-setStatus("Enter sitemap XML first.","#b91c1c")
-return
+document.getElementById("report").value="";
+setStatus("Enter sitemap XML first.","#b91c1c");
+return;
 }
 try{
-let doc=new DOMParser().parseFromString(input,"text/xml")
+var doc=new DOMParser().parseFromString(input,"text/xml");
 if(doc.querySelector("parsererror")){
-throw new Error("Invalid XML.")
+throw new Error("Invalid XML: parsing failed");
 }
-let root=doc.documentElement
-let report=[]
-report.push("Root element: "+root.nodeName)
+var root=doc.documentElement;
+var report=[];
+report.push("=== Sitemap Validation Report ===");
+report.push("");
+report.push("Root element: "+root.nodeName);
+report.push("Namespace: "+(root.getAttribute("xmlns")||"not specified"));
+report.push("");
+
 if(root.nodeName==="urlset"){
-let urls=Array.from(doc.getElementsByTagName("url"))
-let locs=urls.map(function(url){
-let loc=url.getElementsByTagName("loc")[0]
-return loc?loc.textContent.trim():""
-}).filter(Boolean)
-let duplicates=locs.filter(function(loc,index){ return locs.indexOf(loc)!==index })
-report.push("URL count: "+locs.length)
-report.push("Duplicate URLs: "+duplicates.length)
-report.push("Sample URLs:")
-locs.slice(0,5).forEach(function(loc){ report.push("- "+loc) })
+var urls=Array.from(doc.getElementsByTagName("url"));
+var locs=[];
+var urlDetails=[];
+for(var i=0;i<urls.length;i++){
+var url=urls[i];
+var loc=url.getElementsByTagName("loc")[0];
+var lastmod=url.getElementsByTagName("lastmod")[0];
+var changefreq=url.getElementsByTagName("changefreq")[0];
+var priority=url.getElementsByTagName("priority")[0];
+if(loc){
+var locText=loc.textContent.trim();
+locs.push(locText);
+urlDetails.push({
+loc:locText,
+lastmod:lastmod?lastmod.textContent:"",
+changefreq:changefreq?changefreq.textContent:"",
+priority:priority?priority.textContent:""
+});
+}
+}
+var duplicates=locs.filter(function(loc,index){return locs.indexOf(loc)!==index});
+var uniqueCount=locs.length-duplicates.length;
+report.push("Total URLs: "+locs.length);
+report.push("Unique URLs: "+uniqueCount);
+report.push("Duplicate URLs: "+duplicates.length);
+if(duplicates.length>0){
+report.push("");
+report.push("First few duplicates:");
+var seen={};
+for(var j=0;j<duplicates.length&&j<5;j++){
+var dup=duplicates[j];
+if(!seen[dup]){report.push("  - "+dup);seen[dup]=true;}
+}
+}
+report.push("");
+report.push("URLs with lastmod: "+urlDetails.filter(function(u){return u.lastmod;}).length);
+report.push("URLs with changefreq: "+urlDetails.filter(function(u){return u.changefreq;}).length);
+report.push("URLs with priority: "+urlDetails.filter(function(u){return u.priority;}).length);
+report.push("");
+report.push("Sample URLs (first 5):");
+for(var k=0;k<Math.min(5,locs.length);k++){
+report.push("  "+(k+1)+". "+locs[k]);
+}
 }else if(root.nodeName==="sitemapindex"){
-let sitemaps=Array.from(doc.getElementsByTagName("sitemap"))
-report.push("Nested sitemap count: "+sitemaps.length)
+var sitemaps=Array.from(doc.getElementsByTagName("sitemap"));
+report.push("Nested sitemap count: "+sitemaps.length);
+report.push("");
+report.push("Referenced sitemaps:");
+for(var m=0;m<sitemaps.length;m++){
+var sm=sitemaps[m];
+var smLoc=sm.getElementsByTagName("loc")[0];
+var smLastmod=sm.getElementsByTagName("lastmod")[0];
+if(smLoc){
+report.push("  - "+smLoc.textContent+(smLastmod?" (lastmod: "+smLastmod.textContent+")":""));
+}
+}
 }else{
-report.push("Unexpected root. Expected urlset or sitemapindex.")
+report.push("Unexpected root element: "+root.nodeName);
+report.push("Expected: urlset or sitemapindex");
 }
-document.getElementById("report").value=report.join("\n")
-setStatus("Sitemap validated.","#16a34a")
+report.push("");
+report.push("=== Validation Complete ===");
+document.getElementById("report").value=report.join("\n");
+setStatus("Sitemap validated.","#16a34a");
 }catch(e){
-document.getElementById("report").value=""
-setStatus(e.message,"#b91c1c")
+document.getElementById("report").value="";
+setStatus(e.message,"#b91c1c");
 }
 }
+
 function copyReport(){
-let value=document.getElementById("report").value
+var value=document.getElementById("report").value;
 if(!value){
-setStatus("Validate sitemap first.","#b91c1c")
-return
+setStatus("Validate sitemap first.","#b91c1c");
+return;
 }
 navigator.clipboard.writeText(value).then(function(){
-setStatus("Validation report copied.","#16a34a")
+setStatus("Validation report copied.","#16a34a");
 }).catch(function(){
-setStatus("Copy failed.","#b91c1c")
-})
+setStatus("Copy failed.","#b91c1c");
+});
 }
-document.getElementById("sitemap-input").value='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>https://example.com/</loc></url>\n</urlset>'
-validateSitemap()
+
+// Initialize with sample sitemap
+document.getElementById("sitemap-input").value='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>https://example.com/</loc><lastmod>2026-01-15</lastmod></url>\n  <url><loc>https://example.com/about</loc><lastmod>2026-01-10</lastmod></url>\n</urlset>';
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>

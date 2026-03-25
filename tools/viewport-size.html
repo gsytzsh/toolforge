@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Viewport Size – Live Window &amp; Screen Dimensions | ToolForge</title>
-<meta name="description" content="Free online Viewport Size tool to see live window dimensions, screen resolution and device pixel ratio. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Viewport Size displays live window dimensions, screen resolution, device pixel ratio, and CSS breakpoint detection. Essential for responsive web design and mobile testing. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/viewport-size.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Viewport Size – Live Window &amp; Screen Dimensions | ToolForge">
-<meta property="og:description" content="Free online Viewport Size tool to see live window dimensions, screen resolution and device pixel ratio.">
+<meta property="og:description" content="Viewport Size displays live window dimensions, screen resolution, device pixel ratio, and CSS breakpoint detection. Essential for responsive web design and mobile testing. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/viewport-size.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Viewport Size – Live Window &amp; Screen Dimensions | ToolForge">
-<meta name="twitter:description" content="Free online Viewport Size tool to see live window dimensions, screen resolution and device pixel ratio.">
+<meta name="twitter:description" content="Viewport Size displays live window dimensions, screen resolution, device pixel ratio, and CSS breakpoint detection. Essential for responsive web design and mobile testing. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
@@ -30,45 +30,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Viewport Size?",
+      "name": "What is the difference between window and screen dimensions?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Viewport Size is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Screen dimensions (screen.width/height) represent the physical display resolution in CSS pixels. Window dimensions (window.innerWidth/innerHeight) represent the viewport size—the visible area for web content excluding browser UI like toolbars and scrollbars. Available dimensions (screen.availWidth/availHeight) exclude OS taskbars and docks."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is device pixel ratio (DPR)?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Device pixel ratio is the ratio between physical device pixels and CSS logical pixels. Standard displays have DPR=1. Retina/HiDPI displays have DPR=2, 3, or higher. A 2x DPR display renders 1 CSS pixel as 2×2=4 physical device pixels, providing sharper text and images."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What are common CSS breakpoint ranges?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Common responsive breakpoints follow mobile-first patterns: xs (<640px) for phones, sm (640-768px) for large phones, md (768-1024px) for tablets, lg (1024-1280px) for small laptops, xl (1280-1536px) for desktops, 2xl (≥1536px) for large monitors. Frameworks like Tailwind use similar ranges."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "Why do innerWidth and clientWidth differ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "window.innerWidth includes the width of the vertical scrollbar (if present). document.documentElement.clientWidth excludes the scrollbar, measuring only the content area. For most responsive design work, innerWidth is preferred as it represents the actual visible viewport."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How does viewport affect responsive design?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "CSS media queries use viewport width to apply responsive styles. The <meta name='viewport'> tag ensures mobile browsers use actual device width instead of a virtual 980px viewport. Without it, mobile devices show desktop-sized pages zoomed out, breaking responsive layouts."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What is color depth and why does it matter?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Color depth (bits per channel) determines how many colors a display can show. 8-bit displays show 256 levels per RGB channel (16.7 million colors). 10-bit displays show 1024 levels (1.07 billion colors). Higher color depth reduces banding in gradients and improves HDR content rendering."
       }
     }
   ]
@@ -78,7 +83,7 @@
 <body>
 <main class="container">
 <h1>Viewport Size</h1>
-<p class="subtitle">Live window and screen dimensions. Resize the window to see values update.</p>
+<p class="subtitle">Live window dimensions, screen resolution, device pixel ratio, and CSS breakpoint detection for responsive design testing.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <h3>Current Dimensions</h3>
@@ -96,24 +101,191 @@
 
 <section class="tool-seo">
 <h3>About Viewport Size</h3>
-<p>This Viewport Size tool shows live window dimensions, screen resolution and device pixel ratio. Useful for responsive design testing and debugging viewport-dependent layouts.</p>
+<p>This viewport size tool displays real-time window dimensions, screen resolution, device pixel ratio, color depth, and CSS breakpoint detection for responsive web design testing and debugging.</p>
+<p>It is useful for responsive design development, mobile layout testing, debugging viewport-dependent CSS, verifying media query breakpoints, checking HiDPI/Retina display rendering, and ensuring consistent UI behavior across different screen sizes and device pixel ratios.</p>
+
+<h4>Viewport Dimension Properties</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Property</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">window.innerWidth</td>
+    <td style="border:1px solid #ddd;padding:8px">Viewport width including scrollbar</td>
+    <td style="border:1px solid #ddd;padding:8px">Responsive breakpoints</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">window.innerHeight</td>
+    <td style="border:1px solid #ddd;padding:8px">Viewport height including scrollbar</td>
+    <td style="border:1px solid #ddd;padding:8px">Full-screen layouts</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">document.documentElement.clientWidth</td>
+    <td style="border:1px solid #ddd;padding:8px">Viewport width excluding scrollbar</td>
+    <td style="border:1px solid #ddd;padding:8px">Content area calculations</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">screen.width</td>
+    <td style="border:1px solid #ddd;padding:8px">Physical screen resolution (CSS pixels)</td>
+    <td style="border:1px solid #ddd;padding:8px">Device detection</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">screen.availWidth</td>
+    <td style="border:1px solid #ddd;padding:8px">Available width (excludes OS taskbar)</td>
+    <td style="border:1px solid #ddd;padding:8px">Maximized window sizing</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">window.devicePixelRatio</td>
+    <td style="border:1px solid #ddd;padding:8px">Physical pixels per CSS pixel</td>
+    <td style="border:1px solid #ddd;padding:8px">HiDPI image assets</td>
+  </tr>
+</table>
+
+<h4>CSS Breakpoint Ranges</h4>
+<p>Common responsive design breakpoints (mobile-first approach):</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Breakpoint</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Width Range</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Target Device</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">xs (extra small)</td>
+    <td style="border:1px solid #ddd;padding:8px">&lt;640px</td>
+    <td style="border:1px solid #ddd;padding:8px">Phones (portrait)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">sm (small)</td>
+    <td style="border:1px solid #ddd;padding:8px">640–768px</td>
+    <td style="border:1px solid #ddd;padding:8px">Large phones, small tablets</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">md (medium)</td>
+    <td style="border:1px solid #ddd;padding:8px">768–1024px</td>
+    <td style="border:1px solid #ddd;padding:8px">Tablets (landscape)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">lg (large)</td>
+    <td style="border:1px solid #ddd;padding:8px">1024–1280px</td>
+    <td style="border:1px solid #ddd;padding:8px">Small laptops, desktops</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">xl (extra large)</td>
+    <td style="border:1px solid #ddd;padding:8px">1280–1536px</td>
+    <td style="border:1px solid #ddd;padding:8px">Standard desktops</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">2xl (2x extra large)</td>
+    <td style="border:1px solid #ddd;padding:8px">≥1536px</td>
+    <td style="border:1px solid #ddd;padding:8px">Large monitors, 4K displays</td>
+  </tr>
+</table>
+
+<h4>Device Pixel Ratio Examples</h4>
+<p>DPR determines how many physical device pixels represent one CSS pixel:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">DPR</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Physical Pixels per CSS Pixel</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Common Devices</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">1x</td>
+    <td style="border:1px solid #ddd;padding:8px">1:1</td>
+    <td style="border:1px solid #ddd;padding:8px">Standard desktop monitors</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">2x</td>
+    <td style="border:1px solid #ddd;padding:8px">2×2 = 4:1</td>
+    <td style="border:1px solid #ddd;padding:8px">iPhone, MacBook Retina</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">3x</td>
+    <td style="border:1px solid #ddd;padding:8px">3×3 = 9:1</td>
+    <td style="border:1px solid #ddd;padding:8px">iPhone Pro Max, flagship Android</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">4x+</td>
+    <td style="border:1px solid #ddd;padding:8px">4×4 = 16:1+</td>
+    <td style="border:1px solid #ddd;padding:8px">High-end smartphones</td>
+  </tr>
+</table>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Image asset recommendation:
+CSS size: 100×100px
+
+DPR 1x: use 100×100px image
+DPR 2x: use 200×200px image (@2x)
+DPR 3x: use 300×300px image (@3x)
+
+// Responsive images with srcset:
+&lt;img src="image-1x.jpg"
+     srcset="image-2x.jpg 2x, image-3x.jpg 3x"
+     alt="Example"&gt;
+</pre>
+
+<h4>Viewport Meta Tag</h4>
+<p>The viewport meta tag controls how a webpage is displayed on mobile devices:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+&lt;!-- Standard responsive viewport --&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+
+<!-- Fixed width (not recommended) --&gt;
+&lt;meta name="viewport" content="width=320"&gt;
+
+<!-- Initial zoom level --&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"&gt;
+
+<!-- Attributes:
+  width=device-width  - Match CSS pixels to device width
+  initial-scale=1     - 1:1 zoom level on load
+  maximum-scale=1     - Disable zoom (accessibility concern)
+  user-scalable=no    - Disable user zooming (accessibility concern)
+--&gt;
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Responsive design testing:</strong> Verify layouts at different breakpoint widths</li>
+  <li><strong>Mobile debugging:</strong> Check actual viewport dimensions on mobile devices</li>
+  <li><strong>HiDPI asset verification:</strong> Confirm devicePixelRatio for retina images</li>
+  <li><strong>CSS media query debugging:</strong> Identify which breakpoint is active</li>
+  <li><strong>Full-screen applications:</strong> Calculate available viewport space</li>
+  <li><strong>Cross-browser testing:</strong> Compare viewport behavior across browsers</li>
+</ul>
+
+<h4>Window vs Document Dimensions</h4>
+<p>Understanding the difference between window and document measurements:</p>
+<ul>
+  <li><strong>window.innerWidth/Height:</strong> Includes scrollbar, represents visible viewport</li>
+  <li><strong>document.documentElement.clientWidth/Height:</strong> Excludes scrollbar, content area only</li>
+  <li><strong>document.body.scrollWidth/Height:</strong> Total document size including overflow</li>
+  <li><strong>screen.width/Height:</strong> Physical display resolution in CSS pixels</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Viewport Size?</dt>
-  <dd>Viewport Size is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the difference between window and screen dimensions?</dt>
+  <dd>Screen dimensions (screen.width/height) represent the physical display resolution in CSS pixels. Window dimensions (window.innerWidth/innerHeight) represent the viewport size—the visible area for web content excluding browser UI like toolbars and scrollbars. Available dimensions (screen.availWidth/availHeight) exclude OS taskbars and docks.</dd>
+
+  <dt>What is device pixel ratio (DPR)?</dt>
+  <dd>Device pixel ratio is the ratio between physical device pixels and CSS logical pixels. Standard displays have DPR=1. Retina/HiDPI displays have DPR=2, 3, or higher. A 2x DPR display renders 1 CSS pixel as 2×2=4 physical device pixels, providing sharper text and images.</dd>
+
+  <dt>What are common CSS breakpoint ranges?</dt>
+  <dd>Common responsive breakpoints follow mobile-first patterns: xs (&lt;640px) for phones, sm (640-768px) for large phones, md (768-1024px) for tablets, lg (1024-1280px) for small laptops, xl (1280-1536px) for desktops, 2xl (≥1536px) for large monitors. Frameworks like Tailwind use similar ranges.</dd>
+
+  <dt>Why do innerWidth and clientWidth differ?</dt>
+  <dd>window.innerWidth includes the width of the vertical scrollbar (if present). document.documentElement.clientWidth excludes the scrollbar, measuring only the content area. For most responsive design work, innerWidth is preferred as it represents the actual visible viewport.</dd>
+
+  <dt>How does viewport affect responsive design?</dt>
+  <dd>CSS media queries use viewport width to apply responsive styles. The &lt;meta name='viewport'&gt; tag ensures mobile browsers use actual device width instead of a virtual 980px viewport. Without it, mobile devices show desktop-sized pages zoomed out, breaking responsive layouts.</dd>
+
+  <dt>What is color depth and why does it matter?</dt>
+  <dd>Color depth (bits per channel) determines how many colors a display can show. 8-bit displays show 256 levels per RGB channel (16.7 million colors). 10-bit displays show 1024 levels (1.07 billion colors). Higher color depth reduces banding in gradients and improves HDR content rendering.</dd>
 </dl>
 </section>
 </main>

@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Notes & Lists – Notepad, Checklist and Shopping List | ToolForge</title>
-<meta name="description" content="Free online Notes & Lists tool to keep quick notes, build checklists and organize shopping lists in your browser with local save. Part of the ToolForge developer tools collection.">
+<title>Online Notepad – Notes, Checklist and Shopping List Tool | ToolForge</title>
+<meta name="description" content="Simple online notepad for quick notes, checklists, and shopping lists. Features localStorage persistence, category grouping, and markdown-style rendering. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/notepad.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Notes & Lists – Notepad, Checklist and Shopping List | ToolForge">
-<meta property="og:description" content="Free online Notes & Lists tool to keep quick notes, build checklists and organize shopping lists in your browser with local save.">
+<meta property="og:title" content="Online Notepad – Notes, Checklist and Shopping List Tool | ToolForge">
+<meta property="og:description" content="Simple online notepad for quick notes, checklists, and shopping lists. Features localStorage persistence, category grouping, and markdown-style rendering. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/notepad.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Notes & Lists – Notepad, Checklist and Shopping List | ToolForge">
-<meta name="twitter:description" content="Free online Notes & Lists tool to keep quick notes, build checklists and organize shopping lists in your browser with local save.">
+<meta name="twitter:title" content="Online Notepad – Notes, Checklist and Shopping List Tool | ToolForge">
+<meta name="twitter:description" content="Simple online notepad for quick notes, checklists, and shopping lists. Features localStorage persistence, category grouping, and markdown-style rendering. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Notepad used for?",
+      "name": "How does localStorage persistence work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Notepad is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "localStorage is a Web API that stores data as key-value pairs in the browser. Data persists across page reloads and browser sessions until explicitly cleared. Each origin (domain) has its own isolated storage with a typical 5-10MB quota. Data is accessed via localStorage.setItem(key, value) and localStorage.getItem(key)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the checklist format?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "The checklist mode treats each line as a separate task item. Enter one task per line. The rendered view displays each item with a checkbox for interactive tracking. Empty lines are automatically filtered out. This format is ideal for task lists, packing lists, and step-by-step procedures."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "How does the shopping list categorization work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Use the pipe character (|) to separate category from item: 'Produce|Apples' groups 'Apples' under 'Produce'. Items without a category default to 'Other'. The rendered output groups items by category with headers, making it easier to navigate stores by section."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are localStorage limitations?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "localStorage limits: 5-10MB per origin depending on browser, synchronous API (can block main thread), string-only values (objects must be JSON.stringify'd), no expiration mechanism, cleared by browser cache clearing, and not available in private/incognito mode (data lost on close)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "How to export notes from localStorage?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Access localStorage via browser console: JSON.parse(localStorage.getItem('toolforge.notes-lists.notes')). To export all data: Object.keys(localStorage).filter(k=>k.startsWith('toolforge')).reduce((acc,k)=>{acc[k]=localStorage[k];return acc},{}). Copy the result or use download scripts."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "What is the difference between localStorage and sessionStorage?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "localStorage persists indefinitely until cleared; sessionStorage only lasts for the current browser tab session. localStorage is shared across all tabs/windows of the same origin; sessionStorage is per-tab. localStorage has no automatic expiration; sessionStorage clears when the tab closes."
       }
     }
   ]
@@ -71,8 +76,8 @@
 </head>
 <body>
 <main class="container">
-<h1>Notes & Lists</h1>
-<p class="subtitle">Keep notes, build checklists and organize shopping lists in one browser-based tool.</p>
+<h1>Online Notepad</h1>
+<p class="subtitle">Simple notepad for quick notes, checklists, and shopping lists with browser-based storage.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <label for="mode" class="sr-only">Mode</label>
 <select id="mode" aria-label="Mode" onchange="switchMode()">
@@ -91,27 +96,338 @@
 </div>
 <div id="preview"></div>
 <p id="status" class="inline-status"></p>
+
 <section class="tool-seo">
-<h3>About Notes &amp; Lists</h3>
-<p>This Notes &amp; Lists tool gives you one simple place to keep plain notes, manage checklists and sort shopping items directly in the browser.</p>
-<p>It is useful for quick personal planning, temporary task tracking and everyday lists when a full note app would feel slower than just opening a lightweight page.</p>
+<h3>About Online Notepad</h3>
+<p>This online notepad provides three specialized modes for different note-taking needs: plain text notes, interactive checklists, and categorized shopping lists. All data is stored locally in your browser using the localStorage API.</p>
+
+<h4>localStorage Storage Mechanism</h4>
+<p>localStorage is a Web Storage API that provides persistent key-value storage in the browser:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Property</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Details</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Storage Limit</td>
+    <td style="border:1px solid #ddd;padding:8px">5-10MB per origin (varies by browser)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Data Type</td>
+    <td style="border:1px solid #ddd;padding:8px">String only (objects require JSON.stringify)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Persistence</td>
+    <td style="border:1px solid #ddd;padding:8px">Indefinite until explicitly cleared</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Scope</td>
+    <td style="border:1px solid #ddd;padding:8px">Shared across all tabs/windows of same origin</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">API Type</td>
+    <td style="border:1px solid #ddd;padding:8px">Synchronous (blocks main thread)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Private Browsing</td>
+    <td style="border:1px solid #ddd;padding:8px">Data lost when session ends</td>
+  </tr>
+</table>
+
+<h4>Storage Key Structure</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// This tool uses namespaced keys to avoid collisions:
+const STORAGE_KEYS = {
+  notes:     "toolforge.notes-lists.notes",
+  checklist: "toolforge.notes-lists.checklist",
+  shopping:  "toolforge.notes-lists.shopping"
+};
+
+// Save data:
+localStorage.setItem(STORAGE_KEYS.notes, textValue);
+
+// Load data:
+const saved = localStorage.getItem(STORAGE_KEYS.notes) || "";
+
+// Clear data:
+localStorage.removeItem(STORAGE_KEYS.checklist);
+
+// Export all data:
+const exportData = {
+  notes: localStorage.getItem(STORAGE_KEYS.notes),
+  checklist: localStorage.getItem(STORAGE_KEYS.checklist),
+  shopping: localStorage.getItem(STORAGE_KEYS.shopping)
+};
+</pre>
+
+<h4>Checklist Format Specification</h4>
+<p>Each line represents one task item. The format is simple plain text:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Input (one item per line):
+Buy milk
+Send email to team
+Pack charger
+Call dentist
+
+Rendered Output:
+☐ Buy milk
+☐ Send email to team
+☐ Pack charger
+☐ Call dentist
+</pre>
+
+<h4>Shopping List Category Format</h4>
+<p>Use pipe character (|) to separate category from item name:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Input Format:
+Category|Item Name
+
+Example Input:
+Produce|Apples
+Produce|Bananas
+Dairy|Milk
+Dairy|Eggs
+Meat|Chicken
+Other|Paper towels
+
+Rendered Output:
+Produce
+- Apples
+- Bananas
+
+Dairy
+- Milk
+- Eggs
+
+Meat
+- Chicken
+
+Other
+- Paper towels
+</pre>
+
+<h4>Mode Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Feature</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Checklist</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Shopping List</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Input Format</td>
+    <td style="border:1px solid #ddd;padding:8px">Free text</td>
+    <td style="border:1px solid #ddd;padding:8px">One item per line</td>
+    <td style="border:1px solid #ddd;padding:8px">Category|Item</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Output</td>
+    <td style="border:1px solid #ddd;padding:8px">Preserved whitespace</td>
+    <td style="border:1px solid #ddd;padding:8px">Interactive checkboxes</td>
+    <td style="border:1px solid #ddd;padding:8px">Grouped by category</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Best For</td>
+    <td style="border:1px solid #ddd;padding:8px">General notes</td>
+    <td style="border:1px solid #ddd;padding:8px">Task tracking</td>
+    <td style="border:1px solid #ddd;padding:8px">Organized lists</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Copy Format</td>
+    <td style="border:1px solid #ddd;padding:8px">As-is</td>
+    <td style="border:1px solid #ddd;padding:8px">Markdown bullets</td>
+    <td style="border:1px solid #ddd;padding:8px">Grouped text</td>
+  </tr>
+</table>
+
+<h4>Rendering Algorithm</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Notes rendering - preserves whitespace
+function renderNotes(value) {
+  if (!value) return '<p>No notes yet.</p>';
+  return '<pre style="white-space:pre-wrap">' +
+         escapeHtml(value) +
+         '</pre>';
+}
+
+// Checklist rendering - creates interactive checkboxes
+function renderChecklist(value) {
+  const lines = value.split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(Boolean);
+
+  if (!lines.length) return '<p>No checklist items yet.</p>';
+
+  return lines.map(item =>
+    '<label style="display:block;margin:8px 0">' +
+    '<input type="checkbox"> ' +
+    escapeHtml(item) +
+    '</label>'
+  ).join('');
+}
+
+// Shopping list rendering - groups by category
+function renderShopping(value) {
+  const groups = {};
+
+  value.split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(Boolean)
+    .forEach(line => {
+      const parts = line.split('|');
+      const group = parts.length > 1 ? (parts[0] || 'Other').trim() : 'Other';
+      const item = parts.length > 1 ? parts.slice(1).join('|') : parts[0] || '';
+
+      if (!groups[group]) groups[group] = [];
+      groups[group].push(item.trim());
+    });
+
+  const keys = Object.keys(groups);
+  if (!keys.length) return '<p>No shopping items yet.</p>';
+
+  return '<pre>' + keys.map(group =>
+    group + '\n- ' + groups[group].join('\n- ')
+  ).join('\n\n') + '</pre>';
+}
+
+// HTML escape for XSS prevention
+function escapeHtml(value) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+</pre>
+
+<h4>Browser Storage Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Storage Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Capacity</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Persistence</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Server Access</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">localStorage</td>
+    <td style="border:1px solid #ddd;padding:8px">5-10MB</td>
+    <td style="border:1px solid #ddd;padding:8px">Until cleared</td>
+    <td style="border:1px solid #ddd;padding:8px">Client only</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">sessionStorage</td>
+    <td style="border:1px solid #ddd;padding:8px">5-10MB</td>
+    <td style="border:1px solid #ddd;padding:8px">Tab session only</td>
+    <td style="border:1px solid #ddd;padding:8px">Client only</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Cookies</td>
+    <td style="border:1px solid #ddd;padding:8px">4KB per cookie</td>
+    <td style="border:1px solid #ddd;padding:8px">Configurable expiry</td>
+    <td style="border:1px solid #ddd;padding:8px">Sent to server</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">IndexedDB</td>
+    <td style="border:1px solid #ddd;padding:8px">Large (varies)</td>
+    <td style="border:1px solid #ddd;padding:8px">Until cleared</td>
+    <td style="border:1px solid #ddd;padding:8px">Client only</td>
+  </tr>
+</table>
+
+<h4>Data Export and Backup</h4>
+<p>Since data is stored locally in the browser, consider these practices for data portability:</p>
+<ul>
+  <li><strong>Manual Copy:</strong> Regularly copy important notes to a separate file</li>
+  <li><strong>Copy Output:</strong> Use the Copy Output button to export rendered content</li>
+  <li><strong>Browser Console:</strong> Access localStorage directly via developer tools</li>
+  <li><strong>Browser Sync:</strong> Some browsers sync localStorage across devices</li>
+  <li><strong>Export Script:</strong> Use console to extract all data as JSON</li>
+</ul>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Export all ToolForge data from browser console:
+const data = {};
+const prefix = 'toolforge.notes-lists.';
+['notes', 'checklist', 'shopping'].forEach(mode => {
+  data[mode] = localStorage.getItem(prefix + mode);
+});
+console.log(JSON.stringify(data, null, 2));
+// Copy the output and save as JSON file
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Quick Notes:</strong> Temporary scratchpad for phone numbers, URLs, or reminders</li>
+  <li><strong>Task Checklist:</strong> Daily tasks, packing lists, procedure steps</li>
+  <li><strong>Shopping Lists:</strong> Organized by store sections for efficient shopping</li>
+  <li><strong>Meeting Notes:</strong> Quick capture during calls with render for review</li>
+  <li><strong>Code Snippets:</strong> Temporary storage for code fragments being worked on</li>
+  <li><strong>Brainstorming:</strong> Rapid idea capture without app overhead</li>
+</ul>
+
+<h4>Security Considerations</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Concern</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Mitigation</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">XSS Attacks</td>
+    <td style="border:1px solid #ddd;padding:8px">HTML escaping on all output</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Data Loss</td>
+    <td style="border:1px solid #ddd;padding:8px">Manual backup via Copy Output</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Private Browsing</td>
+    <td style="border:1px solid #ddd;padding:8px">Data lost on session end</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Shared Devices</td>
+    <td style="border:1px solid #ddd;padding:8px">Use Clear button after sensitive use</td>
+  </tr>
+</table>
+</section>
+
+<section class="how-to-use">
+<h3>How to Use Online Notepad</h3>
+<ol class="how-to-steps">
+  <li><strong>Select mode:</strong> Choose Notes, Checklist, or Shopping List from the dropdown.</li>
+  <li><strong>Enter content:</strong> Type or paste your content in the text area.</li>
+  <li><strong>Render (optional):</strong> Click Render to see formatted output with checkboxes or categories.</li>
+  <li><strong>Save:</strong> Click Save to store in browser localStorage.</li>
+  <li><strong>Copy Output:</strong> Export the rendered content to clipboard.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Each mode has separate storage - switching modes preserves data for each</li>
+  <li>For shopping lists, use Category|Item format for automatic grouping</li>
+  <li>Checklist items are displayed with interactive checkboxes in rendered view</li>
+  <li>Data persists across page reloads but clear browser cache to remove</li>
+  <li>Use Copy Output to backup important notes externally</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Notepad used for?</dt>
-  <dd>Notepad is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>How does localStorage persistence work?</dt>
+  <dd>localStorage is a Web API that stores data as key-value pairs in the browser. Data persists across page reloads and browser sessions until explicitly cleared. Each origin (domain) has its own isolated storage with a typical 5-10MB quota. Data is accessed via localStorage.setItem(key, value) and localStorage.getItem(key).</dd>
+
+  <dt>What is the checklist format?</dt>
+  <dd>The checklist mode treats each line as a separate task item. Enter one task per line. The rendered view displays each item with a checkbox for interactive tracking. Empty lines are automatically filtered out. This format is ideal for task lists, packing lists, and step-by-step procedures.</dd>
+
+  <dt>How does the shopping list categorization work?</dt>
+  <dd>Use the pipe character (|) to separate category from item: 'Produce|Apples' groups 'Apples' under 'Produce'. Items without a category default to 'Other'. The rendered output groups items by category with headers, making it easier to navigate stores by section.</dd>
+
+  <dt>What are localStorage limitations?</dt>
+  <dd>localStorage limits: 5-10MB per origin depending on browser, synchronous API (can block main thread), string-only values (objects must be JSON.stringify'd), no expiration mechanism, cleared by browser cache clearing, and not available in private/incognito mode (data lost on close).</dd>
+
+  <dt>How to export notes from localStorage?</dt>
+  <dd>Access localStorage via browser console: JSON.parse(localStorage.getItem('toolforge.notes-lists.notes')). To export all data: Object.keys(localStorage).filter(k=>k.startsWith('toolforge')).reduce((acc,k)=>{acc[k]=localStorage[k];return acc},{}). Copy the result or use download scripts.</dd>
+
+  <dt>What is the difference between localStorage and sessionStorage?</dt>
+  <dd>localStorage persists indefinitely until cleared; sessionStorage only lasts for the current browser tab session. localStorage is shared across all tabs/windows of the same origin; sessionStorage is per-tab. localStorage has no automatic expiration; sessionStorage clears when the tab closes.</dd>
 </dl>
 </section>
 </main>

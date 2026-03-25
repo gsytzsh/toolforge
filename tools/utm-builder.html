@@ -3,25 +3,81 @@
 <head>
 <meta charset="UTF-8">
 <title>UTM Builder – Build UTM URLs Online | ToolForge</title>
-<meta name="description" content="Free online UTM Builder to create campaign tracking URLs with utm_source, utm_medium, utm_campaign and more. Part of the ToolForge developer tools collection.">
+<meta name="description" content="UTM Builder creates campaign tracking URLs with utm_source, utm_medium, utm_campaign, utm_term, and utm_content parameters. Essential for Google Analytics and marketing attribution. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/utm-builder.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="UTM Builder – Build UTM URLs Online | ToolForge">
-<meta property="og:description" content="Free online UTM Builder to create campaign tracking URLs with utm_source, utm_medium, utm_campaign and more. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="UTM Builder creates campaign tracking URLs with utm_source, utm_medium, utm_campaign, utm_term, and utm_content parameters. Essential for Google Analytics and marketing attribution. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/utm-builder.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UTM Builder – Build UTM URLs Online | ToolForge">
-<meta name="twitter:description" content="Free online UTM Builder to create campaign tracking URLs with utm_source, utm_medium, utm_campaign and more. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="UTM Builder creates campaign tracking URLs with utm_source, utm_medium, utm_campaign, utm_term, and utm_content parameters. Essential for Google Analytics and marketing attribution. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are UTM parameters and why use them?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "UTM (Urchin Tracking Module) parameters are query string tags added to URLs to track marketing campaign performance in analytics tools. They tell you exactly which source, medium, and campaign drove traffic. Without UTMs, all traffic appears as 'direct' or 'unknown', making it impossible to measure campaign ROI."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the five standard UTM parameters?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The five standard UTM parameters are: utm_source (traffic source like google, facebook), utm_medium (marketing medium like email, cpc, social), utm_campaign (campaign name like spring_sale), utm_term (paid search keywords), and utm_content (differentiates similar content or A/B test variants)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between utm_source and utm_medium?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "utm_source identifies the specific platform (google, newsletter, facebook). utm_medium identifies the channel type (organic, email, social, cpc). Example: source=google&medium=cpc means Google paid ads; source=newsletter&medium=email means email marketing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When should I use utm_term and utm_content?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use utm_term for paid search campaigns to track specific keywords (utm_term=running+shoes). Use utm_content to differentiate similar content (utm_content=header_link vs footer_link) or A/B test variants (utm_content=variant_a). utm_term is primarily for PPC; utm_content works for any channel."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are UTM naming best practices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use lowercase consistently (google not Google), use underscores not spaces (spring_sale not spring sale), be descriptive but concise, document your naming conventions for team consistency, and avoid special characters that need URL encoding. Example: source=newsletter, medium=email, campaign=2024_spring_launch."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do UTM parameters affect SEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "UTM parameters do not directly affect SEO rankings, but they can cause duplicate content issues if multiple URLs with different UTMs point to the same page. Use canonical tags to specify the preferred URL. Google Analytics ignores UTMs on organic search traffic, so they won't interfere with natural search tracking."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <main class="container">
 <h1>UTM Builder</h1>
-<p class="subtitle">Build a campaign tracking URL with standard UTM parameters.</p>
+<p class="subtitle">Build campaign tracking URLs with standard UTM parameters for Google Analytics and marketing attribution.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <p>Base URL:
 <label for="base-url" class="sr-only">Base URL</label>
@@ -50,25 +106,207 @@ Term:
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About UTM Builder</h3>
-<p>This UTM builder creates campaign tracking URLs with standard UTM parameters such as source, medium and campaign.</p>
-<p>It is useful for newsletters, paid ads, social posts and partner links when you want cleaner attribution data in analytics tools.</p>
+<p>This UTM builder creates campaign tracking URLs with the five standard UTM parameters (source, medium, campaign, term, content) for accurate marketing attribution in Google Analytics and other analytics platforms.</p>
+<p>It is useful for email marketing campaigns, paid advertising (Google Ads, Facebook Ads), social media posts, affiliate links, newsletter tracking, influencer campaigns, and any marketing activity where you need to measure traffic sources and campaign performance.</p>
+
+<h4>The Five UTM Parameters</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Parameter</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Required</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example Values</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">utm_source</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">The traffic source/platform</td>
+    <td style="border:1px solid #ddd;padding:8px">google, facebook, newsletter, twitter</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">utm_medium</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">The marketing channel type</td>
+    <td style="border:1px solid #ddd;padding:8px">email, cpc, social, organic, referral</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">utm_campaign</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">The specific campaign name</td>
+    <td style="border:1px solid #ddd;padding:8px">spring_sale, product_launch_2024</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">utm_term</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+    <td style="border:1px solid #ddd;padding:8px">Paid search keywords</td>
+    <td style="border:1px solid #ddd;padding:8px">running+shoes, best+crm+software</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">utm_content</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+    <td style="border:1px solid #ddd;padding:8px">Differentiates similar content</td>
+    <td style="border:1px solid #ddd;padding:8px">header_link, variant_a, logo_banner</td>
+  </tr>
+</table>
+
+<h4>UTM URL Structure</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Base URL: https://example.com/landing
+
+Full UTM URL:
+https://example.com/landing?utm_source=newsletter&utm_medium=email&utm_campaign=spring_sale&utm_content=header_cta
+
+<!-- Parameter breakdown:
+  ?                        - Starts query string
+  utm_source=newsletter    - Traffic came from newsletter
+  &                        - Separates parameters
+  utm_medium=email         - Channel was email
+  utm_campaign=spring_sale - Campaign name
+  utm_content=header_cta   - Specific link clicked
+-->
+</pre>
+
+<h4>Common Source and Medium Combinations</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Channel</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Source</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Medium</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Google Ads</td>
+    <td style="border:1px solid #ddd;padding:8px">google</td>
+    <td style="border:1px solid #ddd;padding:8px">cpc</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Facebook Ads</td>
+    <td style="border:1px solid #ddd;padding:8px">facebook</td>
+    <td style="border:1px solid #ddd;padding:8px">paid_social</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Email Newsletter</td>
+    <td style="border:1px solid #ddd;padding:8px">newsletter</td>
+    <td style="border:1px solid #ddd;padding:8px">email</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Organic Social</td>
+    <td style="border:1px solid #ddd;padding:8px">linkedin</td>
+    <td style="border:1px solid #ddd;padding:8px">social</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Affiliate</td>
+    <td style="border:1px solid #ddd;padding:8px">partner_name</td>
+    <td style="border:1px solid #ddd;padding:8px">affiliate</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Display Ads</td>
+    <td style="border:1px solid #ddd;padding:8px">ads_network</td>
+    <td style="border:1px solid #ddd;padding:8px">display</td>
+  </tr>
+</table>
+
+<h4>UTM Naming Best Practices</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+DO:
+✓ Use lowercase consistently (google, not Google)
+✓ Use underscores for spaces (spring_sale)
+✓ Be specific but concise (black_friday_2024)
+✓ Document naming conventions for your team
+✓ Use dates for time-sensitive campaigns
+
+DON'T:
+✗ Mix cases (Google vs google creates duplicates)
+✗ Use spaces (need URL encoding)
+✗ Change naming mid-campaign
+✗ Use special characters (!, @, #)
+✗ Make names too long or vague
+</pre>
+
+<h4>Example UTM URLs by Channel</h4>
+<ul>
+  <li><strong>Email Campaign:</strong>
+    <pre>https://shop.example.com/sale?utm_source=newsletter&utm_medium=email&utm_campaign=black_friday&utm_content=main_cta</pre>
+  </li>
+  <li><strong>Facebook Ads:</strong>
+    <pre>https://app.example.com/signup?utm_source=facebook&utm_medium=paid_social&utm_campaign=app_install&utm_content=video_ad_v2</pre>
+  </li>
+  <li><strong>Google Search Ads:</strong>
+    <pre>https://shop.example.com/products?utm_source=google&utm_medium=cpc&utm_campaign=brand_terms&utm_term=example+shop</pre>
+  </li>
+  <li><strong>Influencer Marketing:</strong>
+    <pre>https://brand.example.com?utm_source=instagram&utm_medium=influencer&utm_campaign=launch_2024&utm_content=jane_doe</pre>
+  </li>
+</ul>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Email Marketing:</strong> Track newsletter campaigns, promotional emails, and automated sequences</li>
+  <li><strong>Paid Advertising:</strong> Monitor Google Ads, Facebook Ads, LinkedIn Ads performance</li>
+  <li><strong>Social Media:</strong> Measure organic social traffic from different platforms and posts</li>
+  <li><strong>Affiliate Programs:</strong> Attribute sales to specific partners and promotional methods</li>
+  <li><strong>Content Marketing:</strong> Track traffic from blog posts, guest articles, and press releases</li>
+  <li><strong>A/B Testing:</strong> Compare performance of different ad variants or email subject lines</li>
+</ul>
+
+<h4>UTM Parameters and Analytics</h4>
+<p>UTM parameters populate specific dimensions in Google Analytics:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">UTM Parameter</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Google Analytics Dimension</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">utm_source</td>
+    <td style="border:1px solid #ddd;padding:8px">Source</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">utm_medium</td>
+    <td style="border:1px solid #ddd;padding:8px">Medium</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">utm_campaign</td>
+    <td style="border:1px solid #ddd;padding:8px">Campaign</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">utm_term</td>
+    <td style="border:1px solid #ddd;padding:8px">Keyword (for paid search)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">utm_content</td>
+    <td style="border:1px solid #ddd;padding:8px">Ad Content</td>
+  </tr>
+</table>
+
+<h4>Important Considerations</h4>
+<ul>
+  <li><strong>Canonical Tags:</strong> Use rel="canonical" to prevent duplicate content issues when multiple UTM URLs point to the same page</li>
+  <li><strong>URL Length:</strong> Keep UTMs concise; very long URLs may be truncated in some applications</li>
+  <li><strong>Privacy:</strong> Avoid including PII (personal information) in UTM values</li>
+  <li><strong>Consistency:</strong> Create a naming convention document for your team to ensure consistent tracking</li>
+  <li><strong>Testing:</strong> Always test UTM URLs to ensure they load correctly and analytics captures the parameters</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Utm Builder?</dt>
-  <dd>Utm Builder is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What are UTM parameters and why use them?</dt>
+  <dd>UTM (Urchin Tracking Module) parameters are query string tags added to URLs to track marketing campaign performance in analytics tools. They tell you exactly which source, medium, and campaign drove traffic. Without UTMs, all traffic appears as 'direct' or 'unknown', making it impossible to measure campaign ROI.</dd>
+
+  <dt>What are the five standard UTM parameters?</dt>
+  <dd>The five standard UTM parameters are: utm_source (traffic source like google, facebook), utm_medium (marketing medium like email, cpc, social), utm_campaign (campaign name like spring_sale), utm_term (paid search keywords), and utm_content (differentiates similar content or A/B test variants).</dd>
+
+  <dt>What is the difference between utm_source and utm_medium?</dt>
+  <dd>utm_source identifies the specific platform (google, newsletter, facebook). utm_medium identifies the channel type (organic, email, social, cpc). Example: source=google&medium=cpc means Google paid ads; source=newsletter&medium=email means email marketing.</dd>
+
+  <dt>When should I use utm_term and utm_content?</dt>
+  <dd>Use utm_term for paid search campaigns to track specific keywords (utm_term=running+shoes). Use utm_content to differentiate similar content (utm_content=header_link vs footer_link) or A/B test variants (utm_content=variant_a). utm_term is primarily for PPC; utm_content works for any channel.</dd>
+
+  <dt>What are UTM naming best practices?</dt>
+  <dd>Use lowercase consistently (google not Google), use underscores not spaces (spring_sale not spring sale), be descriptive but concise, document your naming conventions for team consistency, and avoid special characters that need URL encoding. Example: source=newsletter, medium=email, campaign=2024_spring_launch.</dd>
+
+  <dt>Do UTM parameters affect SEO?</dt>
+  <dd>UTM parameters do not directly affect SEO rankings, but they can cause duplicate content issues if multiple URLs with different UTMs point to the same page. Use canonical tags to specify the preferred URL. Google Analytics ignores UTMs on organic search traffic, so they won't interfere with natural search tracking.</dd>
 </dl>
 </section>
 </main>

@@ -26,45 +26,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Checklist To Pdf?",
+      "name": "How does html2canvas render HTML to PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Checklist To Pdf is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "html2canvas captures DOM elements by rendering them to an HTML5 canvas element. It parses CSS styles, computes layout positions, and draws each element pixel-by-pixel. The canvas is then exported as PNG data and embedded into a jsPDF document. This approach preserves visual fidelity but converts text to images (not searchable text)."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What are the limitations of html2canvas vs native PDF generation?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "html2canvas produces image-based PDFs where text is not selectable or searchable. Native jsPDF text rendering creates searchable, accessible PDFs with proper text layers. html2canvas excels at preserving complex CSS layouts, checkboxes, and visual styling that would be difficult to recreate with PDF drawing commands alone."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How do you create custom checkboxes in HTML/CSS?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Custom checkboxes use a span or div styled with border and border-radius properties. Example: <span style='display:inline-block;width:18px;height:18px;border:2px solid #6b7280;border-radius:3px'></span>. This approach allows full CSS customization of size, color, and shape compared to default browser checkbox styling."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What PDF page sizes are commonly used for checklists?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "A4 (595x842 points) is standard for international documents. Letter (612x792 points) is common in North America. For checklists, consider landscape orientation for wide item lists, or smaller formats like A5 for portable printed checklists. Margins of 36-72 points provide adequate white space for printed annotations."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How do you handle multi-page PDF generation with html2canvas?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "When canvas height exceeds page height, calculate remaining content after each page break. Subtract page height from total image height, add new pages with pdf.addPage(), and position subsequent image slices. The loop continues until all content fits. Position tracking ensures seamless visual flow across pages."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What are best practices for printable checklist design?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Use high contrast (dark text on white background), adequate line spacing (1.5x font size), checkbox sizes of 16-20px for easy marking, clear section headings, and leave margin space for handwritten notes. Sans-serif fonts like Arial or Helvetica improve readability at small print sizes. Test print before distribution."</
       }
     }
   ]
@@ -94,23 +99,122 @@ Checklist Title:
 <h3>About Checklist to PDF</h3>
 <p>This tool turns one checklist item per line into a printable PDF checklist. It is useful for onboarding lists, QA steps, packing lists and recurring work routines.</p>
 <p>The checklist is rendered entirely in your browser and exported without any server upload.</p>
+
+<h4>How html2canvas Works</h4>
+<p>html2canvas captures DOM elements by rendering them to an HTML5 canvas:</p>
+<ol>
+  <li><strong>DOM Parsing:</strong> Traverses the DOM tree and computes styles for each element</li>
+  <li><strong>Canvas Rendering:</strong> Draws each element pixel-by-pixel onto a canvas using the Canvas API</li>
+  <li><strong>CSS Support:</strong> Interprets background colors, borders, fonts, and basic CSS properties</li>
+  <li><strong>Image Export:</strong> Exports the canvas as PNG or JPEG data URL</li>
+  <li><strong>PDF Embedding:</strong> Embeds the image data into a jsPDF document with proper page breaks</li>
+</ol>
+
+<h4>Custom Checkbox Implementation</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+&lt;!-- Custom checkbox using styled span --&gt;
+&lt;span style="
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #6b7280;
+  border-radius: 3px;
+  background: #ffffff;
+"&gt;&lt;/span&gt;
+
+&lt;!-- Flexbox layout for checkbox + text --&gt;
+&lt;li style="
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 10px 0;
+"&gt;
+  [checkbox] [item text]
+&lt;/li&gt;
+</pre>
+
+<h4>Multi-Page PDF Generation</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+async function downloadPdf() {
+  const canvas = await html2canvas(element, { scale: 2 });
+  const imageData = canvas.toDataURL("image/png");
+  const pdf = new jsPDF("p", "pt", "a4");
+
+  const pageHeight = pdf.internal.pageSize.getHeight();
+  const imgHeight = canvas.height * imgWidth / canvas.width;
+  let heightLeft = imgHeight;
+  let position = 20;
+
+  pdf.addImage(imageData, "PNG", 20, position, imgWidth, imgHeight);
+  heightLeft -= pageHeight - 40;
+
+  while (heightLeft > 0) {
+    pdf.addPage();
+    position = heightLeft - imgHeight + 20;
+    pdf.addImage(imageData, "PNG", 20, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight - 40;
+  }
+
+  pdf.save("checklist.pdf");
+}
+</pre>
+
+<h4>Common PDF Page Sizes</h4>
+<table class="ref-table">
+<thead><tr><th>Size</th><th>Dimensions (points)</th><th>Dimensions (mm)</th><th>Use Case</th></tr></thead>
+<tbody>
+<tr><td>A4</td><td>595 × 842 pt</td><td>210 × 297 mm</td><td>Standard international documents</td></tr>
+<tr><td>Letter</td><td>612 × 792 pt</td><td>216 × 279 mm</td><td>North American standard</td></tr>
+<tr><td>A5</td><td>420 × 595 pt</td><td>148 × 210 mm</td><td>Portable checklists, notebooks</td></tr>
+<tr><td>Legal</td><td>612 × 1008 pt</td><td>216 × 356 mm</td><td>Legal documents, contracts</td></tr>
+<tr><td>Tabloid</td><td>792 × 1224 pt</td><td>279 × 432 mm</td><td>Large formats, posters</td></tr>
+</tbody>
+</table>
+
+<h4>Printable Checklist Design Best Practices</h4>
+<ul>
+  <li><strong>Checkbox size:</strong> 16-20px square for easy pen/pencil marking</li>
+  <li><strong>Line spacing:</strong> 1.5x font size minimum for readability</li>
+  <li><strong>Font choice:</strong> Sans-serif (Arial, Helvetica) at 11-14pt</li>
+  <li><strong>Margins:</strong> 36-72 points (0.5-1 inch) for binding space</li>
+  <li><strong>Contrast:</strong> High contrast (black text, white background) for photocopying</li>
+  <li><strong>Section headers:</strong> Bold or larger fonts to group related items</li>
+  <li><strong>White space:</strong> Leave room for handwritten notes or annotations</li>
+</ul>
+
+<h4>html2canvas Configuration Options</h4>
+<table class="ref-table">
+<thead><tr><th>Option</th><th>Default</th><th>Recommended</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td>scale</td><td>1</td><td>2</td><td>Higher DPI for sharper print output</td></tr>
+<tr><td>backgroundColor</td><td>#ffffff</td><td>#ffffff</td><td>Ensure white background for printing</td></tr>
+<tr><td>useCORS</td><td>false</td><td>true</td><td>Allow cross-origin images if needed</td></tr>
+<tr><td>logging</td><td>true</td><td>false</td><td>Disable console spam in production</td></tr>
+<tr><td>imageTimeout</td><td>15000</td><td>15000</td><td>Timeout for loading external images</td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Checklist To Pdf?</dt>
-  <dd>Checklist To Pdf is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How does html2canvas render HTML to PDF?</dt>
+  <dd>html2canvas captures DOM elements by rendering them to an HTML5 canvas element. It parses CSS styles, computes layout positions, and draws each element pixel-by-pixel. The canvas is then exported as PNG data and embedded into a jsPDF document. This approach preserves visual fidelity but converts text to images (not searchable text).</dd>
+
+  <dt>What are the limitations of html2canvas vs native PDF generation?</dt>
+  <dd>html2canvas produces image-based PDFs where text is not selectable or searchable. Native jsPDF text rendering creates searchable, accessible PDFs with proper text layers. html2canvas excels at preserving complex CSS layouts, checkboxes, and visual styling that would be difficult to recreate with PDF drawing commands alone.</dd>
+
+  <dt>How do you create custom checkboxes in HTML/CSS?</dt>
+  <dd>Custom checkboxes use a span or div styled with border and border-radius properties. Example: &lt;span style='display:inline-block;width:18px;height:18px;border:2px solid #6b7280;border-radius:3px'&gt;&lt;/span&gt;. This approach allows full CSS customization of size, color, and shape compared to default browser checkbox styling.</dd>
+
+  <dt>What PDF page sizes are commonly used for checklists?</dt>
+  <dd>A4 (595x842 points) is standard for international documents. Letter (612x792 points) is common in North America. For checklists, consider landscape orientation for wide item lists, or smaller formats like A5 for portable printed checklists. Margins of 36-72 points provide adequate white space for printed annotations.</dd>
+
+  <dt>How do you handle multi-page PDF generation with html2canvas?</dt>
+  <dd>When canvas height exceeds page height, calculate remaining content after each page break. Subtract page height from total image height, add new pages with pdf.addPage(), and position subsequent image slices. The loop continues until all content fits. Position tracking ensures seamless visual flow across pages.</dd>
+
+  <dt>What are best practices for printable checklist design?</dt>
+  <dd>Use high contrast (dark text on white background), adequate line spacing (1.5x font size), checkbox sizes of 16-20px for easy marking, clear section headings, and leave margin space for handwritten notes. Sans-serif fonts like Arial or Helvetica improve readability at small print sizes. Test print before distribution.</dd>
 </dl>
 </section>
 </main>

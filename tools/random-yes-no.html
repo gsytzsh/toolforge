@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Random Yes No – Random Yes or No | ToolForge</title>
-<meta name="description" content="Free online Random Yes or No picker. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Generate random yes or no answers with 50/50 probability. Uses secure browser crypto for fair random selection. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/random-yes-no.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Random Yes No – Random Yes or No | ToolForge">
-<meta property="og:description" content="Free online Random Yes or No picker. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Generate random yes or no answers with 50/50 probability. Uses secure browser crypto for fair random selection. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/random-yes-no.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Random Yes No – Random Yes or No | ToolForge">
-<meta name="twitter:description" content="Free online Random Yes or No picker. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Generate random yes or no answers with 50/50 probability. Uses secure browser crypto for fair random selection. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Random Yes No?",
+      "name": "How does random yes/no generation work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Random Yes No is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "The tool generates a random number and compares it to 0.5. If the number is less than 0.5, it returns 'Yes'; otherwise 'No'. This creates a 50/50 probability distribution. Using crypto.getRandomValues ensures fair randomness compared to Math.random."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "Is this truly random?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "The tool uses crypto.getRandomValues() when available, which generates cryptographically secure random numbers from your operating system's entropy pool. This provides high-quality randomness suitable for fair decision-making. Older browsers fall back to Math.random()."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the probability distribution?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Each outcome (Yes or No) has exactly 50% probability. Over many trials, you should see approximately equal numbers of each outcome. For example, 1000 flips should yield roughly 500 Yes and 500 No results."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are common use cases for yes/no randomization?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Common uses include: quick decision-making when options are equally valid, coin flip simulations, classroom activities, game mechanics (random events), breaking deadlocks, choosing between two options, and probability demonstrations."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How is this related to coin flipping?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "A yes/no generator is mathematically equivalent to a coin flip: Yes = Heads, No = Tails. Both have binary outcomes with 50/50 probability. Physical coins can have biases due to weight distribution; digital randomizers avoid physical biases."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "Can I use this for important decisions?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "This tool is designed for entertainment and light decision-making when either outcome is acceptable. For important decisions involving health, finance, or safety, consult appropriate professionals rather than relying on random chance."
       }
     }
   ]
@@ -78,30 +83,288 @@
 <h2 id="result" style="font-size:2rem;margin-top:16px"></h2>
 <section class="tool-seo">
 <h3>About Random Yes No</h3>
-<p>This random yes-no tool gives you a simple 50/50 answer.</p>
-<p>It is useful for light decision-making, classroom prompts, games and breaking small deadlocks when any fair answer will do.</p>
+<p>This random yes-no tool generates binary random choices with equal 50/50 probability. It uses the Web Crypto API's crypto.getRandomValues() when available for cryptographically secure random number generation, ensuring fair and unbiased results.</p>
+<p>It is useful for quick decision-making when options are equally valid, coin flip simulations, classroom activities, game mechanics, breaking deadlocks, choosing between two options, and probability demonstrations in educational settings.</p>
+
+<h4>Binary Random Generation</h4>
+<p>Binary random selection produces one of two possible outcomes:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Random Sources:
+
+1. crypto.getRandomValues (Secure)
+   - Uses OS entropy pool
+   - Cryptographically secure
+   - Uniform distribution
+   - Recommended for fair outcomes
+
+   Implementation:
+   const array = new Uint32Array(1);
+   crypto.getRandomValues(array);
+   const isYes = (array[0] % 2) === 0;
+
+2. Math.random (Fallback)
+   - Pseudo-random algorithm
+   - Fast but not cryptographically secure
+   - Sufficient for casual use
+
+   Implementation:
+   const isYes = Math.random() < 0.5;
+
+Probability Distribution:
+  - Yes: 50% (probability = 0.5)
+  - No:  50% (probability = 0.5)
+  - Expected value: E = 0.5 × Yes + 0.5 × No
+
+Statistical Properties:
+  - Each trial is independent
+  - Previous results don't affect future outcomes
+  - Law of large numbers: ratio approaches 50/50 over many trials
+</pre>
+
+<h4>Probability Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Trials</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Expected Yes</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Expected No</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Standard Deviation</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">10</td>
+    <td style="border:1px solid #ddd;padding:8px">5</td>
+    <td style="border:1px solid #ddd;padding:8px">5</td>
+    <td style="border:1px solid #ddd;padding:8px">±1.58</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">100</td>
+    <td style="border:1px solid #ddd;padding:8px">50</td>
+    <td style="border:1px solid #ddd;padding:8px">50</td>
+    <td style="border:1px solid #ddd;padding:8px">±5.0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">1000</td>
+    <td style="border:1px solid #ddd;padding:8px">500</td>
+    <td style="border:1px solid #ddd;padding:8px">500</td>
+    <td style="border:1px solid #ddd;padding:8px">±15.8</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">10000</td>
+    <td style="border:1px solid #ddd;padding:8px">5000</td>
+    <td style="border:1px solid #ddd;padding:8px">5000</td>
+    <td style="border:1px solid #ddd;padding:8px">±50.0</td>
+  </tr>
+</table>
+
+<h4>Comparison with Other Random Methods</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Method</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Outcomes</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Probability</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Yes/No (this tool)</td>
+    <td style="border:1px solid #ddd;padding:8px">2 (Yes, No)</td>
+    <td style="border:1px solid #ddd;padding:8px">50/50</td>
+    <td style="border:1px solid #ddd;padding:8px">Binary decisions</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Coin Flip</td>
+    <td style="border:1px solid #ddd;padding:8px">2 (Heads, Tails)</td>
+    <td style="border:1px solid #ddd;padding:8px">50/50</td>
+    <td style="border:1px solid #ddd;padding:8px">Games, decisions</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Dice Roll (d6)</td>
+    <td style="border:1px solid #ddd;padding:8px">6 (1-6)</td>
+    <td style="border:1px solid #ddd;padding:8px">16.67% each</td>
+    <td style="border:1px solid #ddd;padding:8px">Board games, RPGs</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Random Number</td>
+    <td style="border:1px solid #ddd;padding:8px">Variable range</td>
+    <td style="border:1px solid #ddd;padding:8px">Uniform</td>
+    <td style="border:1px solid #ddd;padding:8px">Sampling, selection</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Weighted Random</td>
+    <td style="border:1px solid #ddd;padding:8px">2+ with weights</td>
+    <td style="border:1px solid #ddd;padding:8px">Custom</td>
+    <td style="border:1px solid #ddd;padding:8px">Biased selection</td>
+  </tr>
+</table>
+
+<h4>Code Examples by Language</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript:
+  // Using crypto (secure)
+  function randomYesNo() {
+    const array = new Uint32Array(1);
+    crypto.getRandomValues(array);
+    return (array[0] % 2) === 0 ? "Yes" : "No";
+  }
+
+  // Using Math.random (fallback)
+  function randomYesNo() {
+    return Math.random() < 0.5 ? "Yes" : "No";
+  }
+
+Python:
+  import secrets
+
+  # Secure random
+  def random_yes_no():
+      return "Yes" if secrets.randbelow(2) == 0 else "No"
+
+  # Using random module
+  import random
+  def random_yes_no():
+      return random.choice(["Yes", "No"])
+
+PHP:
+  // Secure random (PHP 7+)
+  function randomYesNo() {
+      return random_int(0, 1) === 0 ? "Yes" : "No";
+  }
+
+Java:
+  import java.security.SecureRandom;
+
+  SecureRandom random = new SecureRandom();
+  String result = random.nextBoolean() ? "Yes" : "No";
+
+C#:
+  using System.Security.Cryptography;
+
+  var rng = RandomNumberGenerator.Create();
+  var data = new byte[1];
+  rng.GetBytes(data);
+  string result = (data[0] % 2 == 0) ? "Yes" : "No";
+
+Bash:
+  # Using $RANDOM
+  if [ $((RANDOM % 2)) -eq 0 ]; then
+    echo "Yes"
+  else
+    echo "No"
+  fi
+
+PowerShell:
+  # Random boolean
+  if (Get-Random -Maximum 2 -Minimum 0 -eq 0) {
+    "Yes"
+  } else {
+    "No"
+  }
+</pre>
+
+<h4>Random Yes/No Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example Scenarios:
+
+1. Quick Decision
+   Question: "Should I order pizza tonight?"
+   Result: Yes or No (50/50)
+
+2. Coin Flip Equivalent
+   Question: "Heads or Tails?"
+   Mapping: Yes = Heads, No = Tails
+
+3. Game Mechanic
+   Question: "Does the random encounter occur?"
+   Result: Yes (trigger encounter) or No (continue)
+
+4. A/B Testing Assignment
+   Question: "Show variant A?"
+   Result: Yes = Variant A, No = Variant B
+
+5. Feature Flag
+   Question: "Enable beta feature for this user?"
+   Result: Yes (enable) or No (disable)
+
+6. Probability Demo
+   Experiment: Flip 100 times
+   Expected: ~50 Yes, ~50 No
+   Actual: Varies due to randomness
+
+Sample Output Sequence (10 trials):
+  Trial 1: Yes
+  Trial 2: No
+  Trial 3: Yes
+  Trial 4: Yes
+  Trial 5: No
+  Trial 6: No
+  Trial 7: Yes
+  Trial 8: No
+  Trial 9: Yes
+  Trial 10: No
+
+  Count: 5 Yes, 5 No (50/50 split)
+</pre>
+
+<h4>Historical Context</h4>
+<ul>
+  <li><strong>Ancient divination:</strong> Casting lots, flipping coins, and drawing straws have been used for decision-making throughout history. The Bible references casting lots in Proverbs 16:33.</li>
+  <li><strong>Mathematical probability:</strong> Blaise Pascal and Pierre de Fermat developed probability theory in the 17th century through correspondence about gambling problems.</li>
+  <li><strong>Random number generation:</strong> Early computers used algorithmic pseudo-random generators. Modern systems harvest entropy from hardware sources like thermal noise and clock jitter.</li>
+  <li><strong>Cryptographic security:</strong> Secure random generation became essential for encryption keys, authentication tokens, and security protocols in the digital age.</li>
+</ul>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Use for appropriate decisions:</strong> Suitable when either outcome is acceptable and consequences are minimal.</li>
+  <li><strong>Understand independence:</strong> Each result is independent; previous outcomes don't influence future results.</li>
+  <li><strong>Recognize gambler's fallacy:</strong> A streak of "Yes" doesn't make "No" more likely next time.</li>
+  <li><strong>Consider weighted alternatives:</strong> For non-50/50 decisions, use a weighted random tool instead.</li>
+  <li><strong>Document important random choices:</strong> If using for research or testing, record the seed or result for reproducibility.</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>Not for critical decisions:</strong> Don't use for medical, financial, legal, or safety-critical choices.</li>
+  <li><strong>No guarantee of balance:</strong> Short sequences may have unequal Yes/No distribution due to randomness.</li>
+  <li><strong>Browser dependent:</strong> Secure random requires Web Crypto API support for best results.</li>
+  <li><strong>No persistence:</strong> Results are not stored; record important outcomes separately.</li>
+  <li><strong>Binary only:</strong> Limited to two outcomes; use other tools for multi-option selection.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Random Yes No?</dt>
-  <dd>Random Yes No is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How does random yes/no generation work?</dt>
+  <dd>The tool generates a random number and compares it to 0.5. If the number is less than 0.5, it returns 'Yes'; otherwise 'No'. This creates a 50/50 probability distribution. Using crypto.getRandomValues ensures fair randomness compared to Math.random.</dd>
+
+  <dt>Is this truly random?</dt>
+  <dd>The tool uses crypto.getRandomValues() when available, which generates cryptographically secure random numbers from your operating system's entropy pool. This provides high-quality randomness suitable for fair decision-making. Older browsers fall back to Math.random().</dd>
+
+  <dt>What is the probability distribution?</dt>
+  <dd>Each outcome (Yes or No) has exactly 50% probability. Over many trials, you should see approximately equal numbers of each outcome. For example, 1000 flips should yield roughly 500 Yes and 500 No results.</dd>
+
+  <dt>What are common use cases for yes/no randomization?</dt>
+  <dd>Common uses include: quick decision-making when options are equally valid, coin flip simulations, classroom activities, game mechanics (random events), breaking deadlocks, choosing between two options, and probability demonstrations.</dd>
+
+  <dt>How is this related to coin flipping?</dt>
+  <dd>A yes/no generator is mathematically equivalent to a coin flip: Yes = Heads, No = Tails. Both have binary outcomes with 50/50 probability. Physical coins can have biases due to weight distribution; digital randomizers avoid physical biases.</dd>
+
+  <dt>Can I use this for important decisions?</dt>
+  <dd>This tool is designed for entertainment and light decision-making when either outcome is acceptable. For important decisions involving health, finance, or safety, consult appropriate professionals rather than relying on random chance.</dd>
 </dl>
 </section>
 </main>
 <script>
-function pick(){document.getElementById("result").innerText=Math.random()<0.5?"Yes":"No"}
+function pick(){
+  var result;
+  if(window.crypto&&crypto.getRandomValues){
+    var array=new Uint32Array(1);
+    crypto.getRandomValues(array);
+    result=(array[0]%2)===0?"Yes":"No";
+  }else{
+    result=Math.random()<0.5?"Yes":"No";
+  }
+  document.getElementById("result").innerText=result;
+}
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>

@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Reverse Text – Reverse String Online | ToolForge</title>
-<meta name="description" content="Free online Reverse Text tool to reverse a string character by character. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Reverse Text tool reverses strings character by character or line by line. Includes Unicode handling, use cases in programming and cryptography, and reversal examples. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/reverse-text.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Reverse Text – Reverse String Online | ToolForge">
-<meta property="og:description" content="Free online Reverse Text tool to reverse a string character by character. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Reverse Text tool reverses strings character by character or line by line. Includes Unicode handling, use cases in programming and cryptography, and reversal examples. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/reverse-text.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Reverse Text – Reverse String Online | ToolForge">
-<meta name="twitter:description" content="Free online Reverse Text tool to reverse a string character by character. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Reverse Text tool reverses strings character by character or line by line. Includes Unicode handling, use cases in programming and cryptography, and reversal examples. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Reverse Text?",
+      "name": "What is string reversal and how does it work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Reverse Text is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "String reversal flips the order of characters in a text string. The last character becomes first, the second-to-last becomes second, and so on. For example, 'hello' reversed is 'olleh'. The algorithm iterates through the string from end to start, building a new string with characters in reverse order."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between reversing entire text vs each line?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Reversing entire text treats all content as one string, including newline characters. 'Hello\nWorld' becomes 'dlroW\nolleH'. Reversing each line keeps line structure intact, reversing characters within each line separately. 'Hello\nWorld' becomes 'olleH\ndlroW'. Choose based on whether you need to preserve line breaks."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How does Unicode affect string reversal?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Unicode characters like emoji (😀), accented letters (é), and CJK characters (中文) can be multi-byte. Simple reversal may break these characters. Modern JavaScript handles most Unicode correctly with proper string methods, but complex emoji with modifiers (skin tones, flags) may still cause issues. This tool uses JavaScript's native string handling for best Unicode support."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are common use cases for text reversal?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Common uses include: palindrome checking, string manipulation in programming interviews, cryptography and encoding puzzles, data obfuscation, testing string handling functions, creating mirror text effects, debugging text processing code, and educational demonstrations of algorithms and data structures."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What is a palindrome?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "A palindrome is a word, phrase, or number that reads the same forwards and backwards. Examples: 'racecar', 'level', 'madam', '12321', 'A man a plan a canal Panama' (ignoring spaces and case). Palindromes are used in recreational mathematics, linguistics, and as programming exercise examples."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "Can reversed text be used for encoding?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Reversal is a simple transposition cipher but provides no real security. It's easily decoded by reversing again. Historically used in puzzles and games, not serious encryption. For actual data protection, use proper encryption algorithms like AES. Reversal is mainly useful for obfuscation, puzzles, and educational purposes."
       }
     }
   ]
@@ -72,11 +77,11 @@
 <body>
 <main class="container">
 <h1>Reverse Text</h1>
-<p class="subtitle">Reverse a string character by character (or reverse each line).</p>
+<p class="subtitle">Reverse strings character by character or reverse each line separately while preserving line structure.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Input</h3>
 <label for="input" class="sr-only">Input text</label>
-<textarea id="input" rows="6" style="width:90%" aria-label="Input text"></textarea>
+<textarea id="input" rows="6" style="width:90%" aria-label="Input text" placeholder="Enter text to reverse..."></textarea>
 <br><br>
 <button onclick="reverseAll()">Reverse entire text</button>
 <button onclick="reverseLines()">Reverse each line</button>
@@ -85,25 +90,285 @@
 <textarea id="output" rows="6" style="width:90%" aria-label="Output text"></textarea>
 <section class="tool-seo">
 <h3>About Reverse Text</h3>
-<p>This reverse-text tool flips text character by character, or reverses each line separately.</p>
-<p>It is useful for playful text effects, simple string experiments and niche formatting tasks where reversed output is easier to generate than to type manually.</p>
+<p>This reverse text tool flips strings character by character using JavaScript's native string methods. It supports two modes: reversing the entire text as one string (including newlines) or reversing each line individually while preserving line structure. The tool handles Unicode characters including emoji and international text.</p>
+<p>It is useful for palindrome checking, string manipulation exercises, programming interviews, cryptography puzzles, data obfuscation experiments, testing text processing functions, creating mirror text effects, debugging string algorithms, and educational demonstrations of reversal operations.</p>
+
+<h4>String Reversal Algorithm</h4>
+<p>Text reversal works by flipping character order:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Reversal Process:
+
+Input: "Hello, World!"
+
+Step-by-step:
+  Position: 0  1  2  3  4  5  6  7  8  9  10 11 12
+  Original: H  e  l  l  o  ,     W  o  r  l  d  !
+  Reversed: !  d  l  r  o  W     ,  o  l  l  e  H
+
+Result: "!dlroW ,olleH"
+
+JavaScript Implementation:
+  function reverse(str) {
+    return str.split("").reverse().join("");
+  }
+
+  // Or using spread operator for Unicode:
+  function reverseUnicode(str) {
+    return [...str].reverse().join("");
+  }
+
+Time Complexity: O(n) where n = string length
+Space Complexity: O(n) for the new string
+
+Line-by-Line Reversal:
+  Input:
+    Line 1
+    Line 2
+
+  Output:
+    1 eniL
+    2 eniL
+
+  (Line breaks preserved, each line reversed separately)
+</pre>
+
+<h4>Reversal Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Simple Word
+  Input:  "hello"
+  Output: "olleh"
+
+Example 2: Sentence
+  Input:  "The quick brown fox"
+  Output: "xof nworb kciuq ehT"
+
+Example 3: With Punctuation
+  Input:  "Hello, World!"
+  Output: "!dlroW ,olleH"
+
+Example 4: Numbers
+  Input:  "12345"
+  Output: "54321"
+
+Example 5: Mixed Content
+  Input:  "abc123XYZ"
+  Output: "ZYX321cba"
+
+Example 6: Palindrome Test
+  Input:  "racecar"
+  Output: "racecar" (same as input - it's a palindrome!)
+
+Example 7: Multi-line (Entire Text)
+  Input:
+    Hello
+    World
+
+  Output:
+    dlroW
+    olleH
+  (Note: newline position also reversed)
+
+Example 8: Multi-line (Each Line)
+  Input:
+    Hello
+    World
+
+  Output:
+    olleH
+    dlroW
+  (Line structure preserved)
+
+Example 9: Unicode Characters
+  Input:  "Hello 世界"
+  Output: "界世 olleH"
+
+Example 10: Emoji
+  Input:  "Hi 😀"
+  Output: "😀 iH"
+</pre>
+
+<h4>Palindrome Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Reversed</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Single Words</td>
+    <td style="border:1px solid #ddd;padding:8px">racecar, level, madam, rotor</td>
+    <td style="border:1px solid #ddd;padding:8px">(unchanged)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Numbers</td>
+    <td style="border:1px solid #ddd;padding:8px">12321, 1001, 1331</td>
+    <td style="border:1px solid #ddd;padding:8px">(unchanged)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Phrases (ignoring spaces)</td>
+    <td style="border:1px solid #ddd;padding:8px">A man a plan a canal Panama</td>
+    <td style="border:1px solid #ddd;padding:8px">(unchanged when normalized)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Names</td>
+    <td style="border:1px solid #ddd;padding:8px">Anna, Bob, Eve, Hannah</td>
+    <td style="border:1px solid #ddd;padding:8px">(unchanged, case-insensitive)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Long Palindromes</td>
+    <td style="border:1px solid #ddd;padding:8px">Was it a car or a cat I saw</td>
+    <td style="border:1px solid #ddd;padding:8px">(unchanged when normalized)</td>
+  </tr>
+</table>
+
+<h4>Use Cases in Programming</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+1. Interview Questions:
+   - "Reverse a string without built-in methods"
+   - "Check if a string is a palindrome"
+   - "Reverse words in a sentence"
+
+2. Algorithm Testing:
+   - Verify string manipulation functions
+   - Test Unicode handling in text processing
+   - Benchmark string operation performance
+
+3. Data Processing:
+   - Decode reversed data formats
+   - Process mirrored text in images (OCR)
+   - Handle right-to-left text conversion
+
+4. Cryptography Education:
+   - Demonstrate simple transposition ciphers
+   - Teach encoding/decoding concepts
+   - Create puzzle challenges
+
+5. Debugging:
+   - Inspect string structure visually
+   - Find hidden patterns in data
+   - Verify text transformation pipelines
+
+6. Fun/Creative:
+   - Generate mirror text for design
+   - Create puzzle game content
+   - Write palindromic poetry/code
+</pre>
+
+<h4>Reversal in Different Languages</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Language</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Code Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">JavaScript</td>
+    <td style="border:1px solid #ddd;padding:8px">str.split("").reverse().join("")</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Python</td>
+    <td style="border:1px solid #ddd;padding:8px">string[::-1]</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Java</td>
+    <td style="border:1px solid #ddd;padding:8px">new StringBuilder(str).reverse().toString()</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">C#</td>
+    <td style="border:1px solid #ddd;padding:8px">new string(str.Reverse().ToArray())</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">PHP</td>
+    <td style="border:1px solid #ddd;padding:8px">strrev($str)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Ruby</td>
+    <td style="border:1px solid #ddd;padding:8px">str.reverse</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Go</td>
+    <td style="border:1px solid #ddd;padding:8px">(no built-in; use rune slice)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Rust</td>
+    <td style="border:1px solid #ddd;padding:8px">s.chars().rev().collect()</td>
+  </tr>
+</table>
+
+<h4>Unicode Considerations</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Unicode Character Types:
+
+1. Basic Multilingual Plane (BMP):
+   - Most common characters
+   - Single 16-bit code unit
+   - Reverses correctly with simple methods
+
+2. Supplementary Characters:
+   - Emoji, rare CJK characters
+   - Use two 16-bit code units (surrogate pairs)
+   - May break with naive reversal
+
+3. Combining Characters:
+   - Accents, diacritics (é = e + ́)
+   - Should stay attached to base character
+   - Complex reversal needed
+
+4. Emoji Modifiers:
+   - Skin tones: 👋🏿 👋🏾 👋🏽 👋🏼 👋🏻
+   - Gender: 👨‍⚕️ 👩‍⚕️ (ZWJ sequences)
+   - Flags: 🇺🇸 🇬🇧 🇯🇵 (regional indicators)
+   - Require grapheme-aware reversal
+
+JavaScript Handling:
+  // Simple reversal (may break emoji):
+  "Hello 😀".split("").reverse().join("")
+
+  // Better for Unicode:
+  [..."Hello 😀"].reverse().join("")
+
+  // Best: use a library like grapheme-splitter
+  // for complex emoji sequences
+</pre>
+
+<h4>Historical Context</h4>
+<ul>
+  <li><strong>Ancient palindromes:</strong> The Sator Square (Latin palindrome) dates to 1st century CE. Found in Pompeii ruins.</li>
+  <li><strong>Literary use:</strong> Palindromic poetry and prose exist in many languages. "Dammit I'm mad" is a famous English example.</li>
+  <li><strong>Mathematical interest:</strong> Palindromic numbers studied in recreational mathematics. Some bases produce more palindromes than others.</li>
+  <li><strong>Computer science:</strong> String reversal is a classic introductory programming exercise, teaching array manipulation and algorithm thinking.</li>
+  <li><strong>Cryptography:</strong> Simple reversal was used in ancient times for basic obfuscation, but provides no real security.</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>Complex emoji:</strong> Emoji with modifiers, ZWJ sequences, or flags may not reverse perfectly due to JavaScript's string handling.</li>
+  <li><strong>Right-to-left text:</strong> Arabic and Hebrew text may appear incorrectly reversed since these scripts already have different display direction.</li>
+  <li><strong>Combining characters:</strong> Accented characters formed with combining diacritics may separate from their base character.</li>
+  <li><strong>Performance:</strong> Very long strings (millions of characters) may cause browser slowdown. Consider chunking for large inputs.</li>
+  <li><strong>Not encryption:</strong> Reversed text is trivially decoded. Don't use for any security-sensitive applications.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Reverse Text?</dt>
-  <dd>Reverse Text is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is string reversal and how does it work?</dt>
+  <dd>String reversal flips the order of characters in a text string. The last character becomes first, the second-to-last becomes second, and so on. For example, 'hello' reversed is 'olleh'. The algorithm iterates through the string from end to start, building a new string with characters in reverse order.</dd>
+
+  <dt>What is the difference between reversing entire text vs each line?</dt>
+  <dd>Reversing entire text treats all content as one string, including newline characters. 'Hello\nWorld' becomes 'dlroW\nolleH'. Reversing each line keeps line structure intact, reversing characters within each line separately. 'Hello\nWorld' becomes 'olleH\ndlroW'. Choose based on whether you need to preserve line breaks.</dd>
+
+  <dt>How does Unicode affect string reversal?</dt>
+  <dd>Unicode characters like emoji (😀), accented letters (é), and CJK characters (中文) can be multi-byte. Simple reversal may break these characters. Modern JavaScript handles most Unicode correctly with proper string methods, but complex emoji with modifiers (skin tones, flags) may still cause issues. This tool uses JavaScript's native string handling for best Unicode support.</dd>
+
+  <dt>What are common use cases for text reversal?</dt>
+  <dd>Common uses include: palindrome checking, string manipulation in programming interviews, cryptography and encoding puzzles, data obfuscation, testing string handling functions, creating mirror text effects, debugging text processing code, and educational demonstrations of algorithms and data structures.</dd>
+
+  <dt>What is a palindrome?</dt>
+  <dd>A palindrome is a word, phrase, or number that reads the same forwards and backwards. Examples: 'racecar', 'level', 'madam', '12321', 'A man a plan a canal Panama' (ignoring spaces and case). Palindromes are used in recreational mathematics, linguistics, and as programming exercise examples.</dd>
+
+  <dt>Can reversed text be used for encoding?</dt>
+  <dd>Reversal is a simple transposition cipher but provides no real security. It's easily decoded by reversing again. Historically used in puzzles and games, not serious encryption. For actual data protection, use proper encryption algorithms like AES. Reversal is mainly useful for obfuscation, puzzles, and educational purposes.</dd>
 </dl>
 </section>
 </main>

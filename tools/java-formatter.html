@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Java Formatter – Java Code Beautify Online | ToolForge</title>
-<meta name="description" content="Free online Java formatter to beautify and indent Java code by braces. No external libraries. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Format and indent Java code with proper brace handling. Browser-based Java code beautifier with comment preservation. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/java-formatter.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Java Formatter – Java Code Beautify Online | ToolForge">
-<meta property="og:description" content="Free online Java formatter to beautify and indent Java code by braces. No external libraries. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Format and indent Java code with proper brace handling.">
 <meta property="og:url" content="https://toolforge.site/tools/java-formatter.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java Formatter – Java Code Beautify Online | ToolForge">
-<meta name="twitter:description" content="Free online Java formatter to beautify and indent Java code by braces. No external libraries. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Browser-based Java code formatter.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Java Formatter used for?",
+      "name": "What is Java code formatting?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Java Formatter is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "Java code formatting applies consistent indentation and line breaks to make code readable. Proper formatting places opening braces on the same or new line, indents nested blocks (typically 2-4 spaces), and adds line breaks after statements. Follows conventions like Oracle Code Conventions or Google Java Style Guide."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What are Java naming conventions?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Java uses PascalCase for classes (MyClass), camelCase for methods/variables (myMethod, myVariable), and UPPER_SNAKE_CASE for constants (MAX_VALUE). Package names are lowercase (com.example.package). Following conventions improves code readability and maintainability."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What is the standard Java indentation?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Standard Java indentation is 4 spaces per level (not tabs). Each nested block (class, method, if, loop) adds one indent level. Closing braces align with the opening statement. Consistent indentation is crucial for readability, especially in deeply nested code."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How are Java comments handled?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Java has three comment types: single-line (// comment), multi-line (/* comment */), and Javadoc (/** ... */). Formatters preserve comments in their original positions. Javadoc comments appear before class/method declarations and support tags like @param, @return, @throws."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What is K&R vs Allman brace style?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "K&R (kernel) style places opening brace on same line: if (x) { ... }. Allman style places it on new line: if (x) \\n { ... }. Java typically uses K&R (Oracle style). Both are valid; consistency matters more than choice. This formatter uses K&R style."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "What tools format Java code professionally?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Professional tools: IntelliJ IDEA (built-in formatter), Eclipse (Ctrl+Shift+F), google-java-format, Checkstyle, Spotless. IDEs apply style guides automatically. This simple formatter handles basic brace-based formatting for quick cleanup of minified or poorly indented code."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>Java Formatter</h1>
-<p class="subtitle">Beautify and indent Java code by braces. Simple formatter, no external libraries.</p>
+<p class="subtitle">Format and indent Java code with proper brace handling and comment preservation.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <label for="input" class="sr-only">Java code input</label>
 <textarea id="input" rows="14" style="width:90%;font-family:monospace" placeholder="public class Main{public static void main(String[] args){System.out.println(&quot;Hello&quot;);}}" aria-label="Java code input"></textarea>
@@ -85,34 +90,130 @@
 <label for="output" class="sr-only">Formatted output</label>
 <textarea id="output" rows="14" style="width:90%;font-family:monospace" aria-label="Formatted output"></textarea>
 <p id="status" class="inline-status"></p>
+
 <section class="tool-seo">
 <h3>About Java Formatter</h3>
 <p>This Java formatter beautifies and indents Java code based on braces. It adds line breaks and indentation to make code easier to read without using external libraries.</p>
-<p>It is useful for quickly formatting minified or poorly indented Java snippets, pasted code or small examples before sharing or reviewing.</p>
+<p>It is useful for quickly formatting minified or poorly indented Java snippets, pasted code, or small examples before sharing or reviewing. The formatter handles strings, comments, and proper brace matching.</p>
+
+<h4>Java Code Style Guidelines</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Oracle Java Code Conventions:
+
+1. Indentation: 4 spaces per level (not tabs)
+2. Line length: Maximum 80-120 characters
+3. Braces: K&R style (opening brace same line)
+4. Statements: One per line, end with semicolon
+5. Blank lines: Separate methods and logical sections
+
+Example formatted code:
+public class HelloWorld {
+    private static final int MAX = 100;
+
+    public static void main(String[] args) {
+        for (int i = 0; i < MAX; i++) {
+            if (i % 2 == 0) {
+                System.out.println("Even: " + i);
+            } else {
+                System.out.println("Odd: " + i);
+            }
+        }
+    }
+}
+</pre>
+
+<h4>Comment Types in Java</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Single-line comment
+int x = 10;
+
+/* Multi-line comment
+   spans multiple lines */
+int y = 20;
+
+/**
+ * Javadoc comment for documentation
+ * @param name the user name
+ * @return greeting message
+ */
+public String greet(String name) {
+    return "Hello, " + name;
+}
+</pre>
+
+<h4>Common Java Formatting Issues</h4>
+<table class="ref-table">
+<thead><tr><th>Issue</th><th>Incorrect</th><th>Correct</th></tr></thead>
+<tbody>
+<tr><td>Missing indent</td><td><code>public void m(){if(x){doSomething();}}</code></td><td><code>public void m() {<br>    if (x) {<br>        doSomething();<br>    }<br>}</code></td></tr>
+<tr><td>No spacing</td><td><code>for(int i=0;i<10;i++)</code></td><td><code>for (int i = 0; i < 10; i++)</code></td></tr>
+<tr><td>Brace placement</td><td><code>if (x)<br>  doSomething();</code></td><td><code>if (x) {<br>    doSomething();<br>}</code></td></tr>
+<tr><td>Long lines</td><td>200+ char lines</td><td>Break at 80-120 chars</td></tr>
+</tbody>
+</table>
+
+<h4>Formatting Algorithm</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+How this formatter works:
+
+1. Track state: inString, inComment, inLineComment
+2. Process character by character
+3. Handle special cases:
+   - Strings: Preserve content, track escape chars
+   - Comments: Preserve /* */ and // comments
+   - Braces: Increase/decrease indent level
+   - Semicolons: Add line break after
+4. Add indentation at line starts
+5. Handle edge cases: empty lines, consecutive braces
+
+Limitations:
+- Doesn't add spaces around operators
+- Doesn't enforce line length limits
+- Doesn't reorder imports
+- Doesn't validate Java syntax
+
+For production code, use IDE formatters or
+google-java-format for complete formatting.
+</pre>
+
+<h4>Best Practices for Readable Java</h4>
+<ul>
+  <li><strong>Consistent indentation:</strong> Use 4 spaces throughout project</li>
+  <li><strong>Meaningful names:</strong> Use descriptive variable/method names</li>
+  <li><strong>Short methods:</strong> Keep methods under 20-30 lines</li>
+  <li><strong>Logical grouping:</strong> Blank lines between related code blocks</li>
+  <li><strong>Comment why, not what:</strong> Explain reasoning, not obvious code</li>
+  <li><strong>Align related code:</strong> Group field declarations, align assignments</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Java Formatter used for?</dt>
-  <dd>Java Formatter is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is Java code formatting?</dt>
+  <dd>Java code formatting applies consistent indentation and line breaks to make code readable. Proper formatting places opening braces on the same or new line, indents nested blocks (typically 2-4 spaces), and adds line breaks after statements. Follows conventions like Oracle Code Conventions or Google Java Style Guide.</dd>
+
+  <dt>What are Java naming conventions?</dt>
+  <dd>Java uses PascalCase for classes (MyClass), camelCase for methods/variables (myMethod, myVariable), and UPPER_SNAKE_CASE for constants (MAX_VALUE). Package names are lowercase (com.example.package). Following conventions improves code readability and maintainability.</dd>
+
+  <dt>What is the standard Java indentation?</dt>
+  <dd>Standard Java indentation is 4 spaces per level (not tabs). Each nested block (class, method, if, loop) adds one indent level. Closing braces align with the opening statement. Consistent indentation is crucial for readability, especially in deeply nested code.</dd>
+
+  <dt>How are Java comments handled?</dt>
+  <dd>Java has three comment types: single-line (// comment), multi-line (/* comment */), and Javadoc (/** ... */). Formatters preserve comments in their original positions. Javadoc comments appear before class/method declarations and support tags like @param, @return, @throws.</dd>
+
+  <dt>What is K&R vs Allman brace style?</dt>
+  <dd>K&R (kernel) style places opening brace on same line: if (x) { ... }. Allman style places it on new line: if (x) \n { ... }. Java typically uses K&R (Oracle style). Both are valid; consistency matters more than choice. This formatter uses K&R style.</dd>
+
+  <dt>What tools format Java code professionally?</dt>
+  <dd>Professional tools: IntelliJ IDEA (built-in formatter), Eclipse (Ctrl+Shift+F), google-java-format, Checkstyle, Spotless. IDEs apply style guides automatically. This simple formatter handles basic brace-based formatting for quick cleanup of minified or poorly indented code.</dd>
 </dl>
 </section>
 </main>
 <script>
 function format(){
 var src=document.getElementById("input").value;
-var indent="  ";
+var indent="    ";
 var out="";
 var level=0;
 var i=0;

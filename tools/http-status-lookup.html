@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <title>HTTP Status Code Lookup – Check 200, 301, 404, 500 and More | ToolForge</title>
-
-<meta name="description" content="Free online HTTP Status Code Lookup tool to check the meaning of common HTTP response codes like 200, 301, 404, 429 and 500. Part of the ToolForge developer tools collection.">
-
+<meta name="description" content="Look up HTTP status codes to understand server response meanings. Quick reference for 1xx, 2xx, 3xx, 4xx, 5xx codes with descriptions. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/http-status-lookup.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="HTTP Status Code Lookup – Check 200, 301, 404, 500 and More | ToolForge">
-<meta property="og:description" content="Free online HTTP Status Code Lookup tool to check the meaning of common HTTP response codes like 200, 301, 404, 429 and 500. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Quick HTTP status code lookup with descriptions for common response codes.">
 <meta property="og:url" content="https://toolforge.site/tools/http-status-lookup.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP Status Code Lookup – Check 200, 301, 404, 500 and More | ToolForge">
-<meta name="twitter:description" content="Free online HTTP Status Code Lookup tool to check the meaning of common HTTP response codes like 200, 301, 404, 429 and 500. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Quick HTTP status code lookup with descriptions.">
 <meta name="robots" content="index, follow">
-
 <link rel="stylesheet" href="/css/style.css">
-
 
 <script type="application/ld+json">
 {
@@ -29,147 +24,245 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Http Status Lookup used for?",
+      "name": "What are HTTP status codes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Http Status Lookup is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "HTTP status codes are 3-digit numbers returned by servers to indicate the result of an HTTP request. They are grouped into 5 categories: 1xx (Informational), 2xx (Success), 3xx (Redirection), 4xx (Client Error), 5xx (Server Error). The first digit defines the class, remaining two provide specific details."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What does 200 OK mean?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "200 OK is the standard success response. It indicates the request was received, understood, and processed successfully. GET requests return the requested resource, POST requests return the result of processing, PUT/PATCH return confirmation of updates."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What is the difference between 401 and 403?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "401 Unauthorized means authentication is required but missing or invalid (you need to log in). 403 Forbidden means authentication succeeded but you lack permission for this resource (you're logged in but not authorized). 401 = who are you? 403 = you're not allowed."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What does 404 Not Found mean?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "404 Not Found means the server cannot locate the requested resource. The URL might be mistyped, the resource was deleted, or the path is incorrect. Unlike 403 (exists but forbidden) or 500 (server error), 404 specifically means the resource doesn't exist at that location."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What is the difference between 301 and 302?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "301 Moved Permanently tells clients to update bookmarks/links to the new URL (SEO-friendly, cached). 302 Found is a temporary redirect; clients should continue using the original URL for future requests. Use 301 for permanent moves, 302 for temporary maintenance or A/B tests."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "What causes 500 Internal Server Error?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "500 Internal Server Error is a generic server error when no specific code applies. Causes include: code exceptions, database connection failures, configuration errors, resource exhaustion. Check server logs for details. 502/503/504 provide more specific information about the failure."
       }
     }
   ]
 }
 </script>
 </head>
-
 <body>
-
 <main class="container">
-
 <h1>HTTP Status Code Lookup</h1>
-
-<p class="subtitle">Look up common HTTP response codes like 200, 301, 404 and 500 to see what they mean.</p>
-
+<p class="subtitle">Look up HTTP status codes to understand server response meanings.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <label for="code" class="sr-only">Status code</label>
-<input id="code" placeholder="e.g. 404" style="width:120px" aria-label="Status code">
+<input id="code" placeholder="e.g. 404" style="width:120px;padding:8px;font-size:14px" aria-label="Status code">
 
-<button onclick="lookup()">Lookup</button>
+<button onclick="lookup()" style="padding:8px 16px;font-size:14px;margin-left:8px">Lookup</button>
 
 <h3>Result</h3>
+<pre id="result" style="background:#f5f5f5;padding:16px;border-radius:4px;font-family:monospace;white-space:pre-wrap"></pre>
 
-<pre id="result"></pre>
+<h3 style="margin-top:24px">Quick Reference</h3>
+<table class="ref-table" style="width:100%;border-collapse:collapse;font-size:0.9rem">
+<thead><tr style="background:#f8fafc"><th style="border:1px solid #ddd;padding:8px">Code</th><th style="border:1px solid #ddd;padding:8px">Name</th><th style="border:1px solid #ddd;padding:8px">Category</th></tr></thead>
+<tbody>
+<tr><td style="border:1px solid #ddd;padding:8px"><code>200</code></td><td>OK</td><td>Success</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px"><code>201</code></td><td>Created</td><td>Success</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px"><code>204</code></td><td>No Content</td><td>Success</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px"><code>301</code></td><td>Moved Permanently</td><td>Redirection</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px"><code>302</code></td><td>Found</td><td>Redirection</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px"><code>304</code></td><td>Not Modified</td><td>Redirection</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px"><code>400</code></td><td>Bad Request</td><td>Client Error</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px"><code>401</code></td><td>Unauthorized</td><td>Client Error</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px"><code>403</code></td><td>Forbidden</td><td>Client Error</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px"><code>404</code></td><td>Not Found</td><td>Client Error</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px"><code>429</code></td><td>Too Many Requests</td><td>Client Error</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px"><code>500</code></td><td>Internal Server Error</td><td>Server Error</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px"><code>502</code></td><td>Bad Gateway</td><td>Server Error</td></tr>
+<tr><td style="border:1px solid #ddd;padding:8px"><code>503</code></td><td>Service Unavailable</td><td>Server Error</td></tr>
+</tbody>
+</table>
 
 <section class="tool-seo">
 <h3>About HTTP Status Code Lookup</h3>
-<p>This HTTP status lookup tool explains common response codes like 200, 301, 404 and 500 so you can quickly understand what a server is returning.</p>
-<p>It is useful for debugging API responses, checking redirect behavior, reading server logs and confirming whether a request failed because of the client, the server or an upstream service.</p>
+<p>This HTTP status lookup tool explains common response codes so you can quickly understand what a server is returning. Enter any standard HTTP status code to see its name and description.</p>
+<p>It is useful for debugging API responses, checking redirect behavior, reading server logs, and understanding whether a request failed because of the client, the server, or an upstream service.</p>
+
+<h4>HTTP Status Code Categories</h4>
+<table class="ref-table">
+<thead><tr><th>Category</th><th>Range</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><strong>1xx Informational</strong></td><td>100-199</td><td>Request received, continuing process</td></tr>
+<tr><td><strong>2xx Success</strong></td><td>200-299</td><td>Request successfully received and processed</td></tr>
+<tr><td><strong>3xx Redirection</strong></td><td>300-399</td><td>Further action needed to complete request</td></tr>
+<tr><td><strong>4xx Client Error</strong></td><td>400-499</td><td>Request contains error or invalid syntax</td></tr>
+<tr><td><strong>5xx Server Error</strong></td><td>500-599</td><td>Server failed to fulfill valid request</td></tr>
+</tbody>
+</table>
+
+<h4>Common Status Codes Explained</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+200 OK
+  Standard success response for GET, POST, PUT, DELETE
+  Response contains requested resource or result
+
+201 Created
+  Resource successfully created (POST response)
+  Location header points to new resource
+
+204 No Content
+  Success but no body to return
+  Common for DELETE operations
+
+301 Moved Permanently
+  Resource has new permanent URL
+  Update bookmarks, SEO transfers
+
+302 Found (Temporary Redirect)
+  Resource temporarily at different URL
+  Keep using original URL next time
+
+304 Not Modified
+  Use cached version (ETag/If-Modified-Since match)
+  No body, saves bandwidth
+
+400 Bad Request
+  Invalid syntax, malformed request
+  Check request format and parameters
+
+401 Unauthorized
+  Authentication required/failed
+  Include valid credentials
+
+403 Forbidden
+  Authenticated but no permission
+  Check access control rules
+
+404 Not Found
+  Resource doesn't exist at URL
+  Check URL path and resource ID
+
+429 Too Many Requests
+  Rate limit exceeded
+  Wait and retry (check Retry-After)
+
+500 Internal Server Error
+  Generic server error
+  Check server logs for details
+
+502 Bad Gateway
+  Upstream server returned invalid response
+  Check proxy/backend health
+
+503 Service Unavailable
+  Server temporarily overloaded/maintenance
+  Retry later (check Retry-After)
+
+504 Gateway Timeout
+  Upstream server didn't respond in time
+  Increase timeout or check backend
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Http Status Lookup used for?</dt>
-  <dd>Http Status Lookup is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What are HTTP status codes?</dt>
+  <dd>HTTP status codes are 3-digit numbers returned by servers to indicate the result of an HTTP request. They are grouped into 5 categories: 1xx (Informational), 2xx (Success), 3xx (Redirection), 4xx (Client Error), 5xx (Server Error). The first digit defines the class, remaining two provide specific details.</dd>
+
+  <dt>What does 200 OK mean?</dt>
+  <dd>200 OK is the standard success response. It indicates the request was received, understood, and processed successfully. GET requests return the requested resource, POST requests return the result of processing, PUT/PATCH return confirmation of updates.</dd>
+
+  <dt>What is the difference between 401 and 403?</dt>
+  <dd>401 Unauthorized means authentication is required but missing or invalid (you need to log in). 403 Forbidden means authentication succeeded but you lack permission for this resource (you're logged in but not authorized). 401 = who are you? 403 = you're not allowed.</dd>
+
+  <dt>What does 404 Not Found mean?</dt>
+  <dd>404 Not Found means the server cannot locate the requested resource. The URL might be mistyped, the resource was deleted, or the path is incorrect. Unlike 403 (exists but forbidden) or 500 (server error), 404 specifically means the resource doesn't exist at that location.</dd>
+
+  <dt>What is the difference between 301 and 302?</dt>
+  <dd>301 Moved Permanently tells clients to update bookmarks/links to the new URL (SEO-friendly, cached). 302 Found is a temporary redirect; clients should continue using the original URL for future requests. Use 301 for permanent moves, 302 for temporary maintenance or A/B tests.</dd>
+
+  <dt>What causes 500 Internal Server Error?</dt>
+  <dd>500 Internal Server Error is a generic server error when no specific code applies. Causes include: code exceptions, database connection failures, configuration errors, resource exhaustion. Check server logs for details. 502/503/504 provide more specific information about the failure.</dd>
 </dl>
 </section>
 </main>
-
 <script>
-
 const statusCodes = {
 "100": {name:"Continue",desc:"Request received, continue."},
 "101": {name:"Switching Protocols",desc:"Server switching protocols."},
-
 "200": {name:"OK",desc:"Request succeeded."},
 "201": {name:"Created",desc:"Resource successfully created."},
 "202": {name:"Accepted",desc:"Request accepted but not finished."},
 "204": {name:"No Content",desc:"Success with no response body."},
-
 "301": {name:"Moved Permanently",desc:"Resource permanently moved."},
 "302": {name:"Found",desc:"Temporary redirect."},
-"304": {name:"Not Modified",desc:"Resource not modified."},
-
+"303": {name:"See Other",desc:"Redirect to different URI via GET."},
+"304": {name:"Not Modified",desc:"Resource not modified (use cache)."},
+"307": {name:"Temporary Redirect",desc:"Temp redirect, method preserved."},
+"308": {name:"Permanent Redirect",desc:"Perm redirect, method preserved."},
 "400": {name:"Bad Request",desc:"Invalid request syntax."},
 "401": {name:"Unauthorized",desc:"Authentication required."},
 "403": {name:"Forbidden",desc:"Access denied."},
 "404": {name:"Not Found",desc:"Resource not found."},
 "405": {name:"Method Not Allowed",desc:"HTTP method not allowed."},
 "408": {name:"Request Timeout",desc:"Server timed out waiting."},
+"409": {name:"Conflict",desc:"Request conflicts with current state."},
+"410": {name:"Gone",desc:"Resource permanently removed."},
+"413": {name:"Payload Too Large",desc:"Request entity too large."},
+"414": {name:"URI Too Long",desc:"Request URI too long."},
+"415": {name:"Unsupported Media Type",desc:"Format not supported."},
 "429": {name:"Too Many Requests",desc:"Rate limit exceeded."},
-
 "500": {name:"Internal Server Error",desc:"Server encountered error."},
 "501": {name:"Not Implemented",desc:"Feature not supported."},
 "502": {name:"Bad Gateway",desc:"Invalid response from upstream."},
 "503": {name:"Service Unavailable",desc:"Server temporarily unavailable."},
 "504": {name:"Gateway Timeout",desc:"Upstream server timeout."}
 }
-
 function lookup(){
-
-let code=document.getElementById("code").value.trim()
-
-let res=document.getElementById("result")
-
+var code=document.getElementById("code").value.trim();
+var res=document.getElementById("result");
 if(statusCodes[code]){
-
-res.innerText=
-code+" "+statusCodes[code].name+"\n\n"+statusCodes[code].desc
-
+res.innerHTML="<strong>"+code+" "+statusCodes[code].name+"</strong>\n\n"+statusCodes[code].desc;
+res.style.background="#dcfce7";
+}else if(code){
+res.innerHTML="Status code "+code+" not found in lookup.\n\nEnter a standard HTTP status code (e.g., 200, 404, 500)";
+res.style.background="#fee2e2";
 }else{
-
-res.innerText="Status code not found."
-
+res.innerHTML="Enter a status code above and click Lookup.\n\nTry: 200, 201, 301, 302, 400, 401, 403, 404, 429, 500, 502, 503, 504";
+res.style.background="#f5f5f5";
 }
-
 }
-
+document.getElementById("code").addEventListener("keypress",function(e){
+if(e.key==="Enter") lookup();
+});
 </script>
-
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>
 </body>

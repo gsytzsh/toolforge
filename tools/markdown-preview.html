@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Markdown Preview &amp; HTML to Markdown – Online Markdown Toolkit | ToolForge</title>
-<meta name="description" content="Free online Markdown Toolkit to preview Markdown as HTML and convert simple HTML back to Markdown in your browser. Part of the ToolForge developer tools collection.">
+<title>Markdown Preview & HTML Converter – Markdown Editor with Live Preview | ToolForge</title>
+<meta name="description" content="Markdown editor with live HTML preview and HTML-to-Markdown converter. Supports CommonMark syntax including headings, lists, code blocks, tables, and links. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/markdown-preview.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Markdown Preview &amp; HTML to Markdown – Online Markdown Toolkit | ToolForge">
-<meta property="og:description" content="Free online Markdown Toolkit to preview Markdown as HTML and convert simple HTML back to Markdown in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Markdown Preview & HTML Converter – Markdown Editor with Live Preview | ToolForge">
+<meta property="og:description" content="Markdown editor with live HTML preview and HTML-to-Markdown converter. Supports CommonMark syntax including headings, lists, code blocks, tables, and links. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/markdown-preview.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Markdown Preview &amp; HTML to Markdown – Online Markdown Toolkit | ToolForge">
-<meta name="twitter:description" content="Free online Markdown Toolkit to preview Markdown as HTML and convert simple HTML back to Markdown in your browser. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Markdown Preview & HTML Converter – Markdown Editor with Live Preview | ToolForge">
+<meta name="twitter:description" content="Markdown editor with live HTML preview and HTML-to-Markdown converter. Supports CommonMark syntax including headings, lists, code blocks, tables, and links. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -25,113 +25,389 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Markdown Preview used for?",
+      "name": "What is Markdown and why use it?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Markdown Preview is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "Markdown is a lightweight markup language created by John Gruber in 2004. It uses plain text formatting symbols that convert to HTML, allowing writers to focus on content rather than styling. Markdown is widely used for documentation (GitHub READMEs), blogs (Static Site Generators), forums (Reddit, Discord), and note-taking apps (Obsidian, Notion)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What Markdown syntax is supported?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "This tool supports CommonMark/GitHub Flavored Markdown: headings (# H1), bold (**text**), italic (*text*), links [text](url), images ![alt](url), lists (- item or 1. item), code blocks (```lang), inline code (`code`), blockquotes (> quote), tables (| col |), strikethrough (~~text~~), and task lists (- [ ] task)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "How do I convert HTML to Markdown?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Select 'HTML to Markdown' mode, paste HTML code, and click Run. The tool converts common HTML elements: <h1>→# , <strong>→** , <em>→* , <a>→[]() , <ul>/<li>→- , <code>→` `. Complex HTML (nested divs, CSS classes, JavaScript) may not convert cleanly—Markdown is simpler than full HTML."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the difference between Markdown and HTML?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Markdown is a subset of HTML focused on readability. Markdown uses intuitive symbols (# for headings, ** for bold) while HTML uses verbose tags (<h1>, <strong>). Markdown converts to HTML for web display. Use Markdown for writing; use HTML when you need precise control over styling, layout, or interactivity."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "How do I create tables in Markdown?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Markdown tables use pipes (|) and dashes (-): first row is header, second row defines alignment with colons, subsequent rows are content. Example: | Header | --- | align |. Not all Markdown parsers support tables—GitHub Flavored Markdown does, but basic CommonMark doesn't."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "Can I embed images and videos in Markdown?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Images use ![alt text](image.png) syntax. Videos aren't natively supported in standard Markdown—use HTML <video> tags or platform-specific embeds (YouTube: ![thumb](url) linking to video). For responsive images, you need HTML or platform extensions."
       }
     }
   ]
 }
 </script>
 </head>
-
 <body>
-
 <main class="container">
-
 <h1>Markdown Toolkit</h1>
-
-<p class="subtitle">Preview Markdown as HTML or convert simple HTML snippets back to Markdown in one browser-based toolkit.</p>
-
+<p class="subtitle">Edit Markdown with live HTML preview or convert HTML snippets back to Markdown syntax.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
-
 <label for="mode" class="sr-only">Markdown mode</label>
 <select id="mode" aria-label="Markdown mode" onchange="switchMode()">
 <option value="preview">Markdown Preview</option>
 <option value="html-to-markdown">HTML to Markdown</option>
 </select>
-
 <br><br>
-
 <label for="input" class="sr-only">Input text</label>
-<textarea id="input" rows="10" style="width:90%" aria-label="Input text"></textarea>
-
+<textarea id="input" rows="10" style="width:90%;font-family:monospace" aria-label="Input text"></textarea>
 <br><br>
-
 <div class="tool-actions">
 <button type="button" onclick="runTool()">Run</button>
 <button type="button" onclick="copyOutput()">Copy Result</button>
 </div>
-
 <h3>Output</h3>
-
-<div id="output"></div>
-
+<div id="output" style="border:1px solid #ddd;padding:12px;min-height:100px"></div>
 <p id="status" style="color:#666"></p>
-
 <section class="tool-seo">
 <h3>About Markdown Toolkit</h3>
-<p>The Markdown Toolkit tool lets you preview Markdown as HTML or convert simple HTML snippets into Markdown in one page.</p>
-<p>It is useful for editing copy, cleaning pasted text, comparing content and making small text transformations directly in the browser.</p>
+<p>This Markdown toolkit provides a live preview editor for writing Markdown with instant HTML rendering, plus an HTML-to-Markdown converter for reverse transformation. It supports CommonMark and GitHub Flavored Markdown syntax for comprehensive documentation writing.</p>
+
+<h4>What is Markdown?</h4>
+<p>Markdown is a lightweight markup language created by John Gruber in 2004. It uses plain text formatting symbols that convert to HTML, enabling writers to focus on content rather than visual styling. Markdown has become the standard for:</p>
+<ul>
+  <li><strong>Software Documentation:</strong> GitHub READMEs, API docs, changelogs</li>
+  <li><strong>Static Sites:</strong> Jekyll, Hugo, Gatsby, Next.js blogs</li>
+  <li><strong>Forums & Chat:</strong> Reddit, Discord, Slack, Stack Overflow</li>
+  <li><strong>Note-taking:</strong> Obsidian, Notion, Bear, iA Writer</li>
+  <li><strong>Content Management:</strong> Ghost, Netlify CMS, Contentful</li>
+</ul>
+
+<h4>Markdown Syntax Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Element</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Markdown Syntax</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example Output</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Heading 1</td>
+    <td style="border:1px solid #ddd;padding:8px"><code># Title</code></td>
+    <td style="border:1px solid #ddd;padding:8px">&lt;h1&gt;Title&lt;/h1&gt;</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Heading 2</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>## Title</code></td>
+    <td style="border:1px solid #ddd;padding:8px">&lt;h2&gt;Title&lt;/h2&gt;</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Bold</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>**text**</code> or <code>__text__</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><strong>text</strong></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Italic</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>*text*</code> or <code>_text_</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><em>text</em></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Strikethrough</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>~~text~~</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><del>text</del></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Link</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>[text](url)</code></td>
+    <td style="border:1px solid #ddd;padding:8px">&lt;a href="url"&gt;text&lt;/a&gt;</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Image</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>![alt](src)</code></td>
+    <td style="border:1px solid #ddd;padding:8px">&lt;img src="src" alt="alt"&gt;</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Inline Code</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>`code`</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>code</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Code Block</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>```lang\n...\n```</code></td>
+    <td style="border:1px solid #ddd;padding:8px">&lt;pre&gt;&lt;code&gt;...&lt;/code&gt;&lt;/pre&gt;</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Blockquote</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>> quote</code></td>
+    <td style="border:1px solid #ddd;padding:8px">&lt;blockquote&gt;quote&lt;/blockquote&gt;</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Unordered List</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>- item</code> or <code>* item</code></td>
+    <td style="border:1px solid #ddd;padding:8px">&lt;ul&gt;&lt;li&gt;item&lt;/li&gt;&lt;/ul&gt;</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Ordered List</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>1. item</code></td>
+    <td style="border:1px solid #ddd;padding:8px">&lt;ol&gt;&lt;li&gt;item&lt;/li&gt;&lt;/ol&gt;</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Task List</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>- [ ] task</code></td>
+    <td style="border:1px solid #ddd;padding:8px">☐ task</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Horizontal Rule</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>---</code> or <code>***</code></td>
+    <td style="border:1px solid #ddd;padding:8px">&lt;hr&gt;</td>
+  </tr>
+</table>
+
+<h4>Markdown Table Syntax</h4>
+<p>Tables are part of GitHub Flavored Markdown (GFM):</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Markdown Table:
+
+| Name       | Age | City        |
+|------------|-----|-------------|
+| Alice      | 25  | New York    |
+| Bob        | 30  | San Francisco|
+| Charlie    | 35  | Seattle     |
+
+Renders as:
+┌───────────┬─────┬───────────────┐
+│ Name      │ Age │ City          │
+├───────────┼─────┼───────────────┤
+│ Alice     │ 25  │ New York      │
+│ Bob       │ 30  │ San Francisco │
+│ Charlie   │ 35  │ Seattle       │
+└───────────┴─────┴───────────────┘
+
+Alignment with colons:
+| Left      | Center | Right     |
+|:----------|:------:|----------:|
+| aligned   | text   | here      |
+
+:--- = left align (default)
+:--: = center align
+---: = right align
+</pre>
+
+<h4>HTML to Markdown Conversion Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">HTML Element</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Markdown Equivalent</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>&lt;h1&gt;Title&lt;/h1&gt;</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code># Title</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>&lt;h2&gt;Title&lt;/h2&gt;</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>## Title</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>&lt;strong&gt;text&lt;/strong&gt;</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>**text**</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>&lt;em&gt;text&lt;/em&gt;</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>*text*</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>&lt;a href="url"&gt;text&lt;/a&gt;</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>[text](url)</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>&lt;img src="url" alt="alt"&gt;</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>![alt](url)</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>&lt;ul&gt;&lt;li&gt;item&lt;/li&gt;&lt;/ul&gt;</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>- item</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>&lt;code&gt;code&lt;/code&gt;</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>`code`</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>&lt;blockquote&gt;quote&lt;/blockquote&gt;</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>> quote</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>&lt;br&gt;</code></td>
+    <td style="border:1px solid #ddd;padding:8px">New line (double space at end)</td>
+  </tr>
+</table>
+
+<h4>Markdown Conversion Algorithm</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript HTML to Markdown Conversion:
+
+function htmlToMarkdown(html) {
+  return html
+    // Headings
+    .replace(/<h1>(.*?)<\/h1>/gi, "# $1\n")
+    .replace(/<h2>(.*?)<\/h2>/gi, "## $1\n")
+    .replace(/<h3>(.*?)<\/h3>/gi, "### $1\n")
+    // Text formatting
+    .replace(/<strong>(.*?)<\/strong>/gi, "**$1**")
+    .replace(/<b>(.*?)<\/b>/gi, "**$1**")
+    .replace(/<em>(.*?)<\/em>/gi, "*$1*")
+    .replace(/<i>(.*?)<\/i>/gi, "*$1*")
+    // Links and images
+    .replace(/<a href="(.*?)">(.*?)<\/a>/gi, "[$2]($1)")
+    .replace(/<img src="(.*?)" alt="(.*?)"/gi, "![$2]($1)")
+    // Lists
+    .replace(/<ul>/gi, "")
+    .replace(/<\/ul>/gi, "")
+    .replace(/<li>(.*?)<\/li>/gi, "- $1\n")
+    // Other elements
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<p>(.*?)<\/p>/gi, "$1\n\n")
+    .replace(/<code>(.*?)<\/code>/gi, "`$1`")
+    .replace(/<blockquote>(.*?)<\/blockquote>/gi, "> $1")
+    // Remove remaining tags
+    .replace(/<[^>]+>/g, "")
+    // Clean up whitespace
+    .replace(/\n{3,}/g, "\n\n");
+}
+
+// Usage:
+const html = "<h1>Hello</h1><p>This is <strong>bold</strong> text.</p>";
+const md = htmlToMarkdown(html);
+console.log(md);
+// # Hello
+//
+// This is **bold** text.
+</pre>
+
+<h4>Common Markdown Use Cases</h4>
+<ul>
+  <li><strong>README Files:</strong> Document GitHub repositories with installation, usage, and API docs</li>
+  <li><strong>Technical Documentation:</strong> Write API references, tutorials, and guides</li>
+  <li><strong>Blog Posts:</strong> Create content for static site generators (Jekyll, Hugo, Gatsby)</li>
+  <li><strong>Forum Posts:</strong> Format questions and answers on Stack Overflow, Reddit, Discord</li>
+  <li><strong>Email Templates:</strong> Write formatted emails in apps that support Markdown</li>
+  <li><strong>Meeting Notes:</strong> Structure notes with headings, lists, and task items</li>
+  <li><strong>Content Migration:</strong> Convert HTML content to Markdown for modern CMS platforms</li>
+</ul>
+
+<h4>Markdown Flavors Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Flavor</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Extensions</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Used By</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">CommonMark</td>
+    <td style="border:1px solid #ddd;padding:8px">Standard base syntax</td>
+    <td style="border:1px solid #ddd;padding:8px">Standard spec</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">GitHub Flavored (GFM)</td>
+    <td style="border:1px solid #ddd;padding:8px">Tables, task lists, strikethrough, autolinks</td>
+    <td style="border:1px solid #ddd;padding:8px">GitHub, GitLab</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Markdown Extra</td>
+    <td style="border:1px solid #ddd;padding:8px">Tables, footnotes, definition lists, attributes</td>
+    <td style="border:1px solid #ddd;padding:8px">Drupal, Stack Overflow</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">MultiMarkdown</td>
+    <td style="border:1px solid #ddd;padding:8px">Footnotes, tables, metadata, cross-references</td>
+    <td style="border:1px solid #ddd;padding:8px">Academic writing</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">RMarkdown</td>
+    <td style="border:1px solid #ddd;padding:8px">Code chunks, data visualization, dynamic docs</td>
+    <td style="border:1px solid #ddd;padding:8px">RStudio, data science</td>
+  </tr>
+</table>
+
+<h4>Markdown Best Practices</h4>
+<ul>
+  <li><strong>Use headings hierarchically:</strong> Start with # H1, then ## H2, ### H3—don't skip levels</li>
+  <li><strong>Keep line length reasonable:</strong> Break lines at 80-120 characters for readability in raw form</li>
+  <li><strong>Use reference-style links for long documents:</strong> Define links at bottom [link][ref]</li>
+  <li><strong>Escape special characters:</strong> Use backslash (\) to escape *, _, #, etc. when needed</li>
+  <li><strong>Include alt text for images:</strong> Describe image content for accessibility</li>
+  <li><strong>Use code blocks with language:</strong> ```javascript enables syntax highlighting</li>
+</ul>
 </section>
 
+<section class="how-to-use">
+<h3>How to Use Markdown Toolkit</h3>
+<ol class="how-to-steps">
+  <li><strong>Select mode:</strong> Choose "Markdown Preview" or "HTML to Markdown".</li>
+  <li><strong>Enter content:</strong> Write Markdown or paste HTML code.</li>
+  <li><strong>Click Run:</strong> Preview renders HTML or converts to Markdown.</li>
+  <li><strong>Copy result:</strong> Click "Copy Result" to use the output.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>In Preview mode, output is rendered HTML; copy gives plain text</li>
+  <li>In HTML-to-Markdown mode, output shows Markdown in a code block</li>
+  <li>Use the placeholder text as a syntax reference</li>
+  <li>Complex HTML may not convert perfectly—review the output</li>
+  <li>Tables and task lists require GitHub Flavored Markdown support</li>
+</ul>
+</section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Markdown Preview used for?</dt>
-  <dd>Markdown Preview is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+
+  <dt>What is Markdown and why use it?</dt>
+  <dd>Markdown is a lightweight markup language created by John Gruber in 2004. It uses plain text formatting symbols that convert to HTML, allowing writers to focus on content rather than styling. Markdown is widely used for documentation (GitHub READMEs), blogs (Static Site Generators), forums (Reddit, Discord), and note-taking apps (Obsidian, Notion).</dd>
+
+  <dt>What Markdown syntax is supported?</dt>
+  <dd>This tool supports CommonMark/GitHub Flavored Markdown: headings (# H1), bold (**text**), italic (*text*), links [text](url), images ![alt](url), lists (- item or 1. item), code blocks (```lang), inline code (`code`), blockquotes (> quote), tables (| col |), strikethrough (~~text~~), and task lists (- [ ] task).</dd>
+
+  <dt>How do I convert HTML to Markdown?</dt>
+  <dd>Select "HTML to Markdown" mode, paste HTML code, and click Run. The tool converts common HTML elements: &lt;h1&gt;→# , &lt;strong&gt;** , &lt;em&gt;* , &lt;a&gt;[]() , &lt;ul&gt/&lt;li&gt;→- , &lt;code&gt;→` `. Complex HTML (nested divs, CSS classes, JavaScript) may not convert cleanly—Markdown is simpler than full HTML.</dd>
+
+  <dt>What is the difference between Markdown and HTML?</dt>
+  <dd>Markdown is a subset of HTML focused on readability. Markdown uses intuitive symbols (# for headings, ** for bold) while HTML uses verbose tags (&lt;h1&gt;, &lt;strong&gt;). Markdown converts to HTML for web display. Use Markdown for writing; use HTML when you need precise control over styling, layout, or interactivity.</dd>
+
+  <dt>How do I create tables in Markdown?</dt>
+  <dd>Markdown tables use pipes (|) and dashes (-): first row is header, second row defines alignment with colons, subsequent rows are content. Example: | Header | --- | align |. Not all Markdown parsers support tables—GitHub Flavored Markdown does, but basic CommonMark doesn't.</dd>
+
+  <dt>Can I embed images and videos in Markdown?</dt>
+  <dd>Images use ![alt text](image.png) syntax. Videos aren't natively supported in standard Markdown—use HTML &lt;video&gt; tags or platform-specific embeds (YouTube: ![thumb](url) linking to video). For responsive images, you need HTML or platform extensions.</dd>
 </dl>
 </section>
 </main>
-
 <script>
-
 function escapeHtml(text){
 return text
 .replace(/&/g,"&amp;")
@@ -140,9 +416,7 @@ return text
 .replace(/\"/g,"&quot;")
 .replace(/'/g,"&#39;")
 }
-
 let latestOutput=""
-
 function htmlToMarkdown(html){
 return html
 .replace(/<h1>(.*?)<\/h1>/gi,"# $1\n")
@@ -157,10 +431,12 @@ return html
 .replace(/<\/ul>/gi,"")
 .replace(/<li>(.*?)<\/li>/gi,"- $1\n")
 .replace(/<br\s*\/?>/gi,"\n")
-.replace(/<p>(.*?)<\/p>/gi,"$1\n")
+.replace(/<p>(.*?)<\/p>/gi,"$1\n\n")
+.replace(/<code>(.*?)<\/code>/gi,"`$1`")
+.replace(/<blockquote>(.*?)<\/blockquote>/gi,"> $1")
 .replace(/<[^>]+>/g,"")
+.replace(/\n{3,}/g,"\n\n")
 }
-
 function switchMode(){
 let mode=document.getElementById("mode").value
 let input=document.getElementById("input")
@@ -168,13 +444,12 @@ let output=document.getElementById("output")
 latestOutput=""
 output.innerHTML=""
 if(mode==="preview"){
-input.placeholder="# Hello ToolForge\n\n- item 1\n- item 2"
+input.placeholder="# Hello TOOLFORGE\n\n- item 1\n- item 2"
 }else{
-input.placeholder="<h1>Hello</h1><p>ToolForge</p>"
+input.placeholder="<h1>Hello</h1><p>TOOLFORGE</p>"
 }
 document.getElementById("status").innerText=""
 }
-
 function runTool(){
 let mode=document.getElementById("mode").value
 let text=document.getElementById("input").value
@@ -187,11 +462,10 @@ document.getElementById("status").style.color="#16a34a"
 return
 }
 latestOutput=htmlToMarkdown(text)
-document.getElementById("output").innerHTML="<pre>"+escapeHtml(latestOutput)+"</pre>"
+document.getElementById("output").innerHTML="<pre style='background:#f5f5f5;padding:12px;overflow:auto'>"+escapeHtml(latestOutput)+"</pre>"
 document.getElementById("status").innerText="HTML converted to Markdown."
 document.getElementById("status").style.color="#16a34a"
 }
-
 function copyOutput(){
 let mode=document.getElementById("mode").value
 let value=mode==="preview"?document.getElementById("output").innerText.trim():latestOutput.trim()
@@ -208,11 +482,8 @@ document.getElementById("status").innerText="Copy failed."
 document.getElementById("status").style.color="#b91c1c"
 })
 }
-
 switchMode()
-
 </script>
-
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>
 </body>

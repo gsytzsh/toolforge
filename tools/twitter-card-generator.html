@@ -3,19 +3,75 @@
 <head>
 <meta charset="UTF-8">
 <title>Twitter Card Generator – Create Twitter Card Tags Online | ToolForge</title>
-<meta name="description" content="Free online Twitter Card Generator to create Twitter/X card meta tags for link previews. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Free online Twitter Card Generator to create Twitter/X card meta tags for link previews. Generate summary and summary_large_image cards for social sharing. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/twitter-card-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Twitter Card Generator – Create Twitter Card Tags Online | ToolForge">
-<meta property="og:description" content="Free online Twitter Card Generator to create Twitter/X card meta tags for link previews. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Free online Twitter Card Generator to create Twitter/X card meta tags for link previews. Generate summary and summary_large_image cards for social sharing. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/twitter-card-generator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Twitter Card Generator – Create Twitter Card Tags Online | ToolForge">
-<meta name="twitter:description" content="Free online Twitter Card Generator to create Twitter/X card meta tags for link previews. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Free online Twitter Card Generator to create Twitter/X card meta tags for link previews. Generate summary and summary_large_image cards for social sharing. Part of the ToolForge developer tools collection.">
 <link rel="stylesheet" href="/css/style.css">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are the different Twitter Card types?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Twitter supports four card types: Summary (small thumbnail, 120x120px), Summary Large Image (large 800x418px image), App Card (for mobile app installs), and Player Card (for embedded media). Summary and Summary Large Image are the most commonly used for general web pages."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the recommended image sizes for Twitter Cards?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For Summary cards: minimum 120x120px, recommended 300x300px. For Summary Large Image: minimum 800x418px, recommended 1200x627px (1.91:1 ratio). Maximum file size is 5MB for GIF, 15MB for JPG/PNG. Use absolute HTTPS URLs for reliable rendering."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long should Twitter Card titles and descriptions be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Twitter Card titles should be under 70 characters to avoid truncation. Descriptions should be 200 characters or less for optimal display. While Twitter doesn't enforce strict limits, shorter, punchier text performs better in the social feed context."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I test if my Twitter Card meta tags are working?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use Twitter's Card Validator at cards-dev.twitter.com/validator to preview how your page will appear when shared. Enter your page URL and Twitter will fetch the meta tags and show you a live preview. You may need to validate a URL once to clear Twitter's cache if you've updated tags."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need both Twitter Card and Open Graph tags?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, it's recommended to include both. Twitter Card tags are used specifically by Twitter/X, while Open Graph tags are used by Facebook, LinkedIn, and other platforms. Twitter will fall back to Open Graph tags if Twitter-specific tags are missing, but using both ensures consistent previews across all social platforms."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the @twitter:site handle and should I include it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The twitter:site tag specifies your official Twitter account handle (e.g., @toolforge). Including it attributes the shared content to your account and can help with brand recognition. It's optional but recommended for business or brand accounts to increase visibility and engagement."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <main class="container">
@@ -51,23 +107,157 @@
 <h3>About Twitter Card Generator</h3>
 <p>This Twitter Card generator creates Twitter/X card meta tags so shared links can show the right title, description and image.</p>
 <p>It is useful for blog posts, product pages and campaign links when you want a more polished preview on social feeds instead of a bare URL.</p>
+
+<h4>Twitter Card Types Explained</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Card Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Layout</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Best For</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">summary</td>
+    <td style="border:1px solid #ddd;padding:8px">Small thumbnail (120x120px) beside text</td>
+    <td style="border:1px solid #ddd;padding:8px">Articles, blog posts, general content</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">summary_large_image</td>
+    <td style="border:1px solid #ddd;padding:8px">Large banner image (800x418px) above text</td>
+    <td style="border:1px solid #ddd;padding:8px">Product pages, featured content, visual posts</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">app</td>
+    <td style="border:1px solid #ddd;padding:8px">App icon with install buttons</td>
+    <td style="border:1px solid #ddd;padding:8px">Mobile app promotion (requires app-specific tags)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">player</td>
+    <td style="border:1px solid #ddd;padding:8px">Embedded media player</td>
+    <td style="border:1px solid #ddd;padding:8px">Video, audio, or interactive content</td>
+  </tr>
+</table>
+
+<h4>Twitter Card Image Requirements</h4>
+<ul>
+  <li><strong>Summary card:</strong> Minimum 120x120px, recommended 300x300px, max 5MB</li>
+  <li><strong>Summary Large Image:</strong> Minimum 800x418px, recommended 1200x627px (1.91:1 ratio), max 5MB</li>
+  <li><strong>Formats:</strong> JPG, PNG, GIF (animated GIFs supported)</li>
+  <li><strong>URLs:</strong> Must use absolute HTTPS URLs for reliable rendering</li>
+  <li><strong>Aspect ratio:</strong> 1:1 for Summary, 1.91:1 for Large Image</li>
+</ul>
+
+<h4>Character Count Guidelines</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Recommended character limits:
+
+Title:       Under 70 characters (no hard limit, but longer titles may be truncated)
+Description: 200 characters or less for optimal display
+Image alt:   Up to 480 characters for accessibility
+
+Note: Twitter does not enforce strict character limits for Card tags,
+but shorter, focused text performs better in social feeds.
+</pre>
+
+<h4>Complete Twitter Card Meta Tags Example</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+&lt;!-- Twitter Card Meta Tags --&gt;
+&lt;meta name="twitter:card" content="summary_large_image"&gt;
+&lt;meta name="twitter:title" content="Your Page Title"&gt;
+&lt;meta name="twitter:description" content="Your page description here"&gt;
+&lt;meta name="twitter:image" content="https://example.com/image.jpg"&gt;
+&lt;meta name="twitter:site" content="@yourhandle"&gt;
+&lt;meta name="twitter:creator" content="@authorhandle"&gt;
+
+<!-- Optional: Image alt text for accessibility -->
+&lt;meta name="twitter:image:alt" content="Description of image for screen readers"&gt;
+</pre>
+
+<h4>Twitter Card vs Open Graph Tags</h4>
+<p>Twitter Cards and Open Graph tags serve similar purposes but are used by different platforms:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Platform</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Uses</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Twitter/X</td>
+    <td style="border:1px solid #ddd;padding:8px">twitter:card, twitter:title, etc.</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Facebook</td>
+    <td style="border:1px solid #ddd;padding:8px">og:title, og:description, og:image</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">LinkedIn</td>
+    <td style="border:1px solid #ddd;padding:8px">og: tags (falls back to Open Graph)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Slack</td>
+    <td style="border:1px solid #ddd;padding:8px">og: tags (falls back to Open Graph)</td>
+  </tr>
+</table>
+<p>Best practice: Include both Twitter Card and Open Graph tags for complete social media coverage.</p>
+
+<h4>Common Twitter Card Issues</h4>
+<ul>
+  <li><strong>Image not showing:</strong> Ensure URL is absolute (https://) and publicly accessible</li>
+  <li><strong>Wrong card type:</strong> Verify twitter:card value is exactly "summary" or "summary_large_image"</li>
+  <li><strong>Cached preview:</strong> Twitter caches card data; re-validate URL to refresh cache</li>
+  <li><strong>Tags in wrong place:</strong> Meta tags must be in the <head> section, not <body></li>
+  <li><strong>Image too small:</strong> Meet minimum size requirements or Twitter will fall back to Summary card</li>
+</ul>
+
+<h4>Testing and Validation</h4>
+<p>After adding Twitter Card tags to your page:</p>
+<ol>
+  <li>Visit <a href="https://cards-dev.twitter.com/validator" target="_blank" rel="noopener">Twitter Card Validator</a></li>
+  <li>Enter your page URL and click "Preview Card"</li>
+  <li>Review the preview and fix any issues shown</li>
+  <li>If you've updated tags but see old preview, re-validate to clear cache</li>
+</ol>
 </section>
 
+
+<section class="how-to-use">
+<h3>How to Generate Twitter Card Tags</h3>
+<ol class="how-to-steps">
+  <li><strong>Select card type:</strong> Choose "summary" for small thumbnail or "summary_large_image" for large banner display.</li>
+  <li><strong>Enter title:</strong> Add your page or post title (under 70 characters recommended).</li>
+  <li><strong>Add description:</strong> Write a brief, compelling description (200 characters or less).</li>
+  <li><strong>Provide image URL:</strong> Enter the full HTTPS URL to your card image.</li>
+  <li><strong>Optional - Add site handle:</strong> Include your Twitter account (e.g., @yourbrand) to attribute the shared content.</li>
+  <li><strong>Generate and copy:</strong> Click "Generate" to create the meta tags, then "Copy Tags" to paste them into your page's <head> section.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Use high-quality images that meet size requirements</li>
+  <li>Test your tags with Twitter's Card Validator before publishing</li>
+  <li>Include both Twitter Card and Open Graph tags for cross-platform compatibility</li>
+  <li>Keep text concise and focused on driving engagement</li>
+</ul>
+</section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Twitter Card Generator?</dt>
-  <dd>Twitter Card Generator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+
+  <dt>What are the different Twitter Card types?</dt>
+  <dd>Twitter supports four card types: Summary (small thumbnail, 120x120px), Summary Large Image (large 800x418px image), App Card (for mobile app installs), and Player Card (for embedded media). Summary and Summary Large Image are the most commonly used for general web pages.</dd>
+
+  <dt>What are the recommended image sizes for Twitter Cards?</dt>
+  <dd>For Summary cards: minimum 120x120px, recommended 300x300px. For Summary Large Image: minimum 800x418px, recommended 1200x627px (1.91:1 ratio). Maximum file size is 5MB for GIF, 15MB for JPG/PNG. Use absolute HTTPS URLs for reliable rendering.</dd>
+
+  <dt>How long should Twitter Card titles and descriptions be?</dt>
+  <dd>Twitter Card titles should be under 70 characters to avoid truncation. Descriptions should be 200 characters or less for optimal display. While Twitter doesn't enforce strict limits, shorter, punchier text performs better in the social feed context.</dd>
+
+  <dt>How do I test if my Twitter Card meta tags are working?</dt>
+  <dd>Use Twitter's Card Validator at cards-dev.twitter.com/validator to preview how your page will appear when shared. Enter your page URL and Twitter will fetch the meta tags and show you a live preview. You may need to validate a URL once to clear Twitter's cache if you've updated tags.</dd>
+
+  <dt>Do I need both Twitter Card and Open Graph tags?</dt>
+  <dd>Yes, it's recommended to include both. Twitter Card tags are used specifically by Twitter/X, while Open Graph tags are used by Facebook, LinkedIn, and other platforms. Twitter will fall back to Open Graph tags if Twitter-specific tags are missing, but using both ensures consistent previews across all social platforms.</dd>
+
+  <dt>What is the @twitter:site handle and should I include it?</dt>
+  <dd>The twitter:site tag specifies your official Twitter account handle (e.g., @toolforge). Including it attributes the shared content to your account and can help with brand recognition. It's optional but recommended for business or brand accounts to increase visibility and engagement.</dd>
 </dl>
 </section>
 </main>

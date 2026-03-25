@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>UTM Parser – Parse UTM Parameters Online | ToolForge</title>
-<meta name="description" content="Free online UTM Parser to extract utm_source, utm_medium, utm_campaign and other parameters from a URL. Part of the ToolForge developer tools collection.">
+<meta name="description" content="UTM Parser extracts utm_source, utm_medium, utm_campaign, utm_term, and utm_content from campaign URLs. Analyze marketing links and verify tracking setup. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/utm-parser.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="UTM Parser – Parse UTM Parameters Online | ToolForge">
-<meta property="og:description" content="Free online UTM Parser to extract utm_source, utm_medium, utm_campaign and other parameters from a URL. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="UTM Parser extracts utm_source, utm_medium, utm_campaign, utm_term, and utm_content from campaign URLs. Analyze marketing links and verify tracking setup. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/utm-parser.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UTM Parser – Parse UTM Parameters Online | ToolForge">
-<meta name="twitter:description" content="Free online UTM Parser to extract utm_source, utm_medium, utm_campaign and other parameters from a URL. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="UTM Parser extracts utm_source, utm_medium, utm_campaign, utm_term, and utm_content from campaign URLs. Analyze marketing links and verify tracking setup. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Utm Parser?",
+      "name": "What does a UTM parser do?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Utm Parser is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "A UTM parser extracts UTM (Urchin Tracking Module) parameters from URLs. It reads the query string and isolates utm_source, utm_medium, utm_campaign, utm_term, and utm_content values. This is useful for auditing campaign links, verifying tracking setup, and analyzing competitor marketing URLs."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What happens if a URL has no UTM parameters?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "If a URL has no UTM parameters, the parser will indicate that none were found. The URL may still have other query parameters (like ?product=123 or ?ref=homepage), but these are not UTM tracking parameters. Only parameters starting with 'utm_' are extracted."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Can UTM parser handle encoded URLs?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Yes, the parser automatically handles URL-encoded characters. For example, %40 is decoded to @, %20 to space, and %2B to +. The displayed UTM values show the decoded, human-readable format for easier analysis."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What other parameters can appear alongside UTMs?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Common non-UTM parameters include: fbclid (Facebook Click ID), gclid (Google Click ID), ref (referrer), affiliate_id, partner_id, and custom tracking parameters. These are not extracted by this tool, which focuses only on standard utm_* parameters."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How do I verify UTM tracking is working?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "First, parse the URL to confirm all UTM parameters are present and correctly spelled. Then click the URL and check your analytics platform (Google Analytics, Adobe Analytics) real-time reports to verify the traffic is attributed correctly. Allow 24-48 hours for full data processing."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "Why are my UTM values showing as '(not set)' in analytics?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Common causes include: missing UTM parameters on some links, typos in parameter names (utm_souce vs utm_source), inconsistent naming conventions (Email vs email), or the URL being redirected and losing parameters. Always parse URLs before launching campaigns to catch errors."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>UTM Parser</h1>
-<p class="subtitle">Extract UTM parameters from a campaign URL.</p>
+<p class="subtitle">Extract and analyze UTM campaign parameters from tracking URLs.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <p>Tracked URL:
 <label for="tracked-url" class="sr-only">Tracked URL</label>
@@ -86,25 +91,209 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About UTM Parser</h3>
-<p>This UTM parser extracts campaign parameters from a tracked URL and shows each value clearly.</p>
-<p>It is useful for link audits, campaign QA and analytics troubleshooting when you need to confirm exactly what tracking data a URL contains.</p>
+<p>This UTM parser extracts campaign tracking parameters (utm_source, utm_medium, utm_campaign, utm_term, utm_content) from URLs and displays each value for analysis and verification.</p>
+<p>It is useful for marketing link audits, campaign QA before launch, competitor analysis, analytics troubleshooting, verifying affiliate links, documenting campaign structures, and ensuring consistent UTM naming across marketing teams.</p>
+
+<h4>UTM Parameter Extraction</h4>
+<p>The parser reads the URL query string and extracts only parameters starting with <code>utm_</code>:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Input URL:
+https://shop.example.com/sale?utm_source=newsletter&utm_medium=email&utm_campaign=black_friday&utm_content=header_cta
+
+Extracted Parameters:
+utm_source: newsletter
+utm_medium: email
+utm_campaign: black_friday
+utm_content: header_cta
+
+<!-- The parser ignores non-UTM parameters like:
+    ?product=123, ?ref=sidebar, ?discount=10off
+-->
+</pre>
+
+<h4>UTM Parameter Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Parameter</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example Value</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">utm_source</td>
+    <td style="border:1px solid #ddd;padding:8px">The traffic source or platform</td>
+    <td style="border:1px solid #ddd;padding:8px">google, facebook, newsletter</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">utm_medium</td>
+    <td style="border:1px solid #ddd;padding:8px">The marketing channel type</td>
+    <td style="border:1px solid #ddd;padding:8px">email, cpc, social, organic</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">utm_campaign</td>
+    <td style="border:1px solid #ddd;padding:8px">The specific campaign name</td>
+    <td style="border:1px solid #ddd;padding:8px">spring_sale, launch_2024</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">utm_term</td>
+    <td style="border:1px solid #ddd;padding:8px">Paid search keywords</td>
+    <td style="border:1px solid #ddd;padding:8px">running+shoes, crm+software</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">utm_content</td>
+    <td style="border:1px solid #ddd;padding:8px">Differentiates similar content</td>
+    <td style="border:1px solid #ddd;padding:8px">header_link, variant_a, banner</td>
+  </tr>
+</table>
+
+<h4>Common UTM Parsing Examples</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">URL Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example URL</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">UTMs Found</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Email Campaign</td>
+    <td style="border:1px solid #ddd;padding:8px">example.com?utm_source=newsletter&utm_medium=email</td>
+    <td style="border:1px solid #ddd;padding:8px">2 parameters</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Full Campaign</td>
+    <td style="border:1px solid #ddd;padding:8px">example.com?utm_source=google&utm_medium=cpc&utm_campaign=brand&utm_term=shoes&utm_content=ad1</td>
+    <td style="border:1px solid #ddd;padding:8px">5 parameters</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Social Post</td>
+    <td style="border:1px solid #ddd;padding:8px">example.com?utm_source=linkedin&utm_medium=social</td>
+    <td style="border:1px solid #ddd;padding:8px">2 parameters</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">No UTMs</td>
+    <td style="border:1px solid #ddd;padding:8px">example.com/product?id=123&ref=homepage</td>
+    <td style="border:1px solid #ddd;padding:8px">None found</td>
+  </tr>
+</table>
+
+<h4>Other URL Parameters vs UTMs</h4>
+<p>URLs often contain non-UTM tracking parameters that serve different purposes:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Parameter</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Purpose</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Platform</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">fbclid</td>
+    <td style="border:1px solid #ddd;padding:8px">Facebook Click Identifier</td>
+    <td style="border:1px solid #ddd;padding:8px">Facebook/Meta</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">gclid</td>
+    <td style="border:1px solid #ddd;padding:8px">Google Click Identifier</td>
+    <td style="border:1px solid #ddd;padding:8px">Google Ads</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">gbraid</td>
+    <td style="border:1px solid #ddd;padding:8px">Google Ads web tracking (iOS 14+)</td>
+    <td style="border:1px solid #ddd;padding:8px">Google Ads</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">wbraid</td>
+    <td style="border:1px solid #ddd;padding:8px">Google Ads app tracking (iOS 14+)</td>
+    <td style="border:1px solid #ddd;padding:8px">Google Ads</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">ref</td>
+    <td style="border:1px solid #ddd;padding:8px">Generic referrer identifier</td>
+    <td style="border:1px solid #ddd;padding:8px">Various</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">affiliate_id</td>
+    <td style="border:1px solid #ddd;padding:8px">Affiliate partner tracking</td>
+    <td style="border:1px solid #ddd;padding:8px">Affiliate networks</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Campaign QA:</strong> Verify all campaign URLs have correct UTM parameters before launch</li>
+  <li><strong>Link Audits:</strong> Review existing marketing links for consistent naming conventions</li>
+  <li><strong>Competitor Analysis:</strong> Analyze competitor campaign URLs from ads and emails</li>
+  <li><strong>Analytics Troubleshooting:</strong> Debug why traffic shows as 'direct' or '(not set)'</li>
+  <li><strong>Affiliate Verification:</strong> Confirm affiliate links include proper tracking</li>
+  <li><strong>Team Training:</strong> Teach marketers proper UTM structure and naming</li>
+</ul>
+
+<h4>UTM Validation Checklist</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Before launching campaigns, verify:
+
+□ utm_source is present and uses consistent naming
+□ utm_medium accurately reflects the channel type
+□ utm_campaign identifies the specific campaign
+□ All values use lowercase (google not Google)
+□ Underscores used for spaces (spring_sale)
+□ No special characters requiring encoding
+□ URL loads correctly with all parameters
+□ Parameters survive any redirects
+
+Common mistakes to catch:
+- Typo: utm_souce instead of utm_source
+- Inconsistent: Email vs email vs EMAIL
+- Wrong order: source and medium swapped
+- Missing: Only 1-2 UTMs when 3+ needed
+</pre>
+
+<h4>URL Encoding in UTM Values</h4>
+<p>Special characters in UTM values are URL-encoded. The parser displays decoded values:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Encoded</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Decoded</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">%20</td>
+    <td style="border:1px solid #ddd;padding:8px">Space</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">%2B</td>
+    <td style="border:1px solid #ddd;padding:8px">Plus sign (+)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">%40</td>
+    <td style="border:1px solid #ddd;padding:8px">At symbol (@)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">%26</td>
+    <td style="border:1px solid #ddd;padding:8px">Ampersand (&)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">%3D</td>
+    <td style="border:1px solid #ddd;padding:8px">Equals (=)</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Utm Parser?</dt>
-  <dd>Utm Parser is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What does a UTM parser do?</dt>
+  <dd>A UTM parser extracts UTM (Urchin Tracking Module) parameters from URLs. It reads the query string and isolates utm_source, utm_medium, utm_campaign, utm_term, and utm_content values. This is useful for auditing campaign links, verifying tracking setup, and analyzing competitor marketing URLs.</dd>
+
+  <dt>What happens if a URL has no UTM parameters?</dt>
+  <dd>If a URL has no UTM parameters, the parser will indicate that none were found. The URL may still have other query parameters (like ?product=123 or ?ref=homepage), but these are not UTM tracking parameters. Only parameters starting with 'utm_' are extracted.</dd>
+
+  <dt>Can UTM parser handle encoded URLs?</dt>
+  <dd>Yes, the parser automatically handles URL-encoded characters. For example, %40 is decoded to @, %20 to space, and %2B to +. The displayed UTM values show the decoded, human-readable format for easier analysis.</dd>
+
+  <dt>What other parameters can appear alongside UTMs?</dt>
+  <dd>Common non-UTM parameters include: fbclid (Facebook Click ID), gclid (Google Click ID), ref (referrer), affiliate_id, partner_id, and custom tracking parameters. These are not extracted by this tool, which focuses only on standard utm_* parameters.</dd>
+
+  <dt>How do I verify UTM tracking is working?</dt>
+  <dd>First, parse the URL to confirm all UTM parameters are present and correctly spelled. Then click the URL and check your analytics platform (Google Analytics, Adobe Analytics) real-time reports to verify the traffic is attributed correctly. Allow 24-48 hours for full data processing.</dd>
+
+  <dt>Why are my UTM values showing as '(not set)' in analytics?</dt>
+  <dd>Common causes include: missing UTM parameters on some links, typos in parameter names (utm_souce vs utm_source), inconsistent naming conventions (Email vs email), or the URL being redirected and losing parameters. Always parse URLs before launching campaigns to catch errors.</dd>
 </dl>
 </section>
 </main>

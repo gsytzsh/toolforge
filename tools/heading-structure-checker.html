@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Heading Structure Checker – Check H1-H6 Hierarchy Online | ToolForge</title>
-<meta name="description" content="Free online Heading Structure Checker to inspect H1-H6 hierarchy from HTML and detect skipped heading levels. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Analyze HTML heading structure (H1-H6) to detect skipped levels and accessibility issues. Essential for SEO and WCAG compliance. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/heading-structure-checker.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Heading Structure Checker – Check H1-H6 Hierarchy Online | ToolForge">
-<meta property="og:description" content="Free online Heading Structure Checker to inspect H1-H6 hierarchy from HTML and detect skipped heading levels. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Analyze HTML heading structure to detect skipped levels and accessibility issues.">
 <meta property="og:url" content="https://toolforge.site/tools/heading-structure-checker.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Heading Structure Checker – Check H1-H6 Hierarchy Online | ToolForge">
-<meta name="twitter:description" content="Free online Heading Structure Checker to inspect H1-H6 hierarchy from HTML and detect skipped heading levels. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Check HTML heading hierarchy for SEO and accessibility.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Heading Structure Checker used for?",
+      "name": "What is proper heading hierarchy?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Heading Structure Checker is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "Proper heading hierarchy follows a logical order: H1 for page title (one per page), H2 for main sections, H3 for subsections, H4-H6 for deeper nesting. Never skip levels (e.g., H2 to H4). This structure helps screen readers navigate content and improves SEO."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "Why is heading structure important for accessibility?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Screen reader users navigate by headings to understand page structure and jump to sections. Skipped levels (H2 to H4) confuse navigation. Proper hierarchy (WCAG 1.3.1) ensures all users can understand content organization. Headings should describe content, not just style."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "How many H1 tags should a page have?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Best practice is one H1 per page, representing the main topic/title. While HTML5 allows multiple H1s (one per section), screen readers and SEO tools work best with a single H1. Use H2-H6 for subsections. Think of H1 as the page title in a document outline."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are common heading mistakes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Common mistakes: skipping levels (H2 to H4), using headings for styling only, multiple H1s, empty headings, headings that don't describe content, using bold/large text instead of proper heading tags. Always use heading tags for structure, CSS for visual styling."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "How does heading structure affect SEO?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Search engines use headings to understand content hierarchy and importance. H1 carries most weight, followed by H2, etc. Proper structure helps crawlers understand page topics and section relationships. Include relevant keywords naturally in headings, but prioritize user readability."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "What is WCAG requirement for headings?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "WCAG 2.1 Success Criterion 1.3.1 (Info and Relationships) requires headings to be used correctly. Criterion 2.4.6 (Headings and Labels) requires descriptive headings. Criterion 2.4.10 (Section Headings) recommends section headings in mobile contexts. Proper heading order is essential for AA compliance."
       }
     }
   ]
@@ -75,7 +80,7 @@
 <p class="subtitle">Inspect H1-H6 heading order in HTML and detect skipped levels.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <label for="html-input" class="sr-only">HTML input</label>
-<textarea id="html-input" rows="12" class="pdf-editor pdf-editor-mono" aria-label="HTML input"></textarea>
+<textarea id="html-input" rows="12" class="pdf-editor pdf-editor-mono" aria-label="HTML input" placeholder="<h1>Main Title</h1>&#10;<h2>Section</h2>&#10;<h3>Subsection</h3>"></textarea>
 <div class="tool-actions">
 <button type="button" onclick="checkHeadings()">Check Headings</button>
 <button type="button" onclick="copyOutput()">Copy Report</button>
@@ -83,27 +88,105 @@
 <label for="output" class="sr-only">Heading structure report</label>
 <textarea id="output" rows="12" class="pdf-editor pdf-editor-mono" aria-label="Heading structure report" readonly></textarea>
 <p id="status" class="inline-status"></p>
+
 <section class="tool-seo">
 <h3>About Heading Structure Checker</h3>
-<p>This heading structure checker inspects H1 to H6 order in HTML and highlights skipped heading levels.</p>
-<p>It is useful for content audits, accessibility reviews and on-page SEO checks when you want cleaner document structure and more consistent heading hierarchy.</p>
+<p>This heading structure checker inspects H1 to H6 order in HTML and highlights skipped heading levels. It generates a report showing the heading hierarchy and warns about accessibility issues.</p>
+<p>It is useful for content audits, accessibility reviews (WCAG compliance), on-page SEO checks, and ensuring consistent document structure for screen reader users.</p>
+
+<h4>Heading Hierarchy Best Practices</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Correct structure:
+  &lt;h1&gt;Page Title&lt;/h1&gt;
+    &lt;h2&gt;Main Section&lt;/h2&gt;
+      &lt;h3&gt;Subsection&lt;/h3&gt;
+      &lt;h3&gt;Another Subsection&lt;/h3&gt;
+    &lt;h2&gt;Another Main Section&lt;/h2&gt;
+      &lt;h3&gt;Subsection&lt;/h3&gt;
+        &lt;h4&gt;Deep nesting&lt;/h4&gt;
+
+Incorrect - skipped level:
+  &lt;h1&gt;Page Title&lt;/h1&gt;
+    &lt;h2&gt;Main Section&lt;/h2&gt;
+      &lt;h4&gt;Skipped H3!&lt;/h4&gt;  &lt;!-- WARNING --&gt;
+
+Incorrect - multiple H1s:
+  &lt;h1&gt;First Title&lt;/h1&gt;
+  &lt;h1&gt;Second Title&lt;/h1&gt;  &lt;!-- WARNING --&gt;
+</pre>
+
+<h4>WCAG Heading Requirements</h4>
+<table class="ref-table">
+<thead><tr><th>Criterion</th><th>Level</th><th>Requirement</th></tr></thead>
+<tbody>
+<tr><td><code>1.3.1</code></td><td>A</td><td>Info and Relationships - headings convey structure</td></tr>
+<tr><td><code>2.4.6</code></td><td>AA</td><td>Headings and Labels - descriptive headings</td></tr>
+<tr><td><code>2.4.10</code></td><td>AAA</td><td>Section Headings - use headings in mobile contexts</td></tr>
+<tr><td><code>1.4.10</code></td><td>AA</td><td>Reflow - headings visible at 320px width</td></tr>
+</tbody>
+</table>
+
+<h4>Common Heading Issues</h4>
+<table class="ref-table">
+<thead><tr><th>Issue</th><th>Impact</th><th>Fix</th></tr></thead>
+<tbody>
+<tr><td>Skipped level (H2→H4)</td><td>Screen reader confusion</td><td>Use sequential levels</td></tr>
+<tr><td>Multiple H1 tags</td><td>SEO dilution, unclear structure</td><td>Use one H1 per page</td></tr>
+<tr><td>No H1 tag</td><td>Missing page title</td><td>Add descriptive H1</td></tr>
+<tr><td>Empty headings</td><td>Wasted navigation points</td><td>Remove or fill content</td></tr>
+<tr><td>Headings for styling</td><td>Misleading structure</td><td>Use CSS for styling</td></tr>
+<tr><td>Non-descriptive text</td><td>Poor navigation</td><td>Use meaningful headings</td></tr>
+</tbody>
+</table>
+
+<h4>Heading Structure for SEO</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+SEO Best Practices:
+
+1. One H1 per page - include primary keyword
+2. H2s for main topics - include secondary keywords
+3. H3-H6 for subsections - support topic hierarchy
+4. Keep headings concise (20-70 characters)
+5. Make headings descriptive and unique
+6. Include keywords naturally, don't stuff
+7. Match search intent in headings
+
+Example SEO-friendly structure:
+
+&lt;h1&gt;Complete Guide to JavaScript Arrays&lt;/h1&gt;
+  &lt;h2&gt;What Are Arrays?&lt;/h2&gt;
+    &lt;h3&gt;Array Syntax&lt;/h3&gt;
+    &lt;h3&gt;Creating Arrays&lt;/h3&gt;
+  &lt;h2&gt;Array Methods&lt;/h2&gt;
+    &lt;h3&gt;map() Method&lt;/h3&gt;
+    &lt;h3&gt;filter() Method&lt;/h3&gt;
+    &lt;h3&gt;reduce() Method&lt;/h3&gt;
+  &lt;h2&gt;Common Array Operations&lt;/h2&gt;
+    &lt;h3&gt;Adding Elements&lt;/h3&gt;
+    &lt;h3&gt;Removing Elements&lt;/h3&gt;
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Heading Structure Checker used for?</dt>
-  <dd>Heading Structure Checker is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is proper heading hierarchy?</dt>
+  <dd>Proper heading hierarchy follows a logical order: H1 for page title (one per page), H2 for main sections, H3 for subsections, H4-H6 for deeper nesting. Never skip levels (e.g., H2 to H4). This structure helps screen readers navigate content and improves SEO.</dd>
+
+  <dt>Why is heading structure important for accessibility?</dt>
+  <dd>Screen reader users navigate by headings to understand page structure and jump to sections. Skipped levels (H2 to H4) confuse navigation. Proper hierarchy (WCAG 1.3.1) ensures all users can understand content organization. Headings should describe content, not just style.</dd>
+
+  <dt>How many H1 tags should a page have?</dt>
+  <dd>Best practice is one H1 per page, representing the main topic/title. While HTML5 allows multiple H1s (one per section), screen readers and SEO tools work best with a single H1. Use H2-H6 for subsections. Think of H1 as the page title in a document outline.</dd>
+
+  <dt>What are common heading mistakes?</dt>
+  <dd>Common mistakes: skipping levels (H2 to H4), using headings for styling only, multiple H1s, empty headings, headings that don't describe content, using bold/large text instead of proper heading tags. Always use heading tags for structure, CSS for visual styling.</dd>
+
+  <dt>How does heading structure affect SEO?</dt>
+  <dd>Search engines use headings to understand content hierarchy and importance. H1 carries most weight, followed by H2, etc. Proper structure helps crawlers understand page topics and section relationships. Include relevant keywords naturally in headings, but prioritize user readability.</dd>
+
+  <dt>What is WCAG requirement for headings?</dt>
+  <dd>WCAG 2.1 Success Criterion 1.3.1 (Info and Relationships) requires headings to be used correctly. Criterion 2.4.6 (Headings and Labels) requires descriptive headings. Criterion 2.4.10 (Section Headings) recommends section headings in mobile contexts. Proper heading order is essential for AA compliance.</dd>
 </dl>
 </section>
 </main>
@@ -124,19 +207,33 @@ let doc=new DOMParser().parseFromString(input,"text/html")
 let headings=Array.from(doc.querySelectorAll("h1,h2,h3,h4,h5,h6"))
 let report=[]
 let prev=0
+let h1Count=0
+let warnings=[]
 headings.forEach(function(node,index){
 let level=parseInt(node.tagName.slice(1),10)
-report.push(node.tagName.toUpperCase()+": "+node.textContent.trim())
+let text=node.textContent.trim()
+report.push(node.tagName.toUpperCase()+": "+text)
+if(level===1)h1Count++
 if(prev&&level>prev+1){
-report.push("Warning: skipped from H"+prev+" to H"+level)
+warnings.push("Warning: skipped from H"+prev+" to H"+level+" at \""+text.substring(0,30)+"\"")
 }
 prev=level
 })
+if(h1Count===0){
+warnings.push("Warning: no H1 tag found")
+}else if(h1Count>1){
+warnings.push("Warning: "+h1Count+" H1 tags found (recommend one)")
+}
 if(!headings.length){
 report.push("No headings found.")
 }
+if(warnings.length){
+report.unshift("--- WARNINGS ---")
+warnings.forEach(function(w){report.unshift(w)})
+report.unshift("--- END WARNINGS ---\n")
+}
 document.getElementById("output").value=report.join("\n")
-setStatus("Heading structure checked.","#16a34a")
+setStatus("Found "+headings.length+" headings, "+warnings.length+" warnings.","#16a34a")
 }
 function copyOutput(){
 let value=document.getElementById("output").value

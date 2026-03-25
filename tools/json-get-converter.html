@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>JSON to GET Converter – JSON Query String Online | ToolForge</title>
-<meta name="description" content="Free online JSON to GET query string and GET to JSON converter. Convert JSON objects to URL query parameters and back. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Convert JSON objects to URL query strings and parse query strings back to JSON. Supports nested objects and arrays. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/json-get-converter.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="JSON to GET Converter – JSON Query String Online | ToolForge">
-<meta property="og:description" content="Free online JSON to GET query string and GET to JSON converter. Convert JSON objects to URL query parameters and back. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Convert JSON objects to GET query strings and GET query strings back to JSON.">
 <meta property="og:url" content="https://toolforge.site/tools/json-get-converter.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JSON to GET Converter – JSON Query String Online | ToolForge">
-<meta name="twitter:description" content="Free online JSON to GET query string and GET to JSON converter. Convert JSON objects to URL query parameters and back. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Convert JSON to GET query strings and back.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Json Get Converter used for?",
+      "name": "What is a query string?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Json Get Converter is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "A query string is the part of a URL after the question mark (?) containing key-value pairs separated by ampersands (&). Format: ?key1=value1&key2=value2. Query strings send data via GET requests, used for filters, pagination, search parameters, and API queries."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How are arrays represented in query strings?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Arrays can be represented multiple ways: repeated keys (tags=a&tags=b), bracket notation (tags[]=a&tags[]=b), or indexed (tags[0]=a&tags[1]=b). This tool uses repeated keys by default. Server-side parsing determines how duplicates are handled (array vs last value wins)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "How are nested objects flattened?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Nested objects use bracket notation: {user: {name: 'John'}} becomes user[name]=John. Arrays in objects: {filter: {tags: ['a','b']}} becomes filter[tags]=a&filter[tags]=b. This flat key-value structure preserves the hierarchy while remaining URL-compatible."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What characters are encoded in URLs?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Special characters are percent-encoded: space→%20 (or +), &→%26, =→%3D, ?→%3F, #→%23, non-ASCII→UTF-8 bytes. JavaScript's encodeURIComponent() handles this automatically. Always encode values, and optionally encode keys if they contain special characters."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What is the query string length limit?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "No official HTTP spec limit, but practical limits exist: IE ~2048 chars, older browsers ~2000 chars, servers vary (Apache ~8KB, IIS ~16KB). For large data, use POST with JSON body. Keep query strings under 2000 characters for maximum compatibility."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How do I parse query strings in JavaScript?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Use URLSearchParams: const params = new URLSearchParams(window.location.search); params.get('key'); params.getAll('key'); for modern browsers. For Node.js: require('querystring').parse(). This tool handles nested objects and arrays that URLSearchParams doesn't natively support."
       }
     }
   ]
@@ -72,11 +77,11 @@
 <body>
 <main class="container">
 <h1>JSON ⇄ GET Converter</h1>
-<p class="subtitle">Convert JSON objects to GET query string and GET query string back to JSON.</p>
+<p class="subtitle">Convert JSON objects to GET query strings and parse query strings back to JSON with support for nested objects and arrays.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
-<h3>JSON</h3>
+<h3>JSON Object</h3>
 <label for="json" class="sr-only">JSON input</label>
-<textarea id="json" rows="10" style="width:90%;font-family:monospace" placeholder='{"name":"John","age":30,"tags":["a","b"]}' aria-label="JSON input"></textarea>
+<textarea id="json" rows="10" style="width:90%;font-family:monospace" placeholder='{"name":"John","age":30,"tags":["a","b"],"filter":{"status":"active"}}' aria-label="JSON input"></textarea>
 <br><br>
 <div class="tool-actions">
 <button type="button" onclick="jsonToGet()">JSON → GET</button>
@@ -85,29 +90,135 @@
 </div>
 <h3 style="margin-top:24px">GET Query String</h3>
 <label for="get" class="sr-only">GET query string input</label>
-<textarea id="get" rows="6" style="width:90%;font-family:monospace" placeholder="name=John&amp;age=30&amp;tags=a&amp;tags=b" aria-label="GET query string input"></textarea>
+<textarea id="get" rows="6" style="width:90%;font-family:monospace" placeholder="name=John&age=30&tags=a&tags=b&filter[status]=active" aria-label="GET query string input"></textarea>
 <p id="status" class="inline-status"></p>
+
 <section class="tool-seo">
 <h3>About JSON ⇄ GET Converter</h3>
-<p>This converter transforms JSON objects into GET query strings (e.g. ?key=value&amp;arr=a&amp;arr=b) and parses query strings back into JSON. Handles nested objects and arrays in a flat key-value style.</p>
-<p>It is useful for building API URLs, testing query parameters, or converting between structured data and URL formats.</p>
+<p>This converter transforms JSON objects into GET query strings (e.g., ?key=value&arr=a&arr=b) and parses query strings back into JSON. It handles nested objects using bracket notation and arrays as repeated keys.</p>
+<p>It is useful for building API URLs with dynamic parameters, testing query-based endpoints, converting filter objects to URLs, or extracting JSON data from existing query strings for debugging.</p>
+
+<h4>Conversion Examples</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Simple object:
+{"name": "John", "age": 30}
+→ name=John&age=30
+
+Array values (repeated keys):
+{"tags": ["a", "b", "c"]}
+→ tags=a&tags=b&tags=c
+
+Nested objects (bracket notation):
+{"user": {"name": "John", "age": 30}}
+→ user[name]=John&user[age]=30
+
+Complex nested with array:
+{"filter": {"status": "active", "tags": ["web", "api"]}}
+→ filter[status]=active&filter[tags]=web&filter[tags]=api
+
+Full URL example:
+https://api.example.com/users?name=John&age=30&tags=a&tags=b
+</pre>
+
+<h4>Query String Encoding Rules</h4>
+<table class="ref-table">
+<thead><tr><th>Character</th><th>Encoded</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td><code> </code> (space)</td><td><code>%20</code> or <code>+</code></td><td>Both accepted; + common in forms</td></tr>
+<tr><td><code>&</code></td><td><code>%26</code></td><td>Separator between pairs</td></tr>
+<tr><td><code>=</code></td><td><code>%3D</code></td><td>Separates key from value</td></tr>
+<tr><td><code>?</code></td><td><code>%3F</code></td><td>Starts query string</td></tr>
+<tr><td><code>#</code></td><td><code>%23</code></td><td>Starts fragment (not sent)</td></tr>
+<tr><td><code>/</code></td><td><code>%2F</code></td><td>Path separator</td></tr>
+<tr><td>Non-ASCII</td><td><code>%XX</code> bytes</td><td>UTF-8 percent encoded</td></tr>
+</tbody>
+</table>
+
+<h4>JavaScript Implementation</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// JSON to query string (handles nested/arrays)
+function jsonToQuery(obj, prefix) {
+  const pairs = [];
+  for (const key in obj) {
+    if (!obj.hasOwnProperty(key)) continue;
+    const fullKey = prefix ? prefix + "[" + key + "]" : key;
+    const value = obj[key];
+
+    if (value === null || value === undefined) continue;
+
+    if (Array.isArray(value)) {
+      value.forEach(v => {
+        pairs.push(encodeURIComponent(fullKey) + "=" + encodeURIComponent(v));
+      });
+    } else if (typeof value === "object") {
+      pairs.push(...jsonToQuery(value, fullKey));
+    } else {
+      pairs.push(encodeURIComponent(fullKey) + "=" + encodeURIComponent(value));
+    }
+  }
+  return pairs.join("&");
+}
+
+// Query string to JSON
+function queryToJson(queryString) {
+  const params = new URLSearchParams(queryString.replace(/^\?/, ""));
+  const result = {};
+
+  for (const [key, value] of params) {
+    if (result.hasOwnProperty(key)) {
+      if (!Array.isArray(result[key])) {
+        result[key] = [result[key]];
+      }
+      result[key].push(value);
+    } else {
+      result[key] = value;
+    }
+  }
+
+  // Single-element arrays become scalars
+  for (const key in result) {
+    if (Array.isArray(result[key]) && result[key].length === 1) {
+      result[key] = result[key][0];
+    }
+  }
+
+  return result;
+}
+</pre>
+
+<h4>Common Use Cases</h4>
+<table class="ref-table">
+<thead><tr><th>Use Case</th><th>Example JSON</th><th>Query String</th></tr></thead>
+<tbody>
+<tr><td>Search filters</td><td><code>{"q": "api", "page": 2}</code></td><td><code>q=api&page=2</code></td></tr>
+<tr><td>Multi-select</td><td><code>{"tags": ["js", "css"]}</code></td><td><code>tags=js&tags=css</code></td></tr>
+<tr><td>Range filter</td><td><code>{"min": 0, "max": 100}</code></td><td><code>min=0&max=100</code></td></tr>
+<tr><td>Sort options</td><td><code>{"sort": "date", "order": "desc"}</code></td><td><code>sort=date&order=desc</code></td></tr>
+<tr><td>Nested filters</td><td><code>{"user": {"role": "admin"}}</code></td><td><code>user[role]=admin</code></td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Json Get Converter used for?</dt>
-  <dd>Json Get Converter is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is a query string?</dt>
+  <dd>A query string is the part of a URL after the question mark (?) containing key-value pairs separated by ampersands (&). Format: ?key1=value1&key2=value2. Query strings send data via GET requests, used for filters, pagination, search parameters, and API queries.</dd>
+
+  <dt>How are arrays represented in query strings?</dt>
+  <dd>Arrays can be represented multiple ways: repeated keys (tags=a&tags=b), bracket notation (tags[]=a&tags[]=b), or indexed (tags[0]=a&tags[1]=b). This tool uses repeated keys by default. Server-side parsing determines how duplicates are handled (array vs last value wins).</dd>
+
+  <dt>How are nested objects flattened?</dt>
+  <dd>Nested objects use bracket notation: {user: {name: 'John'}} becomes user[name]=John. Arrays in objects: {filter: {tags: ['a','b']}} becomes filter[tags]=a&filter[tags]=b. This flat key-value structure preserves the hierarchy while remaining URL-compatible.</dd>
+
+  <dt>What characters are encoded in URLs?</dt>
+  <dd>Special characters are percent-encoded: space→%20 (or +), &→%26, =→%3D, ?→%3F, #→%23, non-ASCII→UTF-8 bytes. JavaScript's encodeURIComponent() handles this automatically. Always encode values, and optionally encode keys if they contain special characters.</dd>
+
+  <dt>What is the query string length limit?</dt>
+  <dd>No official HTTP spec limit, but practical limits exist: IE ~2048 chars, older browsers ~2000 chars, servers vary (Apache ~8KB, IIS ~16KB). For large data, use POST with JSON body. Keep query strings under 2000 characters for maximum compatibility.</dd>
+
+  <dt>How do I parse query strings in JavaScript?</dt>
+  <dd>Use URLSearchParams: const params = new URLSearchParams(window.location.search); params.get('key'); params.getAll('key'); for modern browsers. For Node.js: require('querystring').parse(). This tool handles nested objects and arrays that URLSearchParams doesn't natively support.</dd>
 </dl>
 </section>
 </main>

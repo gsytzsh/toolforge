@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>PPI Calculator – Screen Pixels Per Inch Calculator | ToolForge</title>
-<meta name="description" content="Free online PPI calculator. Calculate screen pixels per inch from width, height and diagonal in inches. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Calculate screen PPI (pixels per inch) from resolution and diagonal size. Includes dot pitch calculation and display density comparison. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/ppi-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="PPI Calculator – Screen Pixels Per Inch Calculator | ToolForge">
-<meta property="og:description" content="Calculate screen PPI from width, height and diagonal.">
+<meta property="og:description" content="Calculate screen PPI (pixels per inch) from resolution and diagonal size. Includes dot pitch calculation and display density comparison. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/ppi-calculator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PPI Calculator – Screen Pixels Per Inch Calculator | ToolForge">
-<meta name="twitter:description" content="Calculate screen PPI from width, height and diagonal.">
+<meta name="twitter:description" content="Calculate screen PPI (pixels per inch) from resolution and diagonal size. Includes dot pitch calculation and display density comparison. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Ppi Calculator used for?",
+      "name": "How is PPI calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Ppi Calculator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "PPI is calculated using the Pythagorean theorem: PPI = √(width² + height²) / diagonal. First, calculate the diagonal resolution in pixels using √(width² + height²), then divide by the screen diagonal in inches. For example, a 1920×1080 display at 24 inches: √(1920² + 1080²) = 2202.9 pixels, divided by 24 = 91.8 PPI."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is dot pitch and how does it relate to PPI?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Dot pitch is the distance between adjacent pixels, measured in millimeters. It's the inverse of PPI: Dot Pitch (mm) = 25.4 / PPI. Higher PPI means smaller dot pitch and sharper images. For example, 96 PPI = 0.265mm dot pitch, while 300 PPI = 0.085mm dot pitch."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What is considered Retina or HiDPI display?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Retina (Apple) and HiDPI (general) refer to displays where individual pixels are indistinguishable at normal viewing distance. Thresholds vary: smartphones need ~300+ PPI (viewed at 10-12 inches), tablets need ~264 PPI (15-18 inches), monitors need ~200+ PPI (24-36 inches). The required PPI decreases as viewing distance increases."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "Why does PPI matter for design work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "PPI affects pixel density and sharpness. High PPI displays (HiDPI/Retina) require 2x or 3x resolution assets for crisp rendering. Design tools use PPI to scale UI elements correctly. Web design assumes 96 PPI (CSS pixel), but actual device PPI varies widely. Understanding PPI ensures designs look sharp across devices."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What are common PPI values for different devices?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Smartphones: 300-500+ PPI (iPhone 15: 460 PPI, Galaxy S24: 390-500 PPI). Tablets: 264-400 PPI (iPad: 264 PPI). Laptops: 100-220 PPI (MacBook Pro: 220-254 PPI). Monitors: 80-200 PPI (27\" 4K: 163 PPI). TVs: 40-80 PPI (55\" 4K: 80 PPI, viewed from 6+ feet)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How does viewing distance affect perceived sharpness?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Perceived sharpness depends on angular pixel density. At 20/20 vision, the human eye resolves ~1 arcminute (1/60 degree). Required PPI = 3438 / viewing distance (inches). At 12 inches: 287 PPI needed. At 24 inches: 143 PPI. At 10 feet (TV): 29 PPI. This is why TVs can have lower PPI than phones."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>PPI Calculator</h1>
-<p class="subtitle">Calculate screen pixels per inch (PPI) from resolution and diagonal size.</p>
+<p class="subtitle">Calculate screen pixels per inch (PPI) and dot pitch from resolution and diagonal size.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <label for="width">Width (pixels)</label>
@@ -96,25 +101,318 @@
 
 <section class="tool-seo">
 <h3>About PPI Calculator</h3>
-<p>PPI (pixels per inch) indicates screen density. This calculator uses width, height and diagonal in inches to compute PPI and dot pitch.</p>
-<p>Useful for comparing displays, design at correct DPI and understanding Retina/HiDPI.</p>
+<p>PPI (pixels per inch) measures screen pixel density, indicating how many pixels fit in one inch of display space. Higher PPI values produce sharper, more detailed images with less visible pixelation. This calculator computes PPI and dot pitch from screen resolution and diagonal size.</p>
+
+<h4>PPI Calculation Formula</h4>
+<p>PPI is calculated using the Pythagorean theorem to find the diagonal resolution in pixels:</p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+PPI Calculation:
+
+Step 1: Calculate diagonal resolution (pixels)
+  diagonal_pixels = √(width² + height²)
+
+Step 2: Divide by screen diagonal (inches)
+  PPI = diagonal_pixels / screen_diagonal
+
+Step 3: Calculate dot pitch (mm)
+  dot_pitch = 25.4 / PPI
+
+Example: 1920×1080 at 24 inches
+  diagonal_pixels = √(1920² + 1080²)
+                  = √(3,686,400 + 1,166,400)
+                  = √4,852,800
+                  = 2,202.9 pixels
+
+  PPI = 2,202.9 / 24
+      = 91.79 pixels per inch
+
+  dot_pitch = 25.4 / 91.79
+            = 0.277 mm
+</pre>
+
+<h4>JavaScript Implementation</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+function calculatePPI(width, height, diagonal) {
+  // Validate inputs
+  if (!width || !height || !diagonal || diagonal <= 0) {
+    throw new Error("Invalid input values");
+  }
+
+  // Calculate diagonal resolution using Pythagorean theorem
+  const diagonalPixels = Math.sqrt(width * width + height * height);
+
+  // Calculate PPI
+  const ppi = diagonalPixels / diagonal;
+
+  // Calculate dot pitch in millimeters
+  // 1 inch = 25.4 mm
+  const dotPitch = 25.4 / ppi;
+
+  return {
+    ppi: ppi.toFixed(2),
+    dotPitch: dotPitch.toFixed(3),
+    diagonalPixels: diagonalPixels.toFixed(1)
+  };
+}
+
+// Usage examples:
+calculatePPI(1920, 1080, 24);   // 91.79 PPI, 0.277mm
+calculatePPI(3840, 2160, 27);   // 163.18 PPI, 0.156mm
+calculatePPI(2560, 1440, 27);   // 108.79 PPI, 0.233mm
+</pre>
+
+<h4>Common Resolution PPI Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Resolution</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Name</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">24"</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">27"</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">32"</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">1920×1080</td>
+    <td style="border:1px solid #ddd;padding:8px">Full HD (1080p)</td>
+    <td style="border:1px solid #ddd;padding:8px">91.8 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">81.6 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">68.8 PPI</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">2560×1440</td>
+    <td style="border:1px solid #ddd;padding:8px">QHD (1440p)</td>
+    <td style="border:1px solid #ddd;padding:8px">122.4 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">108.8 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">91.8 PPI</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">3840×2160</td>
+    <td style="border:1px solid #ddd;padding:8px">4K UHD (2160p)</td>
+    <td style="border:1px solid #ddd;padding:8px">183.5 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">163.2 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">137.6 PPI</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">5120×2880</td>
+    <td style="border:1px solid #ddd;padding:8px">5K</td>
+    <td style="border:1px solid #ddd;padding:8px">244.7 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">217.5 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">183.5 PPI</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">7680×4320</td>
+    <td style="border:1px solid #ddd;padding:8px">8K UHD</td>
+    <td style="border:1px solid #ddd;padding:8px">367.0 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">326.2 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">275.2 PPI</td>
+  </tr>
+</table>
+
+<h4>Device PPI Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Device Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Typical PPI Range</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Viewing Distance</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Smartphones</td>
+    <td style="border:1px solid #ddd;padding:8px">300-500+ PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">iPhone 15 Pro: 460 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">10-12 inches</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Tablets</td>
+    <td style="border:1px solid #ddd;padding:8px">264-400 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">iPad Pro: 264 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">15-18 inches</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Laptops</td>
+    <td style="border:1px solid #ddd;padding:8px">100-220 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">MacBook Pro 14": 254 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">18-24 inches</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Desktop Monitors</td>
+    <td style="border:1px solid #ddd;padding:8px">80-200 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">27" 4K: 163 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">24-36 inches</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Televisions</td>
+    <td style="border:1px solid #ddd;padding:8px">40-80 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">55" 4K: 80 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">6-10 feet</td>
+  </tr>
+</table>
+
+<h4>Retina / HiDPI Thresholds</h4>
+<p>"Retina" (Apple) and "HiDPI" refer to displays where pixels are indistinguishable at normal viewing distance for 20/20 vision:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Viewing Distance</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Required PPI</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Device Category</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">10-12 inches</td>
+    <td style="border:1px solid #ddd;padding:8px">287-344 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">Smartphones</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">15-18 inches</td>
+    <td style="border:1px solid #ddd;padding:8px">191-229 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">Tablets</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">18-24 inches</td>
+    <td style="border:1px solid #ddd;padding:8px">143-191 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">Laptops/Monitors</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">36 inches</td>
+    <td style="border:1px solid #ddd;padding:8px">96 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">Large monitors</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">6 feet (72 inches)</td>
+    <td style="border:1px solid #ddd;padding:8px">48 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">Televisions</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">10 feet (120 inches)</td>
+    <td style="border:1px solid #ddd;padding:8px">29 PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">Large TVs/Projectors</td>
+  </tr>
+</table>
+
+<h4>PPI and Dot Pitch Relationship</h4>
+<p>Dot pitch is the physical distance between adjacent pixel centers, measured in millimeters:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+PPI to Dot Pitch Conversion:
+  dot_pitch_mm = 25.4 / PPI
+
+Dot Pitch to PPI Conversion:
+  PPI = 25.4 / dot_pitch_mm
+
+Reference Table:
+  PPI     | Dot Pitch (mm) | Quality
+  --------|----------------|------------------
+  72      | 0.353          | Standard (old CRT)
+  96      | 0.265          | Standard LCD
+  110     | 0.231          | Entry laptop
+  144     | 0.176          | Good quality
+  200     | 0.127          | High density
+  300     | 0.085          | Retina class
+  400     | 0.064          | Premium smartphone
+  500     | 0.051          | Cutting edge phone
+</pre>
+
+<h4>Design Considerations for HiDPI</h4>
+<p>When designing for HiDPI/Retina displays:</p>
+<ul>
+  <li><strong>2x assets:</strong> Provide images at 2x resolution for crisp rendering on Retina displays</li>
+  <li><strong>CSS pixels:</strong> Web design uses CSS pixels (96 PPI reference), not physical pixels</li>
+  <li><strong>Vector graphics:</strong> Use SVG for icons and illustrations to scale infinitely</li>
+  <li><strong>Font hinting:</strong> High PPI reduces need for aggressive font hinting</li>
+  <li><strong>Touch targets:</strong> Minimum 44×44 CSS pixels for touch accessibility</li>
+</ul>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Display Comparison:</strong> Compare pixel density when shopping for monitors or TVs</li>
+  <li><strong>UI/UX Design:</strong> Design at correct scale for target device PPI</li>
+  <li><strong>Asset Production:</strong> Determine required image resolutions for different devices</li>
+  <li><strong>Print Design:</strong> Convert between screen PPI and print DPI requirements</li>
+  <li><strong>Accessibility:</strong> Ensure text remains readable at various PPI levels</li>
+  <li><strong>Game Development:</strong> Optimize texture resolution for target display density</li>
+</ul>
+
+<h4>PPI vs DPI</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Aspect</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">PPI (Pixels Per Inch)</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">DPI (Dots Per Inch)</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Definition</td>
+    <td style="border:1px solid #ddd;padding:8px">Screen pixel density</td>
+    <td style="border:1px solid #ddd;padding:8px">Print dot density</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Used For</td>
+    <td style="border:1px solid #ddd;padding:8px">Digital displays</td>
+    <td style="border:1px solid #ddd;padding:8px">Printing, scanning</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Standard Values</td>
+    <td style="border:1px solid #ddd;padding:8px">72-500+ PPI</td>
+    <td style="border:1px solid #ddd;padding:8px">150-600+ DPI</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">CSS Reference</td>
+    <td style="border:1px solid #ddd;padding:8px">96 PPI (web standard)</td>
+    <td style="border:1px solid #ddd;padding:8px">N/A</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Print Quality</td>
+    <td style="border:1px solid #ddd;padding:8px">N/A</td>
+    <td style="border:1px solid #ddd;padding:8px">300 DPI standard</td>
+  </tr>
+</table>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>Assumes square pixels:</strong> Calculation assumes square pixel layout; some displays use different arrangements</li>
+  <li><strong>Doesn't account for subpixel layout:</strong> RGB stripe, PenTile, and other subpixel arrangements affect perceived sharpness</li>
+  <li><strong>Viewing distance varies:</strong> Actual perceived sharpness depends on individual viewing distance</li>
+  <li><strong>Doesn't measure color accuracy:</strong> PPI only measures density, not color gamut or accuracy</li>
+  <li><strong>Ignores anti-aliasing:</strong> Software rendering can affect perceived edge sharpness</li>
+</ul>
+</section>
+
+<section class="how-to-use">
+<h3>How to Use PPI Calculator</h3>
+<ol class="how-to-steps">
+  <li><strong>Enter width:</strong> Input the horizontal resolution in pixels (e.g., 1920).</li>
+  <li><strong>Enter height:</strong> Input the vertical resolution in pixels (e.g., 1080).</li>
+  <li><strong>Enter diagonal:</strong> Input the screen diagonal size in inches (e.g., 24).</li>
+  <li><strong>Calculate:</strong> PPI and dot pitch are automatically calculated.</li>
+  <li><strong>Compare:</strong> Use results to compare display sharpness across devices.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Common resolutions: 1920×1080 (Full HD), 2560×1440 (QHD), 3840×2160 (4K)</li>
+  <li>Higher PPI means sharper images but may require more GPU power</li>
+  <li>For design work, consider the target device's typical viewing distance</li>
+  <li>Dot pitch below 0.2mm is generally considered high density</li>
+  <li>TVs viewed from 6+ feet don't benefit from extremely high PPI</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Ppi Calculator used for?</dt>
-  <dd>Ppi Calculator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>How is PPI calculated?</dt>
+  <dd>PPI is calculated using the Pythagorean theorem: PPI = √(width² + height²) / diagonal. First, calculate the diagonal resolution in pixels using √(width² + height²), then divide by the screen diagonal in inches. For example, a 1920×1080 display at 24 inches: √(1920² + 1080²) = 2202.9 pixels, divided by 24 = 91.8 PPI.</dd>
+
+  <dt>What is dot pitch and how does it relate to PPI?</dt>
+  <dd>Dot pitch is the distance between adjacent pixels, measured in millimeters. It's the inverse of PPI: Dot Pitch (mm) = 25.4 / PPI. Higher PPI means smaller dot pitch and sharper images. For example, 96 PPI = 0.265mm dot pitch, while 300 PPI = 0.085mm dot pitch.</dd>
+
+  <dt>What is considered Retina or HiDPI display?</dt>
+  <dd>Retina (Apple) and HiDPI (general) refer to displays where individual pixels are indistinguishable at normal viewing distance. Thresholds vary: smartphones need ~300+ PPI (viewed at 10-12 inches), tablets need ~264 PPI (15-18 inches), monitors need ~200+ PPI (24-36 inches). The required PPI decreases as viewing distance increases.</dd>
+
+  <dt>Why does PPI matter for design work?</dt>
+  <dd>PPI affects pixel density and sharpness. High PPI displays (HiDPI/Retina) require 2x or 3x resolution assets for crisp rendering. Design tools use PPI to scale UI elements correctly. Web design assumes 96 PPI (CSS pixel), but actual device PPI varies widely. Understanding PPI ensures designs look sharp across devices.</dd>
+
+  <dt>What are common PPI values for different devices?</dt>
+  <dd>Smartphones: 300-500+ PPI (iPhone 15: 460 PPI, Galaxy S24: 390-500 PPI). Tablets: 264-400 PPI (iPad: 264 PPI). Laptops: 100-220 PPI (MacBook Pro: 220-254 PPI). Monitors: 80-200 PPI (27" 4K: 163 PPI). TVs: 40-80 PPI (55" 4K: 80 PPI, viewed from 6+ feet).</dd>
+
+  <dt>How does viewing distance affect perceived sharpness?</dt>
+  <dd>Perceived sharpness depends on angular pixel density. At 20/20 vision, the human eye resolves ~1 arcminute (1/60 degree). Required PPI = 3438 / viewing distance (inches). At 12 inches: 287 PPI needed. At 24 inches: 143 PPI. At 10 feet (TV): 29 PPI. This is why TVs can have lower PPI than phones.</dd>
 </dl>
 </section>
 </main>

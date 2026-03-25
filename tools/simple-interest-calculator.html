@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Simple Interest Calculator – P × r × t | ToolForge</title>
-<meta name="description" content="Free online Simple Interest Calculator: principal × rate × time. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Simple Interest Calculator computes interest using I = P × r × t formula. Includes formula derivation, comparison with compound interest, amortization examples, and financial applications. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/simple-interest-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Simple Interest Calculator – P × r × t | ToolForge">
-<meta property="og:description" content="Free online Simple Interest Calculator: principal × rate × time. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Simple Interest Calculator computes interest using I = P × r × t formula. Includes formula derivation, comparison with compound interest, amortization examples, and financial applications. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/simple-interest-calculator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Simple Interest Calculator – P × r × t | ToolForge">
-<meta name="twitter:description" content="Free online Simple Interest Calculator: principal × rate × time. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Simple Interest Calculator computes interest using I = P × r × t formula. Includes formula derivation, comparison with compound interest, amortization examples, and financial applications. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Simple Interest Calculator?",
+      "name": "What is the simple interest formula?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Simple Interest Calculator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Simple interest is calculated as I = P × r × t, where I is interest, P is principal (initial amount), r is annual interest rate (as decimal), and t is time in years. Total amount A = P + I = P(1 + rt). For example, $1000 at 5% for 3 years: I = 1000 × 0.05 × 3 = $150, Total = $1150."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between simple and compound interest?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Simple interest calculates only on the principal amount. Compound interest calculates on principal plus accumulated interest. Simple: $1000 at 5% for 3 years = $150 interest. Compound (annual): $1000 × (1.05)³ - 1000 = $157.63. Compound grows faster over time due to 'interest on interest'."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "When is simple interest used?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Simple interest is used for short-term loans (under 1 year), car loans (sometimes), bonds (coupon payments), certificates of deposit (some), personal loans between individuals, and educational finance problems. It favors borrowers for short terms but lenders lose potential earnings on reinvested interest."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I calculate simple interest for months instead of years?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Convert months to years by dividing by 12. Formula becomes I = P × r × (months/12). For example, $5000 at 6% for 9 months: I = 5000 × 0.06 × (9/12) = 5000 × 0.06 × 0.75 = $225. Alternatively, use monthly rate: r/12 × months."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How do I find the principal if I know the interest?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Rearrange the formula: P = I / (r × t). If you earned $200 interest at 4% over 2 years: P = 200 / (0.04 × 2) = 200 / 0.08 = $2500. Similarly, to find rate: r = I / (P × t), and to find time: t = I / (P × r)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What is the Rule of 72?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "The Rule of 72 estimates how long it takes to double money at compound interest: Years ≈ 72 / (interest rate %). At 6%, money doubles in about 12 years. For simple interest, doubling time = 100 / rate %. At 5% simple interest, it takes 20 years to double."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>Simple Interest Calculator</h1>
-<p class="subtitle">Calculate simple interest: I = P × r × t (principal, annual rate, years).</p>
+<p class="subtitle">Calculate simple interest using the formula I = P × r × t with detailed breakdown and comparison to compound interest.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Principal</h3>
 <label for="P" class="sr-only">Principal</label>
@@ -90,25 +95,303 @@
 <p>Total (P + I): <span id="total"></span></p>
 <section class="tool-seo">
 <h3>About Simple Interest Calculator</h3>
-<p>This simple interest calculator computes interest and total repayment using principal, annual rate and time.</p>
-<p>It is useful for basic lending examples, short-term agreements and classroom finance problems where interest does not compound.</p>
+<p>This simple interest calculator computes interest amounts and total repayment using the classic formula I = P × r × t. It provides a straightforward calculation where interest accrues linearly over time without compounding, making it ideal for short-term loans, educational purposes, and basic financial planning.</p>
+<p>It is useful for calculating personal loan interest, short-term borrowing costs, bond coupon payments, certificate of deposit returns, car loan estimates, classroom finance education, comparing loan offers, and understanding the time value of money in its simplest form.</p>
+
+<h4>Simple Interest Formula</h4>
+<p>The fundamental simple interest formula is:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Basic Formula:
+  I = P × r × t
+
+Where:
+  I = Interest amount
+  P = Principal (initial amount)
+  r = Annual interest rate (as decimal)
+  t = Time in years
+
+Total Amount (Future Value):
+  A = P + I
+  A = P + (P × r × t)
+  A = P(1 + rt)
+
+Variable Definitions:
+  Principal (P): Initial sum of money invested or borrowed
+  Rate (r): Annual percentage rate expressed as decimal (5% = 0.05)
+  Time (t): Duration in years (months ÷ 12 if needed)
+
+Example Calculation:
+  P = $1,000
+  r = 5% = 0.05
+  t = 3 years
+
+  I = 1000 × 0.05 × 3 = $150
+  A = 1000 + 150 = $1,150
+</pre>
+
+<h4>Formula Rearrangements</h4>
+<p>Solve for any variable when others are known:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Find Principal (P):
+  P = I / (r × t)
+  Example: Earn $200 interest at 4% over 2 years
+  P = 200 / (0.04 × 2) = 200 / 0.08 = $2,500
+
+Find Rate (r):
+  r = I / (P × t)
+  Example: $5000 principal earns $400 in 2 years
+  r = 400 / (5000 × 2) = 400 / 10000 = 0.04 = 4%
+
+Find Time (t):
+  t = I / (P × r)
+  Example: $3000 at 6% earns $540 interest
+  t = 540 / (3000 × 0.06) = 540 / 180 = 3 years
+
+Find Principal from Total (P from A):
+  P = A / (1 + rt)
+  Example: Total repayment is $1,150 at 5% for 3 years
+  P = 1150 / (1 + 0.05 × 3) = 1150 / 1.15 = $1,000
+</pre>
+
+<h4>Simple Interest vs Compound Interest</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Aspect</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Simple Interest</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Compound Interest</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Formula</td>
+    <td style="border:1px solid #ddd;padding:8px">I = P × r × t</td>
+    <td style="border:1px solid #ddd;padding:8px">A = P(1 + r/n)^(nt)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Interest Base</td>
+    <td style="border:1px solid #ddd;padding:8px">Principal only</td>
+    <td style="border:1px solid #ddd;padding:8px">Principal + accumulated interest</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Growth Pattern</td>
+    <td style="border:1px solid #ddd;padding:8px">Linear (straight line)</td>
+    <td style="border:1px solid #ddd;padding:8px">Exponential (curve upward)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">$1000 at 5% for 5 years</td>
+    <td style="border:1px solid #ddd;padding:8px">$250 interest</td>
+    <td style="border:1px solid #ddd;padding:8px">$276.28 interest</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">$1000 at 5% for 20 years</td>
+    <td style="border:1px solid #ddd;padding:8px">$1,000 interest</td>
+    <td style="border:1px solid #ddd;padding:8px">$1,653.30 interest</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Best For</td>
+    <td style="border:1px solid #ddd;padding:8px">Short-term loans, borrowers</td>
+    <td style="border:1px solid #ddd;padding:8px">Long-term investing, savings</td>
+  </tr>
+</table>
+
+<h4>Simple Interest Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Personal Loan
+  Borrow $5,000 at 8% simple interest for 2 years
+  I = 5000 × 0.08 × 2 = $800
+  Total repayment = $5,800
+  Monthly payment = $5,800 / 24 = $241.67
+
+Example 2: Certificate of Deposit
+  Invest $10,000 at 3.5% for 18 months
+  t = 18/12 = 1.5 years
+  I = 10000 × 0.035 × 1.5 = $525
+  Total value = $10,525
+
+Example 3: Short-term Business Loan
+  Borrow $25,000 at 6% for 9 months
+  t = 9/12 = 0.75 years
+  I = 25000 × 0.06 × 0.75 = $1,125
+  Total repayment = $26,125
+
+Example 4: Comparing Loan Offers
+  Loan A: $15,000 at 5.5% for 3 years
+  I = 15000 × 0.055 × 3 = $2,475
+  Total = $17,475
+
+  Loan B: $15,000 at 5% for 3.5 years
+  I = 15000 × 0.05 × 3.5 = $2,625
+  Total = $17,625
+
+  Loan A costs $150 less overall
+</pre>
+
+<h4>Time Period Conversions</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Converting Time to Years:
+
+From Months:
+  t (years) = months / 12
+  6 months = 0.5 years
+  18 months = 1.5 years
+  30 months = 2.5 years
+
+From Days (Exact Interest):
+  t (years) = days / 365
+  90 days = 0.2466 years
+  180 days = 0.4932 years
+  270 days = 0.7397 years
+
+From Days (Banker's Rule):
+  t (years) = days / 360
+  90 days = 0.25 years
+  180 days = 0.5 years
+  270 days = 0.75 years
+
+From Weeks:
+  t (years) = weeks / 52
+  13 weeks = 0.25 years
+  26 weeks = 0.5 years
+  52 weeks = 1 year
+</pre>
+
+<h4>Common Applications of Simple Interest</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Application</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Typical Terms</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Personal Loans</td>
+    <td style="border:1px solid #ddd;padding:8px">Loans between individuals or from lenders</td>
+    <td style="border:1px solid #ddd;padding:8px">1-5 years, 5-15% rate</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Auto Loans</td>
+    <td style="border:1px solid #ddd;padding:8px">Vehicle purchase financing</td>
+    <td style="border:1px solid #ddd;padding:8px">3-7 years, 3-8% rate</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Bonds</td>
+    <td style="border:1px solid #ddd;padding:8px">Fixed income securities with coupon payments</td>
+    <td style="border:1px solid #ddd;padding:8px">1-30 years, periodic interest</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Certificates of Deposit</td>
+    <td style="border:1px solid #ddd;padding:8px">Bank time deposits with fixed terms</td>
+    <td style="border:1px solid #ddd;padding:8px">3 months-5 years, 2-5% rate</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Treasury Bills</td>
+    <td style="border:1px solid #ddd;padding:8px">Short-term government debt</td>
+    <td style="border:1px solid #ddd;padding:8px">4-52 weeks, discount basis</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Trade Credit</td>
+    <td style="border:1px solid #ddd;padding:8px">Business-to-business short-term financing</td>
+    <td style="border:1px solid #ddd;padding:8px">30-90 days, 0-2% discount</td>
+  </tr>
+</table>
+
+<h4>Simple Interest Amortization</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Amortization Schedule Example:
+Loan: $10,000 at 6% simple interest for 2 years
+Total Interest: 10000 × 0.06 × 2 = $1,200
+Total Repayment: $11,200
+Monthly Payment: $11,200 / 24 = $466.67
+
+Month | Payment | Interest | Principal | Balance
+------|---------|----------|-----------|--------
+  1   | $466.67 | $50.00   | $416.67   | $9,583.33
+  2   | $466.67 | $50.00   | $416.67   | $9,166.66
+  3   | $466.67 | $50.00   | $416.67   | $8,749.99
+ ...  |   ...   |   ...    |   ...     |   ...
+ 24   | $466.67 | $50.00   | $416.67   | $0.00
+
+Note: With simple interest amortization, each payment
+includes the same interest amount because interest is
+calculated on the original principal, not the balance.
+This differs from compound interest amortization where
+interest decreases as principal is paid down.
+</pre>
+
+<h4>Day Count Conventions</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Different markets use different day count conventions:
+
+Actual/365 (Exact Interest):
+  Interest = P × r × (actual days / 365)
+  Used by: Consumer loans, some bonds
+
+Actual/360 (Banker's Rule):
+  Interest = P × r × (actual days / 360)
+  Used by: Commercial loans, money markets
+  Results in slightly higher interest
+
+30/360 (Corporate Bond):
+  Assumes 30 days per month, 360 per year
+  Used by: Corporate bonds, mortgages
+  Simplifies calculations
+
+Actual/Actual (Government):
+  Interest = P × r × (actual days / actual days in year)
+  Used by: Treasury securities, some government bonds
+
+Example Comparison ($10,000 at 5% for 180 days):
+  Actual/365: 10000 × 0.05 × 180/365 = $246.58
+  Actual/360: 10000 × 0.05 × 180/360 = $250.00
+  Difference: $3.42 (Banker's Rule favors lender)
+</pre>
+
+<h4>Historical Context</h4>
+<p>Simple interest has been used for thousands of years:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Ancient Civilizations:
+  - Babylonians (2000 BCE): Clay tablets show interest calculations
+  - Egyptians: Grain loans with simple interest
+  - Romans: Legal maximum rates (usurae) around 8-12%
+
+Medieval Period:
+  - Islamic finance: Prohibited riba (interest), developed profit-sharing
+  - European guilds: Established lending practices
+  - Fibonacci (1202): Liber Abaci formalized calculations
+
+Modern Era:
+  - 17th century: Compound interest gained prominence
+  - Truth in Lending Act (1968): Required APR disclosure in US
+  - Today: Simple interest still used for short-term products
+</pre>
+
+<h4>Limitations of Simple Interest</h4>
+<ul>
+  <li><strong>Doesn't account for compounding:</strong> Real-world investments typically compound, making simple interest underestimate long-term growth.</li>
+  <li><strong>Ignores inflation:</strong> Nominal interest doesn't reflect purchasing power changes over time.</li>
+  <li><strong>Assumes constant rate:</strong> Variable-rate loans don't fit the simple interest model.</li>
+  <li><strong>No payment timing:</strong> Doesn't distinguish between beginning vs. end of period payments (annuity due vs. ordinary annuity).</li>
+  <li><strong>Limited to linear growth:</strong> Cannot model exponential growth scenarios like population or viral spread.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Simple Interest Calculator?</dt>
-  <dd>Simple Interest Calculator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the simple interest formula?</dt>
+  <dd>Simple interest is calculated as I = P × r × t, where I is interest, P is principal (initial amount), r is annual interest rate (as decimal), and t is time in years. Total amount A = P + I = P(1 + rt). For example, $1000 at 5% for 3 years: I = 1000 × 0.05 × 3 = $150, Total = $1150.</dd>
+
+  <dt>What is the difference between simple and compound interest?</dt>
+  <dd>Simple interest calculates only on the principal amount. Compound interest calculates on principal plus accumulated interest. Simple: $1000 at 5% for 3 years = $150 interest. Compound (annual): $1000 × (1.05)³ - 1000 = $157.63. Compound grows faster over time due to 'interest on interest'.</dd>
+
+  <dt>When is simple interest used?</dt>
+  <dd>Simple interest is used for short-term loans (under 1 year), car loans (sometimes), bonds (coupon payments), certificates of deposit (some), personal loans between individuals, and educational finance problems. It favors borrowers for short terms but lenders lose potential earnings on reinvested interest.</dd>
+
+  <dt>How do I calculate simple interest for months instead of years?</dt>
+  <dd>Convert months to years by dividing by 12. Formula becomes I = P × r × (months/12). For example, $5000 at 6% for 9 months: I = 5000 × 0.06 × (9/12) = 5000 × 0.06 × 0.75 = $225. Alternatively, use monthly rate: r/12 × months.</dd>
+
+  <dt>How do I find the principal if I know the interest?</dt>
+  <dd>Rearrange the formula: P = I / (r × t). If you earned $200 interest at 4% over 2 years: P = 200 / (0.04 × 2) = 200 / 0.08 = $2500. Similarly, to find rate: r = I / (P × t), and to find time: t = I / (P × r).</dd>
+
+  <dt>What is the Rule of 72?</dt>
+  <dd>The Rule of 72 estimates how long it takes to double money at compound interest: Years ≈ 72 / (interest rate %). At 6%, money doubles in about 12 years. For simple interest, doubling time = 100 / rate %. At 5% simple interest, it takes 20 years to double.</dd>
 </dl>
 </section>
 </main>

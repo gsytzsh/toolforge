@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Schema Markup Generator – Create JSON-LD Online | ToolForge</title>
-<meta name="description" content="Free online Schema Markup Generator to create JSON-LD for Organization, FAQ, Article and Product pages. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Schema Markup Generator creates JSON-LD structured data for Organization, FAQPage, Article, Product, and more. Complete with schema type reference, property guides, and SEO best practices. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/schema-markup-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Schema Markup Generator – Create JSON-LD Online | ToolForge">
-<meta property="og:description" content="Free online Schema Markup Generator to create JSON-LD for Organization, FAQ, Article and Product pages. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Schema Markup Generator creates JSON-LD structured data for Organization, FAQPage, Article, Product, and more. Complete with schema type reference, property guides, and SEO best practices. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/schema-markup-generator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Schema Markup Generator – Create JSON-LD Online | ToolForge">
-<meta name="twitter:description" content="Free online Schema Markup Generator to create JSON-LD for Organization, FAQ, Article and Product pages. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Schema Markup Generator creates JSON-LD structured data for Organization, FAQPage, Article, Product, and more. Complete with schema type reference, property guides, and SEO best practices. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Schema Markup Generator?",
+      "name": "What is schema markup and why is it important for SEO?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Schema Markup Generator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Schema markup (structured data) is code that helps search engines understand your content better. It uses standardized vocabularies (Schema.org) to label content types like articles, products, FAQs, and organizations. Benefits include rich snippets in search results, improved click-through rates, better content classification, and eligibility for special search features like carousels and knowledge panels."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is JSON-LD format?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "JSON-LD (JavaScript Object Notation for Linked Data) is Google's recommended format for structured data. It's a JSON object with @context and @type properties that can be placed in a <script type='application/ld+json'> tag. JSON-LD is preferred over Microdata and RDFa because it doesn't interfere with HTML structure and is easier to maintain and validate."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What are the most common schema types for SEO?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Common schema types include: Organization (company info), WebSite (site search), Article/BlogPosting (content), Product (e-commerce), FAQPage (Q&A content), LocalBusiness (physical locations), BreadcrumbList (navigation), Review/Rating (product reviews), Event (occurrences), and Person (individual profiles). Each type has specific required and recommended properties."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I validate my schema markup?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Use Google's Rich Results Test (search.google.com/test/rich-results) to check eligibility for rich snippets. Use Schema Markup Validator (validator.schema.org) for syntax validation. Google Search Console reports structured data issues after indexing. Test markup before deployment and monitor for errors after implementation."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What is the difference between required and recommended properties?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Required properties must be present for Google to display rich results (e.g., name and url for Organization). Recommended properties aren't mandatory but improve how content appears (e.g., logo, sameAs for Organization). Optional properties add extra context. Always include required properties; add recommended ones when available for best results."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "Can I use multiple schema types on one page?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Yes, you can include multiple schema objects on one page. Use an array for multiple items of the same type (e.g., multiple FAQQuestion entries in FAQPage) or separate script tags for different types (e.g., Article and BreadcrumbList on the same page). Ensure each schema object is complete and valid independently."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>Schema Markup Generator</h1>
-<p class="subtitle">Generate basic JSON-LD schema markup for common SEO use cases.</p>
+<p class="subtitle">Generate JSON-LD structured data markup for Organization, FAQPage, Article, Product, and other schema types.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <p>Schema Type:
 <label for="schema-type" class="sr-only">Schema type</label>
@@ -91,7 +96,7 @@
 <p>Description:
 <label for="schema-description" class="sr-only">Schema description</label></p>
 <textarea id="schema-description" rows="4" class="pdf-editor" aria-label="Schema description"></textarea>
-<p style="font-size:13px;color:#666;">For FAQPage, use one question and answer pair in the description field separated by `::`.</p>
+<p style="font-size:13px;color:#666;">For FAQPage, use one question and answer pair in the description field separated by <code>::</code>.</p>
 <div class="tool-actions">
 <button type="button" onclick="generateSchema()">Generate</button>
 <button type="button" onclick="copyOutput()">Copy JSON-LD</button>
@@ -101,25 +106,339 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Schema Markup Generator</h3>
-<p>This schema markup generator creates basic JSON-LD for common structured-data use cases without needing to write the markup by hand.</p>
-<p>It is useful for articles, organizations, websites and FAQ content when you want to add structured data faster and reduce syntax mistakes.</p>
+<p>This schema markup generator creates JSON-LD structured data for common SEO use cases. It supports Organization, Article, FAQPage, and Product schema types, generating properly formatted markup that follows Schema.org vocabulary and Google's rich results guidelines.</p>
+<p>It is useful for adding structured data to websites, generating schema for client projects, creating FAQ markup for knowledge panels, marking up products for e-commerce rich snippets, implementing article schema for news content, and validating structured data syntax before deployment.</p>
+
+<h4>What is Schema Markup?</h4>
+<p>Schema markup is structured data that helps search engines understand your content:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Schema Markup Overview:
+
+Schema.org is a collaborative effort by Google, Bing,
+Yahoo, and Yandex to create a standardized vocabulary
+for structured data on the web.
+
+Benefits of Schema Markup:
+  ✓ Rich snippets in search results
+  ✓ Improved click-through rates (CTR)
+  ✓ Better content understanding by search engines
+  ✓ Eligibility for special search features
+  ✓ Enhanced knowledge panel display
+  ✓ Rich cards for mobile search
+
+JSON-LD Format (Google's preferred format):
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Example Corp",
+    "url": "https://example.com"
+  }
+  </script>
+
+Placement: Add JSON-LD scripts in <head> or <body>
+of your HTML. Multiple scripts per page are allowed.
+</pre>
+
+<h4>Supported Schema Types</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Schema Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Required Properties</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Rich Result Type</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Organization</td>
+    <td style="border:1px solid #ddd;padding:8px">Company information</td>
+    <td style="border:1px solid #ddd;padding:8px">name, url</td>
+    <td style="border:1px solid #ddd;padding:8px">Knowledge panel</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Article</td>
+    <td style="border:1px solid #ddd;padding:8px">News, blog posts</td>
+    <td style="border:1px solid #ddd;padding:8px">headline, image, datePublished</td>
+    <td style="border:1px solid #ddd;padding:8px">Top stories carousel</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">FAQPage</td>
+    <td style="border:1px solid #ddd;padding:8px">Q&A content</td>
+    <td style="border:1px solid #ddd;padding:8px">mainEntity (Question/Answer pairs)</td>
+    <td style="border:1px solid #ddd;padding:8px">FAQ rich results</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Product</td>
+    <td style="border:1px solid #ddd;padding:8px">E-commerce items</td>
+    <td style="border:1px solid #ddd;padding:8px">name, image, offers</td>
+    <td style="border:1px solid #ddd;padding:8px">Product rich snippets</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">LocalBusiness</td>
+    <td style="border:1px solid #ddd;padding:8px">Physical locations</td>
+    <td style="border:1px solid #ddd;padding:8px">name, address, telephone</td>
+    <td style="border:1px solid #ddd;padding:8px">Local pack results</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">BreadcrumbList</td>
+    <td style="border:1px solid #ddd;padding:8px">Navigation paths</td>
+    <td style="border:1px solid #ddd;padding:8px">itemListElement</td>
+    <td style="border:1px solid #ddd;padding:8px">Breadcrumb rich results</td>
+  </tr>
+</table>
+
+<h4>Organization Schema Example</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Basic Organization Schema:
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ToolForge",
+  "url": "https://toolforge.site",
+  "description": "Developer tools and SEO utilities",
+  "logo": "https://toolforge.site/logo.png",
+  "sameAs": [
+    "https://twitter.com/toolforge",
+    "https://github.com/toolforge",
+    "https://linkedin.com/company/toolforge"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-800-555-1234",
+    "contactType": "customer service"
+  }
+}
+
+Extended with Address:
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Example Corp",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Main St",
+    "addressLocality": "San Francisco",
+    "addressRegion": "CA",
+    "postalCode": "94102",
+    "addressCountry": "US"
+  }
+}
+</pre>
+
+<h4>FAQPage Schema Example</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+FAQPage Schema (Multiple Questions):
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is schema markup?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Schema markup is structured data that helps search engines understand your content better."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I add schema to my website?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Add a JSON-LD script tag in your HTML head or body section with your structured data."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does schema markup improve SEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Schema markup can improve click-through rates by enabling rich snippets, but it's not a direct ranking factor."
+      }
+    }
+  ]
+}
+
+Note: FAQPage schema should only be used on pages
+where both questions AND answers are visible to users.
+Don't mark up FAQ content that requires user interaction
+to reveal answers.
+</pre>
+
+<h4>Article Schema Example</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Article Schema (BlogPosting):
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to Implement Schema Markup",
+  "image": "https://example.com/image.jpg",
+  "datePublished": "2024-01-15T08:00:00+08:00",
+  "dateModified": "2024-01-20T12:00:00+08:00",
+  "author": {
+    "@type": "Person",
+    "name": "Jane Doe",
+    "url": "https://example.com/author/jane"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Example Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/logo.png"
+    }
+  },
+  "description": "A complete guide to implementing schema markup"
+}
+
+Date Format (ISO 8601):
+  YYYY-MM-DDTHH:MM:SS+TZ
+  Example: 2024-01-15T08:00:00+08:00
+
+Article vs BlogPosting vs NewsArticle:
+  Article - General article type
+  BlogPosting - Blog posts specifically
+  NewsArticle - News articles (eligible for Top Stories)
+  TechArticle - Technical articles/tutorials
+</pre>
+
+<h4>Product Schema Example</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Product Schema with Offers:
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Premium Widget",
+  "image": "https://example.com/widget.jpg",
+  "description": "High-quality widget for all your needs",
+  "sku": "WIDGET-001",
+  "brand": {
+    "@type": "Brand",
+    "name": "WidgetCo"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "29.99",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "https://example.com/widget",
+    "seller": {
+      "@type": "Organization",
+      "name": "Example Store"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.5",
+    "reviewCount": "128"
+  }
+}
+
+Availability Values:
+  InStock, OutOfStock, PreOrder, PreSale,
+  SoldOut, InStoreOnly, OnlineOnly
+
+Price Format:
+  Use string or number without currency symbol
+  Specify currency with priceCurrency property
+</pre>
+
+<h4>Schema Property Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Property</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Applies To</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">name</td>
+    <td style="border:1px solid #ddd;padding:8px">All types</td>
+    <td style="border:1px solid #ddd;padding:8px">Text</td>
+    <td style="border:1px solid #ddd;padding:8px">"Example Corp"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">url</td>
+    <td style="border:1px solid #ddd;padding:8px">All types</td>
+    <td style="border:1px solid #ddd;padding:8px">URL</td>
+    <td style="border:1px solid #ddd;padding:8px">"https://example.com"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">image</td>
+    <td style="border:1px solid #ddd;padding:8px">Most types</td>
+    <td style="border:1px solid #ddd;padding:8px">URL/ImageObject</td>
+    <td style="border:1px solid #ddd;padding:8px">"https://example.com/img.jpg"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">description</td>
+    <td style="border:1px solid #ddd;padding:8px">Most types</td>
+    <td style="border:1px solid #ddd;padding:8px">Text</td>
+    <td style="border:1px solid #ddd;padding:8px">"Brief description"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">sameAs</td>
+    <td style="border:1px solid #ddd;padding:8px">Organization, Person</td>
+    <td style="border:1px solid #ddd;padding:8px">URL array</td>
+    <td style="border:1px solid #ddd;padding:8px">["https://twitter.com/..."]</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">address</td>
+    <td style="border:1px solid #ddd;padding:8px">LocalBusiness</td>
+    <td style="border:1px solid #ddd;padding:8px">PostalAddress</td>
+    <td style="border:1px solid #ddd;padding:8px">{@type: "PostalAddress", ...}</td>
+  </tr>
+</table>
+
+<h4>Schema Validation Tools</h4>
+<ul>
+  <li><strong>Google Rich Results Test:</strong> search.google.com/test/rich-results - Tests eligibility for Google rich results</li>
+  <li><strong>Schema Markup Validator:</strong> validator.schema.org - Validates syntax against Schema.org standards</li>
+  <li><strong>Google Search Console:</strong> Reports structured data issues after page indexing</li>
+  <li><strong>Bing Webmaster Tools:</strong> Reports structured data for Bing search</li>
+  <li><strong>Yandex Webmaster:</strong> Validates structured data for Yandex search</li>
+</ul>
+
+<h4>Common Schema Errors</h4>
+<ul>
+  <li><strong>Missing required properties:</strong> Each schema type has required fields. Check documentation before publishing.</li>
+  <li><strong>Invalid property values:</strong> URLs must be valid, dates must follow ISO 8601, numbers shouldn't have currency symbols.</li>
+  <li><strong>Mismatched content:</strong> Schema must reflect visible page content. Don't mark up hidden or different content.</li>
+  <li><strong>Multiple conflicting schemas:</strong> Don't mark up the same content with conflicting types.</li>
+  <li><strong>Incorrect nesting:</strong> Some properties require specific sub-object types (e.g., address must be PostalAddress).</li>
+  <li><strong>Markup spam:</strong> Don't add fake reviews, ratings, or misleading information to schema.</li>
+</ul>
+
+<h4>Schema Implementation Best Practices</h4>
+<ul>
+  <li><strong>Use JSON-LD format:</strong> Google recommends JSON-LD over Microdata or RDFa for ease of implementation.</li>
+  <li><strong>Place in <head> or <body>:</strong> JSON-LD can go anywhere in HTML, but <head> is conventional.</li>
+  <li><strong>Test before deploying:</strong> Always validate markup with Rich Results Test before publishing.</li>
+  <li><strong>Keep content consistent:</strong> Schema content should match visible page content exactly.</li>
+  <li><strong>Use full URLs:</strong> Always use absolute URLs (https://...) not relative paths.</li>
+  <li><strong>Monitor Search Console:</strong> Check for structured data errors and fix issues promptly.</li>
+  <li><strong>Update when content changes:</strong> Keep schema synchronized with page content updates.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Schema Markup Generator?</dt>
-  <dd>Schema Markup Generator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is schema markup and why is it important for SEO?</dt>
+  <dd>Schema markup (structured data) is code that helps search engines understand your content better. It uses standardized vocabularies (Schema.org) to label content types like articles, products, FAQs, and organizations. Benefits include rich snippets in search results, improved click-through rates, better content classification, and eligibility for special search features like carousels and knowledge panels.</dd>
+
+  <dt>What is JSON-LD format?</dt>
+  <dd>JSON-LD (JavaScript Object Notation for Linked Data) is Google's recommended format for structured data. It's a JSON object with @context and @type properties that can be placed in a <script type='application/ld+json'> tag. JSON-LD is preferred over Microdata and RDFa because it doesn't interfere with HTML structure and is easier to maintain and validate.</dd>
+
+  <dt>What are the most common schema types for SEO?</dt>
+  <dd>Common schema types include: Organization (company info), WebSite (site search), Article/BlogPosting (content), Product (e-commerce), FAQPage (Q&A content), LocalBusiness (physical locations), BreadcrumbList (navigation), Review/Rating (product reviews), Event (occurrences), and Person (individual profiles). Each type has specific required and recommended properties.</dd>
+
+  <dt>How do I validate my schema markup?</dt>
+  <dd>Use Google's Rich Results Test (search.google.com/test/rich-results) to check eligibility for rich snippets. Use Schema Markup Validator (validator.schema.org) for syntax validation. Google Search Console reports structured data issues after indexing. Test markup before deployment and monitor for errors after implementation.</dd>
+
+  <dt>What is the difference between required and recommended properties?</dt>
+  <dd>Required properties must be present for Google to display rich results (e.g., name and url for Organization). Recommended properties aren't mandatory but improve how content appears (e.g., logo, sameAs for Organization). Optional properties add extra context. Always include required properties; add recommended ones when available for best results.</dd>
+
+  <dt>Can I use multiple schema types on one page?</dt>
+  <dd>Yes, you can include multiple schema objects on one page. Use an array for multiple items of the same type (e.g., multiple FAQQuestion entries in FAQPage) or separate script tags for different types (e.g., Article and BreadcrumbList on the same page). Ensure each schema object is complete and valid independently.</dd>
 </dl>
 </section>
 </main>
@@ -138,9 +457,9 @@ let data={"@context":"https://schema.org","@type":type}
 if(type==="FAQPage"){
 let parts=description.split("::")
 data.mainEntity=[{
-  "@type":"Question",
-  "name":parts[0]||"Question",
-  "acceptedAnswer":{"@type":"Answer","text":parts[1]||"Answer"}
+"@type":"Question",
+"name":parts[0]||"Question",
+"acceptedAnswer":{"@type":"Answer","text":parts[1]||"Answer"}
 }]
 }else{
 if(name) data.name=name

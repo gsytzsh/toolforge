@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Redirect Rule Generator – Create Redirect Rules Online | ToolForge</title>
-<meta name="description" content="Free online Redirect Rule Generator to create simple 301 and 302 redirect rules for websites. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Generate 301 and 302 redirect rules for Apache and Nginx. Create redirect configurations for site migrations and URL changes. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/redirect-rule-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Redirect Rule Generator – Create Redirect Rules Online | ToolForge">
-<meta property="og:description" content="Free online Redirect Rule Generator to create simple 301 and 302 redirect rules for websites. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Generate 301 and 302 redirect rules for Apache and Nginx. Create redirect configurations for site migrations and URL changes. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/redirect-rule-generator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redirect Rule Generator – Create Redirect Rules Online | ToolForge">
-<meta name="twitter:description" content="Free online Redirect Rule Generator to create simple 301 and 302 redirect rules for websites. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Generate 301 and 302 redirect rules for Apache and Nginx. Create redirect configurations for site migrations and URL changes. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Redirect Rule Generator?",
+      "name": "What is the difference between 301 and 302 redirects?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Redirect Rule Generator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "A 301 redirect indicates a permanent move, telling search engines to transfer SEO value and update their index. A 302 redirect indicates a temporary move, keeping the original URL indexed. Use 301 for permanent URL changes, 302 for temporary maintenance or A/B testing."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I implement redirects in Apache?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "In Apache, add redirect rules to .htaccess or virtual host config using 'Redirect' directive: 'Redirect 301 /old-page https://example.com/new-page'. For regex patterns, use 'RedirectMatch'. Ensure mod_alias or mod_rewrite is enabled."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How do I implement redirects in Nginx?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "In Nginx, use 'rewrite' directive with 'permanent' (301) or 'redirect' (302) flag: 'rewrite ^/old-page$ https://example.com/new-page permanent;'. Alternatively, use 'return' directive: 'return 301 https://example.com/new-page;'."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "When should I use redirects?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Common scenarios include: site migrations (domain changes), URL structure updates, removing or consolidating pages, fixing broken links, redirecting www to non-www (or vice versa), enforcing HTTPS, and redirecting deleted content to relevant alternatives."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What are redirect chains and why should I avoid them?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Redirect chains occur when URL A redirects to B, which redirects to C. They slow page load, dilute SEO value, and may be truncated by browsers. Always redirect directly from source to final destination. Audit existing rules periodically to eliminate chains."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "Do redirects affect SEO?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "301 redirects pass most SEO value (link equity) to the new URL, but some PageRank may be lost. 302 redirects do not transfer SEO value since they're temporary. Properly implemented 301 redirects are essential for preserving rankings during URL changes."
       }
     }
   ]
@@ -95,67 +100,391 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Redirect Rule Generator</h3>
-<p>This redirect rule generator creates simple redirect rules for Apache and Nginx from an old path and a target URL.</p>
-<p>It is useful for site migrations, URL cleanups and deleted-page replacements when you need to preserve traffic and send users to the right new destination.</p>
+<p>This tool generates HTTP redirect rules for Apache and Nginx web servers. It creates properly formatted redirect directives using the specified source path and target URL. The tool supports both 301 (permanent) and 302 (temporary) redirect status codes and escapes special regex characters in paths.</p>
+<p>It is useful for site migrations, URL structure updates, removing or consolidating pages, fixing broken links, redirecting www to non-www (or vice versa), enforcing HTTPS, and redirecting deleted content to relevant alternatives.</p>
+
+<h4>HTTP Redirect Status Codes</h4>
+<p>HTTP redirects use 3xx status codes to indicate URL changes:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Common Redirect Status Codes:
+
+301 Moved Permanently
+  - Indicates permanent URL change
+  - Search engines update index to new URL
+  - SEO value (link equity) is transferred
+  - Browser may cache the redirect
+  - Use for: site migrations, permanent moves
+
+302 Found (Temporary Redirect)
+  - Indicates temporary URL change
+  - Search engines keep original URL indexed
+  - SEO value stays with original URL
+  - Browser requests original URL next time
+  - Use for: maintenance, A/B testing, temporary moves
+
+307 Temporary Redirect
+  - Like 302 but preserves HTTP method
+  - POST requests remain POST (not GET)
+  - HTTP/1.1 replacement for 302
+  - Use for: temporary API redirects
+
+308 Permanent Redirect
+  - Like 301 but preserves HTTP method
+  - HTTP/1.1 replacement for 301
+  - Use for: permanent API endpoint moves
+
+Less Common:
+  300 Multiple Choices - Several options available
+  303 See Other - Use GET for response
+  305 Use Proxy - Deprecated, security concerns
+</pre>
+
+<h4>Redirect Type Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Property</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">301 Permanent</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">302 Temporary</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">SEO Value Transfer</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes (most PageRank)</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Search Engine Index</td>
+    <td style="border:1px solid #ddd;padding:8px">Updates to new URL</td>
+    <td style="border:1px solid #ddd;padding:8px">Keeps original URL</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Browser Caching</td>
+    <td style="border:1px solid #ddd;padding:8px">May cache permanently</td>
+    <td style="border:1px solid #ddd;padding:8px">Does not cache</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Use Case</td>
+    <td style="border:1px solid #ddd;padding:8px">Permanent moves</td>
+    <td style="border:1px solid #ddd;padding:8px">Temporary changes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Example Scenario</td>
+    <td style="border:1px solid #ddd;padding:8px">Site migration</td>
+    <td style="border:1px solid #ddd;padding:8px">Maintenance page</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Change Back Later</td>
+    <td style="border:1px solid #ddd;padding:8px">Not recommended</td>
+    <td style="border:1px solid #ddd;padding:8px">Expected</td>
+  </tr>
+</table>
+
+<h4>Apache Redirect Syntax</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Apache Redirect Directives:
+
+Basic Redirect (mod_alias):
+  Redirect 301 /old-page https://example.com/new-page
+  Redirect 302 /temp https://example.com/alternate
+
+  Syntax: Redirect [status] [URI-path] [target-URL]
+
+Redirect with Regex (mod_rewrite):
+  RewriteEngine On
+  RewriteRule ^old-page$ https://example.com/new-page [R=301,L]
+
+  RewriteRule ^products/(.*)$ https://example.com/items/$1 [R=301,L]
+
+  Syntax: RewriteRule [pattern] [substitution] [flags]
+
+Common Flags:
+  [R=301]     - 301 permanent redirect
+  [R=302]     - 302 temporary redirect
+  [L]         - Last rule (stop processing)
+  [NC]        - No case (case-insensitive)
+  [QSA]       - Query string append
+
+Redirect www to non-www:
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.example\.com [NC]
+  RewriteRule ^(.*)$ https://example.com/$1 [R=301,L]
+
+Redirect HTTP to HTTPS:
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+Redirect old domain to new domain:
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^olddomain\.com [NC,OR]
+  RewriteCond %{HTTP_HOST} ^www\.olddomain\.com [NC]
+  RewriteRule ^(.*)$ https://newdomain.com/$1 [R=301,L]
+</pre>
+
+<h4>Nginx Redirect Syntax</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Nginx Redirect Directives:
+
+Using rewrite directive:
+  rewrite ^/old-page$ https://example.com/new-page permanent;
+  rewrite ^/temp$ https://example.com/alternate redirect;
+
+  Syntax: rewrite [regex] [replacement] [flag];
+
+  Flags:
+    permanent - 301 Moved Permanently
+    redirect  - 302 Found
+    break     - Stop processing rewrite
+    last      - Continue with next location
+
+Using return directive (simpler):
+  location /old-page {
+    return 301 https://example.com/new-page;
+  }
+
+  location /temp {
+    return 302 https://example.com/alternate;
+  }
+
+Redirect www to non-www:
+  server {
+    listen 80;
+    server_name www.example.com;
+    return 301 https://example.com$request_uri;
+  }
+
+Redirect HTTP to HTTPS:
+  server {
+    listen 80;
+    server_name example.com;
+    return 301 https://$server_name$request_uri;
+  }
+
+Redirect with regex capture:
+  location ~ ^/products/(.*)$ {
+    return 301 https://example.com/items/$1;
+  }
+
+Redirect entire directory:
+  location /old-folder/ {
+    return 301 https://example.com/new-folder/$request_uri;
+  }
+</pre>
+
+<h4>Common Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Scenario</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Redirect Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Site Migration</td>
+    <td style="border:1px solid #ddd;padding:8px">301</td>
+    <td style="border:1px solid #ddd;padding:8px">olddomain.com → newdomain.com</td>
+  </tr>
+  <tr>
+    <td style="border:border:1px solid #ddd;padding:8px">URL Structure Change</td>
+    <td style="border:1px solid #ddd;padding:8px">301</td>
+    <td style="border:1px solid #ddd;padding:8px">/blog/post-name → /articles/post-name</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Page Consolidation</td>
+    <td style="border:1px solid #ddd;padding:8px">301</td>
+    <td style="border:1px solid #ddd;padding:8px">/page1, /page2 → /main-page</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Deleted Content</td>
+    <td style="border:1px solid #ddd;padding:8px">301</td>
+    <td style="border:1px solid #ddd;padding:8px">/old-product → /products-category</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Maintenance Mode</td>
+    <td style="border:1px solid #ddd;padding:8px">302</td>
+    <td style="border:1px solid #ddd;padding:8px">/* → /maintenance.html</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">A/B Testing</td>
+    <td style="border:1px solid #ddd;padding:8px">302</td>
+    <td style="border:1px solid #ddd;padding:8px">/landing → /landing-variant-a</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">WWW Enforcement</td>
+    <td style="border:1px solid #ddd;padding:8px">301</td>
+    <td style="border:1px solid #ddd;padding:8px">www.example.com → example.com</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">HTTPS Enforcement</td>
+    <td style="border:1px solid #ddd;padding:8px">301</td>
+    <td style="border:1px solid #ddd;padding:8px">http:// → https://</td>
+  </tr>
+</table>
+
+<h4>Redirect Rule Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Simple Page Move
+  From: /old-page
+  To:   https://example.com/new-page
+
+  Apache: Redirect 301 /old-page https://example.com/new-page
+  Nginx:  rewrite ^/old-page$ https://example.com/new-page permanent;
+
+Example 2: Blog URL Restructure
+  From: /blog/post-title
+  To:   https://example.com/articles/post-title
+
+  Apache: Redirect 301 /blog/post-title https://example.com/articles/post-title
+  Nginx:  rewrite ^/blog/post-title$ https://example.com/articles/post-title permanent;
+
+Example 3: Product Category Move
+  From: /products/electronics/phones
+  To:   https://example.com/phones
+
+  Apache: Redirect 301 /products/electronics/phones https://example.com/phones
+  Nginx:  rewrite ^/products/electronics/phones$ https://example.com/phones permanent;
+
+Example 4: Temporary Maintenance
+  From: /checkout
+  To:   https://example.com/maintenance
+
+  Apache: Redirect 302 /checkout https://example.com/maintenance
+  Nginx:  rewrite ^/checkout$ https://example.com/maintenance redirect;
+
+Example 5: With Query String
+  From: /search?q=hello
+  To:   https://example.com/search/hello
+
+  Apache: RewriteRule ^search$ https://example.com/search/%1 [R=301,L]
+  Nginx:  rewrite ^/search\?q=(.*)$ https://example.com/search/$1 permanent;
+
+Example 6: Domain Migration
+  From: /
+  To:   https://newdomain.com/
+
+  Apache: RedirectMatch 301 ^(.*)$ https://newdomain.com$1
+  Nginx:  rewrite ^(.*)$ https://newdomain.com$1 permanent;
+</pre>
+
+<h4>Redirect Best Practices</h4>
+<ul>
+  <li><strong>Use 301 for permanent moves:</strong> Ensures SEO value transfer and search engine index updates.</li>
+  <li><strong>Avoid redirect chains:</strong> Always redirect source directly to final destination.</li>
+  <li><strong>Update internal links:</strong> Don't rely on redirects for internal navigation.</li>
+  <li><strong>Test before deploying:</strong> Verify redirects work correctly in staging environment.</li>
+  <li><strong>Monitor 404 errors:</strong> Use analytics to identify missed redirect opportunities.</li>
+  <li><strong>Document redirect rules:</strong> Keep a record of all redirects for future reference.</li>
+  <li><strong>Consider mobile users:</strong> Ensure redirects work across all device types.</li>
+  <li><strong>Check redirect loops:</strong> Verify A→B doesn't create B→A circular redirect.</li>
+</ul>
+
+<h4>Common Redirect Mistakes</h4>
+<ul>
+  <li><strong>Redirect chains:</strong> A→B→C instead of A→C directly. Causes slower load times and SEO loss.</li>
+  <li><strong>Redirect loops:</strong> A→B→A creates infinite loop. Browser shows "too many redirects" error.</li>
+  <li><strong>Using 302 for permanent moves:</strong> Loses SEO value and confuses search engines.</li>
+  <li><strong>Forgetting to update canonical URLs:</strong> Canonical should point to preferred URL.</li>
+  <li><strong>Redirecting all 404s to homepage:</strong> Creates soft 404s; better to redirect to relevant content.</li>
+  <li><strong>Not escaping special characters:</strong> Paths with regex chars (. * + ?) need proper escaping.</li>
+  <li><strong>Ignoring query strings:</strong> Query parameters may be lost without proper handling.</li>
+</ul>
+
+<h4>Testing Redirects</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Testing Methods:
+
+1. cURL Command Line:
+   curl -I https://example.com/old-page
+
+   Response headers show:
+   HTTP/1.1 301 Moved Permanently
+   Location: https://example.com/new-page
+
+2. Browser DevTools:
+   - Open Network tab
+   - Navigate to old URL
+   - Check status code and Location header
+
+3. Online Tools:
+   - httpstatus.io
+   - Redirect Path (Chrome extension)
+   - WhereGoes.com
+
+4. Google Search Console:
+   - Check Coverage report for redirect errors
+   - Use URL Inspection tool
+
+Expected Response Headers:
+  HTTP/1.1 301 Moved Permanently
+  Location: https://example.com/new-page
+  Cache-Control: no-cache
+
+  HTTP/1.1 302 Found
+  Location: https://example.com/temporary
+  Cache-Control: no-store
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Redirect Rule Generator?</dt>
-  <dd>Redirect Rule Generator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the difference between 301 and 302 redirects?</dt>
+  <dd>A 301 redirect indicates a permanent move, telling search engines to transfer SEO value and update their index. A 302 redirect indicates a temporary move, keeping the original URL indexed. Use 301 for permanent URL changes, 302 for temporary maintenance or A/B testing.</dd>
+
+  <dt>How do I implement redirects in Apache?</dt>
+  <dd>In Apache, add redirect rules to .htaccess or virtual host config using 'Redirect' directive: 'Redirect 301 /old-page https://example.com/new-page'. For regex patterns, use 'RedirectMatch'. Ensure mod_alias or mod_rewrite is enabled.</dd>
+
+  <dt>How do I implement redirects in Nginx?</dt>
+  <dd>In Nginx, use 'rewrite' directive with 'permanent' (301) or 'redirect' (302) flag: 'rewrite ^/old-page$ https://example.com/new-page permanent;'. Alternatively, use 'return' directive: 'return 301 https://example.com/new-page;'.</dd>
+
+  <dt>When should I use redirects?</dt>
+  <dd>Common scenarios include: site migrations (domain changes), URL structure updates, removing or consolidating pages, fixing broken links, redirecting www to non-www (or vice versa), enforcing HTTPS, and redirecting deleted content to relevant alternatives.</dd>
+
+  <dt>What are redirect chains and why should I avoid them?</dt>
+  <dd>Redirect chains occur when URL A redirects to B, which redirects to C. They slow page load, dilute SEO value, and may be truncated by browsers. Always redirect directly from source to final destination. Audit existing rules periodically to eliminate chains.</dd>
+
+  <dt>Do redirects affect SEO?</dt>
+  <dd>301 redirects pass most SEO value (link equity) to the new URL, but some PageRank may be lost. 302 redirects do not transfer SEO value since they're temporary. Properly implemented 301 redirects are essential for preserving rankings during URL changes.</dd>
 </dl>
 </section>
 </main>
 <script>
 function setStatus(message,color){
-let status=document.getElementById("status")
-status.innerText=message
-status.style.color=color
+let status=document.getElementById("status");
+status.innerText=message;
+status.style.color=color;
 }
 function generateRules(){
-let type=document.getElementById("redirect-type").value
-let from=document.getElementById("from-path").value.trim()
-let to=document.getElementById("to-url").value.trim()
+let type=document.getElementById("redirect-type").value;
+let from=document.getElementById("from-path").value.trim();
+let to=document.getElementById("to-url").value.trim();
 if(!from||!to){
-document.getElementById("output").value=""
-setStatus("Enter both source path and target URL.","#b91c1c")
-return
+document.getElementById("output").value="";
+setStatus("Enter both source path and target URL.","#b91c1c");
+return;
 }
-let lines=[]
-lines.push("# Apache (.htaccess)")
-lines.push("Redirect "+type+" "+from+" "+to)
-lines.push("")
-lines.push("# Nginx")
-lines.push("rewrite ^"+from.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"$ "+to+" "+(type==="301"?"permanent":"redirect")+";")
-document.getElementById("output").value=lines.join("\n")
-setStatus("Redirect rules generated.","#16a34a")
+let lines=[];
+lines.push("# Apache (.htaccess)");
+lines.push("Redirect "+type+" "+from+" "+to);
+lines.push("");
+lines.push("# Nginx");
+lines.push("rewrite ^"+from.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"$ "+to+" "+(type==="301"?"permanent":"redirect")+";");
+document.getElementById("output").value=lines.join("\n");
+setStatus("Redirect rules generated.","#16a34a");
 }
 function copyOutput(){
-let value=document.getElementById("output").value
+let value=document.getElementById("output").value;
 if(!value){
-setStatus("Generate redirect rules first.","#b91c1c")
-return
+setStatus("Generate redirect rules first.","#b91c1c");
+return;
 }
 navigator.clipboard.writeText(value).then(function(){
-setStatus("Redirect rules copied.","#16a34a")
+setStatus("Redirect rules copied.","#16a34a");
 }).catch(function(){
-setStatus("Copy failed.","#b91c1c")
-})
+setStatus("Copy failed.","#b91c1c");
+});
 }
-document.getElementById("from-path").value="/old-page"
-document.getElementById("to-url").value="https://example.com/new-page"
-generateRules()
+document.getElementById("from-path").value="/old-page";
+document.getElementById("to-url").value="https://example.com/new-page";
+generateRules();
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>

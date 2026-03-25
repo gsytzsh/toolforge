@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>SQL Query Builder – Build SELECT Statements Online | ToolForge</title>
-<meta name="description" content="Free online SQL Query Builder to compose SELECT queries with columns, table names, WHERE conditions, ORDER BY and LIMIT clauses. Part of the ToolForge developer tools collection.">
+<meta name="description" content="SQL Query Builder constructs SELECT statements with columns, tables, WHERE conditions, ORDER BY, GROUP BY, HAVING, and LIMIT clauses. Complete with SQL syntax reference and optimization tips. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/sql-query-builder.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="SQL Query Builder – Build SELECT Statements Online | ToolForge">
-<meta property="og:description" content="Free online SQL Query Builder to compose SELECT queries with columns, table names, WHERE conditions, ORDER BY and LIMIT clauses.">
+<meta property="og:description" content="SQL Query Builder constructs SELECT statements with columns, tables, WHERE conditions, ORDER BY, GROUP BY, HAVING, and LIMIT clauses. Complete with SQL syntax reference and optimization tips. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/sql-query-builder.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL Query Builder – Build SELECT Statements Online | ToolForge">
-<meta name="twitter:description" content="Free online SQL Query Builder to compose SELECT queries with columns, table names, WHERE conditions, ORDER BY and LIMIT clauses.">
+<meta name="twitter:description" content="SQL Query Builder constructs SELECT statements with columns, tables, WHERE conditions, ORDER BY, GROUP BY, HAVING, and LIMIT clauses. Complete with SQL syntax reference and optimization tips. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Sql Query Builder?",
+      "name": "What is the standard SQL SELECT statement syntax?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sql Query Builder is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "The standard SQL SELECT syntax is: SELECT [DISTINCT] column1, column2, ... FROM table_name [WHERE condition] [GROUP BY column] [HAVING condition] [ORDER BY column [ASC|DESC]] [LIMIT n]. The clauses must appear in this specific order. SELECT and FROM are required; other clauses are optional."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between WHERE and HAVING?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "WHERE filters rows before grouping; HAVING filters groups after aggregation. WHERE cannot use aggregate functions (COUNT, SUM, AVG); HAVING is designed for them. Example: WHERE salary > 50000 filters individual employees; HAVING AVG(salary) > 50000 filters departments by average salary."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How does ORDER BY work with multiple columns?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Multiple ORDER BY columns are sorted hierarchically: ORDER BY last_name ASC, first_name ASC sorts by last name first, then first name within each last name. Each column can independently specify ASC (ascending) or DESC (descending). NULL values sort first in ASC, last in DESC by default (varies by database)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the purpose of DISTINCT in SELECT?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "DISTINCT eliminates duplicate rows from results. SELECT DISTINCT country returns each country once even if multiple customers share it. DISTINCT applies to all selected columns combined: SELECT DISTINCT city, country returns unique (city, country) pairs. DISTINCT can impact performance on large datasets."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How do LIMIT and OFFSET work together?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "LIMIT restricts the number of rows returned; OFFSET skips rows before starting to return. LIMIT 10 OFFSET 20 returns rows 21-30 (0-indexed: rows 20-29). This enables pagination: page 1 = LIMIT 10 OFFSET 0, page 2 = LIMIT 10 OFFSET 10. Note: OFFSET can be slow on large tables."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What are SQL JOIN types and when to use them?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "INNER JOIN returns matching rows from both tables. LEFT JOIN (LEFT OUTER JOIN) returns all left table rows plus matched right table rows (NULL if no match). RIGHT JOIN is the reverse of LEFT JOIN. FULL OUTER JOIN returns all rows from both tables. CROSS JOIN produces Cartesian product. Use INNER JOIN for mandatory relationships, LEFT JOIN for optional relationships."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>SQL Query Builder</h1>
-<p class="subtitle">Build simple SELECT queries for demos, docs and quick testing.</p>
+<p class="subtitle">Build SELECT statements with columns, tables, WHERE conditions, ORDER BY, GROUP BY, HAVING, and LIMIT clauses.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <label for="table" class="sr-only">Table name</label>
 <input id="table" style="width:90%" aria-label="Table name" placeholder="users">
@@ -97,25 +102,396 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About SQL Query Builder</h3>
-<p>This SQL query builder helps you assemble simple `SELECT` statements from common query parts.</p>
-<p>It is useful for demos, internal docs, quick testing and drafting starter queries when you do not want to type every clause from scratch.</p>
+<p>This SQL query builder constructs SELECT statements with proper clause ordering and syntax. It supports column selection, table specification, WHERE filtering, ORDER BY sorting, and LIMIT/OFFSET pagination. The tool generates standard SQL compatible with MySQL, PostgreSQL, SQLite, and most relational databases.</p>
+<p>It is useful for rapid query prototyping, generating admin panel queries, creating documentation examples, teaching SQL syntax, debugging complex queries, and building starter SQL for applications and reports.</p>
+
+<h4>SQL SELECT Statement Structure</h4>
+<p>A complete SELECT statement follows this clause order:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Standard SELECT Syntax:
+
+SELECT [DISTINCT] column1, column2, ...
+FROM table_name
+  [JOIN other_table ON condition]
+  [WHERE row_filter]
+  [GROUP BY column]
+  [HAVING group_filter]
+  [ORDER BY column [ASC|DESC]]
+  [LIMIT n [OFFSET m]]
+
+Clause Execution Order:
+1. FROM (including JOINs) - determine source data
+2. WHERE - filter individual rows
+3. GROUP BY - aggregate into groups
+4. HAVING - filter groups
+5. SELECT - choose columns
+6. ORDER BY - sort results
+7. LIMIT/OFFSET - paginate output
+
+Note: This tool builds the core clauses.
+JOIN syntax requires manual addition for complex queries.
+</pre>
+
+<h4>SELECT Clause Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Select all columns:
+  SELECT * FROM users;
+
+Select specific columns:
+  SELECT id, username, email FROM users;
+
+Select with aliases:
+  SELECT
+    id AS user_id,
+    username AS user_name,
+    email AS user_email
+  FROM users;
+
+Select with DISTINCT:
+  SELECT DISTINCT country FROM customers;
+
+Select with expressions:
+  SELECT
+    first_name || ' ' || last_name AS full_name,
+    age,
+    age * 12 AS age_in_months
+  FROM users;
+
+Select with aggregate functions:
+  SELECT
+    COUNT(*) AS total_users,
+    AVG(age) AS avg_age,
+    MAX(created_at) AS latest_signup
+  FROM users;
+</pre>
+
+<h4>WHERE Clause Operators</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Operator</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">=</td>
+    <td style="border:1px solid #ddd;padding:8px">Equals</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE status = 'active'</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">&lt;&gt;, !=</td>
+    <td style="border:1px solid #ddd;padding:8px">Not equals</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE role &lt;&gt; 'admin'</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">&lt;, &gt;, &lt;=, &gt;=</td>
+    <td style="border:1px solid #ddd;padding:8px">Comparison</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE age &gt;= 18</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">BETWEEN</td>
+    <td style="border:1px solid #ddd;padding:8px">Range</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE price BETWEEN 10 AND 50</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">IN</td>
+    <td style="border:1px solid #ddd;padding:8px">Set membership</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE status IN ('active', 'pending')</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">LIKE</td>
+    <td style="border:1px solid #ddd;padding:8px">Pattern match</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE name LIKE 'A%'</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">IS NULL</td>
+    <td style="border:1px solid #ddd;padding:8px">Null check</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE deleted_at IS NULL</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">IS NOT NULL</td>
+    <td style="border:1px solid #ddd;padding:8px">Not null</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE email IS NOT NULL</td>
+  </tr>
+</table>
+
+<h4>ORDER BY Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Single column ascending:
+  ORDER BY name ASC
+
+Single column descending:
+  ORDER BY created_at DESC
+
+Multiple columns:
+  ORDER BY last_name ASC, first_name ASC
+
+Mixed sort directions:
+  ORDER BY status DESC, created_at ASC
+
+With expressions:
+  ORDER BY price * quantity DESC
+
+With column position (not recommended):
+  ORDER BY 2, 1 DESC
+
+NULL handling (PostgreSQL):
+  ORDER BY created_at DESC NULLS LAST
+
+NULL handling (MySQL):
+  ORDER BY ISNULL(created_at), created_at DESC
+</pre>
+
+<h4>LIMIT and OFFSET for Pagination</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+First 10 rows:
+  LIMIT 10
+
+Rows 11-20 (page 2, 10 per page):
+  LIMIT 10 OFFSET 10
+
+Rows 21-30 (page 3, 10 per page):
+  LIMIT 10 OFFSET 20
+
+Pagination formula (page N, page_size P):
+  LIMIT P OFFSET (N-1)*P
+
+Example: Page 5 with 20 items per page
+  LIMIT 20 OFFSET 80
+
+PostgreSQL/SQLite alternative syntax:
+  LIMIT 10 OFFSET 20
+  -- or --
+  OFFSET 20 FETCH NEXT 10 ROWS ONLY
+
+SQL Server syntax:
+  OFFSET 20 ROWS FETCH NEXT 10 ROWS ONLY
+
+Oracle 12c+ syntax:
+  OFFSET 20 ROWS FETCH NEXT 10 ROWS ONLY
+
+MySQL/PostgreSQL traditional:
+  LIMIT 20, 10  -- OFFSET, LIMIT
+</pre>
+
+<h4>GROUP BY and Aggregation</h4>
+<p>GROUP BY groups rows for aggregate calculations:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Count by status:
+  SELECT status, COUNT(*) AS count
+  FROM orders
+  GROUP BY status;
+
+Sum by category:
+  SELECT category, SUM(price) AS total
+  FROM products
+  GROUP BY category;
+
+Multiple aggregates:
+  SELECT
+    department,
+    COUNT(*) AS emp_count,
+    AVG(salary) AS avg_salary,
+    MAX(salary) AS max_salary,
+    MIN(salary) AS min_salary
+  FROM employees
+  GROUP BY department;
+
+Group by multiple columns:
+  SELECT
+    YEAR(order_date) AS year,
+    MONTH(order_date) AS month,
+    SUM(total) AS monthly_total
+  FROM orders
+  GROUP BY YEAR(order_date), MONTH(order_date);
+
+HAVING to filter groups:
+  SELECT department, AVG(salary) AS avg_sal
+  FROM employees
+  GROUP BY department
+  HAVING AVG(salary) > 50000;
+</pre>
+
+<h4>Complete Query Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Active Users List
+  SELECT id, username, email, created_at
+  FROM users
+  WHERE status = 'active'
+  ORDER BY created_at DESC
+  LIMIT 100;
+
+Example 2: Recent Orders with Total
+  SELECT
+    order_id,
+    customer_id,
+    order_date,
+    total_amount
+  FROM orders
+  WHERE order_date &gt;= '2024-01-01'
+    AND status IN ('pending', 'shipped')
+  ORDER BY order_date DESC
+  LIMIT 50;
+
+Example 3: Product Sales Summary
+  SELECT
+    p.category,
+    COUNT(*) AS units_sold,
+    SUM(oi.quantity) AS total_quantity,
+    SUM(oi.quantity * oi.price) AS revenue
+  FROM order_items oi
+  JOIN products p ON oi.product_id = p.id
+  WHERE oi.order_date BETWEEN '2024-01-01' AND '2024-12-31'
+  GROUP BY p.category
+  HAVING SUM(oi.quantity * oi.price) &gt; 1000
+  ORDER BY revenue DESC;
+
+Example 4: User Activity Report
+  SELECT
+    u.id,
+    u.username,
+    COUNT(o.id) AS order_count,
+    COALESCE(SUM(o.total), 0) AS total_spent
+  FROM users u
+  LEFT JOIN orders o ON u.id = o.user_id
+  WHERE u.created_at &gt;= '2023-01-01'
+  GROUP BY u.id, u.username
+  HAVING COUNT(o.id) &gt; 0
+  ORDER BY total_spent DESC
+  LIMIT 100;
+</pre>
+
+<h4>SQL JOIN Types Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">JOIN Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">INNER JOIN</td>
+    <td style="border:1px solid #ddd;padding:8px">Returns matching rows only</td>
+    <td style="border:1px solid #ddd;padding:8px">Orders with valid customers</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">LEFT JOIN</td>
+    <td style="border:1px solid #ddd;padding:8px">All left rows + matched right</td>
+    <td style="border:1px solid #ddd;padding:8px">All users + their orders (if any)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">RIGHT JOIN</td>
+    <td style="border:1px solid #ddd;padding:8px">All right rows + matched left</td>
+    <td style="border:1px solid #ddd;padding:8px">All orders + customer info (if exists)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">FULL OUTER JOIN</td>
+    <td style="border:1px solid #ddd;padding:8px">All rows from both tables</td>
+    <td style="border:1px solid #ddd;padding:8px">Reconcile two data sources</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">CROSS JOIN</td>
+    <td style="border:1px solid #ddd;padding:8px">Cartesian product</td>
+    <td style="border:1px solid #ddd;padding:8px">Generate all combinations</td>
+  </tr>
+</table>
+
+<h4>SQL Dialect Differences</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+LIMIT/OFFSET Syntax:
+  MySQL/PostgreSQL:  LIMIT 10 OFFSET 20
+  PostgreSQL:        LIMIT 10 OFFSET 20
+  SQL Server:        OFFSET 20 ROWS FETCH NEXT 10 ROWS ONLY
+  Oracle 12c+:       OFFSET 20 ROWS FETCH NEXT 10 ROWS ONLY
+
+String Concatenation:
+  Standard SQL:      'Hello' || ' ' || 'World'
+  MySQL:             CONCAT('Hello', ' ', 'World')
+  SQL Server:        'Hello' + ' ' + 'World'
+
+Boolean Values:
+  PostgreSQL:        is_active = TRUE
+  MySQL:             is_active = 1
+  SQL Server:        is_active = 1
+  Oracle:            is_active = 1
+
+Date Functions:
+  PostgreSQL:        NOW(), CURRENT_DATE
+  MySQL:             NOW(), CURDATE()
+  SQL Server:        GETDATE(), CAST(GETDATE() AS DATE)
+  Oracle:            SYSDATE, TRUNC(SYSDATE)
+
+Top N Records:
+  SQL Server:        SELECT TOP 10 * FROM users
+  Oracle:            SELECT * FROM users WHERE ROWNUM &lt;= 10
+  MySQL/PostgreSQL:  SELECT * FROM users LIMIT 10
+</pre>
+
+<h4>Query Optimization Tips</h4>
+<ul>
+  <li><strong>SELECT specific columns:</strong> Avoid SELECT * in production; specify only needed columns to reduce data transfer.</li>
+  <li><strong>Use WHERE early:</strong> Filter as early as possible to reduce rows processed.</li>
+  <li><strong>Index WHERE columns:</strong> Columns in WHERE and JOIN conditions should be indexed for large tables.</li>
+  <li><strong>Avoid functions on indexed columns:</strong> WHERE YEAR(date_col) = 2024 prevents index use; use WHERE date_col &gt;= '2024-01-01' AND date_col &lt; '2025-01-01' instead.</li>
+  <li><strong>Use EXISTS for subqueries:</strong> WHERE EXISTS (SELECT 1 FROM ...) is often faster than WHERE IN for large datasets.</li>
+  <li><strong>Limit OFFSET depth:</strong> Deep pagination (OFFSET 10000) is slow; consider keyset pagination (WHERE id &gt; last_seen_id).</li>
+</ul>
+
+<h4>Common SQL Patterns</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Pattern</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">SQL Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Soft delete</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE deleted_at IS NULL</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Pagination</td>
+    <td style="border:1px solid #ddd;padding:8px">ORDER BY id DESC LIMIT 20 OFFSET 0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Search with wildcard</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE name LIKE '%keyword%'</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Date range</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE created_at BETWEEN '2024-01-01' AND '2024-12-31'</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Multi-value filter</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE status IN ('active', 'pending')</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Exclude NULLs</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE email IS NOT NULL</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Aggregation filter</td>
+    <td style="border:1px solid #ddd;padding:8px">GROUP BY category HAVING COUNT(*) &gt; 10</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Sql Query Builder?</dt>
-  <dd>Sql Query Builder is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the standard SQL SELECT statement syntax?</dt>
+  <dd>The standard SQL SELECT syntax is: SELECT [DISTINCT] column1, column2, ... FROM table_name [WHERE condition] [GROUP BY column] [HAVING condition] [ORDER BY column [ASC|DESC]] [LIMIT n]. The clauses must appear in this specific order. SELECT and FROM are required; other clauses are optional.</dd>
+
+  <dt>What is the difference between WHERE and HAVING?</dt>
+  <dd>WHERE filters rows before grouping; HAVING filters groups after aggregation. WHERE cannot use aggregate functions (COUNT, SUM, AVG); HAVING is designed for them. Example: WHERE salary > 50000 filters individual employees; HAVING AVG(salary) > 50000 filters departments by average salary.</dd>
+
+  <dt>How does ORDER BY work with multiple columns?</dt>
+  <dd>Multiple ORDER BY columns are sorted hierarchically: ORDER BY last_name ASC, first_name ASC sorts by last name first, then first name within each last name. Each column can independently specify ASC (ascending) or DESC (descending). NULL values sort first in ASC, last in DESC by default (varies by database).</dd>
+
+  <dt>What is the purpose of DISTINCT in SELECT?</dt>
+  <dd>DISTINCT eliminates duplicate rows from results. SELECT DISTINCT country returns each country once even if multiple customers share it. DISTINCT applies to all selected columns combined: SELECT DISTINCT city, country returns unique (city, country) pairs. DISTINCT can impact performance on large datasets.</dd>
+
+  <dt>How do LIMIT and OFFSET work together?</dt>
+  <dd>LIMIT restricts the number of rows returned; OFFSET skips rows before starting to return. LIMIT 10 OFFSET 20 returns rows 21-30 (0-indexed: rows 20-29). This enables pagination: page 1 = LIMIT 10 OFFSET 0, page 2 = LIMIT 10 OFFSET 10. Note: OFFSET can be slow on large tables.</dd>
+
+  <dt>What are SQL JOIN types and when to use them?</dt>
+  <dd>INNER JOIN returns matching rows from both tables. LEFT JOIN (LEFT OUTER JOIN) returns all left table rows plus matched right table rows (NULL if no match). RIGHT JOIN is the reverse of LEFT JOIN. FULL OUTER JOIN returns all rows from both tables. CROSS JOIN produces Cartesian product. Use INNER JOIN for mandatory relationships, LEFT JOIN for optional relationships.</dd>
 </dl>
 </section>
 </main>

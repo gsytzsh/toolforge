@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Find and Replace – Replace Text Online with Optional Regex | ToolForge</title>
-<meta name="description" content="Free online Find and Replace tool to replace text with optional regex support. Global replace, case-sensitive matching, and pattern-based substitution for powerful text editing. Part of the ToolForge developer tools collection.">
+<title>Find and Replace – Text Substitution with Regex Support | ToolForge</title>
+<meta name="description" content="Find and replace text with literal strings or regular expressions. Supports capture groups, global replacement, and pattern-based substitution. Includes regex reference and examples. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/find-replace.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Find and Replace – Replace Text Online with Optional Regex | ToolForge">
-<meta property="og:description" content="Free online Find and Replace tool to replace text with optional regex support for quick edits and text cleanup. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Find and Replace – Text Substitution with Regex Support | ToolForge">
+<meta property="og:description" content="Find and replace text with literal strings or regular expressions. Supports capture groups, global replacement, and pattern-based substitution. Includes regex reference and examples. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/find-replace.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Find and Replace – Replace Text Online with Optional Regex | ToolForge">
-<meta name="twitter:description" content="Free online Find and Replace tool to replace text with optional regex support for quick edits and text cleanup. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Find and Replace – Text Substitution with Regex Support | ToolForge">
+<meta name="twitter:description" content="Find and replace text with literal strings or regular expressions. Supports capture groups, global replacement, and pattern-based substitution. Includes regex reference and examples. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -27,31 +27,31 @@
       "name": "How does find and replace work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Find and replace searches for a specific string or pattern in text and replaces all occurrences with a new value. In regex mode, you can use patterns like \\d+ to match numbers or [A-Z] for uppercase letters.\""
+        "text": "Find and replace scans text for occurrences of a search string or pattern and substitutes them with a replacement value. In literal mode, it uses exact string matching (split/join). In regex mode, it uses the RegExp engine with pattern matching and capture group substitution via $1, $2, etc."
       }
     },
     {
       "@type": "Question",
-      "name": "What is regex mode and when should I use it?",
+      "name": "What is the difference between literal and regex mode?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Regex (regular expression) mode enables pattern-based matching instead of literal text. Use it for complex searches like 'all numbers', 'email addresses', or 'words starting with capital'. Enable the Regex checkbox to use it.\""
+        "text": "Literal mode treats the find string as plain text—special characters like ., *, + have no special meaning. Regex mode interprets the find string as a regular expression pattern, enabling wildcards (.*), character classes ([A-Z]), quantifiers (\\d+), and anchors (^, $). Use regex mode for pattern-based matching, literal mode for exact text replacement."
       }
     },
     {
       "@type": "Question",
-      "name": "How do I replace all occurrences?",
+      "name": "How do capture groups work in replacements?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Both 'Replace' and 'Replace all' buttons replace all occurrences globally. Enter your find text and replacement text, then click either button. The result appears in the output box below.\""
+        "text": "Capture groups are defined by parentheses in the regex pattern. Each group is numbered left-to-right starting from 1. In the replacement string, use $1, $2, etc. to reference captured text. Example: Find '(\\w+), (\\w+)' with Replace '$2 $1' transforms 'Doe, John' to 'John Doe'."
       }
     },
     {
       "@type": "Question",
-      "name": "Can I use capture groups in replacements?",
+      "name": "Why do special characters need escaping?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, in regex mode you can use capture groups. Use $1, $2, etc. in the replacement to reference captured groups. Example: Find '(\\w+), (\\w+)' Replace '$2 $1' converts 'Doe, John' to 'John Doe'.\""
+        "text": "In regex mode, characters like ., *, +, ?, [, ], (, ), ^, $, |, \\ have special meanings. To match them literally, escape with backslash: \\. matches a literal dot, \\* matches an asterisk. In literal mode, these characters are treated as-is without escaping."
       }
     },
     {
@@ -59,7 +59,15 @@
       "name": "Is the replacement case-sensitive?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, by default matching is case-sensitive. 'hello' won't match 'Hello' or 'HELLO'. In regex mode, add the 'i' flag pattern or use character classes like [Hh]ello for case-insensitive matching.\""
+        "text": "Yes, matching is case-sensitive by default. 'hello' does not match 'Hello' or 'HELLO'. For case-insensitive regex matching, use the (?i) flag at the pattern start or character classes like [Hh]ello. Literal mode has no built-in case-insensitive option."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens with empty replacement text?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An empty replacement string deletes all matched text. This is useful for removing unwanted patterns: use \\s+ to collapse multiple spaces, \\d+ to remove all numbers, or [^\\w\\s] to strip punctuation. The matches are replaced with nothing, effectively deleting them."
       }
     }
   ]
@@ -69,7 +77,7 @@
 <body>
 <main class="container">
 <h1>Find and Replace</h1>
-<p class="subtitle">Replace text with literal strings or regex patterns.</p>
+<p class="subtitle">Replace text using literal strings or regular expression patterns with capture group support.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Find</h3>
 <label for="find" class="sr-only">Find</label>
@@ -91,83 +99,296 @@
 <p id="status" style="color:#666"></p>
 <section class="tool-seo">
 <h3>About Find and Replace</h3>
-<p>This find and replace tool searches for text patterns and replaces them with your specified value. It supports both literal string matching and regular expressions (regex) for advanced pattern-based substitution.</p>
+<p>This find and replace tool performs text substitution using either literal string matching or regular expression patterns. It supports global replacement, capture groups, and pattern-based transformations for text editing and data processing workflows.</p>
 
-<h4>Basic vs Regex Mode</h4>
+<h4>Literal vs Regex Mode Comparison</h4>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Feature</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Basic Mode</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Literal Mode</th>
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Regex Mode</th>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Matching</td>
-    <td style="border:1px solid #ddd;padding:8px">Literal text</td>
-    <td style="border:1px solid #ddd;padding:8px">Patterns</td>
+    <td style="border:1px solid #ddd;padding:8px">Exact string match</td>
+    <td style="border:1px solid #ddd;padding:8px">Pattern-based matching</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Special Characters</td>
+    <td style="border:1px solid #ddd;padding:8px">Treated literally</td>
+    <td style="border:1px solid #ddd;padding:8px">Have special meaning</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Wildcards</td>
     <td style="border:1px solid #ddd;padding:8px">Not supported</td>
-    <td style="border:1px solid #ddd;padding:8px">.*, \d, \w, etc.</td>
+    <td style="border:1px solid #ddd;padding:8px">.*, \\d, \\w, [A-Z], etc.</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Capture Groups</td>
-    <td style="border:1px solid #ddd;padding:8px">No</td>
-    <td style="border:1px solid #ddd;padding:8px">Yes ($1, $2...)</td>
+    <td style="border:1px solid #ddd;padding:8px">Not supported</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes ($1, $2, etc.)</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Character Classes</td>
-    <td style="border:1px solid #ddd;padding:8px">No</td>
-    <td style="border:1px solid #ddd;padding:8px">[A-Z], [0-9], etc.</td>
+    <td style="border:1px solid #ddd;padding:8px">Not supported</td>
+    <td style="border:1px solid #ddd;padding:8px">[A-Z], [0-9], \\s, etc.</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Anchors</td>
+    <td style="border:1px solid #ddd;padding:8px">Not supported</td>
+    <td style="border:1px solid #ddd;padding:8px">^ (start), $ (end)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Quantifiers</td>
+    <td style="border:1px solid #ddd;padding:8px">Not supported</td>
+    <td style="border:1px solid #ddd;padding:8px">+, *, ?, {n,m}</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Best For</td>
-    <td style="border:1px solid #ddd;padding:8px">Simple replacements</td>
-    <td style="border:1px solid #ddd;padding:8px">Complex patterns</td>
+    <td style="border:1px solid #ddd;padding:8px">Simple text replacement</td>
+    <td style="border:1px solid #ddd;padding:8px">Pattern matching, data transformation</td>
   </tr>
 </table>
 
-<h4>Common Regex Patterns</h4>
+<h4>Regex Pattern Reference</h4>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Pattern</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Matches</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Example Match</th>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px"><code>\d+</code></td>
-    <td style="border:1px solid #ddd;padding:8px">One or more digits</td>
-    <td style="border:1px solid #ddd;padding:8px">123, 42, 0</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>.</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Any character except newline</td>
+    <td style="border:1px solid #ddd;padding:8px">a, 1, space</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px"><code>\w+</code></td>
-    <td style="border:1px solid #ddd;padding:8px">Word characters</td>
-    <td style="border:1px solid #ddd;padding:8px">hello, user_123</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>\\d</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Digit character</td>
+    <td style="border:1px solid #ddd;padding:8px">0-9</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px"><code>[A-Z]</code></td>
-    <td style="border:1px solid #ddd;padding:8px">Uppercase letters</td>
-    <td style="border:1px solid #ddd;padding:8px">A, B, C</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>\\w</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Word character</td>
+    <td style="border:1px solid #ddd;padding:8px">a-z, A-Z, 0-9, _</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px"><code>\s+</code></td>
-    <td style="border:1px solid #ddd;padding:8px">Whitespace</td>
-    <td style="border:1px solid #ddd;padding:8px">" ", "\t", "\n"</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>\\s</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Whitespace character</td>
+    <td style="border:1px solid #ddd;padding:8px">space, tab, newline</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px"><code>.*</code></td>
-    <td style="border:1px solid #ddd;padding:8px">Any characters (greedy)</td>
-    <td style="border:1px solid #ddd;padding:8px">anything</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>[abc]</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Character class (a, b, or c)</td>
+    <td style="border:1px solid #ddd;padding:8px">a, b, or c</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px"><code>^word</code></td>
-    <td style="border:1px solid #ddd;padding:8px">Starts with "word"</td>
-    <td style="border:1px solid #ddd;padding:8px">word at line start</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>[^abc]</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Negated class (not a, b, or c)</td>
+    <td style="border:1px solid #ddd;padding:8px">any except a, b, c</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px"><code>word$</code></td>
-    <td style="border:1px solid #ddd;padding:8px">Ends with "word"</td>
-    <td style="border:1px solid #ddd;padding:8px">word at line end</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>^pattern</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Start of string/line</td>
+    <td style="border:1px solid #ddd;padding:8px">pattern at beginning</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>pattern$</code></td>
+    <td style="border:1px solid #ddd;padding:8px">End of string/line</td>
+    <td style="border:1px solid #ddd;padding:8px">pattern at end</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>\\bword\\b</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Word boundary</td>
+    <td style="border:1px solid #ddd;padding:8px">whole word "word"</td>
+  </tr>
+</table>
+
+<h4>Quantifier Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Quantifier</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>*</code></td>
+    <td style="border:1px solid #ddd;padding:8px">0 or more (greedy)</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>a*</code> matches "", "a", "aaa"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>+</code></td>
+    <td style="border:1px solid #ddd;padding:8px">1 or more (greedy)</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>\\d+</code> matches "1", "123"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>?</code></td>
+    <td style="border:1px solid #ddd;padding:8px">0 or 1 (optional)</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>colou?r</code> matches "color" or "colour"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>{n}</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Exactly n times</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>\\d{4}</code> matches "2024"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>{n,m}</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Between n and m times</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>\\d{2,4}</code> matches "24", "2024"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>*?</code></td>
+    <td style="border:1px solid #ddd;padding:8px">0 or more (non-greedy)</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>&lt;.*?&gt;</code> matches "&lt;tag&gt;" minimally</td>
+  </tr>
+</table>
+
+<h4>Replacement Algorithm</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript Find and Replace Implementation:
+
+// Literal mode: uses split/join for exact string replacement
+function literalReplace(text, find, replacement) {
+  return text.split(find).join(replacement);
+}
+
+// Regex mode: uses RegExp with capture group support
+function regexReplace(text, pattern, replacement) {
+  const regex = new RegExp(pattern, "g");
+  return text.replace(regex, replacement);
+}
+
+// Count matches
+function countMatches(text, pattern, isRegex) {
+  const searchPattern = isRegex
+    ? new RegExp(pattern, "g")
+    : new RegExp(pattern.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g");
+  const matches = text.match(searchPattern);
+  return matches ? matches.length : 0;
+}
+
+// Usage:
+const text = "I have 123 apples and 456 oranges";
+
+// Literal replacement
+literalReplace(text, "apples", "oranges");
+// "I have 123 oranges and 456 oranges"
+
+// Regex replacement - remove all numbers
+regexReplace(text, "\\d+", "");
+// "I have  apples and  oranges"
+
+// Regex with capture groups - swap numbers
+regexReplace("Doe, John", "(\\w+), (\\w+)", "$2 $1");
+// "John Doe"
+</pre>
+
+<h4>Capture Group Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Swap first and last name
+Find: (\w+), (\w+)
+Replace: $2 $1
+Input: "Doe, John"
+Output: "John Doe"
+
+Example 2: Convert date format MM/DD/YYYY → YYYY-MM-DD
+Find: (\d{2})/(\d{2})/(\d{4})
+Replace: $3-$1-$2
+Input: "12/25/2024"
+Output: "2024-12-25"
+
+Example 3: Wrap numbers in brackets
+Find: (\d+)
+Replace: [$1]
+Input: "I have 42 dollars and 99 cents"
+Output: "I have [42] dollars and [99] cents"
+
+Example 4: Add quotes around words
+Find: (\w+)
+Replace: "$1"
+Input: "hello world"
+Output: ""hello" "world""
+
+Example 5: Extract email domain
+Find: \w+@(\w+\.\w+)
+Replace: $1
+Input: "Contact: user@example.com"
+Output: "Contact: example.com"
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Data Cleanup:</strong> Remove unwanted characters, normalize whitespace, strip HTML tags</li>
+  <li><strong>Code Refactoring:</strong> Rename variables, update function calls, transform imports</li>
+  <li><strong>Content Editing:</strong> Fix repeated typos, update terminology, reformat dates</li>
+  <li><strong>Log Processing:</strong> Extract or mask sensitive data (IPs, emails, IDs)</li>
+  <li><strong>Format Conversion:</strong> Transform CSV to JSON, reformat dates, normalize phone numbers</li>
+  <li><strong>Text Transformation:</strong> Case changes, word reordering, field extraction</li>
+  <li><strong>SEO:</strong> Update internal links, modify meta descriptions, fix heading structures</li>
+</ul>
+
+<h4>Special Characters Reference</h4>
+<p>These characters have special meaning in regex mode and must be escaped with backslash to match literally:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Character</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Regex Meaning</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Escape to Match</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>.</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Any character</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>\.</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>*</code></td>
+    <td style="border:1px solid #ddd;padding:8px">0 or more</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>\*</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>+</code></td>
+    <td style="border:1px solid #ddd;padding:8px">1 or more</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>\+</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>?</code></td>
+    <td style="border:1px solid #ddd;padding:8px">0 or 1</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>\?</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>[</code> <code>]</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Character class</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>\[</code> <code>\]</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>(</code> <code>)</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Capture group</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>\(</code> <code>\)</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>{</code> <code>}</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Quantifier</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>\{</code> <code>\}</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>^</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Start anchor</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>\^</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>$</code></td>
+    <td style="border:1px solid #ddd;padding:8px">End anchor</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>\$</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>|</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Alternation (OR)</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>\|</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"><code>\</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Escape character</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>\\</code></td>
   </tr>
 </table>
 
@@ -179,85 +400,50 @@ Replace: (empty)
 Input: "I have 123 apples and 456 oranges"
 Output: "I have  apples and  oranges"
 
-Example 2: Swap first and last name
-Find: (\w+), (\w+)
-Replace: $2 $1
-Input: "Doe, John"
-Output: "John Doe"
-
-Example 3: Replace multiple spaces with single
+Example 2: Normalize whitespace
 Find: \s+
 Replace: " "
-Input: "too    many   spaces"
-Output: "too many spaces"
+Input: "too    many   spaces   here"
+Output: "too many spaces here"
 
-Example 4: Wrap numbers in brackets
-Find: (\d+)
-Replace: [$1]
-Input: "I have 42 dollars"
-Output: "I have [42] dollars"
-</pre>
+Example 3: Mask email addresses
+Find: \w+@\w+\.\w+
+Replace: [EMAIL REDACTED]
+Input: "Contact support@example.com or sales@company.org"
+Output: "Contact [EMAIL REDACTED] or [EMAIL REDACTED]"
 
-<h4>Common Use Cases</h4>
-<ul>
-  <li><strong>Data Cleanup:</strong> Remove unwanted characters, normalize whitespace</li>
-  <li><strong>Code Refactoring:</strong> Rename variables, update function calls</li>
-  <li><strong>Content Editing:</strong> Fix repeated typos, update terminology</li>
-  <li><strong>Log Processing:</strong> Extract or mask sensitive data</li>
-  <li><strong>Format Conversion:</strong> Transform CSV, JSON, or other formats</li>
-  <li><strong>Text Transformation:</strong> Case changes, reordering fields</li>
-</ul>
+Example 4: Convert camelCase to snake_case
+Find: ([a-z])([A-Z])
+Replace: $1_$2
+Input: "userName and firstName"
+Output: "user_name and first_name"
 
-<h4>Special Characters in Basic Mode</h4>
-<p>In basic mode, these characters are treated literally:</p>
-<ul>
-  <li><code>.</code> dot</li>
-  <li><code>*</code> asterisk</li>
-  <li><code>+</code> plus</li>
-  <li><code>?</code> question mark</li>
-  <li><code>[</code> <code>]</code> brackets</li>
-  <li><code>(</code> <code>)</code> parentheses</li>
-  <li><code>^</code> <code>$</code> caret and dollar</li>
-  <li><code>\</code> backslash</li>
-</ul>
-<p>In regex mode, these have special meaning for pattern matching.</p>
-
-<h4>Using Capture Groups</h4>
-<p>Capture groups let you reuse matched text in replacements:</p>
-<ol>
-  <li>Wrap part of pattern in parentheses: <code>(pattern)</code></li>
-  <li>Reference in replacement: <code>$1</code>, <code>$2</code>, etc.</li>
-  <li><code>$1</code> = first group, <code>$2</code> = second group</li>
-</ol>
-
-<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
-Example: Convert date format from MM/DD/YYYY to YYYY-MM-DD
-
-Find: (\d{2})/(\d{2})/(\d{4})
-Replace: $3-$1-$2
-
-Input: "12/25/2024"
-Output: "2024-12-25"
+Example 5: Extract phone numbers (US format)
+Find: (\d{3})[-.]?(\d{3})[-.]?(\d{4})
+Replace: ($1) $2-$3
+Input: "Call 555-123-4567 or 555.987.6543"
+Output: "Call (555) 123-4567 or (555) 987-6543"
 </pre>
 </section>
 
 <section class="how-to-use">
 <h3>How to Use Find and Replace</h3>
 <ol class="how-to-steps">
-  <li><strong>Enter find text:</strong> Type the text or regex pattern to search for.</li>
-  <li><strong>Enter replacement:</strong> Type what should replace found matches.</li>
+  <li><strong>Enter find text:</strong> Type the literal text or regex pattern to search for.</li>
+  <li><strong>Enter replacement:</strong> Type the substitution text (use $1, $2 for capture groups).</li>
   <li><strong>Enable regex (optional):</strong> Check the box if using regex patterns.</li>
   <li><strong>Paste input text:</strong> Enter the text to process.</li>
-  <li><strong>Click Replace All:</strong> All occurrences are replaced in the output.</li>
+  <li><strong>Click Replace All:</strong> All occurrences are replaced globally in the output.</li>
   <li><strong>Copy result:</strong> Use the output in your documents or code.</li>
 </ol>
 
 <h4 style="margin-top:20px">Tips</h4>
 <ul>
-  <li>Test regex patterns on small text first</li>
+  <li>Test regex patterns on small text samples first</li>
   <li>Use capture groups for complex rearrangements</li>
   <li>Empty replacement deletes all matches</li>
-  <li>Special characters need escaping in basic mode</li>
+  <li>Escape special characters in literal mode if they have regex meaning</li>
+  <li>Use character classes for case-insensitive single characters: [Hh]ello</li>
 </ul>
 </section>
 <section class="faq">
@@ -265,19 +451,22 @@ Output: "2024-12-25"
 <dl class="faq-list">
 
   <dt>How does find and replace work?</dt>
-  <dd>Find and replace searches for a specific string or pattern in text and replaces all occurrences with a new value. In regex mode, you can use patterns like \d+ to match numbers or [A-Z] for uppercase letters.</dd>
+  <dd>Find and replace scans text for occurrences of a search string or pattern and substitutes them with a replacement value. In literal mode, it uses exact string matching (split/join). In regex mode, it uses the RegExp engine with pattern matching and capture group substitution via $1, $2, etc.</dd>
 
-  <dt>What is regex mode and when should I use it?</dt>
-  <dd>Regex (regular expression) mode enables pattern-based matching instead of literal text. Use it for complex searches like 'all numbers', 'email addresses', or 'words starting with capital'. Enable the Regex checkbox to use it.</dd>
+  <dt>What is the difference between literal and regex mode?</dt>
+  <dd>Literal mode treats the find string as plain text—special characters like ., *, + have no special meaning. Regex mode interprets the find string as a regular expression pattern, enabling wildcards (.*), character classes ([A-Z]), quantifiers (\d+), and anchors (^, $). Use regex mode for pattern-based matching, literal mode for exact text replacement.</dd>
 
-  <dt>How do I replace all occurrences?</dt>
-  <dd>Both 'Replace' and 'Replace all' buttons replace all occurrences globally. Enter your find text and replacement text, then click either button. The result appears in the output box below.</dd>
+  <dt>How do capture groups work in replacements?</dt>
+  <dd>Capture groups are defined by parentheses in the regex pattern. Each group is numbered left-to-right starting from 1. In the replacement string, use $1, $2, etc. to reference captured text. Example: Find '(\w+), (\w+)' with Replace '$2 $1' transforms 'Doe, John' to 'John Doe'.</dd>
 
-  <dt>Can I use capture groups in replacements?</dt>
-  <dd>Yes, in regex mode you can use capture groups. Use $1, $2, etc. in the replacement to reference captured groups. Example: Find '(\w+), (\w+)' Replace '$2 $1' converts 'Doe, John' to 'John Doe'.</dd>
+  <dt>Why do special characters need escaping?</dt>
+  <dd>In regex mode, characters like ., *, +, ?, [, ], (, ), ^, $, |, \ have special meanings. To match them literally, escape with backslash: \. matches a literal dot, \* matches an asterisk. In literal mode, these characters are treated as-is without escaping.</dd>
 
   <dt>Is the replacement case-sensitive?</dt>
-  <dd>Yes, by default matching is case-sensitive. 'hello' won't match 'Hello' or 'HELLO'. In regex mode, add the 'i' flag pattern or use character classes like [Hh]ello for case-insensitive matching.</dd>
+  <dd>Yes, matching is case-sensitive by default. 'hello' does not match 'Hello' or 'HELLO'. For case-insensitive regex matching, use the (?i) flag at the pattern start or character classes like [Hh]ello. Literal mode has no built-in case-insensitive option.</dd>
+
+  <dt>What happens with empty replacement text?</dt>
+  <dd>An empty replacement string deletes all matched text. This is useful for removing unwanted patterns: use \s+ to collapse multiple spaces, \d+ to remove all numbers, or [^\w\s] to strip punctuation. The matches are replaced with nothing, effectively deleting them.</dd>
 </dl>
 </section>
 </main>

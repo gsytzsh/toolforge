@@ -2,27 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Operator Precedence Reference – JS, Python, C | ToolForge</title>
-<meta name="description" content="Free online operator precedence reference for JavaScript, Python and C. Part of the ToolForge developer tools collection.">
+<title>Operator Precedence Reference – JavaScript, Python, C Order of Operations | ToolForge</title>
+<meta name="description" content="Complete operator precedence reference for JavaScript, Python, and C. Includes precedence tables, associativity rules, and expression evaluation examples. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/operator-precedence-reference.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Operator Precedence Reference – JS, Python, C | ToolForge">
-<meta property="og:description" content="Free online operator precedence reference. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Operator Precedence Reference – JavaScript, Python, C Order of Operations | ToolForge">
+<meta property="og:description" content="Complete operator precedence reference for JavaScript, Python, and C.">
 <meta property="og:url" content="https://toolforge.site/tools/operator-precedence-reference.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Operator Precedence Reference – JS, Python, C | ToolForge">
-<meta name="twitter:description" content="Free online operator precedence reference. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Operator Precedence Reference – JavaScript, Python, C Order of Operations | ToolForge">
+<meta name="twitter:description" content="Complete operator precedence reference for JavaScript, Python, and C.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
-.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem}
+.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem;margin:16px 0}
 .ref-table th,.ref-table td{border:1px solid #eee;padding:8px 12px;text-align:left}
 .ref-table th{background:#f8fafc;font-weight:600}
 .ref-table code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:0.9em}
 .ref-section{margin-top:24px}
-.ref-section h3{font-size:1rem;color:#475569;margin-bottom:8px}
+.ref-section h3{font-size:1.1rem;color:#475569;margin-bottom:12px}
+.example-box{background:#f5f5f5;padding:12px;border-radius:8px;margin:12px 0}
 </style>
 
 <script type="application/ld+json">
@@ -32,45 +33,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Operator Precedence Reference used for?",
+      "name": "What is operator precedence?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Operator Precedence Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "Operator precedence determines the order in which operations are evaluated in an expression. Higher precedence operators are evaluated before lower precedence ones. For example, in 2 + 3 * 4, multiplication has higher precedence, so it's 2 + (3 * 4) = 14, not (2 + 3) * 4 = 20."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is associativity in operators?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Associativity determines evaluation order when operators have the same precedence. Left-to-right (L→R) means evaluate from left: a - b - c = (a - b) - c. Right-to-left (R→L) means evaluate from right: a = b = c means a = (b = c). Most operators are left-associative; assignment operators are typically right-associative."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "Why does 2 + 3 * 4 equal 14 and not 20?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Multiplication (*) has higher precedence than addition (+). So 2 + 3 * 4 is evaluated as 2 + (3 * 4) = 2 + 12 = 14. To get 20, you'd need parentheses: (2 + 3) * 4 = 5 * 4 = 20. This follows standard mathematical order of operations (PEMDAS/BODMAS)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the precedence of logical operators?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "In most languages: NOT (!) has highest precedence, then AND (&&), then OR (||). So !a && b || c means ((!a) && b) || c. This ensures logical NOT binds tightest, AND groups conditions, and OR provides alternatives."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "How does Python's precedence differ from JavaScript?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Key differences: Python uses ** for exponentiation (higher than unary), Python has 'not' instead of !, Python chains comparisons (a < b < c means a < b AND b < c), Python uses 'and'/'or' keywords. JavaScript has >>> (unsigned right shift) and === (strict equality) which Python lacks."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "When should I use parentheses?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Use parentheses when: precedence is unclear, you want to override default precedence, code readability improves, or mixing operators from same precedence level. Even when not strictly necessary, parentheses can make intent clearer: (a && b) || (c && d) is clearer than a && b || c && d."
       }
     }
   ]
@@ -80,80 +86,157 @@
 <body>
 <main class="container">
 <h1>Operator Precedence Reference</h1>
-<p class="subtitle">Operator precedence for JavaScript, Python and C (highest to lowest).</p>
+<p class="subtitle">Operator precedence tables for JavaScript, Python, and C (highest to lowest precedence).</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
+<div class="example-box">
+<strong>Quick Example:</strong> In <code>2 + 3 * 4</code>, multiplication happens first: <code>2 + (3 * 4) = 14</code>, not <code>(2 + 3) * 4 = 20</code>.
+</div>
+
 <div class="ref-section">
-<h3>JavaScript / C-style</h3>
+<h3>JavaScript Operator Precedence</h3>
 <table class="ref-table">
-<thead><tr><th>Precedence</th><th>Operators</th><th>Associativity</th></tr></thead>
+<thead><tr><th>Level</th><th>Precedence</th><th>Operators</th><th>Associativity</th><th>Description</th></tr></thead>
 <tbody>
-<tr><td>1</td><td><code>()</code> <code>[]</code> <code>.</code> <code>new</code></td><td>L→R</td></tr>
-<tr><td>2</td><td><code>!</code> <code>~</code> <code>++</code> <code>--</code> <code>+</code> <code>-</code> <code>typeof</code> <code>void</code> <code>delete</code></td><td>R→L</td></tr>
-<tr><td>3</td><td><code>*</code> <code>/</code> <code>%</code></td><td>L→R</td></tr>
-<tr><td>4</td><td><code>+</code> <code>-</code></td><td>L→R</td></tr>
-<tr><td>5</td><td><code>&lt;&lt;</code> <code>&gt;&gt;</code> <code>&gt;&gt;&gt;</code></td><td>L→R</td></tr>
-<tr><td>6</td><td><code>&lt;</code> <code>&lt;=</code> <code>&gt;</code> <code>&gt;=</code> <code>instanceof</code></td><td>L→R</td></tr>
-<tr><td>7</td><td><code>==</code> <code>!=</code> <code>===</code> <code>!==</code></td><td>L→R</td></tr>
-<tr><td>8</td><td><code>&amp;</code></td><td>L→R</td></tr>
-<tr><td>9</td><td><code>^</code></td><td>L→R</td></tr>
-<tr><td>10</td><td><code>|</code></td><td>L→R</td></tr>
-<tr><td>11</td><td><code>&amp;&amp;</code></td><td>L→R</td></tr>
-<tr><td>12</td><td><code>||</code></td><td>L→R</td></tr>
-<tr><td>13</td><td><code>? :</code></td><td>R→L</td></tr>
-<tr><td>14</td><td><code>=</code> <code>+=</code> <code>-=</code> <code>*=</code> <code>/=</code> etc.</td><td>R→L</td></tr>
-<tr><td>15</td><td><code>,</code></td><td>L→R</td></tr>
+<tr><td>1</td><td>21</td><td><code>()</code> <code>[]</code> <code>.</code> <code>new</code> <code>?.</code></td><td>L→R</td><td>Member access, function call</td></tr>
+<tr><td>2</td><td>20</td><td><code>new</code> (with args)</td><td>R→L</td><td>Object instantiation</td></tr>
+<tr><td>3</td><td>19</td><td><code>++</code> <code>--</code> (postfix)</td><td>L→R</td><td>Postfix increment/decrement</td></tr>
+<tr><td>4</td><td>18</td><td><code>!</code> <code>~</code> <code>+</code> <code>-</code> <code>++</code> <code>--</code> <code>typeof</code> <code>void</code> <code>delete</code></td><td>R→L</td><td>Unary operators</td></tr>
+<tr><td>5</td><td>17</td><td><code>**</code></td><td>R→L</td><td>Exponentiation</td></tr>
+<tr><td>6</td><td>16</td><td><code>*</code> <code>/</code> <code>%</code></td><td>L→R</td><td>Multiplicative</td></tr>
+<tr><td>7</td><td>15</td><td><code>+</code> <code>-</code></td><td>L→R</td><td>Additive</td></tr>
+<tr><td>8</td><td>14</td><td><code>&lt;&lt;</code> <code>&gt;&gt;</code> <code>&gt;&gt;&gt;</code></td><td>L→R</td><td>Bitwise shifts</td></tr>
+<tr><td>9</td><td>13</td><td><code>&lt;</code> <code>&gt;</code> <code>&lt;=</code> <code>&gt;=</code> <code>in</code> <code>instanceof</code></td><td>L→R</td><td>Relational</td></tr>
+<tr><td>10</td><td>12</td><td><code>==</code> <code>!=</code> <code>===</code> <code>!==</code></td><td>L→R</td><td>Equality</td></tr>
+<tr><td>11</td><td>11</td><td><code>&amp;</code></td><td>L→R</td><td>Bitwise AND</td></tr>
+<tr><td>12</td><td>10</td><td><code>^</code></td><td>L→R</td><td>Bitwise XOR</td></tr>
+<tr><td>13</td><td>9</td><td><code>|</code></td><td>L→R</td><td>Bitwise OR</td></tr>
+<tr><td>14</td><td>8</td><td><code>&amp;&amp;</code></td><td>L→R</td><td>Logical AND</td></tr>
+<tr><td>15</td><td>7</td><td><code>||</code> <code>??</code></td><td>L→R</td><td>Logical OR / Nullish coalescing</td></tr>
+<tr><td>16</td><td>6</td><td><code>? :</code></td><td>R→L</td><td>Ternary conditional</td></tr>
+<tr><td>17</td><td>5</td><td><code>=</code> <code>+=</code> <code>-=</code> <code>*=</code> <code>/=</code> <code>%=</code> <code>&amp;=</code> <code>|=</code> <code>^=</code> <code>&lt;&lt;=</code> <code>&gt;&gt;=</code> <code>&gt;&gt;&gt;=</code> <code>**=</code></td><td>R→L</td><td>Assignment operators</td></tr>
+<tr><td>18</td><td>4</td><td><code>yield</code> <code>yield*</code></td><td>R→L</td><td>Generator yield</td></tr>
+<tr><td>19</td><td>3</td><td><code>=&gt;</code></td><td>R→L</td><td>Arrow function</td></tr>
+<tr><td>20</td><td>1</td><td><code>,</code></td><td>L→R</td><td>Comma (sequence)</td></tr>
 </tbody>
 </table>
 </div>
 
 <div class="ref-section">
-<h3>Python</h3>
+<h3>Python Operator Precedence</h3>
 <table class="ref-table">
-<thead><tr><th>Precedence</th><th>Operators</th><th>Associativity</th></tr></thead>
+<thead><tr><th>Level</th><th>Precedence</th><th>Operators</th><th>Associativity</th><th>Description</th></tr></thead>
 <tbody>
-<tr><td>1</td><td><code>()</code> <code>[]</code> <code>{}</code> <code>.</code></td><td>L→R</td></tr>
-<tr><td>2</td><td><code>**</code></td><td>R→L</td></tr>
-<tr><td>3</td><td><code>+x</code> <code>-x</code> <code>~x</code> <code>not</code></td><td>R→L</td></tr>
-<tr><td>4</td><td><code>*</code> <code>/</code> <code>//</code> <code>%</code></td><td>L→R</td></tr>
-<tr><td>5</td><td><code>+</code> <code>-</code></td><td>L→R</td></tr>
-<tr><td>6</td><td><code>&lt;&lt;</code> <code>&gt;&gt;</code></td><td>L→R</td></tr>
-<tr><td>7</td><td><code>&amp;</code></td><td>L→R</td></tr>
-<tr><td>8</td><td><code>^</code></td><td>L→R</td></tr>
-<tr><td>9</td><td><code>|</code></td><td>L→R</td></tr>
-<tr><td>10</td><td><code>in</code> <code>not in</code> <code>is</code> <code>is not</code> <code>&lt;</code> <code>&lt;=</code> <code>&gt;</code> <code>&gt;=</code> <code>!=</code> <code>==</code></td><td>L→R</td></tr>
-<tr><td>11</td><td><code>not</code></td><td>R→L</td></tr>
-<tr><td>12</td><td><code>and</code></td><td>L→R</td></tr>
-<tr><td>13</td><td><code>or</code></td><td>L→R</td></tr>
-<tr><td>14</td><td><code>if else</code> (conditional)</td><td>R→L</td></tr>
-<tr><td>15</td><td><code>:=</code> (walrus) <code>=</code> <code>+=</code> etc.</td><td>R→L</td></tr>
+<tr><td>1</td><td>18</td><td><code>()</code> <code>[]</code> <code>{}</code> <code>.</code></td><td>L→R</td><td>Grouping, indexing, attribute</td></tr>
+<tr><td>2</td><td>17</td><td><code>**</code></td><td>R→L</td><td>Exponentiation</td></tr>
+<tr><td>3</td><td>16</td><td><code>+x</code> <code>-x</code> <code>~x</code></td><td>R→L</td><td>Unary plus, minus, bitwise NOT</td></tr>
+<tr><td>4</td><td>15</td><td><code>not</code></td><td>R→L</td><td>Logical NOT</td></tr>
+<tr><td>5</td><td>14</td><td><code>*</code> <code>/</code> <code>//</code> <code>%</code> <code>@</code></td><td>L→R</td><td>Multiplication, division, floor div, mod, matrix</td></tr>
+<tr><td>6</td><td>13</td><td><code>+</code> <code>-</code></td><td>L→R</td><td>Addition, subtraction</td></tr>
+<tr><td>7</td><td>12</td><td><code>&lt;&lt;</code> <code>&gt;&gt;</code></td><td>L→R</td><td>Bitwise shifts</td></tr>
+<tr><td>8</td><td>11</td><td><code>&amp;</code></td><td>L→R</td><td>Bitwise AND</td></tr>
+<tr><td>9</td><td>10</td><td><code>^</code></td><td>L→R</td><td>Bitwise XOR</td></tr>
+<tr><td>10</td><td>9</td><td><code>|</code></td><td>L→R</td><td>Bitwise OR</td></tr>
+<tr><td>11</td><td>8</td><td><code>in</code> <code>not in</code> <code>is</code> <code>is not</code> <code>&lt;</code> <code>&lt;=</code> <code>&gt;</code> <code>&gt;=</code> <code>!=</code> <code>==</code></td><td>L→R</td><td>Comparisons, membership, identity</td></tr>
+<tr><td>12</td><td>7</td><td><code>not</code></td><td>R→L</td><td>Boolean NOT</td></tr>
+<tr><td>13</td><td>6</td><td><code>and</code></td><td>L→R</td><td>Boolean AND</td></tr>
+<tr><td>14</td><td>5</td><td><code>or</code></td><td>L→R</td><td>Boolean OR</td></tr>
+<tr><td>15</td><td>4</td><td><code>if</code> <code>else</code></td><td>R→L</td><td>Conditional expression</td></tr>
+<tr><td>16</td><td>3</td><td><code>:=</code></td><td>R→L</td><td>Walrus operator (assignment expression)</td></tr>
+<tr><td>17</td><td>2</td><td><code>=</code> <code>+=</code> <code>-=</code> <code>*=</code> <code>/=</code> <code>//=</code> <code>%=</code> <code>**=</code> <code>&amp;=</code> <code>|=</code> <code>^=</code> <code>&lt;&lt;=</code> <code>&gt;&gt;=</code></td><td>R→L</td><td>Augmented assignment</td></tr>
+<tr><td>18</td><td>1</td><td><code>lambda</code></td><td>R→L</td><td>Lambda expression</td></tr>
 </tbody>
 </table>
 </div>
 
-<section class="tool-seo">
-<h3>About Operator Precedence Reference</h3>
-<p>This reference shows operator precedence for JavaScript, Python and C-style languages. Higher numbers = lower precedence.</p>
-<p>It is useful when reading or writing expressions to understand evaluation order without extra parentheses.</p>
-</section>
+<div class="ref-section">
+<h3>C Operator Precedence</h3>
+<table class="ref-table">
+<thead><tr><th>Level</th><th>Precedence</th><th>Operators</th><th>Associativity</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>15</td><td><code>()</code> <code>[]</code> <code>-&gt;</code> <code>.</code></td><td>L→R</td><td>Function call, array subscript, member access</td></tr>
+<tr><td>2</td><td>14</td><td><code>++</code> <code>--</code> (postfix) <code>()</code> (cast)</td><td>R→L</td><td>Postfix increment/decrement, type cast</td></tr>
+<tr><td>3</td><td>13</td><td><code>++</code> <code>--</code> (prefix) <code>+</code> <code>-</code> <code>!</code> <code>~</code> <code>*</code> <code>&amp;</code> <code>sizeof</code> <code>_Alignof</code></td><td>R→L</td><td>Unary operators</td></tr>
+<tr><td>4</td><td>12</td><td><code>*</code> <code>/</code> <code>%</code></td><td>L→R</td><td>Multiplicative</td></tr>
+<tr><td>5</td><td>11</td><td><code>+</code> <code>-</code></td><td>L→R</td><td>Additive</td></tr>
+<tr><td>6</td><td>10</td><td><code>&lt;&lt;</code> <code>&gt;&gt;</code></td><td>L→R</td><td>Bitwise shifts</td></tr>
+<tr><td>7</td><td>9</td><td><code>&lt;</code> <code>&lt;=</code> <code>&gt;</code> <code>&gt;=</code></td><td>L→R</td><td>Relational</td></tr>
+<tr><td>8</td><td>8</td><td><code>==</code> <code>!=</code></td><td>L→R</td><td>Equality</td></tr>
+<tr><td>9</td><td>7</td><td><code>&amp;</code></td><td>L→R</td><td>Bitwise AND</td></tr>
+<tr><td>10</td><td>6</td><td><code>^</code></td><td>L→R</td><td>Bitwise XOR</td></tr>
+<tr><td>11</td><td>5</td><td><code>|</code></td><td>L→R</td><td>Bitwise OR</td></tr>
+<tr><td>12</td><td>4</td><td><code>&amp;&amp;</code></td><td>L→R</td><td>Logical AND</td></tr>
+<tr><td>13</td><td>3</td><td><code>||</code></td><td>L→R</td><td>Logical OR</td></tr>
+<tr><td>14</td><td>2</td><td><code>? :</code></td><td>R→L</td><td>Conditional (ternary)</td></tr>
+<tr><td>15</td><td>1</td><td><code>=</code> <code>+=</code> <code>-=</code> <code>*=</code> <code>/=</code> <code>%=</code> <code>&lt;&lt;=</code> <code>&gt;&gt;=</code> <code>&amp;=</code> <code>^=</code> <code>|=</code></td><td>R→L</td><td>Assignment</td></tr>
+<tr><td>16</td><td>0</td><td><code>,</code></td><td>L→R</td><td>Comma operator</td></tr>
+</tbody>
+</table>
+</div>
 
-<section class="faq">
-<h3>Frequently Asked Questions</h3>
-<dl class="faq-list">
-  <dt>What is Operator Precedence Reference used for?</dt>
-  <dd>Operator Precedence Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
-</dl>
-</section>
+<div class="ref-section">
+<h3>Common Precedence Pitfalls</h3>
+<div class="example-box">
+<h4>1. Bitwise AND vs Equality</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px">
+// WRONG: &amp; has LOWER precedence than ==
+if (x &amp; 1 == 0)  // Evaluates as: x &amp; (1 == 0) = x &amp; 0 = 0
+
+// CORRECT: Use parentheses
+if ((x &amp; 1) == 0)  // Checks if x is even
+</pre>
+</div>
+
+<div class="example-box">
+<h4>2. Logical AND vs Logical OR</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px">
+// && binds tighter than ||
+if (a || b &amp;&amp; c)  // Means: a || (b &amp;&amp; c), NOT (a || b) &amp;&amp; c
+
+// For clarity, use parentheses
+if (a || (b &amp;&amp; c))
+</pre>
+</div>
+
+<div class="example-box">
+<h4>3. Assignment in Conditions</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px">
+// C/JavaScript: = has very low precedence
+if (x = y &amp;&amp; z)  // Means: x = (y &amp;&amp; z), assigns boolean!
+
+// Use == for comparison
+if (x == (y &amp;&amp; z))
+
+// Intentional assignment (C idiom)
+while ((c = getchar()) != EOF)  // Read char until EOF
+</pre>
+</div>
+
+<div class="example-box">
+<h4>4. Python Chained Comparisons</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px">
+# Python allows chained comparisons
+if 0 &lt; x &lt; 10:  # Means: (0 &lt; x) and (x &lt; 10)
+
+# JavaScript requires explicit logic
+if (x > 0 &amp;&amp; x &lt; 10)  // Cannot chain in JS
+</pre>
+</div>
+</div>
+
+<div class="ref-section">
+<h3>Operator Associativity Examples</h3>
+<table class="ref-table">
+<thead><tr><th>Expression</th><th>Associativity</th><th>Evaluates As</th><th>Result (a=1,b=2,c=3)</th></tr></thead>
+<tbody>
+<tr><td><code>a - b - c</code></td><td>L→R</td><td><code>(a - b) - c</code></td><td>-4</td></tr>
+<tr><td><code>a ** b ** c</code></td><td>R→L</td><td><code>a ** (b ** c)</code></td><td>1^8 = 1</td></tr>
+<tr><td><code>a = b = c</code></td><td>R→L</td><td><code>a = (b = c)</code></td><td>All equal 3</td></tr>
+<tr><td><code>a &amp;&amp; b &amp;&amp; c</code></td><td>L→R</td><td><code>(a &amp;&amp; b) &amp;&amp; c</code></td><td>true if all truthy</td></tr>
+<tr><td><code>a ? b : c ? d : e</code></td><td>R→L</td><td><code>a ? b : (c ? d : e)</code></td><td>Nested conditional</td></tr>
+</tbody>
+</table>
+</div>
 </main>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>

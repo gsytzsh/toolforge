@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Notepad to PDF – Export Notes to PDF Online | ToolForge</title>
-<meta name="description" content="Free online Notepad to PDF tool to write notes in your browser, auto-save them locally, and export them as a PDF. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Write notes in browser with auto-save to localStorage and export to PDF using jsPDF. Supports TXT and MD file import. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/notepad-to-pdf.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Notepad to PDF – Export Notes to PDF Online | ToolForge">
-<meta property="og:description" content="Free online Notepad to PDF tool to write notes in your browser, auto-save them locally, and export them as a PDF. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Write notes in browser with auto-save to localStorage and export to PDF using jsPDF. Supports TXT and MD file import. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/notepad-to-pdf.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Notepad to PDF – Export Notes to PDF Online | ToolForge">
-<meta name="twitter:description" content="Free online Notepad to PDF tool to write notes in your browser, auto-save them locally, and export them as a PDF. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Write notes in browser with auto-save to localStorage and export to PDF using jsPDF. Supports TXT and MD file import. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
@@ -25,45 +25,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Notepad To Pdf?",
+      "name": "How does the auto-save feature work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Notepad To Pdf is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "The tool uses the browser's localStorage API to automatically save your notes as you type. Every keystroke triggers a save to local storage, which persists even after closing the browser. Data is stored locally on your device and never sent to any server."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What PDF library does this tool use?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "This tool uses jsPDF, a popular JavaScript library for generating PDF documents client-side. jsPDF creates PDFs using JavaScript's canvas and font rendering capabilities, allowing PDF generation entirely in the browser without server processing."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What file formats can I import?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "You can import plain text files (.txt) and Markdown files (.md). The tool reads these as plain text and preserves line breaks and content formatting. Binary formats like .docx are not supported."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How is the PDF formatted?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "The PDF uses A4 page size with 40pt margins. The title appears in bold 14pt Helvetica at the top of the first page. Content is rendered in 11pt Helvetica with 15pt line spacing. Long lines automatically wrap to fit the page width."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "Can I edit the PDF after downloading?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "The generated PDF contains plain text only and cannot be directly edited. To make changes, edit the notes in the tool and regenerate the PDF. For PDF editing, use dedicated PDF editors like Adobe Acrobat, PDFescape, or LibreOffice Draw."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "Is there a character or page limit?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "localStorage typically supports 5-10MB of data (varies by browser), allowing hundreds of thousands of characters. The PDF generator handles multi-page documents automatically. Very large documents may take longer to generate."
       }
     }
   ]
@@ -93,47 +98,304 @@ Title:
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Notepad to PDF</h3>
-<p>This Notepad to PDF tool lets you draft notes in the browser, keep them locally with auto-save, and export them as a simple PDF when you are ready to share or print.</p>
-<p>Your notes stay on this device unless you choose to export them.</p>
+<p>This Notepad to PDF tool lets you draft notes in the browser with automatic localStorage persistence and exports them as a PDF document using the jsPDF library. Content is formatted with proper margins, page breaks, and typography for clean, readable output.</p>
+<p>It is useful for meeting notes, study materials, quick documentation, temporary drafts, content that needs PDF format for sharing, and situations where you want local-only storage without cloud sync.</p>
+
+<h4>localStorage Auto-Save</h4>
+<p>Your notes are automatically saved to browser storage:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+localStorage API:
+
+Storage Keys:
+  - toolforge.notepadToPdf: Note content
+  - toolforge.notepadToPdfTitle: Document title
+
+Features:
+  - Automatic save on every keystroke
+  - Persists across browser sessions
+  - Survives page refresh and browser restart
+  - No server storage or sync
+  - Cleared only by user or browser data clear
+
+Implementation:
+  // Save content
+  localStorage.setItem("toolforge.notepadToPdf", content);
+  localStorage.setItem("toolforge.notepadToPdfTitle", title);
+
+  // Load content
+  const content = localStorage.getItem("toolforge.notepadToPdf");
+  const title = localStorage.getItem("toolforge.notepadToPdfTitle");
+
+Storage Limits:
+  - Typical limit: 5-10 MB per origin
+  - Character capacity: ~2.5-5 million characters
+  - Varies by browser and settings
+
+Browser Support:
+  - Chrome/Edge: Full support
+  - Firefox: Full support
+  - Safari: Full support
+  - Opera: Full support
+  - IE11: Supported (legacy)
+</pre>
+
+<h4>PDF Generation with jsPDF</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Property</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Value</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Page Size</td>
+    <td style="border:1px solid #ddd;padding:8px">A4 (595 × 842 pt)</td>
+    <td style="border:1px solid #ddd;padding:8px">Standard international paper size</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Orientation</td>
+    <td style="border:1px solid #ddd;padding:8px">Portrait</td>
+    <td style="border:1px solid #ddd;padding:8px">Vertical layout</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Margins</td>
+    <td style="border:1px solid #ddd;padding:8px">40 pt (≈14mm)</td>
+    <td style="border:1px solid #ddd;padding:8px">All sides</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Title Font</td>
+    <td style="border:1px solid #ddd;padding:8px">Helvetica Bold 14pt</td>
+    <td style="border:1px solid #ddd;padding:8px">Document header</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Body Font</td>
+    <td style="border:1px solid #ddd;padding:8px">Helvetica 11pt</td>
+    <td style="border:1px solid #ddd;padding:8px">Content text</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Line Spacing</td>
+    <td style="border:1px solid #ddd;padding:8px">15 pt</td>
+    <td style="border:1px solid #ddd;padding:8px">Distance between lines</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Line Wrap</td>
+    <td style="border:1px solid #ddd;padding:8px">Automatic</td>
+    <td style="border:1px solid #ddd;padding:8px">Using splitTextToSize()</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Page Breaks</td>
+    <td style="border:1px solid #ddd;padding:8px">Automatic</td>
+    <td style="border:1px solid #ddd;padding:8px">When content exceeds page</td>
+  </tr>
+</table>
+
+<h4>PDF Structure</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+PDF Document Flow:
+
+1. Initialize jsPDF
+   const pdf = new jsPDF("p", "pt", "a4");
+
+2. Set title (bold, 14pt)
+   pdf.setFont("helvetica", "bold");
+   pdf.setFontSize(14);
+   pdf.text(title, margin, y);
+   y += 24;  // Space after title
+
+3. Set body font (normal, 11pt)
+   pdf.setFont("helvetica", "normal");
+   pdf.setFontSize(11);
+
+4. Process each line
+   - Split text into lines
+   - For each line:
+     a. Wrap to page width using splitTextToSize()
+     b. For each wrapped segment:
+        - Check if new page needed
+        - Add page if necessary
+        - Render text at (margin, y)
+        - Advance y by line spacing
+
+5. Save PDF
+   pdf.save("notepad-to-pdf.pdf");
+
+Page Break Logic:
+  if (y > pageHeight - margin) {
+    pdf.addPage();
+    y = margin;  // Reset to top margin
+  }
+
+Text Wrapping:
+  const wrapped = pdf.splitTextToSize(line, usableWidth);
+  // usableWidth = pageWidth - (margin × 2)
+</pre>
+
+<h4>File Import Process</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+FileReader API Flow:
+
+1. User selects file via input element
+   &lt;input type="file" accept=".txt,.md"&gt;
+
+2. File change event triggers loadNoteFile()
+
+3. FileReader reads file as text
+   const reader = new FileReader();
+   reader.onload = function(e) {
+     content = e.target.result;
+   };
+   reader.readAsText(file);
+
+4. Content loaded into textarea
+   document.getElementById("note-input").value = content;
+
+5. Title extracted from filename
+   title = filename.replace(/\.[^.]+$/, "");
+
+6. Content auto-saved to localStorage
+
+Supported Formats:
+  - .txt: Plain text files
+  - .md: Markdown files (rendered as plain text)
+  - text/plain: Any plain text MIME type
+
+Encoding:
+  - Default: UTF-8 (browser default)
+  - Handles Unicode characters
+  - Preserves line endings (LF, CRLF)
+</pre>
+
+<h4>Code Examples by Language</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Language/Library</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">PDF Generation Approach</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">JavaScript (jsPDF)</td>
+    <td style="border:1px solid #ddd;padding:8px">Client-side PDF via canvas rendering</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Python (reportlab)</td>
+    <td style="border:1px solid #ddd;padding:8px">from reportlab.pdfgen import canvas</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Python (fpdf)</td>
+    <td style="border:1px solid #ddd;padding:8px">from fpdf import FPDF</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">PHP (FPDF)</td>
+    <td style="border:1px solid #ddd;padding:8px">require('fpdf.php');</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">PHP (Dompdf)</td>
+    <td style="border:1px solid #ddd;padding:8px">HTML to PDF conversion</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Java (iText)</td>
+    <td style="border:1px solid #ddd;padding:8px">com.itextpdf.text.Document</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">C# (iTextSharp)</td>
+    <td style="border:1px solid #ddd;padding:8px">iTextSharp.text.Document</td>
+  </tr>
+</table>
+
+<h4>Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Meeting Notes</td>
+    <td style="border:1px solid #ddd;padding:8px">Quick note-taking during meetings, export to PDF for distribution</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Study Materials</td>
+    <td style="border:1px solid #ddd;padding:8px">Create study guides from notes, export for printing</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Temporary Drafts</td>
+    <td style="border:1px solid #ddd;padding:8px">Draft content with auto-save, export when ready</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Documentation</td>
+    <td style="border:1px solid #ddd;padding:8px">Quick technical notes, procedures, or reference materials</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Interview Notes</td>
+    <td style="border:1px solid #ddd;padding:8px">Record candidate responses, export for HR records</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Recipe Collection</td>
+    <td style="border:1px solid #ddd;padding:8px">Compile recipes, export as printable cookbook</td>
+  </tr>
+</table>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Use descriptive titles:</strong> Clear titles help identify PDF content and improve file organization.</li>
+  <li><strong>Organize with line breaks:</strong> Use blank lines to separate sections for better readability.</li>
+  <li><strong>Review before export:</strong> Check content formatting in the editor before generating PDF.</li>
+  <li><strong>Backup important notes:</strong> localStorage can be cleared; copy important content elsewhere.</li>
+  <li><strong>Consider line length:</strong> Very long lines wrap automatically but may look better with manual breaks.</li>
+  <li><strong>Use for plain text:</strong> Complex formatting requires dedicated word processors or Markdown-to-PDF tools.</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>Plain text only:</strong> No rich text formatting, images, or tables in output PDF.</li>
+  <li><strong>Basic typography:</strong> Uses only Helvetica font family; no custom fonts or styling.</li>
+  <li><strong>No Markdown rendering:</strong> Markdown syntax appears as plain text, not formatted.</li>
+  <li><strong>localStorage dependency:</strong> Clearing browser data deletes saved notes.</li>
+  <li><strong>No collaboration:</strong> Single-user, local-only; no sharing or sync features.</li>
+  <li><strong>Fixed page format:</strong> A4 portrait only; no custom page sizes or landscape orientation.</li>
+  <li><strong>No headers/footers:</strong> Cannot add page numbers, dates, or custom headers/footers.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Notepad To Pdf?</dt>
-  <dd>Notepad To Pdf is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How does the auto-save feature work?</dt>
+  <dd>The tool uses the browser's localStorage API to automatically save your notes as you type. Every keystroke triggers a save to local storage, which persists even after closing the browser. Data is stored locally on your device and never sent to any server.</dd>
+
+  <dt>What PDF library does this tool use?</dt>
+  <dd>This tool uses jsPDF, a popular JavaScript library for generating PDF documents client-side. jsPDF creates PDFs using JavaScript's canvas and font rendering capabilities, allowing PDF generation entirely in the browser without server processing.</dd>
+
+  <dt>What file formats can I import?</dt>
+  <dd>You can import plain text files (.txt) and Markdown files (.md). The tool reads these as plain text and preserves line breaks and content formatting. Binary formats like .docx are not supported.</dd>
+
+  <dt>How is the PDF formatted?</dt>
+  <dd>The PDF uses A4 page size with 40pt margins. The title appears in bold 14pt Helvetica at the top of the first page. Content is rendered in 11pt Helvetica with 15pt line spacing. Long lines automatically wrap to fit the page width.</dd>
+
+  <dt>Can I edit the PDF after downloading?</dt>
+  <dd>The generated PDF contains plain text only and cannot be directly edited. To make changes, edit the notes in the tool and regenerate the PDF. For PDF editing, use dedicated PDF editors like Adobe Acrobat, PDFescape, or LibreOffice Draw.</dd>
+
+  <dt>Is there a character or page limit?</dt>
+  <dd>localStorage typically supports 5-10MB of data (varies by browser), allowing hundreds of thousands of characters. The PDF generator handles multi-page documents automatically. Very large documents may take longer to generate.</dd>
 </dl>
 </section>
 </main>
 <script>
-let STORAGE_KEY="toolforge.notepadToPdf"
-let TITLE_KEY="toolforge.notepadToPdfTitle"
+let STORAGE_KEY="toolforge.notepadToPdf";
+let TITLE_KEY="toolforge.notepadToPdfTitle";
 
 function setStatus(message,color){
-let status=document.getElementById("status")
-status.innerText=message
-status.style.color=color
+let status=document.getElementById("status");
+status.innerText=message;
+status.style.color=color;
 }
 
 function loadSavedNotes(){
 try{
-let saved=localStorage.getItem(STORAGE_KEY)
-let savedTitle=localStorage.getItem(TITLE_KEY)
+let saved=localStorage.getItem(STORAGE_KEY);
+let savedTitle=localStorage.getItem(TITLE_KEY);
 if(saved!==null){
-document.getElementById("note-input").value=saved
+document.getElementById("note-input").value=saved;
 }
 if(savedTitle){
-document.getElementById("note-title").value=savedTitle
+document.getElementById("note-title").value=savedTitle;
 }
 }catch(e){
 }
@@ -141,85 +403,85 @@ document.getElementById("note-title").value=savedTitle
 
 function persistNotes(){
 try{
-localStorage.setItem(STORAGE_KEY,document.getElementById("note-input").value)
-localStorage.setItem(TITLE_KEY,document.getElementById("note-title").value)
+localStorage.setItem(STORAGE_KEY,document.getElementById("note-input").value);
+localStorage.setItem(TITLE_KEY,document.getElementById("note-title").value);
 }catch(e){
 }
 }
 
 function loadNoteFile(){
-let file=document.getElementById("note-file").files[0]
+let file=document.getElementById("note-file").files[0];
 if(!file){
-return
+return;
 }
-let reader=new FileReader()
+let reader=new FileReader();
 reader.onload=function(e){
-document.getElementById("note-input").value=e.target.result
-document.getElementById("note-title").value=file.name.replace(/\.[^.]+$/,"")
-persistNotes()
-setStatus("Text file loaded.","#16a34a")
-}
+document.getElementById("note-input").value=e.target.result;
+document.getElementById("note-title").value=file.name.replace(/\.[^.]+$/,"");
+persistNotes();
+setStatus("Text file loaded.","#16a34a");
+};
 reader.onerror=function(){
-setStatus("Failed to read text file.","#b91c1c")
-}
-reader.readAsText(file)
+setStatus("Failed to read text file.","#b91c1c");
+};
+reader.readAsText(file);
 }
 
 function clearNotes(){
-document.getElementById("note-input").value=""
-persistNotes()
-setStatus("Notes cleared.","#16a34a")
+document.getElementById("note-input").value="";
+persistNotes();
+setStatus("Notes cleared.","#16a34a");
 }
 
 function downloadPdf(){
-let text=document.getElementById("note-input").value
-let title=document.getElementById("note-title").value.trim()||"My Notes"
+let text=document.getElementById("note-input").value;
+let title=document.getElementById("note-title").value.trim()||"My Notes";
 if(!text.trim()){
-setStatus("Enter notes first.","#b91c1c")
-return
+setStatus("Enter notes first.","#b91c1c");
+return;
 }
 try{
-let pdf=new window.jspdf.jsPDF("p","pt","a4")
-let pageWidth=pdf.internal.pageSize.getWidth()
-let pageHeight=pdf.internal.pageSize.getHeight()
-let margin=40
-let usableWidth=pageWidth-margin*2
-let y=margin
-pdf.setFont("helvetica","bold")
-pdf.setFontSize(14)
-pdf.text(title,margin,y)
-y+=24
-pdf.setFont("helvetica","normal")
-pdf.setFontSize(11)
+let pdf=new window.jspdf.jsPDF("p","pt","a4");
+let pageWidth=pdf.internal.pageSize.getWidth();
+let pageHeight=pdf.internal.pageSize.getHeight();
+let margin=40;
+let usableWidth=pageWidth-margin*2;
+let y=margin;
+pdf.setFont("helvetica","bold");
+pdf.setFontSize(14);
+pdf.text(title,margin,y);
+y+=24;
+pdf.setFont("helvetica","normal");
+pdf.setFontSize(11);
 text.split(/\r?\n/).forEach(function(line){
-let wrapped=pdf.splitTextToSize(line||" ",usableWidth)
+let wrapped=pdf.splitTextToSize(line||" ",usableWidth);
 wrapped.forEach(function(segment){
 if(y>pageHeight-margin){
-pdf.addPage()
-pdf.setFont("helvetica","normal")
-pdf.setFontSize(11)
-y=margin
+pdf.addPage();
+pdf.setFont("helvetica","normal");
+pdf.setFontSize(11);
+y=margin;
 }
-pdf.text(segment,margin,y)
-y+=15
-})
-})
-pdf.save("notepad-to-pdf.pdf")
-setStatus("PDF downloaded.","#16a34a")
+pdf.text(segment,margin,y);
+y+=15;
+});
+});
+pdf.save("notepad-to-pdf.pdf");
+setStatus("PDF downloaded.","#16a34a");
 }catch(e){
-setStatus("PDF export failed.","#b91c1c")
+setStatus("PDF export failed.","#b91c1c");
 }
 }
 
 document.getElementById("note-input").addEventListener("input",function(){
-persistNotes()
-setStatus("Notes saved locally.","#16a34a")
-})
-document.getElementById("note-title").addEventListener("input",persistNotes)
-loadSavedNotes()
+persistNotes();
+setStatus("Notes saved locally.","#16a34a");
+});
+document.getElementById("note-title").addEventListener("input",persistNotes);
+loadSavedNotes();
 if(!document.getElementById("note-input").value){
-document.getElementById("note-input").value="Meeting notes\n\n- Discuss PDF tools\n- Review upload UX"
-persistNotes()
+document.getElementById("note-input").value="Meeting notes\n\n- Discuss PDF tools\n- Review upload UX";
+persistNotes();
 }
 </script>
 <script src="/js/favorites.js"></script>

@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <title>Timezone Converter – Convert Date Time to Different Timezones | ToolForge</title>
-<meta name="description" content="Free online Timezone Converter to convert date and time to UTC, Asia/Shanghai, America/New_York, Europe/London and other timezones. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Timezone Converter converts dates and times between world timezones including UTC, EST, PST, GMT, CET, and IANA timezone database regions. Essential for global meetings, travel, and remote work scheduling. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/timezone-converter.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Timezone Converter – Convert Date Time to Different Timezones | ToolForge">
-<meta property="og:description" content="Free online Timezone Converter to convert date and time to UTC, Asia/Shanghai, America/New_York, Europe/London and other timezones. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Timezone Converter converts dates and times between world timezones including UTC, EST, PST, GMT, CET, and IANA timezone database regions. Essential for global meetings, travel, and remote work scheduling. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/timezone-converter.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Timezone Converter – Convert Date Time to Different Timezones | ToolForge">
-<meta name="twitter:description" content="Free online Timezone Converter to convert date and time to UTC, Asia/Shanghai, America/New_York, Europe/London and other timezones. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Timezone Converter converts dates and times between world timezones including UTC, EST, PST, GMT, CET, and IANA timezone database regions. Essential for global meetings, travel, and remote work scheduling. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
-
 
 <script type="application/ld+json">
 {
@@ -26,60 +24,60 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Timezone Converter?",
+      "name": "What is the IANA timezone database?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Timezone Converter is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "The IANA Time Zone Database (also called tz database or zoneinfo) is a collaborative collection of timezone information used by most operating systems and programming languages. It uses Region/City format (America/New_York, Europe/London, Asia/Tokyo) and includes historical timezone rules plus DST transition dates."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between UTC and GMT?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "UTC (Coordinated Universal Time) is a time standard based on atomic clocks. GMT (Greenwich Mean Time) is a timezone based on Earth's rotation. For most practical purposes they're identical (UTC+0 = GMT), but UTC is used for technical/scientific applications while GMT is a civil timezone. UTC doesn't observe DST; some GMT regions do."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How does Daylight Saving Time affect conversions?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "DST shifts clocks forward (usually +1 hour) during summer months. The converter automatically accounts for DST based on the date and timezone rules. For example, New York is UTC-5 (EST) in winter but UTC-4 (EDT) in summer. European timezones also shift; most US states observe DST but Arizona and Hawaii don't."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "Why use Region/City format instead of EST/PST?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Abbreviations like EST, PST, CST are ambiguous (Australia has CST too) and don't account for DST changes. IANA format (America/New_York, America/Los_Angeles) is unambiguous and automatically handles DST transitions. It also accounts for historical timezone rule changes that abbreviations can't represent."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What are common US timezone abbreviations?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "US timezones: ET/EST/EDT (Eastern, UTC-5/-4), CT/CST/CDT (Central, UTC-6/-5), MT/MST/MDT (Mountain, UTC-7/-6), PT/PST/PDT (Pacific, UTC-8/-7), AKST/AKDT (Alaska, UTC-9/-8), HST (Hawaii, UTC-10, no DST). The 'S' = Standard (winter), 'D' = Daylight (summer)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How do I schedule meetings across timezones?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "First, identify all participant timezones. Use a timezone converter to find overlapping business hours. Consider rotating meeting times if the schedule disadvantages one region. Use UTC for calendar invites to avoid confusion. Tools like World Time Buddy or calendar apps with multiple timezone display help visualize overlap windows."
       }
     }
   ]
 }
 </script>
 </head>
-
 <body>
-
 <main class="container">
-
 <h1>Timezone Converter</h1>
-
-<p class="subtitle">Pick a date and time, then see it displayed in your chosen timezone.</p>
-
+<p class="subtitle">Convert dates and times between world timezones using the IANA timezone database for accurate DST-aware conversions.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <h3>Date & Time</h3>
@@ -89,10 +87,22 @@
 <h3>Target Timezone</h3>
 <label for="zone" class="sr-only">Zone</label>
 <select id="zone" aria-label="Zone">
-<option value="UTC">UTC</option>
-<option value="Asia/Shanghai">Asia/Shanghai</option>
-<option value="America/New_York">New York</option>
-<option value="Europe/London">London</option>
+<option value="UTC">UTC (Coordinated Universal Time)</option>
+<option value="America/New_York">America/New_York (Eastern Time)</option>
+<option value="America/Chicago">America/Chicago (Central Time)</option>
+<option value="America/Denver">America/Denver (Mountain Time)</option>
+<option value="America/Los_Angeles">America/Los_Angeles (Pacific Time)</option>
+<option value="Europe/London">Europe/London (GMT/BST)</option>
+<option value="Europe/Paris">Europe/Paris (CET/CEST)</option>
+<option value="Europe/Berlin">Europe/Berlin (CET/CEST)</option>
+<option value="Asia/Dubai">Asia/Dubai (GST)</option>
+<option value="Asia/Kolkata">Asia/Kolkata (IST)</option>
+<option value="Asia/Bangkok">Asia/Bangkok (ICT)</option>
+<option value="Asia/Shanghai">Asia/Shanghai (CST)</option>
+<option value="Asia/Tokyo">Asia/Tokyo (JST)</option>
+<option value="Asia/Seoul">Asia/Seoul (KST)</option>
+<option value="Australia/Sydney">Australia/Sydney (AEST/AEDT)</option>
+<option value="Pacific/Auckland">Pacific/Auckland (NZST/NZDT)</option>
 </select>
 
 <br><br>
@@ -104,25 +114,307 @@
 
 <section class="tool-seo">
 <h3>About Timezone Converter</h3>
-<p>This timezone converter lets you pick a date and time and view it in another timezone.</p>
-<p>It is useful for remote work, client communication, travel planning and cross-region scheduling when the same clock time means different local times.</p>
+<p>This timezone converter converts dates and times between world timezones using the IANA timezone database for accurate, DST-aware conversions. It handles historical timezone rules and automatic daylight saving time adjustments.</p>
+<p>It is useful for scheduling international meetings, coordinating remote teams across continents, planning travel itineraries, converting webinar/podcast recording times, setting up global conference calls, flight booking across timezones, and any scenario requiring accurate cross-region time coordination.</p>
+
+<h4>World Timezone Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Region</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Timezone</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">UTC Offset</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">DST Observed</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Eastern US</td>
+    <td style="border:1px solid #ddd;padding:8px">America/New_York</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC-5 / UTC-4</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes (Mar-Nov)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Central US</td>
+    <td style="border:1px solid #ddd;padding:8px">America/Chicago</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC-6 / UTC-5</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes (Mar-Nov)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Mountain US</td>
+    <td style="border:1px solid #ddd;padding:8px">America/Denver</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC-7 / UTC-6</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes (Mar-Nov)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Pacific US</td>
+    <td style="border:1px solid #ddd;padding:8px">America/Los_Angeles</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC-8 / UTC-7</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes (Mar-Nov)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">United Kingdom</td>
+    <td style="border:1px solid #ddd;padding:8px">Europe/London</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC+0 / UTC+1</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes (Mar-Oct)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Central Europe</td>
+    <td style="border:1px solid #ddd;padding:8px">Europe/Paris</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC+1 / UTC+2</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes (Mar-Oct)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Japan</td>
+    <td style="border:1px solid #ddd;padding:8px">Asia/Tokyo</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC+9</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">China</td>
+    <td style="border:1px solid #ddd;padding:8px">Asia/Shanghai</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC+8</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">India</td>
+    <td style="border:1px solid #ddd;padding:8px">Asia/Kolkata</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC+5:30</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Australia (Sydney)</td>
+    <td style="border:1px solid #ddd;padding:8px">Australia/Sydney</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC+10 / UTC+11</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes (Oct-Apr)</td>
+  </tr>
+</table>
+
+<h4>UTC Offset Reference by US City</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">City</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Timezone</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Standard</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Daylight</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">New York</td>
+    <td style="border:1px solid #ddd;padding:8px">America/New_York</td>
+    <td style="border:1px solid #ddd;padding:8px">EST (UTC-5)</td>
+    <td style="border:1px solid #ddd;padding:8px">EDT (UTC-4)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Chicago</td>
+    <td style="border:1px solid #ddd;padding:8px">America/Chicago</td>
+    <td style="border:1px solid #ddd;padding:8px">CST (UTC-6)</td>
+    <td style="border:1px solid #ddd;padding:8px">CDT (UTC-5)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Denver</td>
+    <td style="border:1px solid #ddd;padding:8px">America/Denver</td>
+    <td style="border:1px solid #ddd;padding:8px">MST (UTC-7)</td>
+    <td style="border:1px solid #ddd;padding:8px">MDT (UTC-6)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Los Angeles</td>
+    <td style="border:1px solid #ddd;padding:8px">America/Los_Angeles</td>
+    <td style="border:1px solid #ddd;padding:8px">PST (UTC-8)</td>
+    <td style="border:1px solid #ddd;padding:8px">PDT (UTC-7)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Phoenix</td>
+    <td style="border:1px solid #ddd;padding:8px">America/Phoenix</td>
+    <td style="border:1px solid #ddd;padding:8px">MST (UTC-7)</td>
+    <td style="border:1px solid #ddd;padding:8px">No DST</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Honolulu</td>
+    <td style="border:1px solid #ddd;padding:8px">Pacific/Honolulu</td>
+    <td style="border:1px solid #ddd;padding:8px">HST (UTC-10)</td>
+    <td style="border:1px solid #ddd;padding:8px">No DST</td>
+  </tr>
+</table>
+
+<h4>Daylight Saving Time Schedule</h4>
+<p>DST transition dates vary by region:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Region</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">DST Starts</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">DST Ends</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Offset Change</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">United States</td>
+    <td style="border:1px solid #ddd;padding:8px">2nd Sunday in March</td>
+    <td style="border:1px solid #ddd;padding:8px">1st Sunday in November</td>
+    <td style="border:1px solid #ddd;padding:8px">+1 hour</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">European Union</td>
+    <td style="border:1px solid #ddd;padding:8px">Last Sunday in March</td>
+    <td style="border:1px solid #ddd;padding:8px">Last Sunday in October</td>
+    <td style="border:1px solid #ddd;padding:8px">+1 hour</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">United Kingdom</td>
+    <td style="border:1px solid #ddd;padding:8px">Last Sunday in March</td>
+    <td style="border:1px solid #ddd;padding:8px">Last Sunday in October</td>
+    <td style="border:1px solid #ddd;padding:8px">+1 hour</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Australia</td>
+    <td style="border:1px solid #ddd;padding:8px">1st Sunday in October</td>
+    <td style="border:1px solid #ddd;padding:8px">1st Sunday in April</td>
+    <td style="border:1px solid #ddd;padding:8px">+1 hour</td>
+  </tr>
+</table>
+<p><strong>Note:</strong> Southern Hemisphere DST is reversed (summer = Oct-Apr). Some regions don't observe DST at all.</p>
+
+<h4>Timezone Conversion Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: US East to West Coast
+Input:  2024-03-15 09:00 (New York)
+Output: 2024-03-15 06:00 (Los Angeles)
+Difference: -3 hours (EDT to PDT)
+
+Example 2: London to Tokyo
+Input:  2024-06-01 14:00 (London)
+Output: 2024-06-01 22:00 (Tokyo)
+Difference: +8 hours (BST to JST)
+
+Example 3: New York to Sydney
+Input:  2024-01-15 10:00 (New York)
+Output: 2024-01-16 02:00+1 (Sydney)
+Difference: +16 hours (EST to AEDT, next day)
+
+Example 4: During DST Transition
+Input:  2024-03-10 01:30 (New York)
+Output: Skips to 03:00 EDT (DST starts)
+Note: 2:00 AM jumps to 3:00 AM
+
+Example 5: During Fall Back
+Input:  2024-11-03 01:30 (New York)
+Output: Occurs twice (EDT then EST)
+Note: 2:00 AM repeats as 1:00 AM
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Remote Team Meetings:</strong> Find overlapping business hours for distributed teams across US, Europe, and Asia</li>
+  <li><strong>Webinar Scheduling:</strong> Convert presentation times to multiple timezones for global audience registration pages</li>
+  <li><strong>Travel Planning:</strong> Calculate arrival times and jet lag duration when booking international flights</li>
+  <li><strong>Software Releases:</strong> Coordinate deployment times across engineering teams in different regions</li>
+  <li><strong>Customer Support:</strong> Display support availability in customer's local timezone</li>
+  <li><strong>Broadcast Scheduling:</strong> Announce live stream times in viewer-friendly local times</li>
+</ul>
+
+<h4>IANA Timezone Format</h4>
+<p>The IANA timezone database uses Region/City format:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Format: Continent/City or Ocean/Region
+
+Americas:
+  America/New_York    - Eastern Time
+  America/Chicago     - Central Time
+  America/Denver      - Mountain Time
+  America/Los_Angeles - Pacific Time
+  America/Anchorage   - Alaska Time
+  Pacific/Honolulu    - Hawaii Time
+
+Europe:
+  Europe/London       - GMT/BST
+  Europe/Paris        - CET/CEST
+  Europe/Berlin       - CET/CEST
+  Europe/Moscow       - MSK (no DST)
+
+Asia:
+  Asia/Dubai          - GST (UTC+4)
+  Asia/Kolkata        - IST (UTC+5:30)
+  Asia/Bangkok        - ICT (UTC+7)
+  Asia/Shanghai       - CST (UTC+8)
+  Asia/Tokyo          - JST (UTC+9)
+  Asia/Seoul          - KST (UTC+9)
+
+Pacific:
+  Australia/Sydney    - AEST/AEDT
+  Pacific/Auckland    - NZST/NZDT
+</pre>
+
+<h4>Timezone Abbreviation Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Abbreviation</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Full Name</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">UTC Offset</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC</td>
+    <td style="border:1px solid #ddd;padding:8px">Coordinated Universal Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC+0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">GMT</td>
+    <td style="border:1px solid #ddd;padding:8px">Greenwich Mean Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC+0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">EST</td>
+    <td style="border:1px solid #ddd;padding:8px">Eastern Standard Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC-5</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">EDT</td>
+    <td style="border:1px solid #ddd;padding:8px">Eastern Daylight Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC-4</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">CST</td>
+    <td style="border:1px solid #ddd;padding:8px">Central Standard Time (US) / China Standard Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC-6 / UTC+8</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">MST</td>
+    <td style="border:1px solid #ddd;padding:8px">Mountain Standard Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC-7</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">PST</td>
+    <td style="border:1px solid #ddd;padding:8px">Pacific Standard Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC-8</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">JST</td>
+    <td style="border:1px solid #ddd;padding:8px">Japan Standard Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC+9</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">IST</td>
+    <td style="border:1px solid #ddd;padding:8px">Indian Standard Time / Irish Standard Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC+5:30 / UTC+1</td>
+  </tr>
+</table>
+<p><strong>Note:</strong> Some abbreviations are ambiguous (CST, IST). Always use IANA format for clarity.</p>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Timezone Converter?</dt>
-  <dd>Timezone Converter is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the IANA timezone database?</dt>
+  <dd>The IANA Time Zone Database (also called tz database or zoneinfo) is a collaborative collection of timezone information used by most operating systems and programming languages. It uses Region/City format (America/New_York, Europe/London, Asia/Tokyo) and includes historical timezone rules plus DST transition dates.</dd>
+
+  <dt>What is the difference between UTC and GMT?</dt>
+  <dd>UTC (Coordinated Universal Time) is a time standard based on atomic clocks. GMT (Greenwich Mean Time) is a timezone based on Earth's rotation. For most practical purposes they're identical (UTC+0 = GMT), but UTC is used for technical/scientific applications while GMT is a civil timezone. UTC doesn't observe DST; some GMT regions do.</dd>
+
+  <dt>How does Daylight Saving Time affect conversions?</dt>
+  <dd>DST shifts clocks forward (usually +1 hour) during summer months. The converter automatically accounts for DST based on the date and timezone rules. For example, New York is UTC-5 (EST) in winter but UTC-4 (EDT) in summer. European timezones also shift; most US states observe DST but Arizona and Hawaii don't.</dd>
+
+  <dt>Why use Region/City format instead of EST/PST?</dt>
+  <dd>Abbreviations like EST, PST, CST are ambiguous (Australia has CST too) and don't account for DST changes. IANA format (America/New_York, America/Los_Angeles) is unambiguous and automatically handles DST transitions. It also accounts for historical timezone rule changes that abbreviations can't represent.</dd>
+
+  <dt>What are common US timezone abbreviations?</dt>
+  <dd>US timezones: ET/EST/EDT (Eastern, UTC-5/-4), CT/CST/CDT (Central, UTC-6/-5), MT/MST/MDT (Mountain, UTC-7/-6), PT/PST/PDT (Pacific, UTC-8/-7), AKST/AKDT (Alaska, UTC-9/-8), HST (Hawaii, UTC-10, no DST). The 'S' = Standard (winter), 'D' = Daylight (summer).</dd>
+
+  <dt>How do I schedule meetings across timezones?</dt>
+  <dd>First, identify all participant timezones. Use a timezone converter to find overlapping business hours. Consider rotating meeting times if the schedule disadvantages one region. Use UTC for calendar invites to avoid confusion. Tools like World Time Buddy or calendar apps with multiple timezone display help visualize overlap windows.</dd>
 </dl>
 </section>
 </main>
@@ -140,9 +432,37 @@ return
 }
 
 let d=new Date(t)
-let res=d.toLocaleString("en-US",{timeZone:zone})
 
-document.getElementById("result").textContent=res
+// Get source timezone from browser
+let sourceZone=Intl.DateTimeFormat().resolvedOptions().timeZone
+
+// Format for both timezones
+let options={
+  timeZone:zone,
+  year:'numeric',
+  month:'2-digit',
+  day:'2-digit',
+  hour:'2-digit',
+  minute:'2-digit',
+  second:'2-digit',
+  hour12:true
+}
+
+let targetTime=d.toLocaleString('en-US',options)
+
+// Get timezone abbreviations
+let sourceAbbrev=d.toLocaleString('en-US',{timeZone:sourceZone,timeZoneName:'short'}).split(', ').pop()
+let targetAbbrev=d.toLocaleString('en-US',{timeZone:zone,timeZoneName:'short'}).split(', ').pop()
+
+// Calculate offset difference
+let sourceOffset=-d.getTimezoneOffset() // minutes
+let targetDate=new Date(d.toLocaleString('en-US',{timeZone:zone}))
+let targetOffset=-(new Date(d.toLocaleString('en-US',{timeZone:zone}))).getTimezoneOffset()
+
+document.getElementById("result").textContent=
+"Source: "+d.toLocaleString('en-US',{timeZone:sourceZone})+" ("+sourceAbbrev+")\n"+
+"Target: "+targetTime+" ("+targetAbbrev+")\n"+
+"Timezone: "+zone
 
 }
 

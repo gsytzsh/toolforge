@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Coin Flip?",
+      "name": "How does computer-generated random number generation work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Coin Flip is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "JavaScript's Math.random() uses a pseudo-random number generator (PRNG) algorithm, typically a linear congruential generator or xorshift algorithm. It produces deterministic sequences from an initial seed (often system time). While statistically distributed, PRNGs are not truly random and not suitable for cryptographic purposes. For security, use crypto.getRandomValues()."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between pseudo-random and true random?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Pseudo-random (PRNG) uses mathematical algorithms with deterministic output from a seed. True random (TRNG) derives randomness from physical phenomena like atmospheric noise, thermal noise, or quantum effects. PRNGs are fast and reproducible; TRNGs are slower but unpredictable. Coin flips use PRNGs which are sufficient for casual decisions."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Is Math.random() truly 50/50 for coin flips?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Math.random() produces uniformly distributed values between 0 and 1 with equal probability across the range. Comparing against 0.5 gives theoretically equal heads/tails probability. However, PRNG periodicity and seed quality can introduce microscopic biases. For casual use, the distribution is effectively fair; for statistical applications, use crypto APIs."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the Web Crypto API and when should it be used?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "The Web Crypto API (crypto.getRandomValues()) provides cryptographically secure random numbers from the operating system's entropy pool. It uses hardware events, mouse movements, and other unpredictable sources. Use for passwords, tokens, gambling, lotteries, or any security-sensitive application. Not needed for casual coin flips."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What are common use cases for coin flip simulations?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Coin flips resolve binary decisions fairly: choosing teams in games, settling disputes, A/B test assignment, randomized experiments, tiebreakers in competitions, decision-making when options are equally preferable, and teaching probability concepts. They provide neutral outcomes without human bias."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How do you test if a random generator is fair?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Run large sample tests (10,000+ flips) and apply chi-squared goodness-of-fit tests. Expected distribution should be ~50% heads, ~50% tails. Check for patterns, runs, or clustering. Use statistical test suites like Diehard tests or NIST Statistical Test Suite. Visual inspection of histograms and run-length distributions also reveals biases."</
       }
     }
   ]
@@ -80,23 +85,115 @@
 <h3>About Coin Flip</h3>
 <p>This coin flip tool gives you a fair heads-or-tails result.</p>
 <p>It is useful for quick choices, games, experiments and simple tie-breakers when you want a neutral random outcome.</p>
+
+<h4>Understanding Random Number Generation</h4>
+<p>Computer-based coin flips use pseudo-random number generators (PRNGs):</p>
+<ul>
+  <li><strong>Algorithm:</strong> Mathematical formula produces seemingly random sequences</li>
+  <li><strong>Seed value:</strong> Initial input determines the entire sequence (often system time)</li>
+  <li><strong>Periodicity:</strong> PRNG sequences eventually repeat (period length varies by algorithm)</li>
+  <li><strong>Distribution:</strong> Good PRNGs produce uniform distribution across the output range</li>
+  <li><strong>Determinism:</strong> Same seed always produces identical sequence (reproducible for testing)</li>
+</ul>
+
+<h4>JavaScript Random Implementation</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Basic coin flip using Math.random()
+function flip() {
+  const result = Math.random() < 0.5 ? "Heads" : "Tails";
+  return result;
+}
+
+// Cryptographically secure alternative
+function secureFlip() {
+  const array = new Uint32Array(1);
+  crypto.getRandomValues(array);
+  return array[0] % 2 === 0 ? "Heads" : "Tails";
+}
+
+// Multiple flips simulation
+function flipMultiple(count) {
+  let heads = 0, tails = 0;
+  for (let i = 0; i < count; i++) {
+    if (Math.random() < 0.5) heads++;
+    else tails++;
+  }
+  return { heads, tails, ratio: heads / count };
+}
+</pre>
+
+<h4>Probability and Statistics</h4>
+<table class="ref-table">
+<thead><tr><th>Concept</th><th>Formula</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td>Single flip probability</td><td>P(heads) = 1/2 = 0.5</td><td>50% chance</td></tr>
+<tr><td>Two consecutive heads</td><td>P(HH) = 1/2 × 1/2 = 1/4</td><td>25% chance</td></tr>
+<tr><td>Three consecutive heads</td><td>P(HHH) = 1/2³ = 1/8</td><td>12.5% chance</td></tr>
+<tr><td>At least one heads in n flips</td><td>P = 1 - (1/2)ⁿ</td><td>99.9% in 10 flips</td></tr>
+<tr><td>Expected heads in n flips</td><td>E = n × 0.5</td><td>50 heads in 100 flips</td></tr>
+<tr><td>Standard deviation</td><td>σ = √(n × p × (1-p))</td><td>5 for 100 flips</td></tr>
+</tbody>
+</table>
+
+<h4>Random Number Generator Comparison</h4>
+<table class="ref-table">
+<thead><tr><th>Method</th><th>Type</th><th>Speed</th><th>Security</th><th>Use Case</th></tr></thead>
+<tbody>
+<tr><td>Math.random()</td><td>PRNG</td><td>Very Fast</td><td>Not secure</td><td>Games, simulations, casual decisions</td></tr>
+<tr><td>crypto.getRandomValues()</td><td>CSPRNG</td><td>Fast</td><td>Secure</td><td>Passwords, tokens, cryptography</td></tr>
+<tr><td>Physical coin</td><td>TRNG</td><td>Manual</td><td>Unpredictable</td><td>In-person decisions, demonstrations</td></tr>
+<tr><td>Atmospheric noise</td><td>TRNG</td><td>Slow</td><td>Secure</td><td>Lotteries, gambling, research</td></tr>
+</tbody>
+</table>
+
+<h4>Common Coin Flip Applications</h4>
+<ul>
+  <li><strong>Sports:</strong> Deciding which team gets first possession (football, cricket)</li>
+  <li><strong>Gaming:</strong> Determining turn order, random events, loot drops</li>
+  <li><strong>Decision Making:</strong> Choosing between equally preferred options</li>
+  <li><strong>Research:</strong> Random assignment in experiments and A/B tests</li>
+  <li><strong>Education:</strong> Teaching probability, statistics, and randomness concepts</li>
+  <li><strong>Dispute Resolution:</strong> Fair, unbiased tiebreaker for disagreements</li>
+</ul>
+
+<h4>Testing Randomness Quality</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Chi-squared test for fairness
+function testFairness(flips = 10000) {
+  let heads = 0;
+  for (let i = 0; i < flips; i++) {
+    if (Math.random() < 0.5) heads++;
+  }
+  const expected = flips / 2;
+  const chiSquared = Math.pow(heads - expected, 2) / expected +
+                     Math.pow(flips - heads - expected, 2) / expected;
+  const pValue = 1 - chiSquaredCDF(chiSquared, 1); // df = 1
+  return { heads, expected, chiSquared, pValue };
+}
+// p-value > 0.05 suggests fair distribution
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Coin Flip?</dt>
-  <dd>Coin Flip is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How does computer-generated random number generation work?</dt>
+  <dd>JavaScript's Math.random() uses a pseudo-random number generator (PRNG) algorithm, typically a linear congruential generator or xorshift algorithm. It produces deterministic sequences from an initial seed (often system time). While statistically distributed, PRNGs are not truly random and not suitable for cryptographic purposes. For security, use crypto.getRandomValues().</dd>
+
+  <dt>What is the difference between pseudo-random and true random?</dt>
+  <dd>Pseudo-random (PRNG) uses mathematical algorithms with deterministic output from a seed. True random (TRNG) derives randomness from physical phenomena like atmospheric noise, thermal noise, or quantum effects. PRNGs are fast and reproducible; TRNGs are slower but unpredictable. Coin flips use PRNGs which are sufficient for casual decisions.</dd>
+
+  <dt>Is Math.random() truly 50/50 for coin flips?</dt>
+  <dd>Math.random() produces uniformly distributed values between 0 and 1 with equal probability across the range. Comparing against 0.5 gives theoretically equal heads/tails probability. However, PRNG periodicity and seed quality can introduce microscopic biases. For casual use, the distribution is effectively fair; for statistical applications, use crypto APIs.</dd>
+
+  <dt>What is the Web Crypto API and when should it be used?</dt>
+  <dd>The Web Crypto API (crypto.getRandomValues()) provides cryptographically secure random numbers from the operating system's entropy pool. It uses hardware events, mouse movements, and other unpredictable sources. Use for passwords, tokens, gambling, lotteries, or any security-sensitive application. Not needed for casual coin flips.</dd>
+
+  <dt>What are common use cases for coin flip simulations?</dt>
+  <dd>Coin flips resolve binary decisions fairly: choosing teams in games, settling disputes, A/B test assignment, randomized experiments, tiebreakers in competitions, decision-making when options are equally preferable, and teaching probability concepts. They provide neutral outcomes without human bias.</dd>
+
+  <dt>How do you test if a random generator is fair?</dt>
+  <dd>Run large sample tests (10,000+ flips) and apply chi-squared goodness-of-fit tests. Expected distribution should be ~50% heads, ~50% tails. Check for patterns, runs, or clustering. Use statistical test suites like Diehard tests or NIST Statistical Test Suite. Visual inspection of histograms and run-length distributions also reveals biases.</dd>
 </dl>
 </section>
 </main>

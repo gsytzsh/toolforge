@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <title>Percentage Calculator – Solve Percentage Problems Online | ToolForge</title>
-<meta name="description" content="Free online Percentage Calculator to compute percentage values, percentage of, and percentage change for discounts, analytics and finance. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Calculate percentages with formulas for percentage of value, percentage between numbers, and percentage change. Includes step-by-step solutions. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/percentage-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Percentage Calculator – Solve Percentage Problems Online | ToolForge">
-<meta property="og:description" content="Free online Percentage Calculator to compute percentage values, percentage of, and percentage change for discounts, analytics and finance. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Calculate percentages with formulas for percentage of value, percentage between numbers, and percentage change. Includes step-by-step solutions. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/percentage-calculator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Percentage Calculator – Solve Percentage Problems Online | ToolForge">
-<meta name="twitter:description" content="Free online Percentage Calculator to compute percentage values, percentage of, and percentage change for discounts, analytics and finance. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Calculate percentages with formulas for percentage of value, percentage between numbers, and percentage change. Includes step-by-step solutions. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
-
 
 <script type="application/ld+json">
 {
@@ -26,64 +24,62 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Percentage Calculator?",
+      "name": "How do you calculate percentage of a number?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Percentage Calculator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "To find X% of Y, multiply Y by X/100. Formula: Result = Y × (X/100). For example, 20% of 150 = 150 × (20/100) = 150 × 0.2 = 30."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do you calculate what percent one number is of another?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "To find what percent X is of Y, divide X by Y and multiply by 100. Formula: Percent = (X/Y) × 100. For example, 25 is what percent of 200? (25/200) × 100 = 12.5%."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How do you calculate percentage change?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Percentage change from A to B = ((B-A)/A) × 100. Positive result indicates increase, negative indicates decrease. For example, from 50 to 75: ((75-50)/50) × 100 = 50% increase."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the difference between percentage points and percent change?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Percentage points measure absolute difference between percentages. If rate goes from 10% to 15%, that's a 5 percentage point increase, but a 50% percent change. Percentage points are used for rate comparisons; percent change for relative growth."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How do you calculate percentage increase vs decrease?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Both use the same formula: ((new-old)/old) × 100. Positive result = increase, negative result = decrease. For decrease, you can also use: ((old-new)/old) × 100 and report as positive percentage."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "Why can't percentage change be calculated from zero?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Percentage change requires dividing by the original value. Division by zero is undefined in mathematics. If starting from zero, any non-zero endpoint represents infinite percentage increase, which cannot be meaningfully expressed."
       }
     }
   ]
 }
 </script>
 </head>
-
 <body>
-
 <main class="container">
-
 <h1>Percentage Calculator</h1>
-
 <p class="subtitle">Quickly compute common percentage problems for pricing, discounts, analytics and finance.</p>
-
 <p><a href="/">Back to all tools on ToolForge</a></p>
-
 <h3>1. What is X% of Y?</h3>
-
 <p>
 <label for="p1_x" class="sr-only">P1 X</label>
 <input id="p1_x" type="number" style="width:120px" placeholder="X" aria-label="P1 X"> %
@@ -91,15 +87,10 @@ of
 <label for="p1_y" class="sr-only">P1 Y</label>
 <input id="p1_y" type="number" style="width:160px" placeholder="Y" aria-label="P1 Y">
 </p>
-
 <button onclick="calcP1()">Calculate</button>
-
 <p><b>Result:</b> <span id="p1_result"></span></p>
-
 <hr>
-
 <h3>2. X is what percent of Y?</h3>
-
 <p>
 <label for="p2_x" class="sr-only">P2 X</label>
 <input id="p2_x" type="number" style="width:160px" placeholder="X" aria-label="P2 X">
@@ -107,15 +98,10 @@ is what % of
 <label for="p2_y" class="sr-only">P2 Y</label>
 <input id="p2_y" type="number" style="width:160px" placeholder="Y" aria-label="P2 Y">
 </p>
-
 <button onclick="calcP2()">Calculate</button>
-
 <p><b>Result:</b> <span id="p2_result"></span></p>
-
 <hr>
-
 <h3>3. Percentage change from A to B</h3>
-
 <p>
 From
 <label for="p3_a" class="sr-only">P3 A</label>
@@ -124,99 +110,426 @@ to
 <label for="p3_b" class="sr-only">P3 B</label>
 <input id="p3_b" type="number" style="width:160px" placeholder="B" aria-label="P3 B">
 </p>
-
 <button onclick="calcP3()">Calculate</button>
-
 <p><b>Result:</b> <span id="p3_result"></span></p>
-
 <section class="tool-seo">
 <h3>About Percentage Calculator</h3>
-<p>This percentage calculator solves common percentage questions such as percent of a value, what percent one number is of another and percentage change.</p>
-<p>It is useful for discounts, markups, score changes, growth rates and everyday comparisons where a quick percentage answer is easier than doing the math by hand.</p>
+<p>This percentage calculator solves three common percentage problems: finding a percentage of a value, determining what percentage one number is of another, and calculating percentage change (increase or decrease). Each calculation uses standard mathematical formulas with step-by-step breakdowns.</p>
+<p>It is useful for discounts and markups, tax calculations, score changes, growth rates, financial analysis, statistical comparisons, grade calculations, and everyday percentage problems.</p>
+
+<h4>Percentage Fundamentals</h4>
+<p>Percentage means "per hundred" and represents a fraction with denominator 100:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Percentage Basics:
+
+Definition:
+  X% = X/100 = X hundredths
+
+Conversions:
+  Percentage to Decimal: Divide by 100
+    25% = 25/100 = 0.25
+
+  Decimal to Percentage: Multiply by 100
+    0.75 = 0.75 × 100 = 75%
+
+  Percentage to Fraction: Simplify
+    50% = 50/100 = 1/2
+    20% = 20/100 = 1/5
+
+Common Percentage Equivalents:
+  1%    = 0.01   = 1/100
+  5%    = 0.05   = 1/20
+  10%   = 0.10   = 1/10
+  20%   = 0.20   = 1/5
+  25%   = 0.25   = 1/4
+  33.33%= 0.3333 = 1/3
+  50%   = 0.50   = 1/2
+  66.67%= 0.6667 = 2/3
+  75%   = 0.75   = 3/4
+  100%  = 1.00   = 1
+  150%  = 1.50   = 3/2
+  200%  = 2.00   = 2
+</pre>
+
+<h4>Percentage Formulas</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Problem Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Formula</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Find X% of Y</td>
+    <td style="border:1px solid #ddd;padding:8px">Y × (X/100)</td>
+    <td style="border:1px solid #ddd;padding:8px">20% of 150 = 150 × 0.2 = 30</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">X is what % of Y</td>
+    <td style="border:1px solid #ddd;padding:8px">(X/Y) × 100</td>
+    <td style="border:1px solid #ddd;padding:8px">25 of 200 = (25/200) × 100 = 12.5%</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Percentage Change</td>
+    <td style="border:1px solid #ddd;padding:8px">((B-A)/A) × 100</td>
+    <td style="border:1px solid #ddd;padding:8px">50 to 75 = ((75-50)/50) × 100 = 50%</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Percentage Increase</td>
+    <td style="border:1px solid #ddd;padding:8px">((New-Old)/Old) × 100</td>
+    <td style="border:1px solid #ddd;padding:8px">100 to 150 = 50% increase</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Percentage Decrease</td>
+    <td style="border:1px solid #ddd;padding:8px">((Old-New)/Old) × 100</td>
+    <td style="border:1px solid #ddd;padding:8px">80 to 60 = 25% decrease</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Find Original (after X% increase)</td>
+    <td style="border:1px solid #ddd;padding:8px">New / (1 + X/100)</td>
+    <td style="border:1px solid #ddd;padding:8px">120 after 20% increase → 100</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Find Original (after X% decrease)</td>
+    <td style="border:1px solid #ddd;padding:8px">New / (1 - X/100)</td>
+    <td style="border:1px solid #ddd;padding:8px">80 after 20% decrease → 100</td>
+  </tr>
+</table>
+
+<h4>Calculation Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Type 1: What is X% of Y?
+
+Example 1: What is 15% of 200?
+  Step 1: Convert percentage to decimal
+    15% = 15/100 = 0.15
+  Step 2: Multiply
+    200 × 0.15 = 30
+  Answer: 30
+
+Example 2: What is 7.5% of 450?
+  Step 1: 7.5% = 0.075
+  Step 2: 450 × 0.075 = 33.75
+  Answer: 33.75
+
+Type 2: X is what percent of Y?
+
+Example 1: 45 is what percent of 180?
+  Step 1: Divide
+    45 / 180 = 0.25
+  Step 2: Convert to percentage
+    0.25 × 100 = 25%
+  Answer: 25%
+
+Example 2: 17 is what percent of 85?
+  Step 1: 17 / 85 = 0.2
+  Step 2: 0.2 × 100 = 20%
+  Answer: 20%
+
+Type 3: Percentage Change from A to B
+
+Example 1: From 40 to 60
+  Step 1: Find difference
+    60 - 40 = 20
+  Step 2: Divide by original
+    20 / 40 = 0.5
+  Step 3: Convert to percentage
+    0.5 × 100 = 50%
+  Answer: +50% (increase)
+
+Example 2: From 100 to 80
+  Step 1: 80 - 100 = -20
+  Step 2: -20 / 100 = -0.2
+  Step 3: -0.2 × 100 = -20%
+  Answer: -20% (decrease)
+
+Example 3: From 250 to 375
+  Step 1: 375 - 250 = 125
+  Step 2: 125 / 250 = 0.5
+  Step 3: 0.5 × 100 = 50%
+  Answer: +50% (increase)
+</pre>
+
+<h4>Real-World Applications</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Application</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Formula</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Discount Amount</td>
+    <td style="border:1px solid #ddd;padding:8px">Price × (Discount%/100)</td>
+    <td style="border:1px solid #ddd;padding:8px">$100 × 20% = $20 off</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Sale Price</td>
+    <td style="border:1px solid #ddd;padding:8px">Price × (1 - Discount%/100)</td>
+    <td style="border:1px solid #ddd;padding:8px">$100 × 0.8 = $80</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Tax Amount</td>
+    <td style="border:1px solid #ddd;padding:8px">Price × (Tax%/100)</td>
+    <td style="border:1px solid #ddd;padding:8px">$50 × 8% = $4 tax</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Total with Tax</td>
+    <td style="border:1px solid #ddd;padding:8px">Price × (1 + Tax%/100)</td>
+    <td style="border:1px solid #ddd;padding:8px">$50 × 1.08 = $54</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Tip Amount</td>
+    <td style="border:1px solid #ddd;padding:8px">Bill × (Tip%/100)</td>
+    <td style="border:1px solid #ddd;padding:8px">$80 × 18% = $14.40</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Growth Rate</td>
+    <td style="border:1px solid #ddd;padding:8px">((New-Old)/Old) × 100</td>
+    <td style="border:1px solid #ddd;padding:8px">1000 to 1200 = 20% growth</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Profit Margin</td>
+    <td style="border:1px solid #ddd;padding:8px">((Revenue-Cost)/Revenue) × 100</td>
+    <td style="border:1px solid #ddd;padding:8px">($200-$150)/$200 = 25%</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Commission</td>
+    <td style="border:1px solid #ddd;padding:8px">Sales × (Commission%/100)</td>
+    <td style="border:1px solid #ddd;padding:8px">$5000 × 5% = $250</td>
+  </tr>
+</table>
+
+<h4>Code Examples by Language</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript:
+  // Percentage of value
+  function percentageOf(percent, value) {
+    return value * (percent / 100);
+  }
+
+  // What percent
+  function whatPercent(part, whole) {
+    return (part / whole) * 100;
+  }
+
+  // Percentage change
+  function percentChange(old, new) {
+    return ((new - old) / old) * 100;
+  }
+
+Python:
+  def percentage_of(percent, value):
+      return value * (percent / 100)
+
+  def what_percent(part, whole):
+      return (part / whole) * 100
+
+  def percent_change(old, new):
+      return ((new - old) / old) * 100
+
+PHP:
+  function percentageOf($percent, $value) {
+      return $value * ($percent / 100);
+  }
+
+  function whatPercent($part, $whole) {
+      return ($part / $whole) * 100;
+  }
+
+  function percentChange($old, $new) {
+      return (($new - $old) / $old) * 100;
+  }
+
+Java:
+  public static double percentageOf(double percent, double value) {
+      return value * (percent / 100);
+  }
+
+  public static double whatPercent(double part, double whole) {
+      return (part / whole) * 100;
+  }
+
+  public static double percentChange(double old, double new) {
+      return ((new - old) / old) * 100;
+  }
+
+Excel/Google Sheets:
+  ' Percentage of value
+  =B1*A1/100    or   =B1*(A1%)
+
+  ' What percent
+  =A1/B1*100
+
+  ' Percentage change
+  =(B1-A1)/A1*100
+
+  ' Format cells as Percentage (%)
+</pre>
+
+<h4>Percentage Tricks</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Mental Math Shortcuts:
+
+1. 10% of any number: Move decimal one place left
+   10% of 250 = 25
+   10% of 47.5 = 4.75
+
+2. 5% = Half of 10%
+   5% of 80 = (10% of 80) / 2 = 8 / 2 = 4
+
+3. 15% = 10% + 5%
+   15% of 200 = 20 + 10 = 30
+
+4. 20% = Double 10%
+   20% of 75 = 7.5 × 2 = 15
+
+5. 25% = Divide by 4
+   25% of 100 = 100/4 = 25
+
+6. 50% = Half
+   50% of 87 = 87/2 = 43.5
+
+7. 75% = 50% + 25% = Half + Quarter
+   75% of 80 = 40 + 20 = 60
+
+8. 100% = The number itself
+   100% of 42 = 42
+
+9. Reversibility: X% of Y = Y% of X
+   4% of 25 = 25% of 4 = 1
+   8% of 50 = 50% of 8 = 4
+
+10. Percentage increase followed by decrease:
+    +10% then -10% ≠ Original
+    100 → 110 → 99 (net -1%)
+</pre>
+
+<h4>Common Mistakes</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Mistake 1: Adding percentages incorrectly
+  Wrong: +20% then +30% = +50%
+  Correct: 100 → 120 → 156 = +56% total
+  (Percentages compound, not add)
+
+Mistake 2: Reversing percentage change
+  Wrong: If A is 25% more than B, then B is 25% less than A
+  Correct: A = 125, B = 100
+           B is (125-100)/125 = 20% less than A
+
+Mistake 3: Percentage of percentage
+  Wrong: 50% of 50% = 100%
+  Correct: 50% of 50% = 25% (0.5 × 0.5 = 0.25)
+
+Mistake 4: Division by zero in percentage change
+  Cannot calculate: From 0 to 100
+  Result would be infinite (division by zero)
+
+Mistake 5: Confusing percentage points with percent
+  From 10% to 15%:
+  - 5 percentage points increase
+  - 50% percent increase
+  (These are different measurements)
+</pre>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Check for zero denominators:</strong> Percentage calculations involving division require non-zero denominators.</li>
+  <li><strong>Distinguish absolute vs relative:</strong> Understand when to use percentage points (absolute) vs percent change (relative).</li>
+  <li><strong>Round appropriately:</strong> For currency, round to 2 decimal places; for statistics, use appropriate significant figures.</li>
+  <li><strong>Verify reasonableness:</strong> Quick mental estimate helps catch calculation errors.</li>
+  <li><strong>Document base values:</strong> Always specify what the percentage is relative to for clarity.</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>Cannot compute change from zero:</strong> Percentage change requires non-zero starting value.</li>
+  <li><strong>Floating-point precision:</strong> JavaScript Number type may introduce small rounding errors for very precise calculations.</li>
+  <li><strong>Single-step calculations:</strong> Does not handle multi-step percentage problems (e.g., successive discounts).</li>
+  <li><strong>No context awareness:</strong> Cannot determine if result makes sense in real-world context.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Percentage Calculator?</dt>
-  <dd>Percentage Calculator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How do you calculate percentage of a number?</dt>
+  <dd>To find X% of Y, multiply Y by X/100. Formula: Result = Y × (X/100). For example, 20% of 150 = 150 × (20/100) = 150 × 0.2 = 30.</dd>
+
+  <dt>How do you calculate what percent one number is of another?</dt>
+  <dd>To find what percent X is of Y, divide X by Y and multiply by 100. Formula: Percent = (X/Y) × 100. For example, 25 is what percent of 200? (25/200) × 100 = 12.5%.</dd>
+
+  <dt>How do you calculate percentage change?</dt>
+  <dd>Percentage change from A to B = ((B-A)/A) × 100. Positive result indicates increase, negative indicates decrease. For example, from 50 to 75: ((75-50)/50) × 100 = 50% increase.</dd>
+
+  <dt>What is the difference between percentage points and percent change?</dt>
+  <dd>Percentage points measure absolute difference between percentages. If rate goes from 10% to 15%, that's a 5 percentage point increase, but a 50% percent change. Percentage points are used for rate comparisons; percent change for relative growth.</dd>
+
+  <dt>How do you calculate percentage increase vs decrease?</dt>
+  <dd>Both use the same formula: ((new-old)/old) × 100. Positive result = increase, negative result = decrease. For decrease, you can also use: ((old-new)/old) × 100 and report as positive percentage.</dd>
+
+  <dt>Why can't percentage change be calculated from zero?</dt>
+  <dd>Percentage change requires dividing by the original value. Division by zero is undefined in mathematics. If starting from zero, any non-zero endpoint represents infinite percentage increase, which cannot be meaningfully expressed.</dd>
 </dl>
 </section>
 </main>
-
 <script>
-
 function formatNumber(n){
-if(!isFinite(n)) return ""
-return Number(n.toFixed(4)).toString()
+if(!isFinite(n)) return "";
+return Number(n.toFixed(4)).toString();
 }
 
 function calcP1(){
-let x=parseFloat(document.getElementById("p1_x").value)
-let y=parseFloat(document.getElementById("p1_y").value)
+let x=parseFloat(document.getElementById("p1_x").value);
+let y=parseFloat(document.getElementById("p1_y").value);
 
 if(isNaN(x)||isNaN(y)){
-document.getElementById("p1_result").innerText="Please enter both numbers."
-return
+document.getElementById("p1_result").innerText="Please enter both numbers.";
+return;
 }
 
-let result=y*x/100
-document.getElementById("p1_result").innerText=formatNumber(result)
+let result=y*x/100;
+document.getElementById("p1_result").innerText=formatNumber(result);
 }
 
 function calcP2(){
-let x=parseFloat(document.getElementById("p2_x").value)
-let y=parseFloat(document.getElementById("p2_y").value)
+let x=parseFloat(document.getElementById("p2_x").value);
+let y=parseFloat(document.getElementById("p2_y").value);
 
 if(isNaN(x)||isNaN(y)){
-document.getElementById("p2_result").innerText="Please enter both numbers."
-return
+document.getElementById("p2_result").innerText="Please enter both numbers.";
+return;
 }
 
 if(y===0){
-document.getElementById("p2_result").innerText="Cannot divide by zero."
-return
+document.getElementById("p2_result").innerText="Cannot divide by zero.";
+return;
 }
 
-let result=x/y*100
-document.getElementById("p2_result").innerText=formatNumber(result)+" %"
+let result=x/y*100;
+document.getElementById("p2_result").innerText=formatNumber(result)+"%";
 }
 
 function calcP3(){
-let a=parseFloat(document.getElementById("p3_a").value)
-let b=parseFloat(document.getElementById("p3_b").value)
+let a=parseFloat(document.getElementById("p3_a").value);
+let b=parseFloat(document.getElementById("p3_b").value);
 
 if(isNaN(a)||isNaN(b)){
-document.getElementById("p3_result").innerText="Please enter both numbers."
-return
+document.getElementById("p3_result").innerText="Please enter both numbers.";
+return;
 }
 
 if(a===0){
-document.getElementById("p3_result").innerText="Cannot compute change from zero."
-return
+document.getElementById("p3_result").innerText="Cannot compute change from zero.";
+return;
 }
 
-let diff=b-a
-let percent=diff/a*100
-let sign=percent>0?"+":""
+let diff=b-a;
+let percent=diff/a*100;
+let sign=percent>0?"+":"";
 
-document.getElementById("p3_result").innerText=sign+formatNumber(percent)+" %"
+document.getElementById("p3_result").innerText=sign+formatNumber(percent)+"%";
 }
-
 </script>
-
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>
 </body>
 </html>
-

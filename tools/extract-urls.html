@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Extract URLs – Find Links in Text Online | ToolForge</title>
-<meta name="description" content="Free online Extract URLs tool to find and list all HTTP and HTTPS links in plain text. Deduplicated output for log analysis, content scraping, and link extraction. Part of the ToolForge developer tools collection.">
+<title>URL Extractor – HTTP/HTTPS Link Finder from Text | ToolForge</title>
+<meta name="description" content="Extract HTTP and HTTPS URLs from text using regex pattern matching. Supports full URL syntax including paths, queries, fragments, and ports. Includes RFC 3986 URL structure reference. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/extract-urls.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Extract URLs – Find Links in Text Online | ToolForge">
-<meta property="og:description" content="Free online Extract URLs tool to find and list all HTTP and HTTPS links in plain text. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="URL Extractor – HTTP/HTTPS Link Finder from Text | ToolForge">
+<meta property="og:description" content="Extract HTTP and HTTPS URLs from text using regex pattern matching. Supports full URL syntax including paths, queries, fragments, and ports. Includes RFC 3986 URL structure reference. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/extract-urls.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Extract URLs – Find Links in Text Online | ToolForge">
-<meta name="twitter:description" content="Free online Extract URLs tool to find and list all HTTP and HTTPS links in plain text. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="URL Extractor – HTTP/HTTPS Link Finder from Text | ToolForge">
+<meta name="twitter:description" content="Extract HTTP and HTTPS URLs from text using regex pattern matching. Supports full URL syntax including paths, queries, fragments, and ports. Includes RFC 3986 URL structure reference. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,42 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How does URL extraction work?",
+      "name": "How does regex-based URL extraction work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "URL extraction uses regex patterns to match HTTP and HTTPS URLs. The pattern looks for the protocol (http:// or https://), domain name, and optional path/query parameters. All matches are collected and deduplicated.\""
+        "text": "URL extraction uses regular expressions to match the URI syntax defined in RFC 3986. The pattern looks for the scheme (http:// or https://), followed by the authority (domain), and optional path, query, and fragment components. This tool finds all matches using JavaScript's match() method and removes duplicates using Set."
       }
     },
     {
       "@type": "Question",
-      "name": "What URL formats are supported?",
+      "name": "What is the RFC 3986 URL standard?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Full URLs with http:// or https:// protocol. Supports subdomains, paths, query strings, fragments, and port numbers. Examples: https://example.com, http://api.domain.com:8080/v1/users?id=123\""
+        "text": "RFC 3986 defines the Uniform Resource Identifier (URI) syntax: scheme://authority/path?query#fragment. The authority includes userinfo@, host, and :port. Valid characters vary by component—alphanumeric plus unreserved characters (-._~) are allowed throughout, while reserved characters (:/?#[]@!$&'()*+,;=) have special meanings and may require percent-encoding."
       }
     },
     {
       "@type": "Question",
-      "name": "Are relative URLs extracted?",
+      "name": "Why are relative URLs not extracted?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, only absolute URLs with http:// or https:// protocol are extracted. Relative URLs like /page/path or //cdn.example.com are not matched. This ensures only complete, usable URLs are returned.\""
+        "text": "Relative URLs (like /page/path or //cdn.example.com) lack a scheme and are resolved relative to a base URL. This tool extracts only absolute URLs with explicit http:// or https:// schemes to ensure results are immediately usable. Relative URLs require context (the base URL) to be meaningful."
       }
     },
     {
       "@type": "Question",
-      "name": "Is the output deduplicated?",
+      "name": "How does deduplication handle URL variations?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, duplicate URLs are automatically removed. Each unique URL appears only once in the output, regardless of how many times it appears in the input text.\""
+        "text": "Deduplication uses exact string matching via JavaScript Set. This means https://Example.com and https://example.com are treated as different URLs (case-sensitive), and https://example.com/page is different from https://example.com/page/. For semantic deduplication (normalizing case, trailing slashes), additional processing would be required."
       }
     },
     {
       "@type": "Question",
-      "name": "What about FTP or other protocols?",
+      "name": "What URL components are captured?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool only extracts HTTP and HTTPS URLs. Other protocols like FTP, mailto, tel, or file:// are not supported. Most web-related use cases only require HTTP/HTTPS links.\""
+        "text": "The pattern captures the full URL including: scheme (http/https), domain/host, optional port number, path segments, query string (everything after ?), and fragment identifier (everything after #). Example: https://api.example.com:8080/v1/users?id=123&name=test#section captures all components."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why doesn't this extract FTP or other protocols?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This tool focuses on HTTP/HTTPS as they are the most common web protocols. FTP, mailto, tel, file://, and other schemes have different use cases and security considerations. The regex can be extended to support additional schemes by modifying the pattern to (https?|ftp|mailto):// if needed."
       }
     }
   ]
@@ -68,8 +76,8 @@
 </head>
 <body>
 <main class="container">
-<h1>Extract URLs</h1>
-<p class="subtitle">Find and extract all HTTP/HTTPS links from any text.</p>
+<h1>URL Extractor</h1>
+<p class="subtitle">Scan text and extract all HTTP/HTTPS URLs using regex pattern matching with automatic deduplication.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Input Text</h3>
 <label for="text" class="sr-only">Text input</label>
@@ -84,29 +92,72 @@
 <p id="count" style="color:#666;margin-top:6px"></p>
 <section class="tool-seo">
 <h3>About URL Extractor</h3>
-<p>This URL extractor scans any text and finds all HTTP and HTTPS links using regex pattern matching. Results are automatically deduplicated, providing a clean list of unique URLs for further processing or analysis.</p>
+<p>This URL extractor uses regular expressions to scan text and identify HTTP/HTTPS links matching standard URI syntax. Results are automatically deduplicated, producing a clean list of unique URLs for analysis, crawling, or content workflows.</p>
 
-<h4>URL Pattern Explained</h4>
-<p>The regex matches standard web URL formats:</p>
+<h4>URL Regex Pattern Explained</h4>
+<p>The extraction pattern matches common web URL formats:</p>
 <pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
-Pattern: https?://[^\s"'&lt;&gt;()]+
+Pattern: /https?:\/\/[^\s"'&lt;&gt;()]+/gi
 
-Breakdown:
-https?      → http or https (s is optional)
-://         → Protocol separator
-[^\s"'&lt;&gt;()]+ → One or more characters that aren't
-               whitespace, quotes, or brackets
+Component breakdown:
+┌──────────────┬──────────────────────────────────────────┐
+│ https?       │ Scheme: http or https (s is optional)    │
+│ ://          │ Scheme separator (literal characters)    │
+│ [^\s"'&lt;&gt;()]+ │ URL body: one or more characters that   │
+│              │ are NOT whitespace, quotes, or brackets │
+└──────────────┴──────────────────────────────────────────┘
+
+Character class [^\s"'&lt;&gt;()] excludes:
+  \s  - Whitespace (space, tab, newline)
+  "   - Double quote
+  '   - Single quote
+  &lt;   - Less-than (HTML tag delimiter)
+  &gt;   - Greater-than (HTML tag delimiter)
+  (   - Opening parenthesis
+  )   - Closing parenthesis
+</pre>
+
+<h4>RFC 3986 URL Structure</h4>
+<p>URI syntax per RFC 3986:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+URI = scheme ":" ["//" authority] path ["?" query] ["#" fragment]
+
+Example URL breakdown:
+https://user:pass@api.example.com:8080/v1/users?id=123#section
+│     │  │    │   │              │     │           │    │
+│     │  │    │   │              │     │           │    └─ fragment
+│     │  │    │   │              │     │           └────── query
+│     │  │    │   │              │     └────────────────── path
+│     │  │    │   │              └──────────────────────── host
+│     │  │    │   └─────────────────────────────────────── port
+│     │  │    └─────────────────────────────────────────── host (domain)
+│     │  └──────────────────────────────────────────────── userinfo
+│     └─────────────────────────────────────────────────── authority delimiter
+└───────────────────────────────────────────────────────── scheme
+
+Components captured by this tool:
+  ✓ scheme (http, https)
+  ✓ host (domain with optional subdomain)
+  ✓ port (optional, e.g., :8080)
+  ✓ path (optional, e.g., /api/users)
+  ✓ query (optional, e.g., ?id=123)
+  ✓ fragment (optional, e.g., #section)
+
+Not captured:
+  ✗ userinfo (user:pass@ - rare in modern URLs)
+  ✗ IPv6 literals in brackets [::1]
+  ✗ Percent-encoded characters handled as-is
 </pre>
 
 <h4>Supported URL Formats</h4>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Component</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format Type</th>
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Supported</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Extracted</th>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">Basic URL</td>
+    <td style="border:1px solid #ddd;padding:8px">Basic domain</td>
     <td style="border:1px solid #ddd;padding:8px"><code>https://example.com</code></td>
     <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
   </tr>
@@ -116,8 +167,8 @@ https?      → http or https (s is optional)
     <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">With query</td>
-    <td style="border:1px solid #ddd;padding:8px"><code>https://example.com/search?q=test</code></td>
+    <td style="border:1px solid #ddd;padding:8px">With query string</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>https://example.com/search?q=test&amp;lang=en</code></td>
     <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
   </tr>
   <tr>
@@ -136,26 +187,78 @@ https?      → http or https (s is optional)
     <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">Relative URL</td>
+    <td style="border:1px solid #ddd;padding:8px">Combined</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>https://api.example.com:8080/v1/users?id=123#top</code></td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Relative path</td>
     <td style="border:1px solid #ddd;padding:8px"><code>/page/path</code></td>
     <td style="border:1px solid #ddd;padding:8px">✗ No</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">FTP/other</td>
-    <td style="border:1px solid #ddd;padding:8px"><code>ftp://files.com/doc.pdf</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Protocol-relative</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>//cdn.example.com/script.js</code></td>
+    <td style="border:1px solid #ddd;padding:8px">✗ No</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">FTP protocol</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>ftp://files.example.com/doc.pdf</code></td>
+    <td style="border:1px solid #ddd;padding:8px">✗ No</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">mailto</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>mailto:user@example.com</code></td>
     <td style="border:1px solid #ddd;padding:8px">✗ No</td>
   </tr>
 </table>
 
+<h4>Extraction Algorithm</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript URL Extraction Implementation:
+
+function extractUrls(text) {
+  // Step 1: Define regex pattern for HTTP/HTTPS URLs
+  const pattern = /(https?:\/\/[^\s"'&lt;&gt;()]+)/gi;
+
+  // Step 2: Find all matches (returns array or null)
+  const matches = text.match(pattern) || [];
+
+  // Step 3: Deduplicate using Set
+  const unique = Array.from(new Set(matches));
+
+  // Step 4: Return results
+  return unique;
+}
+
+// Usage example:
+const text = `
+  Check out https://example.com and https://example.com again.
+  Also visit http://test.org/page?id=123#section for details.
+  The API at https://api.company.com:8080/v1/users is documented
+  at https://docs.company.com/api.
+`;
+
+const urls = extractUrls(text);
+console.log(urls);
+// [
+//   "https://example.com",
+//   "http://test.org/page?id=123#section",
+//   "https://api.company.com:8080/v1/users",
+//   "https://docs.company.com/api"
+// ]
+</pre>
+
 <h4>Common Use Cases</h4>
 <ul>
-  <li><strong>Log Analysis:</strong> Extract visited URLs from browser or server logs</li>
-  <li><strong>Content Scraping:</strong> Pull all links from web pages or documents</li>
-  <li><strong>SEO Auditing:</strong> Collect internal and external links for analysis</li>
-  <li><strong>Redirect Tracking:</strong> Find all URLs in redirect chains</li>
-  <li><strong>Link Verification:</strong> Extract URLs before running link checker tools</li>
-  <li><strong>Research:</strong> Collect source URLs from articles or papers</li>
-  <li><strong>Social Media:</strong> Extract links from posts, comments, or messages</li>
+  <li><strong>Log Analysis:</strong> Extract visited URLs from browser history, server logs, or proxy logs</li>
+  <li><strong>Web Scraping:</strong> Pull all links from HTML content, markdown, or plain text documents</li>
+  <li><strong>SEO Auditing:</strong> Collect internal and external links for link profile analysis</li>
+  <li><strong>Redirect Tracking:</strong> Find all URLs in redirect chains or HTTP response headers</li>
+  <li><strong>Link Verification:</strong> Extract URLs before running link checker or crawler tools</li>
+  <li><strong>Research:</strong> Collect source URLs from articles, papers, or documentation</li>
+  <li><strong>Social Media Analysis:</strong> Extract links from posts, comments, or messages</li>
+  <li><strong>Security Analysis:</strong> Identify external domains referenced in documents or logs</li>
 </ul>
 
 <h4>URL Extraction Example</h4>
@@ -166,99 +269,139 @@ Input Text:
  The API at https://api.company.com:8080/v1/users is documented
  at https://docs.company.com/api."
 
-Extracted URLs (deduplicated):
-- https://example.com
-- http://test.org/page?id=123#section
-- https://api.company.com:8080/v1/users
-- https://docs.company.com/api
+Extraction Process:
+  Match 1: https://example.com
+  Match 2: https://example.com (duplicate)
+  Match 3: http://test.org/page?id=123#section
+  Match 4: https://api.company.com:8080/v1/users
+  Match 5: https://docs.company.com/api
+
+Output (deduplicated, one per line):
+https://example.com
+http://test.org/page?id=123#section
+https://api.company.com:8080/v1/users
+https://docs.company.com/api
 
 Total: 4 unique URLs found
 </pre>
 
-<h4>URL Structure Reference</h4>
+<h4>URL Component Reference</h4>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Part</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Component</th>
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">Protocol</td>
-    <td style="border:1px solid #ddd;padding:8px">http or https</td>
+    <td style="border:1px solid #ddd;padding:8px">Scheme</td>
+    <td style="border:1px solid #ddd;padding:8px">Protocol identifier</td>
     <td style="border:1px solid #ddd;padding:8px"><code>https://</code></td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">Domain</td>
-    <td style="border:1px solid #ddd;padding:8px">Website address</td>
+    <td style="border:1px solid #ddd;padding:8px">Authority</td>
+    <td style="border:1px solid #ddd;padding:8px">Domain/host with optional port</td>
     <td style="border:1px solid #ddd;padding:8px"><code>example.com</code></td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Port</td>
-    <td style="border:1px solid #ddd;padding:8px">Optional port number</td>
+    <td style="border:1px solid #ddd;padding:8px">TCP/IP port number (optional)</td>
     <td style="border:1px solid #ddd;padding:8px"><code>:8080</code></td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Path</td>
-    <td style="border:1px solid #ddd;padding:8px">Resource location</td>
-    <td style="border:1px solid #ddd;padding:8px"><code>/api/users</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Resource location on server</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>/api/v1/users</code></td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Query</td>
-    <td style="border:1px solid #ddd;padding:8px">Parameters</td>
-    <td style="border:1px solid #ddd;padding:8px"><code>?id=123&name=test</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Key-value parameters</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>?id=123&amp;name=test</code></td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Fragment</td>
-    <td style="border:1px solid #ddd;padding:8px">Page section</td>
+    <td style="border:1px solid #ddd;padding:8px">Page section anchor</td>
     <td style="border:1px solid #ddd;padding:8px"><code>#section1</code></td>
   </tr>
 </table>
 
-<h4>Limitations</h4>
+<h4>Extraction Limitations</h4>
 <ul>
-  <li><strong>HTTP/HTTPS only:</strong> FTP, mailto, tel, and other protocols not supported</li>
-  <li><strong>No relative URLs:</strong> Paths like /page aren't extracted</li>
-  <li><strong>No validation:</strong> Doesn't check if URLs are accessible</li>
-  <li><strong>Parentheses:</strong> URLs ending in ) may include trailing paren</li>
-  <li><strong>Encoded URLs:</strong> Punycode international domains may not match perfectly</li>
+  <li><strong>HTTP/HTTPS only:</strong> FTP, mailto, tel, file://, and other protocols are not extracted</li>
+  <li><strong>No relative URLs:</strong> Paths like /page or protocol-relative //cdn.example.com are not matched</li>
+  <li><strong>No validation:</strong> Does not verify if URLs are accessible or return valid responses</li>
+  <li><strong>Parentheses handling:</strong> URLs ending in ) may include trailing parenthesis if present</li>
+  <li><strong>Encoded URLs:</strong> Punycode international domains (xn--...) are matched as-is</li>
+  <li><strong>Case sensitivity:</strong> Deduplication is case-sensitive (HTTPS://EXAMPLE.COM ≠ https://example.com)</li>
+  <li><strong>Whitespace in URLs:</strong> Spaces terminate the match; encoded spaces (%20) are preserved</li>
 </ul>
+
+<h4>Deduplication Behavior</h4>
+<p>JavaScript Set uses exact string comparison for deduplication:</p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Exact string matching
+const urls = [
+  "https://example.com",
+  "https://EXAMPLE.COM",     // Different (case)
+  "https://example.com/",    // Different (trailing slash)
+  "https://example.com",     // Duplicate
+  "http://example.com"       // Different (scheme)
+];
+
+const unique = Array.from(new Set(urls));
+// Result: All 5 URLs retained (only exact duplicate removed)
+
+// For semantic deduplication, normalize first:
+const normalized = urls.map(url => {
+  let n = url.toLowerCase();           // Case-insensitive
+  if (n.endsWith('/') && n.length > 9) {
+    n = n.slice(0, -1);                // Remove trailing slash
+  }
+  return n;
+});
+const semanticUnique = Array.from(new Set(normalized));
+// Would consolidate variations of same URL
+</pre>
 </section>
 
 <section class="how-to-use">
 <h3>How to Extract URLs from Text</h3>
 <ol class="how-to-steps">
   <li><strong>Paste text:</strong> Enter or paste the text containing URLs.</li>
-  <li><strong>Click Extract:</strong> The tool scans for all HTTP/HTTPS links.</li>
-  <li><strong>Review results:</strong> Unique URLs appear in the output box.</li>
+  <li><strong>Click Extract:</strong> The tool scans for all HTTP/HTTPS links using regex.</li>
+  <li><strong>Review results:</strong> Unique URLs appear in the output box, one per line.</li>
   <li><strong>Copy output:</strong> Click "Copy Result" to use the URL list elsewhere.</li>
 </ol>
 
 <h4 style="margin-top:20px">Tips</h4>
 <ul>
-  <li>Works with HTML, plain text, markdown, and code</li>
-  <li>Duplicates are automatically removed</li>
-  <li>Each URL appears on a separate line</li>
-  <li>Full URLs with protocol are required</li>
+  <li>Works with HTML, plain text, markdown, code comments, and logs</li>
+  <li>Duplicates are automatically removed using Set</li>
+  <li>Each unique URL appears on a separate line</li>
+  <li>Full URLs with http:// or https:// prefix are required</li>
+  <li>For case-insensitive deduplication, normalize results externally</li>
 </ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>How does URL extraction work?</dt>
-  <dd>URL extraction uses regex patterns to match HTTP and HTTPS URLs. The pattern looks for the protocol (http:// or https://), domain name, and optional path/query parameters. All matches are collected and deduplicated.</dd>
+  <dt>How does regex-based URL extraction work?</dt>
+  <dd>URL extraction uses regular expressions to match the URI syntax defined in RFC 3986. The pattern looks for the scheme (http:// or https://), followed by the authority (domain), and optional path, query, and fragment components. This tool finds all matches using JavaScript's match() method and removes duplicates using Set.</dd>
 
-  <dt>What URL formats are supported?</dt>
-  <dd>Full URLs with http:// or https:// protocol. Supports subdomains, paths, query strings, fragments, and port numbers. Examples: https://example.com, http://api.domain.com:8080/v1/users?id=123</dd>
+  <dt>What is the RFC 3986 URL standard?</dt>
+  <dd>RFC 3986 defines the Uniform Resource Identifier (URI) syntax: scheme://authority/path?query#fragment. The authority includes userinfo@, host, and :port. Valid characters vary by component—alphanumeric plus unreserved characters (-._~) are allowed throughout, while reserved characters (:/?#[]@!$&'()*+,;=) have special meanings and may require percent-encoding.</dd>
 
-  <dt>Are relative URLs extracted?</dt>
-  <dd>No, only absolute URLs with http:// or https:// protocol are extracted. Relative URLs like /page/path or //cdn.example.com are not matched. This ensures only complete, usable URLs are returned.</dd>
+  <dt>Why are relative URLs not extracted?</dt>
+  <dd>Relative URLs (like /page/path or //cdn.example.com) lack a scheme and are resolved relative to a base URL. This tool extracts only absolute URLs with explicit http:// or https:// schemes to ensure results are immediately usable. Relative URLs require context (the base URL) to be meaningful.</dd>
 
-  <dt>Is the output deduplicated?</dt>
-  <dd>Yes, duplicate URLs are automatically removed. Each unique URL appears only once in the output, regardless of how many times it appears in the input text.</dd>
+  <dt>How does deduplication handle URL variations?</dt>
+  <dd>Deduplication uses exact string matching via JavaScript Set. This means https://Example.com and https://example.com are treated as different URLs (case-sensitive), and https://example.com/page is different from https://example.com/page/. For semantic deduplication (normalizing case, trailing slashes), additional processing would be required.</dd>
 
-  <dt>What about FTP or other protocols?</dt>
-  <dd>This tool only extracts HTTP and HTTPS URLs. Other protocols like FTP, mailto, tel, or file:// are not supported. Most web-related use cases only require HTTP/HTTPS links.</dd>
+  <dt>What URL components are captured?</dt>
+  <dd>The pattern captures the full URL including: scheme (http/https), domain/host, optional port number, path segments, query string (everything after ?), and fragment identifier (everything after #). Example: https://api.example.com:8080/v1/users?id=123&name=test#section captures all components.</dd>
+
+  <dt>Why doesn't this extract FTP or other protocols?</dt>
+  <dd>This tool focuses on HTTP/HTTPS as they are the most common web protocols. FTP, mailto, tel, file://, and other schemes have different use cases and security considerations. The regex can be extended to support additional schemes by modifying the pattern to (https?|ftp|mailto):// if needed.</dd>
 </dl>
 </section>
 </main>

@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>XPath Tester – Evaluate XPath on HTML/XML | ToolForge</title>
-<meta name="description" content="Free online XPath tester. Evaluate XPath expressions on sample HTML or XML. Part of the ToolForge developer tools collection.">
+<title>XPath Tester – Evaluate XPath Expressions on HTML/XML | ToolForge</title>
+<meta name="description" content="XPath Tester evaluates XPath expressions on HTML and XML documents. Test XPath queries, debug selectors, and validate expressions before using in code. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/xpath-tester.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="XPath Tester – Evaluate XPath on HTML/XML | ToolForge">
-<meta property="og:description" content="Evaluate XPath on sample HTML/XML.">
+<meta property="og:title" content="XPath Tester – Evaluate XPath Expressions on HTML/XML | ToolForge">
+<meta property="og:description" content="XPath Tester evaluates XPath expressions on HTML and XML documents. Test XPath queries, debug selectors, and validate expressions before using in code. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/xpath-tester.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="XPath Tester – Evaluate XPath on HTML/XML | ToolForge">
-<meta name="twitter:description" content="Evaluate XPath on sample HTML/XML.">
+<meta name="twitter:title" content="XPath Tester – Evaluate XPath Expressions on HTML/XML | ToolForge">
+<meta name="twitter:description" content="XPath Tester evaluates XPath expressions on HTML and XML documents. Test XPath queries, debug selectors, and validate expressions before using in code. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Xpath Tester?",
+      "name": "What is XPath and how does it work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Xpath Tester is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "XPath (XML Path Language) is a query language for selecting nodes from XML documents. It uses path-like expressions to navigate the document tree, similar to file system paths. XPath is supported by XSLT, XQuery, and many programming languages including JavaScript, Python, and Java."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between XPath 1.0 and XPath 2.0?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "XPath 1.0 is a W3C Recommendation from 1999 with basic node selection and string/number functions. XPath 2.0 (2007) adds sequence support, more data types, better string handling, and conditional expressions. This tool uses the browser's native XPath evaluator which typically supports XPath 3.0."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Can I use XPath on HTML documents?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Yes, but HTML must be well-formed XML (XHTML) for reliable XPath evaluation. The browser's DOMParser can parse HTML, but malformed HTML may produce unexpected results. For scraping real-world HTML, consider using tools like BeautifulSoup (Python) or Cheerio (Node.js) that handle tag soup."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are common XPath axes and operators?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Common axes: child (default), descendant (//), parent (..), ancestor, following-sibling, preceding-sibling. Common predicates: [1] (first), [last()] (last), [@attr] (has attribute), [text()='x'] (text match). Functions: count(), contains(), starts-with(), position()."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "Why does my XPath return no results?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Common causes: XML namespaces not declared, case-sensitive element name mismatch, using absolute path when relative is needed, incorrect predicate syntax, or the target nodes don't exist in the document structure. Check the parsed document tree to verify element names and hierarchy."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How do I handle XML namespaces in XPath?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Namespaces complicate XPath because prefixed elements must match the namespace URI, not just the prefix. In JavaScript, you need to use the local-name() function: /*[local-name()='root' and namespace-uri()='http://example.com']. Full namespace support requires a namespace resolver function."
       }
     }
   ]
@@ -96,25 +101,182 @@
 
 <section class="tool-seo">
 <h3>About XPath Tester</h3>
-<p>This tool evaluates XPath expressions against sample HTML or XML. Uses the browser's native XPath evaluator.</p>
-<p>Useful for scraping, XML parsing and testing XPath before using in code.</p>
+<p>This XPath tester evaluates XPath expressions against XML or HTML documents using the browser's native DOMParser and XPathEvaluator APIs. It provides immediate feedback on XPath queries, showing matched nodes and their content.</p>
+<p>It is useful for web scraping preparation, XML parsing workflows, testing XPath expressions before embedding in code, debugging node selection logic, and learning XPath syntax through hands-on experimentation.</p>
+
+<h4>What is XPath?</h4>
+<p>XPath (XML Path Language) is a W3C-standard query language for selecting nodes from XML documents. It uses path-like expressions to navigate document trees, similar to filesystem paths.</p>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Select all item elements
+//item
+
+// Select item with id="1"
+//item[@id="1"]
+
+// Select title inside section
+//section/title
+
+// Select first item
+//item[1]
+
+// Select items containing text "Apple"
+//item[contains(text(),"Apple")]
+</pre>
+
+<h4>XPath Axis Types</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Axis</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Expression</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Child</td>
+    <td style="border:1px solid #ddd;padding:8px">root/item</td>
+    <td style="border:1px solid #ddd;padding:8px">Direct children (default axis)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Descendant</td>
+    <td style="border:1px solid #ddd;padding:8px">//item</td>
+    <td style="border:1px solid #ddd;padding:8px">All descendants at any level</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Parent</td>
+    <td style="border:1px solid #ddd;padding:8px">item/..</td>
+    <td style="border:1px solid #ddd;padding:8px">Parent node</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Attribute</td>
+    <td style="border:1px solid #ddd;padding:8px">item/@id</td>
+    <td style="border:1px solid #ddd;padding:8px">Attribute values</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Following-sibling</td>
+    <td style="border:1px solid #ddd;padding:8px">item/following-sibling::item</td>
+    <td style="border:1px solid #ddd;padding:8px">Siblings after current node</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Preceding-sibling</td>
+    <td style="border:1px solid #ddd;padding:8px">item/preceding-sibling::item</td>
+    <td style="border:1px solid #ddd;padding:8px">Siblings before current node</td>
+  </tr>
+</table>
+
+<h4>Common XPath Predicates</h4>
+<p>Predicates filter node sets using square brackets:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Predicate</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Meaning</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">[1]</td>
+    <td style="border:1px solid #ddd;padding:8px">First node in set</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">[last()]</td>
+    <td style="border:1px solid #ddd;padding:8px">Last node in set</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">[position()=2]</td>
+    <td style="border:1px solid #ddd;padding:8px">Second node in set</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">[@id]</td>
+    <td style="border:1px solid #ddd;padding:8px">Nodes with id attribute</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">[@id="x"]</td>
+    <td style="border:1px solid #ddd;padding:8px">Nodes where id equals "x"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">[text()="x"]</td>
+    <td style="border:1px solid #ddd;padding:8px">Nodes with text content "x"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">[contains(., "x")]</td>
+    <td style="border:1px solid #ddd;padding:8px">Nodes containing text "x"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">[starts-with(@id, "x")]</td>
+    <td style="border:1px solid #ddd;padding:8px">Nodes where id starts with "x"</td>
+  </tr>
+</table>
+
+<h4>XPath Functions</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Node functions
+count(//item)           // Count nodes
+position()              // Current position
+last()                  // Last position
+
+// String functions
+contains(., "text")     // Contains substring
+starts-with(@id, "x")   // Starts with prefix
+concat(@a, @b)          // Concatenate strings
+string-length()         // String length
+
+// Boolean functions
+not(@id)                // Negation
+boolean(//item)         // Convert to boolean
+
+// Number functions
+number(@price)          // Convert to number
+sum(//price)            // Sum values
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Web scraping:</strong> Test XPath selectors before using in Scrapy, Selenium, or Puppeteer</li>
+  <li><strong>XML processing:</strong> Validate XPath queries for XSLT transformations</li>
+  <li><strong>Test automation:</strong> Develop XPath locators for UI test frameworks</li>
+  <li><strong>Data extraction:</strong> Query structured XML data feeds and APIs</li>
+  <li><strong>Learning XPath:</strong> Experiment with XPath syntax and see immediate results</li>
+</ul>
+
+<h4>XML vs HTML Parsing</h4>
+<p>This tool parses input as XML using DOMParser with "text/xml" mode:</p>
+<ul>
+  <li><strong>XML parsing:</strong> Strict, requires well-formed markup</li>
+  <li><strong>HTML parsing:</strong> Lenient, browser auto-corrects errors</li>
+  <li><strong>For HTML:</strong> Ensure tags are properly closed for reliable XPath results</li>
+</ul>
+
+<h4>Handling Namespaces</h4>
+<p>XML namespaces complicate XPath because elements must match both local name and namespace URI:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+<!-- Without namespace handling (may fail) -->
+//ns:element
+
+<!-- With local-name() (works without namespace resolver) -->
+//*[local-name()='element']
+
+<!-- With namespace URI check -->
+//*[local-name()='element' and namespace-uri()='http://example.com']
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Xpath Tester?</dt>
-  <dd>Xpath Tester is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is XPath and how does it work?</dt>
+  <dd>XPath (XML Path Language) is a query language for selecting nodes from XML documents. It uses path-like expressions to navigate the document tree, similar to file system paths. XPath is supported by XSLT, XQuery, and many programming languages including JavaScript, Python, and Java.</dd>
+
+  <dt>What is the difference between XPath 1.0 and XPath 2.0?</dt>
+  <dd>XPath 1.0 is a W3C Recommendation from 1999 with basic node selection and string/number functions. XPath 2.0 (2007) adds sequence support, more data types, better string handling, and conditional expressions. This tool uses the browser's native XPath evaluator which typically supports XPath 3.0.</dd>
+
+  <dt>Can I use XPath on HTML documents?</dt>
+  <dd>Yes, but HTML must be well-formed XML (XHTML) for reliable XPath evaluation. The browser's DOMParser can parse HTML, but malformed HTML may produce unexpected results. For scraping real-world HTML, consider using tools like BeautifulSoup (Python) or Cheerio (Node.js) that handle tag soup.</dd>
+
+  <dt>What are common XPath axes and operators?</dt>
+  <dd>Common axes: child (default), descendant (//), parent (..), ancestor, following-sibling, preceding-sibling. Common predicates: [1] (first), [last()] (last), [@attr] (has attribute), [text()='x'] (text match). Functions: count(), contains(), starts-with(), position().</dd>
+
+  <dt>Why does my XPath return no results?</dt>
+  <dd>Common causes: XML namespaces not declared, case-sensitive element name mismatch, using absolute path when relative is needed, incorrect predicate syntax, or the target nodes don't exist in the document structure. Check the parsed document tree to verify element names and hierarchy.</dd>
+
+  <dt>How do I handle XML namespaces in XPath?</dt>
+  <dd>Namespaces complicate XPath because prefixed elements must match the namespace URI, not just the prefix. In JavaScript, you need to use the local-name() function: /*[local-name()='root' and namespace-uri()='http://example.com']. Full namespace support requires a namespace resolver function.</dd>
 </dl>
 </section>
 </main>

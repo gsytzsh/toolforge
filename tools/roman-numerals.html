@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Roman Numerals Converter – Decimal to Roman | ToolForge</title>
-<meta name="description" content="Free online Roman Numerals Converter between decimal and Roman numerals. Part of the ToolForge developer tools collection.">
+<title>Roman Numerals Converter – Decimal to Roman Number Converter | ToolForge</title>
+<meta name="description" content="Convert between decimal numbers and Roman numerals (1-3999). Includes conversion rules, examples, and historical context for Roman numeral notation. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/roman-numerals.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Roman Numerals Converter – Decimal to Roman | ToolForge">
-<meta property="og:description" content="Free online Roman Numerals Converter between decimal and Roman numerals. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Roman Numerals Converter – Decimal to Roman Number Converter | ToolForge">
+<meta property="og:description" content="Convert between decimal numbers and Roman numerals (1-3999). Includes conversion rules, examples, and historical context for Roman numeral notation. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/roman-numerals.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Roman Numerals Converter – Decimal to Roman | ToolForge">
-<meta name="twitter:description" content="Free online Roman Numerals Converter between decimal and Roman numerals. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Roman Numerals Converter – Decimal to Roman Number Converter | ToolForge">
+<meta name="twitter:description" content="Convert between decimal numbers and Roman numerals (1-3999). Includes conversion rules, examples, and historical context for Roman numeral notation. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Roman Numerals used for?",
+      "name": "How do you convert decimal to Roman numerals?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Roman Numerals is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "To convert decimal to Roman numerals, repeatedly subtract the largest possible Roman numeral value from the number. Start with 1000 (M), then 900 (CM), 500 (D), 400 (CD), 100 (C), 90 (XC), 50 (L), 40 (XL), 10 (X), 9 (IX), 5 (V), 4 (IV), and 1 (I). For example, 2024 = 1000+1000+10+10+1+1+1+1 = MMXXIV."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What are the Roman numeral symbols?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Roman numerals use seven symbols: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. Numbers are formed by combining these symbols. When a smaller value precedes a larger value, it's subtracted (IV=4, IX=9, XL=40, XC=90, CD=400, CM=900). Otherwise, values are added."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "Why does Roman numerals only go to 3999?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Traditional Roman numerals are limited to 3999 (MMMCMXCIX) because the Romans didn't have a standard notation for larger numbers. While extensions exist (like using a bar over numerals to multiply by 1000), the standard system used in most contexts today caps at 3999 for simplicity and compatibility."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are the rules for writing Roman numerals?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Key rules: 1) Symbols I, X, C, M can repeat up to 3 times; V, L, D cannot repeat. 2) Subtractive notation: IV(4), IX(9), XL(40), XC(90), CD(400), CM(900). 3) Read left to right, largest to smallest. 4) Only one smaller value can precede a larger value for subtraction."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "Where are Roman numerals still used today?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Roman numerals appear in: book chapters and outlines, movie/TV show copyright dates, monarch and pope names (Queen Elizabeth II), Super Bowl numbering, clock faces, formal events (Oscars, Olympics), music theory (chord progressions), and academic outlines."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How do you read Roman numerals?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Read Roman numerals left to right. If a symbol is followed by one of equal or lesser value, add them (VI = 5+1 = 6). If followed by a greater value, subtract it (IV = 5-1 = 4). Group subtractive pairs first, then add all values: MCMXCIV = 1000+(1000-100)+(100-10)+4 = 1994."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>Roman Numerals Converter</h1>
-<p class="subtitle">Convert between decimal numbers and Roman numerals (1–3999).</p>
+<p class="subtitle">Convert between decimal numbers and Roman numerals (1-3999).</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Decimal to Roman</h3>
 <label for="dec" class="sr-only">Dec</label>
@@ -84,27 +89,333 @@
 <input id="rom" placeholder="MMXXIV" style="width:120px" aria-label="Rom">
 <button onclick="toDec()">To Decimal</button>
 <p>Decimal: <span id="decimal"></span></p>
+
 <section class="tool-seo">
 <h3>About Roman Numerals Converter</h3>
-<p>This Roman numerals converter switches between decimal numbers and Roman numerals from 1 to 3999.</p>
-<p>It is useful for outlines, clocks, book sections, schoolwork and any situation where Roman numeral notation still appears.</p>
+<p>Roman numerals are a numeric system originating in ancient Rome that uses combinations of letters from the Latin alphabet to represent values. This converter translates between modern decimal numbers (1-3999) and their Roman numeral equivalents.</p>
+
+<h4>Roman Numeral Symbols</h4>
+<p>Roman numerals use seven letters from the Latin alphabet:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Symbol</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Value</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Latin Name</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">I</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+    <td style="border:1px solid #ddd;padding:8px"> unus</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">V</td>
+    <td style="border:1px solid #ddd;padding:8px">5</td>
+    <td style="border:1px solid #ddd;padding:8px">quinque</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">X</td>
+    <td style="border:1px solid #ddd;padding:8px">10</td>
+    <td style="border:1px solid #ddd;padding:8px">decem</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">L</td>
+    <td style="border:1px solid #ddd;padding:8px">50</td>
+    <td style="border:1px solid #ddd;padding:8px">quinquaginta</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">C</td>
+    <td style="border:1px solid #ddd;padding:8px">100</td>
+    <td style="border:1px solid #ddd;padding:8px">centum</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">D</td>
+    <td style="border:1px solid #ddd;padding:8px">500</td>
+    <td style="border:1px solid #ddd;padding:8px">quingenti</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">M</td>
+    <td style="border:1px solid #ddd;padding:8px">1000</td>
+    <td style="border:1px solid #ddd;padding:8px">mille</td>
+  </tr>
+</table>
+
+<h4>Conversion Rules</h4>
+<p>Roman numerals follow specific rules for combining symbols:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Rule</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Additive Notation</td>
+    <td style="border:1px solid #ddd;padding:8px">Symbols of equal or lesser value are added</td>
+    <td style="border:1px solid #ddd;padding:8px">VI = 5+1 = 6</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Subtractive Notation</td>
+    <td style="border:1px solid #ddd;padding:8px">Smaller before larger means subtraction</td>
+    <td style="border:1px solid #ddd;padding:8px">IV = 5-1 = 4</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Repetition Limit</td>
+    <td style="border:1px solid #ddd;padding:8px">I, X, C, M can repeat up to 3 times</td>
+    <td style="border:1px solid #ddd;padding:8px">III = 3, but 4 = IV</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">No Repeat Rule</td>
+    <td style="border:1px solid #ddd;padding:8px">V, L, D cannot be repeated</td>
+    <td style="border:1px solid #ddd;padding:8px">10 = X, not VV</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Descending Order</td>
+    <td style="border:1px solid #ddd;padding:8px">Write largest to smallest (left to right)</td>
+    <td style="border:1px solid #ddd;padding:8px">XVI = 16, not VIX</td>
+  </tr>
+</table>
+
+<h4>Subtractive Combinations</h4>
+<p>Six specific subtractive combinations are used in standard Roman numerals:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Combination</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Calculation</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Value</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">IV</td>
+    <td style="border:1px solid #ddd;padding:8px">5 - 1</td>
+    <td style="border:1px solid #ddd;padding:8px">4</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">IX</td>
+    <td style="border:1px solid #ddd;padding:8px">10 - 1</td>
+    <td style="border:1px solid #ddd;padding:8px">9</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">XL</td>
+    <td style="border:1px solid #ddd;padding:8px">50 - 10</td>
+    <td style="border:1px solid #ddd;padding:8px">40</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">XC</td>
+    <td style="border:1px solid #ddd;padding:8px">100 - 10</td>
+    <td style="border:1px solid #ddd;padding:8px">90</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">CD</td>
+    <td style="border:1px solid #ddd;padding:8px">500 - 100</td>
+    <td style="border:1px solid #ddd;padding:8px">400</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">CM</td>
+    <td style="border:1px solid #ddd;padding:8px">1000 - 100</td>
+    <td style="border:1px solid #ddd;padding:8px">900</td>
+  </tr>
+</table>
+
+<h4>Decimal to Roman Conversion Algorithm</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript Implementation:
+
+const ROMAN_MAP = [
+  ["M", 1000], ["CM", 900], ["D", 500], ["CD", 400],
+  ["C", 100], ["XC", 90], ["L", 50], ["XL", 40],
+  ["X", 10], ["IX", 9], ["V", 5], ["IV", 4], ["I", 1]
+];
+
+function toRoman(num) {
+  let result = "";
+  for (let i = 0; i < ROMAN_MAP.length; i++) {
+    const [symbol, value] = ROMAN_MAP[i];
+    while (num >= value) {
+      result += symbol;
+      num -= value;
+    }
+  }
+  return result;
+}
+
+// Examples:
+toRoman(2024);  // "MMXXIV"
+toRoman(1994);  // "MCMXCIV"
+toRoman(444);   // "CDXLIV"
+toRoman(3999);  // "MMMCMXCIX"
+</pre>
+
+<h4>Roman to Decimal Conversion Algorithm</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript Implementation:
+
+function toDecimal(roman) {
+  const ROMAN_VALUES = {
+    'M': 1000, 'D': 500, 'C': 100, 'L': 50,
+    'X': 10, 'V': 5, 'I': 1
+  };
+
+  let result = 0;
+  let prevValue = 0;
+
+  // Process from right to left
+  for (let i = roman.length - 1; i >= 0; i--) {
+    const value = ROMAN_VALUES[roman[i].toUpperCase()];
+    if (value < prevValue) {
+      result -= value;  // Subtractive notation
+    } else {
+      result += value;
+    }
+    prevValue = value;
+  }
+
+  return result;
+}
+
+// Examples:
+toDecimal("MMXXIV");   // 2024
+toDecimal("MCMXCIV");  // 1994
+toDecimal("CDXLIV");   // 444
+</pre>
+
+<h4>Conversion Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Common Numbers:
+  1 = I           25 = XXV         100 = C
+  2 = II          30 = XXX         500 = D
+  3 = III         40 = XL          1000 = M
+  4 = IV          50 = L           2000 = MM
+  5 = V           60 = LX          3000 = MMM
+  6 = VI          90 = XC
+  9 = IX          99 = XCIX
+  10 = X          100 = C
+  14 = XIV        500 = D
+  19 = XIX        999 = CMXCIX
+  20 = XX         1994 = MCMXCIV
+  21 = XXI        2024 = MMXXIV
+  44 = XLIV       3999 = MMMCMXCIX
+
+Year Examples:
+  1776 = MDCCLXXVI (US Declaration of Independence)
+  1969 = MCMLXIX (Moon landing)
+  2000 = MM (Millennium)
+  2024 = MMXXIV (Current year)
+</pre>
+
+<h4>Historical Background</h4>
+<p>Roman numerals originated in ancient Rome around 500 BC and remained the primary numbering system in Europe until the 14th century when Arabic numerals (0-9) were adopted. The system evolved from Etruscan numerals and used tally-mark origins:</p>
+<ul>
+  <li><strong>I:</strong> Originally a single tally mark (one finger)</li>
+  <li><strong>V:</strong> Represents a hand (five fingers), with the thumb creating a V shape</li>
+  <li><strong>X:</strong> Two hands (ten fingers), or V doubled and inverted</li>
+  <li><strong>L, C, D, M:</strong> Later additions representing 50, 100, 500, 1000</li>
+</ul>
+
+<h4>Modern Applications</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Application</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Book Chapters/Outlines</td>
+    <td style="border:1px solid #ddd;padding:8px">Chapter I, Section IV, Appendix XII</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Movie/TV Copyright</td>
+    <td style="border:1px solid #ddd;padding:8px">MCMLXXXV (1985) on end credits</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Monarchs/Popes</td>
+    <td style="border:1px solid #ddd;padding:8px">Elizabeth II, Pope Francis I</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Super Bowl</td>
+    <td style="border:1px solid #ddd;padding:8px">Super Bowl LVIII (58)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Clock Faces</td>
+    <td style="border:1px solid #ddd;padding:8px">IIII instead of IV on some clocks</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Music Theory</td>
+    <td style="border:1px solid #ddd;padding:8px">Chord progressions: I-IV-V-I</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Academic Outlines</td>
+    <td style="border:1px solid #ddd;padding:8px">I. Introduction, II. Methods, III. Results</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Olympic Games</td>
+    <td style="border:1px solid #ddd;padding:8px">Games of the XXXII Olympiad</td>
+  </tr>
+</table>
+
+<h4>Clock Face Convention</h4>
+<p>Many clock faces use IIII instead of IV for the 4 o'clock position. Theories for this convention include:</p>
+<ul>
+  <li><strong>Visual balance:</strong> IIII balances with VIII on the opposite side</li>
+  <li><strong>Jupiter theory:</strong> IV matches Jupiter's Latin name (IVPITER), so avoided</li>
+  <li><strong>Manufacturing:</strong> Easier to cast molds with IIII than IV</li>
+  <li><strong>Historical preference:</strong> King Louis XIV preferred IIII, became standard</li>
+</ul>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Education:</strong> Learning Roman numerals for history, Latin, and mathematics classes</li>
+  <li><strong>Genealogy:</strong> Writing family names with generational suffixes (Jr., II, III)</li>
+  <li><strong>Legal Documents:</strong> Numbering sections, articles, and amendments</li>
+  <li><strong>Publishing:</strong> Front matter pagination (i, ii, iii, iv...)</li>
+  <li><strong>Event Planning:</strong> Formal event numbering (anniversaries, competitions)</li>
+  <li><strong>Design:</strong> Decorative numbering for aesthetic purposes</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>No zero:</strong> Roman numerals have no symbol for zero</li>
+  <li><strong>Limited range:</strong> Standard notation only supports 1-3999</li>
+  <li><strong>No fractions:</strong> Cannot easily represent decimal fractions</li>
+  <li><strong>Complex arithmetic:</strong> Addition/subtraction possible, but multiplication/division is difficult</li>
+  <li><strong>Non-standard variants:</strong> Historical texts may use non-standard forms</li>
+</ul>
+</section>
+
+<section class="how-to-use">
+<h3>How to Use Roman Numerals Converter</h3>
+<ol class="how-to-steps">
+  <li><strong>Decimal to Roman:</strong> Enter a number (1-3999) and click "To Roman" to convert.</li>
+  <li><strong>Roman to Decimal:</strong> Enter Roman numerals and click "To Decimal" to convert.</li>
+  <li><strong>Verify results:</strong> Check the converted value for accuracy.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Enter uppercase or lowercase letters for Roman numerals (case-insensitive)</li>
+  <li>Valid input range is 1 to 3999 for decimal numbers</li>
+  <li>Use standard subtractive notation (IV not IIII for 4)</li>
+  <li>Invalid Roman numeral sequences will show an error</li>
+  <li>Common mistake: IC is not valid for 99 (use XCIX)</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Roman Numerals used for?</dt>
-  <dd>Roman Numerals is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>How do you convert decimal to Roman numerals?</dt>
+  <dd>To convert decimal to Roman numerals, repeatedly subtract the largest possible Roman numeral value from the number. Start with 1000 (M), then 900 (CM), 500 (D), 400 (CD), 100 (C), 90 (XC), 50 (L), 40 (XL), 10 (X), 9 (IX), 5 (V), 4 (IV), and 1 (I). For example, 2024 = 1000+1000+10+10+1+1+1+1 = MMXXIV.</dd>
+
+  <dt>What are the Roman numeral symbols?</dt>
+  <dd>Roman numerals use seven symbols: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. Numbers are formed by combining these symbols. When a smaller value precedes a larger value, it's subtracted (IV=4, IX=9, XL=40, XC=90, CD=400, CM=900). Otherwise, values are added.</dd>
+
+  <dt>Why does Roman numerals only go to 3999?</dt>
+  <dd>Traditional Roman numerals are limited to 3999 (MMMCMXCIX) because the Romans didn't have a standard notation for larger numbers. While extensions exist (like using a bar over numerals to multiply by 1000), the standard system used in most contexts today caps at 3999 for simplicity and compatibility.</dd>
+
+  <dt>What are the rules for writing Roman numerals?</dt>
+  <dd>Key rules: 1) Symbols I, X, C, M can repeat up to 3 times; V, L, D cannot repeat. 2) Subtractive notation: IV(4), IX(9), XL(40), XC(90), CD(400), CM(900). 3) Read left to right, largest to smallest. 4) Only one smaller value can precede a larger value for subtraction.</dd>
+
+  <dt>Where are Roman numerals still used today?</dt>
+  <dd>Roman numerals appear in: book chapters and outlines, movie/TV show copyright dates, monarch and pope names (Queen Elizabeth II), Super Bowl numbering, clock faces, formal events (Oscars, Olympics), music theory (chord progressions), and academic outlines.</dd>
+
+  <dt>How do you read Roman numerals?</dt>
+  <dd>Read Roman numerals left to right. If a symbol is followed by one of equal or lesser value, add them (VI = 5+1 = 6). If followed by a greater value, subtract it (IV = 5-1 = 4). Group subtractive pairs first, then add all values: MCMXCIV = 1000+(1000-100)+(100-10)+4 = 1994.</dd>
 </dl>
 </section>
 </main>

@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>YAML to PDF – Convert YAML into PDF Online | ToolForge</title>
-<meta name="description" content="Free online YAML to PDF tool to validate YAML and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<title>YAML to PDF – Convert YAML Documents to PDF Online | ToolForge</title>
+<meta name="description" content="YAML to PDF converts YAML configuration files to PDF format with validation and formatted output. Export Kubernetes, Docker, CI configs as readable PDFs. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/yaml-to-pdf.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="YAML to PDF – Convert YAML into PDF Online | ToolForge">
-<meta property="og:description" content="Free online YAML to PDF tool to validate YAML and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="YAML to PDF – Convert YAML Documents to PDF Online | ToolForge">
+<meta property="og:description" content="YAML to PDF converts YAML configuration files to PDF format with validation and formatted output. Export Kubernetes, Docker, CI configs as readable PDFs. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/yaml-to-pdf.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="YAML to PDF – Convert YAML into PDF Online | ToolForge">
-<meta name="twitter:description" content="Free online YAML to PDF tool to validate YAML and export it as a readable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="YAML to PDF – Convert YAML Documents to PDF Online | ToolForge">
+<meta name="twitter:description" content="YAML to PDF converts YAML configuration files to PDF format with validation and formatted output. Export Kubernetes, Docker, CI configs as readable PDFs. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
@@ -26,45 +26,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Yaml To Pdf?",
+      "name": "How does YAML to PDF conversion work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yaml To Pdf is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "This tool parses YAML using the js-yaml library, validates syntax, normalizes the formatting, then renders the text as monospaced content in a PDF document using jsPDF. Each line is wrapped to fit within PDF page margins for readable output."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What happens if my YAML is invalid?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "The tool validates YAML before conversion using js-yaml. If the YAML has syntax errors (incorrect indentation, missing colons, tab characters), you'll see an error message describing the issue. Fix the YAML syntax before generating the PDF."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Does the PDF preserve YAML formatting?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Yes, the PDF preserves the YAML structure with consistent indentation using a monospace font (Courier 10pt). The tool normalizes the YAML format before export, ensuring clean, readable output."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "Can I convert large YAML files to PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "The tool processes YAML in browser memory, so practical limits depend on available RAM. For very large files (10+ MB), consider splitting the YAML or using server-side PDF generation tools designed for bulk processing."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What PDF settings are used?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "PDFs are generated in A4 size (595×842 points), portrait orientation, with 40-point margins. Text uses Courier 10pt monospace font with 14pt line spacing for optimal readability of indented YAML."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What YAML features are preserved in the PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "All YAML 1.2 features are preserved: comments, anchors (&ref) and aliases (*ref), multi-line strings (| and >), and nested structures. The js-yaml library parses and re-emits the YAML with consistent formatting."
       }
     }
   ]
@@ -89,25 +94,145 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About YAML to PDF</h3>
-<p>This YAML to PDF tool validates YAML and exports it as a readable PDF. It is useful for configuration files, CI workflows, infrastructure definitions and readable sharing of YAML documents.</p>
-<p>The YAML is processed entirely in the browser, so your file contents stay on your device during export.</p>
+<p>This YAML to PDF tool validates YAML syntax, normalizes formatting, and exports the result as a readable PDF document. The entire process runs in your browser using the js-yaml library (v4.1.0) for YAML 1.2 specification parsing and jsPDF for PDF generation.</p>
+<p>It is useful for creating printable documentation of Kubernetes manifests, Docker Compose files, CI/CD pipeline configurations, infrastructure-as-code definitions, and application configuration files that need to be shared or archived in a universal format.</p>
+
+<h4>YAML to PDF Conversion Process</h4>
+<p>The conversion follows these steps:</p>
+<ol>
+  <li><strong>Parse:</strong> Input text is parsed using js-yaml library</li>
+  <li><strong>Validate:</strong> YAML syntax errors are detected and reported</li>
+  <li><strong>Normalize:</strong> YAML is re-emitted with consistent formatting</li>
+  <li><strong>Render:</strong> Formatted text is written to PDF using monospace font</li>
+</ol>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Conversion flow:
+YAML String → js-yaml.load() → JavaScript Object →
+js-yaml.dump() → Formatted YAML String → jsPDF → PDF Document
+</pre>
+
+<h4>PDF Output Settings</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Setting</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Value</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Page size</td>
+    <td style="border:1px solid #ddd;padding:8px">A4 (595 × 842 points)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Orientation</td>
+    <td style="border:1px solid #ddd;padding:8px">Portrait</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Font</td>
+    <td style="border:1px solid #ddd;padding:8px">Courier (monospace)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Font size</td>
+    <td style="border:1px solid #ddd;padding:8px">10 points</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Line spacing</td>
+    <td style="border:1px solid #ddd;padding:8px">14 points</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Margins</td>
+    <td style="border:1px solid #ddd;padding:8px">40 points (approx. 14mm)</td>
+  </tr>
+</table>
+
+<h4>Common YAML Formats for PDF Export</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Kubernetes Manifests</td>
+    <td style="border:1px solid #ddd;padding:8px">Deployments, Services, ConfigMaps, Secrets</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Docker Compose</td>
+    <td style="border:1px solid #ddd;padding:8px">Multi-container application definitions</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">GitHub Actions</td>
+    <td style="border:1px solid #ddd;padding:8px">Workflow definitions (.github/workflows/)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">GitLab CI</td>
+    <td style="border:1px solid #ddd;padding:8px">.gitlab-ci.yml pipeline configs</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Ansible Playbooks</td>
+    <td style="border:1px solid #ddd;padding:8px">Infrastructure automation scripts</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">App Configs</td>
+    <td style="border:1px solid #ddd;padding:8px">application.yml, config.yaml files</td>
+  </tr>
+</table>
+
+<h4>YAML Syntax Features</h4>
+<p>The tool supports YAML 1.2 specification features:</p>
+<ul>
+  <li><strong>Comments:</strong> Lines starting with # (preserved in output)</li>
+  <li><strong>Anchors and Aliases:</strong> &amp;anchor and *alias references</li>
+  <li><strong>Multi-line strings:</strong> Literal (|) and folded (&gt;) blocks</li>
+  <li><strong>Data types:</strong> Strings, integers, floats, booleans, null, dates</li>
+  <li><strong>Complex structures:</strong> Nested mappings, sequences, combinations</li>
+</ul>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Documentation:</strong> Create printable specs of Kubernetes or Docker configs</li>
+  <li><strong>Code reviews:</strong> Generate PDFs of YAML changes for offline review</li>
+  <li><strong>Compliance:</strong> Archive infrastructure configs for audit trails</li>
+  <li><strong>Training:</strong> Create handouts showing YAML structure examples</li>
+  <li><strong>Sharing:</strong> Send readable configs to team members unfamiliar with YAML</li>
+</ul>
+
+<h4>Common YAML Syntax Errors</h4>
+<ul>
+  <li><strong>Tab characters:</strong> YAML requires spaces, not tabs</li>
+  <li><strong>Inconsistent indentation:</strong> Use same number of spaces per level</li>
+  <li><strong>Missing colon:</strong> Key-value pairs need colon + space</li>
+  <li><strong>Bad list syntax:</strong> List items need space after dash (- item)</li>
+  <li><strong>Unquoted special chars:</strong> Some strings need quotes</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li>Large YAML files may cause browser memory issues</li>
+  <li>PDF contains text only, not syntax-highlighted YAML</li>
+  <li>Custom YAML tags require server-side processing</li>
+  <li>Very long lines are wrapped to fit page width</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Yaml To Pdf?</dt>
-  <dd>Yaml To Pdf is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How does YAML to PDF conversion work?</dt>
+  <dd>This tool parses YAML using the js-yaml library, validates syntax, normalizes the formatting, then renders the text as monospaced content in a PDF document using jsPDF. Each line is wrapped to fit within PDF page margins for readable output.</dd>
+
+  <dt>What happens if my YAML is invalid?</dt>
+  <dd>The tool validates YAML before conversion using js-yaml. If the YAML has syntax errors (incorrect indentation, missing colons, tab characters), you'll see an error message describing the issue. Fix the YAML syntax before generating the PDF.</dd>
+
+  <dt>Does the PDF preserve YAML formatting?</dt>
+  <dd>Yes, the PDF preserves the YAML structure with consistent indentation using a monospace font (Courier 10pt). The tool normalizes the YAML format before export, ensuring clean, readable output.</dd>
+
+  <dt>Can I convert large YAML files to PDF?</dt>
+  <dd>The tool processes YAML in browser memory, so practical limits depend on available RAM. For very large files (10+ MB), consider splitting the YAML or using server-side PDF generation tools designed for bulk processing.</dd>
+
+  <dt>What PDF settings are used?</dt>
+  <dd>PDFs are generated in A4 size (595×842 points), portrait orientation, with 40-point margins. Text uses Courier 10pt monospace font with 14pt line spacing for optimal readability of indented YAML.</dd>
+
+  <dt>What YAML features are preserved in the PDF?</dt>
+  <dd>All YAML 1.2 features are preserved: comments, anchors (&amp;ref) and aliases (*ref), multi-line strings (| and &gt;), and nested structures. The js-yaml library parses and re-emits the YAML with consistent formatting.</dd>
 </dl>
 </section>
 </main>

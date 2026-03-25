@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Base64 Image Viewer – Preview Base64 to Image Online | ToolForge</title>
-<meta name="description" content="Free online Base64 Image Viewer to preview images from Base64 strings or data URLs, and download the decoded image in your browser. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Test and preview Base64-encoded images and data URLs. Decode Base64 strings to visual images with MIME type detection and download support. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/base64-image-viewer.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Base64 Image Viewer – Preview Base64 to Image Online | ToolForge">
-<meta property="og:description" content="Free online Base64 Image Viewer to preview images from Base64 strings or data URLs, and download the decoded image in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Test and preview Base64-encoded images and data URLs. Decode Base64 strings to visual images with MIME type detection and download support. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/base64-image-viewer.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Base64 Image Viewer – Preview Base64 to Image Online | ToolForge">
-<meta name="twitter:description" content="Free online Base64 Image Viewer to preview images from Base64 strings or data URLs, and download the decoded image in your browser. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Test and preview Base64-encoded images and data URLs. Decode Base64 strings to visual images with MIME type detection and download support. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,42 +24,42 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Base64 image encoding?",
+      "name": "What is a Base64 data URL?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Base64 image encoding converts binary image data into ASCII text using 64 characters (A-Z, a-z, 0-9, +, /). This allows images to be embedded directly in HTML, CSS, or JSON. The format is: data:image/png;base64,[encoded data].\""
+        "text": "A Base64 data URL embeds binary image data directly in text using the format: data:image/png;base64,[encoded data]. The MIME type (image/png, image/jpeg, etc.) tells the browser how to decode the image. The base64 portion contains the actual image data encoded as ASCII text."
       }
     },
     {
       "@type": "Question",
-      "name": "What is a data URL and how do I use it?",
+      "name": "How do I extract Base64 data from a data URL?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "A data URL embeds data directly in web pages using the format: data:[media-type][;base64],[data]. For images: data:image/png;base64,iVBORw0KG... Data URLs are useful for small icons, avoiding HTTP requests, and embedding images in emails.\""
+        "text": "A data URL has three parts separated by commas: prefix (data:), MIME type with encoding (image/png;base64), and the actual Base64 data. To extract just the Base64 portion, remove everything before and including the first comma. Most tools accept both full data URLs and raw Base64 strings."
       }
     },
     {
       "@type": "Question",
-      "name": "Why use Base64 images in web development?",
+      "name": "Why does my Base64 image appear broken?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Base64 images reduce HTTP requests (good for small icons), enable single-file HTML/CSS distribution, work in email templates where external images are blocked, and allow dynamic image generation in JavaScript. However, Base64 adds ~33% size overhead.\""
+        "text": "Common causes include: missing or incorrect data URL prefix, invalid Base64 characters (only A-Z, a-z, 0-9, +, /, = are valid), incorrect padding (length must be multiple of 4), MIME type mismatch (e.g., claiming PNG but data is JPEG), or truncated/corrupted data from copy-paste errors."
       }
     },
     {
       "@type": "Question",
-      "name": "What are common Base64 image MIME types?",
+      "name": "What MIME types are supported for Base64 images?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Common types: image/png (PNG images), image/jpeg (JPEG photos), image/gif (animated GIFs), image/webp (modern WebP), image/svg+xml (SVG vectors), image/bmp (bitmap images). The MIME type tells browsers how to decode the image.\""
+        "text": "Common image MIME types: image/png (PNG graphics), image/jpeg (JPEG photos), image/gif (animated GIFs), image/webp (modern WebP), image/svg+xml (SVG vectors), image/bmp (bitmap). The MIME type must match the actual image format for correct decoding."
       }
     },
     {
       "@type": "Question",
-      "name": "Why does my Base64 image not display?",
+      "name": "How do I convert an image to Base64?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Common causes: missing 'data:image' prefix, invalid Base64 characters (only A-Z, a-z, 0-9, +, /, = allowed), incorrect padding (length must be multiple of 4), truncated/corrupted data, or wrong MIME type for the actual image format.\""
+        "text": "Use the image-to-base64 tool to upload and encode images. Programmatically: in JavaScript use FileReader.readAsDataURL(), in Python use base64.b64encode() with file bytes, in Node.js use Buffer.from(fs.readFileSync(path)).toString('base64'). The result can be prefixed with data:image/type;base64, for use as data URLs."
       }
     },
     {
@@ -67,7 +67,7 @@
       "name": "What is Base64 padding and why does it matter?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Base64 padding (=) ensures the encoded string length is a multiple of 4. Each = represents 2 missing bits. Valid Base64 always has 0, 1, or 2 padding characters at the end. Missing or extra padding causes decoding failures.\""
+        "text": "Base64 padding uses = characters to ensure the encoded string length is a multiple of 4. One = means 2 bytes of input (16 bits encoded to 3 chars + padding). Two = means 1 byte of input (8 bits encoded to 2 chars + padding). Missing or extra padding causes decoding failures."
       }
     }
   ]
@@ -81,12 +81,12 @@
 
 <h1>Base64 Image Viewer</h1>
 
-<p class="subtitle">Paste a Base64 image string or data URL to preview the image instantly and download it if needed.</p>
+<p class="subtitle">Decode and preview Base64 image strings or data URLs instantly in your browser.</p>
 
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <label for="input" class="sr-only">Input text</label>
-<textarea id="input" rows="8" style="width:90%" placeholder="Paste Base64 image string here" aria-label="Input text"></textarea>
+<textarea id="input" rows="8" style="width:90%" placeholder="Paste Base64 image string or data URL here" aria-label="Input text"></textarea>
 
 <br><br>
 
@@ -103,143 +103,210 @@
 
 <section class="tool-seo">
 <h3>About Base64 Image Viewer</h3>
-<p>The Base64 Image Viewer lets you paste a Base64-encoded image string or data URL to preview the decoded image instantly in your browser. All processing happens locally - no images are uploaded to any server.</p>
+<p>The Base64 Image Viewer decodes Base64-encoded image data and displays the resulting image. It accepts both raw Base64 strings and complete data URLs with MIME type prefixes.</p>
 
-<h4>Understanding Base64 Image Format</h4>
-<p>Base64 images use a data URL format to embed binary image data as text:</p>
+<h4>Understanding Data URL Format</h4>
+<p>Base64 images use a data URL scheme to embed binary data as text:</p>
 <pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
 data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...
 |     |     |       |
 |     |     |       +-- Base64-encoded image data
-|     |     +-- Encoding type (base64)
-|     +-- MIME type (image/png, image/jpeg, etc.)
+|     |     +-- Encoding type (always base64 for images)
+|     +-- MIME type (image/png, image/jpeg, image/gif, etc.)
 +-- Data URL scheme prefix
 </pre>
 
-<h4>Common Image MIME Types</h4>
+<h4>Supported Image MIME Types</h4>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
     <th style="border:1px solid #ddd;padding:8px;text-align:left">MIME Type</th>
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Format</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Characteristics</th>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px"><code>image/png</code></td>
     <td style="border:1px solid #ddd;padding:8px">PNG</td>
-    <td style="border:1px solid #ddd;padding:8px">Graphics, logos, screenshots</td>
+    <td style="border:1px solid #ddd;padding:8px">Lossless, supports transparency</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px"><code>image/jpeg</code></td>
     <td style="border:1px solid #ddd;padding:8px">JPEG</td>
-    <td style="border:1px solid #ddd;padding:8px">Photographs, complex images</td>
+    <td style="border:1px solid #ddd;padding:8px">Lossy, best for photos</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px"><code>image/gif</code></td>
     <td style="border:1px solid #ddd;padding:8px">GIF</td>
-    <td style="border:1px solid #ddd;padding:8px">Simple animations</td>
+    <td style="border:1px solid #ddd;padding:8px">Supports animation, 256 colors</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px"><code>image/webp</code></td>
     <td style="border:1px solid #ddd;padding:8px">WebP</td>
-    <td style="border:1px solid #ddd;padding:8px">Modern web (better compression)</td>
+    <td style="border:1px solid #ddd;padding:8px">Modern format, better compression</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px"><code>image/svg+xml</code></td>
     <td style="border:1px solid #ddd;padding:8px">SVG</td>
-    <td style="border:1px solid #ddd;padding:8px">Vector graphics, icons</td>
+    <td style="border:1px solid #ddd;padding:8px">Vector graphics, scalable</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px"><code>image/bmp</code></td>
     <td style="border:1px solid #ddd;padding:8px">BMP</td>
-    <td style="border:1px solid #ddd;padding:8px">Uncompressed bitmaps</td>
+    <td style="border:1px solid #ddd;padding:8px">Uncompressed bitmap</td>
   </tr>
 </table>
 
-<h4>How Base64 Encoding Works</h4>
-<p>Base64 converts binary data into ASCII text:</p>
+<h4>Base64 Decoding Process</h4>
+<p>Converting Base64 text back to binary image data:</p>
 <ol>
-  <li>Binary data is split into 6-bit groups</li>
-  <li>Each 6-bit group maps to a character (0-63 → A-Z, a-z, 0-9, +, /)</li>
-  <li>Padding (=) is added if length isn't a multiple of 4</li>
-  <li>Result is ~33% larger than original binary</li>
+  <li><strong>Parse data URL:</strong> Extract MIME type and Base64 portion (remove <code>data:image/type;base64,</code> prefix)</li>
+  <li><strong>Validate characters:</strong> Ensure only valid Base64 characters: A-Z, a-z, 0-9, +, /, =</li>
+  <li><strong>Check padding:</strong> Verify length is multiple of 4 (add = if needed)</li>
+  <li><strong>Decode to binary:</strong> Convert each 4-char group to 3 bytes</li>
+  <li><strong>Create blob:</strong> Wrap binary data in Blob with correct MIME type</li>
+  <li><strong>Display:</strong> Generate object URL and set as image src</li>
 </ol>
 
 <pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
-Original:  "Hello" (5 bytes = 40 bits)
-Binary:    01001000 01100101 01101100 01101100 01101111
-Base64:    SGVsbG8= (8 characters)
-Size increase: 60% (but overhead decreases for larger data)
+JavaScript Base64 to Image:
+
+// Full data URL
+const dataUrl = "data:image/png;base64,iVBORw0KG...";
+
+// Extract Base64 portion
+const base64Data = dataUrl.split(',')[1];
+
+// Convert to binary
+const binaryString = atob(base64Data);
+
+// Create byte array
+const bytes = new Uint8Array(binaryString.length);
+for (let i = 0; i < binaryString.length; i++) {
+  bytes[i] = binaryString.charCodeAt(i);
+}
+
+// Create blob and display
+const blob = new Blob([bytes], { type: 'image/png' });
+const imageUrl = URL.createObjectURL(blob);
+document.getElementById('preview').src = imageUrl;
 </pre>
 
 <h4>Common Use Cases</h4>
 <ul>
-  <li><strong>Embed images in HTML/CSS:</strong> Include small icons directly in stylesheets</li>
-  <li><strong>Email templates:</strong> Embed images that won't be blocked by email clients</li>
-  <li><strong>Single-file distribution:</strong> Create self-contained HTML documents</li>
-  <li><strong>API responses:</strong> Return images as JSON without separate endpoints</li>
-  <li><strong>Data URIs in JavaScript:</strong> Dynamically generate and display images</li>
-  <li><strong>Testing:</strong> Quickly verify Base64 image data without saving files</li>
+  <li><strong>Verify Base64 images:</strong> Preview encoded images to confirm they decoded correctly</li>
+  <li><strong>Debug data URLs:</strong> Check if Base64 strings from APIs or databases are valid</li>
+  <li><strong>Extract embedded images:</strong> Save images from HTML/CSS that use data URLs</li>
+  <li><strong>Test image encoding:</strong> Verify that image-to-Base64 conversion worked properly</li>
+  <li><strong>Inspect email templates:</strong> View inline images embedded in HTML emails</li>
+  <li><strong>Validate API responses:</strong> Check Base64 image data returned from web services</li>
 </ul>
 
-<h4>Base64 Image Size Considerations</h4>
-<p>Base64 encoding increases data size:</p>
+<h4>Base64 Size Overhead</h4>
+<p>Base64 encoding increases data size compared to binary:</p>
 <ul>
-  <li><strong>Overhead:</strong> Approximately 33% larger than binary</li>
-  <li><strong>Formula:</strong> encodedSize ≈ (originalSize / 3) × 4</li>
-  <li><strong>For web:</strong> Use only for small images (< 10KB recommended)</li>
-  <li><strong>For large images:</strong> Serve as separate files with normal <code>&lt;img src&gt;</code></li>
+  <li><strong>Ratio:</strong> 4 Base64 characters encode 3 bytes of binary data</li>
+  <li><strong>Overhead:</strong> Approximately 33.3% size increase</li>
+  <li><strong>Formula:</strong> <code>encodedSize ≈ (originalSize / 3) × 4</code></li>
+  <li><strong>With data URL prefix:</strong> Additional ~20-30 characters for prefix</li>
 </ul>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Binary Size vs Base64 Data URL Size:
+
+Original Image     → Base64 String      → Data URL
+100 bytes          → ~136 bytes         → ~155 bytes
+1 KB               → ~1.36 KB           → ~1.38 KB
+10 KB              → ~13.6 KB           → ~13.6 KB
+100 KB             → ~136 KB            → ~136 KB
+1 MB               → ~1.36 MB           → ~1.36 MB
+
+Note: Overhead becomes negligible for larger images
+</pre>
 
 <h4>Troubleshooting Base64 Images</h4>
-<p>If your Base64 image won't display:</p>
+<p>If your Base64 image won't display, check these common issues:</p>
 <ul>
-  <li>Check for <code>data:image/[type];base64,</code> prefix</li>
-  <li>Verify only valid Base64 characters: A-Z, a-z, 0-9, +, /, =</li>
-  <li>Ensure length is a multiple of 4 (padding with = if needed)</li>
-  <li>Confirm MIME type matches actual image format</li>
-  <li>Check for truncated or corrupted data</li>
-  <li>Remove any whitespace or newlines from the Base64 string</li>
+  <li><strong>Missing prefix:</strong> Add <code>data:image/png;base64,</code> if using raw Base64</li>
+  <li><strong>Invalid characters:</strong> Remove any spaces, newlines, or non-Base64 characters</li>
+  <li><strong>Wrong MIME type:</strong> Ensure prefix matches actual image format (PNG vs JPEG)</li>
+  <li><strong>Truncated data:</strong> Verify the Base64 string is complete (check for cut-off ending)</li>
+  <li><strong>Padding errors:</strong> Length should be multiple of 4 (add = padding if needed)</li>
+  <li><strong>Browser limits:</strong> Very large Base64 strings may exceed browser memory limits</li>
 </ul>
+
+<h4>MIME Type Detection</h4>
+<p>When the MIME type is missing or incorrect, you can detect it from the Base64 header:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Magic Bytes (hex)</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Base64 Header</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">PNG</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>89 50 4E 47</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>iVBORw0K</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">JPEG</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>FF D8 FF</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>/9j/</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">GIF</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>47 49 46 38</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>R0lGOD</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">WebP</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>52 49 46 46</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>UklGR</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">BMP</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>42 4D</code></td>
+    <td style="border:1px solid #ddd;padding:8px"><code>Qk</code></td>
+  </tr>
+</table>
 </section>
 
 <section class="how-to-use">
 <h3>How to View Base64 Images</h3>
 <ol class="how-to-steps">
-  <li><strong>Paste Base64 data:</strong> Copy your Base64 image string into the input box.</li>
-  <li><strong>Click Preview:</strong> The tool decodes and displays the image instantly.</li>
-  <li><strong>Review the image:</strong> Verify the decoded image displays correctly.</li>
-  <li><strong>Download (optional):</strong> Click "Download Image" to save as a file.</li>
+  <li><strong>Paste Base64 data:</strong> Copy your Base64 image string or data URL into the input box.</li>
+  <li><strong>Click Preview:</strong> The tool decodes the Base64 and displays the image instantly.</li>
+  <li><strong>Verify the image:</strong> Check that the decoded image displays correctly without artifacts.</li>
+  <li><strong>Download (optional):</strong> Click "Download Image" to save the decoded image as a file.</li>
 </ol>
 
 <h4 style="margin-top:20px">Tips</h4>
 <ul>
-  <li>Data URLs can start with <code>data:image/png;base64,</code> or just the Base64 data</li>
-  <li>This tool automatically adds the prefix if missing</li>
-  <li>Large Base64 strings may take a moment to decode</li>
-  <li>Clear the input before pasting new data</li>
+  <li>Data URLs should start with <code>data:image/[type];base64,</code> prefix</li>
+  <li>This tool automatically adds PNG prefix if missing</li>
+  <li>Remove any whitespace or newlines from Base64 strings before pasting</li>
+  <li>For large images, decoding may take a moment depending on string length</li>
 </ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What is Base64 image encoding?</dt>
-  <dd>Base64 image encoding converts binary image data into ASCII text using 64 characters (A-Z, a-z, 0-9, +, /). This allows images to be embedded directly in HTML, CSS, or JSON. The format is: data:image/png;base64,[encoded data].</dd>
+  <dt>What is a Base64 data URL?</dt>
+  <dd>A Base64 data URL embeds binary image data directly in text using the format: data:image/png;base64,[encoded data]. The MIME type (image/png, image/jpeg, etc.) tells the browser how to decode the image. The base64 portion contains the actual image data encoded as ASCII text.</dd>
 
-  <dt>What is a data URL and how do I use it?</dt>
-  <dd>A data URL embeds data directly in web pages using the format: data:[media-type][;base64],[data]. For images: data:image/png;base64,iVBORw0KG... Data URLs are useful for small icons, avoiding HTTP requests, and embedding images in emails.</dd>
+  <dt>How do I extract Base64 data from a data URL?</dt>
+  <dd>A data URL has three parts separated by commas: prefix (data:), MIME type with encoding (image/png;base64), and the actual Base64 data. To extract just the Base64 portion, remove everything before and including the first comma. Most tools accept both full data URLs and raw Base64 strings.</dd>
 
-  <dt>Why use Base64 images in web development?</dt>
-  <dd>Base64 images reduce HTTP requests (good for small icons), enable single-file HTML/CSS distribution, work in email templates where external images are blocked, and allow dynamic image generation in JavaScript. However, Base64 adds ~33% size overhead.</dd>
+  <dt>Why does my Base64 image appear broken?</dt>
+  <dd>Common causes include: missing or incorrect data URL prefix, invalid Base64 characters (only A-Z, a-z, 0-9, +, /, = are valid), incorrect padding (length must be multiple of 4), MIME type mismatch (e.g., claiming PNG but data is JPEG), or truncated/corrupted data from copy-paste errors.</dd>
 
-  <dt>What are common Base64 image MIME types?</dt>
-  <dd>Common types: image/png (PNG images), image/jpeg (JPEG photos), image/gif (animated GIFs), image/webp (modern WebP), image/svg+xml (SVG vectors), image/bmp (bitmap images). The MIME type tells browsers how to decode the image.</dd>
+  <dt>What MIME types are supported for Base64 images?</dt>
+  <dd>Common image MIME types: image/png (PNG graphics), image/jpeg (JPEG photos), image/gif (animated GIFs), image/webp (modern WebP), image/svg+xml (SVG vectors), image/bmp (bitmap). The MIME type must match the actual image format for correct decoding.</dd>
 
-  <dt>Why does my Base64 image not display?</dt>
-  <dd>Common causes: missing 'data:image' prefix, invalid Base64 characters (only A-Z, a-z, 0-9, +, /, = allowed), incorrect padding (length must be multiple of 4), truncated/corrupted data, or wrong MIME type for the actual image format.</dd>
+  <dt>How do I convert an image to Base64?</dt>
+  <dd>Use the image-to-base64 tool to upload and encode images. Programmatically: in JavaScript use FileReader.readAsDataURL(), in Python use base64.b64encode() with file bytes, in Node.js use Buffer.from(fs.readFileSync(path)).toString('base64'). The result can be prefixed with data:image/type;base64, for use as data URLs.</dd>
 
   <dt>What is Base64 padding and why does it matter?</dt>
-  <dd>Base64 padding (=) ensures the encoded string length is a multiple of 4. Each = represents 2 missing bits. Valid Base64 always has 0, 1, or 2 padding characters at the end. Missing or extra padding causes decoding failures.</dd>
+  <dd>Base64 padding uses = characters to ensure the encoded string length is a multiple of 4. One = means 2 bytes of input (16 bits encoded to 3 chars + padding). Two = means 1 byte of input (8 bits encoded to 2 chars + padding). Missing or extra padding causes decoding failures.</dd>
 </dl>
 </section>
 </main>

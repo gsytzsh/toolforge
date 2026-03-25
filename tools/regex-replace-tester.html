@@ -3,20 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <title>Regex Replace Tester – Test Regex Replace Rules Online | ToolForge</title>
-<meta name="description" content="Free online Regex Replace Tester to test JavaScript regex search-and-replace rules with flags and replacement patterns. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Test JavaScript regex search-and-replace rules with flags and replacement patterns. Preview transformed output instantly. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/regex-replace-tester.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Regex Replace Tester – Test Regex Replace Rules Online | ToolForge">
-<meta property="og:description" content="Free online Regex Replace Tester to test JavaScript regex search-and-replace rules with flags and replacement patterns. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Test JavaScript regex search-and-replace rules with flags and replacement patterns. Preview transformed output instantly. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/regex-replace-tester.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Regex Replace Tester – Test Regex Replace Rules Online | ToolForge">
-<meta name="twitter:description" content="Free online Regex Replace Tester to test JavaScript regex search-and-replace rules with flags and replacement patterns. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Test JavaScript regex search-and-replace rules with flags and replacement patterns. Preview transformed output instantly. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are regular expressions and how do they work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Regular expressions (regex) are patterns that describe text for searching and manipulation. They consist of literal characters and metacharacters with special meanings. The regex engine matches patterns against input text, finding occurrences for replacement or extraction."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What do the regex flags mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common flags: g (global) - replace all matches, not just first; i (ignoreCase) - case-insensitive matching; m (multiline) - ^ and $ match line boundaries; s (dotAll) - dot matches newlines; u (unicode) - Unicode-aware matching; y (sticky) - match at position only."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do replacement patterns work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Replacement patterns can include literal text and special sequences: $1, $2, etc. for capture groups; $& for entire match; $` for before match; $' for after match; $$ for literal dollar sign. Named groups use $<name> syntax."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are common regex metacharacters?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common metacharacters: . (any char), * (0+ times), + (1+ times), ? (0 or 1 time), ^ (start), $ (end), [] (character class), () (capture group), | (alternation), {} (quantifier), \\ (escape). These form the building blocks of regex patterns."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I escape special characters in regex?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "To match literal special characters, escape them with backslash: \\., \\*, \\+, \\?, \\[, \\], \\(\\), \\{\\}, \\|, \\\\. For example, to match 'example.com' literally, use 'example\\.com' since unescaped dot matches any character."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are capture groups and how do I use them?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Capture groups (parentheses) extract matched text for reuse. Group 1 is $1, group 2 is $2, etc. Named groups use (?<name>pattern) syntax and $<name> in replacement. Example: /(\\w+), (\\w+)/ replaced with '$2 $1' swaps 'Doe, John' to 'John Doe'."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <main class="container">
@@ -43,60 +99,415 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Regex Replace Tester</h3>
-<p>This regex replace tester lets you try search-and-replace rules with flags and preview the transformed output immediately.</p>
-<p>It is useful for bulk text cleanup, rewrite rules, log cleanup and refactoring tasks where you want to verify replacement logic before applying it elsewhere.</p>
+<p>This regex replace tester lets you try search-and-replace rules with JavaScript-compatible regular expressions. It supports all standard regex flags (g, i, m, s, u, y) and replacement patterns including capture group references. The tool validates patterns and displays errors for invalid regex syntax.</p>
+<p>It is useful for bulk text cleanup, rewrite rules, log parsing and cleanup, code refactoring, data transformation, URL rewriting, and verifying replacement logic before applying it in production code.</p>
+
+<h4>Regular Expression Basics</h4>
+<p>Regular expressions are patterns that describe text for searching and manipulation:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Regex Components:
+
+1. Literal Characters
+   - Match themselves exactly
+   - Example: /hello/ matches "hello"
+
+2. Metacharacters (special meaning)
+   .   - Any character except newline
+   *   - 0 or more of previous
+   +   - 1 or more of previous
+   ?   - 0 or 1 of previous
+   ^   - Start of string/line
+   $   - End of string/line
+   []  - Character class
+   ()  - Capture group
+   |   - Alternation (OR)
+   {}  - Quantifier
+   \   - Escape character
+
+3. Character Classes
+   \d  - Digit [0-9]
+   \D  - Non-digit [^0-9]
+   \w  - Word character [a-zA-Z0-9_]
+   \W  - Non-word character
+   \s  - Whitespace (space, tab, newline)
+   \S  - Non-whitespace
+   \b  - Word boundary
+   \B  - Non-word boundary
+
+Example Pattern:
+  Pattern: /\b(\w+)\s+\1\b/g
+  Purpose: Find repeated words
+  Matches: "the the", "hello hello"
+</pre>
+
+<h4>Regex Flags Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Flag</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Name</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">g</td>
+    <td style="border:1px solid #ddd;padding:8px">Global</td>
+    <td style="border:1px solid #ddd;padding:8px">Replace all matches, not just first</td>
+    <td style="border:1px solid #ddd;padding:8px">/a/g replaces all "a"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">i</td>
+    <td style="border:1px solid #ddd;padding:8px">Ignore Case</td>
+    <td style="border:1px solid #ddd;padding:8px">Case-insensitive matching</td>
+    <td style="border:1px solid #ddd;padding:8px">/A/i matches "a" or "A"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">m</td>
+    <td style="border:1px solid #ddd;padding:8px">Multiline</td>
+    <td style="border:1px solid #ddd;padding:8px">^ and $ match line boundaries</td>
+    <td style="border:1px solid #ddd;padding:8px">/^test/m matches line starts</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">s</td>
+    <td style="border:1px solid #ddd;padding:8px">DotAll</td>
+    <td style="border:1px solid #ddd;padding:8px">Dot matches newlines too</td>
+    <td style="border:1px solid #ddd;padding:8px">/.*?/s matches across lines</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">u</td>
+    <td style="border:1px solid #ddd;padding:8px">Unicode</td>
+    <td style="border:1px solid #ddd;padding:8px">Unicode-aware matching</td>
+    <td style="border:1px solid #ddd;padding:8px">/\p{L}/u matches letters</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">y</td>
+    <td style="border:1px solid #ddd;padding:8px">Sticky</td>
+    <td style="border:1px solid #ddd;padding:8px">Match at position only</td>
+    <td style="border:1px solid #ddd;padding:8px">/a/y matches at lastIndex</td>
+  </tr>
+</table>
+
+<h4>Replacement Pattern Syntax</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Replacement Sequences:
+
+$&      - Entire matched string
+$`      - String before the match
+$'      - String after the match
+$$      - Literal $ character
+$1-$9   - Capture group 1-9
+$<name> - Named capture group
+
+Examples:
+
+Input: "John Doe"
+Pattern: /(\w+) (\w+)/
+Replace: "$2, $1"
+Result: "Doe, John"
+
+Input: "hello world"
+Pattern: /(\w+)/g
+Replace: "[$&]"
+Result: "[hello] [world]"
+
+Input: "abc123def"
+Pattern: /(\d+)/
+Replace: "($`)|$&|($')"
+Result: "(abc)|123|(def)"
+
+Named Groups:
+Input: "2024-03-15"
+Pattern: /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/
+Replace: "$<month>/$<day>/$<year>"
+Result: "03/15/2024"
+
+Escaping:
+Input: "Price: $100"
+Pattern: /\$(\d+)/
+Replace: "$$${1}.00"
+Result: "Price: ${100}.00"
+</pre>
+
+<h4>Common Regex Patterns</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Pattern</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example Match</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">\b\w+@\w+\.\w+\b</td>
+    <td style="border:1px solid #ddd;padding:8px">Basic email</td>
+    <td style="border:1px solid #ddd;padding:8px">user@example.com</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">https?://\S+</td>
+    <td style="border:1px solid #ddd;padding:8px">URLs</td>
+    <td style="border:1px solid #ddd;padding:8px">https://example.com/path</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">\b\d{3}-\d{4}\b</td>
+    <td style="border:1px solid #ddd;padding:8px">Phone (xxx-xxxx)</td>
+    <td style="border:1px solid #ddd;padding:8px">555-1234</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">\b[A-Z][a-z]+ [A-Z][a-z]+\b</td>
+    <td style="border:1px solid #ddd;padding:8px">Name (First Last)</td>
+    <td style="border:1px solid #ddd;padding:8px">John Doe</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">\s+</td>
+    <td style="border:1px solid #ddd;padding:8px">Whitespace</td>
+    <td style="border:1px solid #ddd;padding:8px">Spaces, tabs, newlines</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">&lt;[^&gt;]*&gt;</td>
+    <td style="border:1px solid #ddd;padding:8px">HTML tags</td>
+    <td style="border:1px solid #ddd;padding:8px">&lt;div class="x"&gt;</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">\b(\w+)\s+\1\b</td>
+    <td style="border:1px solid #ddd;padding:8px">Repeated words</td>
+    <td style="border:1px solid #ddd;padding:8px">the the</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">^\s*#.*</td>
+    <td style="border:1px solid #ddd;padding:8px">Comment lines</td>
+    <td style="border:1px solid #ddd;padding:8px"># This is a comment</td>
+  </tr>
+</table>
+
+<h4>Code Examples by Language</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript:
+  // Basic replace
+  text.replace(/pattern/g, 'replacement')
+
+  // With capture groups
+  text.replace(/(\w+) (\w+)/, '$2, $1')
+
+  // With function
+  text.replace(/\d+/g, (m) => `[${m}]`)
+
+  // Using RegExp object
+  const regex = new RegExp(pattern, flags);
+  text.replace(regex, replacement);
+
+Python:
+  import re
+  # Basic replace
+  re.sub(r'pattern', 'replacement', text)
+
+  # With capture groups
+  re.sub(r'(\w+) (\w+)', r'\2, \1', text)
+
+  # With function
+  re.sub(r'\d+', lambda m: f'[{m.group()}]', text)
+
+  # Count replacements
+  result, count = re.subn(r'pattern', 'rep', text)
+
+PHP:
+  // Basic replace
+  preg_replace('/pattern/', 'replacement', $text)
+
+  // With capture groups
+  preg_replace('/(\w+) (\w+)/', '$2, $1', $text)
+
+  // With function
+  preg_replace_callback('/\d+/', fn($m) => "[{$m[0]}]", $text)
+
+  // Limit replacements
+  preg_replace('/pat/', 'rep', $text, 1)
+
+Java:
+  // Basic replace
+  text.replaceAll("pattern", "replacement")
+
+  // With capture groups
+  text.replaceAll("(\\w+) (\\w+)", "$2, $1")
+
+  // Using Pattern
+  Pattern.compile("pattern").matcher(text).replaceAll("rep")
+
+C#:
+  // Basic replace
+  Regex.Replace(text, "pattern", "replacement")
+
+  // With capture groups
+  Regex.Replace(text, @"(\w+) (\w+)", "$2, $1")
+
+  // With function
+  Regex.Replace(text, @"\d+", m => $"[{m.Value}]")
+</pre>
+
+<h4>Regex Replace Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Simple Word Replacement
+  Pattern: hello
+  Replace: hi
+  Input: "hello world, hello there"
+  Output (g): "hi world, hi there"
+  Output (no g): "hi world, hello there"
+
+Example 2: Case-Insensitive Replace
+  Pattern: hello
+  Flags: gi
+  Replace: HI
+  Input: "Hello HELLO hello"
+  Output: "HI HI HI"
+
+Example 3: Swap Words Using Capture Groups
+  Pattern: (\w+) (\w+)
+  Replace: $2 $1
+  Input: "John Doe, Jane Smith"
+  Output: "Doe John, Smith Jane"
+
+Example 4: Remove HTML Tags
+  Pattern: &lt;[^&gt;]*&gt;
+  Replace: (empty)
+  Input: "&lt;p&gt;Hello &lt;b&gt;World&lt;/b&gt;&lt;/p&gt;"
+  Output: "Hello World"
+
+Example 5: Normalize Whitespace
+  Pattern: \s+
+  Replace: " "
+  Input: "too   many\n\nnewlines"
+  Output: "too many newlines"
+
+Example 6: Format Numbers (add commas)
+  Pattern: \B(?=(\d{3})+(?!\d))
+  Replace: ","
+  Input: "1000000"
+  Output: "1,000,000"
+
+Example 7: Mask Credit Card
+  Pattern: \d(?=\d{4})
+  Replace: "*"
+  Input: "1234567890123456"
+  Output: "***********23456"
+
+Example 8: Convert Date Format
+  Pattern: (\d{4})-(\d{2})-(\d{2})
+  Replace: $2/$3/$1
+  Input: "2024-03-15"
+  Output: "03/15/2024"
+
+Example 9: Remove Comments
+  Pattern: ^\s*#.*$
+  Flags: gm
+  Replace: (empty)
+  Input: "code\n# comment\nmore"
+  Output: "code\nmore"
+
+Example 10: URL to Link
+  Pattern: (https?://\S+)
+  Replace: &lt;a href="$1"&gt;$1&lt;/a&gt;
+  Input: "Visit https://example.com"
+  Output: "Visit &lt;a href="https://example.com"&gt;https://example.com&lt;/a&gt;"
+</pre>
+
+<h4>Quantifiers Reference</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Quantifier   | Matches          | Example
+-------------|------------------|------------------
+*            | 0 or more        /a*/ matches "", "a", "aaa"
++            | 1 or more        /a+/ matches "a", "aaa" (not "")
+?            | 0 or 1           /a?/ matches "" or "a"
+{n}          | Exactly n        /a{3}/ matches "aaa"
+{n,}         | n or more        /a{2,}/ matches "aa", "aaa"
+{n,m}        | n to m           /a{2,4}/ matches "aa", "aaa", "aaaa"
+*?           | Lazy 0 or more   /a*?/ matches minimal
++?           | Lazy 1 or more   /a+?/ matches minimal
+??           | Lazy 0 or 1      /a??/ matches minimal
+
+Greedy vs Lazy:
+  Greedy (default): Match as much as possible
+  Lazy (? suffix): Match as little as possible
+
+Example:
+  Input: "&lt;div&gt;content&lt;/div&gt;"
+  Greedy:  /&lt;.*&gt;/ matches "&lt;div&gt;content&lt;/div&gt;"
+  Lazy:    /&lt;.*?&gt;/ matches "&lt;div&gt;" then "&lt;/div&gt;"
+</pre>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Test with edge cases:</strong> Include empty strings, special characters, and unexpected input formats.</li>
+  <li><strong>Use specific patterns:</strong> More specific patterns are faster and less error-prone.</li>
+  <li><strong>Escape special characters:</strong> Remember to escape . * + ? ^ $ { } ( ) | [ ] \ when matching literally.</li>
+  <li><strong>Consider performance:</strong> Complex patterns on large text can be slow; avoid catastrophic backtracking.</li>
+  <li><strong>Use non-capturing groups:</strong> Use (?:pattern) instead of (pattern) when you don't need the capture.</li>
+  <li><strong>Anchor when possible:</strong> Use ^ and $ to anchor patterns for better performance.</li>
+  <li><strong>Comment complex regex:</strong> Use the x flag (in some languages) or add comments explaining patterns.</li>
+</ul>
+
+<h4>Common Mistakes</h4>
+<ul>
+  <li><strong>Forgetting to escape:</strong> Using . when you mean literal dot (matches any char instead).</li>
+  <li><strong>Greedy matching issues:</strong> Using .* when you need .*? for non-greedy matching.</li>
+  <li><strong>Missing global flag:</strong> Only first match replaced when all matches needed.</li>
+  <li><strong>Wrong character classes:</strong> Using \w when you need [a-zA-Z] (underscore included in \w).</li>
+  <li><strong>Catastrophic backtracking:</strong> Nested quantifiers like (a+)+ can cause exponential time.</li>
+  <li><strong>Assuming multiline by default:</strong> ^ and $ match string boundaries, not line boundaries without m flag.</li>
+  <li><strong>Over-matching:</strong> Using .* which can match more than intended across line boundaries.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Regex Replace Tester?</dt>
-  <dd>Regex Replace Tester is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What are regular expressions and how do they work?</dt>
+  <dd>Regular expressions (regex) are patterns that describe text for searching and manipulation. They consist of literal characters and metacharacters with special meanings. The regex engine matches patterns against input text, finding occurrences for replacement or extraction.</dd>
+
+  <dt>What do the regex flags mean?</dt>
+  <dd>Common flags: g (global) - replace all matches, not just first; i (ignoreCase) - case-insensitive matching; m (multiline) - ^ and $ match line boundaries; s (dotAll) - dot matches newlines; u (unicode) - Unicode-aware matching; y (sticky) - match at position only.</dd>
+
+  <dt>How do replacement patterns work?</dt>
+  <dd>Replacement patterns can include literal text and special sequences: $1, $2, etc. for capture groups; $& for entire match; $` for before match; $' for after match; $$ for literal dollar sign. Named groups use $<name> syntax.</dd>
+
+  <dt>What are common regex metacharacters?</dt>
+  <dd>Common metacharacters: . (any char), * (0+ times), + (1+ times), ? (0 or 1 time), ^ (start), $ (end), [] (character class), () (capture group), | (alternation), {} (quantifier), \ (escape). These form the building blocks of regex patterns.</dd>
+
+  <dt>How do I escape special characters in regex?</dt>
+  <dd>To match literal special characters, escape them with backslash: \., \*, \+, \?, \[, \], \(\), \{\}, \|, \\. For example, to match 'example.com' literally, use 'example\.com' since unescaped dot matches any character.</dd>
+
+  <dt>What are capture groups and how do I use them?</dt>
+  <dd>Capture groups (parentheses) extract matched text for reuse. Group 1 is $1, group 2 is $2, etc. Named groups use (?&lt;name&gt;pattern) syntax and $&lt;name&gt; in replacement. Example: /(\w+), (\w+)/ replaced with '$2 $1' swaps 'Doe, John' to 'John Doe'.</dd>
 </dl>
 </section>
 </main>
 <script>
 function runReplace(){
 try{
-let pattern=document.getElementById("pattern").value
-let flags=document.getElementById("flags").value
-let replacement=document.getElementById("replacement").value
-let input=document.getElementById("input-text").value
-let regex=new RegExp(pattern,flags)
-let output=input.replace(regex,replacement)
-document.getElementById("output").value=output
-document.getElementById("status").innerText="Replacement complete."
-document.getElementById("status").style.color="#16a34a"
+let pattern=document.getElementById("pattern").value;
+let flags=document.getElementById("flags").value;
+let replacement=document.getElementById("replacement").value;
+let input=document.getElementById("input-text").value;
+let regex=new RegExp(pattern,flags);
+let output=input.replace(regex,replacement);
+document.getElementById("output").value=output;
+document.getElementById("status").innerText="Replacement complete.";
+document.getElementById("status").style.color="#16a34a";
 }catch(e){
-document.getElementById("output").value=""
-document.getElementById("status").innerText="Invalid pattern or flags."
-document.getElementById("status").style.color="#b91c1c"
+document.getElementById("output").value="";
+document.getElementById("status").innerText="Invalid pattern or flags.";
+document.getElementById("status").style.color="#b91c1c";
 }
 }
 function copyOutput(){
-let value=document.getElementById("output").value.trim()
+let value=document.getElementById("output").value.trim();
 if(!value){
-document.getElementById("status").innerText="Nothing to copy."
-document.getElementById("status").style.color="#b91c1c"
-return
+document.getElementById("status").innerText="Nothing to copy.";
+document.getElementById("status").style.color="#b91c1c";
+return;
 }
 navigator.clipboard.writeText(value).then(function(){
-document.getElementById("status").innerText="Output copied."
-document.getElementById("status").style.color="#16a34a"
+document.getElementById("status").innerText="Output copied.";
+document.getElementById("status").style.color="#16a34a";
 }).catch(function(){
-document.getElementById("status").innerText="Copy failed."
-document.getElementById("status").style.color="#b91c1c"
-})
+document.getElementById("status").innerText="Copy failed.";
+document.getElementById("status").style.color="#b91c1c";
+});
 }
 </script>
 <script src="/js/favorites.js"></script>

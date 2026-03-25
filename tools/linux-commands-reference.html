@@ -2,28 +2,30 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Linux Commands Reference – Common Linux Commands Cheat Sheet | ToolForge</title>
-<meta name="description" content="Free online Linux commands reference and cheat sheet. ls, cd, grep, find, chmod and more. Part of the ToolForge developer tools collection.">
+<title>Linux Commands Reference – Complete Bash Command Cheat Sheet | ToolForge</title>
+<meta name="description" content="Comprehensive Linux/Unix command reference with examples. File operations, text processing, permissions, processes, networking, and system administration. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/linux-commands-reference.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Linux Commands Reference – Common Linux Commands Cheat Sheet | ToolForge">
-<meta property="og:description" content="Free online Linux commands reference and cheat sheet. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Linux Commands Reference – Complete Bash Command Cheat Sheet | ToolForge">
+<meta property="og:description" content="Comprehensive Linux/Unix command reference with examples for file operations, text processing, permissions, and more.">
 <meta property="og:url" content="https://toolforge.site/tools/linux-commands-reference.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux Commands Reference – Common Linux Commands Cheat Sheet | ToolForge">
-<meta name="twitter:description" content="Free online Linux commands reference and cheat sheet. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Linux Commands Reference – Complete Bash Command Cheat Sheet | ToolForge">
+<meta name="twitter:description" content="Comprehensive Linux/Unix command reference with examples.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
-.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem}
+.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem;margin:16px 0}
 .ref-table th,.ref-table td{border:1px solid #eee;padding:8px 12px;text-align:left}
 .ref-table th{background:#f8fafc;font-weight:600}
-.ref-table code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:0.9em}
+.ref-table code{background:#1e1e1e;color:#f0f0f0;padding:2px 6px;border-radius:4px;font-size:0.9em}
 .ref-section{margin-top:24px}
-.ref-section h3{font-size:1rem;color:#475569;margin-bottom:8px}
-.ref-table input{width:100%;max-width:200px;padding:6px;border:1px solid #ddd;border-radius:4px}
+.ref-section h3{font-size:1.1rem;color:#475569;margin-bottom:12px}
+.filter-box{margin-bottom:16px}
+.category-header{background:#e7f3ff;padding:10px 12px;font-weight:600;border-radius:6px;margin:20px 0 10px}
+.example-box{background:#f5f5f5;padding:12px;border-radius:8px;margin:12px 0}
 </style>
 
 <script type="application/ld+json">
@@ -33,45 +35,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Linux Commands Reference used for?",
+      "name": "What is the purpose of the ls command?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Linux Commands Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "The ls command lists directory contents. Common options: -l (long format with permissions), -a (show hidden files starting with .), -la (combine both), -lh (human-readable sizes), -R (recursive), -t (sort by time), -S (sort by size)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I find files in Linux?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Use the find command: 'find /path -name filename' searches by name, 'find . -type f' finds all files, 'find . -type d' finds directories, 'find . -mtime -7' finds files modified in last 7 days, 'find . -size +100M' finds files larger than 100MB."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What is the difference between chmod and chown?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "chmod changes file permissions (read/write/execute), chown changes file ownership (user/group). Example: 'chmod 755 file' sets rwxr-xr-x permissions, 'chown user:group file' transfers ownership to specified user and group."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I view and search file contents?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "cat displays entire file, head shows first N lines, tail shows last N lines, less allows scrolling, grep searches for patterns. Example: 'grep -r pattern .' searches recursively, 'tail -f logfile' follows log updates."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What are pipes and redirection?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Pipes (|) pass output from one command to another: 'ls | grep txt'. Redirection: > overwrites output to file, >> appends, 2> redirects errors, < reads from file. Example: 'command > file 2>&1' redirects both stdout and stderr."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How do I manage processes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "ps aux lists processes, top/htop shows live process view, kill PID terminates process, kill -9 PID force kills, pkill name kills by name, bg/fg manage background/foreground jobs, nohup runs commands immune to hangups."
       }
     }
   ]
@@ -81,111 +88,377 @@
 <body>
 <main class="container">
 <h1>Linux Commands Reference</h1>
-<p class="subtitle">Quick reference for common Linux and Unix commands.</p>
+<p class="subtitle">Comprehensive reference for common Linux and Unix commands with examples.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
+<div class="filter-box">
 <label for="filter" class="sr-only">Filter</label>
-<input id="filter" placeholder="Search commands" style="width:100%;max-width:400px;padding:10px;margin-bottom:16px;border:1px solid #ddd;border-radius:6px" aria-label="Filter">
-
-<div class="ref-section">
-<h3>File & Directory</h3>
-<table class="ref-table">
-<thead><tr><th>Command</th><th>Description</th></tr></thead>
-<tbody>
-<tr><td><code>ls</code></td><td>List directory contents</td></tr>
-<tr><td><code>ls -la</code></td><td>List with details (hidden files)</td></tr>
-<tr><td><code>cd &lt;dir&gt;</code></td><td>Change directory</td></tr>
-<tr><td><code>pwd</code></td><td>Print working directory</td></tr>
-<tr><td><code>mkdir &lt;name&gt;</code></td><td>Create directory</td></tr>
-<tr><td><code>rm &lt;file&gt;</code></td><td>Remove file</td></tr>
-<tr><td><code>rm -r &lt;dir&gt;</code></td><td>Remove directory recursively</td></tr>
-<tr><td><code>cp src dest</code></td><td>Copy file or directory</td></tr>
-<tr><td><code>mv src dest</code></td><td>Move or rename</td></tr>
-<tr><td><code>cat &lt;file&gt;</code></td><td>Print file contents</td></tr>
-<tr><td><code>head -n N &lt;file&gt;</code></td><td>First N lines</td></tr>
-<tr><td><code>tail -n N &lt;file&gt;</code></td><td>Last N lines</td></tr>
-</tbody>
-</table>
+<input id="filter" placeholder="Search commands..." style="width:100%;max-width:500px;padding:10px;border:1px solid #ddd;border-radius:6px;font-size:14px" aria-label="Filter">
 </div>
 
-<div class="ref-section">
-<h3>Search & Find</h3>
-<table class="ref-table">
-<thead><tr><th>Command</th><th>Description</th></tr></thead>
-<tbody>
-<tr><td><code>find . -name "*.txt"</code></td><td>Find files by name</td></tr>
-<tr><td><code>grep "pattern" file</code></td><td>Search text in file</td></tr>
-<tr><td><code>grep -r "pattern" .</code></td><td>Recursive grep</td></tr>
-<tr><td><code>which &lt;cmd&gt;</code></td><td>Show command path</td></tr>
-<tr><td><code>locate &lt;name&gt;</code></td><td>Find by name (indexed)</td></tr>
-</tbody>
-</table>
-</div>
-
-<div class="ref-section">
-<h3>Permissions & Process</h3>
-<table class="ref-table">
-<thead><tr><th>Command</th><th>Description</th></tr></thead>
-<tbody>
-<tr><td><code>chmod 755 file</code></td><td>Change permissions</td></tr>
-<tr><td><code>chown user:group file</code></td><td>Change owner</td></tr>
-<tr><td><code>ps aux</code></td><td>List processes</td></tr>
-<tr><td><code>kill &lt;pid&gt;</code></td><td>Terminate process</td></tr>
-<tr><td><code>kill -9 &lt;pid&gt;</code></td><td>Force kill</td></tr>
-</tbody>
-</table>
-</div>
-
-<div class="ref-section">
-<h3>System & Network</h3>
-<table class="ref-table">
-<thead><tr><th>Command</th><th>Description</th></tr></thead>
-<tbody>
-<tr><td><code>df -h</code></td><td>Disk space</td></tr>
-<tr><td><code>du -sh *</code></td><td>Directory sizes</td></tr>
-<tr><td><code>free -h</code></td><td>Memory usage</td></tr>
-<tr><td><code>curl &lt;url&gt;</code></td><td>HTTP request</td></tr>
-<tr><td><code>wget &lt;url&gt;</code></td><td>Download file</td></tr>
-<tr><td><code>ssh user@host</code></td><td>SSH connect</td></tr>
-<tr><td><code>scp file user@host:path</code></td><td>Copy over SSH</td></tr>
-</tbody>
-</table>
-</div>
+<div id="commands-content"></div>
 
 <section class="tool-seo">
 <h3>About Linux Commands Reference</h3>
-<p>This reference lists common Linux and Unix commands for file operations, search, permissions and system tasks.</p>
-<p>It is useful as a quick reminder when working in the terminal or writing shell scripts.</p>
+<p>This reference provides a comprehensive list of essential Linux and Unix commands for file operations, text processing, system administration, and scripting. Commands work across most distributions including Ubuntu, Debian, CentOS, RHEL, Fedora, and macOS.</p>
+
+<h4>Command Syntax Conventions</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Syntax Notation:
+  command &lt;arg&gt;      - Required argument
+  command [arg]      - Optional argument
+  command [options]  - Optional flags
+  file1|file2        - Either file1 or file2
+  ...                - Repeatable argument
+
+Examples:
+  ls -la /home       - List with details in /home
+  cat file.txt       - Display file contents
+  grep "pattern" *   - Search pattern in all files
+</pre>
+
+<h4>Essential Commands by Category</h4>
+
+<h5>File & Directory Operations</h5>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><code>ls</code></td><td>List directory contents</td><td><code>ls -la</code></td></tr>
+<tr><td><code>ls -la</code></td><td>List all files with details</td><td><code>ls -la /etc</code></td></tr>
+<tr><td><code>cd &lt;dir&gt;</code></td><td>Change directory</td><td><code>cd /var/log</code></td></tr>
+<tr><td><code>pwd</code></td><td>Print working directory</td><td><code>pwd</code></td></tr>
+<tr><td><code>mkdir &lt;name&gt;</code></td><td>Create directory</td><td><code>mkdir -p project/src</code></td></tr>
+<tr><td><code>rm &lt;file&gt;</code></td><td>Remove file</td><td><code>rm -rf temp/</code></td></tr>
+<tr><td><code>cp &lt;src&gt; &lt;dest&gt;</code></td><td>Copy files</td><td><code>cp -r dir1 dir2</code></td></tr>
+<tr><td><code>mv &lt;src&gt; &lt;dest&gt;</code></td><td>Move/rename files</td><td><code>mv old.txt new.txt</code></td></tr>
+<tr><td><code>touch &lt;file&gt;</code></td><td>Create empty file/update timestamp</td><td><code>touch file.txt</code></td></tr>
+<tr><td><code>ln -s &lt;src&gt; &lt;link&gt;</code></td><td>Create symbolic link</td><td><code>ln -s /path/to/target link</code></td></tr>
+<tr><td><code>cat &lt;file&gt;</code></td><td>Display file contents</td><td><code>cat file.txt</code></td></tr>
+<tr><td><code>head -n N &lt;file&gt;</code></td><td>First N lines</td><td><code>head -20 logfile.log</code></td></tr>
+<tr><td><code>tail -n N &lt;file&gt;</code></td><td>Last N lines</td><td><code>tail -f logfile.log</code></td></tr>
+<tr><td><code>less &lt;file&gt;</code></td><td>View file (scrollable)</td><td><code>less largefile.txt</code></td></tr>
+<tr><td><code>wc -l &lt;file&gt;</code></td><td>Count lines</td><td><code>wc -l file.txt</code></td></tr>
+</tbody>
+</table>
+
+<h5>Search & Find</h5>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><code>find &lt;path&gt; -name &lt;pattern&gt;</code></td><td>Find files by name</td><td><code>find . -name "*.log"</code></td></tr>
+<tr><td><code>find . -type f</code></td><td>Find all files</td><td><code>find /var -type f</code></td></tr>
+<tr><td><code>find . -type d</code></td><td>Find all directories</td><td><code>find . -type d -name "src"</code></td></tr>
+<tr><td><code>find . -mtime -N</code></td><td>Files modified N days ago</td><td><code>find . -mtime -7</code></td></tr>
+<tr><td><code>find . -size +N[M|G]</code></td><td>Files larger than N</td><td><code>find . -size +100M</code></td></tr>
+<tr><td><code>grep &lt;pattern&gt; &lt;file&gt;</code></td><td>Search text in file</td><td><code>grep "error" logfile</code></td></tr>
+<tr><td><code>grep -r &lt;pattern&gt; .</code></td><td>Recursive search</td><td><code>grep -r "TODO" .</code></td></tr>
+<tr><td><code>grep -i &lt;pattern&gt;</code></td><td>Case-insensitive search</td><td><code>grep -i "error"</code></td></tr>
+<tr><td><code>grep -v &lt;pattern&gt;</code></td><td>Inverse match (exclude)</td><td><code>grep -v "^#" config</code></td></tr>
+<tr><td><code>grep -n &lt;pattern&gt;</code></td><td>Show line numbers</td><td><code>grep -n "main" *.c</code></td></tr>
+<tr><td><code>which &lt;command&gt;</code></td><td>Show command path</td><td><code>which python3</code></td></tr>
+<tr><td><code>whereis &lt;command&gt;</code></td><td>Find binary/source/man</td><td><code>whereis gcc</code></td></tr>
+<tr><td><code>locate &lt;name&gt;</code></td><td>Find by name (indexed)</td><td><code>locate httpd.conf</code></td></tr>
+</tbody>
+</table>
+
+<h5>Permissions & Ownership</h5>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><code>chmod &lt;mode&gt; &lt;file&gt;</code></td><td>Change permissions</td><td><code>chmod 755 script.sh</code></td></tr>
+<tr><td><code>chmod +x &lt;file&gt;</code></td><td>Add execute permission</td><td><code>chmod +x install.sh</code></td></tr>
+<tr><td><code>chown &lt;user&gt;:&lt;group&gt; &lt;file&gt;</code></td><td>Change ownership</td><td><code>chown www-data:www-data site/</code></td></tr>
+<tr><td><code>chgrp &lt;group&gt; &lt;file&gt;</code></td><td>Change group</td><td><code>chgrp developers project/</code></td></tr>
+<tr><td><code>umask &lt;value&gt;</code></td><td>Set default permissions</td><td><code>umask 022</code></td></tr>
+<tr><td><code>ls -la</code></td><td>View permissions</td><td><code>ls -la file.txt</code></td></tr>
+</tbody>
+</table>
+
+<h5>Process Management</h5>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><code>ps aux</code></td><td>List all processes</td><td><code>ps aux | grep nginx</code></td></tr>
+<tr><td><code>top</code></td><td>Live process view</td><td><code>top</code></td></tr>
+<tr><td><code>htop</code></td><td>Interactive process viewer</td><td><code>htop</code></td></tr>
+<tr><td><code>kill &lt;PID&gt;</code></td><td>Terminate process</td><td><code>kill 1234</code></td></tr>
+<tr><td><code>kill -9 &lt;PID&gt;</code></td><td>Force kill</td><td><code>kill -9 1234</code></td></tr>
+<tr><td><code>killall &lt;name&gt;</code></td><td>Kill by name</td><td><code>killall chrome</code></td></tr>
+<tr><td><code>pkill &lt;pattern&gt;</code></td><td>Kill by pattern</td><td><code>pkill -f python3</code></td></tr>
+<tr><td><code>pgrep &lt;name&gt;</code></td><td>Find PID by name</td><td><code>pgrep nginx</code></td></tr>
+<tr><td><code>nohup &lt;cmd&gt;</code></td><td>Run immune to hangups</td><td><code>nohup server.sh &</code></td></tr>
+<tr><td><code>bg</code></td><td>Resume job in background</td><td><code>bg %1</code></td></tr>
+<tr><td><code>fg</code></td><td>Bring job to foreground</td><td><code>fg %1</code></td></tr>
+<tr><td><code>jobs</code></td><td>List background jobs</td><td><code>jobs -l</code></td></tr>
+</tbody>
+</table>
+
+<h5>System Information</h5>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><code>uname -a</code></td><td>System information</td><td><code>uname -a</code></td></tr>
+<tr><td><code>hostname</code></td><td>Show/set hostname</td><td><code>hostname -I</code></td></tr>
+<tr><td><code>uptime</code></td><td>System uptime</td><td><code>uptime</code></td></tr>
+<tr><td><code>whoami</code></td><td>Current user</td><td><code>whoami</code></td></tr>
+<tr><td><code>id</code></td><td>User/group IDs</td><td><code>id</code></td></tr>
+<tr><td><code>w</code></td><td>Logged in users</td><td><code>w</code></td></tr>
+<tr><td><code>last</code></td><td>Login history</td><td><code>last -10</code></td></tr>
+<tr><td><code>df -h</code></td><td>Disk space (human-readable)</td><td><code>df -h</code></td></tr>
+<tr><td><code>du -sh &lt;dir&gt;</code></td><td>Directory size</td><td><code>du -sh /var/log</code></td></tr>
+<tr><td><code>free -h</code></td><td>Memory usage</td><td><code>free -h</code></td></tr>
+<tr><td><code>vmstat</code></td><td>Virtual memory stats</td><td><code>vmstat 1 5</code></td></tr>
+<tr><td><code>iostat</code></td><td>I/O statistics</td><td><code>iostat -x 1</code></td></tr>
+</tbody>
+</table>
+
+<h5>Network Commands</h5>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><code>ping &lt;host&gt;</code></td><td>Test connectivity</td><td><code>ping -c 4 google.com</code></td></tr>
+<tr><td><code>curl &lt;url&gt;</code></td><td>Transfer data</td><td><code>curl -O https://example.com/file</code></td></tr>
+<tr><td><code>wget &lt;url&gt;</code></td><td>Download file</td><td><code>wget -O file.zip URL</code></td></tr>
+<tr><td><code>ssh &lt;user&gt;@&lt;host&gt;</code></td><td>SSH connection</td><td><code>ssh user@server.com</code></td></tr>
+<tr><td><code>scp &lt;src&gt; &lt;dest&gt;</code></td><td>Secure copy</td><td><code>scp file.txt user@host:/path</code></td></tr>
+<tr><td><code>rsync -av &lt;src&gt; &lt;dest&gt;</code></td><td>Sync files</td><td><code>rsync -av src/ dest/</code></td></tr>
+<tr><td><code>netstat -tulpn</code></td><td>Network connections</td><td><code>netstat -tulpn | grep :80</code></td></tr>
+<tr><td><code>ss -tulpn</code></td><td>Socket statistics</td><td><code>ss -tulpn</code></td></tr>
+<tr><td><code>ip addr</code></td><td>IP addresses</td><td><code>ip addr show</code></td></tr>
+<tr><td><code>ip route</code></td><td>Routing table</td><td><code>ip route show</code></td></tr>
+<tr><td><code>dig &lt;domain&gt;</code></td><td>DNS lookup</td><td><code>dig example.com</code></td></tr>
+<tr><td><code>nslookup &lt;domain&gt;</code></td><td>DNS query</td><td><code>nslookup google.com</code></td></tr>
+<tr><td><code>traceroute &lt;host&gt;</code></td><td>Trace route</td><td><code>traceroute google.com</code></td></tr>
+</tbody>
+</table>
+
+<h5>Text Processing</h5>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><code>sort &lt;file&gt;</code></td><td>Sort lines</td><td><code>sort -n numbers.txt</code></td></tr>
+<tr><td><code>uniq &lt;file&gt;</code></td><td>Remove duplicates</td><td><code>sort file | uniq</code></td></tr>
+<tr><td><code>cut -d : -f 1</code></td><td>Extract fields</td><td><code>cut -d: -f1 /etc/passwd</code></td></tr>
+<tr><td><code>paste &lt;file1&gt; &lt;file2&gt;</code></td><td>Merge lines</td><td><code>paste file1 file2</code></td></tr>
+<tr><td><code>tr &lt;set1&gt; &lt;set2&gt;</code></td><td>Translate characters</td><td><code>tr 'a-z' 'A-Z'</code></td></tr>
+<tr><td><code>sed 's/old/new/'</code></td><td>Stream editor</td><td><code>sed -i 's/foo/bar/g' file</code></td></tr>
+<tr><td><code>awk '{print $1}'</code></td><td>Pattern scanning</td><td><code>awk '{sum+=$1} END {print sum}'</code></td></tr>
+<tr><td><code>diff &lt;file1&gt; &lt;file2&gt;</code></td><td>Compare files</td><td><code>diff -u old.txt new.txt</code></td></tr>
+<tr><td><code>comm &lt;file1&gt; &lt;file2&gt;</code></td><td>Compare sorted files</td><td><code>comm -12 file1 file2</code></td></tr>
+</tbody>
+</table>
+
+<h5>Archive & Compression</h5>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><code>tar -czf &lt;out.tar.gz&gt; &lt;files&gt;</code></td><td>Create gzip archive</td><td><code>tar -czf backup.tar.gz /data</code></td></tr>
+<tr><td><code>tar -xzf &lt;file.tar.gz&gt;</code></td><td>Extract gzip archive</td><td><code>tar -xzf archive.tar.gz</code></td></tr>
+<tr><td><code>tar -cjf &lt;out.tar.bz2&gt;</code></td><td>Create bzip2 archive</td><td><code>tar -cjf backup.tar.bz2 /data</code></td></tr>
+<tr><td><code>gzip &lt;file&gt;</code></td><td>Compress file</td><td><code>gzip -9 file.txt</code></td></tr>
+<tr><td><code>gunzip &lt;file.gz&gt;</code></td><td>Decompress file</td><td><code>gunzip file.gz</code></td></tr>
+<tr><td><code>zip -r &lt;out.zip&gt; &lt;files&gt;</code></td><td>Create ZIP archive</td><td><code>zip -r archive.zip folder/</code></td></tr>
+<tr><td><code>unzip &lt;file.zip&gt;</code></td><td>Extract ZIP</td><td><code>unzip archive.zip</code></td></tr>
+</tbody>
+</table>
+
+<h5>Package Management</h5>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><code>apt update</code></td><td>Update package list (Debian/Ubuntu)</td><td><code>apt update && apt upgrade</code></td></tr>
+<tr><td><code>apt install &lt;pkg&gt;</code></td><td>Install package</td><td><code>apt install nginx</code></td></tr>
+<tr><td><code>apt remove &lt;pkg&gt;</code></td><td>Remove package</td><td><code>apt remove nginx</code></td></tr>
+<tr><td><code>yum install &lt;pkg&gt;</code></td><td>Install package (RHEL/CentOS)</td><td><code>yum install httpd</code></td></tr>
+<tr><td><code>dnf install &lt;pkg&gt;</code></td><td>Install package (Fedora)</td><td><code>dnf install nginx</code></td></tr>
+<tr><td><code>brew install &lt;pkg&gt;</code></td><td>Install package (macOS/Homebrew)</td><td><code>brew install node</code></td></tr>
+<tr><td><code>pip install &lt;pkg&gt;</code></td><td>Install Python package</td><td><code>pip install requests</code></td></tr>
+<tr><td><code>npm install &lt;pkg&gt;</code></td><td>Install Node package</td><td><code>npm install express</code></td></tr>
+</tbody>
+</table>
+
+<h5>User Management</h5>
+<table class="ref-table">
+<thead><tr><th>Command</th><th>Description</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><code>useradd &lt;name&gt;</code></td><td>Create user</td><td><code>useradd -m john</code></td></tr>
+<tr><td><code>userdel &lt;name&gt;</code></td><td>Delete user</td><td><code>userdel -r john</code></td></tr>
+<tr><td><code>passwd &lt;name&gt;</code></td><td>Change password</td><td><code>passwd john</code></td></tr>
+<tr><td><code>usermod -aG &lt;grp&gt; &lt;usr&gt;</code></td><td>Add user to group</td><td><code>usermod -aG sudo john</code></td></tr>
+<tr><td><code>groupadd &lt;name&gt;</code></td><td>Create group</td><td><code>groupadd developers</code></td></tr>
+<tr><td><code>groups &lt;name&gt;</code></td><td>Show user groups</td><td><code>groups john</code></td></tr>
+<tr><td><code>su - &lt;user&gt;</code></td><td>Switch user</td><td><code>su - postgres</code></td></tr>
+<tr><td><code>sudo &lt;cmd&gt;</code></td><td>Execute as root</td><td><code>sudo systemctl restart nginx</code></td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Linux Commands Reference used for?</dt>
-  <dd>Linux Commands Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is the purpose of the ls command?</dt>
+  <dd>The ls command lists directory contents. Common options: -l (long format with permissions), -a (show hidden files starting with .), -la (combine both), -lh (human-readable sizes), -R (recursive), -t (sort by time), -S (sort by size).</dd>
+
+  <dt>How do I find files in Linux?</dt>
+  <dd>Use the find command: 'find /path -name filename' searches by name, 'find . -type f' finds all files, 'find . -type d' finds directories, 'find . -mtime -7' finds files modified in last 7 days, 'find . -size +100M' finds files larger than 100MB.</dd>
+
+  <dt>What is the difference between chmod and chown?</dt>
+  <dd>chmod changes file permissions (read/write/execute), chown changes file ownership (user/group). Example: 'chmod 755 file' sets rwxr-xr-x permissions, 'chown user:group file' transfers ownership to specified user and group.</dd>
+
+  <dt>How do I view and search file contents?</dt>
+  <dd>cat displays entire file, head shows first N lines, tail shows last N lines, less allows scrolling, grep searches for patterns. Example: 'grep -r pattern .' searches recursively, 'tail -f logfile' follows log updates.</dd>
+
+  <dt>What are pipes and redirection?</dt>
+  <dd>Pipes (|) pass output from one command to another: 'ls | grep txt'. Redirection: > overwrites output to file, >> appends, 2> redirects errors, < reads from file. Example: 'command > file 2>&1' redirects both stdout and stderr.</dd>
+
+  <dt>How do I manage processes?</dt>
+  <dd>ps aux lists processes, top/htop shows live process view, kill PID terminates process, kill -9 PID force kills, pkill name kills by name, bg/fg manage background/foreground jobs, nohup runs commands immune to hangups.</dd>
 </dl>
 </section>
 </main>
 <script>
-var rows=document.querySelectorAll(".ref-table tbody tr")
-var filter=document.getElementById("filter")
-filter.addEventListener("input",function(){
-var q=(filter.value||"").toLowerCase().trim()
-rows.forEach(function(tr){
-var text=(tr.textContent||"").toLowerCase()
-tr.style.display=(!q||text.indexOf(q)!==-1)?"":"none"
-})
-})
+var commands=[
+{category:"File & Directory",items:[
+["ls","List directory contents","ls -la"],
+["cd <dir>","Change directory","cd /var/log"],
+["pwd","Print working directory","pwd"],
+["mkdir <name>","Create directory","mkdir -p project/src"],
+["rm <file>","Remove file","rm -rf temp/"],
+["cp <src> <dest>","Copy files","cp -r dir1 dir2"],
+["mv <src> <dest>","Move/rename","mv old.txt new.txt"],
+["touch <file>","Create file/update timestamp","touch file.txt"],
+["ln -s <src> <link>","Create symbolic link","ln -s /path link"],
+["cat <file>","Display file contents","cat file.txt"],
+["head -n N","First N lines","head -20 logfile"],
+["tail -n N","Last N lines","tail -f logfile"],
+["less <file>","View file (scrollable)","less largefile.txt"],
+["wc -l","Count lines","wc -l file.txt"]
+]},
+{category:"Search & Find",items:[
+["find <path> -name","Find by name","find . -name '*.log'"],
+["find . -type f","Find all files","find /var -type f"],
+["find . -type d","Find directories","find . -type d"],
+["find . -mtime -N","Modified N days ago","find . -mtime -7"],
+["find . -size +N[M|G]","Files larger than N","find . -size +100M"],
+["grep <pattern>","Search in file","grep 'error' logfile"],
+["grep -r <pattern>","Recursive search","grep -r 'TODO' ."],
+["grep -i","Case insensitive","grep -i 'error'"],
+["grep -v","Inverse match","grep -v '^#' config"],
+["which <cmd>","Show command path","which python3"],
+["whereis <cmd>","Find binary/source","whereis gcc"],
+["locate <name>","Find by name (indexed)","locate httpd.conf"]
+]},
+{category:"Permissions",items:[
+["chmod <mode>","Change permissions","chmod 755 script.sh"],
+["chmod +x","Add execute permission","chmod +x install.sh"],
+["chown user:group","Change ownership","chown www-data:www-data site/"],
+["chgrp <group>","Change group","chgrp developers project/"],
+["umask <value>","Set default permissions","umask 022"]
+]},
+{category:"Process Management",items:[
+["ps aux","List all processes","ps aux | grep nginx"],
+["top","Live process view","top"],
+["htop","Interactive process viewer","htop"],
+["kill <PID>","Terminate process","kill 1234"],
+["kill -9 <PID>","Force kill","kill -9 1234"],
+["killall <name>","Kill by name","killall chrome"],
+["pkill <pattern>","Kill by pattern","pkill -f python3"],
+["pgrep <name>","Find PID by name","pgrep nginx"],
+["nohup <cmd>","Run immune to hangups","nohup server.sh &"],
+["bg","Resume in background","bg %1"],
+["fg","Bring to foreground","fg %1"],
+["jobs","List background jobs","jobs -l"]
+]},
+{category:"System Info",items:[
+["uname -a","System information","uname -a"],
+["hostname","Show hostname","hostname -I"],
+["uptime","System uptime","uptime"],
+["whoami","Current user","whoami"],
+["id","User/group IDs","id"],
+["df -h","Disk space (human-readable)","df -h"],
+["du -sh <dir>","Directory size","du -sh /var/log"],
+["free -h","Memory usage","free -h"],
+["vmstat","Virtual memory stats","vmstat 1 5"]
+]},
+{category:"Network",items:[
+["ping <host>","Test connectivity","ping -c 4 google.com"],
+["curl <url>","Transfer data","curl -O URL"],
+["wget <url>","Download file","wget -O file.zip URL"],
+["ssh user@host","SSH connection","ssh user@server.com"],
+["scp <src> <dest>","Secure copy","scp file.txt user@host:/path"],
+["rsync -av","Sync files","rsync -av src/ dest/"],
+["netstat -tulpn","Network connections","netstat -tulpn"],
+["ss -tulpn","Socket statistics","ss -tulpn"],
+["ip addr","IP addresses","ip addr show"],
+["dig <domain>","DNS lookup","dig example.com"],
+["traceroute <host>","Trace route","traceroute google.com"]
+]},
+{category:"Text Processing",items:[
+["sort","Sort lines","sort -n numbers.txt"],
+["uniq","Remove duplicates","sort file | uniq"],
+["cut -d : -f 1","Extract fields","cut -d: -f1 /etc/passwd"],
+["tr <set1> <set2>","Translate characters","tr 'a-z' 'A-Z'"],
+["sed 's/old/new/'","Stream editor","sed -i 's/foo/bar/g' file"],
+["awk '{print $1}'","Pattern scanning","awk '{sum+=$1} END {print sum}'"],
+["diff <file1> <file2>","Compare files","diff -u old.txt new.txt"]
+]},
+{category:"Archive & Compression",items:[
+["tar -czf","Create gzip archive","tar -czf backup.tar.gz /data"],
+["tar -xzf","Extract gzip archive","tar -xzf archive.tar.gz"],
+["tar -cjf","Create bzip2 archive","tar -cjf backup.tar.bz2"],
+["gzip <file>","Compress file","gzip -9 file.txt"],
+["gunzip <file.gz>","Decompress file","gunzip file.gz"],
+["zip -r <out> <files>","Create ZIP","zip -r archive.zip folder/"],
+["unzip <file.zip>","Extract ZIP","unzip archive.zip"]
+]},
+{category:"Package Management",items:[
+["apt update","Update packages (Debian/Ubuntu)","apt update && apt upgrade"],
+["apt install <pkg>","Install package","apt install nginx"],
+["yum install <pkg>","Install package (RHEL/CentOS)","yum install httpd"],
+["dnf install <pkg>","Install package (Fedora)","dnf install nginx"],
+["brew install <pkg>","Install package (macOS)","brew install node"],
+["pip install <pkg>","Install Python package","pip install requests"],
+["npm install <pkg>","Install Node package","npm install express"]
+]},
+{category:"User Management",items:[
+["useradd <name>","Create user","useradd -m john"],
+["userdel <name>","Delete user","userdel -r john"],
+["passwd <name>","Change password","passwd john"],
+["usermod -aG <grp> <usr>","Add user to group","usermod -aG sudo john"],
+["groupadd <name>","Create group","groupadd developers"],
+["groups <name>","Show user groups","groups john"],
+["su - <user>","Switch user","su - postgres"],
+["sudo <cmd>","Execute as root","sudo systemctl restart nginx"]
+]}
+];
+function render(){
+var q=(document.getElementById("filter").value||"").toLowerCase().trim();
+var container=document.getElementById("commands-content");
+container.innerHTML="";
+commands.forEach(function(cat){
+var filtered=cat.items.filter(function(item){
+if(!q)return true;
+return item[0].toLowerCase().indexOf(q)>=0||item[1].toLowerCase().indexOf(q)>=0||item[2].toLowerCase().indexOf(q)>=0;
+});
+if(filtered.length===0)return;
+var section=document.createElement("div");
+section.innerHTML='<div class="category-header">'+cat.category+'</div>';
+var table=document.createElement("table");
+table.className="ref-table";
+table.innerHTML='<thead><tr><th>Command</th><th>Description</th><th>Example</th></tr></thead>';
+var tbody=document.createElement("tbody");
+filtered.forEach(function(item){
+var tr=document.createElement("tr");
+tr.innerHTML='<td><code>'+item[0]+'</code></td><td>'+item[1]+'</td><td><code>'+item[2]+'</code></td>';
+tbody.appendChild(tr);
+});
+table.appendChild(tbody);
+section.appendChild(table);
+container.appendChild(section);
+});
+}
+document.getElementById("filter").addEventListener("input",render);
+render();
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>

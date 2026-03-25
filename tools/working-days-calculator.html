@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Working Days Calculator – Count Business Days | ToolForge</title>
-<meta name="description" content="Free online Working Days Calculator to count business days between two dates, excluding weekends. Useful for deadlines, planning and schedules. Part of the ToolForge developer tools collection.">
+<title>Working Days Calculator – Count Business Days Between Dates | ToolForge</title>
+<meta name="description" content="Working Days Calculator counts business days between two dates, excluding weekends. Calculate working days for project planning, deadlines, and delivery estimates. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/working-days-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Working Days Calculator – Count Business Days | ToolForge">
-<meta property="og:description" content="Free online Working Days Calculator to count business days between two dates, excluding weekends. Useful for deadlines, planning and schedules.">
+<meta property="og:title" content="Working Days Calculator – Count Business Days Between Dates | ToolForge">
+<meta property="og:description" content="Working Days Calculator counts business days between two dates, excluding weekends. Calculate working days for project planning, deadlines, and delivery estimates. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/working-days-calculator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Working Days Calculator – Count Business Days | ToolForge">
-<meta name="twitter:description" content="Free online Working Days Calculator to count business days between two dates, excluding weekends. Useful for deadlines, planning and schedules.">
+<meta name="twitter:title" content="Working Days Calculator – Count Business Days Between Dates | ToolForge">
+<meta name="twitter:description" content="Working Days Calculator counts business days between two dates, excluding weekends. Calculate working days for project planning, deadlines, and delivery estimates. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Working Days Calculator?",
+      "name": "What is the difference between calendar days and business days?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Working Days Calculator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Calendar days include all days (Monday through Sunday). Business days (working days) typically refer to Monday through Friday, excluding weekends. For example, a 14-day calendar period might contain only 10 business days if it spans two weekends."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I calculate working days manually?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Count each day between the start and end dates, excluding Saturdays (day 6) and Sundays (day 0). In JavaScript, use getDay() where 0=Sunday and 6=Saturday. The formula iterates through each date and increments a counter only for weekdays (days 1-5)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Does this calculator include public holidays?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "This calculator excludes weekends only (Saturday and Sunday). Public holidays vary by country, region, and organization, so they are not automatically excluded. For accurate business day calculations, manually subtract known holidays from the result or use a calendar specific to your jurisdiction."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are common weekend conventions worldwide?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Most Western countries use Saturday-Sunday weekends. Middle Eastern countries may use Friday-Saturday (Islamic weekend) or Thursday-Friday. Israel uses Friday-Saturday (Jewish Sabbath). Some countries have historically used Sunday-only or no standard weekend. This tool assumes the common Saturday-Sunday weekend."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How is the working days calculation inclusive of start and end dates?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "This calculator includes both the start date and end date in the count. If you start on a Monday and end on the same Monday, that counts as 1 working day. If you span Monday to Friday, that's 5 working days (assuming no weekends in between)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "When should I use working days vs calendar days?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Use working days for project timelines, shipping estimates, contract deadlines, and business processes that operate on weekdays. Use calendar days for legal deadlines, subscription periods, warranty terms, and situations where weekends count toward the total."
       }
     }
   ]
@@ -86,25 +91,134 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Working Days Calculator</h3>
-<p>This working days calculator counts business days between two dates while skipping weekends, making it easier to estimate real work time.</p>
-<p>It is useful for project planning, delivery estimates, contract timelines and admin tasks where calendar days and business days are not the same thing.</p>
+<p>This working days calculator counts business days between two dates while excluding weekends (Saturday and Sunday). It provides both the working day count and total calendar days for complete date range information.</p>
+<p>It is useful for project planning, delivery estimates, contract timelines, shipping calculations, and any situation where you need to distinguish between calendar days and actual working days.</p>
+
+<h4>How Business Days Are Calculated</h4>
+<p>The calculator iterates through each day in the date range and counts only weekdays:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// JavaScript getDay() values:
+Sunday    = 0
+Monday    = 1  ✓ Working day
+Tuesday   = 2  ✓ Working day
+Wednesday = 3  ✓ Working day
+Thursday  = 4  ✓ Working day
+Friday    = 5  ✓ Working day
+Saturday  = 6  ✗ Weekend
+
+// Calculation logic:
+for each day from start to end:
+  if day is not 0 (Sunday) and not 6 (Saturday):
+    working_days++
+</pre>
+
+<h4>Calendar Days vs Working Days</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Measure</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Includes</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example (2 weeks)</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Calendar days</td>
+    <td style="border:1px solid #ddd;padding:8px">All days (Mon-Sun)</td>
+    <td style="border:1px solid #ddd;padding:8px">14 days</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Working days</td>
+    <td style="border:1px solid #ddd;padding:8px">Weekdays only (Mon-Fri)</td>
+    <td style="border:1px solid #ddd;padding:8px">10 days</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Business days + holidays</td>
+    <td style="border:1px solid #ddd;padding:8px">Weekdays minus public holidays</td>
+    <td style="border:1px solid #ddd;padding:8px">8-9 days (varies)</td>
+  </tr>
+</table>
+
+<h4>Weekend Conventions Worldwide</h4>
+<p>Different countries and cultures observe different weekend patterns:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Region</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Weekend Days</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">North America, Europe, Australia</td>
+    <td style="border:1px solid #ddd;padding:8px">Saturday, Sunday</td>
+    <td style="border:1px solid #ddd;padding:8px">Most common convention</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Middle East (many countries)</td>
+    <td style="border:1px solid #ddd;padding:8px">Friday, Saturday</td>
+    <td style="border:1px solid #ddd;padding:8px">Islamic weekend (Jumu'ah)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Israel</td>
+    <td style="border:1px solid #ddd;padding:8px">Friday, Saturday</td>
+    <td style="border:1px solid #ddd;padding:8px">Jewish Sabbath (Shabbat)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Iran, Afghanistan</td>
+    <td style="border:1px solid #ddd;padding:8px">Thursday, Friday</td>
+    <td style="border:1px solid #ddd;padding:8px">Traditional Islamic weekend</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Some Muslim countries</td>
+    <td style="border:1px solid #ddd;padding:8px">Friday only</td>
+    <td style="border:1px solid #ddd;padding:8px">Single day weekend</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Project management:</strong> Calculate realistic delivery dates excluding weekends</li>
+  <li><strong>Shipping estimates:</strong> Determine business days for delivery windows</li>
+  <li><strong>Contract deadlines:</strong> Specify working days for legal obligations</li>
+  <li><strong>Leave planning:</strong> Count working days in vacation periods</li>
+  <li><strong>SLA calculations:</strong> Measure response times in business days</li>
+  <li><strong>Payroll processing:</strong> Calculate working days for hourly or daily rates</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li>Does not automatically exclude public holidays (vary by country/region)</li>
+  <li>Assumes Saturday-Sunday weekend convention</li>
+  <li>Does not account for company-specific non-working days</li>
+  <li>Does not handle partial days or hours</li>
+</ul>
+
+<h4>Related Calculations</h4>
+<p>For more complex business date calculations, consider:</p>
+<ul>
+  <li><strong>Adding business days to a date:</strong> Start from a date and add N working days</li>
+  <li><strong>Holiday-aware calculations:</strong> Exclude country-specific public holidays</li>
+  <li><strong>Custom weekend patterns:</strong> Support for Friday-Saturday or other weekend types</li>
+  <li><strong>Time zone considerations:</strong> Handle dates across different time zones</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Working Days Calculator?</dt>
-  <dd>Working Days Calculator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the difference between calendar days and business days?</dt>
+  <dd>Calendar days include all days (Monday through Sunday). Business days (working days) typically refer to Monday through Friday, excluding weekends. For example, a 14-day calendar period might contain only 10 business days if it spans two weekends.</dd>
+
+  <dt>How do I calculate working days manually?</dt>
+  <dd>Count each day between the start and end dates, excluding Saturdays (day 6) and Sundays (day 0). In JavaScript, use getDay() where 0=Sunday and 6=Saturday. The formula iterates through each date and increments a counter only for weekdays (days 1-5).</dd>
+
+  <dt>Does this calculator include public holidays?</dt>
+  <dd>This calculator excludes weekends only (Saturday and Sunday). Public holidays vary by country, region, and organization, so they are not automatically excluded. For accurate business day calculations, manually subtract known holidays from the result or use a calendar specific to your jurisdiction.</dd>
+
+  <dt>What are common weekend conventions worldwide?</dt>
+  <dd>Most Western countries use Saturday-Sunday weekends. Middle Eastern countries may use Friday-Saturday (Islamic weekend) or Thursday-Friday. Israel uses Friday-Saturday (Jewish Sabbath). Some countries have historically used Sunday-only or no standard weekend. This tool assumes the common Saturday-Sunday weekend.</dd>
+
+  <dt>How is the working days calculation inclusive of start and end dates?</dt>
+  <dd>This calculator includes both the start date and end date in the count. If you start on a Monday and end on the same Monday, that counts as 1 working day. If you span Monday to Friday, that's 5 working days (assuming no weekends in between).</dd>
+
+  <dt>When should I use working days vs calendar days?</dt>
+  <dd>Use working days for project timelines, shipping estimates, contract deadlines, and business processes that operate on weekdays. Use calendar days for legal deadlines, subscription periods, warranty terms, and situations where weekends count toward the total.</dd>
 </dl>
 </section>
 </main>

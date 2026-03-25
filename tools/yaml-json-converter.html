@@ -3,27 +3,83 @@
 <head>
 
 <meta charset="UTF-8">
-<title>YAML to JSON Converter – Convert YAML and JSON Online | ToolForge</title>
-<meta name="description" content="Free online YAML to JSON Converter to convert YAML config files to JSON and convert JSON back to YAML for CI, Docker, Kubernetes and app configs. Part of the ToolForge developer tools collection.">
+<title>YAML to JSON Converter – Convert Between YAML and JSON Online | ToolForge</title>
+<meta name="description" content="YAML to JSON Converter converts YAML configuration files to JSON and JSON back to YAML. Support for Kubernetes, Docker, CI/CD configs with js-yaml library. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/yaml-json-converter.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="YAML to JSON Converter – Convert YAML and JSON Online | ToolForge">
-<meta property="og:description" content="Free online YAML to JSON Converter to convert YAML config files to JSON and convert JSON back to YAML for CI, Docker, Kubernetes and app configs. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="YAML to JSON Converter – Convert Between YAML and JSON Online | ToolForge">
+<meta property="og:description" content="YAML to JSON Converter converts YAML configuration files to JSON and JSON back to YAML. Support for Kubernetes, Docker, CI/CD configs with js-yaml library. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/yaml-json-converter.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="YAML to JSON Converter – Convert YAML and JSON Online | ToolForge">
-<meta name="twitter:description" content="Free online YAML to JSON Converter to convert YAML config files to JSON and convert JSON back to YAML for CI, Docker, Kubernetes and app configs. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="YAML to JSON Converter – Convert Between YAML and JSON Online | ToolForge">
+<meta name="twitter:description" content="YAML to JSON Converter converts YAML configuration files to JSON and JSON back to YAML. Support for Kubernetes, Docker, CI/CD configs with js-yaml library. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
-<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
-
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between YAML and JSON?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "YAML (YAML Ain't Markup Language) uses indentation and line breaks for structure, making it more human-readable. JSON (JavaScript Object Notation) uses braces and brackets with explicit delimiters. YAML supports comments and anchors; JSON does not. JSON is universally supported and faster to parse; YAML is preferred for configuration files."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why convert between YAML and JSON?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Different tools prefer different formats: Kubernetes and Docker use YAML, while many APIs require JSON. Converting lets you edit configs in a readable YAML format, then export to JSON for API consumption, or vice versa—import JSON API responses as YAML for easier manual editing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the converter preserve data types?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, both formats support strings, numbers, booleans, arrays, and objects. YAML has additional types like dates and multi-line strings. When converting YAML→JSON, dates become strings. When converting JSON→YAML, strings may be quoted or unquoted based on content."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What YAML features are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This tool uses js-yaml v4.1.0 which supports YAML 1.2 specification: scalars, sequences, mappings, anchors and aliases (&anchor/*alias), multi-line strings (| and >), and type tags. Advanced features like custom tags require server-side processing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are common YAML syntax errors?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common errors: inconsistent indentation (use spaces, not tabs), missing colon after key, incorrect list syntax, unquoted special characters in strings, and tab characters (YAML requires spaces). The converter will show parse error details to help identify issues."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are common JSON syntax errors?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common errors: trailing commas in arrays/objects, unquoted keys (must use double quotes), single quotes instead of double quotes, comments (JSON doesn't support comments), and missing commas between elements. Use a JSON validator to check syntax."
+      }
+    }
+  ]
+}
+</script>
 
 </head>
 
 <body>
+
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 
 <main class="container">
 
@@ -53,26 +109,174 @@
 <p id="status" style="color:#666">Ready.</p>
 
 <section class="tool-seo">
-<h3>About YAML ⇄ JSON Converter</h3>
-<p>This YAML and JSON converter helps you switch between the two formats for configs, pipeline files and structured app data, with all parsing handled in the browser.</p>
-<p>It is useful for Docker, CI, Kubernetes and app configuration work when you need to rewrite structured data without changing the actual values.</p>
+<h3>About YAML to JSON Converter</h3>
+<p>This YAML to JSON converter helps you switch between YAML and JSON formats for configuration files, pipeline definitions, and structured data. The conversion uses the js-yaml library (v4.1.0) for YAML 1.2 specification compliance.</p>
+<p>It is useful for Kubernetes manifests, Docker Compose files, CI/CD pipeline configs (GitHub Actions, GitLab CI), and application configuration files where you need to convert between human-readable YAML and machine-friendly JSON.</p>
+
+<h4>YAML vs JSON Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Feature</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">YAML</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">JSON</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Syntax style</td>
+    <td style="border:1px solid #ddd;padding:8px">Indentation-based (whitespace significant)</td>
+    <td style="border:1px solid #ddd;padding:8px">Brace-based (explicit delimiters)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">File size</td>
+    <td style="border:1px solid #ddd;padding:8px">More compact (no braces/quotes needed)</td>
+    <td style="border:1px solid #ddd;padding:8px">More verbose (explicit structure)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Comments</td>
+    <td style="border:1px solid #ddd;padding:8px">Supported (# comment)</td>
+    <td style="border:1px solid #ddd;padding:8px">Not supported</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Quotes</td>
+    <td style="border:1px solid #ddd;padding:8px">Optional for simple strings</td>
+    <td style="border:1px solid #ddd;padding:8px">Required for all string keys/values</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Data types</td>
+    <td style="border:1px solid #ddd;padding:8px">Strings, numbers, bools, dates, null</td>
+    <td style="border:1px solid #ddd;padding:8px">Strings, numbers, bools, null, arrays, objects</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Parse speed</td>
+    <td style="border:1px solid #ddd;padding:8px">Slower (complex spec)</td>
+    <td style="border:1px solid #ddd;padding:8px">Faster (simple spec)</td>
+  </tr>
+</table>
+
+<h4>YAML Syntax Basics</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+# Key-value pairs (colon + space)
+name: Tom
+age: 20
+
+# Lists (dash + space)
+hobbies:
+  - reading
+  - coding
+
+# Nested structures (2-space indent)
+address:
+  city: NYC
+  zip: 10001
+
+# Multi-line strings
+description: |
+  This is a literal block
+  that preserves line breaks
+
+# Anchors and aliases
+defaults: &defaults
+  adapter: postgres
+
+production:
+  <<: *defaults
+  database: prod_db
+</pre>
+
+<h4>JSON Syntax Basics</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+{
+  "name": "Tom",
+  "age": 20,
+  "hobbies": ["reading", "coding"],
+  "address": {
+    "city": "NYC",
+    "zip": 10001
+  },
+  "active": true,
+  "metadata": null
+}
+</pre>
+
+<h4>Common Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Domain</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format Preference</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Kubernetes</td>
+    <td style="border:1px solid #ddd;padding:8px">YAML</td>
+    <td style="border:1px solid #ddd;padding:8px">Deployments, Services, ConfigMaps</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Docker</td>
+    <td style="border:1px solid #ddd;padding:8px">YAML</td>
+    <td style="border:1px solid #ddd;padding:8px">docker-compose.yml</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">CI/CD</td>
+    <td style="border:1px solid #ddd;padding:8px">YAML</td>
+    <td style="border:1px solid #ddd;padding:8px">.github/workflows, .gitlab-ci.yml</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">REST APIs</td>
+    <td style="border:1px solid #ddd;padding:8px">JSON</td>
+    <td style="border:1px solid #ddd;padding:8px">Request/response bodies</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Node.js configs</td>
+    <td style="border:1px solid #ddd;padding:8px">JSON</td>
+    <td style="border:1px solid #ddd;padding:8px">package.json, tsconfig.json</td>
+  </tr>
+</table>
+
+<h4>Conversion Considerations</h4>
+<ul>
+  <li><strong>Comments:</strong> YAML comments are lost when converting to JSON (JSON doesn't support comments)</li>
+  <li><strong>Anchors/Aliases:</strong> YAML anchors (&ref) and aliases (*ref) are resolved to actual values in JSON</li>
+  <li><strong>Dates:</strong> YAML date strings may become plain strings in JSON</li>
+  <li><strong>Multi-line strings:</strong> YAML literal (|) and folded (>) blocks become escaped newlines in JSON</li>
+  <li><strong>Quotes:</strong> JSON requires double quotes; YAML is more flexible</li>
+</ul>
+
+<h4>Common Syntax Errors</h4>
+<p><strong>YAML errors:</strong></p>
+<ul>
+  <li>Using tabs instead of spaces (YAML requires spaces)</li>
+  <li>Inconsistent indentation levels</li>
+  <li>Missing colon after key name</li>
+  <li>Incorrect list item syntax (must have space after dash)</li>
+</ul>
+<p><strong>JSON errors:</strong></p>
+<ul>
+  <li>Trailing commas (not allowed in JSON)</li>
+  <li>Unquoted object keys</li>
+  <li>Single quotes instead of double quotes</li>
+  <li>Comments (JSON doesn't support comments)</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Yaml Json Converter?</dt>
-  <dd>Yaml Json Converter is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the difference between YAML and JSON?</dt>
+  <dd>YAML (YAML Ain't Markup Language) uses indentation and line breaks for structure, making it more human-readable. JSON (JavaScript Object Notation) uses braces and brackets with explicit delimiters. YAML supports comments and anchors; JSON does not. JSON is universally supported and faster to parse; YAML is preferred for configuration files.</dd>
+
+  <dt>Why convert between YAML and JSON?</dt>
+  <dd>Different tools prefer different formats: Kubernetes and Docker use YAML, while many APIs require JSON. Converting lets you edit configs in a readable YAML format, then export to JSON for API consumption, or vice versa—import JSON API responses as YAML for easier manual editing.</dd>
+
+  <dt>Does the converter preserve data types?</dt>
+  <dd>Yes, both formats support strings, numbers, booleans, arrays, and objects. YAML has additional types like dates and multi-line strings. When converting YAML→JSON, dates become strings. When converting JSON→YAML, strings may be quoted or unquoted based on content.</dd>
+
+  <dt>What YAML features are supported?</dt>
+  <dd>This tool uses js-yaml v4.1.0 which supports YAML 1.2 specification: scalars, sequences, mappings, anchors and aliases (&amp;anchor/*alias), multi-line strings (| and &gt;), and type tags. Advanced features like custom tags require server-side processing.</dd>
+
+  <dt>What are common YAML syntax errors?</dt>
+  <dd>Common errors: inconsistent indentation (use spaces, not tabs), missing colon after key, incorrect list syntax, unquoted special characters in strings, and tab characters (YAML requires spaces). The converter will show parse error details to help identify issues.</dd>
+
+  <dt>What are common JSON syntax errors?</dt>
+  <dd>Common errors: trailing commas in arrays/objects, unquoted keys (must use double quotes), single quotes instead of double quotes, comments (JSON doesn't support comments), and missing commas between elements. Use a JSON validator to check syntax.</dd>
 </dl>
 </section>
 </main>

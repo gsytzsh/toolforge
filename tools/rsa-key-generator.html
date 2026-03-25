@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>RSA Key Generator – Generate RSA Key Pair + Encrypt Decrypt Demo | ToolForge</title>
-<meta name="description" content="Free online RSA key pair generator with encrypt/decrypt demo using Web Crypto API. Part of the ToolForge developer tools collection.">
+<title>RSA Key Generator – Generate RSA Key Pair Online | ToolForge</title>
+<meta name="description" content="Generate RSA-OAEP key pairs (2048-bit) in your browser using Web Crypto API. Includes encrypt/decrypt demonstration and key export in PEM format. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/rsa-key-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="RSA Key Generator – RSA Key Pair + Encrypt Decrypt Demo | ToolForge">
-<meta property="og:description" content="RSA key pair generator with encrypt/decrypt demo.">
+<meta property="og:title" content="RSA Key Generator – Generate RSA Key Pair Online | ToolForge">
+<meta property="og:description" content="Generate RSA-OAEP key pairs (2048-bit) in your browser using Web Crypto API. Includes encrypt/decrypt demonstration and key export in PEM format. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/rsa-key-generator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RSA Key Generator – RSA Key Pair + Encrypt Decrypt Demo | ToolForge">
-<meta name="twitter:description" content="RSA key pair generator with encrypt/decrypt demo.">
+<meta name="twitter:title" content="RSA Key Generator – Generate RSA Key Pair Online | ToolForge">
+<meta name="twitter:description" content="Generate RSA-OAEP key pairs (2048-bit) in your browser using Web Crypto API. Includes encrypt/decrypt demonstration and key export in PEM format. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Rsa Key Generator used for?",
+      "name": "How does RSA encryption work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Rsa Key Generator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "RSA is an asymmetric cryptosystem based on the mathematical difficulty of factoring large integers. It uses a public key for encryption and a private key for decryption. The keys are generated from two large prime numbers (p and q). Security relies on the fact that while multiplying primes is easy, factoring the product back to primes is computationally infeasible for sufficiently large numbers (2048+ bits)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between RSA-OAEP and PKCS#1 v1.5?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "RSA-OAEP (Optimal Asymmetric Encryption Padding) is a more secure padding scheme that provides semantic security and is resistant to chosen-ciphertext attacks. PKCS#1 v1.5 is older and vulnerable to padding oracle attacks (Bleichenbacher attack). OAEP uses hash functions and mask generation functions for stronger security guarantees. Modern applications should use RSA-OAEP."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What key size should I use for RSA?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Minimum 2048-bit for current security (recommended). 3072-bit or 4096-bit for long-term security or high-value data. 1024-bit is considered broken and should not be used. NIST recommends 2048-bit minimum through 2030, 3072-bit+ after. Larger keys provide more security but slower operations and larger ciphertext."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the RSA message size limit?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "RSA can only encrypt messages smaller than the key size minus padding overhead. For 2048-bit RSA-OAEP with SHA-256: max message = 256 - 2*32 - 2 = 190 bytes. This is why RSA is typically used to encrypt symmetric keys (hybrid encryption), not large messages directly."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What are SPKI and PKCS#8 formats?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "SPKI (Subject Public Key Info) is the standard format for public keys defined in X.509. PKCS#8 is the standard format for private keys. Both are ASN.1 DER-encoded structures. This tool exports keys in these formats and encodes them as base64 for display. PEM format wraps these with header/footer lines."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "Is browser-based RSA key generation secure?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Yes, when using the Web Crypto API (crypto.subtle). It uses the browser's cryptographically secure random number generator (CSPRNG). Keys never leave your device in this tool. However, for production use, consider: server-side generation in HSMs, proper key storage (keychains, vaults), and secure key exchange protocols."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>RSA Key Generator</h1>
-<p class="subtitle">Generate RSA-OAEP key pair and demo encrypt/decrypt using Web Crypto API.</p>
+<p class="subtitle">Generate RSA-OAEP key pairs and demonstrate encryption/decryption using Web Crypto API.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <button onclick="generateKeys()">Generate Key Pair</button>
@@ -104,25 +109,318 @@
 
 <section class="tool-seo">
 <h3>About RSA Key Generator</h3>
-<p>This tool generates RSA-OAEP 2048-bit key pairs in the browser. Includes a demo to encrypt with the public key and decrypt with the private key.</p>
-<p>Useful for learning RSA, testing key exchange and small message encryption. Note: RSA has a small payload limit (~190 bytes for 2048-bit).</p>
+<p>This RSA key generator creates 2048-bit RSA-OAEP key pairs entirely in your browser using the Web Crypto API (crypto.subtle). RSA is an asymmetric cryptographic algorithm widely used for secure data transmission, digital signatures, and key exchange protocols.</p>
+
+<h4>RSA Algorithm Overview</h4>
+<p>RSA (Rivest-Shamir-Adleman) was invented in 1977 and remains one of the most widely used public-key cryptosystems:</p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+RSA Key Generation:
+
+1. Choose two large prime numbers p and q
+   (For 2048-bit key, each prime is ~1024 bits)
+
+2. Compute modulus n = p × q
+   n is the public modulus used in both keys
+
+3. Compute Euler's totient: φ(n) = (p-1)(q-1)
+
+4. Choose public exponent e
+   Common choice: e = 65537 (0x10001)
+   Must be coprime to φ(n)
+
+5. Compute private exponent d
+   d = e^(-1) mod φ(n)
+   (modular multiplicative inverse)
+
+6. Public key: (n, e)
+   Private key: (n, d)
+
+Encryption: c = m^e mod n
+Decryption: m = c^d mod n
+</pre>
+
+<h4>Web Crypto API Implementation</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript RSA Key Generation:
+
+async function generateRSAKeyPair() {
+  const keyPair = await crypto.subtle.generateKey(
+    {
+      name: "RSA-OAEP",
+      modulusLength: 2048,
+      publicExponent: new Uint8Array([1, 0, 1]), // 65537
+      hash: "SHA-256"
+    },
+    true, // extractable
+    ["encrypt", "decrypt"]
+  );
+
+  // Export public key (SPKI format)
+  const pubKey = await crypto.subtle.exportKey("spki", keyPair.publicKey);
+  const pubKeyBase64 = arrayBufferToBase64(pubKey);
+
+  // Export private key (PKCS#8 format)
+  const privKey = await crypto.subtle.exportKey("pkcs8", keyPair.privateKey);
+  const privKeyBase64 = arrayBufferToBase64(privKey);
+
+  return { pubKeyBase64, privKeyBase64 };
+}
+
+// RSA-OAEP Encryption
+async function rsaEncrypt(publicKey, plaintext) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(plaintext);
+
+  const ciphertext = await crypto.subtle.encrypt(
+    { name: "RSA-OAEP" },
+    publicKey,
+    data
+  );
+
+  return arrayBufferToBase64(ciphertext);
+}
+
+// RSA-OAEP Decryption
+async function rsaDecrypt(privateKey, ciphertextBase64) {
+  const ciphertext = base64ToArrayBuffer(ciphertextBase64);
+
+  const plaintext = await crypto.subtle.decrypt(
+    { name: "RSA-OAEP" },
+    privateKey,
+    ciphertext
+  );
+
+  const decoder = new TextDecoder();
+  return decoder.decode(plaintext);
+}
+</pre>
+
+<h4>RSA Key Size Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Key Size</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Security Level</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Max Message (OAEP SHA-256)</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Status</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">1024-bit</td>
+    <td style="border:1px solid #ddd;padding:8px">~80 bits</td>
+    <td style="border:1px solid #ddd;padding:8px">190 bytes</td>
+    <td style="border:1px solid #ddd;padding:8px">Broken, don't use</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">2048-bit</td>
+    <td style="border:1px solid #ddd;padding:8px">~112 bits</td>
+    <td style="border:1px solid #ddd;padding:8px">190 bytes</td>
+    <td style="border:1px solid #ddd;padding:8px">Recommended minimum</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">3072-bit</td>
+    <td style="border:1px solid #ddd;padding:8px">~128 bits</td>
+    <td style="border:1px solid #ddd;padding:8px">190 bytes</td>
+    <td style="border:1px solid #ddd;padding:8px">Long-term security</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">4096-bit</td>
+    <td style="border:1px solid #ddd;padding:8px">~140 bits</td>
+    <td style="border:1px solid #ddd;padding:8px">190 bytes</td>
+    <td style="border:1px solid #ddd;padding:8px">High security</td>
+  </tr>
+</table>
+
+<h4>Padding Schemes Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Scheme</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Security</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Overhead</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Recommendation</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">PKCS#1 v1.5</td>
+    <td style="border:1px solid #ddd;padding:8px">Vulnerable to padding oracle</td>
+    <td style="border:1px solid #ddd;padding:8px">11 bytes</td>
+    <td style="border:1px solid #ddd;padding:8px">Legacy only</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">RSA-OAEP</td>
+    <td style="border:1px solid #ddd;padding:8px">IND-CCA2 secure</td>
+    <td style="border:1px solid #ddd;padding:8px">2*hashLen + 2</td>
+    <td style="border:1px solid #ddd;padding:8px">Recommended</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">RSA-OAEP-256</td>
+    <td style="border:1px solid #ddd;padding:8px">IND-CCA2 secure</td>
+    <td style="border:1px solid #ddd;padding:8px">66 bytes (SHA-256)</td>
+    <td style="border:1px solid #ddd;padding:8px">Best practice</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Raw RSA</td>
+    <td style="border:1px solid #ddd;padding:8px">Completely insecure</td>
+    <td style="border:1px solid #ddd;padding:8px">None</td>
+    <td style="border:1px solid #ddd;padding:8px">Never use</td>
+  </tr>
+</table>
+
+<h4>Key Format Specifications</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Public Key Format (SPKI - Subject Public Key Info):
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2Z3qX2BTLS4e...
+(base64 encoded DER of ASN.1 structure)
+-----END PUBLIC KEY-----
+
+Private Key Format (PKCS#8):
+-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDZne...
+(base64 encoded DER of ASN.1 structure)
+-----END PRIVATE KEY-----
+
+RSA Private Key (PKCS#1 - alternative format):
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEA2Z3qX2BTLS4e...
+(contains p, q, d, dp, dq, qInv for CRT optimization)
+-----END RSA PRIVATE KEY-----
+</pre>
+
+<h4>Hybrid Encryption</h4>
+<p>Due to RSA's size limitations, real-world systems use hybrid encryption:</p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Hybrid Encryption Flow:
+
+1. Generate random symmetric key (AES-256)
+   const aesKey = await crypto.subtle.generateKey(
+     { name: "AES-GCM", length: 256 },
+     true, ["encrypt", "decrypt"]
+   );
+
+2. Encrypt data with AES key
+   const encryptedData = await crypto.subtle.encrypt(
+     { name: "AES-GCM", iv: randomIV },
+     aesKey,
+     plaintext
+   );
+
+3. Encrypt AES key with RSA public key
+   const encryptedKey = await crypto.subtle.encrypt(
+     { name: "RSA-OAEP" },
+     rsaPublicKey,
+     exportedAesKey
+   );
+
+4. Send: encryptedData + encryptedKey + IV
+   Recipient decrypts AES key with RSA private key,
+   then decrypts data with AES key.
+
+This approach combines RSA's secure key exchange
+with AES's efficient bulk encryption.
+</pre>
+
+<h4>RSA Security Considerations</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Consideration</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Risk</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Mitigation</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Small key sizes</td>
+    <td style="border:1px solid #ddd;padding:8px">Factorization attacks</td>
+    <td style="border:1px solid #ddd;padding:8px">Use 2048-bit minimum</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Weak random primes</td>
+    <td style="border:1px solid #ddd;padding:8px">Predictable keys</td>
+    <td style="border:1px solid #ddd;padding:8px">Use CSPRNG (Web Crypto)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Timing attacks</td>
+    <td style="border:1px solid #ddd;padding:8px">Key extraction</td>
+    <td style="border:1px solid #ddd;padding:8px">Constant-time implementations</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Side-channel attacks</td>
+    <td style="border:1px solid #ddd;padding:8px">Power analysis, EM leaks</td>
+    <td style="border:1px solid #ddd;padding:8px">Hardware countermeasures</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Quantum computers</td>
+    <td style="border:1px solid #ddd;padding:8px">Shor's algorithm</td>
+    <td style="border:1px solid #ddd;padding:8px">Post-quantum cryptography</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Key Exchange:</strong> Securely exchange symmetric keys for AES encryption</li>
+  <li><strong>Digital Signatures:</strong> Sign and verify documents using RSA-PSS or RSA-PKCS#1 v1.5</li>
+  <li><strong>TLS/SSL:</strong> Establish secure connections (though being replaced by ECC)</li>
+  <li><strong>SSH Keys:</strong> Authenticate to remote servers</li>
+  <li><strong>PGP/GPG:</strong> Encrypt emails and files</li>
+  <li><strong>JWT Signing:</strong> Sign JSON Web Tokens with RS256 algorithm</li>
+  <li><strong>Code Signing:</strong> Sign software for distribution</li>
+  <li><strong>Certificate Generation:</strong> Create X.509 certificates</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>Message size limit:</strong> ~190 bytes for 2048-bit RSA-OAEP</li>
+  <li><strong>Slow for large data:</strong> Much slower than symmetric encryption</li>
+  <li><strong>Quantum vulnerable:</strong> Shor's algorithm can break RSA on quantum computers</li>
+  <li><strong>Key size:</strong> Large keys compared to ECC (256-bit ECC ≈ 3072-bit RSA)</li>
+  <li><strong>No forward secrecy:</strong> If private key is compromised, all past messages can be decrypted</li>
+</ul>
+
+<h4>Post-Quantum Considerations</h4>
+<p>RSA is vulnerable to quantum computers using Shor's algorithm. For long-term security:</p>
+<ul>
+  <li><strong>Hybrid schemes:</strong> Combine RSA with post-quantum algorithms (Kyber, NTRU)</li>
+  <li><strong>ECC migration:</strong> Elliptic Curve Cryptography offers smaller keys but also quantum-vulnerable</li>
+  <li><strong>NIST PQC:</strong> NIST is standardizing post-quantum algorithms (CRYSTALS-Kyber selected)</li>
+  <li><strong>Timeline:</strong> Large-scale quantum computers estimated 10-30 years away</li>
+</ul>
+</section>
+
+<section class="how-to-use">
+<h3>How to Use RSA Key Generator</h3>
+<ol class="how-to-steps">
+  <li><strong>Generate keys:</strong> Click "Generate Key Pair" to create a new 2048-bit RSA key pair.</li>
+  <li><strong>Copy keys:</strong> Use the Copy buttons to save your public and private keys.</li>
+  <li><strong>Encrypt:</strong> Enter a short message and click "Encrypt" to encrypt with the public key.</li>
+  <li><strong>Decrypt:</strong> Paste the encrypted ciphertext and click "Decrypt" to recover the plaintext.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Store private keys securely - never share them</li>
+  <li>Public keys can be freely shared for encryption</li>
+  <li>RSA encryption has a ~190 byte limit - use hybrid encryption for larger data</li>
+  <li>For production use, consider hardware security modules (HSMs) for key storage</li>
+  <li>Keys are generated locally and never transmitted</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Rsa Key Generator used for?</dt>
-  <dd>Rsa Key Generator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>How does RSA encryption work?</dt>
+  <dd>RSA is an asymmetric cryptosystem based on the mathematical difficulty of factoring large integers. It uses a public key for encryption and a private key for decryption. The keys are generated from two large prime numbers (p and q). Security relies on the fact that while multiplying primes is easy, factoring the product back to primes is computationally infeasible for sufficiently large numbers (2048+ bits).</dd>
+
+  <dt>What is the difference between RSA-OAEP and PKCS#1 v1.5?</dt>
+  <dd>RSA-OAEP (Optimal Asymmetric Encryption Padding) is a more secure padding scheme that provides semantic security and is resistant to chosen-ciphertext attacks. PKCS#1 v1.5 is older and vulnerable to padding oracle attacks (Bleichenbacher attack). OAEP uses hash functions and mask generation functions for stronger security guarantees. Modern applications should use RSA-OAEP.</dd>
+
+  <dt>What key size should I use for RSA?</dt>
+  <dd>Minimum 2048-bit for current security (recommended). 3072-bit or 4096-bit for long-term security or high-value data. 1024-bit is considered broken and should not be used. NIST recommends 2048-bit minimum through 2030, 3072-bit+ after. Larger keys provide more security but slower operations and larger ciphertext.</dd>
+
+  <dt>What is the RSA message size limit?</dt>
+  <dd>RSA can only encrypt messages smaller than the key size minus padding overhead. For 2048-bit RSA-OAEP with SHA-256: max message = 256 - 2*32 - 2 = 190 bytes. This is why RSA is typically used to encrypt symmetric keys (hybrid encryption), not large messages directly.</dd>
+
+  <dt>What are SPKI and PKCS#8 formats?</dt>
+  <dd>SPKI (Subject Public Key Info) is the standard format for public keys defined in X.509. PKCS#8 is the standard format for private keys. Both are ASN.1 DER-encoded structures. This tool exports keys in these formats and encodes them as base64 for display. PEM format wraps these with header/footer lines.</dd>
+
+  <dt>Is browser-based RSA key generation secure?</dt>
+  <dd>Yes, when using the Web Crypto API (crypto.subtle). It uses the browser's cryptographically secure random number generator (CSPRNG). Keys never leave your device in this tool. However, for production use, consider: server-side generation in HSMs, proper key storage (keychains, vaults), and secure key exchange protocols.</dd>
 </dl>
 </section>
 </main>

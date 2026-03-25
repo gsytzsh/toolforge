@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Frontend Shortcuts Reference – VS Code, Chrome, Firefox | ToolForge</title>
-<meta name="description" content="Free online frontend development shortcuts reference for VS Code, WebStorm, Chrome and Firefox. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Comprehensive frontend development keyboard shortcuts reference for VS Code, WebStorm, Chrome DevTools, and Firefox Developer Tools. Essential productivity cheat sheet for web developers.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/frontend-shortcuts-reference.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Frontend Shortcuts Reference – VS Code, Chrome, Firefox | ToolForge">
-<meta property="og:description" content="Free online frontend development shortcuts reference for VS Code, WebStorm, Chrome and Firefox. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Comprehensive frontend development keyboard shortcuts reference for VS Code, WebStorm, Chrome DevTools, and Firefox Developer Tools.">
 <meta property="og:url" content="https://toolforge.site/tools/frontend-shortcuts-reference.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Frontend Shortcuts Reference – VS Code, Chrome, Firefox | ToolForge">
-<meta name="twitter:description" content="Free online frontend development shortcuts reference. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Comprehensive frontend development keyboard shortcuts reference.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
@@ -23,6 +23,7 @@
 .ref-table code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:0.85em;white-space:nowrap}
 .ref-section{margin-top:24px}
 .ref-section h3{font-size:1rem;color:#475569;margin-bottom:8px}
+.platform-note{font-size:0.85rem;color:#64748b;margin-top:4px}
 </style>
 
 <script type="application/ld+json">
@@ -32,45 +33,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Frontend Shortcuts Reference used for?",
+      "name": "What is the difference between Ctrl and Cmd shortcuts?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Frontend Shortcuts Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "On Windows/Linux, shortcuts use Ctrl key. On macOS, the equivalent is Cmd (⌘). For example, Ctrl+F on Windows becomes Cmd+F on Mac. Some shortcuts differ: Ctrl+Alt on Windows often maps to Cmd+Option on Mac. VS Code and WebStorm show platform-specific shortcuts in their UI."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I customize keyboard shortcuts in VS Code?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Open Keyboard Shortcuts with Ctrl+K Ctrl+S (Cmd+K Cmd+S on Mac) or File > Preferences > Keyboard Shortcuts. Search for any command and click the pencil icon to change its binding. You can also edit keybindings.json directly for advanced configurations like chord shortcuts (e.g., Ctrl+K then Ctrl+C)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What are the most essential Chrome DevTools shortcuts?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Essential DevTools shortcuts: F12 or Ctrl+Shift+I (Cmd+Option+I Mac) opens DevTools; Ctrl+Shift+C (Cmd+Shift+C) toggles element inspector; Ctrl+Shift+J (Cmd+Option+J) opens Console; Ctrl+Shift+M (Cmd+Option+M) toggles device toolbar; Ctrl+R (Cmd+R) reloads; Ctrl+Shift+R (Cmd+Shift+R) hard reloads ignoring cache."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "Why do some shortcuts conflict with browser shortcuts?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Browser shortcuts take precedence over web app shortcuts. For example, Ctrl+T opens a new tab, Ctrl+W closes a tab, Ctrl+L focuses the address bar. When building web apps, avoid these conflicts or require modifier combinations. IDEs like VS Code capture keys before the browser, avoiding conflicts."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What is multi-cursor editing and how do I use it?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Multi-cursor editing allows simultaneous editing at multiple positions. In VS Code: Ctrl+D selects next occurrence of current word; Ctrl+Click adds individual cursors; Alt+Click adds cursor at click position; Ctrl+Shift+L selects all occurrences. WebStorm: Alt+J selects next occurrence; Ctrl+G selects all occurrences."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How do I access browser DevTools on macOS?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Chrome/Safari on Mac: Cmd+Option+I opens DevTools/Web Inspector; Cmd+Option+J opens Console; Cmd+Option+C toggles inspector; Cmd+Option+M toggles device mode. Firefox on Mac: Cmd+Option+I opens Toolbox; Cmd+Option+K opens Web Console; Cmd+Option+J opens Browser Console (chrome)."
       }
     }
   ]
@@ -84,84 +90,204 @@
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <div class="ref-section">
-<h3>VS Code</h3>
+<h3>VS Code – Navigation & File Management</h3>
 <table class="ref-table">
-<thead><tr><th>Action</th><th>Shortcut</th></tr></thead>
+<thead><tr><th>Action</th><th>Windows/Linux</th><th>macOS</th></tr></thead>
 <tbody>
-<tr><td>Split editor</td><td><code>Ctrl + \</code></td></tr>
-<tr><td>Switch tab</td><td><code>Ctrl + Tab</code> / <code>Alt + ← / →</code></td></tr>
-<tr><td>Close tab</td><td><code>Ctrl + W</code></td></tr>
-<tr><td>Go to definition</td><td><code>F12</code></td></tr>
-<tr><td>Go to line</td><td><code>Ctrl + G</code></td></tr>
-<tr><td>Find</td><td><code>Ctrl + F</code></td></tr>
-<tr><td>Replace</td><td><code>Ctrl + H</code></td></tr>
-<tr><td>Find in files</td><td><code>Ctrl + Shift + F</code></td></tr>
-<tr><td>Toggle comment</td><td><code>Ctrl + /</code></td></tr>
-<tr><td>Format document</td><td><code>Shift + Alt + F</code></td></tr>
-<tr><td>Duplicate line</td><td><code>Shift + Alt + ↓</code></td></tr>
-<tr><td>Delete line</td><td><code>Ctrl + Shift + K</code></td></tr>
-<tr><td>Multi-cursor (same word)</td><td><code>Ctrl + D</code></td></tr>
-<tr><td>Toggle terminal</td><td><code>Ctrl + `</code></td></tr>
-<tr><td>Command palette</td><td><code>Ctrl + Shift + P</code></td></tr>
-<tr><td>Quick open file</td><td><code>Ctrl + P</code></td></tr>
+<tr><td>Command palette</td><td><code>Ctrl + Shift + P</code></td><td><code>Cmd + Shift + P</code></td></tr>
+<tr><td>Quick open file</td><td><code>Ctrl + P</code></td><td><code>Cmd + P</code></td></tr>
+<tr><td>Go to file in folder</td><td><code>Ctrl + P</code>, type <code>#</code></td><td><code>Cmd + P</code>, type <code>#</code></td></tr>
+<tr><td>Go to symbol in file</td><td><code>Ctrl + Shift + O</code></td><td><code>Cmd + Shift + O</code></td></tr>
+<tr><td>Go to line</td><td><code>Ctrl + G</code></td><td><code>Cmd + G</code></td></tr>
+<tr><td>Go to definition</td><td><code>F12</code></td><td><code>F12</code></td></tr>
+<tr><td>Peek definition</td><td><code>Alt + F12</code></td><td><code>Option + F12</code></td></tr>
+<tr><td>Open definition to side</td><td><code>Ctrl + K, F12</code></td><td><code>Cmd + K, F12</code></td></tr>
+<tr><td>Find references</td><td><code>Shift + F12</code></td><td><code>Shift + F12</code></td></tr>
+<tr><td>Go to next problem</td><td><code>F8</code></td><td><code>F8</code></td></tr>
+<tr><td>Go to previous problem</td><td><code>Shift + F8</code></td><td><code>Shift + F8</code></td></tr>
+<tr><td>Toggle terminal</td><td><code>Ctrl + `</code></td><td><code>Ctrl + `</code></td></tr>
+<tr><td>Split editor</td><td><code>Ctrl + \</code></td><td><code>Cmd + \</code></td></tr>
+<tr><td>Focus next editor group</td><td><code>Ctrl + 1, 2, 3</code></td><td><code>Cmd + 1, 2, 3</code></td></tr>
+<tr><td>Close editor</td><td><code>Ctrl + W</code></td><td><code>Cmd + W</code></td></tr>
+<tr><td>Switch tab</td><td><code>Ctrl + Tab</code></td><td><code>Ctrl + Tab</code></td></tr>
+</tbody>
+</table>
+<p class="platform-note">Note: Backtick (`) is the key left of 1 on US keyboards.</p>
+</div>
+
+<div class="ref-section">
+<h3>VS Code – Editing & Refactoring</h3>
+<table class="ref-table">
+<thead><tr><th>Action</th><th>Windows/Linux</th><th>macOS</th></tr></thead>
+<tbody>
+<tr><td>Find</td><td><code>Ctrl + F</code></td><td><code>Cmd + F</code></td></tr>
+<tr><td>Replace</td><td><code>Ctrl + H</code></td><td><code>Cmd + Option + F</code></td></tr>
+<tr><td>Find in files</td><td><code>Ctrl + Shift + F</code></td><td><code>Cmd + Shift + F</code></td></tr>
+<tr><td>Toggle comment line</td><td><code>Ctrl + /</code></td><td><code>Cmd + /</code></td></tr>
+<tr><td>Toggle comment block</td><td><code>Shift + Alt + A</code></td><td><code>Shift + Option + A</code></td></tr>
+<tr><td>Format document</td><td><code>Shift + Alt + F</code></td><td><code>Shift + Option + F</code></td></tr>
+<tr><td>Format selection</td><td><code>Ctrl + K, Ctrl + F</code></td><td><code>Cmd + K, Cmd + F</code></td></tr>
+<tr><td>Duplicate line</td><td><code>Shift + Alt + ↓</code></td><td><code>Shift + Option + ↓</code></td></tr>
+<tr><td>Delete line</td><td><code>Ctrl + Shift + K</code></td><td><code>Cmd + Shift + K</code></td></tr>
+<tr><td>Move line up/down</td><td><code>Alt + ↑ / ↓</code></td><td><code>Option + ↑ / ↓</code></td></tr>
+<tr><td>Copy line up/down</td><td><code>Shift + Alt + ↑ / ↓</code></td><td><code>Shift + Option + ↑ / ↓</code></td></tr>
+<tr><td>Select next occurrence</td><td><code>Ctrl + D</code></td><td><code>Cmd + D</code></td></tr>
+<tr><td>Select all occurrences</td><td><code>Ctrl + Shift + L</code></td><td><code>Cmd + Shift + L</code></td></tr>
+<tr><td>Add cursor to click</td><td><code>Alt + Click</code></td><td><code>Option + Click</code></td></tr>
+<tr><td>Insert cursor above</td><td><code>Ctrl + Alt + ↑</code></td><td><code>Cmd + Option + ↑</code></td></tr>
+<tr><td>Insert cursor below</td><td><code>Ctrl + Alt + ↓</code></td><td><code>Cmd + Option + ↓</code></td></tr>
+<tr><td>Expand selection</td><td><code>Shift + Alt + →</code></td><td><code>Ctrl + Shift + →</code></td></tr>
+<tr><td>Shrink selection</td><td><code>Shift + Alt + ←</code></td><td><code>Ctrl + Shift + ←</code></td></tr>
+<tr><td>Rename symbol</td><td><code>F2</code></td><td><code>F2</code></td></tr>
+<tr><td>Quick fix</td><td><code>Ctrl + .</code></td><td><code>Cmd + .</code></td></tr>
 </tbody>
 </table>
 </div>
 
 <div class="ref-section">
-<h3>WebStorm</h3>
+<h3>WebStorm – Navigation & Editing</h3>
 <table class="ref-table">
-<thead><tr><th>Action</th><th>Shortcut</th></tr></thead>
+<thead><tr><th>Action</th><th>Windows/Linux</th><th>macOS</th></tr></thead>
 <tbody>
-<tr><td>Split editor</td><td><code>Alt + Shift + 2</code></td></tr>
-<tr><td>Switch tab</td><td><code>Ctrl + PageUp / PageDown</code></td></tr>
-<tr><td>Go to definition</td><td><code>Ctrl + B</code></td></tr>
-<tr><td>Go to line</td><td><code>Ctrl + G</code></td></tr>
-<tr><td>Find</td><td><code>Ctrl + F</code></td></tr>
-<tr><td>Replace</td><td><code>Ctrl + R</code></td></tr>
-<tr><td>Find in files</td><td><code>Ctrl + Shift + F</code></td></tr>
-<tr><td>Format code</td><td><code>Ctrl + Alt + L</code></td></tr>
-<tr><td>Rename</td><td><code>Shift + F6</code></td></tr>
-<tr><td>Toggle terminal</td><td><code>Alt + F12</code></td></tr>
+<tr><td>Search everywhere</td><td><code>Shift + Shift</code></td><td><code>Shift + Shift</code></td></tr>
+<tr><td>Find action</td><td><code>Ctrl + Shift + A</code></td><td><code>Cmd + Shift + A</code></td></tr>
+<tr><td>Go to file</td><td><code>Ctrl + Shift + N</code></td><td><code>Cmd + Shift + O</code></td></tr>
+<tr><td>Go to line</td><td><code>Ctrl + G</code></td><td><code>Cmd + G</code></td></tr>
+<tr><td>Go to declaration</td><td><code>Ctrl + B</code></td><td><code>Cmd + B</code></td></tr>
+<tr><td>Go to implementation</td><td><code>Ctrl + Alt + B</code></td><td><code>Cmd + Option + B</code></td></tr>
+<tr><td>Find usages</td><td><code>Alt + F7</code></td><td><code>Option + F7</code></td></tr>
+<tr><td>Find in files</td><td><code>Ctrl + Shift + F</code></td><td><code>Cmd + Shift + F</code></td></tr>
+<tr><td>Replace in files</td><td><code>Ctrl + Shift + R</code></td><td><code>Cmd + Shift + R</code></td></tr>
+<tr><td>Recent files</td><td><code>Ctrl + E</code></td><td><code>Cmd + E</code></td></tr>
+<tr><td>Toggle terminal</td><td><code>Alt + F12</code></td><td><code>Option + F12</code></td></tr>
+<tr><td>Format code</td><td><code>Ctrl + Alt + L</code></td><td><code>Cmd + Option + L</code></td></tr>
+<tr><td>Reformat code</td><td><code>Ctrl + Alt + L</code></td><td><code>Cmd + Option + L</code></td></tr>
+<tr><td>Duplicate line</td><td><code>Ctrl + D</code></td><td><code>Cmd + D</code></td></tr>
+<tr><td>Delete line</td><td><code>Ctrl + Y</code></td><td><code>Cmd + Delete</code></td></tr>
+<tr><td>Comment line</td><td><code>Ctrl + /</code></td><td><code>Cmd + /</code></td></tr>
+<tr><td>Block comment</td><td><code>Ctrl + Shift + /</code></td><td><code>Cmd + Option + /</code></td></tr>
+<tr><td>Rename</td><td><code>Shift + F6</code></td><td><code>Shift + F6</code></td></tr>
+<tr><td>Refactor</td><td><code>Ctrl + Alt + Shift + T</code></td><td><code>Ctrl + Cmd + Option + T</code></td></tr>
+<tr><td>Optimize imports</td><td><code>Ctrl + Alt + O</code></td><td><code>Ctrl + Option + O</code></td></tr>
 </tbody>
 </table>
 </div>
 
 <div class="ref-section">
-<h3>Chrome / Firefox</h3>
+<h3>Chrome DevTools</h3>
 <table class="ref-table">
-<thead><tr><th>Action</th><th>Shortcut</th></tr></thead>
+<thead><tr><th>Action</th><th>Windows/Linux</th><th>macOS</th></tr></thead>
 <tbody>
-<tr><td>Open DevTools</td><td><code>F12</code></td></tr>
-<tr><td>View page source</td><td><code>Ctrl + U</code></td></tr>
-<tr><td>Reload</td><td><code>Ctrl + R</code></td></tr>
-<tr><td>Hard reload (no cache)</td><td><code>Ctrl + Shift + R</code></td></tr>
-<tr><td>Print</td><td><code>Ctrl + P</code></td></tr>
+<tr><td>Open DevTools</td><td><code>F12</code> / <code>Ctrl + Shift + I</code></td><td><code>Cmd + Option + I</code></td></tr>
+<tr><td>Toggle element inspector</td><td><code>Ctrl + Shift + C</code></td><td><code>Cmd + Shift + C</code></td></tr>
+<tr><td>Open Console</td><td><code>Ctrl + Shift + J</code></td><td><code>Cmd + Option + J</code></td></tr>
+<tr><td>Open Elements panel</td><td><code>Ctrl + Shift + C</code></td><td><code>Cmd + Option + C</code></td></tr>
+<tr><td>Toggle device toolbar</td><td><code>Ctrl + Shift + M</code></td><td><code>Cmd + Option + M</code></td></tr>
+<tr><td>Reload page</td><td><code>Ctrl + R</code></td><td><code>Cmd + R</code></td></tr>
+<tr><td>Hard reload (no cache)</td><td><code>Ctrl + Shift + R</code></td><td><code>Cmd + Shift + R</code></td></tr>
+<tr><td>View page source</td><td><code>Ctrl + U</code></td><td><code>Cmd + Option + U</code></td></tr>
+<tr><td>Next panel</td><td><code>Ctrl + ]</code></td><td><code>Cmd + ]</code></td></tr>
+<tr><td>Previous panel</td><td><code>Ctrl + [</code></td><td><code>Cmd + [</code></td></tr>
+<tr><td>Close DevTools</td><td><code>Esc</code> (when focused)</td><td><code>Esc</code> (when focused)</td></tr>
+<tr><td>Focus command menu</td><td><code>Ctrl + Shift + P</code></td><td><code>Cmd + Shift + P</code></td></tr>
+<tr><td>Search in all sources</td><td><code>Ctrl + Shift + F</code></td><td><code>Cmd + Option + F</code></td></tr>
+<tr><td>Search in current file</td><td><code>Ctrl + F</code></td><td><code>Cmd + F</code></td></tr>
+<tr><td>Go to line in file</td><td><code>Ctrl + G</code></td><td><code>Cmd + G</code></td></tr>
+<tr><td>Go to line number</td><td><code>Ctrl + O</code>, type <code>:line</code></td><td><code>Cmd + O</code>, type <code>:line</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="ref-section">
+<h3>Firefox Developer Tools</h3>
+<table class="ref-table">
+<thead><tr><th>Action</th><th>Windows/Linux</th><th>macOS</th></tr></thead>
+<tbody>
+<tr><td>Open Developer Tools</td><td><code>F12</code> / <code>Ctrl + Shift + I</code></td><td><code>Cmd + Option + I</code></td></tr>
+<tr><td>Toggle inspector</td><td><code>Ctrl + Shift + C</code></td><td><code>Cmd + Option + C</code></td></tr>
+<tr><td>Open Web Console</td><td><code>Ctrl + Shift + K</code></td><td><code>Cmd + Option + K</code></td></tr>
+<tr><td>Open Browser Console</td><td><code>Ctrl + Shift + J</code></td><td><code>Cmd + Option + J</code></td></tr>
+<tr><td>Open Debugger</td><td><code>Ctrl + Shift + S</code></td><td><code>Cmd + Option + S</code></td></tr>
+<tr><td>Open Style Editor</td><td><code>Ctrl + Shift + T</code></td><td><code>Cmd + Option + T</code></td></tr>
+<tr><td>Open Performance</td><td><code>Ctrl + Shift + E</code></td><td><code>Cmd + Option + E</code></td></tr>
+<tr><td>Open Memory</td><td><code>Ctrl + Shift + M</code></td><td><code>Cmd + Option + M</code></td></tr>
+<tr><td>Toggle responsive design</td><td><code>Ctrl + Shift + M</code></td><td><code>Cmd + Option + M</code></td></tr>
+<tr><td>Highlight frames</td><td><code>Ctrl + Shift + H</code></td><td><code>Cmd + Option + H</code></td></tr>
+<tr><td>Screenshot visible node</td><td><code>Right-click > Screenshot</code></td><td><code>Right-click > Screenshot</code></td></tr>
+<tr><td>Search in HTML</td><td><code>Ctrl + F</code></td><td><code>Cmd + F</code></td></tr>
 </tbody>
 </table>
 </div>
 
 <section class="tool-seo">
 <h3>About Frontend Shortcuts Reference</h3>
-<p>This shortcuts reference lists common keyboard shortcuts for VS Code, WebStorm and browser DevTools.</p>
-<p>It is useful when switching editors, onboarding new developers or looking up a shortcut you forgot.</p>
+<p>This comprehensive shortcuts reference covers VS Code, WebStorm, Chrome DevTools, and Firefox Developer Tools. Keyboard shortcuts dramatically improve productivity by reducing mouse dependency and keeping hands on the home row.</p>
+<p>The reference is organized by application and task category, making it easy to find the right shortcut whether you're navigating files, editing code, debugging in the browser, or inspecting elements.</p>
+
+<h4>Modifier Key Notation</h4>
+<table class="ref-table">
+<thead><tr><th>Key</th><th>Windows/Linux</th><th>macOS</th><th>Symbol</th></tr></thead>
+<tbody>
+<tr><td>Control</td><td>Ctrl</td><td>Control (rarely used)</td><td>⌃</td></tr>
+<tr><td>Command</td><td>N/A</td><td>Cmd</td><td>⌘</td></tr>
+<tr><td>Alt/Option</td><td>Alt</td><td>Option</td><td>⌥</td></tr>
+<tr><td>Shift</td><td>Shift</td><td>Shift</td><td>⇧</td></tr>
+</tbody>
+</table>
+
+<h4>Universal Shortcuts Across Applications</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px">
+Nearly universal shortcuts (Windows/Linux → macOS):
+  Ctrl+F → Cmd+F         Find
+  Ctrl+H → Cmd+H         Replace (or Hide window on Mac)
+  Ctrl+Z → Cmd+Z         Undo
+  Ctrl+Y → Cmd+Shift+Z   Redo
+  Ctrl+A → Cmd+A         Select all
+  Ctrl+C → Cmd+C         Copy
+  Ctrl+V → Cmd+V         Paste
+  Ctrl+X → Cmd+X         Cut
+  Ctrl+S → Cmd+S         Save
+  Ctrl+P → Cmd+P         Print (or Quick Open in IDEs)
+  Ctrl+N → Cmd+N         New file/window
+  Ctrl+W → Cmd+W         Close tab/window
+  Ctrl+T → Cmd+T         New tab (or Open symbol in IDEs)
+  F12                    Open DevTools
+  Ctrl+G → Cmd+G         Go to line (or Find next in browsers)
+</pre>
+
+<h4>Chrome vs Firefox DevTools Differences</h4>
+<table class="ref-table">
+<thead><tr><th>Action</th><th>Chrome</th><th>Firefox</th></tr></thead>
+<tbody>
+<tr><td>Open Console</td><td>Ctrl+Shift+J</td><td>Ctrl+Shift+K</td></tr>
+<tr><td>Open Elements/Inspector</td><td>Ctrl+Shift+C</td><td>Ctrl+Shift+C</td></tr>
+<tr><td>Responsive Design Mode</td><td>Ctrl+Shift+M</td><td>Ctrl+Shift+M</td></tr>
+<tr><td>Search All Sources</td><td>Ctrl+Shift+F</td><td>Ctrl+Shift+F</td></tr>
+<tr><td>Command Menu</td><td>Ctrl+Shift+P</td><td>Ctrl+Shift+P</td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Frontend Shortcuts Reference used for?</dt>
-  <dd>Frontend Shortcuts Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is the difference between Ctrl and Cmd shortcuts?</dt>
+  <dd>On Windows/Linux, shortcuts use Ctrl key. On macOS, the equivalent is Cmd (⌘). For example, Ctrl+F on Windows becomes Cmd+F on Mac. Some shortcuts differ: Ctrl+Alt on Windows often maps to Cmd+Option on Mac. VS Code and WebStorm show platform-specific shortcuts in their UI.</dd>
+
+  <dt>How do I customize keyboard shortcuts in VS Code?</dt>
+  <dd>Open Keyboard Shortcuts with Ctrl+K Ctrl+S (Cmd+K Cmd+S on Mac) or File > Preferences > Keyboard Shortcuts. Search for any command and click the pencil icon to change its binding. You can also edit keybindings.json directly for advanced configurations like chord shortcuts (e.g., Ctrl+K then Ctrl+C).</dd>
+
+  <dt>What are the most essential Chrome DevTools shortcuts?</dt>
+  <dd>Essential DevTools shortcuts: F12 or Ctrl+Shift+I (Cmd+Option+I Mac) opens DevTools; Ctrl+Shift+C (Cmd+Option+C) toggles element inspector; Ctrl+Shift+J (Cmd+Option+J) opens Console; Ctrl+Shift+M (Cmd+Option+M) toggles device toolbar; Ctrl+R (Cmd+R) reloads; Ctrl+Shift+R (Cmd+Shift+R) hard reloads ignoring cache.</dd>
+
+  <dt>Why do some shortcuts conflict with browser shortcuts?</dt>
+  <dd>Browser shortcuts take precedence over web app shortcuts. For example, Ctrl+T opens a new tab, Ctrl+W closes a tab, Ctrl+L focuses the address bar. When building web apps, avoid these conflicts or require modifier combinations. IDEs like VS Code capture keys before the browser, avoiding conflicts.</dd>
+
+  <dt>What is multi-cursor editing and how do I use it?</dt>
+  <dd>Multi-cursor editing allows simultaneous editing at multiple positions. In VS Code: Ctrl+D selects next occurrence of current word; Ctrl+Click adds individual cursors; Alt+Click adds cursor at click position; Ctrl+Shift+L selects all occurrences. WebStorm: Alt+J selects next occurrence; Ctrl+G selects all occurrences.</dd>
+
+  <dt>How do I access browser DevTools on macOS?</dt>
+  <dd>Chrome/Safari on Mac: Cmd+Option+I opens DevTools/Web Inspector; Cmd+Option+J opens Console; Cmd+Option+C toggles inspector; Cmd+Option+M toggles device mode. Firefox on Mac: Cmd+Option+I opens Toolbox; Cmd+Option+K opens Web Console; Cmd+Option+J opens Browser Console (chrome).</dd>
 </dl>
 </section>
 </main>

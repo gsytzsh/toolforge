@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Number to Words – Convert Number to English Words | ToolForge</title>
-<meta name="description" content="Free online Number to Words converter for integers (English). Part of the ToolForge developer tools collection.">
+<title>Number to Words – Convert Numbers to English Words | ToolForge</title>
+<meta name="description" content="Convert numbers to English words using standard cardinal number formatting. Supports 0 to 999 billion with proper hyphenation and grouping. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/number-to-words.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Number to Words – Convert Number to English Words | ToolForge">
-<meta property="og:description" content="Free online Number to Words converter for integers (English). Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Number to Words – Convert Numbers to English Words | ToolForge">
+<meta property="og:description" content="Convert numbers to English words using standard cardinal number formatting. Supports 0 to 999 billion with proper hyphenation and grouping. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/number-to-words.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Number to Words – Convert Number to English Words | ToolForge">
-<meta name="twitter:description" content="Free online Number to Words converter for integers (English). Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Number to Words – Convert Numbers to English Words | ToolForge">
+<meta name="twitter:description" content="Convert numbers to English words using standard cardinal number formatting. Supports 0 to 999 billion with proper hyphenation and grouping. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Number To Words used for?",
+      "name": "How does number to word conversion work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Number To Words is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "The algorithm breaks numbers into groups of three digits (periods) and converts each group using ones, tens, and hundreds words. Groups are processed recursively from largest to smallest, with scale words (thousand, million, billion) appended. Compound numbers 21-99 use hyphens between tens and ones."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "When should hyphens be used in number words?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Hyphens connect tens and ones in compound numbers from 21 to 99 (e.g., twenty-one, ninety-nine). Hyphens are not used between hundreds and the rest (e.g., one hundred twenty-three). Numbers 1-20 have unique names without hyphens."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What is the difference between short scale and long scale?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Short scale (US, modern UK) defines billion as 10^9 (1,000 million). Long scale (traditional European) defines billion as 10^12 (1 million million). This tool uses short scale naming, which is standard in most English-speaking countries."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How are large numbers grouped?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Numbers are grouped into periods of three digits, separated by commas. Each period has a name: ones (1-999), thousands (1,000-999,999), millions (1,000,000-999,999,999), billions (1,000,000,000+). The pattern continues with trillions, quadrillions, etc."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "Should 'and' be used in number words?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "British English traditionally uses 'and' after hundreds (e.g., one hundred and twenty-three). American English typically omits 'and' (e.g., one hundred twenty-three). This tool follows American convention without 'and' for consistency."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How is zero handled?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Zero is expressed as 'zero' when it appears alone. In larger numbers, zero digits within a period are skipped (e.g., 101 = one hundred one, 1000 = one thousand). Leading zeros are ignored."
       }
     }
   ]
@@ -72,77 +77,367 @@
 <body>
 <main class="container">
 <h1>Number to Words</h1>
-<p class="subtitle">Convert a number to English words (e.g. 1234 → one thousand two hundred thirty-four).</p>
+<p class="subtitle">Convert numeric digits to English cardinal number words with proper formatting.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
-<h3>Number</h3>
-<label for="num" class="sr-only">Number</label>
-<input id="num" type="number" placeholder="1234" style="width:180px" aria-label="Number">
-<br><br>
-<div class="tool-actions">
-<button onclick="convert()">Convert</button>
-<button type="button" onclick="copyResult()">Copy Result</button>
-</div>
-<h3>Result</h3>
-<p id="result"></p>
-<p id="status" class="inline-status"></p>
+<h3>Input Number</h3>
+<label for="input" class="sr-only">Number to convert</label>
+<input id="input" type="number" style="width:100%;max-width:400px;font-size:18px;padding:8px" placeholder="Enter a number (0-999,999,999,999)" aria-label="Number input">
+<h3>Output</h3>
+<label for="output" class="sr-only">Words output</label>
+<textarea id="output" rows="4" style="width:90%;max-width:600px;font-size:16px" aria-label="Words output"></textarea>
 <section class="tool-seo">
 <h3>About Number to Words</h3>
-<p>The Number to Words tool lets you convert a number to English words (e.g. 1234 → one thousand two hundred thirty-four).</p>
-<p>It is useful for editing copy, cleaning pasted text, comparing content and making small text transformations directly in the browser.</p>
+<p>This tool converts numeric digits to English cardinal number words using standard American English formatting. The conversion handles numbers from zero to 999,999,999,999 (999 billion) with proper hyphenation for compound numbers and correct grouping by thousands.</p>
+<p>It is useful for writing checks and financial documents, legal contracts and agreements, formal writing and invitations, educational materials for teaching number names, accessibility applications for screen readers, and data validation for numeric fields.</p>
+
+<h4>English Number System</h4>
+<p>English numbers use a positional system with base-10 grouping:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Number Word Components:
+
+Ones (1-19):
+  0 = zero          10 = ten
+  1 = one           11 = eleven
+  2 = two           12 = twelve
+  3 = three         13 = thirteen
+  4 = four          14 = fourteen
+  5 = five          15 = fifteen
+  6 = six           16 = sixteen
+  7 = seven         17 = seventeen
+  8 = eight         18 = eighteen
+  9 = nine          19 = nineteen
+
+Tens (20-90):
+  20 = twenty       60 = sixty
+  30 = thirty       70 = seventy
+  40 = forty        80 = eighty
+  50 = fifty        90 = ninety
+
+Scale Words (Periods):
+  1,000     = thousand      (10^3)
+  1,000,000 = million       (10^6)
+  1,000,000,000 = billion   (10^9)
+  1,000,000,000,000 = trillion (10^12)
+</pre>
+
+<h4>Conversion Rules</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Rule</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Basic Numbers</td>
+    <td style="border:1px solid #ddd;padding:8px">Numbers 0-19 have unique names</td>
+    <td style="border:1px solid #ddd;padding:8px">7 = seven, 15 = fifteen</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Compound Numbers</td>
+    <td style="border:1px solid #ddd;padding:8px">Hyphenate tens and ones (21-99)</td>
+    <td style="border:1px solid #ddd;padding:8px">42 = forty-two, 99 = ninety-nine</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Hundreds</td>
+    <td style="border:1px solid #ddd;padding:8px">Add "hundred" after ones digit</td>
+    <td style="border:1px solid #ddd;padding:8px">345 = three hundred forty-five</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Thousands</td>
+    <td style="border:1px solid #ddd;padding:8px">Group by 3 digits, add "thousand"</td>
+    <td style="border:1px solid #ddd;padding:8px">12,345 = twelve thousand three hundred forty-five</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Millions</td>
+    <td style="border:1px solid #ddd;padding:8px">Add "million" after thousands group</td>
+    <td style="border:1px solid #ddd;padding:8px">1,234,567 = one million two hundred thirty-four thousand five hundred sixty-seven</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Billions</td>
+    <td style="border:1px solid #ddd;padding:8px">Add "billion" after millions group</td>
+    <td style="border:1px solid #ddd;padding:8px">2,000,000,000 = two billion</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Zero Handling</td>
+    <td style="border:1px solid #ddd;padding:8px">Skip zero digits within groups</td>
+    <td style="border:1px solid #ddd;padding:8px">101 = one hundred one</td>
+  </tr>
+</table>
+
+<h4>Conversion Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Single Digit Numbers:
+  0 → zero
+  1 → one
+  5 → five
+  9 → nine
+
+Teen Numbers (10-19):
+  10 → ten
+  11 → eleven
+  15 → fifteen
+  19 → nineteen
+
+Tens (20-99):
+  20 → twenty
+  21 → twenty-one
+  45 → forty-five
+  99 → ninety-nine
+
+Hundreds (100-999):
+  100 → one hundred
+  101 → one hundred one
+  250 → two hundred fifty
+  999 → nine hundred ninety-nine
+
+Thousands (1,000-999,999):
+  1,000 → one thousand
+  1,234 → one thousand two hundred thirty-four
+  12,345 → twelve thousand three hundred forty-five
+  100,000 → one hundred thousand
+  999,999 → nine hundred ninety-nine thousand nine hundred ninety-nine
+
+Millions (1,000,000-999,999,999):
+  1,000,000 → one million
+  1,234,567 → one million two hundred thirty-four thousand five hundred sixty-seven
+  50,000,000 → fifty million
+  999,999,999 → nine hundred ninety-nine million nine hundred ninety-nine thousand nine hundred ninety-nine
+
+Billions (1,000,000,000+):
+  1,000,000,000 → one billion
+  2,500,000,000 → two billion five hundred million
+  999,999,999,999 → nine hundred ninety-nine billion nine hundred ninety-nine million nine hundred ninety-nine thousand nine hundred ninety-nine
+</pre>
+
+<h4>Regional Differences</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Feature</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">American English</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">British English</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">After Hundreds</td>
+    <td style="border:1px solid #ddd;padding:8px">No "and" (one hundred twenty)</td>
+    <td style="border:1px solid #ddd;padding:8px">Uses "and" (one hundred and twenty)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Billion Definition</td>
+    <td style="border:1px solid #ddd;padding:8px">10^9 (1,000 million)</td>
+    <td style="border:1px solid #ddd;padding:8px">Modern: 10^9, Traditional: 10^12</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Hyphen Usage</td>
+    <td style="border:1px solid #ddd;padding:8px">21-99 (twenty-one)</td>
+    <td style="border:1px solid #ddd;padding:8px">21-99 (twenty-one)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Number Grouping</td>
+    <td style="border:1px solid #ddd;padding:8px">Commas every 3 digits</td>
+    <td style="border:1px solid #ddd;padding:8px">Spaces or commas</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Check Writing</td>
+    <td style="border:1px solid #ddd;padding:8px">Write dollar amounts in words</td>
+    <td style="border:1px solid #ddd;padding:8px">$1,234.56 = One thousand two hundred thirty-four and 56/100</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Legal Documents</td>
+    <td style="border:1px solid #ddd;padding:8px">Express numbers formally in contracts</td>
+    <td style="border:1px solid #ddd;padding:8px">Loan amount: Five hundred thousand dollars</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Formal Invitations</td>
+    <td style="border:1px solid #ddd;padding:8px">Write dates and times in words</td>
+    <td style="border:1px solid #ddd;padding:8px">Two thousand twenty-six</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Accessibility</td>
+    <td style="border:1px solid #ddd;padding:8px">Screen reader text output</td>
+    <td style="border:1px solid #ddd;padding:8px">Convert numeric displays to speech</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Education</td>
+    <td style="border:1px solid #ddd;padding:8px">Teaching number names to students</td>
+    <td style="border:1px solid #ddd;padding:8px">Learning place value and word forms</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Data Validation</td>
+    <td style="border:1px solid #ddd;padding:8px">Verify numeric input format</td>
+    <td style="border:1px solid #ddd;padding:8px">Confirm written amounts match digits</td>
+  </tr>
+</table>
+
+<h4>Code Examples by Language</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript:
+  const ones = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+  const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+
+  function numberToWords(n) {
+    if (n < 20) return ones[n];
+    if (n < 100) return tens[Math.floor(n / 10)] + (n % 10 ? "-" + ones[n % 10] : "");
+    if (n < 1000) return ones[Math.floor(n / 100)] + " hundred" + (n % 100 ? " " + numberToWords(n % 100) : "");
+    if (n < 1000000) return numberToWords(Math.floor(n / 1000)) + " thousand" + (n % 1000 ? " " + numberToWords(n % 1000) : "");
+    if (n < 1000000000) return numberToWords(Math.floor(n / 1000000)) + " million" + (n % 1000000 ? " " + numberToWords(n % 1000000) : "");
+    return numberToWords(Math.floor(n / 1000000000)) + " billion" + (n % 1000000000 ? " " + numberToWords(n % 1000000000) : "");
+  }
+
+Python:
+  ones = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+  tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+
+  def number_to_words(n):
+      if n < 20:
+          return ones[n]
+      if n < 100:
+          return tens[n // 10] + ("" if n % 10 == 0 else "-" + ones[n % 10])
+      if n < 1000:
+          return ones[n // 100] + " hundred" + ("" if n % 100 == 0 else " " + number_to_words(n % 100))
+      if n < 1000000:
+          return number_to_words(n // 1000) + " thousand" + ("" if n % 1000 == 0 else " " + number_to_words(n % 1000))
+      if n < 1000000000:
+          return number_to_words(n // 1000000) + " million" + ("" if n % 1000000 == 0 else " " + number_to_words(n % 1000000))
+      return number_to_words(n // 1000000000) + " billion" + ("" if n % 1000000000 == 0 else " " + number_to_words(n % 1000000000))
+
+Java:
+  public class NumberToWords {
+      private static final String[] ONES = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
+      private static final String[] TENS = {"", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
+
+      public static String toWords(int n) {
+          if (n < 20) return ONES[n];
+          if (n < 100) return TENS[n / 10] + (n % 10 > 0 ? "-" + ONES[n % 10] : "");
+          if (n < 1000) return ONES[n / 100] + " hundred" + (n % 100 > 0 ? " " + toWords(n % 100) : "");
+          if (n < 1000000) return toWords(n / 1000) + " thousand" + (n % 1000 > 0 ? " " + toWords(n % 1000) : "");
+          if (n < 1000000000) return toWords(n / 1000000) + " million" + (n % 1000000 > 0 ? " " + toWords(n % 1000000) : "");
+          return toWords(n / 1000000000) + " billion" + (n % 1000000000 > 0 ? " " + toWords(n % 1000000000) : "");
+      }
+  }
+
+PHP:
+  function numberToWords($n) {
+      $ones = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+      $tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+
+      if ($n < 20) return $ones[$n];
+      if ($n < 100) return $tens[intval($n / 10)] . ($n % 10 ? "-" . $ones[$n % 10] : "");
+      if ($n < 1000) return $ones[intval($n / 100)] . " hundred" . ($n % 100 ? " " . numberToWords($n % 100) : "");
+      if ($n < 1000000) return numberToWords(intval($n / 1000)) . " thousand" . ($n % 1000 ? " " . numberToWords($n % 1000) : "");
+      if ($n < 1000000000) return numberToWords(intval($n / 1000000)) . " million" . ($n % 1000000 ? " " . numberToWords($n % 1000000) : "");
+      return numberToWords(intval($n / 1000000000)) . " billion" . ($n % 1000000000 ? " " . numberToWords($n % 1000000000) : "");
+  }
+
+C#:
+  public static string ToWords(long n)
+  {
+      string[] ones = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
+      string[] tens = { "", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
+
+      if (n < 20) return ones[n];
+      if (n < 100) return tens[n / 10] + (n % 10 > 0 ? "-" + ones[n % 10] : "");
+      if (n < 1000) return ones[n / 100] + " hundred" + (n % 100 > 0 ? " " + ToWords(n % 100) : "");
+      if (n < 1000000) return ToWords(n / 1000) + " thousand" + (n % 1000 > 0 ? " " + ToWords(n % 1000) : "");
+      if (n < 1000000000) return ToWords(n / 1000000) + " million" + (n % 1000000 > 0 ? " " + ToWords(n % 1000000) : "");
+      return ToWords(n / 1000000000) + " billion" + (n % 1000000000 > 0 ? " " + ToWords(n % 1000000000) : "");
+  }
+</pre>
+
+<h4>Special Cases</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Numbers with Zeros:
+  100 → one hundred (not "one hundred zero zero")
+  1000 → one thousand (not "one thousand zero")
+  1001 → one thousand one (skip internal zeros)
+  1010 → one thousand ten
+  1100 → one thousand one hundred
+  10000 → ten thousand
+  100000 → one hundred thousand
+  1000000 → one million
+
+Compound Numbers (Hyphenation):
+  21 → twenty-one
+  35 → thirty-five
+  48 → forty-eight (note: "forty" not "fourty")
+  57 → fifty-seven
+  63 → sixty-three
+  79 → seventy-nine
+  86 → eighty-six
+  92 → ninety-two
+  99 → ninety-nine
+
+Spelling Notes:
+  40 → forty (NOT fourty - common mistake)
+  14 → fourteen (keeps "four")
+  15 → fifteen (NOT fiveteen)
+  18 → eighteen (only one 't')
+  80 → eighty (only one 't')
+</pre>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Check spelling:</strong> "Forty" is correct (not "fourty"), "eighteen" has one 't'.</li>
+  <li><strong>Use hyphens correctly:</strong> Hyphenate compound numbers 21-99 (twenty-one, not twenty one).</li>
+  <li><strong>Know your audience:</strong> Use "and" for British English, omit for American English.</li>
+  <li><strong>Handle large numbers:</strong> Break into groups of three for readability.</li>
+  <li><strong>Verify financial amounts:</strong> Always double-check written amounts on checks and contracts.</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>Range limit:</strong> Supports numbers up to 999,999,999,999 (999 billion) only.</li>
+  <li><strong>No ordinal forms:</strong> Produces cardinal numbers only (one, two, three), not ordinals (first, second, third).</li>
+  <li><strong>English only:</strong> Does not support other languages or locale-specific number formats.</li>
+  <li><strong>No currency formatting:</strong> Does not add currency symbols or handle decimal fractions.</li>
+  <li><strong>Short scale only:</strong> Uses US/modern UK billion (10^9), not long scale (10^12).</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Number To Words used for?</dt>
-  <dd>Number To Words is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>How does number to word conversion work?</dt>
+  <dd>The algorithm breaks numbers into groups of three digits (periods) and converts each group using ones, tens, and hundreds words. Groups are processed recursively from largest to smallest, with scale words (thousand, million, billion) appended. Compound numbers 21-99 use hyphens between tens and ones.</dd>
+
+  <dt>When should hyphens be used in number words?</dt>
+  <dd>Hyphens connect tens and ones in compound numbers from 21 to 99 (e.g., twenty-one, ninety-nine). Hyphens are not used between hundreds and the rest (e.g., one hundred twenty-three). Numbers 1-20 have unique names without hyphens.</dd>
+
+  <dt>What is the difference between short scale and long scale?</dt>
+  <dd>Short scale (US, modern UK) defines billion as 10^9 (1,000 million). Long scale (traditional European) defines billion as 10^12 (1 million million). This tool uses short scale naming, which is standard in most English-speaking countries.</dd>
+
+  <dt>How are large numbers grouped?</dt>
+  <dd>Numbers are grouped into periods of three digits, separated by commas. Each period has a name: ones (1-999), thousands (1,000-999,999), millions (1,000,000-999,999,999), billions (1,000,000,000+). The pattern continues with trillions, quadrillions, etc.</dd>
+
+  <dt>Should 'and' be used in number words?</dt>
+  <dd>British English traditionally uses 'and' after hundreds (e.g., one hundred and twenty-three). American English typically omits 'and' (e.g., one hundred twenty-three). This tool follows American convention without 'and' for consistency.</dd>
+
+  <dt>How is zero handled?</dt>
+  <dd>Zero is expressed as 'zero' when it appears alone. In larger numbers, zero digits within a period are skipped (e.g., 101 = one hundred one, 1000 = one thousand). Leading zeros are ignored.</dd>
 </dl>
 </section>
 </main>
 <script>
-var ones="zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split(" ")
-var tens=["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"]
 function word(n){
-if(n<20)return ones[n]
-if(n<100)return tens[~~(n/10)]+(n%10?"-"+ones[n%10]:"")
-if(n<1000)return ones[~~(n/100)]+" hundred"+(n%100?" "+word(n%100):"")
-if(n<1e6)return word(~~(n/1000))+" thousand"+(n%1000?" "+word(n%1000):"")
-if(n<1e9)return word(~~(n/1e6))+" million"+(n%1e6?" "+word(n%1e6):"")
-return word(~~(n/1e9))+" billion"+(n%1e9?" "+word(n%1e9):"")
+if(n<20)return"zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split(" ")[n];
+if(n<100){var t=["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"][Math.floor(n/10)];return t+(n%10?"-"+word(n%10):"");}
+if(n<1000)return word(Math.floor(n/100))+" hundred"+(n%100?" "+word(n%100):"");
+if(n<1e6)return word(Math.floor(n/1000))+" thousand"+(n%1000?" "+word(n%1000):"");
+if(n<1e9)return word(Math.floor(n/1e6))+" million"+(n%1e6?" "+word(n%1e6):"");
+return word(Math.floor(n/1e9))+" billion"+(n%1e9?" "+word(n%1e9):"");
 }
-function convert(){
-var n=parseInt(document.getElementById("num").value,10)
-if(isNaN(n)||n<0||n>999999999999){document.getElementById("result").innerText="Enter 0–999999999999.";document.getElementById("status").innerText="Invalid number.";document.getElementById("status").style.color="#b91c1c";return}
-document.getElementById("result").innerText=word(n)
-document.getElementById("status").innerText="Converted successfully."
-document.getElementById("status").style.color="#16a34a"
-}
-
-function copyResult(){
-var value=document.getElementById("result").innerText.trim()
-if(!value){
-document.getElementById("status").innerText="Nothing to copy."
-document.getElementById("status").style.color="#b91c1c"
-return
-}
-navigator.clipboard.writeText(value).then(function(){
-document.getElementById("status").innerText="Result copied."
-document.getElementById("status").style.color="#16a34a"
-}).catch(function(){
-document.getElementById("status").innerText="Copy failed."
-document.getElementById("status").style.color="#b91c1c"
-})
-}
+document.getElementById("input").addEventListener("input",function(){
+var v=parseFloat(this.value);
+document.getElementById("output").value=isNaN(v)?"":word(Math.floor(v));
+});
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>

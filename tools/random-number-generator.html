@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <title>Random Number Generator – Generate Random Numbers Online | ToolForge</title>
-<meta name="description" content="Free online Random Number Generator to pick random integers in a range, with support for multiple values and optional duplicates. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Generate random integers in a custom range. Supports multiple values, unique picks, and secure crypto randomness. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/random-number-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Random Number Generator – Generate Random Numbers Online | ToolForge">
-<meta property="og:description" content="Free online Random Number Generator to pick random integers in a range, with support for multiple values and optional duplicates. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Generate random integers in a custom range. Supports multiple values, unique picks, and secure crypto randomness. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/random-number-generator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Random Number Generator – Generate Random Numbers Online | ToolForge">
-<meta name="twitter:description" content="Free online Random Number Generator to pick random integers in a range, with support for multiple values and optional duplicates. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Generate random integers in a custom range. Supports multiple values, unique picks, and secure crypto randomness. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
-
 
 <script type="application/ld+json">
 {
@@ -26,64 +24,62 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Random Number Generator?",
+      "name": "How does random number generation work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Random Number Generator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Random number generators use either pseudo-random algorithms (Math.random) or cryptographically secure sources (crypto.getRandomValues). The tool maps random values to your specified range using modular arithmetic. For unique picks, it uses a Fisher-Yates style selection from a pool of available numbers."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between allowing and disallowing duplicates?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "With duplicates allowed, each number is independently selected, so the same value can appear multiple times. Without duplicates, each number can only be selected once, using sampling without replacement. This affects probability: with duplicates, each pick has equal chance; without, probabilities change after each pick."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is a uniform distribution?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "A uniform distribution means every number in the range has equal probability of being selected. For range 1-100, each number has 1% chance. Over many trials, each number should appear approximately the same number of times. This tool ensures uniform distribution across the specified range."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I generate random numbers for cryptographic purposes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "This tool uses crypto.getRandomValues() when available for secure random number generation. However, for cryptographic keys, tokens, or passwords, use dedicated tools like the Password Generator or Random String Generator, which are designed for security-sensitive applications with appropriate character sets and entropy."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What are common use cases for random number generation?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Common uses include: lottery and raffle number selection, classroom activities and student selection, test data generation, statistical sampling, simulation inputs, game mechanics (dice rolls, damage calculation), scientific experiments, and randomized controlled trials."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How is this different from a dice roll?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "A standard die produces numbers 1-6 with equal probability. This tool can generate any range (e.g., 1-100, -50 to 50). Dice are physical objects subject to wear and bias; digital generators use mathematical algorithms. Multiple dice can be simulated by generating multiple numbers and summing."
       }
     }
   ]
 }
 </script>
 </head>
-
 <body>
-
 <main class="container">
-
 <h1>Random Number Generator</h1>
-
 <p class="subtitle">Generate random integers in a custom range, with options for multiple values and unique picks.</p>
-
 <p><a href="/">Back to all tools on ToolForge</a></p>
-
 <h3>Settings</h3>
-
 <p>
 Min:
 <label for="min" class="sr-only">Minimum value</label>
@@ -92,121 +88,481 @@ Max:
 <label for="max" class="sr-only">Maximum value</label>
 <input id="max" type="number" style="width:120px" value="100" aria-label="Maximum value">
 </p>
-
 <p>
 How many numbers:
 <label for="count" class="sr-only">Count</label>
 <input id="count" type="number" style="width:120px" value="1" min="1" max="1000" aria-label="Count">
 </p>
-
 <p>
 Allow duplicates?
 <label style="margin-left:6px;font-size:13px;">
 <input id="allowDup" type="checkbox" checked> Yes
 </label>
 </p>
-
 <button onclick="generate()">Generate</button>
-
 <h3 style="margin-top:24px">Result</h3>
 <label for="output" class="sr-only">Output text</label>
 <textarea id="output" rows="8" style="width:90%" readonly aria-label="Output text"></textarea>
-
 <p id="status" style="color:#666;margin-top:8px">Ready.</p>
-
 <section class="tool-seo">
 <h3>About Random Number Generator</h3>
-<p>This random number generator creates integers in a custom range, with options for multiple values and unique picks.</p>
-<p>It is useful for test data, giveaways, classroom activities, simulations and any quick decision-making task that needs fair random numbers.</p>
+<p>This random number generator creates integers in a custom range using uniform distribution. It supports generating multiple values with options for unique picks (sampling without replacement) or allowing duplicates (sampling with replacement). The tool uses crypto.getRandomValues() when available for cryptographically secure random number generation.</p>
+<p>It is useful for lottery and raffle number selection, classroom activities, test data generation, statistical sampling, simulation inputs, game mechanics, scientific experiments, and randomized controlled trials.</p>
+
+<h4>Random Number Generation Methods</h4>
+<p>Two approaches for generating random numbers:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Random Sources:
+
+1. crypto.getRandomValues (Secure)
+   - Uses OS entropy pool
+   - Cryptographically secure PRNG
+   - Uniform distribution guaranteed
+   - Recommended for fair outcomes
+
+   Implementation:
+   const array = new Uint32Array(1);
+   crypto.getRandomValues(array);
+   const random = array[0] / 0xFFFFFFFF;
+   const number = min + Math.floor(random * range);
+
+2. Math.random (Standard)
+   - Pseudo-random algorithm
+   - Fast, suitable for casual use
+   - Implementation-dependent quality
+
+   Implementation:
+   const random = Math.random();
+   const number = min + Math.floor(random * range);
+
+Range Mapping:
+  Given range [min, max]:
+  rangeSize = max - min + 1
+  randomNumber = min + floor(random × rangeSize)
+
+  Example: range [1, 100]
+  rangeSize = 100 - 1 + 1 = 100
+  randomNumber = 1 + floor(random × 100)
+  Result: integer from 1 to 100
+</pre>
+
+<h4>Sampling Methods</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Property</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">With Replacement</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Without Replacement</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Duplicates</td>
+    <td style="border:1px solid #ddd;padding:8px">Allowed</td>
+    <td style="border:1px solid #ddd;padding:8px">Not allowed</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Probability</td>
+    <td style="border:1px solid #ddd;padding:8px">Same for each pick</td>
+    <td style="border:1px solid #ddd;padding:8px">Changes after each pick</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Independence</td>
+    <td style="border:1px solid #ddd;padding:8px">Independent trials</td>
+    <td style="border:1px solid #ddd;padding:8px">Dependent trials</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Max picks</td>
+    <td style="border:1px solid #ddd;padding:8px">Unlimited</td>
+    <td style="border:1px solid #ddd;padding:8px">Limited to range size</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Use case</td>
+    <td style="border:1px solid #ddd;padding:8px">Dice rolls, lottery</td>
+    <td style="border:1px solid #ddd;padding:8px">Raffles, sampling</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Algorithm</td>
+    <td style="border:1px solid #ddd;padding:8px">Direct random</td>
+    <td style="border:1px solid #ddd;padding:8px">Pool selection</td>
+  </tr>
+</table>
+
+<h4>Probability Reference</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+With Replacement (Duplicates Allowed):
+
+For range [1, N] with k picks:
+  - Each number has probability 1/N per pick
+  - Probability of specific number appearing at least once:
+    P = 1 - (1 - 1/N)^k
+
+Example: Range [1, 100], 10 picks
+  P(any specific number) = 1 - (0.99)^10 = 0.0956 = 9.56%
+
+Without Replacement (Unique Picks):
+
+For range [1, N] with k picks (k ≤ N):
+  - First pick: probability 1/N
+  - Second pick: probability 1/(N-1)
+  - k-th pick: probability 1/(N-k+1)
+
+Example: Range [1, 10], picking 3 numbers
+  P(first pick = 5) = 1/10 = 10%
+  P(second pick = 7 | first ≠ 7) = 1/9 = 11.1%
+  P(third pick = 3 | first two ≠ 3) = 1/8 = 12.5%
+
+Expected Statistics (1000 trials, range 1-10):
+
+Number | Expected Count | Expected Frequency
+-------|----------------|-------------------
+1      | 100            | 10.0%
+2      | 100            | 10.0%
+3      | 100            | 10.0%
+4      | 100            | 10.0%
+5      | 100            | 10.0%
+6      | 100            | 10.0%
+7      | 100            | 10.0%
+8      | 100            | 10.0%
+9      | 100            | 10.0%
+10     | 100            | 10.0%
+</pre>
+
+<h4>Common Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Typical Range</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Duplicates</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Count</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Lottery Pick</td>
+    <td style="border:1px solid #ddd;padding:8px">1-49 or 1-69</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+    <td style="border:1px solid #ddd;padding:8px">5-7</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Dice Roll (d6)</td>
+    <td style="border:1px solid #ddd;padding:8px">1-6</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">1-5</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Dice Roll (d20)</td>
+    <td style="border:1px solid #ddd;padding:8px">1-20</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Raffle Drawing</td>
+    <td style="border:1px solid #ddd;padding:8px">1-ticket count</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+    <td style="border:1px solid #ddd;padding:8px">Winner count</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Classroom Selection</td>
+    <td style="border:1px solid #ddd;padding:8px">1-class size</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+    <td style="border:1px solid #ddd;padding:8px">1 or more</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Test Data</td>
+    <td style="border:1px solid #ddd;padding:8px">Variable</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">As needed</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Percentage</td>
+    <td style="border:1px solid #ddd;padding:8px">1-100</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Coin Flip</td>
+    <td style="border:1px solid #ddd;padding:8px">1-2</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+  </tr>
+</table>
+
+<h4>Code Examples by Language</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript:
+  // Single random number in range
+  function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  // Multiple unique numbers
+  function randomUnique(min, max, count) {
+    const pool = [];
+    for (let i = min; i <= max; i++) pool.push(i);
+    const result = [];
+    for (let i = 0; i < count; i++) {
+      const idx = Math.floor(Math.random() * pool.length);
+      result.push(pool[idx]);
+      pool.splice(idx, 1);
+    }
+    return result;
+  }
+
+  // Using crypto (secure)
+  function secureRandomInt(min, max) {
+    const array = new Uint32Array(1);
+    crypto.getRandomValues(array);
+    const range = max - min + 1;
+    return min + (array[0] % range);
+  }
+
+Python:
+  import random
+
+  # Single number
+  random.randint(1, 100)
+
+  # Multiple with duplicates
+  [random.randint(1, 100) for _ in range(5)]
+
+  # Multiple unique
+  random.sample(range(1, 101), 5)
+
+  # Secure random
+  import secrets
+  secrets.randbelow(100) + 1
+
+PHP:
+  // Single number
+  rand(1, 100);
+
+  // Secure (PHP 7+)
+  random_int(1, 100);
+
+  // Multiple unique
+  $numbers = range(1, 100);
+  shuffle($numbers);
+  $result = array_slice($numbers, 0, 5);
+
+Java:
+  import java.util.Random;
+  import java.security.SecureRandom;
+
+  Random rand = new Random();
+  int num = rand.nextInt(100) + 1;  // 1-100
+
+  // Unique numbers
+  List<Integer> numbers = IntStream.rangeClosed(1, 100)
+      .boxed().collect(Collectors.toList());
+  Collections.shuffle(numbers);
+  List<Integer> result = numbers.subList(0, 5);
+
+  // Secure
+  SecureRandom secure = new SecureRandom();
+  int num = secure.nextInt(100) + 1;
+
+C#:
+  var rand = new Random();
+  int num = rand.Next(1, 101);  // 1-100
+
+  // Unique numbers
+  var numbers = Enumerable.Range(1, 100).OrderBy(x => rand.Next()).Take(5);
+
+  // Secure
+  using System.Security.Cryptography;
+  var rng = RandomNumberGenerator.Create();
+  var data = new byte[4];
+  rng.GetBytes(data);
+  int num = BitConverter.ToInt32(data, 0) % 100 + 1;
+</pre>
+
+<h4>Random Number Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Single Number (1-100)
+  Result: 47
+  Use: General purpose, percentage
+
+Example 2: Lottery Pick (1-49, 6 unique)
+  Result: 7, 15, 23, 31, 42, 48
+  Use: Lottery simulation
+
+Example 3: Dice Roll (1-6)
+  Result: 4
+  Use: Board game
+
+Example 4: Multiple Dice (1-6, 3 dice)
+  Result: 2, 5, 3 (sum: 10)
+  Use: RPG damage roll
+
+Example 5: d20 Roll (1-20)
+  Result: 17
+  Use: D&D attack roll
+
+Example 6: Coin Flip (1-2)
+  Result: 1 (Heads)
+  Use: Binary decision
+
+Example 7: Classroom Pick (1-30, unique)
+  Result: 14
+  Use: Select student
+
+Example 8: Test Data (1-1000, 10 values)
+  Result: 234, 567, 123, 890, 456, 789, 321, 654, 987, 432
+  Use: Sample dataset
+
+Example 9: Raffle Winners (1-500, 3 unique)
+  Result: 127, 345, 89
+  Use: Prize drawing
+
+Example 10: Negative Range (-10 to 10)
+  Result: -3
+  Use: Temperature offset
+</pre>
+
+<h4>Fisher-Yates Shuffle</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+The Fisher-Yates shuffle generates a random permutation
+of a finite sequence. It's used for unique number selection.
+
+Algorithm:
+  1. Create array [min, min+1, ..., max]
+  2. For i from n-1 down to 1:
+     a. Pick random j from 0 to i
+     b. Swap array[i] and array[j]
+  3. Take first k elements
+
+JavaScript Implementation:
+  function fisherYates(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  // Get k unique numbers from range
+  function pickUnique(min, max, k) {
+    const pool = [];
+    for (let i = min; i <= max; i++) pool.push(i);
+    return fisherYates(pool).slice(0, k);
+  }
+
+Time Complexity: O(n) where n = range size
+Space Complexity: O(n) for the pool array
+</pre>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Choose appropriate range:</strong> Ensure min and max cover all possible desired values.</li>
+  <li><strong>Consider duplicates:</strong> Use unique picks for raffles/lotteries; allow duplicates for dice/simulations.</li>
+  <li><strong>Verify range size:</strong> When picking unique numbers, count cannot exceed range size.</li>
+  <li><strong>Use secure random for important selections:</strong> Cryptographic randomness for security-sensitive applications.</li>
+  <li><strong>Document seed for reproducibility:</strong> For scientific experiments, record the random seed if possible.</li>
+  <li><strong>Test distribution:</strong> For critical applications, verify uniform distribution over many trials.</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>Integer only:</strong> Does not generate floating-point or decimal numbers.</li>
+  <li><strong>Range limits:</strong> Very large ranges may cause performance issues.</li>
+  <li><strong>Browser dependent:</strong> Secure random requires Web Crypto API support.</li>
+  <li><strong>No persistence:</strong> Generated numbers are not stored; record important results.</li>
+  <li><strong>Not for cryptography:</strong> While using secure random, this tool is not designed for cryptographic key generation.</li>
+  <li><strong>Maximum count:</strong> Limited to 1000 numbers per generation to prevent browser slowdown.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Random Number Generator?</dt>
-  <dd>Random Number Generator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How does random number generation work?</dt>
+  <dd>Random number generators use either pseudo-random algorithms (Math.random) or cryptographically secure sources (crypto.getRandomValues). The tool maps random values to your specified range using modular arithmetic. For unique picks, it uses a Fisher-Yates style selection from a pool of available numbers.</dd>
+
+  <dt>What is the difference between allowing and disallowing duplicates?</dt>
+  <dd>With duplicates allowed, each number is independently selected, so the same value can appear multiple times. Without duplicates, each number can only be selected once, using sampling without replacement. This affects probability: with duplicates, each pick has equal chance; without, probabilities change after each pick.</dd>
+
+  <dt>What is a uniform distribution?</dt>
+  <dd>A uniform distribution means every number in the range has equal probability of being selected. For range 1-100, each number has 1% chance. Over many trials, each number should appear approximately the same number of times. This tool ensures uniform distribution across the specified range.</dd>
+
+  <dt>How do I generate random numbers for cryptographic purposes?</dt>
+  <dd>This tool uses crypto.getRandomValues() when available for secure random number generation. However, for cryptographic keys, tokens, or passwords, use dedicated tools like the Password Generator or Random String Generator, which are designed for security-sensitive applications with appropriate character sets and entropy.</dd>
+
+  <dt>What are common use cases for random number generation?</dt>
+  <dd>Common uses include: lottery and raffle number selection, classroom activities and student selection, test data generation, statistical sampling, simulation inputs, game mechanics (dice rolls, damage calculation), scientific experiments, and randomized controlled trials.</dd>
+
+  <dt>How is this different from a dice roll?</dt>
+  <dd>A standard die produces numbers 1-6 with equal probability. This tool can generate any range (e.g., 1-100, -50 to 50). Dice are physical objects subject to wear and bias; digital generators use mathematical algorithms. Multiple dice can be simulated by generating multiple numbers and summing.</dd>
 </dl>
 </section>
 </main>
-
 <script>
-
 function setStatus(msg,isError){
-let el=document.getElementById("status")
-el.innerText=msg
-el.style.color=isError?"#b91c1c":"#16a34a"
+let el=document.getElementById("status");
+el.innerText=msg;
+el.style.color=isError?"#b91c1c":"#16a34a";
+}
+
+function getRandomInt(max){
+if(window.crypto&&crypto.getRandomValues){
+var array=new Uint32Array(1);
+crypto.getRandomValues(array);
+return array[0]%max;
+}
+return Math.floor(Math.random()*max);
 }
 
 function generate(){
-
-let min=parseInt(document.getElementById("min").value,10)
-let max=parseInt(document.getElementById("max").value,10)
-let count=parseInt(document.getElementById("count").value,10)
-let allowDup=document.getElementById("allowDup").checked
+let min=parseInt(document.getElementById("min").value,10);
+let max=parseInt(document.getElementById("max").value,10);
+let count=parseInt(document.getElementById("count").value,10);
+let allowDup=document.getElementById("allowDup").checked;
 
 if(isNaN(min)||isNaN(max)||isNaN(count)){
-setStatus("Please enter valid numbers.",true)
-return
+setStatus("Please enter valid numbers.",true);
+return;
 }
 
 if(max<min){
-[min,max]=[max,min]
+[min,max]=[max,min];
 }
 
 if(count<1){
-count=1
-document.getElementById("count").value="1"
+count=1;
+document.getElementById("count").value="1";
 }
 
 if(count>1000){
-count=1000
-document.getElementById("count").value="1000"
+count=1000;
+document.getElementById("count").value="1000";
 }
 
-let rangeSize=max-min+1
+let rangeSize=max-min+1;
 
-if(!allowDup && count>rangeSize){
-setStatus("Count is larger than range size when duplicates are disabled.",true)
-return
+if(!allowDup&&count>rangeSize){
+setStatus("Count is larger than range size when duplicates are disabled.",true);
+return;
 }
 
-let result=[]
+let result=[];
 
 if(allowDup){
 for(let i=0;i<count;i++){
-let n=Math.floor(Math.random()*rangeSize)+min
-result.push(n)
+let n=getRandomInt(rangeSize)+min;
+result.push(n);
 }
 }else{
-let pool=[]
+let pool=[];
 for(let v=min;v<=max;v++){
-pool.push(v)
+pool.push(v);
 }
 for(let i=0;i<count;i++){
-let idx=Math.floor(Math.random()*pool.length)
-result.push(pool[idx])
-pool.splice(idx,1)
+let idx=getRandomInt(pool.length);
+result.push(pool[idx]);
+pool.splice(idx,1);
 }
 }
 
-document.getElementById("output").value=result.join(", ")
-setStatus("Generated "+count+" number(s).",false)
+document.getElementById("output").value=result.join(", ");
+setStatus("Generated "+count+" number(s).",false);
 }
-
 </script>
-
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>
 </body>
 </html>
-

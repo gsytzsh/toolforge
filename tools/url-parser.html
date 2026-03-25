@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <title>URL Parser – Split URLs into Path, Host and Query Parameters | ToolForge</title>
-<meta name="description" content="Free online URL Parser to split a URL into protocol, host, path, hash and query parameters for redirect checks, tracking links and API debugging. Part of the ToolForge developer tools collection.">
+<meta name="description" content="URL Parser decomposes URLs into protocol, hostname, port, pathname, search parameters, and hash fragments. Essential for API debugging, redirect analysis, and link inspection. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/url-parser.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="URL Parser – Split URLs into Path, Host and Query Parameters | ToolForge">
-<meta property="og:description" content="Free online URL Parser to split a URL into protocol, host, path, hash and query parameters for redirect checks, tracking links and API debugging. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="URL Parser decomposes URLs into protocol, hostname, port, pathname, search parameters, and hash fragments. Essential for API debugging, redirect analysis, and link inspection. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/url-parser.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="URL Parser – Split URLs into Path, Host and Query Parameters | ToolForge">
-<meta name="twitter:description" content="Free online URL Parser to split a URL into protocol, host, path, hash and query parameters for redirect checks, tracking links and API debugging. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="URL Parser decomposes URLs into protocol, hostname, port, pathname, search parameters, and hash fragments. Essential for API debugging, redirect analysis, and link inspection. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
-
 
 <script type="application/ld+json">
 {
@@ -26,60 +24,60 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Url Parser?",
+      "name": "What are the components of a URL?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Url Parser is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "A URL consists of: protocol (https://), hostname (www.example.com), port (optional, :8080), pathname (/path/to/resource), search query (?key=value&foo=bar), and hash fragment (#section). The hostname may include subdomain and TLD. Port 443 is default for HTTPS, 80 for HTTP."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between hostname and host?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "hostname is just the domain name (www.example.com). host includes the domain plus port if specified (www.example.com:8080). If no explicit port is given, host and hostname appear identical. Use hostname when you only need the domain; use host when port matters."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How are query parameters parsed?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Query parameters follow the ? in a URL and are formatted as key=value pairs separated by &. The parser decodes URL-encoded values (%20→space, %26→&). Duplicate keys (tag=foo&tag=bar) are collected into arrays. Empty values and boolean flags are preserved as-is."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is a URL hash fragment used for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "The hash fragment (#section) identifies a specific section within a page. It's never sent to the server—only used client-side for scrolling to anchors, single-page app routing, or tracking scroll position. Common in documentation sites (#installation, #api-reference) and SPA navigation."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "Why parse URLs for debugging?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Parsing reveals the exact structure of complex URLs: verifying redirect chains have correct parameters, checking API endpoints use proper authentication tokens, confirming tracking pixels fire with right UTMs, debugging OAuth callback URLs, and ensuring deep links route to correct app sections."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What is URL encoding and how does it affect parsing?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "URL encoding (percent-encoding) converts special characters to %XX format. Spaces become %20, ampersands %26, equals %3D. During parsing, these are automatically decoded for display. A parameter value of 'hello%20world' displays as 'hello world'. This ensures safe transmission while maintaining readability."
       }
     }
   ]
 }
 </script>
 </head>
-
 <body>
-
 <main class="container">
-
 <h1>URL Parser</h1>
-
-<p class="subtitle">Split a URL into protocol, host, path, hash and query parameters for debugging and inspection.</p>
-
+<p class="subtitle">Decompose URLs into protocol, hostname, port, pathname, query parameters, and hash fragments for debugging and analysis.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <h3>Input URL</h3>
@@ -102,25 +100,251 @@
 
 <section class="tool-seo">
 <h3>About URL Parser</h3>
-<p>This URL parser breaks a URL into protocol, host, path and query parameters so each part is easier to inspect.</p>
-<p>It is useful for debugging redirect links, tracking URLs, API endpoints and callback URLs when you need to confirm exactly how a URL is structured.</p>
+<p>This URL parser decomposes a complete URL into its constituent parts: protocol, hostname, port, pathname, search query string, individual query parameters, and hash fragment for detailed inspection and debugging.</p>
+<p>It is useful for API endpoint debugging, OAuth callback verification, redirect chain analysis, tracking link inspection, deep link validation, query parameter auditing, SPA route debugging, and understanding the exact structure of complex URLs with multiple parameters.</p>
+
+<h4>URL Structure Breakdown</h4>
+<p>A complete URL follows this structure:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+URL: https://www.example.com:8080/path/to/page?user=123&token=abc#section
+
+Components:
+├── protocol:  https://
+├── hostname:  www.example.com
+├── port:      8080
+├── pathname:  /path/to/page
+├── search:    ?user=123&token=abc
+├── hash:      #section
+└── host:      www.example.com:8080 (hostname + port)
+
+Query Parameters (parsed):
+├── user:  123
+└── token: abc
+</pre>
+
+<h4>URL Component Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Component</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">protocol</td>
+    <td style="border:1px solid #ddd;padding:8px">The scheme/protocol used</td>
+    <td style="border:1px solid #ddd;padding:8px">https:, http:, ftp:, mailto:</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">hostname</td>
+    <td style="border:1px solid #ddd;padding:8px">The domain name (without port)</td>
+    <td style="border:1px solid #ddd;padding:8px">www.example.com, api.github.com</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">port</td>
+    <td style="border:1px solid #ddd;padding:8px">Explicit port number (if any)</td>
+    <td style="border:1px solid #ddd;padding:8px">8080, 3000, 443 (default for HTTPS)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">pathname</td>
+    <td style="border:1px solid #ddd;padding:8px">The path to the resource</td>
+    <td style="border:1px solid #ddd;padding:8px">/api/v1/users, /docs/index.html</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">search</td>
+    <td style="border:1px solid #ddd;padding:8px">Query string including ?</td>
+    <td style="border:1px solid #ddd;padding:8px">?id=123&sort=desc</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">hash</td>
+    <td style="border:1px solid #ddd;padding:8px">Fragment identifier including #</td>
+    <td style="border:1px solid #ddd;padding:8px">#top, #section-2, #comment-456</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">host</td>
+    <td style="border:1px solid #ddd;padding:8px">Hostname + port combined</td>
+    <td style="border:1px solid #ddd;padding:8px">example.com:8080</td>
+  </tr>
+</table>
+
+<h4>Common URL Examples by Protocol</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Protocol</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example URL</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">https:</td>
+    <td style="border:1px solid #ddd;padding:8px">https://api.example.com/v1/users?id=123</td>
+    <td style="border:1px solid #ddd;padding:8px">Secure web APIs</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">http:</td>
+    <td style="border:1px solid #ddd;padding:8px">http://localhost:3000/dev</td>
+    <td style="border:1px solid #ddd;padding:8px">Local development</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">mailto:</td>
+    <td style="border:1px solid #ddd;padding:8px">mailto:user@example.com?subject=Hello</td>
+    <td style="border:1px solid #ddd;padding:8px">Email links</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">tel:</td>
+    <td style="border:1px solid #ddd;padding:8px">tel:+1-555-123-4567</td>
+    <td style="border:1px solid #ddd;padding:8px">Click-to-call links</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">ftp:</td>
+    <td style="border:1px solid #ddd;padding:8px">ftp://files.example.com/pub/file.zip</td>
+    <td style="border:1px solid #ddd;padding:8px">File transfers</td>
+  </tr>
+</table>
+
+<h4>Query Parameter Parsing Details</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Input URL:
+https://shop.example.com/products?category=shoes&size=10&size=11&color=red#details
+
+Parsed Query Parameters:
+{
+  "category": "shoes",
+  "size": ["10", "11"],    // Array for duplicate keys
+  "color": "red"
+}
+
+Hash Fragment: #details
+
+<!-- Note:
+  - Duplicate keys (size) become arrays
+  - Values are URL-decoded automatically
+  - Hash is separate from query string
+-->
+</pre>
+
+<h4>URL Encoding in Parameters</h4>
+<p>Special characters in query values are percent-encoded:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Encoded</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Decoded</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">%20</td>
+    <td style="border:1px solid #ddd;padding:8px">Space</td>
+    <td style="border:1px solid #ddd;padding:8px">search?q=hello%20world</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">%26</td>
+    <td style="border:1px solid #ddd;padding:8px">Ampersand (&)</td>
+    <td style="border:1px solid #ddd;padding:8px">data=a%26b (value contains &)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">%3D</td>
+    <td style="border:1px solid #ddd;padding:8px">Equals (=)</td>
+    <td style="border:1px solid #ddd;padding:8px">formula=x%3D1 (value contains =)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">%2F</td>
+    <td style="border:1px solid #ddd;padding:8px">Forward slash (/)</td>
+    <td style="border:1px solid #ddd;padding:8px">url=http%3A%2F%2Fexample.com</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">%3F</td>
+    <td style="border:1px solid #ddd;padding:8px">Question mark (?)</td>
+    <td style="border:1px solid #ddd;padding:8px">redirect=%3Fhome</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>API Debugging:</strong> Verify endpoint URLs have correct authentication tokens and parameters</li>
+  <li><strong>OAuth Flows:</strong> Inspect callback URLs for authorization codes and state parameters</li>
+  <li><strong>Redirect Analysis:</strong> Check redirect chains preserve UTM parameters and tracking data</li>
+  <li><strong>Deep Linking:</strong> Validate mobile app links route to correct screens with proper data</li>
+  <li><strong>SPA Routing:</strong> Debug client-side routes and hash-based navigation</li>
+  <li><strong>Security Auditing:</strong> Identify exposed tokens, keys, or sensitive data in URLs</li>
+</ul>
+
+<h4>Port Reference for Common Protocols</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Protocol</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Default Port</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">When Explicit Port Needed</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">HTTP</td>
+    <td style="border:1px solid #ddd;padding:8px">80</td>
+    <td style="border:1px solid #ddd;padding:8px">Development servers, proxies</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">HTTPS</td>
+    <td style="border:1px solid #ddd;padding:8px">443</td>
+    <td style="border:1px solid #ddd;padding:8px">Custom SSL endpoints</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">FTP</td>
+    <td style="border:1px solid #ddd;padding:8px">21</td>
+    <td style="border:1px solid #ddd;padding:8px">Alternative FTP servers</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">SSH</td>
+    <td style="border:1px solid #ddd;padding:8px">22</td>
+    <td style="border:1px solid #ddd;padding:8px">Remote Git, SCP, SFTP</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Local Dev</td>
+    <td style="border:1px solid #ddd;padding:8px">Varies (3000, 8000, 8080)</td>
+    <td style="border:1px solid #ddd;padding:8px">Development servers</td>
+  </tr>
+</table>
+
+<h4>Parsing Edge Cases</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Edge Case 1: Relative URL
+Input:  /path/to/page?query=1
+Result: Requires base URL to resolve protocol/host
+
+Edge Case 2: Empty Parameter Value
+Input:  ?flag&key=value
+Result: flag="", key="value"
+
+Edge Case 3: Duplicate Keys
+Input:  ?tag=foo&tag=bar&tag=baz
+Result: tag: ["foo", "bar", "baz"]
+
+Edge Case 4: Nested/Encoded URLs
+Input:  ?redirect=https%3A%2F%2Fexample.com%3Ffoo%3D1
+Result: redirect: "https://example.com?foo=1"
+
+Edge Case 5: Fragment with Query
+Input:  /page?a=1#section
+Result: search="?a=1", hash="#section"
+        (hash is NOT part of query string)
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Url Parser?</dt>
-  <dd>Url Parser is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What are the components of a URL?</dt>
+  <dd>A URL consists of: protocol (https://), hostname (www.example.com), port (optional, :8080), pathname (/path/to/resource), search query (?key=value&foo=bar), and hash fragment (#section). The hostname may include subdomain and TLD. Port 443 is default for HTTPS, 80 for HTTP.</dd>
+
+  <dt>What is the difference between hostname and host?</dt>
+  <dd>hostname is just the domain name (www.example.com). host includes the domain plus port if specified (www.example.com:8080). If no explicit port is given, host and hostname appear identical. Use hostname when you only need the domain; use host when port matters.</dd>
+
+  <dt>How are query parameters parsed?</dt>
+  <dd>Query parameters follow the ? in a URL and are formatted as key=value pairs separated by &. The parser decodes URL-encoded values (%20→space, %26→&). Duplicate keys (tag=foo&tag=bar) are collected into arrays. Empty values and boolean flags are preserved as-is.</dd>
+
+  <dt>What is a URL hash fragment used for?</dt>
+  <dd>The hash fragment (#section) identifies a specific section within a page. It's never sent to the server—only used client-side for scrolling to anchors, single-page app routing, or tracking scroll position. Common in documentation sites (#installation, #api-reference) and SPA navigation.</dd>
+
+  <dt>Why parse URLs for debugging?</dt>
+  <dd>Parsing reveals the exact structure of complex URLs: verifying redirect chains have correct parameters, checking API endpoints use proper authentication tokens, confirming tracking pixels fire with right UTMs, debugging OAuth callback URLs, and ensuring deep links route to correct app sections.</dd>
+
+  <dt>What is URL encoding and how does it affect parsing?</dt>
+  <dd>URL encoding (percent-encoding) converts special characters to %XX format. Spaces become %20, ampersands %26, equals %3D. During parsing, these are automatically decoded for display. A parameter value of 'hello%20world' displays as 'hello world'. This ensures safe transmission while maintaining readability.</dd>
 </dl>
 </section>
 </main>
@@ -150,6 +374,7 @@ host:u.host,
 hostname:u.hostname,
 port:u.port||"(default)",
 pathname:u.pathname,
+search:u.search||"(none)",
 hash:u.hash||"(none)"
 }
 
@@ -205,4 +430,3 @@ document.getElementById("status").style.color="#b91c1c"
 <script src="/js/tool-common.js"></script>
 </body>
 </html>
-

@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Image to PDF – Convert Images into PDF Online | ToolForge</title>
-<meta name="description" content="Free online Image to PDF tool to combine one or more images into a PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<title>Image to PDF – Convert Images to PDF Documents | ToolForge</title>
+<meta name="description" content="Convert images to PDF documents using client-side rendering. Supports PNG, JPEG, WebP formats with automatic scaling and page fitting for professional document creation.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/image-to-pdf.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Image to PDF – Convert Images into PDF Online | ToolForge">
-<meta property="og:description" content="Free online Image to PDF tool to combine one or more images into a PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Image to PDF – Convert Images to PDF Documents | ToolForge">
+<meta property="og:description" content="Convert images to PDF documents using client-side rendering. Supports PNG, JPEG, WebP formats with automatic scaling.">
 <meta property="og:url" content="https://toolforge.site/tools/image-to-pdf.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Image to PDF – Convert Images into PDF Online | ToolForge">
-<meta name="twitter:description" content="Free online Image to PDF tool to combine one or more images into a PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Image to PDF – Convert Images to PDF Documents | ToolForge">
+<meta name="twitter:description" content="Convert images to PDF documents using client-side rendering. Supports PNG, JPEG, WebP formats.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
@@ -25,45 +25,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Image To Pdf?",
+      "name": "How does client-side PDF generation work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Image To Pdf is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Client-side PDF generation uses JavaScript libraries like jsPDF to create PDF documents directly in the browser. The library encodes image data (PNG/JPEG) as binary streams within the PDF structure, writes PDF objects (pages, images, resources), and generates the final binary PDF file for download. No server processing is required."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What image formats are supported for PDF conversion?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "PDF supports JPEG and PNG natively. JPEG uses DCTDecode compression (lossy, smaller files). PNG uses FlateDecode (lossless, preserves transparency). WebP and other formats are typically converted to JPEG/PNG before embedding. Most PDF generators auto-detect format from the image data URI prefix."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How are images scaled to fit PDF pages?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Images are scaled using aspect ratio preservation: calculate the ratio between image dimensions and page dimensions, then use the smaller ratio for both width and height. This prevents distortion. The formula is: scale = min(pageWidth / imgWidth, pageHeight / imgHeight). Center the result using (pageWidth - scaledWidth) / 2."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the PDF page size standard?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "A4 (210 x 297 mm or 595 x 842 points at 72 DPI) is the international standard. Letter (8.5 x 11 inches or 612 x 792 points) is common in North America. PDF uses points as the internal unit (1/72 inch). jsPDF and other libraries support A4, Letter, Legal, and custom sizes with portrait or landscape orientation."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How does PDF handle image quality and compression?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "PDF preserves the original image quality when embedding. JPEG images retain their compression level. PNG images remain lossless. Some PDF generators allow re-compression to reduce file size. For photographs, JPEG at 80-90% quality offers good balance. For screenshots and graphics, PNG preserves sharp edges and text."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What are the use cases for image to PDF conversion?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Common uses: combining scanned documents into single files, creating photo albums or portfolios, preparing screenshots for reports, converting diagrams to shareable documents, archiving visual content in standard format, creating printable materials from digital images, and preparing submission packages that require PDF format."
       }
     }
   ]
@@ -73,7 +78,7 @@
 <body>
 <main class="container">
 <h1>Image to PDF</h1>
-<p class="subtitle">Combine one or more images into a downloadable PDF without uploading them to a server.</p>
+<p class="subtitle">Combine one or more images into a downloadable PDF. Each image becomes a PDF page scaled to fit.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <label for="images" class="sr-only">Image files</label>
 <input id="images" class="pdf-file-input" type="file" accept="image/*" multiple onchange="loadImages()" aria-label="Image files">
@@ -86,25 +91,126 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Image to PDF</h3>
-<p>This Image to PDF tool combines screenshots, photos, scanned pages and other images into a single PDF directly in the browser. Each selected image is added as its own PDF page and scaled to fit neatly.</p>
-<p>Your files stay on your device during the conversion process, which makes the tool convenient for quick client-side document creation.</p>
+<p>This Image to PDF tool converts images (PNG, JPEG, WebP) into PDF pages using client-side JavaScript processing. Each uploaded image is added as a separate PDF page and automatically scaled to fit within the page margins while preserving the original aspect ratio.</p>
+<p>The conversion uses the jsPDF library to embed image data directly into the PDF structure, then generates a downloadable file without any server upload or processing.</p>
+
+<h4>PDF Image Embedding Process</h4>
+<p>When an image is added to a PDF, the following steps occur:</p>
+<ol>
+  <li><strong>Image Loading:</strong> The image file is read as a Data URL (base64-encoded binary data)</li>
+  <li><strong>Format Detection:</strong> The MIME type prefix (data:image/png or data:image/jpeg) determines the PDF encoding method</li>
+  <li><strong>Dimension Calculation:</strong> Original width and height are measured to compute aspect ratio</li>
+  <li><strong>Page Scaling:</strong> The image is scaled to fit the target page size while maintaining proportions</li>
+  <li><strong>PDF Object Creation:</strong> A new page is added and the image is embedded as an XObject</li>
+  <li><strong>File Generation:</strong> All objects are serialized into the binary PDF format with proper headers and cross-reference tables</li>
+</ol>
+
+<h4>Supported Image Formats</h4>
+<table class="ref-table">
+<thead><tr><th>Format</th><th>PDF Encoding</th><th>Compression</th><th>Transparency</th><th>Best For</th></tr></thead>
+<tbody>
+<tr><td>JPEG/JPG</td><td>DCTDecode</td><td>Lossy</td><td>No</td><td>Photographs, natural images</td></tr>
+<tr><td>PNG</td><td>FlateDecode</td><td>Lossless</td><td>Yes</td><td>Screenshots, graphics, text images</td></tr>
+<tr><td>WebP</td><td>Converted to JPEG/PNG</td><td>Varies</td><td>Yes (lossy/lossless)</td><td>Modern web images</td></tr>
+<tr><td>GIF</td><td>Converted (not recommended)</td><td>LZW</td><td>Yes</td><td>Simple graphics (limited support)</td></tr>
+</tbody>
+</table>
+
+<h4>Page Size Reference</h4>
+<table class="ref-table">
+<thead><tr><th>Size</th><th>Dimensions (mm)</th><th>Dimensions (inches)</th><th>Dimensions (points)</th></tr></thead>
+<tbody>
+<tr><td>A4 (default)</td><td>210 x 297</td><td>8.27 x 11.69</td><td>595 x 842</td></tr>
+<tr><td>Letter</td><td>216 x 279</td><td>8.5 x 11</td><td>612 x 792</td></tr>
+<tr><td>Legal</td><td>216 x 356</td><td>8.5 x 14</td><td>612 x 1008</td></tr>
+<tr><td>A3</td><td>297 x 420</td><td>11.69 x 16.54</td><td>842 x 1190</td></tr>
+<tr><td>Tabloid</td><td>279 x 432</td><td>11 x 17</td><td>792 x 1224</td></tr>
+</tbody>
+</table>
+
+<h4>Aspect Ratio Preservation</h4>
+<p>To prevent image distortion, the tool calculates a uniform scale factor:</p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Calculate scale to fit image within page bounds
+const maxWidth = pageWidth - (2 * margin);
+const maxHeight = pageHeight - (2 * margin);
+const scaleX = maxWidth / imageWidth;
+const scaleY = maxHeight / imageHeight;
+const scale = Math.min(scaleX, scaleY); // Use smaller scale
+
+const renderWidth = imageWidth * scale;
+const renderHeight = imageHeight * scale;
+const x = (pageWidth - renderWidth) / 2; // Center horizontally
+const y = (pageHeight - renderHeight) / 2; // Center vertically
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Document Scanning:</strong> Combine multiple scanned pages into a single PDF file</li>
+  <li><strong>Photo Albums:</strong> Create printable photo collections or portfolios</li>
+  <li><strong>Screenshot Reports:</strong> Document bugs or workflows with sequenced screenshots</li>
+  <li><strong>Receipt Organization:</strong> Compile expense receipts for reimbursement</li>
+  <li><strong>Art Portfolios:</strong> Assemble artwork images for submission or sharing</li>
+  <li><strong>Print Preparation:</strong> Convert digital images to print-ready PDF format</li>
+  <li><strong>Archive Creation:</strong> Preserve visual content in a standardized, long-term format</li>
+</ul>
+
+<h4>PDF File Size Considerations</h4>
+<p>PDF file size depends on image resolution, format, and compression:</p>
+<ul>
+  <li><strong>High-resolution images:</strong> Larger file sizes but better print quality. Consider downsampling for screen-only viewing.</li>
+  <li><strong>JPEG quality:</strong> Lower quality (60-80%) reduces file size significantly with minimal visible loss for photos.</li>
+  <li><strong>PNG optimization:</strong> PNG files can be large for photographs but are efficient for graphics with few colors.</li>
+  <li><strong>Page count:</strong> Each additional page adds overhead but the image data dominates total size.</li>
+</ul>
+
+<h4>jsPDF Library Usage</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Initialize PDF with A4 size, portrait orientation, points unit
+const pdf = new jsPDF('p', 'pt', 'a4');
+
+// Add first image
+pdf.addImage(imageData, 'PNG', x, y, width, height);
+
+// Add additional pages
+pdf.addPage();
+pdf.addImage(nextImageData, 'JPEG', x, y, width, height);
+
+// Save the generated PDF
+pdf.save('document.pdf');
+</pre>
+
+<h4>Browser Compatibility</h4>
+<p>This tool uses modern JavaScript features and requires:</p>
+<ul>
+  <li><strong>File API:</strong> For reading uploaded image files (all modern browsers)</li>
+  <li><strong>Blob API:</strong> For generating downloadable PDF files</li>
+  <li><strong>Promise support:</strong> For async image loading</li>
+  <li><strong>Canvas API:</strong> Used internally by jsPDF for image processing</li>
+</ul>
+<p>Tested on Chrome 60+, Firefox 55+, Safari 11+, Edge 79+.</p>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Image To Pdf?</dt>
-  <dd>Image To Pdf is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How does client-side PDF generation work?</dt>
+  <dd>Client-side PDF generation uses JavaScript libraries like jsPDF to create PDF documents directly in the browser. The library encodes image data (PNG/JPEG) as binary streams within the PDF structure, writes PDF objects (pages, images, resources), and generates the final binary PDF file for download. No server processing is required.</dd>
+
+  <dt>What image formats are supported for PDF conversion?</dt>
+  <dd>PDF supports JPEG and PNG natively. JPEG uses DCTDecode compression (lossy, smaller files). PNG uses FlateDecode (lossless, preserves transparency). WebP and other formats are typically converted to JPEG/PNG before embedding. Most PDF generators auto-detect format from the image data URI prefix.</dd>
+
+  <dt>How are images scaled to fit PDF pages?</dt>
+  <dd>Images are scaled using aspect ratio preservation: calculate the ratio between image dimensions and page dimensions, then use the smaller ratio for both width and height. This prevents distortion. The formula is: scale = min(pageWidth / imgWidth, pageHeight / imgHeight). Center the result using (pageWidth - scaledWidth) / 2.</dd>
+
+  <dt>What is the PDF page size standard?</dt>
+  <dd>A4 (210 x 297 mm or 595 x 842 points at 72 DPI) is the international standard. Letter (8.5 x 11 inches or 612 x 792 points) is common in North America. PDF uses points as the internal unit (1/72 inch). jsPDF and other libraries support A4, Letter, Legal, and custom sizes with portrait or landscape orientation.</dd>
+
+  <dt>How does PDF handle image quality and compression?</dt>
+  <dd>PDF preserves the original image quality when embedding. JPEG images retain their compression level. PNG images remain lossless. Some PDF generators allow re-compression to reduce file size. For photographs, JPEG at 80-90% quality offers good balance. For screenshots and graphics, PNG preserves sharp edges and text.</dd>
+
+  <dt>What are the use cases for image to PDF conversion?</dt>
+  <dd>Common uses: combining scanned documents into single files, creating photo albums or portfolios, preparing screenshots for reports, converting diagrams to shareable documents, archiving visual content in standard format, creating printable materials from digital images, and preparing submission packages that require PDF format.</dd>
 </dl>
 </section>
 </main>
@@ -124,7 +230,7 @@ preview.innerHTML=""
 loadedImages=[]
 
 if(!files.length){
-setStatus("Select one or more images first.","#b91c1c")
+setStatus("Select one or more images.","#b91c1c")
 return
 }
 

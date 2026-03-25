@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>XML Formatter – Pretty Print XML Online | ToolForge</title>
-<meta name="description" content="Free online XML Formatter to pretty print and indent XML. Part of the ToolForge developer tools collection.">
+<title>XML Formatter – Pretty Print and Indent XML Online | ToolForge</title>
+<meta name="description" content="XML Formatter pretty prints and indents XML for readability. Format minified XML, validate syntax, and produce well-structured output. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/xml-formatter.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="XML Formatter – Pretty Print XML Online | ToolForge">
-<meta property="og:description" content="Free online XML Formatter to pretty print and indent XML. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="XML Formatter – Pretty Print and Indent XML Online | ToolForge">
+<meta property="og:description" content="XML Formatter pretty prints and indents XML for readability. Format minified XML, validate syntax, and produce well-structured output. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/xml-formatter.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="XML Formatter – Pretty Print XML Online | ToolForge">
-<meta name="twitter:description" content="Free online XML Formatter to pretty print and indent XML. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="XML Formatter – Pretty Print and Indent XML Online | ToolForge">
+<meta name="twitter:description" content="XML Formatter pretty prints and indents XML for readability. Format minified XML, validate syntax, and produce well-structured output. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Xml Formatter?",
+      "name": "What is XML formatting and why is it useful?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Xml Formatter is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "XML formatting (pretty printing) adds indentation and line breaks to XML documents, making nested structures visually clear. Minified XML compresses everything into one line to save space, but formatted XML is essential for reading, debugging, and manual editing of configuration files, feeds, and API responses."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How does XML indentation work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "The formatter parses XML into a DOM tree, then serializes it back with line breaks between tags. Opening tags increase the indent level, closing tags decrease it. Each nested level receives consistent indentation (typically 2 spaces), making parent-child relationships obvious."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What makes XML invalid?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Common XML errors include: unclosed tags, mismatched tag names, improperly nested tags, unescaped special characters (&lt;, &gt;, &amp;, &quot;, &apos;), missing root element, multiple root elements, and invalid characters. The formatter validates XML and reports parsing errors."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "Does formatting change the XML content?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Formatting adds whitespace (indentation and line breaks) but does not change element names, attribute values, or text content. However, whitespace-only text nodes may be normalized. For XML where whitespace is significant (like some document formats), verify the output matches expectations."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What is the difference between well-formed and valid XML?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Well-formed XML follows syntax rules (proper nesting, closed tags, quoted attributes). Valid XML is well-formed AND conforms to a DTD or XML Schema definition. This formatter checks for well-formedness but does not validate against schemas or DTDs."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How are XML namespaces handled?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Namespaces are preserved during formatting. The formatter maintains namespace declarations (xmlns attributes) and prefixed element names. Namespace prefixes are not normalized or changed—whatever prefixes appear in the input remain in the formatted output."
       }
     }
   ]
@@ -88,25 +93,145 @@
 <p id="err" style="color:#b91c1c"></p>
 <section class="tool-seo">
 <h3>About XML Formatter</h3>
-<p>This XML formatter indents XML so nested elements are easier to read and inspect.</p>
-<p>It is useful for feeds, config files, SOAP payloads and legacy integrations when raw XML arrives as one long hard-to-read block.</p>
+<p>This XML formatter indents XML so nested elements are easier to read and inspect. It parses minified or poorly-formatted XML and produces consistently indented output with proper line breaks between elements.</p>
+<p>It is useful for feeds, config files, SOAP payloads, RSS/Atom feeds, and legacy integrations when raw XML arrives as one long hard-to-read block. The formatter also validates XML syntax and reports parsing errors.</p>
+
+<h4>XML Formatting Process</h4>
+<p>The formatter uses a three-step process:</p>
+<ol>
+  <li><strong>Parse:</strong> Input text is parsed into a DOM tree using the browser's DOMParser</li>
+  <li><strong>Serialize:</strong> The DOM tree is serialized back to a string with XMLSerializer</li>
+  <li><strong>Indent:</strong> Line breaks are added between tags, and indentation is applied based on nesting depth</li>
+</ol>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Formatting algorithm:
+1. Parse XML string → DOM Document
+2. Serialize DOM → String with tags separated
+3. For each line:
+   - If closing tag: decrease indent
+   - Apply indent (2 spaces × depth)
+   - If opening tag: increase indent
+</pre>
+
+<h4>Common XML Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Common Use</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">RSS 2.0</td>
+    <td style="border:1px solid #ddd;padding:8px">Really Simple Syndication</td>
+    <td style="border:1px solid #ddd;padding:8px">Blog feeds, podcasts</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Atom</td>
+    <td style="border:1px solid #ddd;padding:8px">IETF standard feed format</td>
+    <td style="border:1px solid #ddd;padding:8px">Web syndication</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">SOAP</td>
+    <td style="border:1px solid #ddd;padding:8px">Simple Object Access Protocol</td>
+    <td style="border:1px solid #ddd;padding:8px">Web service messages</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">SVG</td>
+    <td style="border:1px solid #ddd;padding:8px">Scalable Vector Graphics</td>
+    <td style="border:1px solid #ddd;padding:8px">Vector images, icons</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">XML Schema</td>
+    <td style="border:1px solid #ddd;padding:8px">XSD definition files</td>
+    <td style="border:1px solid #ddd;padding:8px">XML structure validation</td>
+  </tr>
+</table>
+
+<h4>XML Special Characters</h4>
+<p>Five characters must be escaped in XML:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Character</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Entity</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Name</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">&lt;</td>
+    <td style="border:1px solid #ddd;padding:8px">&amp;lt;</td>
+    <td style="border:1px solid #ddd;padding:8px">Less-than sign</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">&gt;</td>
+    <td style="border:1px solid #ddd;padding:8px">&amp;gt;</td>
+    <td style="border:1px solid #ddd;padding:8px">Greater-than sign</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">&amp;</td>
+    <td style="border:1px solid #ddd;padding:8px">&amp;amp;</td>
+    <td style="border:1px solid #ddd;padding:8px">Ampersand</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">"</td>
+    <td style="border:1px solid #ddd;padding:8px">&amp;quot;</td>
+    <td style="border:1px solid #ddd;padding:8px">Double quote</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">'</td>
+    <td style="border:1px solid #ddd;padding:8px">&amp;apos;</td>
+    <td style="border:1px solid #ddd;padding:8px">Apostrophe</td>
+  </tr>
+</table>
+
+<h4>Well-Formed vs Valid XML</h4>
+<ul>
+  <li><strong>Well-formed:</strong> Follows XML syntax rules (proper nesting, closed tags, quoted attributes, valid characters)</li>
+  <li><strong>Valid:</strong> Well-formed AND conforms to a DTD or XML Schema (XSD)</li>
+  <li><strong>This tool:</strong> Checks for well-formedness only, not schema validation</li>
+</ul>
+
+<h4>Common XML Errors</h4>
+<ul>
+  <li><strong>Unclosed tags:</strong> &lt;element&gt; without matching &lt;/element&gt;</li>
+  <li><strong>Mismatched tags:</strong> Opening &lt;foo&gt; but closing &lt;/bar&gt;</li>
+  <li><strong>Improper nesting:</strong> &lt;a&gt;&lt;b&gt;&lt;/a&gt;&lt;/b&gt; (crossed tags)</li>
+  <li><strong>Unescaped ampersand:</strong> Using &amp; instead of &amp;amp; in text</li>
+  <li><strong>Multiple root elements:</strong> XML must have exactly one root element</li>
+  <li><strong>Invalid characters:</strong> Control characters not allowed in XML</li>
+</ul>
+
+<h4>XML Namespaces</h4>
+<p>Namespaces prevent element name conflicts in XML:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+&lt;root xmlns:books="http://example.com/books"
+      xmlns:music="http://example.com/music"&gt;
+  &lt;books:title&gt;Book Title&lt;/books:title&gt;
+  &lt;music:title&gt;Song Title&lt;/music:title&gt;
+&lt;/root&gt;
+</pre>
+<p>The formatter preserves namespace declarations and prefixes exactly as they appear in the input.</p>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Xml Formatter?</dt>
-  <dd>Xml Formatter is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is XML formatting and why is it useful?</dt>
+  <dd>XML formatting (pretty printing) adds indentation and line breaks to XML documents, making nested structures visually clear. Minified XML compresses everything into one line to save space, but formatted XML is essential for reading, debugging, and manual editing of configuration files, feeds, and API responses.</dd>
+
+  <dt>How does XML indentation work?</dt>
+  <dd>The formatter parses XML into a DOM tree, then serializes it back with line breaks between tags. Opening tags increase the indent level, closing tags decrease it. Each nested level receives consistent indentation (typically 2 spaces), making parent-child relationships obvious.</dd>
+
+  <dt>What makes XML invalid?</dt>
+  <dd>Common XML errors include: unclosed tags, mismatched tag names, improperly nested tags, unescaped special characters (&lt;, &gt;, &amp;, &quot;, &apos;), missing root element, multiple root elements, and invalid characters. The formatter validates XML and reports parsing errors.</dd>
+
+  <dt>Does formatting change the XML content?</dt>
+  <dd>Formatting adds whitespace (indentation and line breaks) but does not change element names, attribute values, or text content. However, whitespace-only text nodes may be normalized. For XML where whitespace is significant (like some document formats), verify the output matches expectations.</dd>
+
+  <dt>What is the difference between well-formed and valid XML?</dt>
+  <dd>Well-formed XML follows syntax rules (proper nesting, closed tags, quoted attributes). Valid XML is well-formed AND conforms to a DTD or XML Schema definition. This formatter checks for well-formedness but does not validate against schemas or DTDs.</dd>
+
+  <dt>How are XML namespaces handled?</dt>
+  <dd>Namespaces are preserved during formatting. The formatter maintains namespace declarations (xmlns attributes) and prefixed element names. Namespace prefixes are not normalized or changed—whatever prefixes appear in the input remain in the formatted output.</dd>
 </dl>
 </section>
 </main>

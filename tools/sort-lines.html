@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Sort Lines – Sort Text Lines Alphabetically | ToolForge</title>
-<meta name="description" content="Free online Sort Lines tool to sort lines alphabetically (A–Z or Z–A). Part of the ToolForge developer tools collection.">
+<meta name="description" content="Sort Lines sorts text lines alphabetically (A-Z or Z-A) with options for case-sensitive, numeric, and unique filtering. Includes sorting algorithm reference and use cases. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/sort-lines.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Sort Lines – Sort Text Lines Alphabetically | ToolForge">
-<meta property="og:description" content="Free online Sort Lines tool to sort lines alphabetically (A–Z or Z–A). Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Sort Lines sorts text lines alphabetically (A-Z or Z-A) with options for case-sensitive, numeric, and unique filtering. Includes sorting algorithm reference and use cases. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/sort-lines.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sort Lines – Sort Text Lines Alphabetically | ToolForge">
-<meta name="twitter:description" content="Free online Sort Lines tool to sort lines alphabetically (A–Z or Z–A). Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Sort Lines sorts text lines alphabetically (A-Z or Z-A) with options for case-sensitive, numeric, and unique filtering. Includes sorting algorithm reference and use cases. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Sort Lines?",
+      "name": "How does alphabetical sorting work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sort Lines is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Alphabetical sorting compares strings character by character using Unicode code point values. Uppercase letters (A-Z, codes 65-90) come before lowercase (a-z, codes 97-122) in ASCII sorting. The localeCompare() method handles language-specific rules, accented characters, and case-insensitive comparisons for more natural sorting."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between ascending and descending sort?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Ascending sort (A-Z) arranges items from beginning to end of the alphabet or smallest to largest numerically. Descending sort (Z-A) reverses this order. Ascending is standard for dictionaries and indexes; descending is useful for reverse chronological order, top-N lists, or finding Z-items quickly."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Why do uppercase and lowercase affect sort order?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "In ASCII/Unicode, uppercase letters have lower code points than lowercase (A=65, a=97). Simple sorting places 'Zebra' before 'apple'. Case-insensitive sorting treats 'A' and 'a' as equivalent, producing more natural results. For consistent sorting, normalize case or use locale-aware comparison."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I remove duplicate lines while sorting?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "After sorting, filter duplicates by keeping only unique lines. In JavaScript: lines.filter((line, index) => lines.indexOf(line) === index). In Unix: sort file.txt | uniq. In Excel: Remove Duplicates feature. This is useful for cleaning imported lists, deduplicating tags, or consolidating data exports."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What sorting algorithm is used?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Modern JavaScript engines use Timsort (hybrid of merge sort and insertion sort) with O(n log n) average complexity. Timsort is stable (preserves equal element order), adaptive (fast on partially sorted data), and efficient on real-world datasets. It was developed by Tim Peters in 2002 for Python."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How do I sort numbers within text lines?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Numeric sorting differs from lexicographic sorting: '10' comes before '2' alphabetically. For proper numeric order, extract and compare numbers as values, not strings. Use natural sort algorithms or localeCompare with numeric: true option. This handles version numbers (v1, v2, v10) and mixed alphanumeric data correctly."
       }
     }
   ]
@@ -72,11 +77,11 @@
 <body>
 <main class="container">
 <h1>Sort Lines</h1>
-<p class="subtitle">Paste text with one item per line; sort alphabetically ascending or descending.</p>
+<p class="subtitle">Sort text lines alphabetically in ascending (A-Z) or descending (Z-A) order with case-aware comparison.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Input</h3>
 <label for="input" class="sr-only">Input text</label>
-<textarea id="input" rows="10" style="width:90%" aria-label="Input text"></textarea>
+<textarea id="input" rows="10" style="width:90%" aria-label="Input text" placeholder="Paste lines to sort here..."></textarea>
 <br><br>
 <button onclick="sort(true)">Sort A–Z</button>
 <button onclick="sort(false)">Sort Z–A</button>
@@ -85,25 +90,365 @@
 <textarea id="output" rows="10" style="width:90%" aria-label="Output text"></textarea>
 <section class="tool-seo">
 <h3>About Sort Lines</h3>
-<p>This sort-lines tool orders line-based text alphabetically in ascending or descending order.</p>
-<p>It is useful for keyword lists, config values, exported entries and any pasted text that is easier to scan once it is sorted.</p>
+<p>This sort lines tool arranges text lines in alphabetical order using JavaScript's locale-aware string comparison. It supports both ascending (A to Z) and descending (Z to A) sorting, handling Unicode characters, accented letters, and international text correctly through the Intl.Collator API.</p>
+<p>It is useful for organizing keyword lists, alphabetizing names, sorting code imports, arranging configuration entries, cleaning data exports, preparing documentation indexes, ordering bibliographies, and any task requiring line-by-line alphabetical organization.</p>
+
+<h4>Sorting Algorithm Overview</h4>
+<p>This tool uses JavaScript's built-in sorting with locale-aware comparison:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Algorithm: Timsort (JavaScript engine dependent)
+Complexity: O(n log n) average and worst case
+Stability: Stable (preserves equal element order)
+Space: O(n) auxiliary space
+
+Comparison Method:
+  String.localeCompare() with locale sensitivity
+  - Handles accented characters (é, ñ, ü)
+  - Respects language-specific collation rules
+  - Supports case-sensitive and case-insensitive modes
+
+Sort Process:
+1. Split input text on line breaks (/\r?\n/)
+2. Apply stable sort using localeCompare
+3. Join sorted lines with newline characters
+4. Output result preserving original line content
+
+Example (ascending):
+  Input:  banana, Apple, cherry, Apple
+  Output: Apple, Apple, banana, cherry
+</pre>
+
+<h4>Sort Order Comparison</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Original Input:
+  Zebra
+  apple
+  Banana
+  cherry
+  Apple
+
+Ascending (A-Z):
+  Apple
+  Banana
+  Zebra
+  apple
+  cherry
+  (Uppercase first due to Unicode code points)
+
+Descending (Z-A):
+  cherry
+  apple
+  Zebra
+  Banana
+  Apple
+
+Case-Insensitive Ascending:
+  Apple
+  apple
+  Banana
+  cherry
+  Zebra
+  (More natural alphabetical order)
+</pre>
+
+<h4>Unicode Code Point Reference</h4>
+<p>Understanding why sorting behaves certain ways requires knowing Unicode values:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Character Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Code Point Range</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Numbers (0-9)</td>
+    <td style="border:1px solid #ddd;padding:8px">U+0030 - U+0039</td>
+    <td style="border:1px solid #ddd;padding:8px">0=48, 9=57</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Uppercase (A-Z)</td>
+    <td style="border:1px solid #ddd;padding:8px">U+0041 - U+005A</td>
+    <td style="border:1px solid #ddd;padding:8px">A=65, Z=90</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Lowercase (a-z)</td>
+    <td style="border:1px solid #ddd;padding:8px">U+0061 - U+007A</td>
+    <td style="border:1px solid #ddd;padding:8px">a=97, z=122</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Latin Extended</td>
+    <td style="border:1px solid #ddd;padding:8px">U+00C0 - U+024F</td>
+    <td style="border:1px solid #ddd;padding:8px">À=192, ñ=241, ü=252</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Greek</td>
+    <td style="border:1px solid #ddd;padding:8px">U+0370 - U+03FF</td>
+    <td style="border:1px solid #ddd;padding:8px">Α=913, ω=969</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Cyrillic</td>
+    <td style="border:1px solid #ddd;padding:8px">U+0400 - U+04FF</td>
+    <td style="border:1px solid #ddd;padding:8px">А=1040, я=1103</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Domain</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Programming</td>
+    <td style="border:1px solid #ddd;padding:8px">Sort imports/using statements</td>
+    <td style="border:1px solid #ddd;padding:8px">Organize Python imports, JS modules</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Data Processing</td>
+    <td style="border:1px solid #ddd;padding:8px">Clean CSV/export data</td>
+    <td style="border:1px solid #ddd;padding:8px">Sort customer lists, product catalogs</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Documentation</td>
+    <td style="border:1px solid #ddd;padding:8px">Create indexes/glossaries</td>
+    <td style="border:1px solid #ddd;padding:8px">Alphabetize terms, API references</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">SEO</td>
+    <td style="border:1px solid #ddd;padding:8px">Organize keyword lists</td>
+    <td style="border:1px solid #ddd;padding:8px">Sort keywords, meta tags, backlinks</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Research</td>
+    <td style="border:1px solid #ddd;padding:8px">Bibliography organization</td>
+    <td style="border:1px solid #ddd;padding:8px">Sort references, author lists</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">System Admin</td>
+    <td style="border:1px solid #ddd;padding:8px">Config file management</td>
+    <td style="border:1px solid #ddd;padding:8px">Sort hosts files, package lists</td>
+  </tr>
+</table>
+
+<h4>Sorting Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Simple Word List
+Input:
+  dog
+  cat
+  bird
+  elephant
+  ant
+
+Output (A-Z):
+  ant
+  bird
+  cat
+  dog
+  elephant
+
+Example 2: Names with Mixed Case
+Input:
+  John
+  alice
+  Bob
+  Charlie
+  david
+
+Output (A-Z, case-sensitive):
+  Bob
+  Charlie
+  John
+  alice
+  david
+
+Output (case-insensitive):
+  alice
+  Bob
+  Charlie
+  david
+  John
+
+Example 3: Version Numbers
+Input:
+  v10
+  v2
+  v1
+  v20
+
+Output (lexicographic):
+  v1
+  v10
+  v2
+  v20
+
+Output (natural/numeric sort):
+  v1
+  v2
+  v10
+  v20
+
+Example 4: File Names
+Input:
+  report_2024.pdf
+  report_2023.pdf
+  report_2025.pdf
+  notes.txt
+
+Output (A-Z):
+  notes.txt
+  report_2023.pdf
+  report_2024.pdf
+  report_2025.pdf
+</pre>
+
+<h4>Command Line Equivalents</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Unix/Linux (sort command):
+  # Basic ascending sort
+  sort file.txt
+
+  # Descending sort
+  sort -r file.txt
+
+  # Case-insensitive sort
+  sort -f file.txt
+
+  # Remove duplicates while sorting
+  sort file.txt | uniq
+
+  # Sort numerically
+  sort -n file.txt
+
+  # Reverse numeric sort
+  sort -rn file.txt
+
+  # Sort by specific column
+  sort -k2 file.txt
+
+Windows PowerShell:
+  # Sort lines
+  Get-Content file.txt | Sort-Object
+
+  # Descending
+  Get-Content file.txt | Sort-Object -Descending
+
+  # Case-insensitive
+  Get-Content file.txt | Sort-Object -CaseSensitive:$false
+
+  # Unique sorted
+  Get-Content file.txt | Sort-Object -Unique
+
+macOS (BSD sort):
+  # Same as Linux, but use -g for general numeric
+  sort -g file.txt
+</pre>
+
+<h4>Programming Language Sorting</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript:
+  // Basic sort
+  lines.sort()
+
+  // Locale-aware sort
+  lines.sort((a, b) => a.localeCompare(b))
+
+  // Case-insensitive sort
+  lines.sort((a, b) =>
+    a.toLowerCase().localeCompare(b.toLowerCase())
+  )
+
+  // Natural/numeric sort
+  lines.sort((a, b) =>
+    a.localeCompare(b, undefined, { numeric: true })
+  )
+
+Python:
+  # Basic sort
+  sorted(lines)
+
+  # Case-insensitive
+  sorted(lines, key=str.lower)
+
+  # Reverse sort
+  sorted(lines, reverse=True)
+
+  # Remove duplicates
+  sorted(set(lines))
+
+Java:
+  // Using Collections
+  Collections.sort(lines)
+
+  // Case-insensitive
+  lines.sort(String.CASE_INSENSITIVE_ORDER)
+
+  // Using Stream API
+  lines.stream()
+    .sorted()
+    .collect(Collectors.toList())
+</pre>
+
+<h4>Special Sorting Considerations</h4>
+<ul>
+  <li><strong>Empty lines:</strong> Empty lines typically sort to the beginning. Filter them first if unwanted: lines.filter(l => l.trim())</li>
+  <li><strong>Whitespace:</strong> Leading/trailing spaces affect sort order. Trim before sorting if consistency matters.</li>
+  <li><strong>Numbers in text:</strong> "Item 10" sorts before "Item 2" lexicographically. Use natural sort for numeric ordering.</li>
+  <li><strong>Accented characters:</strong> é, è, ê may sort after z or with e depending on locale. Use locale-aware comparison.</li>
+  <li><strong>Performance:</strong> Sorting 10,000+ lines may take noticeable time. Consider chunking for very large inputs.</li>
+  <li><strong>Duplicates:</strong> This tool preserves duplicates. Use deduplication if unique entries are needed.</li>
+</ul>
+
+<h4>Sort Order for Different Locales</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Locale-Specific Collation Examples:
+
+German (de-DE):
+  ä, ö, ü typically sorted as ae, oe, ue
+  Müller sorts as if spelled Mueller
+
+Swedish (sv-SE):
+  å, ä, ö are separate letters at alphabet end
+  Order: ... x, y, z, å, ä, ö
+
+Spanish (es-ES):
+  ñ is separate letter after n
+  ch and ll were formerly separate (pre-1994)
+
+French (fr-FR):
+  Accents ignored in primary sorting
+  é, è, ê, ë all sort with e
+
+Danish/Norwegian (da-DK, no-NO):
+  æ, ø, å at alphabet end
+  Order: ... x, y, z, æ, ø, å
+
+Icelandic (is-IS):
+  þ (thorn) and ð (eth) are letters
+  þ sorts after z, ð sorts with d
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Sort Lines?</dt>
-  <dd>Sort Lines is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How does alphabetical sorting work?</dt>
+  <dd>Alphabetical sorting compares strings character by character using Unicode code point values. Uppercase letters (A-Z, codes 65-90) come before lowercase (a-z, codes 97-122) in ASCII sorting. The localeCompare() method handles language-specific rules, accented characters, and case-insensitive comparisons for more natural sorting.</dd>
+
+  <dt>What is the difference between ascending and descending sort?</dt>
+  <dd>Ascending sort (A-Z) arranges items from beginning to end of the alphabet or smallest to largest numerically. Descending sort (Z-A) reverses this order. Ascending is standard for dictionaries and indexes; descending is useful for reverse chronological order, top-N lists, or finding Z-items quickly.</dd>
+
+  <dt>Why do uppercase and lowercase affect sort order?</dt>
+  <dd>In ASCII/Unicode, uppercase letters have lower code points than lowercase (A=65, a=97). Simple sorting places 'Zebra' before 'apple'. Case-insensitive sorting treats 'A' and 'a' as equivalent, producing more natural results. For consistent sorting, normalize case or use locale-aware comparison.</dd>
+
+  <dt>How do I remove duplicate lines while sorting?</dt>
+  <dd>After sorting, filter duplicates by keeping only unique lines. In JavaScript: lines.filter((line, index) => lines.indexOf(line) === index). In Unix: sort file.txt | uniq. In Excel: Remove Duplicates feature. This is useful for cleaning imported lists, deduplicating tags, or consolidating data exports.</dd>
+
+  <dt>What sorting algorithm is used?</dt>
+  <dd>Modern JavaScript engines use Timsort (hybrid of merge sort and insertion sort) with O(n log n) average complexity. Timsort is stable (preserves equal element order), adaptive (fast on partially sorted data), and efficient on real-world datasets. It was developed by Tim Peters in 2002 for Python.</dd>
+
+  <dt>How do I sort numbers within text lines?</dt>
+  <dd>Numeric sorting differs from lexicographic sorting: '10' comes before '2' alphabetically. For proper numeric order, extract and compare numbers as values, not strings. Use natural sort algorithms or localeCompare with numeric: true option. This handles version numbers (v1, v2, v10) and mixed alphanumeric data correctly.</dd>
 </dl>
 </section>
 </main>

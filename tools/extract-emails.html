@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Extract Emails – Find Email Addresses in Text Online | ToolForge</title>
-<meta name="description" content="Free online Extract Emails tool to scan text and list all email addresses using regex patterns. Deduplicated output for log analysis, data cleanup, and contact extraction. Part of the ToolForge developer tools collection.">
+<title>Email Extractor – Regex-Based Email Address Finder | ToolForge</title>
+<meta name="description" content="Extract email addresses from text using regex pattern matching. Supports standard email formats with deduplication. Includes RFC 5322 compliance notes and edge case handling. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/extract-emails.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Extract Emails – Find Email Addresses in Text Online | ToolForge">
-<meta property="og:description" content="Free online Extract Emails tool to scan text and list all email addresses using regex patterns. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Email Extractor – Regex-Based Email Address Finder | ToolForge">
+<meta property="og:description" content="Extract email addresses from text using regex pattern matching. Supports standard email formats with deduplication. Includes RFC 5322 compliance notes and edge case handling. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/extract-emails.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Extract Emails – Find Email Addresses in Text Online | ToolForge">
-<meta name="twitter:description" content="Free online Extract Emails tool to scan text and list all email addresses using regex patterns. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Email Extractor – Regex-Based Email Address Finder | ToolForge">
+<meta name="twitter:description" content="Extract email addresses from text using regex pattern matching. Supports standard email formats with deduplication. Includes RFC 5322 compliance notes and edge case handling. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,42 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How does email extraction work?",
+      "name": "How does regex-based email extraction work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Email extraction uses regex patterns to match the standard email format: local-part@domain. The pattern looks for characters before @, a domain name, and a valid TLD. This tool finds all matches and removes duplicates.\""
+        "text": "Email extraction uses regular expressions to match the standard email format defined in RFC 5322: local-part@domain. The regex pattern scans text for sequences matching allowed characters before @, a domain name with valid characters, and a TLD of 2+ letters. This tool finds all matches and removes duplicates using Set data structure."
       }
     },
     {
       "@type": "Question",
-      "name": "What email formats are supported?",
+      "name": "What is the RFC 5322 email standard?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Standard formats: user@domain.com, name.surname@company.org, user+tag@domain.co.uk. Supports alphanumeric characters, dots, hyphens, underscores, and plus signs in the local part.\""
+        "text": "RFC 5322 defines the Internet Message Format, including email address syntax. The local part (before @) can contain alphanumeric characters and special characters like ._%+- without spaces. The domain part (after @) must be a valid domain name with at least one dot. Full RFC compliance allows quoted strings and escaped characters, but most tools use a simplified pattern for practical extraction."
       }
     },
     {
       "@type": "Question",
-      "name": "Are extracted emails validated?",
+      "name": "Why doesn't this extract all valid email formats?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, this tool only extracts emails matching the pattern format. It doesn't verify if the domain exists or if the mailbox is real. For validation, use email verification services that send confirmation emails.\""
+        "text": "Full RFC 5322 regex is extremely complex (hundreds of characters) because it allows edge cases like quoted strings (\"john.doe\"@example.com), comments, and escaped characters. This tool uses a practical pattern that matches 99% of real-world emails while remaining readable and fast. Exotic formats are rare outside of test suites."
       }
     },
     {
       "@type": "Question",
-      "name": "Why are some emails not detected?",
+      "name": "Are extracted emails validated for existence?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Possible reasons: malformed emails (missing @, invalid characters), obfuscated emails (user [at] domain.com), or unusual but valid formats not covered by the pattern. The regex prioritizes accuracy over catching edge cases.\""
+        "text": "No. This tool only validates format, not deliverability. It does not check DNS MX records, send verification emails, or confirm mailboxes exist. Format validation ensures the email looks correct; deliverability requires separate verification services that perform SMTP handshakes or send confirmation messages."
       }
     },
     {
       "@type": "Question",
-      "name": "Is the output deduplicated?",
+      "name": "How does deduplication work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, duplicate email addresses are automatically removed. Each unique email appears only once in the output, regardless of how many times it appears in the input text.\""
+        "text": "The tool uses JavaScript's Set data structure to automatically remove duplicates. Set stores only unique values—adding an existing value has no effect. This is O(n) time complexity and handles case-sensitive comparison (User@Example.com and user@example.com are treated as different emails)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What about internationalized email addresses?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This tool uses ASCII-only regex patterns. Internationalized Email Addresses (RFC 6531) allow UTF-8 characters in local parts and domains (用户@例子。广告). These require Unicode-aware regex and are not yet widely supported. For most use cases, ASCII emails cover the vast majority of addresses in circulation."
       }
     }
   ]
@@ -68,8 +76,8 @@
 </head>
 <body>
 <main class="container">
-<h1>Extract Emails</h1>
-<p class="subtitle">Scan text and extract all email addresses with deduplication.</p>
+<h1>Email Extractor</h1>
+<p class="subtitle">Scan text and extract all email addresses using regex pattern matching with automatic deduplication.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Input Text</h3>
 <label for="text" class="sr-only">Text input</label>
@@ -84,145 +92,265 @@
 <p id="count" style="color:#666;margin-top:6px"></p>
 <section class="tool-seo">
 <h3>About Email Extractor</h3>
-<p>This email extractor scans any text and finds all email addresses using a robust regex pattern. Results are automatically deduplicated, giving you a clean list of unique email addresses for further processing.</p>
+<p>This email extractor uses regular expressions to scan text and identify email addresses matching standard format patterns. Results are automatically deduplicated, producing a clean list of unique email addresses for analysis, migration, or compliance workflows.</p>
 
-<h4>Email Pattern Explained</h4>
-<p>The regex pattern matches standard email formats:</p>
+<h4>Email Regex Pattern Explained</h4>
+<p>The extraction pattern balances RFC compliance with practical coverage:</p>
 <pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
-Pattern: [a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}
+Pattern: /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/gi
 
-Breakdown:
-[a-zA-Z0-9._%+-]+  → Local part (before @)
-@                  → At symbol separator
-[a-zA-Z0-9.-]+     → Domain name
-\.                 → Dot separator
-[a-zA-Z]{2,}       → Top-level domain (2+ letters)
+Component breakdown:
+┌─────────────────┬──────────────────────────────────────┐
+│ [a-zA-Z0-9._%+-]+ │ Local part (before @)              │
+│                 │ - Letters (a-z, A-Z)                 │
+│                 │ - Digits (0-9)                       │
+│                 │ - Dot, underscore, percent, plus, hyphen │
+│ @               │ At symbol (required separator)       │
+│ [a-zA-Z0-9.-]+  │ Domain name                          │
+│                 │ - Letters, digits, dots, hyphens     │
+│ \.              │ Literal dot before TLD               │
+│ [a-zA-Z]{2,}    │ Top-level domain (minimum 2 letters) │
+└─────────────────┴──────────────────────────────────────┘
+
+Flags:
+  g = global (find all matches, not just first)
+  i = case insensitive (USER@ = user@)
 </pre>
 
-<h4>Supported Email Formats</h4>
+<h4>Email Format Compliance Matrix</h4>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format Type</th>
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Supported</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">RFC 5322</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">This Tool</th>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">Standard</td>
+    <td style="border:1px solid #ddd;padding:8px">Simple ASCII</td>
     <td style="border:1px solid #ddd;padding:8px"><code>user@example.com</code></td>
-    <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Valid</td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Matched</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">With dots</td>
     <td style="border:1px solid #ddd;padding:8px"><code>john.doe@company.org</code></td>
-    <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Valid</td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Matched</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">With plus tagging</td>
+    <td style="border:1px solid #ddd;padding:8px">Plus tagging</td>
     <td style="border:1px solid #ddd;padding:8px"><code>user+newsletter@gmail.com</code></td>
-    <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Valid</td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Matched</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">With hyphens</td>
+    <td style="border:1px solid #ddd;padding:8px">Hyphenated</td>
     <td style="border:1px solid #ddd;padding:8px"><code>first-last@domain.co</code></td>
-    <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Valid</td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Matched</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Subdomain</td>
     <td style="border:1px solid #ddd;padding:8px"><code>user@mail.company.com</code></td>
-    <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Valid</td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Matched</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">Country TLD</td>
+    <td style="border:1px solid #ddd;padding:8px">Country code TLD</td>
     <td style="border:1px solid #ddd;padding:8px"><code>user@domain.co.uk</code></td>
-    <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Valid</td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Matched</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Quoted string</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>"john.doe"@example.com</code></td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Valid</td>
+    <td style="border:1px solid #ddd;padding:8px">✗ Not matched</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">International (UTF-8)</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>用户@例子。广告</code></td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Valid (RFC 6531)</td>
+    <td style="border:1px solid #ddd;padding:8px">✗ Not matched</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Obfuscated</td>
     <td style="border:1px solid #ddd;padding:8px"><code>user [at] domain.com</code></td>
-    <td style="border:1px solid #ddd;padding:8px">✗ No</td>
+    <td style="border:1px solid #ddd;padding:8px">✗ Invalid</td>
+    <td style="border:1px solid #ddd;padding:8px">✗ Not matched</td>
   </tr>
 </table>
 
+<h4>Extraction Algorithm</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript Email Extraction Implementation:
+
+function extractEmails(text) {
+  // Step 1: Define regex pattern
+  const pattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/gi;
+
+  // Step 2: Find all matches (returns array or null)
+  const matches = text.match(pattern) || [];
+
+  // Step 3: Deduplicate using Set
+  const unique = Array.from(new Set(matches));
+
+  // Step 4: Return results
+  return unique;
+}
+
+// Usage example:
+const text = "Contact support@example.com or sales@company.org";
+const emails = extractEmails(text);
+console.log(emails); // ["support@example.com", "sales@company.org"]
+</pre>
+
 <h4>Common Use Cases</h4>
 <ul>
-  <li><strong>Log Analysis:</strong> Extract contact emails from support logs or error reports</li>
-  <li><strong>Data Migration:</strong> Pull email addresses from unstructured text exports</li>
-  <li><strong>Lead Generation:</strong> Extract contacts from web pages or documents</li>
-  <li><strong>Email Cleanup:</strong> Find and consolidate duplicate email addresses</li>
-  <li><strong>Compliance:</strong> Identify personal data (emails) in text for GDPR audits</li>
-  <li><strong>Research:</strong> Collect author emails from academic papers or articles</li>
+  <li><strong>Log Analysis:</strong> Extract contact emails from support logs, error reports, or audit trails</li>
+  <li><strong>Data Migration:</strong> Pull email addresses from unstructured text exports or legacy systems</li>
+  <li><strong>Lead Generation:</strong> Extract contact information from web pages, documents, or PDFs</li>
+  <li><strong>GDPR Compliance:</strong> Identify personal data (email addresses) in text for data audits and DSAR responses</li>
+  <li><strong>Research:</strong> Collect author emails from academic papers, articles, or conference proceedings</li>
+  <li><strong>Email Cleanup:</strong> Find and consolidate duplicate addresses across multiple sources</li>
+  <li><strong>Security Analysis:</strong> Extract sender/recipient emails from email headers or logs</li>
 </ul>
 
 <h4>Email Extraction Example</h4>
 <pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
 Input Text:
-"Contact our team at support@example.com for help.
+"Contact our team at support@example.com for assistance.
  You can also reach sales@company.org or john.doe+work@gmail.com.
- For press inquiries, email press@media.co.uk or support@example.com again."
+ For press inquiries, email press@media.co.uk or support@example.com again.
+ Alternative: admin subdomain at admin@mail.example.com"
 
-Extracted Emails (deduplicated):
-- support@example.com
-- sales@company.org
-- john.doe+work@gmail.com
-- press@media.co.uk
+Extraction Process:
+  Match 1: support@example.com
+  Match 2: sales@company.org
+  Match 3: john.doe+work@gmail.com
+  Match 4: press@media.co.uk
+  Match 5: support@example.com (duplicate)
+  Match 6: admin@mail.example.com
 
-Total: 4 unique emails found
+Output (deduplicated, one per line):
+support@example.com
+sales@company.org
+john.doe+work@gmail.com
+press@media.co.uk
+admin@mail.example.com
+
+Total: 5 unique emails found
 </pre>
 
-<h4>Limitations</h4>
+<h4>Extraction Limitations</h4>
 <ul>
-  <li><strong>No validation:</strong> Doesn't verify if emails actually exist</li>
-  <li><strong>No DNS check:</strong> Doesn't confirm domain has mail servers</li>
-  <li><strong>Format only:</strong> Matches pattern, not deliverability</li>
-  <li><strong>Obfuscated emails:</strong> Won't detect "user at domain dot com" style</li>
-  <li><strong>International domains:</strong> May miss non-ASCII characters in emails</li>
+  <li><strong>Format-only validation:</strong> Matches pattern, does not verify domain existence or mailbox validity</li>
+  <li><strong>No DNS/MX checks:</strong> Does not confirm the domain has mail servers</li>
+  <li><strong>Quoted strings:</strong> Does not match RFC 5322 quoted local parts ("john.doe"@example.com)</li>
+  <li><strong>International domains:</strong> Does not match IDN/UTF-8 characters (RFC 6531)</li>
+  <li><strong>Obfuscated emails:</strong> Does not detect "user at domain dot com" or similar obfuscation</li>
+  <li><strong>Case sensitivity:</strong> Deduplication is case-sensitive (User@Example.com ≠ user@example.com)</li>
 </ul>
 
-<h4>Email Regex Best Practices</h4>
-<p>The pattern balances accuracy with coverage:</p>
-<ul>
-  <li><strong>Local part:</strong> Allows common characters but rejects invalid ones</li>
-  <li><strong>Domain:</strong> Requires at least one dot and valid characters</li>
-  <li><strong>TLD:</strong> Minimum 2 characters (covers all country codes)</li>
-  <li><strong>Case insensitive:</strong> Treats USER@ and user@ as same</li>
-</ul>
+<h4>Email Validation vs Extraction</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Validation Level</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">What It Checks</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">This Tool</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Syntax validation</td>
+    <td style="border:1px solid #ddd;padding:8px">Matches email format pattern</td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Yes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">DNS validation</td>
+    <td style="border:1px solid #ddd;padding:8px">Checks domain has DNS records</td>
+    <td style="border:1px solid #ddd;padding:8px">✗ No</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">MX record check</td>
+    <td style="border:1px solid #ddd;padding:8px">Confirms domain accepts email</td>
+    <td style="border:1px solid #ddd;padding:8px">✗ No</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">SMTP verification</td>
+    <td style="border:1px solid #ddd;padding:8px">Connects to mail server, checks mailbox</td>
+    <td style="border:1px solid #ddd;padding:8px">✗ No</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Mailbox verification</td>
+    <td style="border:1px solid #ddd;padding:8px">Sends confirmation email</td>
+    <td style="border:1px solid #ddd;padding:8px">✗ No</td>
+  </tr>
+</table>
+
+<h4>Deduplication with Set</h4>
+<p>JavaScript's Set data structure provides efficient O(n) deduplication:</p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Set automatically removes duplicates
+const emails = [
+  "user@example.com",
+  "admin@test.org",
+  "user@example.com",  // duplicate
+  "support@company.io"
+];
+
+const uniqueSet = new Set(emails);
+// Set(3) { "user@example.com", "admin@test.org", "support@company.io" }
+
+const uniqueArray = Array.from(uniqueSet);
+// ["user@example.com", "admin@test.org", "support@company.io"]
+
+// Note: Set uses SameValueZero comparison
+// "User@Example.com" and "user@example.com" are different values
+// For case-insensitive dedup, convert to lowercase first:
+const lowercaseUnique = Array.from(
+  new Set(emails.map(e => e.toLowerCase()))
+);
+</pre>
 </section>
 
 <section class="how-to-use">
 <h3>How to Extract Emails from Text</h3>
 <ol class="how-to-steps">
   <li><strong>Paste text:</strong> Enter or paste the text containing email addresses.</li>
-  <li><strong>Click Extract:</strong> The tool scans for all email patterns.</li>
-  <li><strong>Review results:</strong> Unique emails appear in the output box.</li>
+  <li><strong>Click Extract:</strong> The tool scans for all email patterns using regex.</li>
+  <li><strong>Review results:</strong> Unique emails appear in the output box, one per line.</li>
   <li><strong>Copy output:</strong> Click "Copy Result" to use the email list elsewhere.</li>
 </ol>
 
 <h4 style="margin-top:20px">Tips</h4>
 <ul>
-  <li>Works with any text format - HTML, plain text, code, logs</li>
-  <li>Duplicates are automatically removed</li>
-  <li>Each email appears on a separate line</li>
-  <li>Clear the input before processing new text</li>
+  <li>Works with any text format: HTML, plain text, code, logs, PDF exports</li>
+  <li>Duplicates are automatically removed using Set</li>
+  <li>Each unique email appears on a separate line</li>
+  <li>For case-insensitive deduplication, convert results to lowercase externally</li>
+  <li>Clear input before processing new text</li>
 </ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>How does email extraction work?</dt>
-  <dd>Email extraction uses regex patterns to match the standard email format: local-part@domain. The pattern looks for characters before @, a domain name, and a valid TLD. This tool finds all matches and removes duplicates.</dd>
+  <dt>How does regex-based email extraction work?</dt>
+  <dd>Email extraction uses regular expressions to match the standard email format defined in RFC 5322: local-part@domain. The regex pattern scans text for sequences matching allowed characters before @, a domain name with valid characters, and a TLD of 2+ letters. This tool finds all matches and removes duplicates using Set data structure.</dd>
 
-  <dt>What email formats are supported?</dt>
-  <dd>Standard formats: user@domain.com, name.surname@company.org, user+tag@domain.co.uk. Supports alphanumeric characters, dots, hyphens, underscores, and plus signs in the local part.</dd>
+  <dt>What is the RFC 5322 email standard?</dt>
+  <dd>RFC 5322 defines the Internet Message Format, including email address syntax. The local part (before @) can contain alphanumeric characters and special characters like ._%+- without spaces. The domain part (after @) must be a valid domain name with at least one dot. Full RFC compliance allows quoted strings and escaped characters, but most tools use a simplified pattern for practical extraction.</dd>
 
-  <dt>Are extracted emails validated?</dt>
-  <dd>No, this tool only extracts emails matching the pattern format. It doesn't verify if the domain exists or if the mailbox is real. For validation, use email verification services that send confirmation emails.</dd>
+  <dt>Why doesn't this extract all valid email formats?</dt>
+  <dd>Full RFC 5322 regex is extremely complex (hundreds of characters) because it allows edge cases like quoted strings ("john.doe"@example.com), comments, and escaped characters. This tool uses a practical pattern that matches 99% of real-world emails while remaining readable and fast. Exotic formats are rare outside of test suites.</dd>
 
-  <dt>Why are some emails not detected?</dt>
-  <dd>Possible reasons: malformed emails (missing @, invalid characters), obfuscated emails (user [at] domain.com), or unusual but valid formats not covered by the pattern. The regex prioritizes accuracy over catching edge cases.</dd>
+  <dt>Are extracted emails validated for existence?</dt>
+  <dd>No. This tool only validates format, not deliverability. It does not check DNS MX records, send verification emails, or confirm mailboxes exist. Format validation ensures the email looks correct; deliverability requires separate verification services that perform SMTP handshakes or send confirmation messages.</dd>
 
-  <dt>Is the output deduplicated?</dt>
-  <dd>Yes, duplicate email addresses are automatically removed. Each unique email appears only once in the output, regardless of how many times it appears in the input text.</dd>
+  <dt>How does deduplication work?</dt>
+  <dd>The tool uses JavaScript's Set data structure to automatically remove duplicates. Set stores only unique values—adding an existing value has no effect. This is O(n) time complexity and handles case-sensitive comparison (User@Example.com and user@example.com are treated as different emails).</dd>
+
+  <dt>What about internationalized email addresses?</dt>
+  <dd>This tool uses ASCII-only regex patterns. Internationalized Email Addresses (RFC 6531) allow UTF-8 characters in local parts and domains (用户@例子。广告). These require Unicode-aware regex and are not yet widely supported. For most use cases, ASCII emails cover the vast majority of addresses in circulation.</dd>
 </dl>
 </section>
 </main>

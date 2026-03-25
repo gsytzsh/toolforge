@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Morse Code – Encode Decode Morse Code | ToolForge</title>
-<meta name="description" content="Free online Morse Code encoder and decoder. Part of the ToolForge developer tools collection.">
+<title>Morse Code Encoder Decoder – Convert Text to Morse Code | ToolForge</title>
+<meta name="description" content="Encode text to Morse code or decode Morse to readable text. Supports letters, digits, and prosigns with proper timing notation. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/morse-code.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Morse Code – Encode Decode Morse Code | ToolForge">
-<meta property="og:description" content="Free online Morse Code encoder and decoder. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Morse Code Encoder Decoder – Convert Text to Morse Code | ToolForge">
+<meta property="og:description" content="Encode text to Morse code or decode Morse to readable text. Supports letters, digits, and prosigns with proper timing notation. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/morse-code.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Morse Code – Encode Decode Morse Code | ToolForge">
-<meta name="twitter:description" content="Free online Morse Code encoder and decoder. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Morse Code Encoder Decoder – Convert Text to Morse Code | ToolForge">
+<meta name="twitter:description" content="Encode text to Morse code or decode Morse to readable text. Supports letters, digits, and prosigns with proper timing notation. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Morse Code used for?",
+      "name": "How does Morse code timing work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Morse Code is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "Morse code uses precise timing: a dot (.) is one unit, a dash (-) is three units, the space between parts of the same letter is one unit, between letters is three units, and between words is seven units. This timing system allows operators to distinguish between letters and words even at high speeds."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What are the standard Morse code abbreviations?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Common Morse abbreviations include: CQ (calling any station), DE (from), K (invitation to transmit), KN (listening only for specific station), SK (end of contact), BT (separator), AR (end of message), and R (received). These prosigns streamline communication."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "How do you represent special characters in Morse?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Special characters use specific patterns: @ is AC (.- -.-.), & is AS (.- ...), = is BT (-...-), / is DN (-..-.), + is AR (.-.-.), and ? is IM (..--..). Some modern additions exist for email and web symbols."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the difference between dots and dashes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Dots (dits) are short signals lasting one time unit. Dashes (dahs) are long signals lasting three time units. The rhythm and timing between them encode information. Letter frequency influenced assignment: E (most common) is a single dot, T is a single dash."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "How fast should Morse code be sent?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Beginner speeds are 5-10 WPM (words per minute). Intermediate operators use 15-20 WPM. Expert operators can send 25-30+ WPM. Speed is measured by the word PARIS, which contains 50 dot/dash elements. At 20 WPM, each dot is 0.06 seconds."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "What are prosigns in Morse code?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Prosigns are procedural signals that convey standard operational messages. Examples: SOS (...---...) for distress, CQ (calling any station), DE (this is), SK (end of work), AR (end of message). They are transmitted as continuous sequences without inter-letter gaps."
       }
     }
   ]
@@ -71,47 +76,281 @@
 </head>
 <body>
 <main class="container">
-<h1>Morse Code</h1>
-<p class="subtitle">Encode text to Morse code or decode Morse to text. Use space between letters, / between words.</p>
+<h1>Morse Code Encoder Decoder</h1>
+<p class="subtitle">Convert text to Morse code or decode Morse to readable text. Supports letters, digits, and standard prosigns.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
-<h3>Text</h3>
-<label for="text" class="sr-only">Text input</label>
-<textarea id="text" rows="4" style="width:90%" placeholder="Hello" aria-label="Text input"></textarea>
+<h3>Text Input</h3>
+<label for="text" class="sr-only">Text to encode</label>
+<textarea id="text" rows="4" style="width:90%" placeholder="HELLO WORLD" aria-label="Text to encode"></textarea>
 <br><br>
 <div class="tool-actions">
-<button onclick="toMorse()">Text → Morse</button>
+<button onclick="toMorse()">Encode to Morse</button>
 <button type="button" onclick="copyMorse()">Copy Morse</button>
 </div>
-<h3>Morse</h3>
-<label for="morse" class="sr-only">Morse code</label>
-<textarea id="morse" rows="4" style="width:90%" placeholder=".... . .-.. .-.. ---" aria-label="Morse code"></textarea>
+<h3>Morse Code Output</h3>
+<label for="morse" class="sr-only">Morse code output</label>
+<textarea id="morse" rows="4" style="width:90%" placeholder=".... . .-.. .-.. --- / .-- --- .-. .-.. -.." aria-label="Morse code output"></textarea>
+<p class="hint">Use space between letters, / between words</p>
 <br><br>
 <div class="tool-actions">
-<button onclick="toText()">Morse → Text</button>
+<button onclick="toText()">Decode to Text</button>
 <button type="button" onclick="copyText()">Copy Text</button>
 </div>
 <p id="status" class="inline-status"></p>
+
 <section class="tool-seo">
 <h3>About Morse Code</h3>
-<p>The Morse Code tool lets you encode text to Morse code or decode Morse to text. Use space between letters, / between words.</p>
-<p>It is useful when working with encoded values, copied payloads, browser-safe strings and quick debugging tasks across common text formats.</p>
+<p>Morse code is a character encoding scheme that represents letters and numerals as sequences of two signal durations: dots (short pulses) and dashes (long pulses). Originally developed for telegraphy, it remains in use for amateur radio, aviation navigation, and emergency signaling.</p>
+
+<h4>Morse Code Timing Standards</h4>
+<p>Morse code uses a precise timing system based on the dot duration as the fundamental unit:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Element</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Duration</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Dot (dit)</td>
+    <td style="border:1px solid #ddd;padding:8px">1 unit</td>
+    <td style="border:1px solid #ddd;padding:8px">Basic time unit, short pulse</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Dash (dah)</td>
+    <td style="border:1px solid #ddd;padding:8px">3 units</td>
+    <td style="border:1px solid #ddd;padding:8px">Three times dot duration</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Intra-letter space</td>
+    <td style="border:1px solid #ddd;padding:8px">1 unit</td>
+    <td style="border:1px solid #ddd;padding:8px">Gap between dots/dashes within a letter</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Inter-letter space</td>
+    <td style="border:1px solid #ddd;padding:8px">3 units</td>
+    <td style="border:1px solid #ddd;padding:8px">Gap between letters (represented as space)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Inter-word space</td>
+    <td style="border:1px solid #ddd;padding:8px">7 units</td>
+    <td style="border:1px solid #ddd;padding:8px">Gap between words (represented as /)</td>
+  </tr>
+</table>
+
+<h4>Complete Morse Code Character Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Letter</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Code</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Letter</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Code</th>
+  </tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">A</td><td style="border:1px solid #ddd;padding:8px">.-</td><td style="border:1px solid #ddd;padding:8px">N</td><td style="border:1px solid #ddd;padding:8px">-.</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">B</td><td style="border:1px solid #ddd;padding:8px">-...</td><td style="border:1px solid #ddd;padding:8px">O</td><td style="border:1px solid #ddd;padding:8px">---</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">C</td><td style="border:1px solid #ddd;padding:8px">-.-.</td><td style="border:1px solid #ddd;padding:8px">P</td><td style="border:1px solid #ddd;padding:8px">.--.</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">D</td><td style="border:1px solid #ddd;padding:8px">-..</td><td style="border:1px solid #ddd;padding:8px">Q</td><td style="border:1px solid #ddd;padding:8px">--.-</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">E</td><td style="border:1px solid #ddd;padding:8px">.</td><td style="border:1px solid #ddd;padding:8px">R</td><td style="border:1px solid #ddd;padding:8px">.-.</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">F</td><td style="border:1px solid #ddd;padding:8px">..-.</td><td style="border:1px solid #ddd;padding:8px">S</td><td style="border:1px solid #ddd;padding:8px">...</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">G</td><td style="border:1px solid #ddd;padding:8px">--.</td><td style="border:1px solid #ddd;padding:8px">T</td><td style="border:1px solid #ddd;padding:8px">-</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">H</td><td style="border:1px solid #ddd;padding:8px">....</td><td style="border:1px solid #ddd;padding:8px">U</td><td style="border:1px solid #ddd;padding:8px">..-</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">I</td><td style="border:1px solid #ddd;padding:8px">..</td><td style="border:1px solid #ddd;padding:8px">V</td><td style="border:1px solid #ddd;padding:8px">...-</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">J</td><td style="border:1px solid #ddd;padding:8px">.---</td><td style="border:1px solid #ddd;padding:8px">W</td><td style="border:1px solid #ddd;padding:8px">.--</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">K</td><td style="border:1px solid #ddd;padding:8px">-.-</td><td style="border:1px solid #ddd;padding:8px">X</td><td style="border:1px solid #ddd;padding:8px">-..-</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">L</td><td style="border:1px solid #ddd;padding:8px">.-..</td><td style="border:1px solid #ddd;padding:8px">Y</td><td style="border:1px solid #ddd;padding:8px">-.--</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">M</td><td style="border:1px solid #ddd;padding:8px">--</td><td style="border:1px solid #ddd;padding:8px">Z</td><td style="border:1px solid #ddd;padding:8px">--..</td></tr>
+</table>
+
+<h4>Morse Code Numerals</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Digit</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Code</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Pattern</th>
+  </tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">1</td><td style="border:1px solid #ddd;padding:8px">.----</td><td style="border:1px solid #ddd;padding:8px">1 dot, 4 dashes</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">2</td><td style="border:1px solid #ddd;padding:8px">..---</td><td style="border:1px solid #ddd;padding:8px">2 dots, 3 dashes</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">3</td><td style="border:1px solid #ddd;padding:8px">...--</td><td style="border:1px solid #ddd;padding:8px">3 dots, 2 dashes</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">4</td><td style="border:1px solid #ddd;padding:8px">....-</td><td style="border:1px solid #ddd;padding:8px">4 dots, 1 dash</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">5</td><td style="border:1px solid #ddd;padding:8px">.....</td><td style="border:1px solid #ddd;padding:8px">5 dots</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">6</td><td style="border:1px solid #ddd;padding:8px">-....</td><td style="border:1px solid #ddd;padding:8px">1 dash, 4 dots</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">7</td><td style="border:1px solid #ddd;padding:8px">--...</td><td style="border:1px solid #ddd;padding:8px">2 dashes, 3 dots</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">8</td><td style="border:1px solid #ddd;padding:8px">---..</td><td style="border:1px solid #ddd;padding:8px">3 dashes, 2 dots</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">9</td><td style="border:1px solid #ddd;padding:8px">----.</td><td style="border:1px solid #ddd;padding:8px">4 dashes, 1 dot</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">0</td><td style="border:1px solid #ddd;padding:8px">-----</td><td style="border:1px solid #ddd;padding:8px">5 dashes</td></tr>
+</table>
+
+<h4>Common Prosigns and Abbreviations</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Prosign</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Code</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Meaning</th>
+  </tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">SOS</td><td style="border:1px solid #ddd;padding:8px">...---...</td><td style="border:1px solid #ddd;padding:8px">Distress signal (save our souls)</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">CQ</td><td style="border:1px solid #ddd;padding:8px">-.-. --.-</td><td style="border:1px solid #ddd;padding:8px">Calling any station</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">DE</td><td style="border:1px solid #ddd;padding:8px">-.. .</td><td style="border:1px solid #ddd;padding:8px">From (this is)</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">K</td><td style="border:1px solid #ddd;padding:8px">-.-</td><td style="border:1px solid #ddd;padding:8px">Invitation to transmit</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">KN</td><td style="border:1px solid #ddd;padding:8px">-. --</td><td style="border:1px solid #ddd;padding:8px">Listening only for specific station</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">SK</td><td style="border:1px solid #ddd;padding:8px">...-.-</td><td style="border:1px solid #ddd;padding:8px">End of contact (silent key)</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">AR</td><td style="border:1px solid #ddd;padding:8px">.-.-.</td><td style="border:1px solid #ddd;padding:8px">End of message</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">BT</td><td style="border:1px solid #ddd;padding:8px">-...-</td><td style="border:1px solid #ddd;padding:8px">Separator (break)</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">R</td><td style="border:1px solid #ddd;padding:8px">.-.</td><td style="border:1px solid #ddd;padding:8px">Received (roger)</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">73</td><td style="border:1px solid #ddd;padding:8px">--... ...--</td><td style="border:1px solid #ddd;padding:8px">Best regards</td></tr>
+</table>
+
+<h4>Encoding and Decoding Algorithm</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript Morse Code Implementation:
+
+// Character mapping table
+const MORSE_CODE = {
+  'A': '.-',    'B': '-...',  'C': '-.-.',  'D': '-..',
+  'E': '.',     'F': '..-.',  'G': '--.',   'H': '....',
+  'I': '..',    'J': '.---',  'K': '-.-',   'L': '.-..',
+  'M': '--',    'N': '-.',    'O': '---',   'P': '.--.',
+  'Q': '--.-',  'R': '.-.',   'S': '...',   'T': '-',
+  'U': '..-',   'V': '...-',  'W': '.--',   'X': '-..-',
+  'Y': '-.--',  'Z': '--..',
+  '1': '.----', '2': '..---', '3': '...--', '4': '....-',
+  '5': '.....', '6': '-....', '7': '--...', '8': '---..',
+  '9': '----.', '0': '-----'
+};
+
+// Create reverse mapping for decoding
+const REVERSE_CODE = Object.fromEntries(
+  Object.entries(MORSE_CODE).map(([k, v]) => [v, k])
+);
+
+// Encode text to Morse code
+function encodeToMorse(text) {
+  return text.toUpperCase()
+    .replace(/[^A-Z0-9\s]/g, '')  // Remove non-alphanumeric
+    .split('')
+    .map(char => {
+      if (char === ' ') return '/';  // Word separator
+      return MORSE_CODE[char] || '';
+    })
+    .join(' ')
+    .replace(/\s*\/\s*/g, ' / ');  // Clean word separators
+}
+
+// Decode Morse code to text
+function decodeMorse(morse) {
+  return morse.trim()
+    .split(/\s+/)  // Split on whitespace
+    .map(symbol => {
+      if (symbol === '/') return ' ';  // Word separator
+      return REVERSE_CODE[symbol] || '';
+    })
+    .join('');
+}
+
+// Usage examples:
+encodeToMorse('HELLO');      // ".... . .-.. .-.. ---"
+encodeToMorse('HELLO WORLD'); // ".... . .-.. .-.. --- / .-- --- .-. .-.. -.."
+decodeMorse('.... . .-.. .-.. ---');  // "HELLO"
+decodeMorse('... --- ...');           // "SOS"
+</pre>
+
+<h4>Speed and Timing Calculation</h4>
+<p>Morse code speed is measured in words per minute (WPM), using the standard word "PARIS" as reference:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Speed (WPM)</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Dot Duration (ms)</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Dash Duration (ms)</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Skill Level</th>
+  </tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">5 WPM</td><td style="border:1px solid #ddd;padding:8px">240 ms</td><td style="border:1px solid #ddd;padding:8px">720 ms</td><td style="border:1px solid #ddd;padding:8px">Beginner</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">10 WPM</td><td style="border:1px solid #ddd;padding:8px">120 ms</td><td style="border:1px solid #ddd;padding:8px">360 ms</td><td style="border:1px solid #ddd;padding:8px">Novice</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">15 WPM</td><td style="border:1px solid #ddd;padding:8px">80 ms</td><td style="border:1px solid #ddd;padding:8px">240 ms</td><td style="border:1px solid #ddd;padding:8px">Intermediate</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">20 WPM</td><td style="border:1px solid #ddd;padding:8px">60 ms</td><td style="border:1px solid #ddd;padding:8px">180 ms</td><td style="border:1px solid #ddd;padding:8px">Advanced</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">25 WPM</td><td style="border:1px solid #ddd;padding:8px">48 ms</td><td style="border:1px solid #ddd;padding:8px">144 ms</td><td style="border:1px solid #ddd;padding:8px">Expert</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">30 WPM</td><td style="border:1px solid #ddd;padding:8px">40 ms</td><td style="border:1px solid #ddd;padding:8px">120 ms</td><td style="border:1px solid #ddd;padding:8px">Professional</td></tr>
+</table>
+<p>The word "PARIS" contains exactly 50 dot/dash elements (including intra-letter spaces). At 20 WPM, one minute contains 20 × 50 = 1000 elements, so each element is 60000/1000 = 60ms.</p>
+
+<h4>Special Characters and Extensions</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Character</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Code</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Mnemonic</th>
+  </tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">@</td><td style="border:1px solid #ddd;padding:8px">.- -.-.</td><td style="border:1px solid #ddd;padding:8px">A + C (at sign)</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">&</td><td style="border:1px solid #ddd;padding:8px">.- ...</td><td style="border:1px solid #ddd;padding:8px">A + S (AS)</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">=</td><td style="border:1px solid #ddd;padding:8px">-...-</td><td style="border:1px solid #ddd;padding:8px">BT (break)</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">/</td><td style="border:1px solid #ddd;padding:8px">-..-.</td><td style="border:1px solid #ddd;padding:8px">DN (double dash)</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">+</td><td style="border:1px solid #ddd;padding:8px">.-.-.</td><td style="border:1px solid #ddd;padding:8px">AR (end of message)</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">?</td><td style="border:1px solid #ddd;padding:8px">..--..</td><td style="border:1px solid #ddd;padding:8px">IM (interrogation)</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">!</td><td style="border:1px solid #ddd;padding:8px">--..--</td><td style="border:1px solid #ddd;padding:8px">DN (emphasized)</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">:</td><td style="border:1px solid #ddd;padding:8px">---...</td><td style="border:1px solid #ddd;padding:8px">OM (colon)</td></tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Amateur Radio:</strong> CW (continuous wave) communication between ham radio operators worldwide</li>
+  <li><strong>Aviation:</strong> VOR navigation beacons and NDB stations transmit identifiers in Morse</li>
+  <li><strong>Emergency Signaling:</strong> SOS and other distress signals using light, sound, or radio</li>
+  <li><strong>Education:</strong> Teaching encoding/decoding concepts and digital communication fundamentals</li>
+  <li><strong>Accessibility:</strong> Assistive communication for people with limited motor control</li>
+  <li><strong>Historical Research:</strong> Decoding historical telegraph and radio messages</li>
+</ul>
+
+<h4>Morse Code Transmission Methods</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Method</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Medium</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">Audio Tone</td><td style="border:1px solid #ddd;padding:8px">Sound waves</td><td style="border:1px solid #ddd;padding:8px">Radio, telephone, audible signals</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">Light Flash</td><td style="border:1px solid #ddd;padding:8px">Visible light</td><td style="border:1px solid #ddd;padding:8px">Signal lamps, flashlight, heliograph</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">Radio CW</td><td style="border:1px solid #ddd;padding:8px">RF carrier</td><td style="border:1px solid #ddd;padding:8px">Amateur radio, maritime communication</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">Electrical</td><td style="border:1px solid #ddd;padding:8px">Wire circuit</td><td style="border:1px solid #ddd;padding:8px">Telegraph, submarine cable</td></tr>
+  <tr><td style="border:1px solid #ddd;padding:8px">Tactile</td><td style="border:1px solid #ddd;padding:8px">Vibration</td><td style="border:1px solid #ddd;padding:8px">Accessibility devices</td></tr>
+</table>
+</section>
+
+<section class="how-to-use">
+<h3>How to Use Morse Code Tool</h3>
+<ol class="how-to-steps">
+  <li><strong>Enter text:</strong> Type or paste text to encode in the Text field.</li>
+  <li><strong>Click Encode:</strong> Convert text to Morse code with proper spacing.</li>
+  <li><strong>Or decode:</strong> Paste Morse code (spaces between letters, / between words) and click Decode.</li>
+  <li><strong>Copy result:</strong> Use the Copy buttons to copy the converted output.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Use / to separate words in Morse input (optional - spaces also work)</li>
+  <li>Lowercase letters are automatically converted to uppercase</li>
+  <li>Numbers are preserved in conversion</li>
+  <li>Special characters are removed during encoding</li>
+  <li>Invalid Morse sequences are silently skipped during decoding</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Morse Code used for?</dt>
-  <dd>Morse Code is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>How does Morse code timing work?</dt>
+  <dd>Morse code uses precise timing: a dot (.) is one unit, a dash (-) is three units, the space between parts of the same letter is one unit, between letters is three units, and between words is seven units. This timing system allows operators to distinguish between letters and words even at high speeds.</dd>
+
+  <dt>What are the standard Morse code abbreviations?</dt>
+  <dd>Common Morse abbreviations include: CQ (calling any station), DE (from), K (invitation to transmit), KN (listening only for specific station), SK (end of contact), BT (separator), AR (end of message), and R (received). These prosigns streamline communication.</dd>
+
+  <dt>How do you represent special characters in Morse?</dt>
+  <dd>Special characters use specific patterns: @ is AC (.- -.-.), & is AS (.- ...), = is BT (-...-), / is DN (-..-.), + is AR (.-.-.), and ? is IM (..--..). Some modern additions exist for email and web symbols.</dd>
+
+  <dt>What is the difference between dots and dashes?</dt>
+  <dd>Dots (dits) are short signals lasting one time unit. Dashes (dahs) are long signals lasting three time units. The rhythm and timing between them encode information. Letter frequency influenced assignment: E (most common) is a single dot, T is a single dash.</dd>
+
+  <dt>How fast should Morse code be sent?</dt>
+  <dd>Beginner speeds are 5-10 WPM (words per minute). Intermediate operators use 15-20 WPM. Expert operators can send 25-30+ WPM. Speed is measured by the word PARIS, which contains 50 dot/dash elements. At 20 WPM, each dot is 0.06 seconds.</dd>
+
+  <dt>What are prosigns in Morse code?</dt>
+  <dd>Prosigns are procedural signals that convey standard operational messages. Examples: SOS (...---...) for distress, CQ (calling any station), DE (this is), SK (end of work), AR (end of message). They are transmitted as continuous sequences without inter-letter gaps.</dd>
 </dl>
 </section>
 </main>
@@ -122,7 +361,7 @@ for(var k in map)rev[map[k]]=k
 function toMorse(){
 var s=document.getElementById("text").value.toUpperCase().replace(/[^A-Z0-9\s]/g,"")
 document.getElementById("morse").value=s.split("").map(function(c){return c===" "?"/":map[c]||""}).join(" ").replace(/\s*\/\s*/g," / ")
-document.getElementById("status").innerText="Converted to Morse."
+document.getElementById("status").innerText="Converted to Morse code."
 document.getElementById("status").style.color="#16a34a"
 }
 function toText(){
@@ -140,7 +379,7 @@ document.getElementById("status").style.color="#b91c1c"
 return
 }
 navigator.clipboard.writeText(value).then(function(){
-document.getElementById("status").innerText="Morse copied."
+document.getElementById("status").innerText="Morse code copied."
 document.getElementById("status").style.color="#16a34a"
 }).catch(function(){
 document.getElementById("status").innerText="Copy failed."

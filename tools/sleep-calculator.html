@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Sleep Calculator – Calculate Sleep Cycles | ToolForge</title>
-<meta name="description" content="Free online Sleep Calculator to estimate suggested bedtimes or wake-up times based on 90-minute sleep cycles. Part of the ToolForge developer tools collection.">
+<title>Sleep Calculator – Calculate Sleep Cycles and Wake Times | ToolForge</title>
+<meta name="description" content="Calculate optimal bedtimes and wake times based on 90-minute sleep cycles. Includes sleep stage breakdown, sleep cycle science, and bedtime planning tips. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/sleep-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Sleep Calculator – Calculate Sleep Cycles | ToolForge">
-<meta property="og:description" content="Free online Sleep Calculator to estimate suggested bedtimes or wake-up times based on 90-minute sleep cycles.">
+<meta property="og:title" content="Sleep Calculator – Calculate Sleep Cycles and Wake Times | ToolForge">
+<meta property="og:description" content="Calculate optimal bedtimes and wake times based on 90-minute sleep cycles.">
 <meta property="og:url" content="https://toolforge.site/tools/sleep-calculator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sleep Calculator – Calculate Sleep Cycles | ToolForge">
-<meta name="twitter:description" content="Free online Sleep Calculator to estimate suggested bedtimes or wake-up times based on 90-minute sleep cycles.">
+<meta name="twitter:title" content="Sleep Calculator – Calculate Sleep Cycles and Wake Times | ToolForge">
+<meta name="twitter:description" content="Calculate optimal bedtimes and wake times based on 90-minute sleep cycles.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Sleep Calculator used for?",
+      "name": "What is a sleep cycle?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sleep Calculator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "A sleep cycle is a recurring progression through different sleep stages lasting approximately 90 minutes. Each cycle includes: Stage 1 (light sleep, 1-5 min), Stage 2 (deeper light sleep, 10-60 min), Stage 3 (deep slow-wave sleep, 20-40 min), and REM sleep (dreaming, 10-60 min). Completing full cycles results in more refreshed waking."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "Why 90 minutes per sleep cycle?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "The average adult sleep cycle lasts 90-110 minutes, with 90 minutes being the commonly used standard. This duration allows completion of all sleep stages including deep sleep (physical restoration) and REM sleep (mental restoration). Waking between cycles (rather than during deep sleep) reduces sleep inertia and grogginess."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "How many sleep cycles do I need?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Most adults need 5-6 sleep cycles per night (7.5-9 hours). 4 cycles (6 hours) may suffice for some. Less than 4 cycles leads to sleep deprivation. Teenagers need 8-10 hours (5-8 cycles), children need 9-12 hours. Individual needs vary based on age, genetics, activity level, and health."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How long does it take to fall asleep?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Average sleep latency (time to fall asleep) is 10-20 minutes for healthy adults. Less than 5 minutes may indicate sleep deprivation. More than 30 minutes regularly may indicate insomnia. Sleep calculators add ~15 minutes buffer to account for typical sleep onset time."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What is the best time to wake up?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Best wake times align with the end of sleep cycles, typically after 5-6 cycles (7.5-9 hours). Waking during light sleep (end of cycle) feels easier than waking during deep sleep. Consistent wake times (even on weekends) regulate circadian rhythm and improve sleep quality over time."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "Why do I feel groggy after sleeping too long?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Sleep inertia (grogginess) occurs when waking during deep sleep (Stage 3) rather than light sleep. Oversleeping often means entering another deep sleep phase. Alcohol, medications, and sleep deprivation can also cause prolonged grogginess. Waking at the end of a 90-minute cycle reduces this effect."
       }
     }
   ]
@@ -72,71 +77,332 @@
 <body>
 <main class="container">
 <h1>Sleep Calculator</h1>
-<p class="subtitle">Estimate suggested sleep or wake times using 90-minute sleep cycles plus time to fall asleep.</p>
+<p class="subtitle">Calculate optimal bedtimes and wake times based on 90-minute sleep cycles.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
-<label for="mode" class="sr-only">Calculation mode</label>
-<select id="mode" aria-label="Calculation mode">
-<option value="wake">I want to wake up at</option>
-<option value="sleep">I want to go to sleep at</option>
+
+<div style="margin-bottom:20px">
+<label for="mode" style="font-weight:bold">Calculation Mode:</label>
+<select id="mode" style="margin-left:8px;padding:8px;font-size:14px">
+<option value="wake">I want to wake up at...</option>
+<option value="sleep">I want to go to sleep at...</option>
 </select>
-<label for="time" class="sr-only">Target time</label>
-<input id="time" type="time" aria-label="Target time" style="margin-left:8px">
-<div class="tool-actions">
-<button type="button" onclick="calculateSleep()">Calculate</button>
 </div>
-<h3>Suggested Times</h3>
-<pre id="result"></pre>
+
+<div style="margin-bottom:20px">
+<label for="time" style="font-weight:bold">Target Time:</label>
+<input id="time" type="time" style="margin-left:8px;padding:8px;font-size:14px">
+</div>
+
+<div class="tool-actions">
+<button type="button" onclick="calculateSleep()">Calculate Sleep Times</button>
+</div>
+
+<h3 style="margin-top:24px">Suggested Times</h3>
+<div id="result" style="background:#f5f5f5;padding:16px;border-radius:8px;font-size:14px"></div>
 <p id="status" class="inline-status"></p>
+
 <section class="tool-seo">
 <h3>About Sleep Calculator</h3>
-<p>This sleep calculator suggests bedtimes or wake-up times based on 90-minute sleep cycles and a typical time to fall asleep.</p>
-<p>It is useful for bedtime planning, early-morning schedules and adjusting routines when you want a more practical target than a random alarm time.</p>
+<p>This sleep calculator suggests optimal bedtimes or wake times based on 90-minute sleep cycles. By timing sleep to complete full cycles, you can wake feeling more refreshed rather than groggy. The calculator accounts for average sleep latency (time to fall asleep) of approximately 15 minutes.</p>
+<p>Whether you need to wake up at a specific time or want to know when you'll wake up if you go to bed now, this tool provides multiple options based on completing 4, 5, or 6 full sleep cycles.</p>
+
+<h4>Sleep Cycle Formula</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:14px;overflow:auto">
+Sleep Cycle Calculation:
+
+When waking at target time:
+  Bedtime = Wake Time - (Cycles × 90 minutes) - 15 minutes (fall asleep time)
+
+When sleeping at target time:
+  Wake Time = Sleep Time + (Cycles × 90 minutes) + 15 minutes (fall asleep time)
+
+Recommended: 5-6 cycles (7.5-9 hours)
+Minimum: 4 cycles (6 hours)
+
+Example (wake at 7:00 AM):
+  6 cycles: 7:00 - 9h - 15min = 9:45 PM
+  5 cycles: 7:00 - 7h30m - 15min = 11:15 PM
+  4 cycles: 7:00 - 6h - 15min = 12:45 AM
+</pre>
+
+<h4>JavaScript Implementation</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Sleep Calculator Implementation
+
+function calculateSleepTimes(targetTime, mode, cycles) {
+  const SLEEP_LATENCY = 15; // minutes to fall asleep
+  const CYCLE_LENGTH = 90;  // minutes per cycle
+
+  let base = new Date();
+  let [hours, minutes] = targetTime.split(':');
+  base.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+
+  let totalMinutes = (cycles * CYCLE_LENGTH) + SLEEP_LATENCY;
+
+  if (mode === 'wake') {
+    // Calculate bedtime: wake time minus sleep duration
+    base.setMinutes(base.getMinutes() - totalMinutes);
+  } else {
+    // Calculate wake time: sleep time plus sleep duration
+    base.setMinutes(base.getMinutes() + totalMinutes);
+  }
+
+  return {
+    cycles: cycles,
+    time: formatTime(base),
+    totalHours: (totalMinutes / 60).toFixed(1)
+  };
+}
+
+function formatTime(date) {
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  const displayHours = hours % 12 || 12;
+  return `${displayHours}:${String(minutes).padStart(2, '0')} ${ampm}`;
+}
+</pre>
+
+<h4>Sleep Stages Breakdown</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Stage</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Name</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Duration</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Function</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Stage 1</td>
+    <td style="border:1px solid #ddd;padding:8px">N1 (Light Sleep)</td>
+    <td style="border:1px solid #ddd;padding:8px">1-5 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">Transition from wakefulness</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Stage 2</td>
+    <td style="border:1px solid #ddd;padding:8px">N2 (Light Sleep)</td>
+    <td style="border:1px solid #ddd;padding:8px">10-60 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">Body temperature drops, heart rate slows</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Stage 3</td>
+    <td style="border:1px solid #ddd;padding:8px">N3 (Deep Sleep)</td>
+    <td style="border:1px solid #ddd;padding:8px">20-40 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">Physical restoration, immune function</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Stage 4</td>
+    <td style="border:1px solid #ddd;padding:8px">REM Sleep</td>
+    <td style="border:1px solid #ddd;padding:8px">10-60 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">Dreaming, memory consolidation, mental restoration</td>
+  </tr>
+</table>
+
+<h4>Sleep Cycles Through the Night</h4>
+<p>A typical night includes 5-6 complete sleep cycles, with stage proportions changing:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Cycle Progression Through 8-Hour Sleep:
+
+Cycle 1 (0:00-1:30):    Stage 1 → Stage 2 → Stage 3 (long) → Stage 2 → REM (short)
+Cycle 2 (1:30-3:00):    Stage 2 → Stage 3 (medium) → Stage 2 → REM (medium)
+Cycle 3 (3:00-4:30):    Stage 2 → Stage 3 (short) → Stage 2 → REM (long)
+Cycle 4 (4:30-6:00):    Stage 2 → Stage 3 (brief) → Stage 2 → REM (long)
+Cycle 5 (6:00-7:30):    Stage 2 → Stage 3 (very short) → Stage 2 → REM (very long)
+Cycle 6 (7:30-9:00):    Stage 1 → Stage 2 → REM (extended)
+
+Key Pattern:
+- Deep sleep (Stage 3) dominates early cycles
+- REM sleep dominates later cycles
+- Waking after Cycle 5 or 6 feels most refreshing
+</pre>
+
+<h4>Recommended Sleep Duration by Age</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Age Group</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Recommended Hours</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Sleep Cycles</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Newborns (0-3 months)</td>
+    <td style="border:1px solid #ddd;padding:8px">14-17 hours</td>
+    <td style="border:1px solid #ddd;padding:8px">9-11 cycles</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Infants (4-11 months)</td>
+    <td style="border:1px solid #ddd;padding:8px">12-15 hours</td>
+    <td style="border:1px solid #ddd;padding:8px">8-10 cycles</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Toddlers (1-2 years)</td>
+    <td style="border:1px solid #ddd;padding:8px">11-14 hours</td>
+    <td style="border:1px solid #ddd;padding:8px">7-9 cycles</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Preschool (3-5 years)</td>
+    <td style="border:1px solid #ddd;padding:8px">10-13 hours</td>
+    <td style="border:1px solid #ddd;padding:8px">7-9 cycles</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">School-age (6-13 years)</td>
+    <td style="border:1px solid #ddd;padding:8px">9-11 hours</td>
+    <td style="border:1px solid #ddd;padding:8px">6-7 cycles</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Teenagers (14-17 years)</td>
+    <td style="border:1px solid #ddd;padding:8px">8-10 hours</td>
+    <td style="border:1px solid #ddd;padding:8px">5-7 cycles</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Young Adults (18-25 years)</td>
+    <td style="border:1px solid #ddd;padding:8px">7-9 hours</td>
+    <td style="border:1px solid #ddd;padding:8px">5-6 cycles</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Adults (26-64 years)</td>
+    <td style="border:1px solid #ddd;padding:8px">7-9 hours</td>
+    <td style="border:1px solid #ddd;padding:8px">5-6 cycles</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Older Adults (65+ years)</td>
+    <td style="border:1px solid #ddd;padding:8px">7-8 hours</td>
+    <td style="border:1px solid #ddd;padding:8px">5 cycles</td>
+  </tr>
+</table>
+
+<h4>Bedtime Calculation Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Need to wake at 6:00 AM
+  For 6 cycles (9h 15m sleep): Bedtime = 8:45 PM
+  For 5 cycles (7h 45m sleep): Bedtime = 10:15 PM
+  For 4 cycles (6h 15m sleep): Bedtime = 11:45 PM
+  Recommended: 10:15 PM (5 cycles)
+
+Example 2: Need to wake at 7:30 AM
+  For 6 cycles (9h 15m sleep): Bedtime = 10:15 PM
+  For 5 cycles (7h 45m sleep): Bedtime = 11:45 PM
+  For 4 cycles (6h 15m sleep): Bedtime = 1:15 AM
+  Recommended: 11:45 PM (5 cycles)
+
+Example 3: Going to sleep at 11:00 PM
+  Wake after 4 cycles:  5:15 AM
+  Wake after 5 cycles:  6:45 AM
+  Wake after 6 cycles:  8:15 AM
+  Recommended: 6:45 AM (5 cycles)
+</pre>
+
+<h4>Sleep Quality Tips</h4>
+<ul>
+  <li><strong>Consistent schedule:</strong> Go to bed and wake up at the same time daily, even on weekends</li>
+  <li><strong>Dark environment:</strong> Use blackout curtains, eye mask; darkness triggers melatonin production</li>
+  <li><strong>Cool temperature:</strong> Keep bedroom at 60-67°F (15-19°C) for optimal sleep</li>
+  <li><strong>Limit screens:</strong> Avoid blue light 1-2 hours before bed; use night mode if necessary</li>
+  <li><strong>Avoid caffeine:</strong> No caffeine 6-8 hours before bedtime (coffee, tea, chocolate)</li>
+  <li><strong>Wind down routine:</strong> Reading, meditation, or warm bath signals body it's time to sleep</li>
+  <li><strong>Exercise regularly:</strong> Physical activity improves sleep quality, but not right before bed</li>
+  <li><strong>Limit naps:</strong> If needed, keep naps under 30 minutes and before 3 PM</li>
+</ul>
+
+<h4>Understanding Sleep Inertia</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Wake Point</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Sleep Stage</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Grogginess Level</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Recovery Time</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">End of cycle</td>
+    <td style="border:1px solid #ddd;padding:8px">Light sleep (Stage 1-2)</td>
+    <td style="border:1px solid #ddd;padding:8px">Low</td>
+    <td style="border:1px solid #ddd;padding:8px">5-15 minutes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">During REM</td>
+    <td style="border:1px solid #ddd;padding:8px">REM sleep</td>
+    <td style="border:1px solid #ddd;padding:8px">Medium</td>
+    <td style="border:1px solid #ddd;padding:8px">15-30 minutes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">During deep sleep</td>
+    <td style="border:1px solid #ddd;padding:8px">Stage 3 (slow-wave)</td>
+    <td style="border:1px solid #ddd;padding:8px">High</td>
+    <td style="border:1px solid #ddd;padding:8px">30-60+ minutes</td>
+  </tr>
+</table>
+
+<h4>Common Sleep Mistakes</h4>
+<ul>
+  <li><strong>Hitting snooze:</strong> Fragmented sleep between alarms causes more grogginess; get up on first alarm</li>
+  <li><strong>Sleeping in on weekends:</strong> Disrupts circadian rhythm; keep consistent schedule</li>
+  <li><strong>Using bed for work:</strong> Associate bed with sleep only; no laptops or phones in bed</li>
+  <li><strong>Heavy meals before bed:</strong> Digestion interferes with sleep; finish eating 2-3 hours before bed</li>
+  <li><strong>Alcohol before bed:</strong> May help fall asleep but disrupts sleep quality and REM sleep</li>
+  <li><strong>Watching clock:</strong> Clock-watching increases anxiety; turn clock away from view</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Sleep Calculator used for?</dt>
-  <dd>Sleep Calculator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is a sleep cycle?</dt>
+  <dd>A sleep cycle is a recurring progression through different sleep stages lasting approximately 90 minutes. Each cycle includes: Stage 1 (light sleep, 1-5 min), Stage 2 (deeper light sleep, 10-60 min), Stage 3 (deep slow-wave sleep, 20-40 min), and REM sleep (dreaming, 10-60 min). Completing full cycles results in more refreshed waking.</dd>
+
+  <dt>Why 90 minutes per sleep cycle?</dt>
+  <dd>The average adult sleep cycle lasts 90-110 minutes, with 90 minutes being the commonly used standard. This duration allows completion of all sleep stages including deep sleep (physical restoration) and REM sleep (mental restoration). Waking between cycles (rather than during deep sleep) reduces sleep inertia and grogginess.</dd>
+
+  <dt>How many sleep cycles do I need?</dt>
+  <dd>Most adults need 5-6 sleep cycles per night (7.5-9 hours). 4 cycles (6 hours) may suffice for some. Less than 4 cycles leads to sleep deprivation. Teenagers need 8-10 hours (5-8 cycles), children need 9-12 hours. Individual needs vary based on age, genetics, activity level, and health.</dd>
+
+  <dt>How long does it take to fall asleep?</dt>
+  <dd>Average sleep latency (time to fall asleep) is 10-20 minutes for healthy adults. Less than 5 minutes may indicate sleep deprivation. More than 30 minutes regularly may indicate insomnia. Sleep calculators add ~15 minutes buffer to account for typical sleep onset time.</dd>
+
+  <dt>What is the best time to wake up?</dt>
+  <dd>Best wake times align with the end of sleep cycles, typically after 5-6 cycles (7.5-9 hours). Waking during light sleep (end of cycle) feels easier than waking during deep sleep. Consistent wake times (even on weekends) regulate circadian rhythm and improve sleep quality over time.</dd>
+
+  <dt>Why do I feel groggy after sleeping too long?</dt>
+  <dd>Sleep inertia (grogginess) occurs when waking during deep sleep (Stage 3) rather than light sleep. Oversleeping often means entering another deep sleep phase. Alcohol, medications, and sleep deprivation can also cause prolonged grogginess. Waking at the end of a 90-minute cycle reduces this effect.</dd>
 </dl>
 </section>
 </main>
 <script>
 function formatTime(date){
-return String(date.getHours()).padStart(2,"0")+":"+String(date.getMinutes()).padStart(2,"0")
+var h=date.getHours();
+var m=date.getMinutes();
+var ampm=h>=12?'PM':'AM';
+var displayH=h%12||12;
+return displayH+':'+String(m).padStart(2,'0')+' '+ampm;
 }
+
 function calculateSleep(){
-let mode=document.getElementById("mode").value
-let time=document.getElementById("time").value
+var mode=document.getElementById("mode").value;
+var time=document.getElementById("time").value;
 if(!time){
-document.getElementById("result").innerText=""
-document.getElementById("status").innerText="Select a time first."
-document.getElementById("status").style.color="#b91c1c"
-return
+document.getElementById("result").innerHTML="";
+document.getElementById("status").innerText="Select a time first.";
+document.getElementById("status").style.color="#b91c1c";
+return;
 }
-let parts=time.split(":")
-let base=new Date()
-base.setHours(parseInt(parts[0],10),parseInt(parts[1],10),0,0)
-let lines=[]
-for(let cycles=6;cycles>=4;cycles--){
-let minutes=cycles*90+15
-let candidate=new Date(base)
-candidate.setMinutes(candidate.getMinutes()+(mode==="wake"?-minutes:minutes))
-lines.push(cycles+" cycles: "+formatTime(candidate))
+var parts=time.split(":");
+var base=new Date();
+base.setHours(parseInt(parts[0],10),parseInt(parts[1],10),0,0);
+var lines=[];
+lines.push("<p><strong>Calculation Mode:</strong> "+(mode==="wake"?"Wake up at "+formatTime(base):"Go to sleep at "+formatTime(base))+"</p>");
+lines.push("<p><strong>Recommended:</strong> 5-6 sleep cycles (7.5-9 hours)</p>");
+lines.push("<hr style=\"margin:16px 0;border:none;border-top:1px solid #ddd\">");
+lines.push("<table style=\"width:100%;border-collapse:collapse;font-size:14px\">");
+lines.push("<tr style=\"background:#f5f5f5\"><th style=\"padding:8px;text-align:left\">Cycles</th><th style=\"padding:8px;text-align:left\">Duration</th><th style=\"padding:8px;text-align:left\">Suggested Time</th></tr>");
+for(var cycles=6;cycles>=4;cycles--){
+var minutes=cycles*90+15;
+var candidate=new Date(base);
+candidate.setMinutes(candidate.getMinutes()+(mode==="wake"?-minutes:minutes));
+var duration=(minutes/60).toFixed(1);
+lines.push("<tr><td style=\"padding:8px;border:1px solid #ddd\">"+cycles+"</td><td style=\"padding:8px;border:1px solid #ddd\">"+duration+" hours</td><td style=\"padding:8px;border:1px solid #ddd\">"+formatTime(candidate)+"</td></tr>");
 }
-document.getElementById("result").innerText=lines.join("\n")
-document.getElementById("status").innerText="Sleep times calculated."
-document.getElementById("status").style.color="#16a34a"
+lines.push("</table>");
+lines.push("<p style=\"margin-top:16px;font-size:13px;color:#666\">Note: Times include 15 minutes average sleep latency (time to fall asleep).</p>");
+document.getElementById("result").innerHTML=lines.join("");
+document.getElementById("status").innerText="Sleep times calculated.";
+document.getElementById("status").style.color="#16a34a";
 }
 </script>
 <script src="/js/favorites.js"></script>

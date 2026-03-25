@@ -18,7 +18,62 @@
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
-
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does JSON to CSV conversion handle nested objects?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This converter flattens only the first level of JSON objects. Nested objects are converted to their string representation. For deeply nested data, consider flattening your JSON structure first or using a dedicated data transformation tool."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What CSV delimiter does this tool use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This tool uses comma (,) as the default delimiter, which is the standard CSV format. Values containing commas, quotes, or newlines are automatically wrapped in double quotes, with internal quotes escaped by doubling them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can this tool handle large JSON or CSV files?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool processes data in your browser's memory, so the practical limit depends on your available RAM. For best performance, keep files under 10 MB. Larger files may cause slow performance or browser memory warnings."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How are null and undefined values handled in conversion?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Null and undefined values are converted to empty cells in CSV. When converting back to JSON, empty cells become empty strings. If you need to preserve null vs empty string distinctions, consider using a more advanced data transformation tool."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What encoding does this tool support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This tool uses UTF-8 encoding for all conversions. If your CSV data uses a different encoding (like Windows-1252 or ISO-8859-1), you may need to convert it to UTF-8 first for proper character display."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I convert CSV with custom delimiters like tabs or semicolons?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This tool uses standard comma-delimited CSV format. For tab-separated (TSV), semicolon-separated, or other custom delimiter formats, you'll need to replace delimiters with commas before using this converter."
+      }
+    }
+  ]
+}
+</script>
 </head>
 
 <body>
@@ -61,23 +116,119 @@
 <h3>About JSON CSV Converter</h3>
 <p>This JSON CSV converter turns JSON arrays into CSV rows and can also parse CSV back into JSON records.</p>
 <p>It is useful when moving data between APIs, spreadsheets, admin tools and bulk import files, especially when you need a quick browser-based conversion without opening Excel or writing code.</p>
+
+<h4>JSON to CSV Conversion Details</h4>
+<p>The converter extracts keys from the first JSON object as CSV headers, then maps each subsequent object to a row. All values are stringified and properly escaped according to RFC 4180 CSV standards.</p>
+
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JSON Input Example:
+[
+  {"name": "Tom", "age": 20, "city": "NYC"},
+  {"name": "Alice", "age": 25, "city": "LA"}
+]
+
+CSV Output:
+name,age,city
+Tom,20,NYC
+Alice,25,LA
+</pre>
+
+<h4>CSV Parsing Features</h4>
+<ul>
+  <li><strong>Quoted fields:</strong> Handles values wrapped in double quotes</li>
+  <li><strong>Escaped quotes:</strong> Recognizes doubled quotes ("") as escaped quote characters</li>
+  <li><strong>Embedded newlines:</strong> Correctly parses multi-line values within quoted fields</li>
+  <li><strong>Empty values:</strong> Preserves empty cells as empty strings in JSON</li>
+  <li><strong>Header row:</strong> First CSV row becomes JSON object keys</li>
+</ul>
+
+<h4>Data Type Considerations</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">JSON Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">CSV Representation</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">String</td>
+    <td style="border:1px solid #ddd;padding:8px">Quoted if contains comma/quote/newline</td>
+    <td style="border:1px solid #ddd;padding:8px">Special characters escaped</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Number</td>
+    <td style="border:1px solid #ddd;padding:8px">Plain text</td>
+    <td style="border:1px solid #ddd;padding:8px">Returns as string in JSON</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Boolean</td>
+    <td style="border:1px solid #ddd;padding:8px">"true" or "false"</td>
+    <td style="border:1px solid #ddd;padding:8px">Returns as string in JSON</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Null</td>
+    <td style="border:1px solid #ddd;padding:8px">Empty cell</td>
+    <td style="border:1px solid #ddd;padding:8px">Becomes empty string in JSON</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>API data export:</strong> Convert API JSON responses to CSV for Excel analysis</li>
+  <li><strong>Bulk imports:</strong> Transform spreadsheet CSV exports to JSON for API imports</li>
+  <li><strong>Data migration:</strong> Move data between systems with different format requirements</li>
+  <li><strong>Report generation:</strong> Prepare data for tools that only accept CSV input</li>
+  <li><strong>Quick debugging:</strong> Inspect JSON data in tabular CSV format</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li>Does not flatten deeply nested objects or arrays</li>
+  <li>Does not support custom delimiters (tab, semicolon, pipe)</li>
+  <li>Does not preserve number types when converting CSV back to JSON</li>
+  <li>Memory-limited for very large files (practical limit ~10 MB)</li>
+</ul>
 </section>
 
+
+<section class="how-to-use">
+<h3>How to Convert JSON to CSV</h3>
+<ol class="how-to-steps">
+  <li><strong>Select mode:</strong> Choose "JSON to CSV" or "CSV to JSON" from the dropdown.</li>
+  <li><strong>Paste your data:</strong> Enter your JSON array or CSV text in the input field.</li>
+  <li><strong>Click Convert:</strong> The tool will parse and transform your data instantly.</li>
+  <li><strong>Copy the result:</strong> Click "Copy Result" to copy the converted data to your clipboard.</li>
+  <li><strong>Swap if needed:</strong> Use the "Swap" button to quickly switch input and output for bidirectional conversion.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Ensure JSON is a valid array of objects with consistent keys</li>
+  <li>CSV must have a header row for proper JSON key mapping</li>
+  <li>Use the Swap button to quickly convert back and forth</li>
+  <li>Large files may take longer to process in the browser</li>
+</ul>
+</section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Json To Csv?</dt>
-  <dd>Json To Csv is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+
+  <dt>How does JSON to CSV conversion handle nested objects?</dt>
+  <dd>This converter flattens only the first level of JSON objects. Nested objects are converted to their string representation. For deeply nested data, consider flattening your JSON structure first or using a dedicated data transformation tool.</dd>
+
+  <dt>What CSV delimiter does this tool use?</dt>
+  <dd>This tool uses comma (,) as the default delimiter, which is the standard CSV format. Values containing commas, quotes, or newlines are automatically wrapped in double quotes, with internal quotes escaped by doubling them.</dd>
+
+  <dt>Can this tool handle large JSON or CSV files?</dt>
+  <dd>The tool processes data in your browser's memory, so the practical limit depends on your available RAM. For best performance, keep files under 10 MB. Larger files may cause slow performance or browser memory warnings.</dd>
+
+  <dt>How are null and undefined values handled in conversion?</dt>
+  <dd>Null and undefined values are converted to empty cells in CSV. When converting back to JSON, empty cells become empty strings. If you need to preserve null vs empty string distinctions, consider using a more advanced data transformation tool.</dd>
+
+  <dt>What encoding does this tool support?</dt>
+  <dd>This tool uses UTF-8 encoding for all conversions. If your CSV data uses a different encoding (like Windows-1252 or ISO-8859-1), you may need to convert it to UTF-8 first for proper character display.</dd>
+
+  <dt>Can I convert CSV with custom delimiters like tabs or semicolons?</dt>
+  <dd>This tool uses standard comma-delimited CSV format. For tab-separated (TSV), semicolon-separated, or other custom delimiter formats, you'll need to replace delimiters with commas before using this converter.</dd>
 </dl>
 </section>
 </main>

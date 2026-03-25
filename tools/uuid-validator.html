@@ -4,20 +4,18 @@
 
 <meta charset="UTF-8">
 
-<title>UUID Validator – Check UUID Strings Online | ToolForge</title>
-
-<meta name="description" content="Free online UUID Validator to check whether a string is a valid UUID v1–v5. Part of the ToolForge developer tools collection.">
-
+<title>UUID Validator – Validate UUID v1-v5 Strings Online | ToolForge</title>
+<meta name="description" content="UUID Validator validates UUID strings and identifies version (v1-v5). Check UUID format, version bits, and variant bits for RFC 4122 compliance. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/uuid-validator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="UUID Validator – Check UUID Strings Online | ToolForge">
-<meta property="og:description" content="Free online UUID Validator to check whether a string is a valid UUID v1–v5. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="UUID Validator – Validate UUID v1-v5 Strings Online | ToolForge">
+<meta property="og:description" content="UUID Validator validates UUID strings and identifies version (v1-v5). Check UUID format, version bits, and variant bits for RFC 4122 compliance. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/uuid-validator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="UUID Validator – Check UUID Strings Online | ToolForge">
-<meta name="twitter:description" content="Free online UUID Validator to check whether a string is a valid UUID v1–v5. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="UUID Validator – Validate UUID v1-v5 Strings Online | ToolForge">
+<meta name="twitter:description" content="UUID Validator validates UUID strings and identifies version (v1-v5). Check UUID format, version bits, and variant bits for RFC 4122 compliance. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 
 <link rel="stylesheet" href="/css/style.css">
@@ -30,45 +28,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Uuid Validator?",
+      "name": "What is a UUID and what is the standard format?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Uuid Validator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "A UUID (Universally Unique Identifier) is a 128-bit number used to uniquely identify information in computer systems. The standard format is 8-4-4-4-12 hexadecimal digits (36 characters including hyphens): xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx. This format is defined in RFC 4122."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What are the different UUID versions?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "UUID v1: Time-based (uses timestamp + MAC address). UUID v2: DCE Security (time-based with user/group IDs). UUID v3: Name-based using MD5 hashing. UUID v4: Random/pseudo-random generation. UUID v5: Name-based using SHA-1 hashing. Versions 3 and 5 produce deterministic UUIDs from names/namespaces."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How do I identify a UUID version from the string?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "The version is stored in the 13th hex digit (first digit of the third group). For example, in '550e8400-e29b-41d4-a716-446655440000', the '4' indicates UUID v4. Valid versions are 1-5. The variant is indicated by the first hex digit of the fourth group (must be 8, 9, a, or b for RFC 4122)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What makes a UUID invalid?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Common invalid UUID issues: wrong character count (must be 36 with hyphens or 32 without), non-hexadecimal characters, invalid version digit (must be 1-5), invalid variant digit (must be 8, 9, a, or b), missing or misplaced hyphens. This validator checks for proper 8-4-4-4-12 format with valid version and variant bits."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What is the difference between UUID v4 and v5?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "UUID v4 is randomly generated (122 random bits), providing 2^122 possible values. UUID v5 is deterministic, generated by hashing a namespace UUID and name using SHA-1. Use v4 for random unique IDs; use v5 when you need consistent UUIDs for the same input (e.g., converting database keys to UUIDs)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "Are UUIDs guaranteed to be unique?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "UUIDs are not mathematically guaranteed unique, but the collision probability is negligible for practical purposes. For v4, generating 1 billion UUIDs per second for 100 years gives roughly a 50% chance of one collision. For v1/v5, uniqueness depends on proper implementation (unique MAC address or namespace)."
       }
     }
   ]
@@ -100,25 +103,143 @@
 
 <section class="tool-seo">
 <h3>About UUID Validator</h3>
-<p>This UUID validator checks whether a UUID string is valid and correctly formatted.</p>
-<p>It is useful for form validation, API debugging and data cleanup when you need to confirm whether an identifier is a real UUID or just a similar-looking string.</p>
+<p>This UUID validator checks whether a string is a valid UUID (Universally Unique Identifier) and correctly formatted according to RFC 4122 standards. It validates the 8-4-4-4-12 hexadecimal structure and verifies that version and variant bits are properly set.</p>
+<p>It is useful for form validation, API debugging, database migrations, and data cleanup when you need to confirm whether an identifier is a valid UUID or just a similar-looking string.</p>
+
+<h4>UUID Format Structure</h4>
+<p>A UUID is a 128-bit number represented as 32 hexadecimal digits in the format 8-4-4-4-12:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        |       |    |    |    |
+        |       |    |    |    +-- 48 bits (12 hex digits)
+        |       |    |    +------- 12 bits (3 hex digits, includes variant)
+        |       |    +------------ 16 bits (4 hex digits, includes version)
+        |       +----------------- 32 bits (8 hex digits)
+        +------------------------- 32 bits (8 hex digits)
+
+Total: 128 bits = 32 hex digits + 4 hyphens = 36 characters
+</pre>
+
+<h4>UUID Version Bits</h4>
+<p>The version is indicated by the most significant 4 bits of the time_hi_and_version field (13th hex character):</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Version</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Hex Digit</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Generation Method</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UUID v1</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+    <td style="border:1px solid #ddd;padding:8px">Time-based (timestamp + MAC address)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UUID v2</td>
+    <td style="border:1px solid #ddd;padding:8px">2</td>
+    <td style="border:1px solid #ddd;padding:8px">DCE Security (time-based with POSIX UID/GID)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UUID v3</td>
+    <td style="border:1px solid #ddd;padding:8px">3</td>
+    <td style="border:1px solid #ddd;padding:8px">Name-based using MD5 hash</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UUID v4</td>
+    <td style="border:1px solid #ddd;padding:8px">4</td>
+    <td style="border:1px solid #ddd;padding:8px">Random/pseudo-random generation</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UUID v5</td>
+    <td style="border:1px solid #ddd;padding:8px">5</td>
+    <td style="border:1px solid #ddd;padding:8px">Name-based using SHA-1 hash</td>
+  </tr>
+</table>
+
+<h4>UUID Variant Bits</h4>
+<p>The variant is indicated by the most significant bits of the clock_seq_hi_and_reserved field (17th hex character). RFC 4122 defines the variant as one of:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Variant</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Hex Digits</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">RFC 4122</td>
+    <td style="border:1px solid #ddd;padding:8px">8, 9, a, b</td>
+    <td style="border:1px solid #ddd;padding:8px">Standard UUID format (most common)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Microsoft GUID</td>
+    <td style="border:1px solid #ddd;padding:8px">c, d, e, f</td>
+    <td style="border:1px solid #ddd;padding:8px">Legacy Microsoft GUID format</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Reserved (NCS)</td>
+    <td style="border:1px solid #ddd;padding:8px">0-7</td>
+    <td style="border:1px solid #ddd;padding:8px">Reserved for NCS backward compatibility</td>
+  </tr>
+</table>
+
+<h4>Validation Regex Pattern</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+
+Breakdown:
+- ^[0-9a-f]{8}     : 8 hex digits (time_low)
+- -[0-9a-f]{4}     : 4 hex digits (time_mid)
+- -[1-5][0-9a-f]{3}: version (1-5) + 3 hex digits (time_hi_and_version)
+- -[89ab][0-9a-f]{3}: variant (8,9,a,b) + 3 hex digits (clock_seq)
+- -[0-9a-f]{12}$   : 12 hex digits (node)
+</pre>
+
+<h4>Common UUID Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+UUID v1 (time-based):
+  550e8400-e29b-11d4-a716-446655440000
+
+UUID v3 (MD5 name-based):
+  6fa45988-0f35-36d3-a09c-3a52f1b3b003
+
+UUID v4 (random):
+  550e8400-e29b-41d4-a716-446655440000
+
+UUID v5 (SHA-1 name-based):
+  886313e1-3b8a-5372-9b90-0c9aee199e5d
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Database migrations:</strong> Validate UUID strings before inserting into UUID-typed columns</li>
+  <li><strong>API development:</strong> Verify UUID parameters in REST endpoints</li>
+  <li><strong>Data import/cleanup:</strong> Filter invalid UUIDs from datasets</li>
+  <li><strong>Form validation:</strong> Client-side validation for UUID input fields</li>
+  <li><strong>Debugging:</strong> Quickly check if a string is a properly formatted UUID</li>
+</ul>
+
+<h4>UUID vs GUID</h4>
+<p>UUID (Universally Unique Identifier) and GUID (Globally Unique Identifier) are often used interchangeably. UUID refers to the RFC 4122 standard, while GUID is Microsoft's implementation. Microsoft GUIDs may use variant values c-f, while standard UUIDs use 8-b.</p>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Uuid Validator?</dt>
-  <dd>Uuid Validator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is a UUID and what is the standard format?</dt>
+  <dd>A UUID (Universally Unique Identifier) is a 128-bit number used to uniquely identify information in computer systems. The standard format is 8-4-4-4-12 hexadecimal digits (36 characters including hyphens): xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx. This format is defined in RFC 4122.</dd>
+
+  <dt>What are the different UUID versions?</dt>
+  <dd>UUID v1: Time-based (uses timestamp + MAC address). UUID v2: DCE Security (time-based with user/group IDs). UUID v3: Name-based using MD5 hashing. UUID v4: Random/pseudo-random generation. UUID v5: Name-based using SHA-1 hashing. Versions 3 and 5 produce deterministic UUIDs from names/namespaces.</dd>
+
+  <dt>How do I identify a UUID version from the string?</dt>
+  <dd>The version is stored in the 13th hex digit (first digit of the third group). For example, in '550e8400-e29b-41d4-a716-446655440000', the '4' indicates UUID v4. Valid versions are 1-5. The variant is indicated by the first hex digit of the fourth group (must be 8, 9, a, or b for RFC 4122).</dd>
+
+  <dt>What makes a UUID invalid?</dt>
+  <dd>Common invalid UUID issues: wrong character count (must be 36 with hyphens or 32 without), non-hexadecimal characters, invalid version digit (must be 1-5), invalid variant digit (must be 8, 9, a, or b), missing or misplaced hyphens. This validator checks for proper 8-4-4-4-12 format with valid version and variant bits.</dd>
+
+  <dt>What is the difference between UUID v4 and v5?</dt>
+  <dd>UUID v4 is randomly generated (122 random bits), providing 2^122 possible values. UUID v5 is deterministic, generated by hashing a namespace UUID and name using SHA-1. Use v4 for random unique IDs; use v5 when you need consistent UUIDs for the same input (e.g., converting database keys to UUIDs).</dd>
+
+  <dt>Are UUIDs guaranteed to be unique?</dt>
+  <dd>UUIDs are not mathematically guaranteed unique, but the collision probability is negligible for practical purposes. For v4, generating 1 billion UUIDs per second for 100 years gives roughly a 50% chance of one collision. For v1/v5, uniqueness depends on proper implementation (unique MAC address or namespace).</dd>
 </dl>
 </section>
 </main>

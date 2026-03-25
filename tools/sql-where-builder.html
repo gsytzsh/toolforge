@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>SQL WHERE Builder – Build WHERE Clauses Online | ToolForge</title>
-<meta name="description" content="Free online SQL WHERE Builder to compose simple SQL WHERE clauses from line-by-line conditions for quick query drafting and debugging. Part of the ToolForge developer tools collection.">
+<meta name="description" content="SQL WHERE Builder constructs SQL WHERE clauses from line-by-line conditions using field|operator|value format. Supports AND/OR connectors, IN/IS NULL operators, and proper value escaping. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/sql-where-builder.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="SQL WHERE Builder – Build WHERE Clauses Online | ToolForge">
-<meta property="og:description" content="Free online SQL WHERE Builder to compose simple SQL WHERE clauses from line-by-line conditions for quick query drafting and debugging.">
+<meta property="og:description" content="SQL WHERE Builder constructs SQL WHERE clauses from line-by-line conditions using field|operator|value format. Supports AND/OR connectors, IN/IS NULL operators, and proper value escaping. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/sql-where-builder.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL WHERE Builder – Build WHERE Clauses Online | ToolForge">
-<meta name="twitter:description" content="Free online SQL WHERE Builder to compose simple SQL WHERE clauses from line-by-line conditions for quick query drafting and debugging.">
+<meta name="twitter:description" content="SQL WHERE Builder constructs SQL WHERE clauses from line-by-line conditions using field|operator|value format. Supports AND/OR connectors, IN/IS NULL operators, and proper value escaping. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Sql Where Builder?",
+      "name": "What is the SQL WHERE clause syntax?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sql Where Builder is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "The WHERE clause follows the pattern: WHERE condition [AND|OR condition].... Conditions use comparison operators (=, <>, <, >, <=, >=), pattern matching (LIKE, NOT LIKE), set operators (IN, NOT IN), null checks (IS NULL, IS NOT NULL), and range operators (BETWEEN). String values require single quotes; numeric values do not."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I handle SQL injection in WHERE clauses?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Never concatenate user input directly into WHERE clauses. Use parameterized queries (prepared statements) with placeholders like ? or :name. In PHP use PDO::prepare(), in Node.js use mysql2 with arrays, in Python use cursor.execute() with parameter tuples. This tool escapes single quotes but should only be used for prototyping, not production queries."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the difference between AND and OR in SQL?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "AND requires all conditions to be true; OR requires at least one condition to be true. AND has higher precedence than OR, so WHERE a OR b AND c is evaluated as WHERE a OR (b AND c). Use parentheses to override: WHERE (a OR b) AND c. When combining multiple conditions, consider operator precedence to avoid logic errors."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I check for NULL values in SQL?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Use IS NULL or IS NOT NULL operators, not = NULL. NULL represents unknown/missing data and cannot be compared with standard operators. Example: WHERE deleted_at IS NULL finds non-deleted records. WHERE column = NULL always returns false because NULL != NULL in SQL three-valued logic."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What is the IN operator and when should I use it?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "IN checks if a value matches any value in a list. WHERE status IN ('active', 'pending') is equivalent to WHERE status = 'active' OR status = 'pending'. Use IN for cleaner code when checking against multiple discrete values. NOT IN excludes matching values. For large lists, consider using a temporary table or JOIN instead."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How do I escape special characters in SQL strings?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "In SQL, escape single quotes by doubling them: O'Brien becomes O''Brian. Backslashes are not escape characters in standard SQL (unlike many programming languages). For LIKE patterns, escape % (wildcard for any characters) and _ (single character) using ESCAPE clause: WHERE name LIKE 'A\_%' ESCAPE '\\' matches literal underscore."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>SQL WHERE Builder</h1>
-<p class="subtitle">Build SQL WHERE clauses from simple condition lines using <code>field|operator|value</code>.</p>
+<p class="subtitle">Build SQL WHERE clauses from line-by-line conditions using <code>field|operator|value</code> format with AND/OR connectors.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <label for="connector" class="sr-only">Condition connector</label>
 <select id="connector" aria-label="Condition connector">
@@ -91,25 +96,311 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About SQL WHERE Builder</h3>
-<p>This SQL WHERE builder turns simple condition lines into a ready-to-use SQL `WHERE` clause.</p>
-<p>It is useful for admin filters, query prototyping and documentation examples when you want to assemble multiple conditions faster and with fewer syntax mistakes.</p>
+<p>This SQL WHERE builder constructs valid SQL WHERE clauses from a simple line-by-line format. Each condition uses pipe-delimited syntax (field|operator|value) and the tool handles proper quoting, escaping, and operator formatting automatically.</p>
+<p>It is useful for rapid query prototyping, generating admin panel filters, creating documentation examples, debugging complex conditions, teaching SQL syntax, and building dynamic query builders for applications.</p>
+
+<h4>Input Format Structure</h4>
+<p>Each condition occupies one line with pipe-separated fields:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Format: field|operator|value
+
+Examples:
+  id|=|123
+  status|IN|'active','pending'
+  name|LIKE|'%Smith%'
+  deleted_at|IS NULL|
+  price|>=|10.00
+  category|NOT IN|'archived','draft'
+
+Output (with AND connector):
+  WHERE
+    id = 123
+    AND status IN ('active','pending')
+    AND name LIKE '%Smith%'
+    AND deleted_at IS NULL
+    AND price >= 10.00
+    AND category NOT IN ('archived','draft')
+</pre>
+
+<h4>Supported SQL Operators</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Operator</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example Input</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Generated SQL</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">=</td>
+    <td style="border:1px solid #ddd;padding:8px">Equals</td>
+    <td style="border:1px solid #ddd;padding:8px">status|=|active</td>
+    <td style="border:1px solid #ddd;padding:8px">status = 'active'</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">&lt;&gt; or !=</td>
+    <td style="border:1px solid #ddd;padding:8px">Not equals</td>
+    <td style="border:1px solid #ddd;padding:8px">type|&lt;&gt;|admin</td>
+    <td style="border:1px solid #ddd;padding:8px">type &lt;&gt; 'admin'</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">&lt;, &gt;, &lt;=, &gt;=</td>
+    <td style="border:1px solid #ddd;padding:8px">Comparison</td>
+    <td style="border:1px solid #ddd;padding:8px">age|&gt;=|18</td>
+    <td style="border:1px solid #ddd;padding:8px">age &gt;= 18</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">LIKE</td>
+    <td style="border:1px solid #ddd;padding:8px">Pattern match</td>
+    <td style="border:1px solid #ddd;padding:8px">name|LIKE|'%John%'</td>
+    <td style="border:1px solid #ddd;padding:8px">name LIKE '%John%'</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">NOT LIKE</td>
+    <td style="border:1px solid #ddd;padding:8px">Pattern exclude</td>
+    <td style="border:1px solid #ddd;padding:8px">email|NOT LIKE|'%@spam.com'</td>
+    <td style="border:1px solid #ddd;padding:8px">email NOT LIKE '%@spam.com'</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">IN</td>
+    <td style="border:1px solid #ddd;padding:8px">Set membership</td>
+    <td style="border:1px solid #ddd;padding:8px">role|IN|'admin','editor'</td>
+    <td style="border:1px solid #ddd;padding:8px">role IN ('admin','editor')</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">NOT IN</td>
+    <td style="border:1px solid #ddd;padding:8px">Set exclusion</td>
+    <td style="border:1px solid #ddd;padding:8px">status|NOT IN|'deleted','archived'</td>
+    <td style="border:1px solid #ddd;padding:8px">status NOT IN ('deleted','archived')</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">IS NULL</td>
+    <td style="border:1px solid #ddd;padding:8px">Null check</td>
+    <td style="border:1px solid #ddd;padding:8px">phone|IS NULL|</td>
+    <td style="border:1px solid #ddd;padding:8px">phone IS NULL</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">IS NOT NULL</td>
+    <td style="border:1px solid #ddd;padding:8px">Not null check</td>
+    <td style="border:1px solid #ddd;padding:8px">email|IS NOT NULL|</td>
+    <td style="border:1px solid #ddd;padding:8px">email IS NOT NULL</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">BETWEEN</td>
+    <td style="border:1px solid #ddd;padding:8px">Range check</td>
+    <td style="border:1px solid #ddd;padding:8px">price|BETWEEN|10 AND 50</td>
+    <td style="border:1px solid #ddd;padding:8px">price BETWEEN 10 AND 50</td>
+  </tr>
+</table>
+
+<h4>Value Formatting Rules</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Automatic Value Handling:
+
+1. Numeric values (integers, decimals):
+   Input:  price|>=|100
+   Output: price >= 100
+
+2. String values (auto-quoted):
+   Input:  name|=|John
+   Output: name = 'John'
+
+3. Already quoted values (preserved):
+   Input:  status|IN|'active','pending'
+   Output: status IN ('active','pending')
+
+4. IN/NOT IN lists (wrapped in parentheses):
+   Input:  role|IN|'admin','user','guest'
+   Output: role IN ('admin','user','guest')
+
+5. IS NULL / IS NOT NULL (no value needed):
+   Input:  deleted_at|IS NULL|
+   Output: deleted_at IS NULL
+
+6. Single quote escaping:
+   Input:  name|=|O'Brien
+   Output: name = 'O''Brien'
+</pre>
+
+<h4>Complete Query Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: User Filter Query
+Input conditions (AND mode):
+  status|=|active
+  role|IN|'admin','moderator'
+  created_at|&gt;=|2024-01-01
+
+Generated WHERE:
+  WHERE
+    status = 'active'
+    AND role IN ('admin','moderator')
+    AND created_at >= '2024-01-01'
+
+Full query:
+  SELECT id, username, email, role
+  FROM users
+  WHERE
+    status = 'active'
+    AND role IN ('admin','moderator')
+    AND created_at >= '2024-01-01'
+  ORDER BY created_at DESC;
+
+Example 2: Product Search
+Input conditions (AND mode):
+  price|BETWEEN|10 AND 100
+  category|NOT IN|'discontinued'
+  stock|&gt;|0
+  name|LIKE|'%widget%'
+
+Generated WHERE:
+  WHERE
+    price BETWEEN 10 AND 100
+    AND category NOT IN ('discontinued')
+    AND stock > 0
+    AND name LIKE '%widget%'
+
+Example 3: Soft Delete Pattern
+Input conditions (AND mode):
+  deleted_at|IS NULL|
+  user_id|=|42
+
+Generated WHERE:
+  WHERE
+    deleted_at IS NULL
+    AND user_id = 42
+</pre>
+
+<h4>SQL Operator Precedence</h4>
+<p>When combining AND and OR conditions, operator precedence affects evaluation:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Precedence Order (highest to lowest):
+1. NOT
+2. AND
+3. OR
+
+Example without parentheses:
+  WHERE status = 'active' OR status = 'pending' AND role = 'admin'
+  -- Evaluated as:
+  WHERE status = 'active' OR (status = 'pending' AND role = 'admin')
+
+Example with explicit grouping:
+  WHERE (status = 'active' OR status = 'pending') AND role = 'admin'
+
+Best Practice:
+Always use parentheses when mixing AND and OR
+to make the intended logic explicit and avoid
+bugs from misunderstood precedence.
+</pre>
+
+<h4>Common WHERE Clause Patterns</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">WHERE Clause Pattern</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Soft delete filter</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE deleted_at IS NULL</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Active records only</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE status = 'active'</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Date range filter</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE created_at BETWEEN '2024-01-01' AND '2024-12-31'</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Multi-status filter</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE status IN ('pending', 'processing', 'shipped')</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Text search</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE name LIKE '%search term%' OR description LIKE '%search term%'</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Exclusion filter</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE type NOT IN ('spam', 'draft', 'archived')</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Numeric range</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE price &gt;= 10 AND price &lt;= 100</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Has related data</td>
+    <td style="border:1px solid #ddd;padding:8px">WHERE parent_id IS NOT NULL</td>
+  </tr>
+</table>
+
+<h4>SQL Dialect Differences</h4>
+<p>Different SQL databases have variations in WHERE clause syntax:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+String Concatenation:
+  Standard SQL: 'Hello' || ' ' || 'World'
+  SQL Server:    'Hello' + ' ' + 'World'
+  MySQL:         CONCAT('Hello', ' ', 'World')
+
+Case-Insensitive LIKE:
+  PostgreSQL:    name ILIKE '%john%'
+  MySQL:         name LIKE '%john%' (default case-insensitive)
+  SQL Server:    name LIKE '%john%' COLLATE Latin1_General_CI_AS
+
+Boolean Values:
+  PostgreSQL:    is_active = TRUE
+  MySQL:         is_active = 1
+  Oracle:        is_active = 1
+
+LIMIT/OFFSET:
+  PostgreSQL:    LIMIT 10 OFFSET 20
+  SQL Server:    OFFSET 20 ROWS FETCH NEXT 10 ROWS ONLY
+  Oracle:        OFFSET 20 ROWS FETCH NEXT 10 ROWS ONLY
+  MySQL:         LIMIT 20, 10
+
+NULL Handling:
+  All databases: IS NULL, IS NOT NULL (standard)
+  Oracle:        NVL(column, default)
+  SQL Server:    ISNULL(column, default)
+  PostgreSQL:    COALESCE(column, default)
+</pre>
+
+<h4>Performance Considerations</h4>
+<ul>
+  <li><strong>Index usage:</strong> WHERE clauses on indexed columns are faster. Avoid functions on indexed columns (e.g., WHERE YEAR(created_at) = 2024 prevents index use).</li>
+  <li><strong>LIKE with leading wildcard:</strong> WHERE name LIKE '%Smith' cannot use indexes. WHERE name LIKE 'Smith%' can use indexes.</li>
+  <li><strong>OR vs IN:</strong> WHERE x = 1 OR x = 2 OR x = 3 is often optimized same as WHERE x IN (1,2,3).</li>
+  <li><strong>NOT IN with NULLs:</strong> NOT IN lists containing NULL can return unexpected results. Use NOT EXISTS for subqueries.</li>
+  <li><strong>Type matching:</strong> Ensure comparison types match (don't compare string column to unquoted number).</li>
+</ul>
+
+<h4>Security Best Practices</h4>
+<ul>
+  <li><strong>Use parameterized queries:</strong> Never concatenate user input into SQL strings in production code.</li>
+  <li><strong>Validate input types:</strong> Ensure numeric inputs are actually numeric before using in queries.</li>
+  <li><strong>Limit string length:</strong> Prevent buffer overflow attacks by limiting input string lengths.</li>
+  <li><strong>Escape special characters:</strong> This tool escapes single quotes, but production code should use proper parameter binding.</li>
+  <li><strong>Use stored procedures:</strong> For complex queries, encapsulate logic in stored procedures with validated parameters.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Sql Where Builder?</dt>
-  <dd>Sql Where Builder is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the SQL WHERE clause syntax?</dt>
+  <dd>The WHERE clause follows the pattern: WHERE condition [AND|OR condition].... Conditions use comparison operators (=, <>, <, >, <=, >=), pattern matching (LIKE, NOT LIKE), set operators (IN, NOT IN), null checks (IS NULL, IS NOT NULL), and range operators (BETWEEN). String values require single quotes; numeric values do not.</dd>
+
+  <dt>How do I handle SQL injection in WHERE clauses?</dt>
+  <dd>Never concatenate user input directly into WHERE clauses. Use parameterized queries (prepared statements) with placeholders like ? or :name. In PHP use PDO::prepare(), in Node.js use mysql2 with arrays, in Python use cursor.execute() with parameter tuples. This tool escapes single quotes but should only be used for prototyping, not production queries.</dd>
+
+  <dt>What is the difference between AND and OR in SQL?</dt>
+  <dd>AND requires all conditions to be true; OR requires at least one condition to be true. AND has higher precedence than OR, so WHERE a OR b AND c is evaluated as WHERE a OR (b AND c). Use parentheses to override: WHERE (a OR b) AND c. When combining multiple conditions, consider operator precedence to avoid logic errors.</dd>
+
+  <dt>How do I check for NULL values in SQL?</dt>
+  <dd>Use IS NULL or IS NOT NULL operators, not = NULL. NULL represents unknown/missing data and cannot be compared with standard operators. Example: WHERE deleted_at IS NULL finds non-deleted records. WHERE column = NULL always returns false because NULL != NULL in SQL three-valued logic.</dd>
+
+  <dt>What is the IN operator and when should I use it?</dt>
+  <dd>IN checks if a value matches any value in a list. WHERE status IN ('active', 'pending') is equivalent to WHERE status = 'active' OR status = 'pending'. Use IN for cleaner code when checking against multiple discrete values. NOT IN excludes matching values. For large lists, consider using a temporary table or JOIN instead.</dd>
+
+  <dt>How do I escape special characters in SQL strings?</dt>
+  <dd>In SQL, escape single quotes by doubling them: O'Brien becomes O''Brian. Backslashes are not escape characters in standard SQL (unlike many programming languages). For LIKE patterns, escape % (wildcard for any characters) and _ (single character) using ESCAPE clause: WHERE name LIKE 'A\_%' ESCAPE '\\' matches literal underscore.</dd>
 </dl>
 </section>
 </main>
@@ -143,7 +434,7 @@ return formattedValue?field+" "+operator+" "+formattedValue:field+" "+operator
 document.getElementById("output").value="WHERE\n  "+clauses.join("\n  "+connector+" ")
 document.getElementById("status").innerText="WHERE clause built."
 document.getElementById("status").style.color="#16a34a"
-}catch(e){
+} catch(e){
 document.getElementById("output").value=""
 document.getElementById("status").innerText="Each line must use field|operator|value."
 document.getElementById("status").style.color="#b91c1c"

@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>HTML Escape Reference – HTML/XML Escape Characters Table | ToolForge</title>
-<meta name="description" content="Free online HTML and XML escape characters reference table. Named entities and numeric codes. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Complete HTML and XML escape characters reference. Named entities, decimal and hex codes for special characters. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/html-escape-reference.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="HTML Escape Reference – HTML/XML Escape Characters Table | ToolForge">
-<meta property="og:description" content="Free online HTML/XML escape characters reference. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="HTML/XML escape characters reference with named entities and numeric codes.">
 <meta property="og:url" content="https://toolforge.site/tools/html-escape-reference.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTML Escape Reference – HTML/XML Escape Characters Table | ToolForge">
-<meta name="twitter:description" content="Free online HTML/XML escape characters reference. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="HTML escape characters reference table.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
@@ -31,45 +31,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Html Escape Reference used for?",
+      "name": "Why do we need to escape HTML characters?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Html Escape Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "HTML escaping prevents browsers from interpreting special characters as markup. Without escaping, < and > could be read as HTML tags, breaking content or enabling XSS attacks. Escaping converts < to &lt;, > to &gt;, etc., ensuring text displays correctly and securely."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What characters must be escaped in HTML?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Five characters must be escaped: < (less than) → &lt;, > (greater than) → &gt;, & (ampersand) → &amp;, \" (double quote) → &quot;, ' (apostrophe) → &apos;. The ampersand and angle brackets are critical; quotes are needed inside attribute values."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What is the difference between named and numeric entities?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Named entities use descriptive names (&amp;, &lt;, &copy;). Numeric entities use decimal (&#38;) or hexadecimal (&#x26;) Unicode code points. Named entities are more readable; numeric entities work for all characters. Both render identically in browsers."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I escape HTML in JavaScript?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Create a temporary element and use textContent: function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }. Or use regex replacement: text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What is &nbsp; and when should I use it?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "&nbsp; (non-breaking space, &#160;) prevents line breaks at its position. Use it to keep words together (e.g., \"Mr.&nbsp;Smith\"), prevent collapsing multiple spaces, or add precise spacing. Don't use for indentation (use CSS margin/padding)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How do I display ampersand in HTML?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Use &amp; to display an ampersand character. Writing & directly starts an entity reference and may cause validation errors. In URLs within HTML, escape & as &amp;: href=\"page.php?a=1&amp;b=2\". In JavaScript strings, use & directly."
       }
     }
   ]
@@ -93,25 +98,153 @@
 
 <section class="tool-seo">
 <h3>About HTML Escape Reference</h3>
-<p>This reference lists HTML and XML escape characters including named entities (&amp;amp;, &amp;lt;) and numeric codes (&#38;, &#x26;).</p>
-<p>It is useful when escaping user input for HTML, building XML, or debugging character display issues.</p>
+<p>This reference lists HTML and XML escape characters including named entities (&amp;amp;, &amp;lt;) and numeric codes (&#38;, &#x26;). Use these to safely display special characters in HTML content.</p>
+<p>It is useful when escaping user input for HTML, building XML documents, displaying code examples, creating documentation, and debugging character display issues in web pages.</p>
+
+<h4>Essential Escape Characters</h4>
+<table class="ref-table">
+<thead><tr><th>Character</th><th>Entity</th><th>Decimal</th><th>When to Escape</th></tr></thead>
+<tbody>
+<tr><td><code>&amp;</code></td><td><code>&amp;amp;</code></td><td><code>&#38;</code></td><td>Always - starts entity references</td></tr>
+<tr><td><code>&lt;</code></td><td><code>&amp;lt;</code></td><td><code>&#60;</code></td><td>Always - starts HTML tags</td></tr>
+<tr><td><code>&gt;</code></td><td><code>&amp;gt;</code></td><td><code>&#62;</code></td><td>Always - ends HTML tags</td></tr>
+<tr><td><code>"</code></td><td><code>&amp;quot;</code></td><td><code>&#34;</code></td><td>In double-quoted attributes</td></tr>
+<tr><td><code>'</code></td><td><code>&amp;apos;</code></td><td><code>&#39;</code></td><td>In single-quoted attributes</td></tr>
+</tbody>
+</table>
+
+<h4>Common Named Entities</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Currency:
+  &amp;cent;    &#162;  ¢  Cent sign
+  &amp;pound;   &#163;  £  Pound sign
+  &amp;euro;    &#8364; €  Euro sign
+  &amp;yen;     &#165;  ¥  Yen sign
+
+Mathematical:
+  &amp;plusmn;  &#177;  ±  Plus-minus
+  &amp;times;   &#215;  ×  Multiplication
+  &amp;divide;  &#247;  ÷  Division
+  &amp;lt;      &#60;   <  Less than
+  &amp;gt;      &#62;   >  Greater than
+  &amp;plusmn;  &#177;  ±  Plus or minus
+
+Punctuation:
+  &amp;ndash;   &#8211; –  En dash
+  &amp;mdash;   &#8212; —  Em dash
+  &amp;hellip;  &#8230; …  Ellipsis
+  &amp;laquo;   &#171;  «  Left guillemet
+  &amp;raquo;   &#187;  »  Right guillemet
+
+Symbols:
+  &amp;copy;    &#169;  ©  Copyright
+  &amp;reg;     &#174;  ®  Registered trademark
+  &amp;trade;   &#8482; ™  Trademark
+  &amp;deg;     &#176;  °  Degree
+  &amp;micro;   &#181;  µ  Micro sign
+</pre>
+
+<h4>How to Escape HTML in Different Languages</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript (browser):
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+  // Or manual replacement:
+  text.replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+
+Node.js:
+  const { escape } = require('html-escaper');
+  const escaped = escape('<script>alert(1)</script>');
+
+Python:
+  import html
+  escaped = html.escape('<script>alert(1)</script>')
+  # Output: &lt;script&gt;alert(1)&lt;/script&gt;
+
+PHP:
+  $escaped = htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
+
+Java:
+  String escaped = StringEscapeUtils.escapeHtml4(input);
+
+C#:
+  string escaped = System.Web.HttpUtility.HtmlEncode(input);
+</pre>
+
+<h4>HTML Entity Format</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Three formats for the same character:
+
+1. Named entity (most readable):
+   &amp;copy; → ©
+
+2. Decimal numeric (Unicode code point):
+   &amp;#169; → ©
+
+3. Hexadecimal numeric (Unicode code point):
+   &amp;#x00A9; → ©
+
+All three render identically in browsers.
+Named entities are easier to read in source code.
+Numeric entities work for all Unicode characters.
+
+Entity format:
+  & + name + ;     (named)
+  & + # + digits + ;     (decimal)
+  & + # + x + hex + ;    (hex)
+</pre>
+
+<h4>XSS Prevention</h4>
+<pre style="background:#fee2e2;padding:12px;border-radius:4px;font-size:13px">
+Always escape user input before displaying in HTML:
+
+DANGEROUS - XSS vulnerability:
+  document.getElementById('output').innerHTML = userInput;
+
+SAFE - Content is escaped:
+  document.getElementById('output').textContent = userInput;
+
+DANGEROUS in server-side rendering:
+  return `<div>${userInput}</div>`;
+
+SAFE with escaping:
+  return `<div>${escapeHtml(userInput)}</div>`;
+
+Common XSS vectors to prevent:
+  <script>alert('XSS')</script>
+  <img src=x onerror="alert('XSS')">
+  <a href="javascript:alert('XSS')">Click</a>
+  <svg onload="alert('XSS')">
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Html Escape Reference used for?</dt>
-  <dd>Html Escape Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>Why do we need to escape HTML characters?</dt>
+  <dd>HTML escaping prevents browsers from interpreting special characters as markup. Without escaping, < and > could be read as HTML tags, breaking content or enabling XSS attacks. Escaping converts < to &lt;, > to &gt;, etc., ensuring text displays correctly and securely.</dd>
+
+  <dt>What characters must be escaped in HTML?</dt>
+  <dd>Five characters must be escaped: < (less than) → &lt;, > (greater than) → &gt;, & (ampersand) → &amp;, " (double quote) → &quot;, ' (apostrophe) → &apos;. The ampersand and angle brackets are critical; quotes are needed inside attribute values.</dd>
+
+  <dt>What is the difference between named and numeric entities?</dt>
+  <dd>Named entities use descriptive names (&amp;, &lt;, &copy;). Numeric entities use decimal (&#38;) or hexadecimal (&#x26;) Unicode code points. Named entities are more readable; numeric entities work for all characters. Both render identically in browsers.</dd>
+
+  <dt>How do I escape HTML in JavaScript?</dt>
+  <dd>Create a temporary element and use textContent: function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }. Or use regex replacement: text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').</dd>
+
+  <dt>What is &nbsp; and when should I use it?</dt>
+  <dd>&nbsp; (non-breaking space, &#160;) prevents line breaks at its position. Use it to keep words together (e.g., "Mr.&nbsp;Smith"), prevent collapsing multiple spaces, or add precise spacing. Don't use for indentation (use CSS margin/padding).</dd>
+
+  <dt>How do I display ampersand in HTML?</dt>
+  <dd>Use &amp; to display an ampersand character. Writing & directly starts an entity reference and may cause validation errors. In URLs within HTML, escape & as &amp;: href="page.php?a=1&amp;b=2". In JavaScript strings, use & directly.</dd>
 </dl>
 </section>
 </main>
@@ -123,20 +256,34 @@ var entities=[
 ['"',"&quot;","&#34;","&#x22;","Double quote"],
 ["'","&apos;","&#39;","&#x27;","Apostrophe"],
 [" ","&nbsp;","&#160;","&#xA0;","Non-breaking space"],
-["¡","&iexcl;","&#161;","&#xA1;","Inverted exclamation"],
-["¢","&cent;","&#162;","&#xA2;","Cent"],
-["£","&pound;","&#163;","&#xA3;","Pound"],
-["©","&copy;","&#169;","&#xA9;","Copyright"],
-["®","&reg;","&#174;","&#xAE;","Registered"],
-["°","&deg;","&#176;","&#xB0;","Degree"],
-["±","&plusmn;","&#177;","&#xB1;","Plus-minus"],
-["×","&times;","&#215;","&#xD7;","Multiplication"],
-["÷","&divide;","&#247;","&#xF7;","Division"],
-["€","&euro;","&#8364;","&#x20AC;","Euro"],
-["™","&trade;","&#8482;","&#x2122;","Trademark"],
+["¡","&iexcl;","&#161;","&#xA1;","Inverted exclamation mark"],
+["¢","&cent;","&#162;","&#xA2;","Cent sign"],
+["£","&pound;","&#163;","&#xA3;","Pound sign"],
+["¤","&curren;","&#164;","&#xA4;","Currency sign"],
+["¥","&yen;","&#165;","&#xA5;","Yen sign"],
+["¦","&brvbar;","&#166;","&#xA6;","Broken bar"],
+["§","&sect;","&#167;","&#xA7;","Section sign"],
+["¨","&uml;","&#168;","&#xA8;","Diaeresis"],
+["©","&copy;","&#169;","&#xA9;","Copyright sign"],
+["ª","&ordf;","&#170;","&#xAA;","Feminine ordinal"],
+["«","&laquo;","&#171;","&#xAB;","Left guillemet"],
+["¬","&not;","&#172;","&#xAC;","Not sign"],
+["®","&reg;","&#174;","&#xAE;","Registered sign"],
+["¯","&macr;","&#175;","&#xAF;","Macron"],
+["°","&deg;","&#176;","&#xB0;","Degree sign"],
+["±","&plusmn;","&#177;","&#xB1;","Plus-minus sign"],
+["²","&sup2;","&#178;","&#xB2;","Superscript 2"],
+["³","&sup3;","&#179;","&#xB3;","Superscript 3"],
+["´","&acute;","&#180;","&#xB4;","Acute accent"],
+["µ","&micro;","&#181;","&#xB5;","Micro sign"],
+["¶","&para;","&#182;","&#xB6;","Pilcrow sign"],
+["·","&middot;","&#183;","&#xB7;","Middle dot"],
+["»","&raquo;","&#187;","&#xBB;","Right guillemet"],
 ["–","&ndash;","&#8211;","&#x2013;","En dash"],
 ["—","&mdash;","&#8212;","&#x2014;","Em dash"],
-["…","&hellip;","&#8230;","&#x2026;","Ellipsis"]
+["…","&hellip;","&#8230;","&#x2026;","Horizontal ellipsis"],
+["™","&trade;","&#8482;","&#x2122;","Trademark sign"],
+["€","&euro;","&#8364;","&#x20AC;","Euro sign"]
 ]
 function render(){
 var q=(document.getElementById("filter").value||"").toLowerCase().trim()

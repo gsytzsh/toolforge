@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>QR Code Decoder – Decode QR Codes from Images Online | ToolForge</title>
-<meta name="description" content="Free online QR Code Decoder to read QR codes from image files directly in your browser using the BarcodeDetector API when available. Part of the ToolForge developer tools collection.">
+<meta name="description" content="QR Code Decoder reads QR codes from image files using the BarcodeDetector API. Decode QR codes from screenshots, photos, and saved images directly in your browser. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/qr-code-decoder.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="QR Code Decoder – Decode QR Codes from Images Online | ToolForge">
-<meta property="og:description" content="Free online QR Code Decoder to read QR codes from image files directly in your browser using the BarcodeDetector API when available. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="QR Code Decoder reads QR codes from image files using the BarcodeDetector API. Decode QR codes from screenshots, photos, and saved images directly in your browser. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/qr-code-decoder.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="QR Code Decoder – Decode QR Codes from Images Online | ToolForge">
-<meta name="twitter:description" content="Free online QR Code Decoder to read QR codes from image files directly in your browser using the BarcodeDetector API when available. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="QR Code Decoder reads QR codes from image files using the BarcodeDetector API. Decode QR codes from screenshots, photos, and saved images directly in your browser. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Qr Code Decoder used for?",
+      "name": "What is the BarcodeDetector API?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Qr Code Decoder is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "The BarcodeDetector API is a native browser API that detects barcodes and QR codes from images. It supports multiple formats including QR code, Code 128, Code 39, EAN-13, and more. The API is available in Chromium-based browsers (Chrome, Edge, Opera) but not yet in Firefox or Safari."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What image formats are supported for QR decoding?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "This tool supports all common image formats: PNG, JPEG, GIF, WebP, BMP, and SVG. The image must contain a clearly visible QR code with good contrast. Blurry, low-resolution, or heavily compressed images may fail to decode."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "How does QR code detection work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "QR codes contain three position detection patterns (large squares) at three corners that help the decoder locate and orient the code. The BarcodeDetector API analyzes the image, finds these patterns, extracts the grid data, and decodes the binary information into text or URLs."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What types of data can QR codes contain?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "QR codes can store URLs, plain text, contact information (vCards), WiFi credentials, email addresses, phone numbers, SMS messages, and more. The decoder extracts the raw data; specialized formats like vCards will appear as formatted text that you can parse separately."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "Why might a QR code fail to decode?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Common failure causes: poor image quality or blur, insufficient lighting or contrast, QR code is too small or partially obscured, the code is damaged or corrupted, or the browser lacks BarcodeDetector support. Ensure the QR code is clearly visible and the image is in focus."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "Can this tool decode multiple QR codes from one image?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Yes, the BarcodeDetector API can detect multiple QR codes in a single image. If an image contains several QR codes, all detected codes will be extracted and displayed, each on a separate line."
       }
     }
   ]
@@ -84,25 +89,166 @@
 <p id="status" style="color:#666;margin-top:6px"></p>
 <section class="tool-seo">
 <h3>About QR Code Decoder</h3>
-<p>This QR code decoder reads QR data from uploaded images directly in your browser. It is useful for checking printed QR codes, verifying encoded links and extracting text from screenshots or saved images.</p>
-<p>On supported browsers, decoding uses the native BarcodeDetector API for a fast and simple client-side workflow.</p>
+<p>This QR code decoder reads QR codes from uploaded images using the BarcodeDetector API directly in your browser. It is useful for verifying printed QR codes, extracting links from screenshots, checking campaign codes, and reading QR data from saved images without uploading files to external servers.</p>
+
+<h4>What is the BarcodeDetector API?</h4>
+<p>The BarcodeDetector API is a native browser API for detecting barcodes and QR codes from images. It provides fast, client-side decoding without requiring external libraries or server-side processing.</p>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Browser support check
+if ("BarcodeDetector" in window) {
+  const detector = new BarcodeDetector({ formats: ["qr_code"] });
+  detector.detect(imageElement).then(codes => {
+    codes.forEach(code => console.log(code.rawValue));
+  });
+}
+</pre>
+
+<h4>Supported Barcode Formats</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Common Use</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">qr_code</td>
+    <td style="border:1px solid #ddd;padding:8px">2D matrix barcode</td>
+    <td style="border:1px solid #ddd;padding:8px">URLs, text, contact info, WiFi credentials</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">code_128</td>
+    <td style="border:1px solid #ddd;padding:8px">High-density linear barcode</td>
+    <td style="border:1px solid #ddd;padding:8px">Shipping labels, product identification</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">code_39</td>
+    <td style="border:1px solid #ddd;padding:8px">Variable-length linear barcode</td>
+    <td style="border:1px solid #ddd;padding:8px">Inventory, ID cards, automotive industry</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">ean_13</td>
+    <td style="border:1px solid #ddd;padding:8px">13-digit European Article Number</td>
+    <td style="border:1px solid #ddd;padding:8px">Retail product packaging</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">upc_a</td>
+    <td style="border:1px solid #ddd;padding:8px">12-digit Universal Product Code</td>
+    <td style="border:1px solid #ddd;padding:8px">Retail products in North America</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">datamatrix</td>
+    <td style="border:1px solid #ddd;padding:8px">2D matrix barcode (smaller than QR)</td>
+    <td style="border:1px solid #ddd;padding:8px">Electronics components, small items</td>
+  </tr>
+</table>
+
+<h4>QR Code Structure</h4>
+<p>QR codes consist of several key components that enable reliable decoding:</p>
+<ul>
+  <li><strong>Position detection patterns:</strong> Three large squares at corners for orientation</li>
+  <li><strong>Alignment patterns:</strong> Smaller squares for distortion correction in larger codes</li>
+  <li><strong>Timing patterns:</strong> Lines connecting position patterns for coordinate reference</li>
+  <li><strong>Data cells:</strong> Actual encoded information in binary format</li>
+  <li><strong>Error correction:</strong> Reed-Solomon redundancy for damaged code recovery</li>
+</ul>
+
+<h4>QR Code Error Correction Levels</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Level</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Recovery Capacity</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">L (Low)</td>
+    <td style="border:1px solid #ddd;padding:8px">~7% of codewords</td>
+    <td style="border:1px solid #ddd;padding:8px">Clean environments, minimal damage risk</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">M (Medium)</td>
+    <td style="border:1px solid #ddd;padding:8px">~15% of codewords</td>
+    <td style="border:1px solid #ddd;padding:8px">General purpose (default level)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Q (Quartile)</td>
+    <td style="border:1px solid #ddd;padding:8px">~25% of codewords</td>
+    <td style="border:1px solid #ddd;padding:8px">Industrial environments, outdoor use</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">H (High)</td>
+    <td style="border:1px solid #ddd;padding:8px">~30% of codewords</td>
+    <td style="border:1px solid #ddd;padding:8px">Harsh conditions, high damage risk</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Marketing verification:</strong> Check what URL or content a printed QR code links to before publishing</li>
+  <li><strong>Security auditing:</strong> Verify QR codes in emails or posters don't lead to malicious sites</li>
+  <li><strong>Event management:</strong> Extract ticket information or attendee data from QR-coded passes</li>
+  <li><strong>Inventory systems:</strong> Read product codes from photos taken in warehouses</li>
+  <li><strong>Contact sharing:</strong> Extract vCard data from QR-coded business cards</li>
+</ul>
+
+<h4>Browser Support</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Browser</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Support Status</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Chrome (desktop & Android)</td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Full support (v87+)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Microsoft Edge</td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Full support (v87+)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Opera</td>
+    <td style="border:1px solid #ddd;padding:8px">✓ Full support</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Firefox</td>
+    <td style="border:1px solid #ddd;padding:8px">✗ Not yet supported</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Safari</td>
+    <td style="border:1px solid #ddd;padding:8px">✗ Not yet supported</td>
+  </tr>
+</table>
+
+<h4>Tips for Successful Decoding</h4>
+<ul>
+  <li>Ensure the QR code is clearly visible and in focus</li>
+  <li>Good lighting and contrast improve detection accuracy</li>
+  <li>Avoid images where the QR code is partially cut off</li>
+  <li>Higher resolution images decode more reliably</li>
+  <li>Straight-on photos work better than angled shots</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Qr Code Decoder used for?</dt>
-  <dd>Qr Code Decoder is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is the BarcodeDetector API?</dt>
+  <dd>The BarcodeDetector API is a native browser API that detects barcodes and QR codes from images. It supports multiple formats including QR code, Code 128, Code 39, EAN-13, and more. The API is available in Chromium-based browsers (Chrome, Edge, Opera) but not yet in Firefox or Safari.</dd>
+
+  <dt>What image formats are supported for QR decoding?</dt>
+  <dd>This tool supports all common image formats: PNG, JPEG, GIF, WebP, BMP, and SVG. The image must contain a clearly visible QR code with good contrast. Blurry, low-resolution, or heavily compressed images may fail to decode.</dd>
+
+  <dt>How does QR code detection work?</dt>
+  <dd>QR codes contain three position detection patterns (large squares) at three corners that help the decoder locate and orient the code. The BarcodeDetector API analyzes the image, finds these patterns, extracts the grid data, and decodes the binary information into text or URLs.</dd>
+
+  <dt>What types of data can QR codes contain?</dt>
+  <dd>QR codes can store URLs, plain text, contact information (vCards), WiFi credentials, email addresses, phone numbers, SMS messages, and more. The decoder extracts the raw data; specialized formats like vCards will appear as formatted text that you can parse separately.</dd>
+
+  <dt>Why might a QR code fail to decode?</dt>
+  <dd>Common failure causes: poor image quality or blur, insufficient lighting or contrast, QR code is too small or partially obscured, the code is damaged or corrupted, or the browser lacks BarcodeDetector support. Ensure the QR code is clearly visible and the image is in focus.</dd>
+
+  <dt>Can this tool decode multiple QR codes from one image?</dt>
+  <dd>Yes, the BarcodeDetector API can detect multiple QR codes in a single image. If an image contains several QR codes, all detected codes will be extracted and displayed, each on a separate line.</dd>
 </dl>
 </section>
 </main>

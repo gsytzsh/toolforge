@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>BMI Calculator – Body Mass Index Calculator | ToolForge</title>
-<meta name="description" content="Free online BMI Calculator to compute Body Mass Index from height and weight. Understand BMI categories and health implications. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Calculate Body Mass Index (BMI) using metric or imperial units. Understand BMI categories, health risks, and limitations of this screening tool. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/bmi-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="BMI Calculator – Body Mass Index Calculator | ToolForge">
-<meta property="og:description" content="Free online BMI Calculator to compute Body Mass Index from height and weight. Understand BMI categories and health implications. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Calculate Body Mass Index (BMI) using metric or imperial units. Understand BMI categories, health risks, and limitations of this screening tool. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/bmi-calculator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BMI Calculator – Body Mass Index Calculator | ToolForge">
-<meta name="twitter:description" content="Free online BMI Calculator to compute Body Mass Index from height and weight. Understand BMI categories and health implications. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Calculate Body Mass Index (BMI) using metric or imperial units. Understand BMI categories, health risks, and limitations of this screening tool. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -27,15 +27,15 @@
       "name": "What is BMI and how is it calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "BMI (Body Mass Index) is a measure of body fat based on height and weight. Formula: BMI = weight (kg) / height (m)². For imperial units: BMI = 703 × weight (lbs) / height (in)². Results categorize as underweight, normal, overweight, or obese.\""
+        "text": "BMI (Body Mass Index) is a screening tool that estimates body fat based on height and weight. The formula is: BMI = weight (kg) / height (m)². For imperial units: BMI = 703 × weight (lbs) / height (in)². Results categorize individuals as underweight, normal weight, overweight, or obese."
       }
     },
     {
       "@type": "Question",
-      "name": "What are the BMI categories?",
+      "name": "What are the WHO BMI categories?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "WHO BMI categories: Underweight (< 18.5), Normal weight (18.5-24.9), Overweight (25-29.9), Obese Class I (30-34.9), Obese Class II (35-39.9), Obese Class III (≥ 40). Categories apply to adults 20+ years.\""
+        "text": "World Health Organization BMI categories for adults: Underweight (< 18.5), Normal weight (18.5-24.9), Overweight (25-29.9), Obese Class I (30-34.9), Obese Class II (35-39.9), Obese Class III (≥ 40). These thresholds are based on epidemiological data linking BMI to health outcomes."
       }
     },
     {
@@ -43,15 +43,23 @@
       "name": "What are the limitations of BMI?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "BMI doesn't distinguish muscle from fat, so athletes may be classified overweight despite low body fat. It doesn't account for bone density, age, sex, or fat distribution. BMI is a screening tool, not a diagnostic measure of health.\""
+        "text": "BMI does not distinguish between muscle and fat mass, so muscular athletes may be misclassified as overweight. It does not account for fat distribution (visceral fat is more dangerous than subcutaneous fat), age-related muscle loss, bone density, sex differences, or ethnic variations in health risk thresholds."
       }
     },
     {
       "@type": "Question",
-      "name": "Is BMI different for men and women?",
+      "name": "Is BMI accurate for all populations?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, BMI categories are the same for adult men and women. However, women naturally have higher body fat percentage than men at the same BMI. BMI doesn't account for these physiological differences.\""
+        "text": "BMI has varying accuracy across populations. Asian populations have higher health risks at lower BMIs (overweight threshold often adjusted to 23). Elderly individuals may have normal BMI despite high body fat due to muscle loss. Athletes and bodybuilders often have elevated BMI from muscle mass, not fat."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What health risks are associated with high BMI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Elevated BMI is associated with increased risk of cardiovascular disease, type 2 diabetes, hypertension, certain cancers (breast, colon, endometrial), sleep apnea, osteoarthritis, and metabolic syndrome. However, BMI is a screening tool, not a diagnostic measure—individual health assessment requires additional factors."
       }
     },
     {
@@ -59,7 +67,7 @@
       "name": "What is a healthy BMI range?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For most adults, a BMI between 18.5 and 24.9 is considered healthy. However, optimal BMI varies by individual factors including age, muscle mass, bone density, and overall health. Consult healthcare providers for personalized guidance.\""
+        "text": "For most adults, BMI 18.5-24.9 is associated with lowest health risks. However, optimal BMI varies by individual factors including age, muscle mass, bone structure, and overall health status. Some research suggests BMI 20-25 may be optimal for longevity in most populations."
       }
     }
   ]
@@ -69,7 +77,7 @@
 <body>
 <main class="container">
 <h1>BMI Calculator</h1>
-<p class="subtitle">Enter your height and weight to calculate Body Mass Index and health category.</p>
+<p class="subtitle">Calculate Body Mass Index from height and weight with health category classification.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Height (cm)</h3>
 <label for="height" class="sr-only">Height</label>
@@ -84,91 +92,126 @@
 <p>Category: <span id="cat"></span></p>
 <section class="tool-seo">
 <h3>About BMI Calculator</h3>
-<p>This BMI calculator computes your Body Mass Index using the standard WHO formula and classifies the result into standard health categories. BMI is widely used as a quick screening tool for weight-related health assessment.</p>
+<p>This BMI calculator computes Body Mass Index using the standard WHO formula and classifies results into established health categories. BMI serves as a population-level screening tool for weight-related health assessment.</p>
 
-<h4>BMI Formula</h4>
-<p><strong>Metric units:</strong></p>
+<h4>BMI Formula and Calculation</h4>
+<p><strong>Metric formula:</strong></p>
 <pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:14px">
 BMI = weight (kg) / height (m)²
 
-Example: 70 kg / (1.70 m)² = 70 / 2.89 = 24.2
+Example calculation:
+Height: 170 cm = 1.70 m
+Weight: 70 kg
+BMI = 70 / (1.70)² = 70 / 2.89 = 24.22
 </pre>
 
-<p><strong>Imperial units:</strong></p>
+<p><strong>Imperial formula:</strong></p>
 <pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:14px">
 BMI = 703 × weight (lbs) / height (in)²
 
-Example: 703 × 154 lbs / (67 in)² = 108262 / 4489 = 24.1
+Example calculation:
+Height: 5'9" = 69 inches
+Weight: 154 lbs
+BMI = 703 × 154 / (69)² = 108,262 / 4,761 = 22.74
+
+Note: 703 is the conversion factor from imperial to metric units
 </pre>
 
-<h4>BMI Categories (WHO Standard)</h4>
+<h4>WHO BMI Categories (Adults)</h4>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Category</th>
     <th style="border:1px solid #ddd;padding:8px;text-align:left">BMI Range</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Health Risk</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Health Risk Level</th>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Underweight</td>
     <td style="border:1px solid #ddd;padding:8px">&lt; 18.5</td>
-    <td style="border:1px solid #ddd;padding:8px">Malnutrition risk</td>
+    <td style="border:1px solid #ddd;padding:8px">Increased (malnutrition, osteoporosis)</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Normal weight</td>
     <td style="border:1px solid #ddd;padding:8px">18.5 - 24.9</td>
-    <td style="border:1px solid #ddd;padding:8px">Low risk</td>
+    <td style="border:1px solid #ddd;padding:8px">Lowest risk (reference category)</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Overweight</td>
-    <td style="border:1px solid #ddd;padding:8px">25 - 29.9</td>
-    <td style="border:1px solid #ddd;padding:8px">Moderate risk</td>
+    <td style="border:1px solid #ddd;padding:8px">25.0 - 29.9</td>
+    <td style="border:1px solid #ddd;padding:8px">Moderate (increased CVD, diabetes risk)</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Obese Class I</td>
-    <td style="border:1px solid #ddd;padding:8px">30 - 34.9</td>
-    <td style="border:1px solid #ddd;padding:8px">High risk</td>
+    <td style="border:1px solid #ddd;padding:8px">30.0 - 34.9</td>
+    <td style="border:1px solid #ddd;padding:8px">High (significantly elevated health risks)</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Obese Class II</td>
-    <td style="border:1px solid #ddd;padding:8px">35 - 39.9</td>
-    <td style="border:1px solid #ddd;padding:8px">Very high risk</td>
+    <td style="border:1px solid #ddd;padding:8px">35.0 - 39.9</td>
+    <td style="border:1px solid #ddd;padding:8px">Very high (severe health risks)</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Obese Class III</td>
-    <td style="border:1px solid #ddd;padding:8px">≥ 40</td>
-    <td style="border:1px solid #ddd;padding:8px">Extremely high risk</td>
+    <td style="border:1px solid #ddd;padding:8px">≥ 40.0</td>
+    <td style="border:1px solid #ddd;padding:8px">Extremely high (morbid obesity)</td>
   </tr>
 </table>
 
 <h4>Health Implications by Category</h4>
 <ul>
-  <li><strong>Underweight:</strong> May indicate malnutrition, eating disorders, or underlying health conditions. Increased risk of osteoporosis and weakened immune function.</li>
-  <li><strong>Normal:</strong> Associated with lowest risk of weight-related health problems. Maintain with balanced diet and regular exercise.</li>
-  <li><strong>Overweight:</strong> Increased risk of cardiovascular disease, type 2 diabetes, and certain cancers. Lifestyle modifications recommended.</li>
-  <li><strong>Obese:</strong> Significantly elevated risk of heart disease, stroke, diabetes, sleep apnea, and joint problems. Medical intervention may be beneficial.</li>
+  <li><strong>Underweight (&lt; 18.5):</strong> May indicate malnutrition, eating disorders, hyperthyroidism, or chronic disease. Associated with increased risk of osteoporosis, anemia, weakened immune function, and fertility issues.</li>
+  <li><strong>Normal weight (18.5-24.9):</strong> Associated with lowest all-cause mortality and morbidity in population studies. Maintain through balanced nutrition and regular physical activity.</li>
+  <li><strong>Overweight (25-29.9):</strong> Increased risk of cardiovascular disease, type 2 diabetes, hypertension, and certain cancers. Lifestyle modifications (diet, exercise) typically recommended.</li>
+  <li><strong>Obese (≥ 30):</strong> Significantly elevated risk of heart disease, stroke, type 2 diabetes, sleep apnea, osteoarthritis, fatty liver disease, and multiple cancer types. Medical intervention and structured weight management may be beneficial.</li>
 </ul>
 
-<h4>BMI Limitations</h4>
-<p>While useful for population-level screening, BMI has important limitations:</p>
+<h4>BMI Limitations and Considerations</h4>
+<p>While useful for population screening, BMI has important limitations for individual assessment:</p>
 <ul>
-  <li><strong>Doesn't measure body composition:</strong> Cannot distinguish between muscle and fat mass</li>
-  <li><strong>Athletes:</strong> May be classified as overweight/obese due to high muscle mass</li>
-  <li><strong>Elderly:</strong> May underestimate fat due to muscle loss with age</li>
-  <li><strong>Ethnicity:</strong> Health risks may vary at same BMI across different ethnic groups</li>
-  <li><strong>Fat distribution:</strong> Doesn't account for visceral fat (more dangerous than subcutaneous)</li>
+  <li><strong>Does not measure body composition:</strong> Cannot distinguish between fat mass and lean mass (muscle, bone, organs)</li>
+  <li><strong>Athletes and muscular individuals:</strong> May be classified as overweight/obese despite low body fat percentage</li>
+  <li><strong>Elderly:</strong> May have normal BMI despite elevated body fat due to age-related muscle loss (sarcopenia)</li>
+  <li><strong>Ethnic variations:</strong> Health risk thresholds may differ—Asian populations have elevated risk at lower BMIs</li>
+  <li><strong>Fat distribution not considered:</strong> Visceral fat (abdominal) is more metabolically dangerous than subcutaneous fat</li>
+  <li><strong>Pregnancy:</strong> BMI categories do not apply during pregnancy</li>
+  <li><strong>Children and adolescents:</strong> Require age and sex-specific percentile charts, not adult thresholds</li>
 </ul>
 
-<h4>Better Health Indicators</h4>
-<p>For comprehensive health assessment, consider alongside BMI:</p>
-<ul>
-  <li><strong>Waist circumference:</strong> > 40" (men) or > 35" (women) indicates higher risk</li>
-  <li><strong>Body fat percentage:</strong> More accurate measure of body composition</li>
-  <li><strong>Blood pressure:</strong> Key indicator of cardiovascular health</li>
-  <li><strong>Blood markers:</strong> Cholesterol, blood sugar, inflammation markers</li>
-  <li><strong>Fitness level:</strong> Cardiorespiratory fitness is independent health predictor</li>
-</ul>
+<h4>Better Health Indicators (Alongside BMI)</h4>
+<p>For comprehensive health assessment, consider these additional measures:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Measure</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">What It Assesses</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Risk Thresholds</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Waist circumference</td>
+    <td style="border:1px solid #ddd;padding:8px">Abdominal/visceral fat</td>
+    <td style="border:1px solid #ddd;padding:8px">Men: > 40" (102cm); Women: > 35" (88cm)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Waist-to-hip ratio</td>
+    <td style="border:1px solid #ddd;padding:8px">Fat distribution pattern</td>
+    <td style="border:1px solid #ddd;padding:8px">Men: > 0.90; Women: > 0.85</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Body fat percentage</td>
+    <td style="border:1px solid #ddd;padding:8px">Actual fat vs lean mass</td>
+    <td style="border:1px solid #ddd;padding:8px">Men: 8-19%; Women: 21-33% (healthy ranges)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Blood pressure</td>
+    <td style="border:1px solid #ddd;padding:8px">Cardiovascular health</td>
+    <td style="border:1px solid #ddd;padding:8px">Normal: < 120/80 mmHg</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Blood markers</td>
+    <td style="border:1px solid #ddd;padding:8px">Metabolic health</td>
+    <td style="border:1px solid #ddd;padding:8px">Cholesterol, HbA1c, triglycerides</td>
+  </tr>
+</table>
 
-<h4>Example Calculations</h4>
+<h4>Example BMI Calculations</h4>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Height</th>
@@ -177,28 +220,76 @@ Example: 703 × 154 lbs / (67 in)² = 108262 / 4489 = 24.1
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Category</th>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">160 cm</td>
-    <td style="border:1px solid #ddd;padding:8px">50 kg</td>
+    <td style="border:1px solid #ddd;padding:8px">160 cm (5'3")</td>
+    <td style="border:1px solid #ddd;padding:8px">50 kg (110 lbs)</td>
     <td style="border:1px solid #ddd;padding:8px">19.5</td>
     <td style="border:1px solid #ddd;padding:8px">Normal</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">170 cm</td>
-    <td style="border:1px solid #ddd;padding:8px">70 kg</td>
+    <td style="border:1px solid #ddd;padding:8px">170 cm (5'7")</td>
+    <td style="border:1px solid #ddd;padding:8px">70 kg (154 lbs)</td>
     <td style="border:1px solid #ddd;padding:8px">24.2</td>
     <td style="border:1px solid #ddd;padding:8px">Normal</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">175 cm</td>
-    <td style="border:1px solid #ddd;padding:8px">85 kg</td>
+    <td style="border:1px solid #ddd;padding:8px">175 cm (5'9")</td>
+    <td style="border:1px solid #ddd;padding:8px">85 kg (187 lbs)</td>
     <td style="border:1px solid #ddd;padding:8px">27.8</td>
     <td style="border:1px solid #ddd;padding:8px">Overweight</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">180 cm</td>
-    <td style="border:1px solid #ddd;padding:8px">100 kg</td>
+    <td style="border:1px solid #ddd;padding:8px">180 cm (5'11")</td>
+    <td style="border:1px solid #ddd;padding:8px">100 kg (220 lbs)</td>
     <td style="border:1px solid #ddd;padding:8px">30.9</td>
-    <td style="border:1px solid #ddd;padding:8px">Obese I</td>
+    <td style="border:1px solid #ddd;padding:8px">Obese Class I</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">165 cm (5'5")</td>
+    <td style="border:1px solid #ddd;padding:8px">45 kg (99 lbs)</td>
+    <td style="border:1px solid #ddd;padding:8px">16.5</td>
+    <td style="border:1px solid #ddd;padding:8px">Underweight</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">178 cm (5'10")</td>
+    <td style="border:1px solid #ddd;padding:8px">120 kg (265 lbs)</td>
+    <td style="border:1px solid #ddd;padding:8px">37.9</td>
+    <td style="border:1px solid #ddd;padding:8px">Obese Class II</td>
+  </tr>
+</table>
+
+<h4>Unit Conversions</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Height Conversions:
+  inches → centimeters: multiply by 2.54
+  feet + inches → cm: (feet × 12 + inches) × 2.54
+  centimeters → inches: divide by 2.54
+
+  Example: 5'9" = (5 × 12 + 9) = 69 inches = 69 × 2.54 = 175.26 cm
+
+Weight Conversions:
+  pounds → kilograms: divide by 2.205 (or multiply by 0.454)
+  kilograms → pounds: multiply by 2.205
+
+  Example: 165 lbs = 165 / 2.205 = 74.8 kg
+</pre>
+
+<h4>Asian BMI Thresholds</h4>
+<p>Research indicates Asian populations experience elevated health risks at lower BMIs. Some health organizations recommend adjusted thresholds:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Category</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Standard WHO</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Asian-adjusted</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Overweight threshold</td>
+    <td style="border:1px solid #ddd;padding:8px">BMI ≥ 25</td>
+    <td style="border:1px solid #ddd;padding:8px">BMI ≥ 23</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Obese threshold</td>
+    <td style="border:1px solid #ddd;padding:8px">BMI ≥ 30</td>
+    <td style="border:1px solid #ddd;padding:8px">BMI ≥ 27.5</td>
   </tr>
 </table>
 </section>
@@ -206,17 +297,18 @@ Example: 703 × 154 lbs / (67 in)² = 108262 / 4489 = 24.1
 <section class="how-to-use">
 <h3>How to Calculate Your BMI</h3>
 <ol class="how-to-steps">
-  <li><strong>Enter height:</strong> Input your height in centimeters (e.g., 170 for 170cm).</li>
-  <li><strong>Enter weight:</strong> Input your weight in kilograms (e.g., 70 for 70kg).</li>
+  <li><strong>Enter height:</strong> Input your height in centimeters (e.g., 170 for 170cm or 5'7").</li>
+  <li><strong>Enter weight:</strong> Input your weight in kilograms (e.g., 70 for 70kg or 154 lbs).</li>
   <li><strong>Calculate:</strong> Click "Calculate BMI" to compute your Body Mass Index.</li>
-  <li><strong>Review results:</strong> Your BMI score and category appear instantly.</li>
+  <li><strong>Review results:</strong> Your BMI value and health category appear instantly.</li>
 </ol>
 
-<h4 style="margin-top:20px">Unit Conversions</h4>
+<h4 style="margin-top:20px">Important Notes</h4>
 <ul>
-  <li><strong>Height:</strong> inches × 2.54 = centimeters</li>
-  <li><strong>Weight:</strong> pounds ÷ 2.205 = kilograms</li>
-  <li><strong>Example:</strong> 5'9" (69 inches) = 175 cm; 165 lbs = 75 kg</li>
+  <li>BMI is a screening tool, not a diagnostic measure of individual health</li>
+  <li>Results may be inaccurate for athletes, elderly, pregnant women, and children</li>
+  <li>Consult healthcare providers for personalized health assessment</li>
+  <li>Consider additional measures (waist circumference, body fat %, blood markers) for comprehensive evaluation</li>
 </ul>
 </section>
 <section class="faq">
@@ -224,19 +316,22 @@ Example: 703 × 154 lbs / (67 in)² = 108262 / 4489 = 24.1
 <dl class="faq-list">
 
   <dt>What is BMI and how is it calculated?</dt>
-  <dd>BMI (Body Mass Index) is a measure of body fat based on height and weight. Formula: BMI = weight (kg) / height (m)². For imperial units: BMI = 703 × weight (lbs) / height (in)². Results categorize as underweight, normal, overweight, or obese.</dd>
+  <dd>BMI (Body Mass Index) is a screening tool that estimates body fat based on height and weight. The formula is: BMI = weight (kg) / height (m)². For imperial units: BMI = 703 × weight (lbs) / height (in)². Results categorize individuals as underweight, normal weight, overweight, or obese.</dd>
 
-  <dt>What are the BMI categories?</dt>
-  <dd>WHO BMI categories: Underweight (&lt; 18.5), Normal weight (18.5-24.9), Overweight (25-29.9), Obese Class I (30-34.9), Obese Class II (35-39.9), Obese Class III (≥ 40). Categories apply to adults 20+ years.</dd>
+  <dt>What are the WHO BMI categories?</dt>
+  <dd>World Health Organization BMI categories for adults: Underweight (&lt; 18.5), Normal weight (18.5-24.9), Overweight (25-29.9), Obese Class I (30-34.9), Obese Class II (35-39.9), Obese Class III (≥ 40). These thresholds are based on epidemiological data linking BMI to health outcomes.</dd>
 
   <dt>What are the limitations of BMI?</dt>
-  <dd>BMI doesn't distinguish muscle from fat, so athletes may be classified overweight despite low body fat. It doesn't account for bone density, age, sex, or fat distribution. BMI is a screening tool, not a diagnostic measure of health.</dd>
+  <dd>BMI does not distinguish between muscle and fat mass, so muscular athletes may be misclassified as overweight. It does not account for fat distribution (visceral fat is more dangerous than subcutaneous fat), age-related muscle loss, bone density, sex differences, or ethnic variations in health risk thresholds.</dd>
 
-  <dt>Is BMI different for men and women?</dt>
-  <dd>No, BMI categories are the same for adult men and women. However, women naturally have higher body fat percentage than men at the same BMI. BMI doesn't account for these physiological differences.</dd>
+  <dt>Is BMI accurate for all populations?</dt>
+  <dd>BMI has varying accuracy across populations. Asian populations have higher health risks at lower BMIs (overweight threshold often adjusted to 23). Elderly individuals may have normal BMI despite high body fat due to muscle loss. Athletes and bodybuilders often have elevated BMI from muscle mass, not fat.</dd>
+
+  <dt>What health risks are associated with high BMI?</dt>
+  <dd>Elevated BMI is associated with increased risk of cardiovascular disease, type 2 diabetes, hypertension, certain cancers (breast, colon, endometrial), sleep apnea, osteoarthritis, and metabolic syndrome. However, BMI is a screening tool, not a diagnostic measure—individual health assessment requires additional factors.</dd>
 
   <dt>What is a healthy BMI range?</dt>
-  <dd>For most adults, a BMI between 18.5 and 24.9 is considered healthy. However, optimal BMI varies by individual factors including age, muscle mass, bone density, and overall health. Consult healthcare providers for personalized guidance.</dd>
+  <dd>For most adults, BMI 18.5-24.9 is associated with lowest health risks. However, optimal BMI varies by individual factors including age, muscle mass, bone structure, and overall health status. Some research suggests BMI 20-25 may be optimal for longevity in most populations.</dd>
 </dl>
 </section>
 </main>

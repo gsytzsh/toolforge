@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>KeyCode Reference – Keyboard Key Codes with Live Demo | ToolForge</title>
-<meta name="description" content="Free online KeyCode reference with live key press demo. JavaScript keyCode, key and code values. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Complete keyboard key code reference with live key press demo. JavaScript keyCode (deprecated), key, and code values for all common keys. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/keycode-reference.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="KeyCode Reference – Keyboard Key Codes with Live Demo | ToolForge">
-<meta property="og:description" content="Free online KeyCode reference with live key press demo. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Complete keyboard key code reference with live key press demo. JavaScript keyCode, key, and code values.">
 <meta property="og:url" content="https://toolforge.site/tools/keycode-reference.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KeyCode Reference – Keyboard Key Codes with Live Demo | ToolForge">
-<meta name="twitter:description" content="Free online KeyCode reference with live key press demo. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Complete keyboard key code reference with live key press demo.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
@@ -24,6 +24,7 @@
 .demo-box{border:2px dashed #cbd5e1;padding:20px;margin:16px 0;background:#f8fafc;border-radius:8px;min-height:60px}
 .demo-box:focus{outline:none;border-color:#3b82f6}
 .demo-result{font-family:monospace;font-size:0.9rem;margin-top:8px}
+.info-box{background:#f5f5f5;padding:12px;border-radius:8px;margin:12px 0}
 </style>
 
 <script type="application/ld+json">
@@ -33,45 +34,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Keycode Reference used for?",
+      "name": "What is the difference between keyCode, key, and code?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Keycode Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "keyCode (deprecated) returns a numeric code (e.g., 65 for 'A'). key returns the character value (e.g., 'a' or 'A' depending on Shift). code returns the physical key location (e.g., 'KeyA' regardless of layout or modifiers). Modern code should use key and code; keyCode is deprecated but still widely supported."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "Why is keyCode deprecated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "keyCode is deprecated because it's ambiguous and layout-dependent. The same keyCode can represent different characters on different keyboard layouts. The key and code properties provide clearer semantics: key gives the actual character, code gives the physical key position. Use key for character input, code for keyboard shortcuts."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What keyboard events are available in JavaScript?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Three main keyboard events: keydown (fires when key is pressed, repeats while held), keypress (deprecated, fires for character keys only), keyup (fires when key is released). Use keydown for shortcuts and game controls, keyup for release detection. Attach listeners to document, window, or focused elements."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I detect modifier keys (Ctrl, Alt, Shift)?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Use the event properties: ctrlKey, altKey, shiftKey, metaKey (Command on Mac). Example: if (e.ctrlKey && e.key === 's') for Ctrl+S shortcut. These boolean properties work with both keydown and keyup events. metaKey detects the Command key on Mac and Windows key on Windows."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What are common key values for shortcuts?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Common shortcut keys: Enter ('Enter'), Escape ('Escape'), Space (' '), Tab ('Tab'), Arrow keys ('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'), Function keys ('F1'-'F12'). For letters/numbers, key returns the character ('a'-'z', '0'-'9'), code returns physical location ('KeyA'-'KeyZ', 'Digit0'-'Digit9')."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How do I prevent default keyboard behavior?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Call event.preventDefault() in the keydown handler to prevent default behavior (e.g., form submission on Enter, page scroll on Space). Example: e.preventDefault() before processing shortcuts. Be cautious: blocking defaults can harm accessibility. Only prevent when you provide alternative functionality."
       }
     }
   ]
@@ -91,7 +97,29 @@
 <div class="demo-result" id="result"></div>
 </div>
 
-<h3>Common Key Codes</h3>
+<div class="info-box">
+<h4>Understanding Key Event Properties</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Modern approach (recommended)
+element.addEventListener('keydown', (e) => {
+  console.log('key:', e.key);   // Character value: 'a', 'A', 'Enter'
+  console.log('code:', e.code); // Physical key: 'KeyA', 'Enter'
+
+  // Check modifiers
+  if (e.ctrlKey) console.log('Ctrl pressed');
+  if (e.altKey) console.log('Alt pressed');
+  if (e.shiftKey) console.log('Shift pressed');
+  if (e.metaKey) console.log('Meta/Command pressed');
+});
+
+// Legacy (deprecated but still works)
+element.addEventListener('keydown', (e) => {
+  console.log('keyCode:', e.keyCode); // Number: 65 for 'A'
+});
+</pre>
+</div>
+
+<h3>Common Key Codes Reference</h3>
 <table class="ref-table">
 <thead><tr><th>Key</th><th>keyCode</th><th>key</th><th>code</th></tr></thead>
 <tbody>
@@ -104,38 +132,117 @@
 <tr><td>Caps Lock</td><td><code>20</code></td><td><code>CapsLock</code></td><td><code>CapsLock</code></td></tr>
 <tr><td>Escape</td><td><code>27</code></td><td><code>Escape</code></td><td><code>Escape</code></td></tr>
 <tr><td>Space</td><td><code>32</code></td><td><code> </code></td><td><code>Space</code></td></tr>
+<tr><td>Page Up</td><td><code>33</code></td><td><code>PageUp</code></td><td><code>PageUp</code></td></tr>
+<tr><td>Page Down</td><td><code>34</code></td><td><code>PageDown</code></td><td><code>PageDown</code></td></tr>
+<tr><td>End</td><td><code>35</code></td><td><code>End</code></td><td><code>End</code></td></tr>
+<tr><td>Home</td><td><code>36</code></td><td><code>Home</code></td><td><code>Home</code></td></tr>
 <tr><td>Arrow Left</td><td><code>37</code></td><td><code>ArrowLeft</code></td><td><code>ArrowLeft</code></td></tr>
 <tr><td>Arrow Up</td><td><code>38</code></td><td><code>ArrowUp</code></td><td><code>ArrowUp</code></td></tr>
 <tr><td>Arrow Right</td><td><code>39</code></td><td><code>ArrowRight</code></td><td><code>ArrowRight</code></td></tr>
 <tr><td>Arrow Down</td><td><code>40</code></td><td><code>ArrowDown</code></td><td><code>ArrowDown</code></td></tr>
+<tr><td>Insert</td><td><code>45</code></td><td><code>Insert</code></td><td><code>Insert</code></td></tr>
+<tr><td>Delete</td><td><code>46</code></td><td><code>Delete</code></td><td><code>Delete</code></td></tr>
 <tr><td>0–9</td><td><code>48–57</code></td><td><code>0</code>–<code>9</code></td><td><code>Digit0</code>–<code>Digit9</code></td></tr>
 <tr><td>A–Z</td><td><code>65–90</code></td><td><code>a</code>/<code>A</code></td><td><code>KeyA</code>–<code>KeyZ</code></td></tr>
 <tr><td>F1–F12</td><td><code>112–123</code></td><td><code>F1</code>–<code>F12</code></td><td><code>F1</code>–<code>F12</code></td></tr>
 <tr><td>Num Lock</td><td><code>144</code></td><td><code>NumLock</code></td><td><code>NumLock</code></td></tr>
+<tr><td>Scroll Lock</td><td><code>145</code></td><td><code>ScrollLock</code></td><td><code>ScrollLock</code></td></tr>
+<tr><td>; (semicolon)</td><td><code>186</code></td><td><code>;</code></td><td><code>Semicolon</code></td></tr>
+<tr><td>= (equals)</td><td><code>187</code></td><td><code>=</code></td><td><code>Equal</code></td></tr>
+<tr><td>, (comma)</td><td><code>188</code></td><td><code>,</code></td><td><code>Comma</code></td></tr>
+<tr><td>- (minus)</td><td><code>189</code></td><td><code>-</code></td><td><code>Minus</code></td></tr>
+<tr><td>. (period)</td><td><code>190</code></td><td><code>.</code></td><td><code>Period</code></td></tr>
+<tr><td>/ (slash)</td><td><code>191</code></td><td><code>/</code></td><td><code>Slash</code></td></tr>
+<tr><td>` (backtick)</td><td><code>192</code></td><td><code>`</code></td><td><code>Backquote</code></td></tr>
+<tr><td>[ (bracket)</td><td><code>219</code></td><td><code>[</code></td><td><code>BracketLeft</code></td></tr>
+<tr><td>\ (backslash)</td><td><code>220</code></td><td><code>\</code></td><td><code>Backslash</code></td></tr>
+<tr><td>] (bracket)</td><td><code>221</code></td><td><code>]</code></td><td><code>BracketRight</code></td></tr>
+<tr><td>' (quote)</td><td><code>222</code></td><td><code>'</code></td><td><code>Quote</code></td></tr>
 </tbody>
 </table>
 
 <section class="tool-seo">
 <h3>About KeyCode Reference</h3>
-<p>This reference lists keyboard key codes for JavaScript key events. keyCode is deprecated; prefer key and code for new code.</p>
-<p>It is useful for keyboard shortcuts, game controls and form handling when you need to identify which key was pressed.</p>
+<p>This reference lists keyboard key codes for JavaScript key events. The keyCode property is deprecated; prefer key and code for new code.</p>
+<p>The key property returns the character value (affected by Shift and keyboard layout), while code returns the physical key location (unaffected by modifiers or layout). This distinction is important for international keyboards and shortcut implementations.</p>
+
+<h4>Keyboard Event Types</h4>
+<table class="ref-table">
+<thead><tr><th>Event</th><th>Description</th><th>Use Case</th></tr></thead>
+<tbody>
+<tr><td><code>keydown</code></td><td>Fires when key is first pressed, repeats while held</td><td>Shortcuts, game controls, preventing defaults</td></tr>
+<tr><td><code>keypress</code></td><td>Deprecated. Fires only for character keys</td><td>Avoid; use keydown with key property instead</td></tr>
+<tr><td><code>keyup</code></td><td>Fires when key is released</td><td>Release detection, cleanup, toggle states</td></tr>
+</tbody>
+</table>
+
+<h4>Modifier Key Reference</h4>
+<table class="ref-table">
+<thead><tr><th>Property</th><th>Key</th><th>Mac Equivalent</th></tr></thead>
+<tbody>
+<tr><td><code>e.ctrlKey</code></td><td>Control</td><td>Control</td></tr>
+<tr><td><code>e.altKey</code></td><td>Alt</td><td>Option</td></tr>
+<tr><td><code>e.shiftKey</code></td><td>Shift</td><td>Shift</td></tr>
+<tr><td><code>e.metaKey</code></td><td>Windows key</td><td>Command</td></tr>
+</tbody>
+</table>
+
+<h4>Common Shortcut Patterns</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Save shortcut (Ctrl+S / Cmd+S)
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    saveDocument();
+  }
+});
+
+// Escape to close modal
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modal.isOpen) {
+    modal.close();
+  }
+});
+
+// Arrow key navigation
+element.addEventListener('keydown', (e) => {
+  switch(e.key) {
+    case 'ArrowUp': moveUp(); break;
+    case 'ArrowDown': moveDown(); break;
+    case 'ArrowLeft': moveLeft(); break;
+    case 'ArrowRight': moveRight(); break;
+  }
+});
+
+// Detect specific key by code (layout-independent)
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'KeyS') {
+    // Fires for physical S key regardless of layout
+  }
+});
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Keycode Reference used for?</dt>
-  <dd>Keycode Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is the difference between keyCode, key, and code?</dt>
+  <dd>keyCode (deprecated) returns a numeric code (e.g., 65 for 'A'). key returns the character value (e.g., 'a' or 'A' depending on Shift). code returns the physical key location (e.g., 'KeyA' regardless of layout or modifiers). Modern code should use key and code; keyCode is deprecated but still widely supported.</dd>
+
+  <dt>Why is keyCode deprecated?</dt>
+  <dd>keyCode is deprecated because it's ambiguous and layout-dependent. The same keyCode can represent different characters on different keyboard layouts. The key and code properties provide clearer semantics: key gives the actual character, code gives the physical key position. Use key for character input, code for keyboard shortcuts.</dd>
+
+  <dt>What keyboard events are available in JavaScript?</dt>
+  <dd>Three main keyboard events: keydown (fires when key is pressed, repeats while held), keypress (deprecated, fires for character keys only), keyup (fires when key is released). Use keydown for shortcuts and game controls, keyup for release detection. Attach listeners to document, window, or focused elements.</dd>
+
+  <dt>How do I detect modifier keys (Ctrl, Alt, Shift)?</dt>
+  <dd>Use the event properties: ctrlKey, altKey, shiftKey, metaKey (Command on Mac). Example: if (e.ctrlKey && e.key === 's') for Ctrl+S shortcut. These boolean properties work with both keydown and keyup events. metaKey detects the Command key on Mac and Windows key on Windows.</dd>
+
+  <dt>What are common key values for shortcuts?</dt>
+  <dd>Common shortcut keys: Enter ('Enter'), Escape ('Escape'), Space (' '), Tab ('Tab'), Arrow keys ('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'), Function keys ('F1'-'F12'). For letters/numbers, key returns the character ('a'-'z', '0'-'9'), code returns physical location ('KeyA'-'KeyZ', 'Digit0'-'Digit9').</dd>
+
+  <dt>How do I prevent default keyboard behavior?</dt>
+  <dd>Call event.preventDefault() in the keydown handler to prevent default behavior (e.g., form submission on Enter, page scroll on Space). Example: e.preventDefault() before processing shortcuts. Be cautious: blocking defaults can harm accessibility. Only prevent when you provide alternative functionality.</dd>
 </dl>
 </section>
 </main>

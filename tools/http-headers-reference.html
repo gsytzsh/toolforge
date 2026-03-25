@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>HTTP Headers Reference – Request & Response Headers Table | ToolForge</title>
-<meta name="description" content="Free online HTTP headers reference for request and response headers. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Complete HTTP headers reference for request and response headers. Learn about Content-Type, Authorization, Cache-Control, CORS headers and more. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/http-headers-reference.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="HTTP Headers Reference – Request & Response Headers Table | ToolForge">
-<meta property="og:description" content="Free online HTTP headers reference. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Complete HTTP headers reference for request and response headers.">
 <meta property="og:url" content="https://toolforge.site/tools/http-headers-reference.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP Headers Reference – Request & Response Headers Table | ToolForge">
-<meta name="twitter:description" content="Free online HTTP headers reference. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="HTTP headers reference for web developers.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
@@ -33,45 +33,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Http Headers Reference used for?",
+      "name": "What are HTTP headers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Http Headers Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "HTTP headers are key-value pairs sent at the start of HTTP requests and responses. They convey information about the request body, client capabilities, server capabilities, authentication, caching, and more. Headers are case-insensitive and follow the format: Header-Name: value."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the Content-Type header?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Content-Type specifies the media type of the resource or request body. Common values: application/json, text/html, image/png, multipart/form-data. In requests, it tells the server what format the body is in. In responses, it tells the client how to interpret the content."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What are CORS headers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "CORS (Cross-Origin Resource Sharing) headers control access to resources from different origins. Key headers: Access-Control-Allow-Origin (which domains can access), Access-Control-Allow-Methods (allowed HTTP methods), Access-Control-Allow-Headers (allowed request headers). Server must include these for cross-origin requests."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the Authorization header?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Authorization contains credentials for authentication. Common formats: Basic base64(username:password), Bearer <token> (JWT/OAuth), APIKey <key>. Never send credentials over HTTP (use HTTPS). The server validates these credentials to authorize the request."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "How do caching headers work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Cache-Control controls browser/proxy caching. Common directives: max-age=3600 (cache for 1 hour), no-store (don't cache), no-cache (validate before using), private (browser only), public (any cache). ETag provides resource version for validation. Last-Modified gives date-based validation."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "What are security headers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Security headers protect against common attacks: Strict-Transport-Security (force HTTPS), X-Content-Type-Options (prevent MIME sniffing), X-Frame-Options (prevent clickjacking), Content-Security-Policy (control resource loading), X-XSS-Protection (XSS filter). Essential for secure web applications."
       }
     }
   ]
@@ -90,7 +95,7 @@
 <div class="ref-section">
 <h3>Request Headers</h3>
 <table class="ref-table">
-<thead><tr><th>Header</th><th>Description</th></tr></thead>
+<thead><tr><th>Header</th><th>Description</th><th>Example</th></tr></thead>
 <tbody id="req"></tbody>
 </table>
 </div>
@@ -98,80 +103,241 @@
 <div class="ref-section">
 <h3>Response Headers</h3>
 <table class="ref-table">
-<thead><tr><th>Header</th><th>Description</th></tr></thead>
+<thead><tr><th>Header</th><th>Description</th><th>Example</th></tr></thead>
 <tbody id="res"></tbody>
+</table>
+</div>
+
+<div class="ref-section">
+<h3>General Headers</h3>
+<table class="ref-table">
+<thead><tr><th>Header</th><th>Description</th><th>Example</th></tr></thead>
+<tbody id="gen"></tbody>
 </table>
 </div>
 
 <section class="tool-seo">
 <h3>About HTTP Headers Reference</h3>
-<p>This reference lists common HTTP request and response headers used in web development and API work.</p>
-<p>It is useful for debugging, CORS configuration, caching and understanding HTTP communication.</p>
+<p>This reference lists common HTTP request and response headers used in web development and API work. Headers are categorized by their typical usage direction, though many can appear in both requests and responses.</p>
+<p>It is useful for debugging network issues, configuring CORS, implementing caching strategies, setting security headers, and understanding HTTP communication between clients and servers.</p>
+
+<h4>Header Format and Rules</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+HTTP Header Format:
+  Header-Name: value
+
+Rules:
+  - Header names are case-insensitive
+  - Values can span multiple lines (start continuation with space/tab)
+  - Multiple values: comma-separated or repeat header
+  - Order doesn't matter (except for Set-Cookie)
+  - Empty value is valid: Header-Name:
+
+Example Request:
+  GET /api/users HTTP/1.1
+  Host: api.example.com
+  Authorization: Bearer eyJhbGc...
+  Accept: application/json
+  Content-Type: application/json
+  User-Agent: MyApp/1.0
+
+Example Response:
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+  Cache-Control: max-age=3600
+  X-Frame-Options: DENY
+  Set-Cookie: session=abc123; HttpOnly
+</pre>
+
+<h4>Common Header Categories</h4>
+<table class="ref-table">
+<thead><tr><th>Category</th><th>Purpose</th><th>Common Headers</th></tr></thead>
+<tbody>
+<tr><td><strong>General</strong></td><td>Apply to both request/response</td><td>Cache-Control, Connection, Date</td></tr>
+<tr><td><strong>Request</strong></td><td>Client sends to server</td><td>Accept, Authorization, Content-Type</td></tr>
+<tr><td><strong>Response</strong></td><td>Server sends to client</td><td>Set-Cookie, Location, Server</td></tr>
+<tr><td><strong>Entity</strong></td><td>Describe body content</td><td>Content-Length, Content-Type, Content-Encoding</td></tr>
+<tr><td><strong>CORS</strong></td><td>Cross-origin access control</td><td>Access-Control-Allow-Origin, Access-Control-Allow-Methods</td></tr>
+<tr><td><strong>Security</strong></td><td>Protect against attacks</td><td>Strict-Transport-Security, X-Frame-Options, CSP</td></tr>
+<tr><td><strong>Caching</strong></td><td>Control cache behavior</td><td>Cache-Control, ETag, Last-Modified, Expires</td></tr>
+</tbody>
+</table>
+
+<h4>CORS Headers Reference</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Simple Request (server response):
+  Access-Control-Allow-Origin: https://example.com
+  Access-Control-Allow-Methods: GET, POST, PUT
+  Access-Control-Allow-Headers: Content-Type, Authorization
+
+Preflight Request (OPTIONS):
+  Client sends:
+    Origin: https://example.com
+    Access-Control-Request-Method: POST
+    Access-Control-Request-Headers: Authorization
+
+  Server responds:
+    Access-Control-Allow-Origin: https://example.com
+    Access-Control-Allow-Methods: GET, POST, PUT, DELETE
+    Access-Control-Allow-Headers: Content-Type, Authorization
+    Access-Control-Max-Age: 86400
+
+Credentials:
+  Client: fetch(url, {credentials: 'include'})
+  Server: Access-Control-Allow-Credentials: true
+  Note: Cannot use * with credentials, must specify origin
+</pre>
+
+<h4>Security Headers Reference</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Force HTTPS for 1 year, including subdomains
+
+X-Content-Type-Options: nosniff
+  Prevent MIME type sniffing
+
+X-Frame-Options: DENY
+  Prevent clickjacking (DENY, SAMEORIGIN, ALLOW-FROM)
+
+Content-Security-Policy: default-src 'self'
+  Control resource loading (scripts, styles, images)
+
+X-XSS-Protection: 1; mode=block
+  Enable XSS filter (legacy, modern browsers use CSP)
+
+Referrer-Policy: strict-origin-when-cross-origin
+  Control referrer information sent
+
+Permissions-Policy: geolocation=(), microphone=()
+  Control browser features
+
+Cross-Origin-Embedder-Policy: require-corp
+  Isolate browsing context (COOP/COEP headers)
+</pre>
+
+<h4>Caching Headers Reference</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Cache-Control directives:
+  max-age=3600     - Cache for 1 hour
+  s-maxage=3600    - Shared cache (CDN) only
+  no-store         - Don't cache anything
+  no-cache         - Validate before using cached
+  private          - Browser cache only
+  public           - Any cache (browser, CDN)
+  must-revalidate  - Must validate when stale
+  stale-while-revalidate=60 - Serve stale for 60s while revalidating
+
+Validation:
+  ETag: "abc123"           - Resource version identifier
+  Last-Modified: Mon, 01 Jan 2024 00:00:00 GMT
+
+Client validation headers:
+  If-None-Match: "abc123"  - Get if ETag changed
+  If-Modified-Since: ...   - Get if modified after date
+
+Expires: Wed, 21 Oct 2024 07:28:00 GMT
+  HTTP/1.0 fallback (use Cache-Control instead)
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Http Headers Reference used for?</dt>
-  <dd>Http Headers Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What are HTTP headers?</dt>
+  <dd>HTTP headers are key-value pairs sent at the start of HTTP requests and responses. They convey information about the request body, client capabilities, server capabilities, authentication, caching, and more. Headers are case-insensitive and follow the format: Header-Name: value.</dd>
+
+  <dt>What is the Content-Type header?</dt>
+  <dd>Content-Type specifies the media type of the resource or request body. Common values: application/json, text/html, image/png, multipart/form-data. In requests, it tells the server what format the body is in. In responses, it tells the client how to interpret the content.</dd>
+
+  <dt>What are CORS headers?</dt>
+  <dd>CORS (Cross-Origin Resource Sharing) headers control access to resources from different origins. Key headers: Access-Control-Allow-Origin (which domains can access), Access-Control-Allow-Methods (allowed HTTP methods), Access-Control-Allow-Headers (allowed request headers). Server must include these for cross-origin requests.</dd>
+
+  <dt>What is the Authorization header?</dt>
+  <dd>Authorization contains credentials for authentication. Common formats: Basic base64(username:password), Bearer &lt;token&gt; (JWT/OAuth), APIKey &lt;key&gt;. Never send credentials over HTTP (use HTTPS). The server validates these credentials to authorize the request.</dd>
+
+  <dt>How do caching headers work?</dt>
+  <dd>Cache-Control controls browser/proxy caching. Common directives: max-age=3600 (cache for 1 hour), no-store (don't cache), no-cache (validate before using), private (browser only), public (any cache). ETag provides resource version for validation. Last-Modified gives date-based validation.</dd>
+
+  <dt>What are security headers?</dt>
+  <dd>Security headers protect against common attacks: Strict-Transport-Security (force HTTPS), X-Content-Type-Options (prevent MIME sniffing), X-Frame-Options (prevent clickjacking), Content-Security-Policy (control resource loading), X-XSS-Protection (XSS filter). Essential for secure web applications.</dd>
 </dl>
 </section>
 </main>
 <script>
 var req=[
-["Accept","Content types the client accepts"],
-["Accept-Encoding","Encodings (gzip, deflate, br)"],
-["Accept-Language","Preferred languages"],
-["Authorization","Credentials (Bearer, Basic)"],
-["Cache-Control","Caching directives"],
-["Content-Type","Request body MIME type"],
-["Cookie","Stored cookies"],
-["Origin","Request origin (CORS)"],
-["Referer","Referring URL"],
-["User-Agent","Client identifier"],
-["X-Requested-With","XMLHttpRequest for AJAX"]
+["Accept","Content types the client accepts","application/json, text/html"],
+["Accept-Encoding","Preferred content encodings","gzip, deflate, br"],
+["Accept-Language","Preferred languages","en-US, en;q=0.9"],
+["Authorization","Authentication credentials","Bearer eyJhbGc..."],
+["Cache-Control","Caching directives for request","no-cache, max-age=0"],
+["Connection","Connection control","keep-alive, close"],
+["Content-Length","Request body size in bytes","1234"],
+["Content-Type","Request body MIME type","application/json"],
+["Cookie","Stored cookies for domain","session=abc; user=123"],
+["Expect","Expected server behavior","100-continue"],
+["From","User email address","user@example.com"],
+["Host","Target server hostname","api.example.com"],
+["If-Modified-Since","Get if modified after date","Mon, 01 Jan 2024 00:00:00 GMT"],
+["If-None-Match","Get if ETag differs","\"abc123\""],
+["Origin","Request origin for CORS","https://example.com"],
+["Referer","Referring page URL","https://example.com/page"],
+["User-Agent","Client application identifier","Mozilla/5.0..."],
+["X-Requested-With","Identifies AJAX requests","XMLHttpRequest"]
 ]
 var res=[
-["Cache-Control","Caching directives"],
-["Content-Type","Response MIME type"],
-["Content-Length","Response body size"],
-["Set-Cookie","Set cookie value"],
-["Access-Control-Allow-Origin","CORS allowed origin"],
-["Access-Control-Allow-Methods","CORS allowed methods"],
-["Access-Control-Allow-Headers","CORS allowed headers"],
-["Location","Redirect URL (3xx)"],
-["ETag","Resource version for cache"],
-["Last-Modified","Resource modification date"],
-["X-Frame-Options","Clickjacking protection"],
-["X-Content-Type-Options","MIME sniffing protection"],
-["Strict-Transport-Security","HSTS"]
+["Access-Control-Allow-Origin","CORS allowed origin","https://example.com"],
+["Access-Control-Allow-Methods","CORS allowed methods","GET, POST, PUT"],
+["Access-Control-Allow-Headers","CORS allowed headers","Content-Type, Authorization"],
+["Access-Control-Allow-Credentials","CORS credentials allowed","true"],
+["Age","Time since response generated","3600"],
+["Cache-Control","Caching directives","max-age=3600, public"],
+["Connection","Connection control","keep-alive"],
+["Content-Disposition","Download filename","attachment; filename=\"file.pdf\""],
+["Content-Encoding","Response body encoding","gzip"],
+["Content-Length","Response body size","5678"],
+["Content-Type","Response MIME type","application/json"],
+["Date","Response timestamp","Mon, 01 Jan 2024 00:00:00 GMT"],
+["ETag","Resource version identifier","\"abc123\""],
+["Expires","Cache expiration date","Mon, 01 Jan 2024 01:00:00 GMT"],
+["Last-Modified","Resource modification date","Mon, 01 Jan 2024 00:00:00 GMT"],
+["Location","Redirect URL or created resource","/new-location"],
+["Server","Server software identifier","nginx/1.18.0"],
+["Set-Cookie","Set cookie value","session=abc; HttpOnly; Secure"],
+["Strict-Transport-Security","HSTS header","max-age=31536000"],
+["Vary","Vary header for caching","Accept-Encoding"],
+["X-Content-Type-Options","MIME sniffing protection","nosniff"],
+["X-Frame-Options","Clickjacking protection","DENY"],
+["X-XSS-Protection","XSS filter","1; mode=block"]
+]
+var gen=[
+["Cache-Control","Caching directives","max-age=3600"],
+["Connection","Connection control","keep-alive"],
+["Content-Length","Message size","1234"],
+["Content-Type","Media type","application/json"],
+["Date","Timestamp","Mon, 01 Jan 2024 00:00:00 GMT"],
+["Host","Target host","api.example.com"],
+["Pragma","Legacy caching","no-cache"],
+["Trailer","Trailing headers","X-Checksum"],
+["Transfer-Encoding","Body encoding","chunked"],
+["Upgrade","Protocol upgrade","websocket"]
 ]
 function render(){
 var q=(document.getElementById("filter").value||"").toLowerCase().trim()
 function filterRows(arr){
-return arr.filter(function(r){return !q||r[0].toLowerCase().indexOf(q)!==-1||r[1].toLowerCase().indexOf(q)!==-1})
+return arr.filter(function(r){return !q||r[0].toLowerCase().indexOf(q)!==-1||r[1].toLowerCase().indexOf(q)!==-1||(r[2]&&r[2].toLowerCase().indexOf(q)!==-1)})
 }
 function fill(id,arr){
 var tbody=document.getElementById(id)
 tbody.innerHTML=""
 filterRows(arr).forEach(function(r){
 var tr=document.createElement("tr")
-tr.innerHTML="<td><code>"+r[0]+"</code></td><td>"+r[1]+"</td>"
+tr.innerHTML="<td><code>"+r[0]+"</code></td><td>"+r[1]+"</td><td><code>"+(r[2]||"")+"</code></td>"
 tbody.appendChild(tr)
 })
 }
 fill("req",req)
 fill("res",res)
+fill("gen",gen)
 }
 document.getElementById("filter").addEventListener("input",render)
 render()

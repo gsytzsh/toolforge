@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Camel Case Converter – snake_case to camelCase Online | ToolForge</title>
-<meta name="description" content="Free online camelCase and snake_case converter. Convert between naming conventions for variable names, JSON keys, and code. Supports camelCase, PascalCase, snake_case, and kebab-case. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Convert between naming conventions: camelCase, PascalCase, snake_case, kebab-case, and SCREAMING_SNAKE_CASE. Essential tool for code formatting, API integration, and cross-language development. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/camel-case-converter.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Camel Case Converter – snake_case to camelCase Online | ToolForge">
-<meta property="og:description" content="Free online camelCase and snake_case converter. Convert between naming conventions for variable names, JSON keys, and code. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Convert between naming conventions: camelCase, PascalCase, snake_case, kebab-case, and SCREAMING_SNAKE_CASE. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/camel-case-converter.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Camel Case Converter – snake_case to camelCase Online | ToolForge">
-<meta name="twitter:description" content="Free online camelCase and snake_case converter. Convert between naming conventions for variable names, JSON keys, and code. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Convert between naming conventions: camelCase, PascalCase, snake_case, kebab-case, and SCREAMING_SNAKE_CASE. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -27,7 +27,7 @@
       "name": "What is camelCase and when is it used?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "camelCase starts with lowercase letter, then capitalizes each subsequent word (e.g., userName, totalCount). It's the standard convention in JavaScript, Java, C#, and JSON APIs for variable names and object properties.\""
+        "text": "camelCase (lowerCamelCase) starts with a lowercase letter, then capitalizes the first letter of each subsequent word (e.g., userName, totalCount, calculateTotal). It is the standard naming convention for variables and functions in JavaScript, Java, C#, C++, Go, and PHP. JSON APIs typically use camelCase for property names."
       }
     },
     {
@@ -35,15 +35,15 @@
       "name": "What is snake_case and when is it used?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "snake_case uses lowercase letters with underscores between words (e.g., user_name, total_count). It's common in Python, Ruby, SQL databases, and environment variables. Preferred for readability in many languages.\""
+        "text": "snake_case uses all lowercase letters with underscores separating words (e.g., user_name, total_count, calculate_total). It is common in Python (variables, functions), Ruby, SQL (table and column names), environment variables, and configuration files. Many developers prefer snake_case for readability, especially in longer names."
       }
     },
     {
       "@type": "Question",
-      "name": "What is PascalCase and how does it differ from camelCase?",
+      "name": "What is the difference between camelCase and PascalCase?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "PascalCase (UpperCamelCase) capitalizes the first letter of every word including the first (e.g., UserName, TotalCount). Unlike camelCase which starts lowercase. Used for class names in most languages and component names in React.\""
+        "text": "Both capitalize each word after the first. The difference: camelCase starts lowercase (userName), PascalCase starts uppercase (UserName). PascalCase (also called UpperCamelCase) is used for class names, interfaces, and component names in most languages. React components always use PascalCase."
       }
     },
     {
@@ -51,15 +51,23 @@
       "name": "What is kebab-case and where is it used?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "kebab-case uses lowercase with hyphens between words (e.g., user-name, total-count). Common in HTML attributes (data-user-id), CSS class names, URL slugs, and configuration files. Not valid in most programming languages.\""
+        "text": "kebab-case uses lowercase letters with hyphens between words (e.g., user-name, total-count). It is standard for HTML attributes (data-user-id, aria-label), CSS class names, URL slugs, configuration file keys, and command-line flags. Hyphens are not valid in most programming language identifiers."
       }
     },
     {
       "@type": "Question",
-      "name": "How do I convert JSON keys between conventions?",
+      "name": "How do I handle acronyms in naming conventions?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Paste the JSON and convert keys individually, or use this tool for single keys. For bulk conversion, use code: JavaScript's Object.keys().map() with regex replacement, or libraries like camelcase-keys for automatic conversion.\""
+        "text": "Acronym handling varies by style guide. Options: treat as single word (parseXml, parse_xml), treat each letter as word (parseXML, parse_xml), or lowercase entirely (parsexml). Consistency within a codebase matters more than the specific choice. Common practice: camelCase preserves acronym case (getHTTPResponse), snake_case lowercases (get_http_response)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert JSON keys between naming conventions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For single keys, use this tool. For bulk conversion in JavaScript: use Object.keys().map() with regex replacement, or libraries like camelcase-keys (snake_case to camelCase) or snakecase-keys (reverse). Example: const camelKeys = obj => Object.fromEntries(Object.entries(obj).map(([k, v]) => [k.replace(/_([a-z])/g, (m, c) => c.toUpperCase()), v]));"
       }
     }
   ]
@@ -69,7 +77,7 @@
 <body>
 <main class="container">
 <h1>Camel Case Converter</h1>
-<p class="subtitle">Convert between snake_case, camelCase, PascalCase, and kebab-case naming conventions.</p>
+<p class="subtitle">Convert between snake_case, camelCase, PascalCase, kebab-case, and SCREAMING_SNAKE_CASE.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <label for="input" class="sr-only">Input text</label>
 <textarea id="input" rows="10" style="width:90%;font-family:monospace" placeholder="user_name or userName or UserName or user-name" aria-label="Input text"></textarea>
@@ -79,6 +87,7 @@
 <button type="button" onclick="camelToSnake()">camelCase → snake_case</button>
 <button type="button" onclick="toPascal()">to PascalCase</button>
 <button type="button" onclick="toKebab()">to kebab-case</button>
+<button type="button" onclick="toScreaming()">to SCREAMING_SNAKE</button>
 <button type="button" onclick="copyResult()">Copy Result</button>
 </div>
 <h3 style="margin-top:24px">Result</h3>
@@ -87,62 +96,70 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Naming Convention Converter</h3>
-<p>This converter transforms text between different naming conventions used in programming: snake_case, camelCase, PascalCase, and kebab-case. Each convention has specific use cases across different languages and frameworks.</p>
+<p>This converter transforms identifiers between different naming conventions used across programming languages and frameworks. Each convention has established use cases, and converting between them is essential for API integration, code migration, and cross-language development.</p>
 
 <h4>Naming Convention Comparison</h4>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Convention</th>
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Used In</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Primary Use Cases</th>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">camelCase</td>
     <td style="border:1px solid #ddd;padding:8px"><code>userName</code></td>
-    <td style="border:1px solid #ddd;padding:8px">JavaScript, Java, C#, JSON</td>
-  </tr>
-  <tr>
-    <td style="border:1px solid #ddd;padding:8px">snake_case</td>
-    <td style="border:1px solid #ddd;padding:8px"><code>user_name</code></td>
-    <td style="border:1px solid #ddd;padding:8px">Python, Ruby, SQL, env vars</td>
+    <td style="border:1px solid #ddd;padding:8px">JavaScript/Java/C# variables, functions, JSON properties</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
     <td style="border:1px solid #ddd;padding:8px"><code>UserName</code></td>
-    <td style="border:1px solid #ddd;padding:8px">Classes, React components</td>
+    <td style="border:1px solid #ddd;padding:8px">Class names, interfaces, React components, TypeScript types</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">snake_case</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>user_name</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Python/Ruby variables, SQL columns, environment variables</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">kebab-case</td>
     <td style="border:1px solid #ddd;padding:8px"><code>user-name</code></td>
-    <td style="border:1px solid #ddd;padding:8px">HTML, CSS, URLs, config</td>
+    <td style="border:1px solid #ddd;padding:8px">HTML attributes, CSS classes, URL slugs, config keys</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">SCREAMING_SNAKE</td>
     <td style="border:1px solid #ddd;padding:8px"><code>USER_NAME</code></td>
-    <td style="border:1px solid #ddd;padding:8px">Constants, macros</td>
+    <td style="border:1px solid #ddd;padding:8px">Constants, macros, environment variable names</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">SCREAMING-KEBAB</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>USER-NAME</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Rare; some CLI flags, legacy systems</td>
   </tr>
 </table>
 
 <h4>Conversion Examples</h4>
 <pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
-Original          → camelCase    → snake_case   → PascalCase   → kebab-case
---------------------------------------------------------------------------------
-user_name         → userName     → user_name    → UserName     → user-name
-firstName         → firstName    → first_name   → FirstName    → first-name
-UserName          → userName     → user_name    → UserName     → user-name
-user-name         → userName     → user_name    → UserName     → user-name
-HTTPResponse      → httpResponse → http_response→ HttpResponse → http-response
-get_user_data     → getUserData  → get_user_data→ GetUserData  → get-user-data
+Input          → camelCase     → PascalCase    → snake_case    → kebab-case    → SCREAMING_SNAKE
+-------------------------------------------------------------------------------------------------
+user_name      → userName      → UserName      → user_name     → user-name     → USER_NAME
+userName       → userName      → UserName      → user_name     → user-name     → USER_NAME
+UserName       → userName      → UserName      → user_name     → user-name     → USER_NAME
+user-name      → userName      → UserName      → user_name     → user-name     → USER_NAME
+USER_NAME      → userName      → UserName      → user_name     → user-name     → USER_NAME
+get_user_data  → getUserData   → GetUserData   → get_user_data → get-user-data → GET_USER_DATA
+HTTPResponse   → httpResponse  → HttpResponse  → http_response → http-response → HTTP_RESPONSE
+firstName      → firstName     → FirstName     → first_name    → first-name    → FIRST_NAME
 </pre>
 
-<h4>Language Conventions Guide</h4>
+<h4>Language Naming Conventions Guide</h4>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Language</th>
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Variables</th>
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Functions</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Classes</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Classes/Types</th>
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Constants</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Private</th>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">JavaScript</td>
@@ -150,6 +167,15 @@ get_user_data     → getUserData  → get_user_data→ GetUserData  → get-use
     <td style="border:1px solid #ddd;padding:8px">camelCase</td>
     <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
     <td style="border:1px solid #ddd;padding:8px">UPPER_CASE</td>
+    <td style="border:1px solid #ddd;padding:8px">_camelCase</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">TypeScript</td>
+    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
+    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
+    <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
+    <td style="border:1px solid #ddd;padding:8px">UPPER_CASE</td>
+    <td style="border:1px solid #ddd;padding:8px">#camelCase</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Python</td>
@@ -157,6 +183,7 @@ get_user_data     → getUserData  → get_user_data→ GetUserData  → get-use
     <td style="border:1px solid #ddd;padding:8px">snake_case</td>
     <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
     <td style="border:1px solid #ddd;padding:8px">UPPER_CASE</td>
+    <td style="border:1px solid #ddd;padding:8px">_snake_case</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Java</td>
@@ -164,6 +191,7 @@ get_user_data     → getUserData  → get_user_data→ GetUserData  → get-use
     <td style="border:1px solid #ddd;padding:8px">camelCase</td>
     <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
     <td style="border:1px solid #ddd;padding:8px">UPPER_CASE</td>
+    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">C#</td>
@@ -171,6 +199,7 @@ get_user_data     → getUserData  → get_user_data→ GetUserData  → get-use
     <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
     <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
     <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
+    <td style="border:1px solid #ddd;padding:8px">_camelCase</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Ruby</td>
@@ -178,6 +207,7 @@ get_user_data     → getUserData  → get_user_data→ GetUserData  → get-use
     <td style="border:1px solid #ddd;padding:8px">snake_case</td>
     <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
     <td style="border:1px solid #ddd;padding:8px">UPPER_CASE</td>
+    <td style="border:1px solid #ddd;padding:8px">_snake_case</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Go</td>
@@ -185,51 +215,110 @@ get_user_data     → getUserData  → get_user_data→ GetUserData  → get-use
     <td style="border:1px solid #ddd;padding:8px">camelCase</td>
     <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
     <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
+    <td style="border:1px solid #ddd;padding:8px">lowercase</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Rust</td>
+    <td style="border:1px solid #ddd;padding:8px">snake_case</td>
+    <td style="border:1px solid #ddd;padding:8px">snake_case</td>
+    <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
+    <td style="border:1px solid #ddd;padding:8px">UPPER_CASE</td>
+    <td style="border:1px solid #ddd;padding:8px">_snake_case</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">PHP</td>
+    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
+    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
+    <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
+    <td style="border:1px solid #ddd;padding:8px">UPPER_CASE</td>
+    <td style="border:1px solid #ddd;padding:8px">$camelCase</td>
   </tr>
 </table>
-
-<h4>Common Use Cases</h4>
-<ul>
-  <li><strong>API Integration:</strong> Convert between backend (snake_case) and frontend (camelCase) conventions</li>
-  <li><strong>Database Mapping:</strong> SQL columns (snake_case) to application properties (camelCase)</li>
-  <li><strong>Code Migration:</strong> Adapting code when switching languages or frameworks</li>
-  <li><strong>JSON Standardization:</strong> Ensuring consistent key naming across APIs</li>
-  <li><strong>Cross-language Projects:</strong> Maintaining convention consistency in polyglot codebases</li>
-</ul>
 
 <h4>Conversion Algorithms</h4>
 <p><strong>snake_case to camelCase:</strong></p>
 <pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
 1. Split by underscore: "user_name" → ["user", "name"]
 2. Keep first word lowercase
-3. Capitalize remaining words: "name" → "Name"
-4. Join: "user" + "Name" = "userName"
+3. Capitalize first letter of remaining words
+4. Join together: "user" + "Name" = "userName"
+
+JavaScript:
+  str.replace(/_([a-z])/g, (m, c) => c.toUpperCase())
+
+Python:
+  parts = s.split('_')
+  return parts[0] + ''.join(w.capitalize() for w in parts[1:])
 </pre>
 
 <p><strong>camelCase to snake_case:</strong></p>
 <pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
-1. Find uppercase letters: "userName" → "user" + "N" + "ame"
-2. Insert underscore before each uppercase
-3. Convert to lowercase: "User" → "user"
-4. Join: "user_name"
+1. Find each uppercase letter
+2. Insert underscore before it
+3. Convert entire string to lowercase
+
+JavaScript:
+  str.replace(/([A-Z])/g, '_$1').toLowerCase().replace(/^_/, '')
+
+Python:
+  import re
+  return re.sub(r'(?<!^)(?=[A-Z])', '_', s).lower()
 </pre>
+
+<p><strong>Handling acronyms:</strong></p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Input: "HTTPResponse"
+
+Simple approach (treat as single word):
+  snake_case: "httpresponse" (loses readability)
+
+Preferred approach (preserve acronym boundaries):
+  snake_case: "http_response"
+  camelCase: "httpResponse"
+
+Regex for acronym handling:
+  str.replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2')
+      .replace(/([a-z])([A-Z])/g, '$1_$2')
+      .toLowerCase()
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>API Integration:</strong> Convert between backend (snake_case) and frontend (camelCase) naming conventions</li>
+  <li><strong>Database Mapping:</strong> SQL columns (snake_case) to application properties (camelCase) in ORM models</li>
+  <li><strong>Code Migration:</strong> Adapting codebases when switching languages or adopting new style guides</li>
+  <li><strong>JSON Standardization:</strong> Ensuring consistent key naming across microservices and APIs</li>
+  <li><strong>Cross-language Projects:</strong> Maintaining convention consistency in polyglot repositories</li>
+  <li><strong>Environment Variables:</strong> Converting config keys to SCREAMING_SNAKE_CASE for deployment</li>
+  <li><strong>CSS/HTML:</strong> Converting JavaScript camelCase to kebab-case for styles and attributes</li>
+</ul>
+
+<h4>Edge Cases and Special Handling</h4>
+<ul>
+  <li><strong>Leading/trailing separators:</strong> Strip before conversion (_user_name → userName)</li>
+  <li><strong>Multiple consecutive separators:</strong> Treat as single (user__name → userName)</li>
+  <li><strong>Numbers in names:</strong> Preserve position (user123Name → user_123_name)</li>
+  <li><strong>All caps input:</strong> Treat as SCREAMING_SNAKE (USER → user, USER_NAME → user_name)</li>
+  <li><strong>Mixed separators:</strong> Handle user-name and user_name identically</li>
+</ul>
 </section>
 
 <section class="how-to-use">
 <h3>How to Convert Naming Conventions</h3>
 <ol class="how-to-steps">
-  <li><strong>Enter text:</strong> Type or paste the variable name or text to convert.</li>
-  <li><strong>Choose conversion:</strong> Click the button for your desired output format.</li>
+  <li><strong>Enter identifier:</strong> Type or paste the variable name, function name, or text to convert.</li>
+  <li><strong>Choose target format:</strong> Click the button for your desired naming convention.</li>
   <li><strong>View result:</strong> The converted name appears in the result box.</li>
-  <li><strong>Copy output:</strong> Click "Copy Result" to use the converted name elsewhere.</li>
+  <li><strong>Copy output:</strong> Click "Copy Result" to use the converted name in your code.</li>
 </ol>
 
 <h4 style="margin-top:20px">Tips</h4>
 <ul>
-  <li>Works with single words or multiple word combinations</li>
-  <li>Handles acronyms (HTTPResponse → http_response)</li>
-  <li>Preserves numbers in names (user123 stays user123)</li>
+  <li>Works with single identifiers or space/newline-separated lists</li>
+  <li>Handles acronyms: HTTPResponse → http_response (preserves word boundaries)</li>
+  <li>Preserves numbers: user2Name → user_2_name</li>
   <li>Multiple conversions can be chained for complex transformations</li>
+  <li>Paste multiple names to convert them all at once</li>
 </ul>
 </section>
 <section class="faq">
@@ -237,19 +326,22 @@ get_user_data     → getUserData  → get_user_data→ GetUserData  → get-use
 <dl class="faq-list">
 
   <dt>What is camelCase and when is it used?</dt>
-  <dd>camelCase starts with lowercase letter, then capitalizes each subsequent word (e.g., userName, totalCount). It's the standard convention in JavaScript, Java, C#, and JSON APIs for variable names and object properties.</dd>
+  <dd>camelCase (lowerCamelCase) starts with a lowercase letter, then capitalizes the first letter of each subsequent word (e.g., userName, totalCount, calculateTotal). It is the standard naming convention for variables and functions in JavaScript, Java, C#, C++, Go, and PHP. JSON APIs typically use camelCase for property names.</dd>
 
   <dt>What is snake_case and when is it used?</dt>
-  <dd>snake_case uses lowercase letters with underscores between words (e.g., user_name, total_count). It's common in Python, Ruby, SQL databases, and environment variables. Preferred for readability in many languages.</dd>
+  <dd>snake_case uses all lowercase letters with underscores separating words (e.g., user_name, total_count, calculate_total). It is common in Python (variables, functions), Ruby, SQL (table and column names), environment variables, and configuration files. Many developers prefer snake_case for readability, especially in longer names.</dd>
 
-  <dt>What is PascalCase and how does it differ from camelCase?</dt>
-  <dd>PascalCase (UpperCamelCase) capitalizes the first letter of every word including the first (e.g., UserName, TotalCount). Unlike camelCase which starts lowercase. Used for class names in most languages and component names in React.</dd>
+  <dt>What is the difference between camelCase and PascalCase?</dt>
+  <dd>Both capitalize each word after the first. The difference: camelCase starts lowercase (userName), PascalCase starts uppercase (UserName). PascalCase (also called UpperCamelCase) is used for class names, interfaces, and component names in most languages. React components always use PascalCase.</dd>
 
   <dt>What is kebab-case and where is it used?</dt>
-  <dd>kebab-case uses lowercase with hyphens between words (e.g., user-name, total-count). Common in HTML attributes (data-user-id), CSS class names, URL slugs, and configuration files. Not valid in most programming languages.</dd>
+  <dd>kebab-case uses lowercase letters with hyphens between words (e.g., user-name, total-count). It is standard for HTML attributes (data-user-id, aria-label), CSS class names, URL slugs, configuration file keys, and command-line flags. Hyphens are not valid in most programming language identifiers.</dd>
 
-  <dt>How do I convert JSON keys between conventions?</dt>
-  <dd>Paste the JSON and convert keys individually, or use this tool for single keys. For bulk conversion, use code: JavaScript's Object.keys().map() with regex replacement, or libraries like camelcase-keys for automatic conversion.</dd>
+  <dt>How do I handle acronyms in naming conventions?</dt>
+  <dd>Acronym handling varies by style guide. Options: treat as single word (parseXml, parse_xml), treat each letter as word (parseXML, parse_xml), or lowercase entirely (parsexml). Consistency within a codebase matters more than the specific choice. Common practice: camelCase preserves acronym case (getHTTPResponse), snake_case lowercases (get_http_response).</dd>
+
+  <dt>How do I convert JSON keys between naming conventions?</dt>
+  <dd>For single keys, use this tool. For bulk conversion in JavaScript: use Object.keys().map() with regex replacement, or libraries like camelcase-keys (snake_case to camelCase) or snakecase-keys (reverse). Example: const camelKeys = obj => Object.fromEntries(Object.entries(obj).map(([k, v]) => [k.replace(/_([a-z])/g, (m, c) => c.toUpperCase()), v]));</dd>
 </dl>
 </section>
 </main>
@@ -261,7 +353,7 @@ el.style.color=isError?"#b91c1c":"#16a34a";
 }
 function snakeToCamel(){
 var s=document.getElementById("input").value;
-var out=s.replace(/_([a-z])/g,function(m,c){ return c.toUpperCase(); });
+var out=s.replace(/_([a-z0-9])/g,function(m,c){ return c.toUpperCase(); });
 document.getElementById("output").value=out;
 setStatus("Converted to camelCase.",false);
 }
@@ -273,7 +365,7 @@ setStatus("Converted to snake_case.",false);
 }
 function toPascal(){
 var s=document.getElementById("input").value;
-var camel=s.replace(/_([a-z])/g,function(m,c){ return c.toUpperCase(); });
+var camel=s.replace(/_([a-z0-9])/g,function(m,c){ return c.toUpperCase(); });
 var out=camel.charAt(0).toUpperCase()+camel.slice(1);
 document.getElementById("output").value=out;
 setStatus("Converted to PascalCase.",false);
@@ -283,6 +375,12 @@ var s=document.getElementById("input").value;
 var out=s.replace(/([a-z])([A-Z])/g,"$1-$2").replace(/_/g,"-").toLowerCase();
 document.getElementById("output").value=out;
 setStatus("Converted to kebab-case.",false);
+}
+function toScreaming(){
+var s=document.getElementById("input").value;
+var snake=s.replace(/([A-Z])/g,function(m){ return "_"+m.toLowerCase(); }).replace(/^_/,"");
+document.getElementById("output").value=snake.toUpperCase();
+setStatus("Converted to SCREAMING_SNAKE_CASE.",false);
 }
 function copyResult(){
 var v=document.getElementById("output").value;

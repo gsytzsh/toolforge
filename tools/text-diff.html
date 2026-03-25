@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Text Diff – Compare Two Texts Online | ToolForge</title>
-<meta name="description" content="Free online Text Diff to compare two text blocks and see differences line by line. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Text Diff compares two text blocks line-by-line to identify additions, deletions, and changes. Essential for code review, document comparison, and version control workflows. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/text-diff.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Text Diff – Compare Two Texts Online | ToolForge">
-<meta property="og:description" content="Free online Text Diff to compare two text blocks and see differences line by line. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Text Diff compares two text blocks line-by-line to identify additions, deletions, and changes. Essential for code review, document comparison, and version control workflows. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/text-diff.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Text Diff – Compare Two Texts Online | ToolForge">
-<meta name="twitter:description" content="Free online Text Diff to compare two text blocks and see differences line by line. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Text Diff compares two text blocks line-by-line to identify additions, deletions, and changes. Essential for code review, document comparison, and version control workflows. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Text Diff?",
+      "name": "What is a diff algorithm and how does it work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Text Diff is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "A diff algorithm compares two sequences to find the longest common subsequence (LCS), then identifies what was added, removed, or changed. The most common is Myers' diff algorithm used by Git. It works by finding matching lines, then marking non-matching lines as additions (+) or deletions (-). This enables efficient version comparison and merge operations."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What do the diff symbols mean?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Standard diff notation: ' ' (space) = unchanged line, '-' = line removed from original, '+' = line added in new version. Some tools use colors: red for deletions, green for additions. Context diffs show surrounding lines; unified diffs show both changes together with @@ markers."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the difference between line-by-line and character-by-character diff?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Line-by-line diff compares entire lines, marking whole lines as added/removed. Character-by-character diff shows exact character changes within lines (useful for typos). Line diff is faster and better for code/docs; character diff is more precise for prose. This tool uses line-by-line comparison."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How is diff used in version control?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Git uses diff to show changes between commits, branches, and working directory. Commands like 'git diff', 'git diff --staged', and pull request views all use diff algorithms. Diffs enable code review, conflict resolution, and understanding what changed between versions without reading entire files."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What are common diff output formats?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Common formats: Normal diff (shows < for old, > for new), Context diff (- for old, + for new, ! for changed with context lines), Unified diff (most common, shows - and + with @@ hunk headers), Side-by-side diff (two columns for visual comparison), and Color diff (terminal colors for readability)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What are common use cases for text diff?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Common uses include: code review before commits, comparing config files after changes, reviewing document revisions, checking log file differences, validating API response changes, comparing database dumps, reviewing legal contract revisions, and debugging why two similar files produce different results."
       }
     }
   ]
@@ -72,13 +77,13 @@
 <body>
 <main class="container">
 <h1>Text Diff</h1>
-<p class="subtitle">Paste two text blocks to compare them line by line. Lines only in A or only in B are highlighted.</p>
+<p class="subtitle">Compare two text blocks line-by-line to identify additions, deletions, and unchanged content.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <div style="display:flex;gap:20px;flex-wrap:wrap">
-<div style="flex:1;min-width:200px"><h3>Text A</h3><label for="a" class="sr-only">A</label>
-<textarea id="a" rows="12" style="width:100%" aria-label="A"></textarea></div>
-<div style="flex:1;min-width:200px"><h3>Text B</h3><label for="b" class="sr-only">B</label>
-<textarea id="b" rows="12" style="width:100%" aria-label="B"></textarea></div>
+<div style="flex:1;min-width:200px"><h3>Text A (Original)</h3><label for="a" class="sr-only">A</label>
+<textarea id="a" rows="12" style="width:100%" placeholder="Paste original text here" aria-label="A"></textarea></div>
+<div style="flex:1;min-width:200px"><h3>Text B (Modified)</h3><label for="b" class="sr-only">B</label>
+<textarea id="b" rows="12" style="width:100%" placeholder="Paste modified text here" aria-label="B"></textarea></div>
 </div>
 <br>
 <button onclick="diff()">Compare</button>
@@ -86,25 +91,245 @@
 <pre id="out" style="background:#1e1e1e;color:#eee;padding:12px;border-radius:8px;overflow:auto;max-height:300px"></pre>
 <section class="tool-seo">
 <h3>About Text Diff</h3>
-<p>This text diff tool compares two text blocks line by line and highlights lines that appear only in one side.</p>
-<p>It is useful for draft reviews, config comparisons, copy edits and quick change checks when you need a simple visual diff in the browser.</p>
+<p>This text diff tool compares two text blocks line-by-line using a set-based comparison algorithm to identify lines that exist only in the original (A), only in the modified (B), or in both versions. Output uses standard unified diff notation with - for deletions, + for additions, and space prefix for unchanged lines.</p>
+<p>It is useful for code review before commits, comparing configuration files, reviewing document revisions, validating API response changes, debugging environment differences, checking log file variations, reviewing legal contract changes, and any scenario requiring visual comparison of text versions.</p>
+
+<h4>Diff Output Format</h4>
+<p>The diff output uses unified diff notation:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Legend:
+  (space) = Unchanged line (exists in both A and B)
+  -       = Line removed (exists only in A)
+  +       = Line added (exists only in B)
+
+Example Output:
+  line 1 unchanged
+  line 2 unchanged
+- removed line from original
+  line 3 unchanged
++ added line in modified version
+  line 4 unchanged
+
+<!-- Visual representation:
+     Lines with - are deletions (red in colored diffs)
+     Lines with + are additions (green in colored diffs)
+     Lines with space are context (unchanged)
+-->
+</pre>
+
+<h4>Diff Algorithm Explanation</h4>
+<p>This tool uses a set-based comparison approach:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Algorithm Steps:
+1. Split Text A into lines → array A
+2. Split Text B into lines → array B
+3. Create Set from B for O(1) lookup
+4. Create Set from A for O(1) lookup
+5. For each line in A:
+   - If in Set B → unchanged (prefix with space)
+   - If not in Set B → deletion (prefix with -)
+6. For each line in B:
+   - If not in Set A → addition (prefix with +)
+
+Note: This is a simplified diff.
+Advanced tools (Git, diff utility) use
+Myers' algorithm for optimal LCS matching.
+</pre>
+
+<h4>Common Diff Formats</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notation</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Normal Diff</td>
+    <td style="border:1px solid #ddd;padding:8px">&lt; original, &gt; modified</td>
+    <td style="border:1px solid #ddd;padding:8px">Traditional Unix diff</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Context Diff</td>
+    <td style="border:1px solid #ddd;padding:8px">- old, + new, ! changed</td>
+    <td style="border:1px solid #ddd;padding:8px">Shows surrounding context</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Unified Diff</td>
+    <td style="border:1px solid #ddd;padding:8px">- deleted, + added</td>
+    <td style="border:1px solid #ddd;padding:8px">Git, GitHub, code review</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Side-by-Side</td>
+    <td style="border:1px solid #ddd;padding:8px">Two columns</td>
+    <td style="border:1px solid #ddd;padding:8px">Visual comparison tools</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Color Diff</td>
+    <td style="border:1px solid #ddd;padding:8px">Red/Green highlighting</td>
+    <td style="border:1px solid #ddd;padding:8px">Terminal output, PRs</td>
+  </tr>
+</table>
+
+<h4>Diff Example: Code Revision</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Original (A):
+function calculateTotal(items) {
+  let total = 0;
+  for (let i = 0; i < items.length; i++) {
+    total += items[i].price;
+  }
+  return total;
+}
+
+Modified (B):
+function calculateTotal(items) {
+  let total = 0;
+  for (let i = 0; i < items.length; i++) {
+    total += items[i].price * items[i].quantity;
+  }
+  return total;
+}
+
+Diff Output:
+  function calculateTotal(items) {
+    let total = 0;
+    for (let i = 0; i < items.length; i++) {
+-     total += items[i].price;
++     total += items[i].price * items[i].quantity;
+    }
+    return total;
+  }
+</pre>
+
+<h4>Diff Example: Configuration Change</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Original config.env:
+DEBUG=false
+PORT=3000
+DATABASE_URL=postgres://localhost/mydb
+LOG_LEVEL=info
+
+Modified config.env:
+DEBUG=true
+PORT=3000
+DATABASE_URL=postgres://localhost/mydb
+LOG_LEVEL=debug
+CACHE_TTL=3600
+
+Diff Output:
+- DEBUG=false
++ DEBUG=true
+  PORT=3000
+  DATABASE_URL=postgres://localhost/mydb
+- LOG_LEVEL=info
++ LOG_LEVEL=debug
++ CACHE_TTL=3600
+</pre>
+
+<h4>Common Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Domain</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Software Development</td>
+    <td style="border:1px solid #ddd;padding:8px">Code review before commit</td>
+    <td style="border:1px solid #ddd;padding:8px">Review changes in PR</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">DevOps</td>
+    <td style="border:1px solid #ddd;padding:8px">Config file comparison</td>
+    <td style="border:1px solid #ddd;padding:8px">Prod vs staging configs</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Legal</td>
+    <td style="border:1px solid #ddd;padding:8px">Contract revision tracking</td>
+    <td style="border:1px solid #ddd;padding:8px">Compare draft versions</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Writing</td>
+    <td style="border:1px solid #ddd;padding:8px">Document editing</td>
+    <td style="border:1px solid #ddd;padding:8px">Track content changes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Data Engineering</td>
+    <td style="border:1px solid #ddd;padding:8px">Schema comparison</td>
+    <td style="border:1px solid #ddd;padding:8px">DDL diff between environments</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Security</td>
+    <td style="border:1px solid #ddd;padding:8px">Policy change audit</td>
+    <td style="border:1px solid #ddd;padding:8px">Firewall rule changes</td>
+  </tr>
+</table>
+
+<h4>Git Diff Commands Reference</h4>
+<p>Related Git commands for diff operations:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+# Working directory vs staged
+git diff
+
+# Staged vs last commit
+git diff --staged
+
+# Between two commits
+git diff HEAD~1 HEAD
+
+# Between two branches
+git diff main feature-branch
+
+# Specific file diff
+git diff -- path/to/file.txt
+
+# Ignore whitespace
+git diff -w
+
+# Word-by-word diff (better for docs)
+git diff --word-diff
+</pre>
+
+<h4>Limitations of Simple Diff</h4>
+<ul>
+  <li><strong>No move detection:</strong> Moved lines appear as delete + add, not as moves</li>
+  <li><strong>No context awareness:</strong> Doesn't understand code structure or semantics</li>
+  <li><strong>Exact match only:</strong> "hello " vs "hello" (trailing space) counts as different</li>
+  <li><strong>No character-level diff:</strong> Shows entire line changed, not which characters</li>
+  <li><strong>Order insensitive:</strong> Same lines in different order may show as unchanged</li>
+</ul>
+
+<h4>Tips for Better Diff Results</h4>
+<ul>
+  <li>Format code consistently before comparing (use Prettier, eslint --fix)</li>
+  <li>Remove trailing whitespace to avoid false positives</li>
+  <li>Use meaningful line breaks (one statement per line)</li>
+  <li>For config files, keep keys in consistent order</li>
+  <li>Consider using specialized diff tools for JSON, XML, or YAML</li>
+  <li>For large files, focus on specific sections or hunks</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Text Diff?</dt>
-  <dd>Text Diff is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is a diff algorithm and how does it work?</dt>
+  <dd>A diff algorithm compares two sequences to find the longest common subsequence (LCS), then identifies what was added, removed, or changed. The most common is Myers' diff algorithm used by Git. It works by finding matching lines, then marking non-matching lines as additions (+) or deletions (-). This enables efficient version comparison and merge operations.</dd>
+
+  <dt>What do the diff symbols mean?</dt>
+  <dd>Standard diff notation: ' ' (space) = unchanged line, '-' = line removed from original, '+' = line added in new version. Some tools use colors: red for deletions, green for additions. Context diffs show surrounding lines; unified diffs show both changes together with @@ markers.</dd>
+
+  <dt>What is the difference between line-by-line and character-by-character diff?</dt>
+  <dd>Line-by-line diff compares entire lines, marking whole lines as added/removed. Character-by-character diff shows exact character changes within lines (useful for typos). Line diff is faster and better for code/docs; character diff is more precise for prose. This tool uses line-by-line comparison.</dd>
+
+  <dt>How is diff used in version control?</dt>
+  <dd>Git uses diff to show changes between commits, branches, and working directory. Commands like 'git diff', 'git diff --staged', and pull request views all use diff algorithms. Diffs enable code review, conflict resolution, and understanding what changed between versions without reading entire files.</dd>
+
+  <dt>What are common diff output formats?</dt>
+  <dd>Common formats: Normal diff (shows &lt; for old, &gt; for new), Context diff (- for old, + for new, ! for changed with context lines), Unified diff (most common, shows - and + with @@ hunk headers), Side-by-side diff (two columns for visual comparison), and Color diff (terminal colors for readability).</dd>
+
+  <dt>What are common use cases for text diff?</dt>
+  <dd>Common uses include: code review before commits, comparing config files after changes, reviewing document revisions, checking log file differences, validating API response changes, comparing database dumps, reviewing legal contract revisions, and debugging why two similar files produce different results.</dd>
 </dl>
 </section>
 </main>

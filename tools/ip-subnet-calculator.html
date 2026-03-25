@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>IP Subnet Calculator – CIDR Network Broadcast | ToolForge</title>
-<meta name="description" content="Free online IP subnet calculator. Calculate CIDR, network address, broadcast address and host range from IP and subnet mask. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Calculate IPv4 network address, broadcast address, CIDR notation, wildcard mask and usable host range from IP address and subnet mask. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/ip-subnet-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="IP Subnet Calculator – CIDR Network Broadcast | ToolForge">
-<meta property="og:description" content="Free online IP subnet calculator. Calculate CIDR, network address, broadcast address and host range from IP and subnet mask. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Calculate IPv4 network address, broadcast address, CIDR notation, wildcard mask and usable host range.">
 <meta property="og:url" content="https://toolforge.site/tools/ip-subnet-calculator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IP Subnet Calculator – CIDR Network Broadcast | ToolForge">
-<meta name="twitter:description" content="Free online IP subnet calculator. Calculate CIDR, network address, broadcast address and host range from IP and subnet mask. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="IPv4 subnet calculator with CIDR support.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Ip Subnet Calculator used for?",
+      "name": "What is a subnet mask?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Ip Subnet Calculator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "A subnet mask divides an IP address into network and host portions. Written as 255.255.255.0 or /24 (CIDR). The 1 bits represent the network, 0 bits represent hosts. Common masks: /24 (255.255.255.0) = 254 hosts, /16 (255.255.0.0) = 65,534 hosts, /32 = single host."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is CIDR notation?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "CIDR (Classless Inter-Domain Routing) notation uses a slash followed by the number of network bits: /24 means 24 bits for network, 8 for hosts. Replaced classful addressing (Class A/B/C). Example: 192.168.1.0/24 = network 192.168.1.0 with mask 255.255.255.0."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What is the network address?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "The network address is the first address in a subnet (all host bits = 0). It identifies the subnet itself and cannot be assigned to hosts. Calculated by ANDing the IP address with the subnet mask. Example: 192.168.1.100/24 → network 192.168.1.0."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the broadcast address?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "The broadcast address is the last address in a subnet (all host bits = 1). Packets sent to this address reach all hosts in the subnet. Calculated by ORing the network address with the wildcard mask. Example: 192.168.1.0/24 → broadcast 192.168.1.255."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What is a wildcard mask?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "A wildcard mask is the inverse of a subnet mask (bits flipped). Used in ACLs and routing. Example: subnet 255.255.255.0 → wildcard 0.0.0.255. Calculated by subtracting each octet from 255. Wildcard = ~subnet_mask (bitwise NOT)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How many usable hosts per subnet?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Formula: 2^(host_bits) - 2. Subtract 2 for network and broadcast addresses. /24 = 8 host bits = 254 hosts, /25 = 7 bits = 126 hosts, /26 = 6 bits = 62 hosts, /30 = 2 bits = 2 hosts (point-to-point links)."
       }
     }
   ]
@@ -72,12 +77,12 @@
 <body>
 <main class="container">
 <h1>IP Subnet Calculator</h1>
-<p class="subtitle">Calculate CIDR, network address, broadcast address and host range from IP and subnet mask.</p>
+<p class="subtitle">Calculate IPv4 network address, broadcast address, CIDR notation, wildcard mask and usable host range.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <div class="info-grid">
 <div class="info-item">
 <label for="ip" class="info-label">IP Address</label>
-<input id="ip" type="text" placeholder="192.168.1.1" style="width:100%;padding:8px">
+<input id="ip" type="text" placeholder="192.168.1.100" style="width:100%;padding:8px">
 </div>
 <div class="info-item">
 <label for="mask" class="info-label">Subnet Mask or CIDR</label>
@@ -91,27 +96,125 @@
 <p style="color:#666">Enter IP and subnet mask, then click Calculate.</p>
 </div>
 <p id="status" class="inline-status"></p>
+
 <section class="tool-seo">
 <h3>About IP Subnet Calculator</h3>
-<p>This IP subnet calculator computes network address, broadcast address, CIDR notation and usable host range from an IP address and subnet mask (or CIDR prefix).</p>
-<p>It is useful for network planning, subnet design, firewall rules and understanding IP addressing for both IPv4 and basic calculations.</p>
+<p>This IPv4 subnet calculator computes network address, broadcast address, CIDR notation, wildcard mask, and usable host range from an IP address and subnet mask (or CIDR prefix).</p>
+<p>It is useful for network planning, subnet design, firewall rule configuration, VLAN setup, and understanding IP addressing for both IPv4 networks.</p>
+
+<h4>Subnet Calculation Formulas</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+IP to 32-bit number:
+  n = (octet1 << 24) + (octet2 << 16) + (octet3 << 8) + octet4
+  Example: 192.168.1.100 → 3232235876
+
+CIDR to subnet mask:
+  mask = (0xFFFFFFFF << (32 - cidr)) & 0xFFFFFFFF
+  /24: 11111111.11111111.11111111.00000000 = 255.255.255.0
+
+Network address (bitwise AND):
+  network = ip & mask
+  192.168.1.100 & 255.255.255.0 = 192.168.1.0
+
+Broadcast address:
+  wildcard = ~mask (bitwise NOT)
+  broadcast = network | wildcard
+  192.168.1.0 | 0.0.0.255 = 192.168.1.255
+
+Usable hosts:
+  hosts = 2^(32 - cidr) - 2
+  /24: 2^8 - 2 = 254 hosts
+  First host: network + 1
+  Last host: broadcast - 1
+</pre>
+
+<h4>Common Subnet Masks Reference</h4>
+<table class="ref-table">
+<thead><tr><th>CIDR</th><th>Subnet Mask</th><th>Wildcard</th><th>Total IPs</th><th>Usable Hosts</th></tr></thead>
+<tbody>
+<tr><td><code>/32</code></td><td><code>255.255.255.255</code></td><td><code>0.0.0.0</code></td><td>1</td><td>1 (single host)</td></tr>
+<tr><td><code>/30</code></td><td><code>255.255.255.252</code></td><td><code>0.0.0.3</code></td><td>4</td><td>2 (point-to-point)</td></tr>
+<tr><td><code>/29</code></td><td><code>255.255.255.248</code></td><td><code>0.0.0.7</code></td><td>8</td><td>6</td></tr>
+<tr><td><code>/28</code></td><td><code>255.255.255.240</code></td><td><code>0.0.0.15</code></td><td>16</td><td>14</td></tr>
+<tr><td><code>/27</code></td><td><code>255.255.255.224</code></td><td><code>0.0.0.31</code></td><td>32</td><td>30</td></tr>
+<tr><td><code>/26</code></td><td><code>255.255.255.192</code></td><td><code>0.0.0.63</code></td><td>64</td><td>62</td></tr>
+<tr><td><code>/25</code></td><td><code>255.255.255.128</code></td><td><code>0.0.0.127</code></td><td>128</td><td>126</td></tr>
+<tr><td><code>/24</code></td><td><code>255.255.255.0</code></td><td><code>0.0.0.255</code></td><td>256</td><td>254</td></tr>
+<tr><td><code>/23</code></td><td><code>255.255.254.0</code></td><td><code>0.0.1.255</code></td><td>512</td><td>510</td></tr>
+<tr><td><code>/22</code></td><td><code>255.255.252.0</code></td><td><code>0.0.3.255</code></td><td>1,024</td><td>1,022</td></tr>
+<tr><td><code>/21</code></td><td><code>255.255.248.0</code></td><td><code>0.0.7.255</code></td><td>2,048</td><td>2,046</td></tr>
+<tr><td><code>/20</code></td><td><code>255.255.240.0</code></td><td><code>0.0.15.255</code></td><td>4,096</td><td>4,094</td></tr>
+<tr><td><code>/19</code></td><td><code>255.255.224.0</code></td><td><code>0.0.31.255</code></td><td>8,192</td><td>8,190</td></tr>
+<tr><td><code>/18</code></td><td><code>255.255.192.0</code></td><td><code>0.0.63.255</code></td><td>16,384</td><td>16,382</td></tr>
+<tr><td><code>/17</code></td><td><code>255.255.128.0</code></td><td><code>0.0.127.255</code></td><td>32,768</td><td>32,766</td></tr>
+<tr><td><code>/16</code></td><td><code>255.255.0.0</code></td><td><code>0.0.255.255</code></td><td>65,536</td><td>65,534</td></tr>
+<tr><td><code>/12</code></td><td><code>255.240.0.0</code></td><td><code>0.15.255.255</code></td><td>1,048,576</td><td>1,048,574</td></tr>
+<tr><td><code>/8</code></td><td><code>255.0.0.0</code></td><td><code>0.255.255.255</code></td><td>16,777,216</td><td>16,777,214</td></tr>
+</tbody>
+</table>
+
+<h4>Private IP Address Ranges</h4>
+<table class="ref-table">
+<thead><tr><th>Class</th><th>Range</th><th>CIDR</th><th>Use Case</th></tr></thead>
+<tbody>
+<tr><td>Class A</td><td><code>10.0.0.0 – 10.255.255.255</code></td><td><code>10.0.0.0/8</code></td><td>Large networks</td></tr>
+<tr><td>Class B</td><td><code>172.16.0.0 – 172.31.255.255</code></td><td><code>172.16.0.0/12</code></td><td>Medium networks</td></tr>
+<tr><td>Class C</td><td><code>192.168.0.0 – 192.168.255.255</code></td><td><code>192.168.0.0/16</code></td><td>Small/home networks</td></tr>
+<tr><td>Loopback</td><td><code>127.0.0.0 – 127.255.255.255</code></td><td><code>127.0.0.0/8</code></td><td>Localhost testing</td></tr>
+</tbody>
+</table>
+
+<h4>Calculation Example</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Input:
+  IP: 192.168.1.100
+  Mask: 255.255.255.0 (or /24)
+
+Step 1: Convert to binary
+  IP:       11000000.10101000.00000001.01100100
+  Mask:     11111111.11111111.11111111.00000000
+
+Step 2: AND for network
+  Network:  11000000.10101000.00000001.00000000
+            = 192.168.1.0
+
+Step 3: Invert mask for wildcard
+  Wildcard: 00000000.00000000.00000000.11111111
+            = 0.0.0.255
+
+Step 4: OR for broadcast
+  Broadcast: 11000000.10101000.00000001.11111111
+             = 192.168.1.255
+
+Results:
+  Network:     192.168.1.0/24
+  Broadcast:   192.168.1.255
+  First Host:  192.168.1.1
+  Last Host:   192.168.1.254
+  Usable:      254 hosts
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Ip Subnet Calculator used for?</dt>
-  <dd>Ip Subnet Calculator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is a subnet mask?</dt>
+  <dd>A subnet mask divides an IP address into network and host portions. Written as 255.255.255.0 or /24 (CIDR). The 1 bits represent the network, 0 bits represent hosts. Common masks: /24 (255.255.255.0) = 254 hosts, /16 (255.255.0.0) = 65,534 hosts, /32 = single host.</dd>
+
+  <dt>What is CIDR notation?</dt>
+  <dd>CIDR (Classless Inter-Domain Routing) notation uses a slash followed by the number of network bits: /24 means 24 bits for network, 8 for hosts. Replaced classful addressing (Class A/B/C). Example: 192.168.1.0/24 = network 192.168.1.0 with mask 255.255.255.0.</dd>
+
+  <dt>What is the network address?</dt>
+  <dd>The network address is the first address in a subnet (all host bits = 0). It identifies the subnet itself and cannot be assigned to hosts. Calculated by ANDing the IP address with the subnet mask. Example: 192.168.1.100/24 → network 192.168.1.0.</dd>
+
+  <dt>What is the broadcast address?</dt>
+  <dd>The broadcast address is the last address in a subnet (all host bits = 1). Packets sent to this address reach all hosts in the subnet. Calculated by ORing the network address with the wildcard mask. Example: 192.168.1.0/24 → broadcast 192.168.1.255.</dd>
+
+  <dt>What is a wildcard mask?</dt>
+  <dd>A wildcard mask is the inverse of a subnet mask (bits flipped). Used in ACLs and routing. Example: subnet 255.255.255.0 → wildcard 0.0.0.255. Calculated by subtracting each octet from 255. Wildcard = ~subnet_mask (bitwise NOT).</dd>
+
+  <dt>How many usable hosts per subnet?</dt>
+  <dd>Formula: 2^(host_bits) - 2. Subtract 2 for network and broadcast addresses. /24 = 8 host bits = 254 hosts, /25 = 7 bits = 126 hosts, /26 = 6 bits = 62 hosts, /30 = 2 bits = 2 hosts (point-to-point links).</dd>
 </dl>
 </section>
 </main>
@@ -171,6 +274,7 @@ html+="<div class=\"info-card\"><span class=\"info-card-title\">Broadcast</span>
 html+="<div class=\"info-card\"><span class=\"info-card-title\">First Host</span><p class=\"info-card-value\">"+numToIp(network+1)+"</p></div>";
 html+="<div class=\"info-card\"><span class=\"info-card-title\">Last Host</span><p class=\"info-card-value\">"+numToIp(broadcast-1)+"</p></div>";
 html+="<div class=\"info-card\"><span class=\"info-card-title\">Usable Hosts</span><p class=\"info-card-value\">"+hosts+"</p></div>";
+html+="<div class=\"info-card\"><span class=\"info-card-title\">Wildcard Mask</span><p class=\"info-card-value\">"+numToIp(wildcard)+"</p></div>";
 document.getElementById("result").innerHTML=html;
 document.getElementById("status").innerText="Calculated.";
 document.getElementById("status").style.color="#16a34a";

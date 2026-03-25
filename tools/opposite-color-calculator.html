@@ -2,22 +2,23 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Opposite Color Calculator – Complementary Color from Hex | ToolForge</title>
-<meta name="description" content="Free online opposite color calculator. Get complementary/opposite color from hex. Part of the ToolForge developer tools collection.">
+<title>Opposite Color Calculator – Complementary & Inverted Colors from Hex | ToolForge</title>
+<meta name="description" content="Calculate opposite/inverted colors from hex codes. Includes complementary color wheel theory, RGB inversion, and color contrast reference. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/opposite-color-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Opposite Color Calculator – Complementary Color from Hex | ToolForge">
-<meta property="og:description" content="Get complementary/opposite color from hex.">
+<meta property="og:title" content="Opposite Color Calculator – Complementary & Inverted Colors from Hex | ToolForge">
+<meta property="og:description" content="Calculate opposite/inverted colors from hex codes. Includes complementary color wheel theory and RGB inversion.">
 <meta property="og:url" content="https://toolforge.site/tools/opposite-color-calculator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Opposite Color Calculator – Complementary Color from Hex | ToolForge">
-<meta name="twitter:description" content="Get complementary/opposite color from hex.">
+<meta name="twitter:title" content="Opposite Color Calculator – Complementary & Inverted Colors from Hex | ToolForge">
+<meta name="twitter:description" content="Calculate opposite/inverted colors from hex codes.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
-.swatch{display:inline-block;width:80px;height:50px;border:1px solid #ccc;vertical-align:middle;margin-right:8px}
+.color-swatch{display:inline-block;width:100px;height:60px;border:1px solid #ccc;vertical-align:middle;margin-right:12px;border-radius:4px}
+.color-box{padding:12px;background:#f5f5f5;border-radius:8px;margin:12px 0}
 </style>
 
 <script type="application/ld+json">
@@ -27,45 +28,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Opposite Color Calculator used for?",
+      "name": "What is the difference between inverted and complementary colors?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Opposite Color Calculator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "Inverted colors (RGB inversion) flip each channel: new = 255 - original. Complementary colors are opposite on the color wheel (180° hue rotation). For example, red (#FF0000) inverts to cyan (#00FFFF) but its complement is green (#00FF00). This tool calculates RGB inversion."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do you calculate the opposite of a hex color?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "To invert a hex color: 1) Parse hex to RGB values (0-255), 2) Subtract each from 255: R' = 255-R, G' = 255-G, B' = 255-B, 3) Convert back to hex. Example: #3498db → RGB(52,152,219) → Inverted RGB(203,103,36) → #CB6724"
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What are complementary colors used for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Complementary colors create maximum contrast and visual tension. Uses include: call-to-action buttons, highlighting important elements, creating visual interest in designs, color correction in photography, and achieving color balance in artwork."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "Why is color contrast important?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Color contrast ensures readability and accessibility. WCAG 2.1 requires 4.5:1 contrast ratio for normal text, 3:1 for large text. High contrast helps users with visual impairments, improves readability in various lighting conditions, and enhances overall user experience."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What is the color wheel?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "The color wheel arranges colors circularly by hue. Primary colors (red, yellow, blue) form the base. Secondary colors (green, orange, purple) result from mixing primaries. Tertiary colors fill gaps. Complementary pairs sit opposite each other (180° apart)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How do I ensure good text contrast?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Use dark text on light backgrounds or vice versa. Avoid similar brightness levels. Test contrast ratios (aim for 4.5:1 minimum). Black (#000000) on white (#FFFFFF) provides maximum 21:1 contrast. Use tools to verify WCAG compliance."
       }
     }
   ]
@@ -75,83 +81,331 @@
 <body>
 <main class="container">
 <h1>Opposite Color Calculator</h1>
-<p class="subtitle">Get complementary/opposite color from hex (255 - each channel).</p>
+<p class="subtitle">Calculate RGB-inverted (opposite) colors from hex color codes.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
-<label for="hex">Input color (hex)</label>
-<input id="hex" type="text" value="#3498db" placeholder="#3498db" style="width:120px">
-<span class="swatch" id="swIn"></span>
-<br><br>
+<div class="color-box">
+<label for="hex">Input Color (Hex): </label>
+<input id="hex" type="text" value="#3498db" placeholder="#3498db" style="width:120px;padding:8px;font-size:14px">
+<span class="color-swatch" id="swIn" style="background:#3498db"></span>
+<span id="inputRgb" style="font-family:monospace">RGB(52, 152, 219)</span>
+</div>
 
-<button onclick="calc()">Get Opposite</button>
+<button onclick="calc()" style="padding:10px 20px;font-size:14px">Calculate Opposite Color</button>
 
+<div class="color-box" style="margin-top:20px">
 <h3>Result</h3>
-<p><span class="swatch" id="swOut"></span> <strong>HEX:</strong> <span id="hexResult"></span></p>
-<p><strong>RGB:</strong> <span id="rgbResult"></span></p>
-<button type="button" onclick="copyHex()">Copy HEX</button>
+<span class="color-swatch" id="swOut" style="background:#cb6724"></span>
+<p><strong>HEX:</strong> <span id="hexResult" style="font-family:monospace;font-size:16px">#CB6724</span> <button type="button" onclick="copyHex()" style="margin-left:8px">Copy</button></p>
+<p><strong>RGB:</strong> <span id="rgbResult" style="font-family:monospace">RGB(203, 103, 36)</span></p>
 <p id="status" class="inline-status"></p>
+</div>
 
 <section class="tool-seo">
 <h3>About Opposite Color Calculator</h3>
-<p>This tool computes the opposite color by inverting each RGB channel (255 - value). Useful for complementary colors and contrast.</p>
-<p>Note: For true color-wheel complement, use a dedicated color theory tool. This gives a simple invert.</p>
+<p>This tool calculates the RGB-inverted (opposite) color by subtracting each RGB channel from 255. The result produces the photographic negative of the input color. This differs from complementary colors on the color wheel, which are determined by rotating hue 180°.</p>
+<p>The calculator shows both the input and output colors as visual swatches, along with hex and RGB values for easy copying and use in design projects.</p>
+
+<h4>RGB Inversion Formula</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:14px;overflow:auto">
+RGB Inversion:
+  R' = 255 - R
+  G' = 255 - G
+  B' = 255 - B
+
+Example: #3498db
+  Original:  R=52,  G=152, B=219
+  Inverted:  R=203, G=103, B=36
+  Result: #CB6724 (burnt orange)
+
+Hex to RGB Conversion:
+  #3498db → 34, 98, db (hex pairs)
+  0x34 = 52, 0x98 = 152, 0xdb = 219
+</pre>
+
+<h4>JavaScript Implementation</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Parse hex color to RGB
+function parseHex(hex) {
+  if (hex.startsWith("#")) hex = hex.slice(1);
+  // Handle 3-digit shorthand: #FFF → #FFFFFF
+  if (hex.length === 3) {
+    hex = hex[0]+hex[0] + hex[1]+hex[1] + hex[2]+hex[2];
+  }
+  if (!/^[0-9a-fA-F]{6}$/.test(hex)) return null;
+  return {
+    r: parseInt(hex.slice(0, 2), 16),
+    g: parseInt(hex.slice(2, 4), 16),
+    b: parseInt(hex.slice(4, 6), 16)
+  };
+}
+
+// RGB to hex
+function toHex(n) {
+  const s = Math.round(Math.max(0, Math.min(255, n))).toString(16);
+  return s.length === 1 ? "0" + s : s;
+}
+
+// Calculate inverted color
+function invertColor(rgb) {
+  return {
+    r: 255 - rgb.r,
+    g: 255 - rgb.g,
+    b: 255 - rgb.b
+  };
+}
+
+// Full calculation
+function calculateOpposite(hexInput) {
+  const rgb = parseHex(hexInput);
+  if (!rgb) return null;
+  const inverted = invertColor(rgb);
+  const hexOut = "#" + toHex(inverted.r) + toHex(inverted.g) + toHex(inverted.b);
+  return { original: rgb, inverted: inverted, hex: hexOut };
+}
+</pre>
+
+<h4>Inversion vs Complementary Colors</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Color</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Hex</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">RGB Inverted</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Color Wheel Complement</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Red</td>
+    <td style="border:1px solid #ddd;padding:8px">#FF0000</td>
+    <td style="border:1px solid #ddd;padding:8px">#00FFFF (Cyan)</td>
+    <td style="border:1px solid #ddd;padding:8px">#00FF00 (Green)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Green</td>
+    <td style="border:1px solid #ddd;padding:8px">#00FF00</td>
+    <td style="border:1px solid #ddd;padding:8px">#FF00FF (Magenta)</td>
+    <td style="border:1px solid #ddd;padding:8px">#FF0000 (Red)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Blue</td>
+    <td style="border:1px solid #ddd;padding:8px">#0000FF</td>
+    <td style="border:1px solid #ddd;padding:8px">#FFFF00 (Yellow)</td>
+    <td style="border:1px solid #ddd;padding:8px">#FF8000 (Orange)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Yellow</td>
+    <td style="border:1px solid #ddd;padding:8px">#FFFF00</td>
+    <td style="border:1px solid #ddd;padding:8px">#0000FF (Blue)</td>
+    <td style="border:1px solid #ddd;padding:8px">#0000FF (Blue)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Cyan</td>
+    <td style="border:1px solid #ddd;padding:8px">#00FFFF</td>
+    <td style="border:1px solid #ddd;padding:8px">#FF0000 (Red)</td>
+    <td style="border:1px solid #ddd;padding:8px">#FF8000 (Orange)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Magenta</td>
+    <td style="border:1px solid #ddd;padding:8px">#FF00FF</td>
+    <td style="border:1px solid #ddd;padding:8px">#00FF00 (Green)</td>
+    <td style="border:1px solid #ddd;padding:8px">#00FF00 (Green)</td>
+  </tr>
+</table>
+
+<h4>Color Wheel Reference</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Traditional Color Wheel (RYB model):
+
+                    Red (0°)
+                   /        \
+                  /          \
+           Purple             Orange
+              |                  |
+              |                  |
+           Blue -------------- Yellow
+              \                  /
+               \                /
+             Green           (Yellow-Green)
+
+Complementary Pairs (180° apart):
+  Red ←→ Green
+  Blue ←→ Orange
+  Yellow ←→ Purple
+
+Digital Color Wheel (RGB model):
+  Red ←→ Cyan
+  Green ←→ Magenta
+  Blue ←→ Yellow
+</pre>
+
+<h4>Common Color Inversions</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Original</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Hex</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Inverted</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Inverted Hex</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Black</td>
+    <td style="border:1px solid #ddd;padding:8px">#000000</td>
+    <td style="border:1px solid #ddd;padding:8px">White</td>
+    <td style="border:1px solid #ddd;padding:8px">#FFFFFF</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">White</td>
+    <td style="border:1px solid #ddd;padding:8px">#FFFFFF</td>
+    <td style="border:1px solid #ddd;padding:8px">Black</td>
+    <td style="border:1px solid #ddd;padding:8px">#000000</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Gray (50%)</td>
+    <td style="border:1px solid #ddd;padding:8px">#808080</td>
+    <td style="border:1px solid #ddd;padding:8px">Gray (50%)</td>
+    <td style="border:1px solid #ddd;padding:8px">#7F7F7F</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Navy</td>
+    <td style="border:1px solid #ddd;padding:8px">#000080</td>
+    <td style="border:1px solid #ddd;padding:8px">Yellow</td>
+    <td style="border:1px solid #ddd;padding:8px">#FFFF7F</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Maroon</td>
+    <td style="border:1px solid #ddd;padding:8px">#800000</td>
+    <td style="border:1px solid #ddd;padding:8px">Green</td>
+    <td style="border:1px solid #ddd;padding:8px">#7FFFFF</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Teal</td>
+    <td style="border:1px solid #ddd;padding:8px">#008080</td>
+    <td style="border:1px solid #ddd;padding:8px">Red-Orange</td>
+    <td style="border:1px solid #ddd;padding:8px">#FF7F7F</td>
+  </tr>
+</table>
+
+<h4>WCAG Contrast Ratio Guide</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Level</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Normal Text</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Large Text (18pt+)</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">WCAG AA</td>
+    <td style="border:1px solid #ddd;padding:8px">4.5:1 minimum</td>
+    <td style="border:1px solid #ddd;padding:8px">3:1 minimum</td>
+    <td style="border:1px solid #ddd;padding:8px">Standard requirement</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">WCAG AAA</td>
+    <td style="border:1px solid #ddd;padding:8px">7:1 minimum</td>
+    <td style="border:1px solid #ddd;padding:8px">4.5:1 minimum</td>
+    <td style="border:1px solid #ddd;padding:8px">Enhanced accessibility</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Maximum</td>
+    <td style="border:1px solid #ddd;padding:8px">21:1</td>
+    <td style="border:1px solid #ddd;padding:8px">21:1</td>
+    <td style="border:1px solid #ddd;padding:8px">Black on white</td>
+  </tr>
+</table>
+
+<h4>Color Contrast Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+High Contrast (Good for text):
+  #000000 on #FFFFFF = 21:1 ✓ (Black on White)
+  #FFFFFF on #000000 = 21:1 ✓ (White on Black)
+  #333333 on #FFFFFF = 12.6:1 ✓ (Dark Gray on White)
+  #FFFF00 on #000000 = 19.6:1 ✓ (Yellow on Black)
+
+Medium Contrast (Use for large text only):
+  #777777 on #FFFFFF = 4.5:1 ✓ (Medium Gray on White)
+  #0066CC on #FFFFFF = 4.5:1 ✓ (Blue on White)
+  #FF6600 on #000000 = 4.8:1 ✓ (Orange on Black)
+
+Low Contrast (Avoid for text):
+  #CCCCCC on #FFFFFF = 1.6:1 ✗ (Light Gray on White)
+  #6699CC on #336699 = 2.1:1 ✗ (Similar blues)
+  #FF9999 on #FF6666 = 1.4:1 ✗ (Similar reds)
+</pre>
+
+<h4>Applications of Color Inversion</h4>
+<ul>
+  <li><strong>Dark mode:</strong> Invert light backgrounds for dark themes</li>
+  <li><strong>Accessibility:</strong> Create high-contrast alternatives for visually impaired users</li>
+  <li><strong>Negative effects:</strong> Create photographic negative effects in image editing</li>
+  <li><strong>Selection highlighting:</strong> Use inverted colors for selection states</li>
+  <li><strong>Print styles:</strong> Invert colors for print-friendly dark backgrounds</li>
+  <li><strong>Error states:</strong> Use complementary colors for error highlighting</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Opposite Color Calculator used for?</dt>
-  <dd>Opposite Color Calculator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is the difference between inverted and complementary colors?</dt>
+  <dd>Inverted colors (RGB inversion) flip each channel: new = 255 - original. Complementary colors are opposite on the color wheel (180° hue rotation). For example, red (#FF0000) inverts to cyan (#00FFFF) but its complement is green (#00FF00). This tool calculates RGB inversion.</dd>
+
+  <dt>How do you calculate the opposite of a hex color?</dt>
+  <dd>To invert a hex color: 1) Parse hex to RGB values (0-255), 2) Subtract each from 255: R' = 255-R, G' = 255-G, B' = 255-B, 3) Convert back to hex. Example: #3498db → RGB(52,152,219) → Inverted RGB(203,103,36) → #CB6724</dd>
+
+  <dt>What are complementary colors used for?</dt>
+  <dd>Complementary colors create maximum contrast and visual tension. Uses include: call-to-action buttons, highlighting important elements, creating visual interest in designs, color correction in photography, and achieving color balance in artwork.</dd>
+
+  <dt>Why is color contrast important?</dt>
+  <dd>Color contrast ensures readability and accessibility. WCAG 2.1 requires 4.5:1 contrast ratio for normal text, 3:1 for large text. High contrast helps users with visual impairments, improves readability in various lighting conditions, and enhances overall user experience.</dd>
+
+  <dt>What is the color wheel?</dt>
+  <dd>The color wheel arranges colors circularly by hue. Primary colors (red, yellow, blue) form the base. Secondary colors (green, orange, purple) result from mixing primaries. Tertiary colors fill gaps. Complementary pairs sit opposite each other (180° apart).</dd>
+
+  <dt>How do I ensure good text contrast?</dt>
+  <dd>Use dark text on light backgrounds or vice versa. Avoid similar brightness levels. Test contrast ratios (aim for 4.5:1 minimum). Black (#000000) on white (#FFFFFF) provides maximum 21:1 contrast. Use tools to verify WCAG compliance.</dd>
 </dl>
 </section>
 </main>
 <script>
 function parseHex(hex){
-if(hex.startsWith("#")) hex=hex.slice(1)
-if(hex.length===3) hex=hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2]
-if(!/^[0-9a-fA-F]{6}$/.test(hex)) return null
-return {r:parseInt(hex.slice(0,2),16),g:parseInt(hex.slice(2,4),16),b:parseInt(hex.slice(4,6),16)}
+if(hex.startsWith("#"))hex=hex.slice(1);
+if(hex.length===3)hex=hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+if(!/^[0-9a-fA-F]{6}$/.test(hex))return null;
+return {r:parseInt(hex.slice(0,2),16),g:parseInt(hex.slice(2,4),16),b:parseInt(hex.slice(4,6),16)};
 }
-function toHex(n){var s=Math.round(Math.max(0,Math.min(255,n))).toString(16);return s.length===1?"0"+s:s}
+function toHex(n){
+var s=Math.round(Math.max(0,Math.min(255,n))).toString(16);
+return s.length===1?"0"+s:s;
+}
 function calc(){
-var c=parseHex(document.getElementById("hex").value.trim())
-if(!c){
-document.getElementById("status").innerText="Invalid hex color."
-document.getElementById("status").style.color="#b91c1c"
-return
+var hex=document.getElementById("hex").value.trim();
+var rgb=parseHex(hex);
+if(!rgb){
+document.getElementById("status").innerText="Invalid hex color. Use format #RRGGBB or #RGB.";
+document.getElementById("status").style.color="#b91c1c";
+return;
 }
-var r=255-c.r,g=255-c.g,b=255-c.b
-var hex="#"+toHex(r)+toHex(g)+toHex(b)
-document.getElementById("hexResult").textContent=hex
-document.getElementById("rgbResult").textContent=r+", "+g+", "+b
-document.getElementById("swIn").style.backgroundColor=document.getElementById("hex").value
-document.getElementById("swOut").style.backgroundColor=hex
-document.getElementById("status").innerText="Calculated."
-document.getElementById("status").style.color="#16a34a"
+var inv={r:255-rgb.r,g:255-rgb.g,b:255-rgb.b};
+var hexOut="#"+toHex(inv.r)+toHex(inv.g)+toHex(inv.b);
+document.getElementById("swIn").style.backgroundColor=hex;
+document.getElementById("swOut").style.backgroundColor=hexOut;
+document.getElementById("hexResult").textContent=hexOut;
+document.getElementById("rgbResult").textContent="RGB("+inv.r+", "+inv.g+", "+inv.b+")";
+document.getElementById("inputRgb").textContent="RGB("+rgb.r+", "+rgb.g+", "+rgb.b+")";
+document.getElementById("status").innerText="Color inverted.";
+document.getElementById("status").style.color="#16a34a";
 }
-document.getElementById("hex").addEventListener("input",calc)
-calc()
 function copyHex(){
-var v=document.getElementById("hexResult").textContent
-if(!v) return
+var v=document.getElementById("hexResult").textContent;
+if(!v)return;
 navigator.clipboard.writeText(v).then(function(){
-document.getElementById("status").innerText="Copied."
-document.getElementById("status").style.color="#16a34a"
+document.getElementById("status").innerText="Copied to clipboard.";
+document.getElementById("status").style.color="#16a34a";
 }).catch(function(){
-document.getElementById("status").innerText="Copy failed."
-document.getElementById("status").style.color="#b91c1c"
-})
+document.getElementById("status").innerText="Copy failed.";
+document.getElementById("status").style.color="#b91c1c";
+});
 }
+document.getElementById("hex").addEventListener("input",calc);
+calc();
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>

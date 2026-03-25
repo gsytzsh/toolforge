@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>JSON to Postman Converter – Postman Collection Format | ToolForge</title>
-<meta name="description" content="Free online JSON to Postman collection format converter. Convert JSON to Postman format and Postman collection back to JSON. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Convert JSON request objects to Postman Collection v2.1 format and extract requests from Postman collections back to JSON. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/json-postman-converter.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="JSON to Postman Converter – Postman Collection Format | ToolForge">
-<meta property="og:description" content="Free online JSON to Postman collection format converter. Convert JSON to Postman format and Postman collection back to JSON. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Convert JSON request objects to Postman Collection v2.1 format and extract requests from Postman collections back to JSON.">
 <meta property="og:url" content="https://toolforge.site/tools/json-postman-converter.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JSON to Postman Converter – Postman Collection Format | ToolForge">
-<meta name="twitter:description" content="Free online JSON to Postman collection format converter. Convert JSON to Postman format and Postman collection back to JSON. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Convert JSON to Postman collection format and Postman collections back to JSON.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Json Postman Converter used for?",
+      "name": "What is Postman Collection format?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Json Postman Converter is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "Postman Collection format (v2.1) is a JSON schema for organizing API requests. Collections contain items (requests or folders), with each request having method, URL, headers, and body. Schema URL: https://schema.getpostman.com/json/collection/v2.1.0/collection.json. Collections can be exported/imported for sharing and version control."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I convert JSON to Postman format?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Map request properties: method (GET/POST/etc), url (full URL string), headers (array of key/value objects), body (object with mode and raw string). Wrap in collection structure with info (name, schema) and item array. This tool handles the conversion automatically."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What is the structure of a Postman request?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "A Postman request contains: method (HTTP verb), url (string or object with host/path/query), header (array of {key, value, type}), body (optional, with mode: raw/formdata/urlencoded and content). Example: {\"method\": \"GET\", \"url\": \"https://api.example.com/users\", \"header\": [{\"key\": \"Accept\", \"value\": \"application/json\"}]}"
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I extract requests from a Postman collection?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Iterate through the item array, checking for request property. For nested folders (items with item array), recurse. Extract method, url, headers (convert array to object), and body.raw. This tool extracts all requests and outputs as JSON array or single object."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "Can Postman collections have nested folders?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Yes, Postman collections support nested folders. An item can have an item array containing sub-items (requests or more folders). When converting, nested structures are flattened to extract all requests. When creating collections, requests are wrapped in a single top-level item array."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "What body modes does Postman support?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Postman supports: raw (plain text, JSON, XML), formdata (multipart/form-data with key/value pairs), urlencoded (application/x-www-form-urlencoded), binary (file upload), graphql (GraphQL queries). Raw mode is most common for JSON APIs. Body mode determines Content-Type header."
       }
     }
   ]
@@ -72,11 +77,11 @@
 <body>
 <main class="container">
 <h1>JSON ⇄ Postman Converter</h1>
-<p class="subtitle">Convert JSON to Postman collection format and Postman collection back to JSON.</p>
+<p class="subtitle">Convert JSON request objects to Postman Collection v2.1 format and extract requests from collections back to JSON.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
-<h3>JSON</h3>
+<h3>JSON Request Object</h3>
 <label for="json" class="sr-only">JSON input</label>
-<textarea id="json" rows="10" style="width:90%;font-family:monospace" placeholder='{"url":"https://api.example.com","method":"GET","headers":{"Accept":"application/json"}}' aria-label="JSON input"></textarea>
+<textarea id="json" rows="10" style="width:90%;font-family:monospace" placeholder='{"name":"Get Users","url":"https://api.example.com/users","method":"GET","headers":{"Accept":"application/json"}}' aria-label="JSON input"></textarea>
 <br><br>
 <div class="tool-actions">
 <button type="button" onclick="jsonToPostman()">JSON → Postman</button>
@@ -87,27 +92,120 @@
 <label for="postman" class="sr-only">Postman format input</label>
 <textarea id="postman" rows="14" style="width:90%;font-family:monospace" placeholder='Postman Collection v2.1 format' aria-label="Postman format input"></textarea>
 <p id="status" class="inline-status"></p>
+
 <section class="tool-seo">
 <h3>About JSON ⇄ Postman Converter</h3>
 <p>This converter transforms simple request JSON (URL, method, headers, body) into Postman Collection v2.1 format and extracts request data from Postman collections back to JSON.</p>
-<p>It is useful when creating Postman collections from API docs, converting cURL or JSON requests to Postman, or extracting request config from existing collections.</p>
+<p>It is useful when creating Postman collections from API documentation, converting cURL or JSON requests to Postman format, or extracting request configurations from existing collections for programmatic use.</p>
+
+<h4>Postman Collection v2.1 Structure</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+{
+  "info": {
+    "name": "My API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get Users",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/json", "type": "text"}
+        ],
+        "url": "https://api.example.com/users"
+      }
+    },
+    {
+      "name": "Create User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json", "type": "text"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"John\"}"
+        },
+        "url": "https://api.example.com/users"
+      }
+    }
+  ]
+}
+</pre>
+
+<h4>Input JSON Format</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+{
+  "name": "Request Name (optional)",
+  "method": "GET|POST|PUT|DELETE|PATCH|...",
+  "url": "https://api.example.com/endpoint",
+  "headers": {
+    "Accept": "application/json",
+    "Authorization": "Bearer token123"
+  },
+  "body": {
+    "key": "value"
+  }
+}
+
+Example with body:
+{
+  "method": "POST",
+  "url": "https://api.example.com/users",
+  "headers": {"Content-Type": "application/json"},
+  "body": {"name": "John", "email": "john@example.com"}
+}
+</pre>
+
+<h4>Common HTTP Methods</h4>
+<table class="ref-table">
+<thead><tr><th>Method</th><th>Description</th><th>Typical Use</th></tr></thead>
+<tbody>
+<tr><td><code>GET</code></td><td>Retrieve resources</td><td>Fetch data, no body</td></tr>
+<tr><td><code>POST</code></td><td>Create resources</td><td>Submit data, JSON body</td></tr>
+<tr><td><code>PUT</code></td><td>Replace resources</td><td>Full update, JSON body</td></tr>
+<tr><td><code>PATCH</code></td><td>Partial update</td><td>Field updates, JSON body</td></tr>
+<tr><td><code>DELETE</code></td><td>Remove resources</td><td>Delete by ID, no body</td></tr>
+<tr><td><code>HEAD</code></td><td>Get headers only</td><td>Check resource exists</td></tr>
+<tr><td><code>OPTIONS</code></td><td>Get allowed methods</td><td>CORS preflight</td></tr>
+</tbody>
+</table>
+
+<h4>Common Headers Reference</h4>
+<table class="ref-table">
+<thead><tr><th>Header</th><th>Value Example</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td><code>Accept</code></td><td><code>application/json</code></td><td>Expected response format</td></tr>
+<tr><td><code>Content-Type</code></td><td><code>application/json</code></td><td>Request body format</td></tr>
+<tr><td><code>Authorization</code></td><td><code>Bearer token123</code></td><td>Authentication token</td></tr>
+<tr><td><code>X-API-Key</code></td><td><code>your-api-key</code></td><td>API key authentication</td></tr>
+<tr><td><code>User-Agent</code></td><td><code>MyApp/1.0</code></td><td>Client identification</td></tr>
+<tr><td><code>Origin</code></td><td><code>https://example.com</code></td><td>CORS request origin</td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Json Postman Converter used for?</dt>
-  <dd>Json Postman Converter is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is Postman Collection format?</dt>
+  <dd>Postman Collection format (v2.1) is a JSON schema for organizing API requests. Collections contain items (requests or folders), with each request having method, URL, headers, and body. Schema URL: https://schema.getpostman.com/json/collection/v2.1.0/collection.json. Collections can be exported/imported for sharing and version control.</dd>
+
+  <dt>How do I convert JSON to Postman format?</dt>
+  <dd>Map request properties: method (GET/POST/etc), url (full URL string), headers (array of key/value objects), body (object with mode and raw string). Wrap in collection structure with info (name, schema) and item array. This tool handles the conversion automatically.</dd>
+
+  <dt>What is the structure of a Postman request?</dt>
+  <dd>A Postman request contains: method (HTTP verb), url (string or object with host/path/query), header (array of {key, value, type}), body (optional, with mode: raw/formdata/urlencoded and content). Example: {"method": "GET", "url": "https://api.example.com/users", "header": [{"key": "Accept", "value": "application/json"}]}</dd>
+
+  <dt>How do I extract requests from a Postman collection?</dt>
+  <dd>Iterate through the item array, checking for request property. For nested folders (items with item array), recurse. Extract method, url, headers (convert array to object), and body.raw. This tool extracts all requests and outputs as JSON array or single object.</dd>
+
+  <dt>Can Postman collections have nested folders?</dt>
+  <dd>Yes, Postman collections support nested folders. An item can have an item array containing sub-items (requests or more folders). When converting, nested structures are flattened to extract all requests. When creating collections, requests are wrapped in a single top-level item array.</dd>
+
+  <dt>What body modes does Postman support?</dt>
+  <dd>Postman supports: raw (plain text, JSON, XML), formdata (multipart/form-data with key/value pairs), urlencoded (application/x-www-form-urlencoded), binary (file upload), graphql (GraphQL queries). Raw mode is most common for JSON APIs. Body mode determines Content-Type header.</dd>
 </dl>
 </section>
 </main>

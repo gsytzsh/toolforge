@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Punycode Converter – IDN Encode Decode Domain Names | ToolForge</title>
-<meta name="description" content="Free online Punycode converter for IDN domain names. Encode Unicode domains to Punycode (xn--) and decode Punycode back to Unicode. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Convert Unicode domain names to Punycode (xn--) and back. IDN encoding/decoding for internationalized domains with RFC 3492 compliance. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/punycode-converter.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Punycode Converter – IDN Encode Decode Domain Names | ToolForge">
-<meta property="og:description" content="Free online Punycode converter for IDN domain names. Encode Unicode domains to Punycode (xn--) and decode Punycode back to Unicode. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Convert Unicode domain names to Punycode (xn--) and back. IDN encoding/decoding for internationalized domains with RFC 3492 compliance. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/punycode-converter.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Punycode Converter – IDN Encode Decode Domain Names | ToolForge">
-<meta name="twitter:description" content="Free online Punycode converter for IDN domain names. Encode Unicode domains to Punycode (xn--) and decode Punycode back to Unicode. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Convert Unicode domain names to Punycode (xn--) and back. IDN encoding/decoding for internationalized domains with RFC 3492 compliance. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/punycode@1.4.1/punycode.min.js"></script>
@@ -25,45 +25,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Punycode Converter?",
+      "name": "What is Punycode and why is it used?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Punycode Converter is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Punycode is an encoding algorithm that converts Unicode strings to ASCII-compatible format. It's used for Internationalized Domain Names (IDN) to represent non-ASCII characters (like ü, 中文，日本語) in the DNS system, which only supports ASCII. Punycode domains start with 'xn--' prefix."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How does Punycode encoding work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Punycode separates basic ASCII characters from non-ASCII characters. ASCII chars are kept as-is, while Unicode characters are encoded using a variable-length integer system based on 36 alphanumeric characters (a-z, 0-9). The 'xn--' prefix indicates Punycode encoding to DNS systems."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the xn-- prefix?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "The 'xn--' prefix is a label separator that identifies Punycode-encoded domain labels. It tells DNS systems and browsers that the following characters are encoded Unicode. For example, 'münchen.de' becomes 'xn--mnchen-3ya.de' where 'xn--' marks the encoded label."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are Internationalized Domain Names (IDN)?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "IDNs are domain names containing non-ASCII characters, allowing users to register domains in their native scripts (Chinese, Arabic, Cyrillic, etc.). IDNs are converted to Punycode for DNS resolution while displaying in Unicode form in browsers."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "Are there security concerns with Punycode domains?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Yes, homograph attacks use visually similar characters from different scripts to create deceptive domains (e.g., using Cyrillic 'а' instead of Latin 'a'). Modern browsers show Punycode instead of Unicode for domains with mixed scripts or suspicious patterns to prevent phishing."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "Which top-level domains support IDN?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Most major TLDs support IDN including .com, .net, .org, .de, .jp, .cn, .kr, .ru, and many country-code TLDs. However, support varies by registry. Some TLDs have restrictions on which character sets are allowed based on language requirements."
       }
     }
   ]
@@ -90,25 +95,359 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Punycode Converter</h3>
-<p>This Punycode converter helps you encode and decode Internationalized Domain Names (IDN). Unicode domain names like münchen.de are converted to ASCII Punycode (xn--mnchen-3ya.de) for DNS compatibility.</p>
-<p>It is useful when working with non-ASCII domain names, debugging IDN issues, or preparing domains for registration and DNS configuration.</p>
+<p>This Punycode converter helps you encode and decode Internationalized Domain Names (IDN) according to RFC 3492. Unicode domain names like münchen.de are converted to ASCII-compatible Punycode (xn--mnchen-3ya.de) for DNS compatibility. The tool uses the standard punycode.js library for accurate conversion.</p>
+<p>It is useful when working with non-ASCII domain names, debugging IDN issues, preparing domains for registration and DNS configuration, and verifying Punycode encoding for international websites.</p>
+
+<h4>Punycode Encoding Algorithm</h4>
+<p>Punycode converts Unicode to ASCII using a specialized encoding scheme:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Punycode Encoding Process:
+
+1. Separate basic ASCII from non-ASCII characters
+   - ASCII chars: kept as-is
+   - Non-ASCII: encoded separately
+
+2. Encode non-ASCII characters
+   - Uses base-36 encoding (a-z, 0-9)
+   - Variable-length integer representation
+   - Adapts to character frequency
+
+3. Add 'xn--' prefix
+   - Marks label as Punycode-encoded
+   - Required for DNS compatibility
+
+Example: "münchen.de"
+  Step 1: Basic = "mnchen.de", Non-ASCII = "ü"
+  Step 2: Encode "ü" → "mnchen-3ya"
+  Step 3: Add prefix → "xn--mnchen-3ya.de"
+
+Technical Details:
+  - Base: 36 (26 letters + 10 digits)
+  - Initial bias: 72
+  - Damp factor: 700
+  - Threshold pattern: adapts based on position
+
+RFC 3492 Specification:
+  https://tools.ietf.org/html/rfc3492
+</pre>
+
+<h4>IDN Encoding Examples</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Unicode Domain</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Punycode</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Language</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">münchen.de</td>
+    <td style="border:1px solid #ddd;padding:8px">xn--mnchen-3ya.de</td>
+    <td style="border:1px solid #ddd;padding:8px">German</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">例え.jp</td>
+    <td style="border:1px solid #ddd;padding:8px">xn--zckzah.jp</td>
+    <td style="border:1px solid #ddd;padding:8px">Japanese</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">한국어.kr</td>
+    <td style="border:1px solid #ddd;padding:8px">xn--3e0b707e.kr</td>
+    <td style="border:1px solid #ddd;padding:8px">Korean</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">пример.ru</td>
+    <td style="border:1px solid #ddd;padding:8px">xn--e1afmkfd.ru</td>
+    <td style="border:1px solid #ddd;padding:8px">Russian</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">مثال.com</td>
+    <td style="border:1px solid #ddd;padding:8px">xn--mgbh0fb.com</td>
+    <td style="border:1px solid #ddd;padding:8px">Arabic</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">例子。中国</td>
+    <td style="border:1px solid #ddd;padding:8px">xn--fsqu00a.xn--fiqs8s</td>
+    <td style="border:1px solid #ddd;padding:8px">Chinese</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">café.fr</td>
+    <td style="border:1px solid #ddd;padding:8px">xn--caf-dma.fr</td>
+    <td style="border:1px solid #ddd;padding:8px">French</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">naïve.com</td>
+    <td style="border:1px solid #ddd;padding:8px">xn--nave-zoa.com</td>
+    <td style="border:1px solid #ddd;padding:8px">French</td>
+  </tr>
+</table>
+
+<h4>Punycode Structure</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Punycode Label Format:
+
+  xn--[encoded-string]-[checksum]
+
+Components:
+  xn--       : ACE prefix (ASCII-Compatible Encoding)
+  encoded    : Base-36 encoded Unicode characters
+  checksum   : Optional delimiter + bias adjustment
+
+Encoding Pattern:
+  [basic-ASCII][hyphen][encoded-non-ASCII]
+
+Examples Breakdown:
+
+  "münchen" → "mnchen-3ya"
+  - "mnchen" : Basic ASCII characters (ü removed)
+  - "-3ya"   : Encoded position and value of "ü"
+
+  "例え" → "zckzah"
+  - No ASCII chars, so all encoded
+  - "zckzah" represents both Japanese characters
+
+  "café" → "caf-dma"
+  - "caf" : ASCII portion
+  - "dma" : Encoded "é"
+
+Decoding Process:
+  1. Find last hyphen
+  2. Part before = ASCII chars (insert non-ASCII positions)
+  3. Part after = encoded non-ASCII values
+  4. Decode base-36 integers to Unicode code points
+</pre>
+
+<h4>IDN Implementation Standards</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Standard</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Status</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">RFC 3492</td>
+    <td style="border:1px solid #ddd;padding:8px">Punycode encoding algorithm</td>
+    <td style="border:1px solid #ddd;padding:8px">Current Standard</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">RFC 5890</td>
+    <td style="border:1px solid #ddd;padding:8px">IDNA definitions and framework</td>
+    <td style="border:1px solid #ddd;padding:8px">Current Standard</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">RFC 5891</td>
+    <td style="border:1px solid #ddd;padding:8px">IDNA protocol (IDNA2008)</td>
+    <td style="border:1px solid #ddd;padding:8px">Current Standard</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">RFC 5892</td>
+    <td style="border:1px solid #ddd;padding:8px">Unicode tables for IDNA</td>
+    <td style="border:1px solid #ddd;padding:8px">Current Standard</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">RFC 5893</td>
+    <td style="border:1px solid #ddd;padding:8px">Right-to-left handling</td>
+    <td style="border:1px solid #ddd;padding:8px">Current Standard</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">IDNA2003</td>
+    <td style="border:1px solid #ddd;padding:8px">Original IDNA implementation</td>
+    <td style="border:1px solid #ddd;padding:8px">Obsolete</td>
+  </tr>
+</table>
+
+<h4>Code Examples by Language</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript (Browser):
+  // Using punycode.js library
+  // https://github.com/bestiejs/punycode.js
+
+  // Encode Unicode to Punycode
+  punycode.toASCII('münchen.de');
+  // → "xn--mnchen-3ya.de"
+
+  // Decode Punycode to Unicode
+  punycode.toUnicode('xn--mnchen-3ya.de');
+  // → "münchen.de"
+
+  // Encode single label
+  punycode.encode('münchen');
+  // → "mnchen-3ya"
+
+  // Decode single label
+  punycode.decode('mnchen-3ya');
+  // → "münchen"
+
+Node.js (Built-in):
+  // Built-in punycode module (deprecated but available)
+  const punycode = require('punycode');
+
+  punycode.toASCII('例え.jp');  // → "xn--zckzah.jp"
+  punycode.toUnicode('xn--zckzah.jp');  // → "例え.jp"
+
+Python:
+  # Built-in support via idna encoding
+  domain = "münchen.de"
+
+  # Encode to Punycode
+  punycode = domain.encode('idna').decode('ascii')
+  # → "xn--mnchen-3ya.de"
+
+  # Decode from Punycode
+  unicode = punycode.encode('ascii').decode('idna')
+  # → "münchen.de"
+
+  # Using idna library (recommended)
+  # pip install idna
+  import idna
+  idna.encode('münchen.de')  # → b"xn--mnchen-3ya.de"
+  idna.decode('xn--mnchen-3ya.de')  # → "münchen.de"
+
+PHP:
+  // Using intl extension
+  idn_to_ascii('münchen.de');
+  // → "xn--mnchen-3ya.de"
+
+  idn_to_utf8('xn--mnchen-3ya.de');
+  // → "münchen.de"
+
+  // With options (IDNA2008)
+  idn_to_ascii('münchen.de', 0, INTL_IDNA_VARIANT_2008);
+
+Java:
+  // Using java.net.IDN
+  String ascii = IDN.toASCII("münchen.de");
+  // → "xn--mnchen-3ya.de"
+
+  String unicode = IDN.toUnicode("xn--mnchen-3ya.de");
+  // → "münchen.de"
+
+C#:
+  // Using IdnMapping class
+  var idn = new IdnMapping();
+  string ascii = idn.GetAscii("münchen.de");
+  // → "xn--mnchen-3ya.de"
+
+  string unicode = idn.GetUnicode("xn--mnchen-3ya.de");
+  // → "münchen.de"
+</pre>
+
+<h4>Browser Behavior with IDN</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Display Behavior:
+
+Modern browsers display IDNs differently based on security:
+
+1. Safe IDNs (single script)
+   - Displayed as Unicode
+   - Example: "münchen.de" shows as "münchen.de"
+
+2. Suspicious IDNs (mixed scripts)
+   - Displayed as Punycode
+   - Example: "раураl.com" (Cyrillic 'а' in "paypal")
+   - Shows as "xn--80ak6aa92e.com"
+
+3. TLD restrictions
+   - Some TLDs force Punycode display
+   - Based on registry policies
+
+Security Measures:
+
+Homograph Attack Prevention:
+  - Browsers detect visually similar characters
+  - Mixed-script domains show as Punycode
+  - Exception lists for valid mixed domains
+
+Example Attack:
+  Legitimate: "paypal.com"
+  Fake:       "раураl.com" (Cyrillic а, у, р, а)
+
+  Browser displays fake as: "xn--80ak6aa92e.com"
+
+User Settings:
+  - Chrome: Settings → Privacy → Use secure DNS
+  - Firefox: network.IDN_show_punycode preference
+  - Safari: Automatic security handling
+</pre>
+
+<h4>Common Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Domain Registration</td>
+    <td style="border:1px solid #ddd;padding:8px">Register IDN domains with registrar</td>
+    <td style="border:1px solid #ddd;padding:8px">Verify Punycode before registration</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">DNS Configuration</td>
+    <td style="border:1px solid #ddd;padding:8px">Configure DNS records for IDN</td>
+    <td style="border:1px solid #ddd;padding:8px">Use Punycode in zone files</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">SSL Certificate</td>
+    <td style="border:1px solid #ddd;padding:8px">Request certificates for IDN domains</td>
+    <td style="border:1px solid #ddd;padding:8px">CSR uses Punycode format</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Email Configuration</td>
+    <td style="border:1px solid #ddd;padding:8px">Set up email for IDN domains</td>
+    <td style="border:1px solid #ddd;padding:8px">MX records with Punycode</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Security Audit</td>
+    <td style="border:1px solid #ddd;padding:8px">Check for homograph attacks</td>
+    <td style="border:1px solid #ddd;padding:8px">Verify suspicious domains</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">International SEO</td>
+    <td style="border:1px solid #ddd;padding:8px">Optimize IDN sites for search</td>
+    <td style="border:1px solid #ddd;padding:8px">Hreflang with Unicode URLs</td>
+  </tr>
+</table>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Verify encoding:</strong> Always verify Punycode output matches expected Unicode input before using in production.</li>
+  <li><strong>Test in browsers:</strong> Check how target browsers display your IDN to ensure proper user experience.</li>
+  <li><strong>Consider homograph attacks:</strong> Be aware that similar-looking characters from different scripts can confuse users.</li>
+  <li><strong>Use IDNA2008:</strong> Prefer IDNA2008 (RFC 589x) over IDNA2003 for newer implementations.</li>
+  <li><strong>Handle right-to-left:</strong> Arabic and Hebrew domains require additional bidi handling per RFC 5893.</li>
+  <li><strong>Document both forms:</strong> Keep records of both Unicode and Punycode versions for domain management.</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>External library:</strong> Requires punycode.js library loaded from CDN for accurate conversion.</li>
+  <li><strong>IDNA version:</strong> Library may use IDNA2003 instead of IDNA2008, causing slight differences.</li>
+  <li><strong>No validation:</strong> Does not validate if domain is registrable or follows TLD rules.</li>
+  <li><strong>Single conversion:</strong> Processes one domain at a time; no batch conversion support.</li>
+  <li><strong>No TLD lookup:</strong> Does not check if specific TLD supports the requested character set.</li>
+  <li><strong>Browser differences:</strong> Actual browser display may differ from tool output due to security policies.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Punycode Converter?</dt>
-  <dd>Punycode Converter is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is Punycode and why is it used?</dt>
+  <dd>Punycode is an encoding algorithm that converts Unicode strings to ASCII-compatible format. It's used for Internationalized Domain Names (IDN) to represent non-ASCII characters (like ü, 中文，日本語) in the DNS system, which only supports ASCII. Punycode domains start with 'xn--' prefix.</dd>
+
+  <dt>How does Punycode encoding work?</dt>
+  <dd>Punycode separates basic ASCII characters from non-ASCII characters. ASCII chars are kept as-is, while Unicode characters are encoded using a variable-length integer system based on 36 alphanumeric characters (a-z, 0-9). The 'xn--' prefix indicates Punycode encoding to DNS systems.</dd>
+
+  <dt>What is the xn-- prefix?</dt>
+  <dd>The 'xn--' prefix is a label separator that identifies Punycode-encoded domain labels. It tells DNS systems and browsers that the following characters are encoded Unicode. For example, 'münchen.de' becomes 'xn--mnchen-3ya.de' where 'xn--' marks the encoded label.</dd>
+
+  <dt>What are Internationalized Domain Names (IDN)?</dt>
+  <dd>IDNs are domain names containing non-ASCII characters, allowing users to register domains in their native scripts (Chinese, Arabic, Cyrillic, etc.). IDNs are converted to Punycode for DNS resolution while displaying in Unicode form in browsers.</dd>
+
+  <dt>Are there security concerns with Punycode domains?</dt>
+  <dd>Yes, homograph attacks use visually similar characters from different scripts to create deceptive domains (e.g., using Cyrillic 'а' instead of Latin 'a'). Modern browsers show Punycode instead of Unicode for domains with mixed scripts or suspicious patterns to prevent phishing.</dd>
+
+  <dt>Which top-level domains support IDN?</dt>
+  <dd>Most major TLDs support IDN including .com, .net, .org, .de, .jp, .cn, .kr, .ru, and many country-code TLDs. However, support varies by registry. Some TLDs have restrictions on which character sets are allowed based on language requirements.</dd>
 </dl>
 </section>
 </main>

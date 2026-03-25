@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Random String Generator – Generate Random Strings and Tokens | ToolForge</title>
-<meta name="description" content="Free online Random String Generator to create random strings for tokens, API keys, invite codes and test data with flexible character sets. Uses secure browser crypto where available. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Generate random strings for tokens, API keys, invite codes and test data. Supports Base62, hex, URL-safe presets with secure crypto randomness. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/random-string-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Random String Generator – Generate Random Strings and Tokens | ToolForge">
-<meta property="og:description" content="Free online Random String Generator to create random strings for tokens, API keys, invite codes and test data with flexible character sets. Uses secure browser crypto where available. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Generate random strings for tokens, API keys, invite codes and test data. Supports Base62, hex, URL-safe presets with secure crypto randomness. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/random-string-generator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Random String Generator – Generate Random Strings and Tokens | ToolForge">
-<meta name="twitter:description" content="Free online Random String Generator to create random strings for tokens, API keys, invite codes and test data with flexible character sets. Uses secure browser crypto where available. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Generate random strings for tokens, API keys, invite codes and test data. Supports Base62, hex, URL-safe presets with secure crypto randomness. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Random String Generator?",
+      "name": "What is the difference between random and secure random?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Random String Generator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Standard random (Math.random) uses pseudo-random algorithms suitable for games and sampling. Secure random (crypto.getRandomValues) uses cryptographically secure random number generation (CSPRNG) suitable for tokens, API keys, and security-sensitive identifiers. This tool uses crypto.getRandomValues when available."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What are Base62 and hex character sets?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Base62 uses a-z, A-Z, and 0-9 (62 characters) for compact, readable identifiers. Hex uses only 0-9 and a-f (16 characters) for binary data representation. Base62 produces shorter strings; hex is useful for hashes and binary-compatible output."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How long should random tokens be?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "For API keys and tokens: 32+ characters. For invite codes: 8-16 characters. For session IDs: 32+ characters. For CSRF tokens: 16-32 characters. Longer strings have exponentially more entropy and are harder to guess through brute force."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is URL-safe encoding?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "URL-safe strings use only alphanumeric characters plus hyphen (-) and underscore (_). They avoid special characters that require URL encoding (+, /, =, etc.). Base64URL is a common URL-safe variant used in JWT tokens and web applications."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How is entropy calculated for random strings?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Entropy (in bits) = length × log2(characterSetSize). For Base62: each character adds ~5.95 bits. For hex: each character adds 4 bits. A 16-character Base62 string has ~95 bits of entropy; a 32-character hex string has 128 bits."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "When should I use this tool vs a password generator?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Use this tool for API keys, tokens, invite codes, and developer identifiers. Use a password generator for user-facing passwords with memorability considerations, password policy requirements, and strength validation."
       }
     }
   ]
@@ -110,25 +115,394 @@ Length:
 <p id="status" style="color:#666;margin-top:6px"></p>
 <section class="tool-seo">
 <h3>About Random String Generator</h3>
-<p>This random string generator creates custom strings for API keys, invite codes, test data, short identifiers and other development tasks. You can choose a preset such as Base62, hex or URL-safe output, or switch to a custom character mix.</p>
-<p>When available, the generator uses browser crypto for stronger randomness, making it a practical option for quick client-side token generation. For account passwords, the dedicated Password Generator is the better fit.</p>
+<p>This random string generator creates custom strings for API keys, invite codes, test data, short identifiers and other development tasks. It uses cryptographically secure random number generation (CSPRNG) via the Web Crypto API when available, falling back to Math.random for older browsers. You can choose a preset such as Base62, hex or URL-safe output, or switch to a custom character mix.</p>
+<p>It is useful for generating API keys, authentication tokens, session IDs, CSRF tokens, invite codes, database IDs, test data fixtures, short URLs, and unique identifiers for development and testing.</p>
+
+<h4>Random Number Generation</h4>
+<p>The quality of randomness is critical for security-sensitive applications:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Random Sources:
+
+1. Math.random (Standard)
+   - Pseudo-random number generator (PRNG)
+   - Uses algorithmic seed (often current time)
+   - Suitable for: games, sampling, non-security uses
+   - NOT suitable for: tokens, keys, passwords
+   - Period: Implementation-dependent
+
+2. crypto.getRandomValues (Secure)
+   - Cryptographically secure PRNG (CSPRNG)
+   - Uses OS entropy sources
+   - Suitable for: tokens, API keys, session IDs
+   - Backed by: /dev/urandom (Unix), CryptGenRandom (Windows)
+   - Standard: Web Crypto API (W3C Recommendation)
+
+Implementation:
+  // Secure random (preferred)
+  const array = new Uint32Array(1);
+  crypto.getRandomValues(array);
+  const random = array[0] / (0xFFFFFFFF + 1);
+
+  // Fallback (less secure)
+  const random = Math.random();
+
+Detection:
+  if (window.crypto && crypto.getRandomValues) {
+    // Use secure random
+  } else {
+    // Fallback to Math.random
+  }
+</pre>
+
+<h4>Character Set Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Preset</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Characters</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Size</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Bits/Char</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Hex</td>
+    <td style="border:1px solid #ddd;padding:8px">0-9, a-f</td>
+    <td style="border:1px solid #ddd;padding:8px">16</td>
+    <td style="border:1px solid #ddd;padding:8px">4.0</td>
+    <td style="border:1px solid #ddd;padding:8px">Binary data, hashes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Base62</td>
+    <td style="border:1px solid #ddd;padding:8px">a-z, A-Z, 0-9</td>
+    <td style="border:1px solid #ddd;padding:8px">62</td>
+    <td style="border:1px solid #ddd;padding:8px">5.95</td>
+    <td style="border:1px solid #ddd;padding:8px">General tokens</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">URL-safe</td>
+    <td style="border:1px solid #ddd;padding:8px">a-z, A-Z, 0-9, -, _</td>
+    <td style="border:1px solid #ddd;padding:8px">64</td>
+    <td style="border:1px solid #ddd;padding:8px">6.0</td>
+    <td style="border:1px solid #ddd;padding:8px">URLs, JWT</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Alphanumeric</td>
+    <td style="border:1px solid #ddd;padding:8px">a-z, 0-9</td>
+    <td style="border:1px solid #ddd;padding:8px">36</td>
+    <td style="border:1px solid #ddd;padding:8px">5.17</td>
+    <td style="border:1px solid #ddd;padding:8px">Simple codes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Full ASCII</td>
+    <td style="border:1px solid #ddd;padding:8px">Printable ASCII (33-126)</td>
+    <td style="border:1px solid #ddd;padding:8px">94</td>
+    <td style="border:1px solid #ddd;padding:8px">6.55</td>
+    <td style="border:1px solid #ddd;padding:8px">Maximum entropy</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Numeric Only</td>
+    <td style="border:1px solid #ddd;padding:8px">0-9</td>
+    <td style="border:1px solid #ddd;padding:8px">10</td>
+    <td style="border:1px solid #ddd;padding:8px">3.32</td>
+    <td style="border:1px solid #ddd;padding:8px">PIN codes, OTP</td>
+  </tr>
+</table>
+
+<h4>Entropy and Security</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Entropy Calculation:
+  Entropy (bits) = length × log2(characterSetSize)
+
+  Examples:
+  - 16-char Base62: 16 × 5.95 = 95.2 bits
+  - 32-char hex:    32 × 4.0  = 128 bits
+  - 24-char URL:    24 × 6.0  = 144 bits
+  - 8-char numeric: 8 × 3.32  = 26.6 bits
+
+Security Recommendations:
+
+Purpose                    | Min Entropy | Example Length (Base62)
+---------------------------|-------------|------------------------
+Session ID                 | 64 bits     | 11 characters
+CSRF Token                 | 64 bits     | 11 characters
+API Key                    | 128 bits    | 22 characters
+Password Reset Token       | 128 bits    | 22 characters
+Invite Code (short-lived)  | 40 bits     | 7 characters
+Database ID (unique)       | 64 bits     | 11 characters
+
+Brute Force Resistance:
+  64 bits:  18.4 quintillion combinations
+  128 bits: 3.4 × 10^38 combinations
+  256 bits: 1.1 × 10^77 combinations
+
+Time to crack (assuming 1 billion guesses/second):
+  64 bits:  ~584 years
+  128 bits: ~10^22 years (longer than universe age)
+</pre>
+
+<h4>Common Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Recommended Length</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Character Set</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">API Keys</td>
+    <td style="border:1px solid #ddd;padding:8px">32+ characters</td>
+    <td style="border:1px solid #ddd;padding:8px">Base62 or URL-safe</td>
+    <td style="border:1px solid #ddd;padding:8px">High entropy, store hashed</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Session IDs</td>
+    <td style="border:1px solid #ddd;padding:8px">32+ characters</td>
+    <td style="border:1px solid #ddd;padding:8px">Hex or Base62</td>
+    <td style="border:1px solid #ddd;padding:8px">Regenerate on privilege change</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">CSRF Tokens</td>
+    <td style="border:1px solid #ddd;padding:8px">16-32 characters</td>
+    <td style="border:1px solid #ddd;padding:8px">Base62</td>
+    <td style="border:1px solid #ddd;padding:8px">Per-session or per-request</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Invite Codes</td>
+    <td style="border:1px solid #ddd;padding:8px">8-16 characters</td>
+    <td style="border:1px solid #ddd;padding:8px">Uppercase + digits</td>
+    <td style="border:1px solid #ddd;padding:8px">Exclude ambiguous chars (0/O, 1/I)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Short URLs</td>
+    <td style="border:1px solid #ddd;padding:8px">6-10 characters</td>
+    <td style="border:1px solid #ddd;padding:8px">Base62</td>
+    <td style="border:1px solid #ddd;padding:8px">Encode sequential ID</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Test Data</td>
+    <td style="border:1px solid #ddd;padding:8px">Variable</td>
+    <td style="border:1px solid #ddd;padding:8px">Any</td>
+    <td style="border:1px solid #ddd;padding:8px">Reproducible seed optional</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Database IDs</td>
+    <td style="border:1px solid #ddd;padding:8px">12-16 characters</td>
+    <td style="border:1px solid #ddd;padding:8px">Base62 or Crockford</td>
+    <td style="border:1px solid #ddd;padding:8px">ULID, NanoID format</td>
+  </tr>
+</table>
+
+<h4>Code Examples by Language</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript (Browser):
+  // Using Web Crypto API
+  function generateRandom(length, charset) {
+    const array = new Uint32Array(length);
+    crypto.getRandomValues(array);
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += charset[array[i] % charset.length];
+    }
+    return result;
+  }
+
+  // Base62 example
+  const base62 = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  generateRandom(16, base62);
+
+JavaScript (Node.js):
+  // Using crypto module
+  const crypto = require('crypto');
+
+  function generateRandom(length, charset) {
+    const buffer = crypto.randomBytes(length);
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += charset[buffer[i] % charset.length];
+    }
+    return result;
+  }
+
+Python:
+  import secrets
+  import string
+
+  # Secure random string
+  def generate(length=16, charset=None):
+      if charset is None:
+          charset = string.ascii_letters + string.digits
+      return ''.join(secrets.choice(charset) for _ in range(length))
+
+  # Hex token
+  secrets.token_hex(16)  # 32-char hex
+
+  # URL-safe token
+  secrets.token_urlsafe(16)  # ~24 chars
+
+PHP:
+  // PHP 7+ using random_bytes
+  function generateRandom($length = 16, $charset = null) {
+      if ($charset === null) {
+          $charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      }
+      $result = '';
+      $charsetLen = strlen($charset);
+      for ($i = 0; $i < $length; $i++) {
+          $result .= $charset[random_int(0, $charsetLen - 1)];
+      }
+      return $result;
+  }
+
+  // Hex token
+  bin2hex(random_bytes(16));  // 32-char hex
+
+Java:
+  // Using SecureRandom
+  import java.security.SecureRandom;
+
+  public String generateRandom(int length, String charset) {
+      SecureRandom random = new SecureRandom();
+      StringBuilder result = new StringBuilder(length);
+      for (int i = 0; i < length; i++) {
+          result.append(charset.charAt(random.nextInt(charset.length())));
+      }
+      return result.toString();
+  }
+
+C#:
+  // Using RandomNumberGenerator
+  using System.Security.Cryptography;
+
+  public string GenerateRandom(int length, string charset) {
+      var rng = RandomNumberGenerator.Create();
+      var data = new byte[length];
+      rng.GetBytes(data);
+      var result = new StringBuilder(length);
+      for (int i = 0; i < length; i++) {
+          result.Append(charset[data[i] % charset.Length]);
+      }
+      return result.ToString();
+  }
+</pre>
+
+<h4>Random String Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Base62 Token (16 chars)
+  Output: "kL9mN2pQ4rS6tU8v"
+  Use: API key component, session ID
+
+Example 2: Hex Token (32 chars)
+  Output: "a3f7c2e1b9d8f4a6c0e5b7d2f8a1c3e9"
+  Use: Binary hash representation, MD5/SHA format
+
+Example 3: URL-safe String (24 chars)
+  Output: "Ab3cD4eF5gH6iJ7kL8mN9oP0"
+  Use: JWT payload, URL parameter
+
+Example 4: Invite Code (8 chars, uppercase + digits)
+  Output: "X7K9M2P4"
+  Use: User invitation, referral code
+
+Example 5: Numeric PIN (6 digits)
+  Output: "482716"
+  Use: OTP, verification code
+
+Example 6: Short URL ID (7 chars)
+  Output: "aB3dE7g"
+  Use: URL shortener (bit.ly style)
+
+Example 7: UUID-like (36 chars with hyphens)
+  Output: "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+  Use: Database primary key, unique identifier
+
+Example 8: NanoID-style (21 chars)
+  Output: "V1StGXR8_Z5jdHi6B-myT"
+  Use: Document ID, resource identifier
+</pre>
+
+<h4>Special Character Sets</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Crockford's Base32:
+  Characters: 0123456789ABCDEFGHJKMNPQRSTVWXYZ
+  Excludes: I, L, O, U (avoid confusion and profanity)
+  Use case: Human-readable codes, verbal transmission
+
+  Example: "CSQPYR8M3"
+
+Base64 (standard):
+  Characters: A-Za-z0-9+/
+  Padding: = (for length alignment)
+  Use case: Binary data encoding
+
+  Example: "SGVsbG8gV29ybGQ="
+
+Base64URL (URL-safe Base64):
+  Characters: A-Za-z0-9-_
+  Replaces: + → -, / → _
+  Use case: JWT, URL parameters
+
+  Example: "SGVsbG8gV29ybGQ"
+
+Decimal Only:
+  Characters: 0123456789
+  Use case: PIN codes, phone-style codes
+
+  Example: "847261"
+
+Uppercase + Digits (alphanumeric):
+  Characters: ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+  Use case: Product keys, license codes
+
+  Example: "XKCD42A7B9"
+
+Ambiguous Character Exclusion:
+  Exclude: 0, O, 1, I, l (look similar)
+  Use case: Manual entry, printed codes
+
+  Safe set: "23456789ABCDEFGHJKMNPQRSTUVWXYZ"
+</pre>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Use secure random:</strong> Always use crypto.getRandomValues or equivalent for security-sensitive tokens.</li>
+  <li><strong>Choose appropriate length:</strong> Match entropy to security requirements (see entropy table above).</li>
+  <li><strong>Consider readability:</strong> For human entry, exclude ambiguous characters (0/O, 1/I/l).</li>
+  <li><strong>Store tokens securely:</strong> Hash API keys before storing, like passwords.</li>
+  <li><strong>Set expiration:</strong> Short-lived tokens reduce risk if compromised.</li>
+  <li><strong>Use constant-time comparison:</strong> Prevent timing attacks when validating tokens.</li>
+  <li><strong>Rate limit validation:</strong> Limit attempts to guess tokens through brute force.</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>Browser dependency:</strong> Secure random requires Web Crypto API support (modern browsers only).</li>
+  <li><strong>No persistence:</strong> Generated strings are not stored; copy immediately.</li>
+  <li><strong>Not a password manager:</strong> Use dedicated password generator for user passwords.</li>
+  <li><strong>No format validation:</strong> Does not validate against specific format requirements.</li>
+  <li><strong>Client-side only:</strong> Not suitable for server-side token generation needs.</li>
+  <li><strong>No collision detection:</strong> Does not check if generated string already exists in your system.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Random String Generator?</dt>
-  <dd>Random String Generator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the difference between random and secure random?</dt>
+  <dd>Standard random (Math.random) uses pseudo-random algorithms suitable for games and sampling. Secure random (crypto.getRandomValues) uses cryptographically secure random number generation (CSPRNG) suitable for tokens, API keys, and security-sensitive identifiers. This tool uses crypto.getRandomValues when available.</dd>
+
+  <dt>What are Base62 and hex character sets?</dt>
+  <dd>Base62 uses a-z, A-Z, and 0-9 (62 characters) for compact, readable identifiers. Hex uses only 0-9 and a-f (16 characters) for binary data representation. Base62 produces shorter strings; hex is useful for hashes and binary-compatible output.</dd>
+
+  <dt>How long should random tokens be?</dt>
+  <dd>For API keys and tokens: 32+ characters. For invite codes: 8-16 characters. For session IDs: 32+ characters. For CSRF tokens: 16-32 characters. Longer strings have exponentially more entropy and are harder to guess through brute force.</dd>
+
+  <dt>What is URL-safe encoding?</dt>
+  <dd>URL-safe strings use only alphanumeric characters plus hyphen (-) and underscore (_). They avoid special characters that require URL encoding (+, /, =, etc.). Base64URL is a common URL-safe variant used in JWT tokens and web applications.</dd>
+
+  <dt>How is entropy calculated for random strings?</dt>
+  <dd>Entropy (in bits) = length × log2(characterSetSize). For Base62: each character adds ~5.95 bits. For hex: each character adds 4 bits. A 16-character Base62 string has ~95 bits of entropy; a 32-character hex string has 128 bits.</dd>
+
+  <dt>When should I use this tool vs a password generator?</dt>
+  <dd>Use this tool for API keys, tokens, invite codes, and developer identifiers. Use a password generator for user-facing passwords with memorability considerations, password policy requirements, and strength validation.</dd>
 </dl>
 </section>
 </main>
@@ -195,22 +569,22 @@ function generateString(){
 }
 
 function copyOutput(){
-var value=document.getElementById("output").value
+var value=document.getElementById("output").value;
 if(!value){
-document.getElementById("status").innerText="Nothing to copy."
-document.getElementById("status").style.color="#b91c1c"
-return
+document.getElementById("status").innerText="Nothing to copy.";
+document.getElementById("status").style.color="#b91c1c";
+return;
 }
 navigator.clipboard.writeText(value).then(function(){
-document.getElementById("status").innerText="Result copied."
-document.getElementById("status").style.color="#16a34a"
+document.getElementById("status").innerText="Result copied.";
+document.getElementById("status").style.color="#16a34a";
 }).catch(function(){
-document.getElementById("status").innerText="Copy failed."
-document.getElementById("status").style.color="#b91c1c"
-})
+document.getElementById("status").innerText="Copy failed.";
+document.getElementById("status").style.color="#b91c1c";
+});
 }
 
-applyPreset()
+applyPreset();
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>

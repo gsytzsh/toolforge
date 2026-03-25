@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Webpage to PDF – Convert a Webpage into PDF Online | ToolForge</title>
-<meta name="description" content="Free online Webpage to PDF tool to fetch a webpage when allowed, preview it in your browser and export it as a PDF. Part of the ToolForge developer tools collection.">
+<title>Webpage to PDF – Convert Web Pages to PDF Documents Online | ToolForge</title>
+<meta name="description" content="Webpage to PDF converts web pages to PDF documents using html2canvas and jsPDF. Fetch URLs or upload HTML files for PDF export. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/webpage-to-pdf.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Webpage to PDF – Convert a Webpage into PDF Online | ToolForge">
-<meta property="og:description" content="Free online Webpage to PDF tool to fetch a webpage when allowed, preview it in your browser and export it as a PDF. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Webpage to PDF – Convert Web Pages to PDF Documents Online | ToolForge">
+<meta property="og:description" content="Webpage to PDF converts web pages to PDF documents using html2canvas and jsPDF. Fetch URLs or upload HTML files for PDF export. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/webpage-to-pdf.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Webpage to PDF – Convert a Webpage into PDF Online | ToolForge">
-<meta name="twitter:description" content="Free online Webpage to PDF tool to fetch a webpage when allowed, preview it in your browser and export it as a PDF. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Webpage to PDF – Convert Web Pages to PDF Documents Online | ToolForge">
+<meta name="twitter:description" content="Webpage to PDF converts web pages to PDF documents using html2canvas and jsPDF. Fetch URLs or upload HTML files for PDF export. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
@@ -26,45 +26,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Webpage To Pdf?",
+      "name": "How does webpage to PDF conversion work in the browser?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Webpage To Pdf is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "This tool uses html2canvas to capture a screenshot of the rendered HTML content, then jsPDF to create a PDF document from the captured canvas. The HTML is sanitized to remove scripts and potentially harmful elements before rendering."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "Why does fetching some webpages fail?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Many websites block browser-based fetch requests due to CORS (Cross-Origin Resource Sharing) policies and anti-framing protections. When fetch fails, upload a saved HTML file instead—save the page from your browser (Ctrl+S) and upload the .html file."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What are the limitations of browser-based PDF generation?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Browser-based PDF generation captures visual appearance as images, not selectable text. Complex layouts, external fonts, and dynamic content may not render perfectly. For production use, server-side tools like Puppeteer or wkhtmltopdf provide more reliable results."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How does the tool handle multi-page PDFs?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "If the captured content exceeds one A4 page, the tool automatically adds additional pages. It calculates the remaining height and creates new pages as needed, maintaining the same image dimensions across all pages."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What security measures are in place?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "The tool sanitizes HTML by removing script, iframe, object, embed tags and event handler attributes (onclick, etc.). It also strips javascript: URLs from href/src attributes. This prevents XSS attacks when rendering external HTML content."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "Why might external images not appear in the PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "External images may be blocked by CORS policies when using html2canvas. The useCORS option is enabled, but the image server must explicitly allow cross-origin access. For best results, ensure images are from CORS-enabled servers or use data URLs."
       }
     }
   ]
@@ -94,25 +99,141 @@ Webpage URL:
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Webpage to PDF</h3>
-<p>This Webpage to PDF tool tries to fetch publicly accessible webpage HTML in the browser, render a preview and export it as a PDF. When a site blocks browser fetch, you can still use the tool by uploading a saved HTML file.</p>
-<p>Because browser security policies vary by website, fetch support is best-effort. Saved HTML upload is the more reliable pure frontend path.</p>
+<p>This webpage to PDF tool fetches publicly accessible webpage HTML or accepts uploaded HTML files, renders a preview, and exports the content as a PDF document using the html2canvas and jsPDF libraries.</p>
+<p>It is useful for archiving web content, creating offline copies of documentation, saving receipts or confirmations, and generating PDFs from HTML prototypes. When direct URL fetch fails due to CORS policies, uploading a saved HTML file provides a reliable alternative.</p>
+
+<h4>How It Works</h4>
+<p>The tool uses a two-step conversion process:</p>
+<ol>
+  <li><strong>HTML Rendering:</strong> The webpage HTML is parsed and rendered in a preview div, with scripts and potentially harmful elements removed for security.</li>
+  <li><strong>Capture & PDF Generation:</strong> html2canvas captures the rendered content as a canvas image, then jsPDF creates a multi-page PDF document from the canvas.</li>
+</ol>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Conversion flow:
+HTML → Sanitize → Render in DOM → html2canvas → Canvas → jsPDF → PDF
+
+// Libraries used:
+- html2canvas v1.4.1: DOM to canvas screenshot
+- jsPDF v2.5.1: Canvas to PDF document
+</pre>
+
+<h4>CORS and Fetch Limitations</h4>
+<p>Browser-based fetch requests are subject to Cross-Origin Resource Sharing (CORS) policies. Many websites block browser fetch to prevent scraping or embedding.</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Scenario</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Fetch Result</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Workaround</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Public URL with CORS headers</td>
+    <td style="border:1px solid #ddd;padding:8px">✓ May succeed</td>
+    <td style="border:1px solid #ddd;padding:8px">Direct fetch</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">URL without CORS headers</td>
+    <td style="border:1px solid #ddd;padding:8px">✗ Blocked</td>
+    <td style="border:1px solid #ddd;padding:8px">Upload saved HTML</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Site with anti-framing</td>
+    <td style="border:1px solid #ddd;padding:8px">✗ Blocked</td>
+    <td style="border:1px solid #ddd;padding:8px">Upload saved HTML</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Local file (file://)</td>
+    <td style="border:1px solid #ddd;padding:8px">✗ Blocked</td>
+    <td style="border:1px solid #ddd;padding:8px">Upload HTML file</td>
+  </tr>
+</table>
+
+<h4>HTML Sanitization</h4>
+<p>For security, the following elements and attributes are removed from input HTML:</p>
+<ul>
+  <li><strong>Script tags:</strong> All <code>&lt;script&gt;</code> elements removed</li>
+  <li><strong>IFrames:</strong> All <code>&lt;iframe&gt;</code> elements removed</li>
+  <li><strong>Object/Embed:</strong> All <code>&lt;object&gt;</code> and <code>&lt;embed&gt;</code> removed</li>
+  <li><strong>Event handlers:</strong> Attributes like <code>onclick</code>, <code>onload</code>, etc. stripped</li>
+  <li><strong>JavaScript URLs:</strong> <code>javascript:</code> protocols removed from href/src</li>
+</ul>
+
+<h4>PDF Output Settings</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Setting</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Value</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Page size</td>
+    <td style="border:1px solid #ddd;padding:8px">A4 (595 × 842 points)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Orientation</td>
+    <td style="border:1px solid #ddd;padding:8px">Portrait</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Canvas scale</td>
+    <td style="border:1px solid #ddd;padding:8px">2x (for better quality)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Background color</td>
+    <td style="border:1px solid #ddd;padding:8px">White (#ffffff)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Margins</td>
+    <td style="border:1px solid #ddd;padding:8px">20 points (approx. 7mm)</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Web archiving:</strong> Save important web pages for offline reference</li>
+  <li><strong>Documentation:</strong> Export API docs, tutorials, or guides as PDFs</li>
+  <li><strong>Receipts & confirmations:</strong> Preserve order confirmations and booking receipts</li>
+  <li><strong>Content review:</strong> Create PDFs from HTML prototypes for client review</li>
+  <li><strong>Research:</strong> Archive web sources for academic or professional research</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li>External images may not render if the server blocks cross-origin access</li>
+  <li>CSS print-specific styles (@media print) are not applied</li>
+  <li>Dynamic content loaded after initial render may not appear</li>
+  <li>PDF contains rasterized images, not selectable/searchable text</li>
+  <li>Very long pages may produce large PDF files</li>
+</ul>
+
+<h4>Alternative Approaches</h4>
+<p>For production-grade PDF generation, consider server-side tools:</p>
+<ul>
+  <li><strong>Puppeteer/Playwright:</strong> Headless Chrome for accurate HTML→PDF</li>
+  <li><strong>wkhtmltopdf:</strong> Uses WebKit for HTML rendering</li>
+  <li><strong>Prince XML:</strong> Commercial tool with CSS Paged Media support</li>
+  <li><strong>WeasyPrint:</strong> Python-based PDF generator with CSS support</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Webpage To Pdf?</dt>
-  <dd>Webpage To Pdf is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How does webpage to PDF conversion work in the browser?</dt>
+  <dd>This tool uses html2canvas to capture a screenshot of the rendered HTML content, then jsPDF to create a PDF document from the captured canvas. The HTML is sanitized to remove scripts and potentially harmful elements before rendering.</dd>
+
+  <dt>Why does fetching some webpages fail?</dt>
+  <dd>Many websites block browser-based fetch requests due to CORS (Cross-Origin Resource Sharing) policies and anti-framing protections. When fetch fails, upload a saved HTML file instead—save the page from your browser (Ctrl+S) and upload the .html file.</dd>
+
+  <dt>What are the limitations of browser-based PDF generation?</dt>
+  <dd>Browser-based PDF generation captures visual appearance as images, not selectable text. Complex layouts, external fonts, and dynamic content may not render perfectly. For production use, server-side tools like Puppeteer or wkhtmltopdf provide more reliable results.</dd>
+
+  <dt>How does the tool handle multi-page PDFs?</dt>
+  <dd>If the captured content exceeds one A4 page, the tool automatically adds additional pages. It calculates the remaining height and creates new pages as needed, maintaining the same image dimensions across all pages.</dd>
+
+  <dt>What security measures are in place?</dt>
+  <dd>The tool sanitizes HTML by removing script, iframe, object, embed tags and event handler attributes (onclick, etc.). It also strips javascript: URLs from href/src attributes. This prevents XSS attacks when rendering external HTML content.</dd>
+
+  <dt>Why might external images not appear in the PDF?</dt>
+  <dd>External images may be blocked by CORS policies when using html2canvas. The useCORS option is enabled, but the image server must explicitly allow cross-origin access. For best results, ensure images are from CORS-enabled servers or use data URLs.</dd>
 </dl>
 </section>
 </main>

@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Schema Validator – Validate JSON-LD Online | ToolForge</title>
-<meta name="description" content="Free online Schema Validator to validate JSON-LD and inspect required schema fields directly in your browser. Part of the ToolForge developer tools collection.">
+<title>Schema Validator – Validate JSON-LD Structured Data Online | ToolForge</title>
+<meta name="description" content="Validate JSON-LD structured data and inspect Schema.org markup. Check required fields for Organization, Article, Product, FAQ, and other schema types. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/schema-validator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Schema Validator – Validate JSON-LD Online | ToolForge">
-<meta property="og:description" content="Free online Schema Validator to validate JSON-LD and inspect required schema fields directly in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Schema Validator – Validate JSON-LD Structured Data Online | ToolForge">
+<meta property="og:description" content="Validate JSON-LD structured data and inspect Schema.org markup. Check required fields for Organization, Article, Product, FAQ, and other schema types. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/schema-validator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Schema Validator – Validate JSON-LD Online | ToolForge">
-<meta name="twitter:description" content="Free online Schema Validator to validate JSON-LD and inspect required schema fields directly in your browser. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Schema Validator – Validate JSON-LD Structured Data Online | ToolForge">
+<meta name="twitter:description" content="Validate JSON-LD structured data and inspect Schema.org markup. Check required fields for Organization, Article, Product, FAQ, and other schema types. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Schema Validator used for?",
+      "name": "What is JSON-LD structured data?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Schema Validator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "JSON-LD (JavaScript Object Notation for Linked Data) is a lightweight syntax for expressing structured data using Schema.org vocabulary. It's embedded in web pages using script tags with type='application/ld+json'. Search engines like Google use JSON-LD to understand page content and display rich results (rich snippets, knowledge panels, carousels)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What are required fields for Schema.org types?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Required fields vary by type. Organization requires 'name' and 'url'. Article requires 'headline', 'image', 'datePublished'. Product requires 'name', 'image', 'offers'. FAQPage requires 'mainEntity' with question/answer pairs. LocalBusiness requires 'name', 'address', 'telephone'. Missing required fields may prevent rich result eligibility."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "How do I validate JSON-LD syntax?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "First, ensure the JSON is valid (proper brackets, quotes, commas). Check that @context and @type are present. Verify property names match Schema.org vocabulary. Use validators like Google's Rich Results Test, Schema Markup Validator, or this tool to catch syntax errors and missing required fields."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the difference between @context and @type?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "@context defines the vocabulary being used (typically 'https://schema.org' for Schema.org). @type specifies the entity type (e.g., 'Organization', 'Article', 'Product'). @context tells parsers how to interpret terms; @type tells them what kind of thing is being described."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "Can JSON-LD have multiple types?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Yes, you can specify multiple types using an array: '@type': ['Article', 'ScholarlyArticle']. This indicates the entity belongs to multiple categories. You can also have multiple separate JSON-LD objects in the same script tag or across multiple script tags on the same page."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "What are common JSON-LD errors?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Common errors include: invalid JSON syntax (missing quotes, trailing commas), missing @context or @type, using wrong property names, missing required properties, incorrect nesting of objects, using text where URL is expected, and date format errors (should be ISO 8601: YYYY-MM-DD)."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>Schema Validator</h1>
-<p class="subtitle">Validate JSON-LD syntax and inspect core schema fields.</p>
+<p class="subtitle">Validate JSON-LD structured data and inspect Schema.org markup fields.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <label for="schema-input" class="sr-only">Schema JSON-LD input</label>
 <textarea id="schema-input" rows="14" class="pdf-editor pdf-editor-mono" aria-label="Schema JSON-LD input"></textarea>
@@ -83,27 +88,506 @@
 <label for="report" class="sr-only">Schema validation report</label>
 <textarea id="report" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Schema validation report" readonly></textarea>
 <p id="status" class="inline-status"></p>
+
 <section class="tool-seo">
 <h3>About Schema Validator</h3>
-<p>This schema validator checks JSON-LD syntax and helps you inspect the core fields in structured-data markup.</p>
-<p>It is useful for catching malformed schema, reviewing generated markup and making sure important fields are present before deployment.</p>
+<p>This JSON-LD validator checks structured data markup syntax and helps you inspect required Schema.org fields. JSON-LD (JavaScript Object Notation for Linked Data) is the preferred format for adding structured data to web pages, used by Google, Bing, and other search engines for rich results.</p>
+
+<h4>JSON-LD Structure Overview</h4>
+<p>JSON-LD uses a simple structure with context, type, and properties:</p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Basic JSON-LD Structure:
+
+{
+  "@context": "https://schema.org",
+  "@type": "EntityType",
+  "property1": "value1",
+  "property2": "value2",
+  "nestedProperty": {
+    "@type": "NestedType",
+    "nestedValue": "example"
+  }
+}
+
+Example - Organization Schema:
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ToolForge",
+  "url": "https://toolforge.site",
+  "logo": "https://toolforge.site/logo.png",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "telephone": "+1-555-123-4567"
+  }
+}
+</pre>
+
+<h4>Required Fields by Schema Type</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Schema Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Required Fields</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Recommended Fields</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Organization</td>
+    <td style="border:1px solid #ddd;padding:8px">name, url</td>
+    <td style="border:1px solid #ddd;padding:8px">logo, contactPoint, sameAs</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">LocalBusiness</td>
+    <td style="border:1px solid #ddd;padding:8px">name, address, telephone</td>
+    <td style="border:1px solid #ddd;padding:8px">openingHours, priceRange, image</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Article</td>
+    <td style="border:1px solid #ddd;padding:8px">headline, image, datePublished</td>
+    <td style="border:1px solid #ddd;padding:8px">author, publisher, dateModified</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Product</td>
+    <td style="border:1px solid #ddd;padding:8px">name, image, offers</td>
+    <td style="border:1px solid #ddd;padding:8px">description, brand, review, aggregateRating</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">FAQPage</td>
+    <td style="border:1px solid #ddd;padding:8px">mainEntity (Question/Answer)</td>
+    <td style="border:1px solid #ddd;padding:8px">name, description</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">BreadcrumbList</td>
+    <td style="border:1px solid #ddd;padding:8px">itemListElement (ListItem)</td>
+    <td style="border:1px solid #ddd;padding:8px">name, position</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Recipe</td>
+    <td style="border:1px solid #ddd;padding:8px">name, image, ingredients</td>
+    <td style="border:1px solid #ddd;padding:8px">cookTime, prepTime, nutrition</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Event</td>
+    <td style="border:1px solid #ddd;padding:8px">name, startDate, location</td>
+    <td style="border:1px solid #ddd;padding:8px">image, description, offers</td>
+  </tr>
+</table>
+
+<h4>Common Schema Types</h4>
+<p>Schema.org defines hundreds of types. Most commonly used for SEO:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Category</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Types</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Business</td>
+    <td style="border:1px solid #ddd;padding:8px">Organization, LocalBusiness, Corporation, NGO</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Content</td>
+    <td style="border:1px solid #ddd;padding:8px">Article, BlogPosting, NewsArticle, ScholarlyArticle</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Commerce</td>
+    <td style="border:1px solid #ddd;padding:8px">Product, Offer, AggregateOffer, Brand</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Media</td>
+    <td style="border:1px solid #ddd;padding:8px">ImageObject, VideoObject, AudioObject, MusicRecording</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">People</td>
+    <td style="border:1px solid #ddd;padding:8px">Person, ContactPoint, PostalAddress</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Structured Content</td>
+    <td style="border:1px solid #ddd;padding:8px">FAQPage, HowTo, Recipe, Event, Course</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Navigation</td>
+    <td style="border:1px solid #ddd;padding:8px">BreadcrumbList, SiteNavigationElement</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Reviews</td>
+    <td style="border:1px solid #ddd;padding:8px">Review, AggregateRating, Rating</td>
+  </tr>
+</table>
+
+<h4>JSON-LD Validation Algorithm</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript JSON-LD Validation:
+
+function validateJSONLD(input) {
+  const report = [];
+  const errors = [];
+  const warnings = [];
+
+  // Step 1: Parse JSON
+  let data;
+  try {
+    data = JSON.parse(input);
+  } catch (e) {
+    return { valid: false, error: "Invalid JSON: " + e.message };
+  }
+
+  // Step 2: Check required structural fields
+  if (!data["@context"]) {
+    errors.push("Missing @context field");
+  } else if (data["@context"] !== "https://schema.org") {
+    warnings.push("Non-standard @context: " + data["@context"]);
+  }
+
+  if (!data["@type"]) {
+    errors.push("Missing @type field");
+  }
+
+  // Step 3: Check type-specific required fields
+  const requiredFields = {
+    "Organization": ["name", "url"],
+    "LocalBusiness": ["name", "address", "telephone"],
+    "Article": ["headline", "image", "datePublished"],
+    "Product": ["name", "image", "offers"],
+    "FAQPage": ["mainEntity"]
+  };
+
+  const type = data["@type"];
+  if (requiredFields[type]) {
+    requiredFields[type].forEach(field => {
+      if (!data[field]) {
+        errors.push(`Missing required field for ${type}: ${field}`);
+      }
+    });
+  }
+
+  // Step 4: Check common optional fields
+  const commonFields = ["name", "description", "image", "url"];
+  commonFields.forEach(field => {
+    if (!data[field]) {
+      warnings.push(`Missing recommended field: ${field}`);
+    }
+  });
+
+  return {
+    valid: errors.length === 0,
+    errors,
+    warnings,
+    data
+  };
+}
+</pre>
+
+<h4>Example JSON-LD Templates</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Organization Schema:
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Company Name",
+  "url": "https://example.com",
+  "logo": "https://example.com/logo.png",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-800-555-1234",
+    "contactType": "customer service"
+  }
+}
+
+Article/BlogPosting Schema:
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Article Title",
+  "image": "https://example.com/image.jpg",
+  "datePublished": "2024-01-15",
+  "dateModified": "2024-01-20",
+  "author": {
+    "@type": "Person",
+    "name": "Author Name"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Publisher Name",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/logo.png"
+    }
+  }
+}
+
+FAQPage Schema:
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is JSON-LD?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JSON-LD is a lightweight syntax for expressing structured data."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why use structured data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Structured data helps search engines understand your content and display rich results."
+      }
+    }
+  ]
+}
+
+Product Schema:
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Product Name",
+  "image": "https://example.com/product.jpg",
+  "description": "Product description",
+  "brand": {
+    "@type": "Brand",
+    "name": "Brand Name"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "99.99",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.5",
+    "reviewCount": "128"
+  }
+}
+
+LocalBusiness Schema:
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Business Name",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Main St",
+    "addressLocality": "City",
+    "addressRegion": "CA",
+    "postalCode": "12345",
+    "addressCountry": "US"
+  },
+  "telephone": "+1-555-123-4567",
+  "openingHours": "Mo-Fr 09:00-17:00",
+  "priceRange": "$$"
+}
+
+BreadcrumbList Schema:
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://example.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Products",
+      "item": "https://example.com/products"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Widget",
+      "item": "https://example.com/products/widget"
+    }
+  ]
+}
+</pre>
+
+<h4>ISO 8601 Date Format</h4>
+<p>Schema.org requires dates in ISO 8601 format:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Date only</td>
+    <td style="border:1px solid #ddd;padding:8px">2024-01-15</td>
+    <td style="border:1px solid #ddd;padding:8px">datePublished, birthDate</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Date with time</td>
+    <td style="border:1px solid #ddd;padding:8px">2024-01-15T10:30:00</td>
+    <td style="border:1px solid #ddd;padding:8px">startDate for events</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">With timezone</td>
+    <td style="border:1px solid #ddd;padding:8px">2024-01-15T10:30:00-08:00</td>
+    <td style="border:1px solid #ddd;padding:8px">Precise timestamps</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Duration</td>
+    <td style="border:border:1px solid #ddd;padding:8px">PT1H30M</td>
+    <td style="border:1px solid #ddd;padding:8px">cookTime, duration (ISO 8601)</td>
+  </tr>
+</table>
+
+<h4>Rich Results Eligibility</h4>
+<p>Google uses structured data to power rich results in search:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Rich Result Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Required Schema</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Organization Logo</td>
+    <td style="border:1px solid #ddd;padding:8px">Organization with logo</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Article Rich Result</td>
+    <td style="border:1px solid #ddd;padding:8px">Article/BlogPosting/NewsArticle</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Product Snippet</td>
+    <td style="border:1px solid #ddd;padding:8px">Product with offers, price</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">FAQ Rich Result</td>
+    <td style="border:1px solid #ddd;padding:8px">FAQPage with Q/A pairs</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Recipe Rich Result</td>
+    <td style="border:1px solid #ddd;padding:8px">Recipe with required fields</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Event Rich Result</td>
+    <td style="border:1px solid #ddd;padding:8px">Event with date, location</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Breadcrumb</td>
+    <td style="border:1px solid #ddd;padding:8px">BreadcrumbList</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Local Business</td>
+    <td style="border:1px solid #ddd;padding:8px">LocalBusiness with NAP</td>
+  </tr>
+</table>
+
+<h4>Common JSON-LD Errors</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Error Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Fix</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Invalid JSON</td>
+    <td style="border:1px solid #ddd;padding:8px">Trailing comma, unquoted keys</td>
+    <td style="border:1px solid #ddd;padding:8px">Remove trailing commas, quote all keys</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Missing @context</td>
+    <td style="border:1px solid #ddd;padding:8px">No @context field</td>
+    <td style="border:1px solid #ddd;padding:8px">Add "@context": "https://schema.org"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Missing @type</td>
+    <td style="border:1px solid #ddd;padding:8px">No @type field</td>
+    <td style="border:1px solid #ddd;padding:8px">Add appropriate @type value</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Wrong property name</td>
+    <td style="border:1px solid #ddd;padding:8px">"title" instead of "headline"</td>
+    <td style="border:1px solid #ddd;padding:8px">Use Schema.org property names</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Invalid date format</td>
+    <td style="border:1px solid #ddd;padding:8px">"01/15/2024"</td>
+    <td style="border:1px solid #ddd;padding:8px">Use ISO 8601: "2024-01-15"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Nested type error</td>
+    <td style="border:1px solid #ddd;padding:8px">Missing @type in nested object</td>
+    <td style="border:1px solid #ddd;padding:8px">Add @type to all nested objects</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>SEO Optimization:</strong> Add structured data to improve search visibility and enable rich results</li>
+  <li><strong>Content Validation:</strong> Verify JSON-LD before deploying to production</li>
+  <li><strong>Agency Workflows:</strong> Check client markup for completeness and correctness</li>
+  <li><strong>Learning Schema.org:</strong> Understand required fields for different entity types</li>
+  <li><strong>Migration Projects:</strong> Validate converted markup from Microdata/RDFa to JSON-LD</li>
+  <li><strong>CMS Integration:</strong> Test dynamically generated structured data</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>Syntax validation only:</strong> Checks JSON structure and required fields, not semantic correctness</li>
+  <li><strong>Limited type coverage:</strong> Validates common types; may not cover all 1000+ Schema.org types</li>
+  <li><strong>No Google validation:</strong> For official rich result testing, use Google's Rich Results Test</li>
+  <li><strong>No external references:</strong> Doesn't validate URLs or check if referenced resources exist</li>
+  <li><strong>No graph validation:</strong> Limited support for @graph with multiple entities</li>
+</ul>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Use JSON-LD format:</strong> Preferred by Google over Microdata and RDFa</li>
+  <li><strong>Include all required fields:</strong> Missing required fields disqualify rich results</li>
+  <li><strong>Add recommended fields:</strong> More fields provide better context to search engines</li>
+  <li><strong>Use full URLs:</strong> Always use absolute URLs for image, url properties</li>
+  <li><strong>Validate before deploying:</strong> Test markup in staging before production</li>
+  <li><strong>Monitor in Search Console:</strong> Use Google Search Console to track structured data issues</li>
+</ul>
+</section>
+
+<section class="how-to-use">
+<h3>How to Use Schema Validator</h3>
+<ol class="how-to-steps">
+  <li><strong>Paste JSON-LD:</strong> Enter your structured data markup in the input textarea.</li>
+  <li><strong>Click Validate:</strong> The tool checks JSON syntax and required fields.</li>
+  <li><strong>Review report:</strong> Check for missing required fields and warnings.</li>
+  <li><strong>Fix errors:</strong> Update your markup based on validation feedback.</li>
+  <li><strong>Copy report:</strong> Use Copy Report to save validation results.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Ensure @context is "https://schema.org" for standard Schema.org vocabulary</li>
+  <li>Check that @type matches a valid Schema.org type</li>
+  <li>Use ISO 8601 format for all date values (YYYY-MM-DD)</li>
+  <li>Include nested @type for all nested objects (address, author, etc.)</li>
+  <li>For official Google testing, also use Rich Results Test tool</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Schema Validator used for?</dt>
-  <dd>Schema Validator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is JSON-LD structured data?</dt>
+  <dd>JSON-LD (JavaScript Object Notation for Linked Data) is a lightweight syntax for expressing structured data using Schema.org vocabulary. It's embedded in web pages using script tags with type='application/ld+json'. Search engines like Google use JSON-LD to understand page content and display rich results (rich snippets, knowledge panels, carousels).</dd>
+
+  <dt>What are required fields for Schema.org types?</dt>
+  <dd>Required fields vary by type. Organization requires 'name' and 'url'. Article requires 'headline', 'image', 'datePublished'. Product requires 'name', 'image', 'offers'. FAQPage requires 'mainEntity' with question/answer pairs. LocalBusiness requires 'name', 'address', 'telephone'. Missing required fields may prevent rich result eligibility.</dd>
+
+  <dt>How do I validate JSON-LD syntax?</dt>
+  <dd>First, ensure the JSON is valid (proper brackets, quotes, commas). Check that @context and @type are present. Verify property names match Schema.org vocabulary. Use validators like Google's Rich Results Test, Schema Markup Validator, or this tool to catch syntax errors and missing required fields.</dd>
+
+  <dt>What is the difference between @context and @type?</dt>
+  <dd>@context defines the vocabulary being used (typically 'https://schema.org' for Schema.org). @type specifies the entity type (e.g., 'Organization', 'Article', 'Product'). @context tells parsers how to interpret terms; @type tells them what kind of thing is being described.</dd>
+
+  <dt>Can JSON-LD have multiple types?</dt>
+  <dd>Yes, you can specify multiple types using an array: '@type': ['Article', 'ScholarlyArticle']. This indicates the entity belongs to multiple categories. You can also have multiple separate JSON-LD objects in the same script tag or across multiple script tags on the same page.</dd>
+
+  <dt>What are common JSON-LD errors?</dt>
+  <dd>Common errors include: invalid JSON syntax (missing quotes, trailing commas), missing @context or @type, using wrong property names, missing required properties, incorrect nesting of objects, using text where URL is expected, and date format errors (should be ISO 8601: YYYY-MM-DD).</dd>
 </dl>
 </section>
 </main>
@@ -123,16 +607,28 @@ return
 try{
 let data=JSON.parse(input)
 let report=[]
-report.push("@context: "+(data["@context"]||"missing"))
-report.push("@type: "+(data["@type"]||"missing"))
-;["name","url","description","headline","mainEntity"].forEach(function(field){
+report.push("=== JSON-LD Validation Report ===\n")
+report.push("@context: "+(data["@context"]||"MISSING - Required field"))
+report.push("@type: "+(data["@type"]||"MISSING - Required field"))
+report.push("")
+report.push("=== Core Fields ===")
+;["name","url","description","headline","mainEntity","image","author","publisher"].forEach(function(field){
 report.push(field+": "+(data[field]!==undefined?"present":"missing"))
 })
+report.push("")
+report.push("=== Nested Objects ===")
+for(var key in data){if(typeof data[key]==="object"&&data[key]!==null&&key[0]!=="@"){report.push(key+": "+(data[key]["@type"]?"@type="+data[key]["@type"]:"object (no @type)"))}}
+report.push("")
+report.push("=== Validation Status ===")
+var hasErrors=false
+if(!data["@context"]){report.push("ERROR: Missing @context");hasErrors=true}
+if(!data["@type"]){report.push("ERROR: Missing @type");hasErrors=true}
+if(!hasErrors){report.push("Basic structure: OK")}
 document.getElementById("report").value=report.join("\n")
 setStatus("Schema validated.","#16a34a")
 }catch(e){
 document.getElementById("report").value=""
-setStatus("Invalid JSON-LD input.","#b91c1c")
+setStatus("Invalid JSON-LD: "+e.message,"#b91c1c")
 }
 }
 function copyReport(){
@@ -147,7 +643,7 @@ setStatus("Validation report copied.","#16a34a")
 setStatus("Copy failed.","#b91c1c")
 })
 }
-document.getElementById("schema-input").value='{\n  "@context": "https://schema.org",\n  "@type": "Organization",\n  "name": "ToolForge",\n  "url": "https://toolforge.site"\n}'
+document.getElementById("schema-input").value='{\n  "@context": "https://schema.org",\n  "@type": "Organization",\n  "name": "ToolForge",\n  "url": "https://toolforge.site",\n  "logo": "https://toolforge.site/logo.png"\n}'
 validateSchema()
 </script>
 <script src="/js/favorites.js"></script>

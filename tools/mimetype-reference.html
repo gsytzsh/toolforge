@@ -2,26 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>MIME Type Reference – Common File Types Table | ToolForge</title>
-<meta name="description" content="Free online MIME type reference for common file types. Part of the ToolForge developer tools collection.">
+<title>MIME Type Reference – Complete File Extensions and Content-Types | ToolForge</title>
+<meta name="description" content="Comprehensive MIME type reference table with file extensions, Content-Type headers, and file type categories. Includes web, image, audio, video, document, and archive formats. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/mimetype-reference.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="MIME Type Reference – Common File Types Table | ToolForge">
-<meta property="og:description" content="Free online MIME type reference. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="MIME Type Reference – Complete File Extensions and Content-Types | ToolForge">
+<meta property="og:description" content="Comprehensive MIME type reference table with file extensions and Content-Type headers.">
 <meta property="og:url" content="https://toolforge.site/tools/mimetype-reference.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MIME Type Reference – Common File Types Table | ToolForge">
-<meta name="twitter:description" content="Free online MIME type reference. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="MIME Type Reference – Complete File Extensions and Content-Types | ToolForge">
+<meta name="twitter:description" content="Comprehensive MIME type reference table with file extensions and Content-Type headers.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
-.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem}
+.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem;margin:16px 0}
 .ref-table th,.ref-table td{border:1px solid #eee;padding:8px 12px;text-align:left}
 .ref-table th{background:#f8fafc;font-weight:600}
 .ref-table code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:0.9em}
 .ref-table input{width:100%;max-width:200px;padding:6px;border:1px solid #ddd;border-radius:4px}
+.filter-box{margin-bottom:16px}
+.category-header{background:#e7f3ff;padding:10px 12px;font-weight:600;border-radius:6px;margin:20px 0 10px}
 </style>
 
 <script type="application/ld+json">
@@ -31,45 +33,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Mimetype Reference used for?",
+      "name": "What is a MIME type?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Mimetype Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "MIME (Multipurpose Internet Mail Extensions) type is a standardized identifier that tells browsers and servers what type of file is being transmitted. Format: type/subtype (e.g., text/html, image/png). MIME types are used in Content-Type headers, file uploads, and API responses."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "Why are MIME types important?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "MIME types ensure correct file handling: browsers render HTML/CSS properly, plugins handle specific formats, downloads get correct extensions, and APIs parse request/response bodies. Wrong MIME types cause security issues, broken downloads, and rendering problems."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What is the Content-Type header?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Content-Type is an HTTP header that specifies the MIME type of a resource. Example: 'Content-Type: text/html; charset=utf-8'. Servers send this with responses; clients send it with POST/PUT requests containing body data (forms, JSON, file uploads)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is application/octet-stream?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "application/octet-stream is the generic MIME type for binary data. Used when the specific type is unknown or when forcing file downloads. Browsers typically download (not display) octet-stream files. Prefer specific MIME types when known."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "How do I add MIME types to my server?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Apache: Add 'AddType' directives to .htaccess or httpd.conf. Nginx: Use 'types' block in nginx.conf. IIS: Configure via IIS Manager or web.config. Node.js/Express: Use mime-types package. Most modern frameworks handle common types automatically."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "What MIME type for JSON?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "application/json is the standard MIME type for JSON. Also acceptable: text/json (less common). When sending JSON APIs, use: Content-Type: application/json; charset=utf-8. JavaScript files use text/javascript (application/javascript is deprecated)."
       }
     }
   ]
@@ -79,83 +86,328 @@
 <body>
 <main class="container">
 <h1>MIME Type Reference</h1>
-<p class="subtitle">Reference table for common MIME types and file extensions.</p>
+<p class="subtitle">Comprehensive reference table for MIME types (Content-Types) and file extensions.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
+<div class="filter-box">
 <label for="filter" class="sr-only">Filter</label>
-<input id="filter" placeholder="Search by MIME type or extension" style="width:100%;max-width:400px;padding:10px;margin-bottom:16px;border:1px solid #ddd;border-radius:6px" aria-label="Filter">
+<input id="filter" placeholder="Search by MIME type, extension, or description..." style="width:100%;max-width:500px;padding:10px;border:1px solid #ddd;border-radius:6px;font-size:14px" aria-label="Filter">
+</div>
 
-<h3>Common MIME Types</h3>
-<table class="ref-table">
-<thead><tr><th>MIME Type</th><th>Extensions</th><th>Description</th></tr></thead>
-<tbody id="body"></tbody>
-</table>
+<div id="mime-content"></div>
 
 <section class="tool-seo">
 <h3>About MIME Type Reference</h3>
-<p>This reference lists common MIME types used in Content-Type headers, file uploads and web APIs.</p>
-<p>It is useful for configuring servers, validating uploads and setting correct Content-Type in HTTP responses.</p>
+<p>This reference lists MIME types used in HTTP Content-Type headers, file uploads, email attachments, and web APIs. MIME types follow the format <code>type/subtype</code> where type is the general category (text, image, application) and subtype specifies the exact format.</p>
+<p>Correct MIME types ensure browsers render content properly, downloads work correctly, and APIs parse data as expected.</p>
+
+<h4>MIME Type Structure</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:14px;overflow:auto">
+Format: type/subtype[; parameters]
+
+Types:
+  application  - Binary data, application-specific formats
+  audio        - Audio files and streams
+  font         - Font files (WOFF, TTF, OTF)
+  image        - Image files (PNG, JPEG, GIF, SVG)
+  message      - Email messages, MIME parts
+  model        - 3D models, CAD files
+  multipart    - Multiple parts (form-data, signed messages)
+  text         - Text files (HTML, CSS, JavaScript, plain text)
+  video        - Video files and streams
+
+Parameters:
+  charset=utf-8  - Character encoding for text types
+  boundary=...   - Boundary for multipart types
+</pre>
+
+<h4>Setting Content-Type in Different Contexts</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// HTTP Response Header
+Content-Type: text/html; charset=utf-8
+
+// Apache (.htaccess)
+AddType application/json .json
+AddType image/webp .webp
+
+// Nginx (nginx.conf)
+types {
+    application/json  json;
+    image/webp        webp;
+}
+
+// Node.js Express
+res.setHeader('Content-Type', 'application/json');
+res.json({ key: 'value' });
+
+// PHP
+header('Content-Type: application/json');
+echo json_encode($data);
+
+// Python Flask
+return jsonify({'key': 'value'})  # Auto-sets application/json
+
+// HTML file input accept
+&lt;input type="file" accept="image/png,image/jpeg"&gt;
+
+// JavaScript fetch
+fetch('/api', {
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(data)
+});
+</pre>
+
+<h4>MIME Types by Category</h4>
+
+<h5>Text Formats</h5>
+<table class="ref-table">
+<thead><tr><th>MIME Type</th><th>Extensions</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>text/html</code></td><td>.html, .htm</td><td>HTML document</td></tr>
+<tr><td><code>text/css</code></td><td>.css</td><td>CSS stylesheet</td></tr>
+<tr><td><code>text/javascript</code></td><td>.js, .mjs</td><td>JavaScript file</td></tr>
+<tr><td><code>text/plain</code></td><td>.txt, .text</td><td>Plain text</td></tr>
+<tr><td><code>text/xml</code></td><td>.xml</td><td>XML document</td></tr>
+<tr><td><code>text/csv</code></td><td>.csv</td><td>Comma-separated values</td></tr>
+<tr><td><code>text/markdown</code></td><td>.md, .markdown</td><td>Markdown document</td></tr>
+<tr><td><code>text/yaml</code></td><td>.yaml, .yml</td><td>YAML data</td></tr>
+<tr><td><code>text/rtf</code></td><td>.rtf</td><td>Rich Text Format</td></tr>
+</tbody>
+</table>
+
+<h5>Application/Data Formats</h5>
+<table class="ref-table">
+<thead><tr><th>MIME Type</th><th>Extensions</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>application/json</code></td><td>.json</td><td>JSON data</td></tr>
+<tr><td><code>application/xml</code></td><td>.xml</td><td>XML document</td></tr>
+<tr><td><code>application/pdf</code></td><td>.pdf</td><td>PDF document</td></tr>
+<tr><td><code>application/msword</code></td><td>.doc</td><td>Microsoft Word</td></tr>
+<tr><td><code>application/vnd.openxmlformats-officedocument.wordprocessingml.document</code></td><td>.docx</td><td>Word 2007+</td></tr>
+<tr><td><code>application/vnd.ms-excel</code></td><td>.xls</td><td>Microsoft Excel</td></tr>
+<tr><td><code>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</code></td><td>.xlsx</td><td>Excel 2007+</td></tr>
+<tr><td><code>application/vnd.ms-powerpoint</code></td><td>.ppt</td><td>PowerPoint</td></tr>
+<tr><td><code>application/vnd.openxmlformats-officedocument.presentationml.presentation</code></td><td>.pptx</td><td>PowerPoint 2007+</td></tr>
+<tr><td><code>application/rtf</code></td><td>.rtf</td><td>Rich Text Format</td></tr>
+<tr><td><code>application/x-www-form-urlencoded</code></td><td>—</td><td>Form submission</td></tr>
+<tr><td><code>application/graphql</code></td><td>—</td><td>GraphQL query</td></tr>
+</tbody>
+</table>
+
+<h5>Image Formats</h5>
+<table class="ref-table">
+<thead><tr><th>MIME Type</th><th>Extensions</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>image/jpeg</code></td><td>.jpg, .jpeg</td><td>JPEG image</td></tr>
+<tr><td><code>image/png</code></td><td>.png</td><td>PNG image</td></tr>
+<tr><td><code>image/gif</code></td><td>.gif</td><td>GIF image</td></tr>
+<tr><td><code>image/webp</code></td><td>.webp</td><td>WebP image</td></tr>
+<tr><td><code>image/svg+xml</code></td><td>.svg</td><td>SVG vector image</td></tr>
+<tr><td><code>image/x-icon</code></td><td>.ico</td><td>Favicon</td></tr>
+<tr><td><code>image/bmp</code></td><td>.bmp</td><td>Bitmap image</td></tr>
+<tr><td><code>image/tiff</code></td><td>.tif, .tiff</td><td>TIFF image</td></tr>
+<tr><td><code>image/avif</code></td><td>.avif</td><td>AV1 image format</td></tr>
+<tr><td><code>image/heic</code></td><td>.heic</td><td>HEIF image (Apple)</td></tr>
+</tbody>
+</table>
+
+<h5>Audio Formats</h5>
+<table class="ref-table">
+<thead><tr><th>MIME Type</th><th>Extensions</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>audio/mpeg</code></td><td>.mp3</td><td>MP3 audio</td></tr>
+<tr><td><code>audio/wav</code></td><td>.wav</td><td>WAV audio</td></tr>
+<tr><td><code>audio/ogg</code></td><td>.ogg</td><td>Ogg Vorbis</td></tr>
+<tr><td><code>audio/webm</code></td><td>.webm</td><td>WebM audio</td></tr>
+<tr><td><code>audio/mp4</code></td><td>.m4a, .aac</td><td>AAC/M4A audio</td></tr>
+<tr><td><code>audio/flac</code></td><td>.flac</td><td>FLAC lossless</td></tr>
+<tr><td><code>audio/midi</code></td><td>.mid, .midi</td><td>MIDI file</td></tr>
+</tbody>
+</table>
+
+<h5>Video Formats</h5>
+<table class="ref-table">
+<thead><tr><th>MIME Type</th><th>Extensions</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>video/mp4</code></td><td>.mp4, .m4v</td><td>MP4 video</td></tr>
+<tr><td><code>video/webm</code></td><td>.webm</td><td>WebM video</td></tr>
+<tr><td><code>video/ogg</code></td><td>.ogv</td><td>Ogg video</td></tr>
+<tr><td><code>video/quicktime</code></td><td>.mov</td><td>QuickTime</td></tr>
+<tr><td><code>video/x-msvideo</code></td><td>.avi</td><td>AVI video</td></tr>
+<tr><td><code>video/x-matroska</code></td><td>.mkv</td><td>Matroska</td></tr>
+<tr><td><code>video/mpeg</code></td><td>.mpeg, .mpg</td><td>MPEG video</td></tr>
+</tbody>
+</table>
+
+<h5>Archive/Compressed Formats</h5>
+<table class="ref-table">
+<thead><tr><th>MIME Type</th><th>Extensions</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>application/zip</code></td><td>.zip</td><td>ZIP archive</td></tr>
+<tr><td><code>application/gzip</code></td><td>.gz, .gzip</td><td>Gzip compressed</td></tr>
+<tr><td><code>application/x-tar</code></td><td>.tar</td><td>TAR archive</td></tr>
+<tr><td><code>application/x-rar-compressed</code></td><td>.rar</td><td>RAR archive</td></tr>
+<tr><td><code>application/x-7z-compressed</code></td><td>.7z</td><td>7-Zip archive</td></tr>
+<tr><td><code>application/x-bzip2</code></td><td>.bz2</td><td>Bzip2 compressed</td></tr>
+<tr><td><code>application/x-xz</code></td><td>.xz</td><td>XZ compressed</td></tr>
+</tbody>
+</table>
+
+<h5>Font Formats</h5>
+<table class="ref-table">
+<thead><tr><th>MIME Type</th><th>Extensions</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>font/woff</code></td><td>.woff</td><td>WOFF font</td></tr>
+<tr><td><code>font/woff2</code></td><td>.woff2</td><td>WOFF2 font</td></tr>
+<tr><td><code>font/ttf</code></td><td>.ttf</td><td>TrueType font</td></tr>
+<tr><td><code>font/otf</code></td><td>.otf</td><td>OpenType font</td></tr>
+<tr><td><code>application/font-sfnt</code></td><td>.ttf, .otf</td><td>SFNT fonts (legacy)</td></tr>
+</tbody>
+</table>
+
+<h5>Multipart/Binary</h5>
+<table class="ref-table">
+<thead><tr><th>MIME Type</th><th>Extensions</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>multipart/form-data</code></td><td>—</td><td>File upload form</td></tr>
+<tr><td><code>multipart/mixed</code></td><td>—</td><td>Mixed content parts</td></tr>
+<tr><td><code>application/octet-stream</code></td><td>.bin, .data</td><td>Generic binary</td></tr>
+<tr><td><code>application/x-executable</code></td><td>.exe</td><td>Executable binary</td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Mimetype Reference used for?</dt>
-  <dd>Mimetype Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is a MIME type?</dt>
+  <dd>MIME (Multipurpose Internet Mail Extensions) type is a standardized identifier that tells browsers and servers what type of file is being transmitted. Format: type/subtype (e.g., text/html, image/png). MIME types are used in Content-Type headers, file uploads, and API responses.</dd>
+
+  <dt>Why are MIME types important?</dt>
+  <dd>MIME types ensure correct file handling: browsers render HTML/CSS properly, plugins handle specific formats, downloads get correct extensions, and APIs parse request/response bodies. Wrong MIME types cause security issues, broken downloads, and rendering problems.</dd>
+
+  <dt>What is the Content-Type header?</dt>
+  <dd>Content-Type is an HTTP header that specifies the MIME type of a resource. Example: 'Content-Type: text/html; charset=utf-8'. Servers send this with responses; clients send it with POST/PUT requests containing body data (forms, JSON, file uploads).</dd>
+
+  <dt>What is application/octet-stream?</dt>
+  <dd>application/octet-stream is the generic MIME type for binary data. Used when the specific type is unknown or when forcing file downloads. Browsers typically download (not display) octet-stream files. Prefer specific MIME types when known.</dd>
+
+  <dt>How do I add MIME types to my server?</dt>
+  <dd>Apache: Add 'AddType' directives to .htaccess or httpd.conf. Nginx: Use 'types' block in nginx.conf. IIS: Configure via IIS Manager or web.config. Node.js/Express: Use mime-types package. Most modern frameworks handle common types automatically.</dd>
+
+  <dt>What MIME type for JSON?</dt>
+  <dd>application/json is the standard MIME type for JSON. Also acceptable: text/json (less common). When sending JSON APIs, use: Content-Type: application/json; charset=utf-8. JavaScript files use text/javascript (application/javascript is deprecated).</dd>
 </dl>
 </section>
 </main>
 <script>
 var mimes=[
+{category:"Text Formats",types:[
 ["text/html",".html,.htm","HTML document"],
-["text/plain",".txt","Plain text"],
 ["text/css",".css","CSS stylesheet"],
 ["text/javascript",".js,.mjs","JavaScript"],
+["text/plain",".txt","Plain text"],
+["text/xml",".xml","XML document"],
+["text/csv",".csv","CSV data"],
+["text/markdown",".md,.markdown","Markdown"],
+["text/yaml",".yaml,.yml","YAML"],
+["text/rtf",".rtf","Rich Text Format"]
+]},
+{category:"Application/Data",types:[
 ["application/json",".json","JSON data"],
 ["application/xml",".xml","XML document"],
 ["application/pdf",".pdf","PDF document"],
+["application/msword",".doc","Microsoft Word 97-2003"],
+["application/vnd.openxmlformats-officedocument.wordprocessingml.document",".docx","Word 2007+"],
+["application/vnd.ms-excel",".xls","Excel 97-2003"],
+["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",".xlsx","Excel 2007+"],
+["application/vnd.ms-powerpoint",".ppt","PowerPoint 97-2003"],
+["application/vnd.openxmlformats-officedocument.presentationml.presentation",".pptx","PowerPoint 2007+"],
+["application/rtf",".rtf","Rich Text Format"],
+["application/x-www-form-urlencoded","—","Form data"],
+["application/graphql","—","GraphQL query"]
+]},
+{category:"Image Formats",types:[
 ["image/jpeg",".jpg,.jpeg","JPEG image"],
 ["image/png",".png","PNG image"],
 ["image/gif",".gif","GIF image"],
 ["image/webp",".webp","WebP image"],
-["image/svg+xml",".svg","SVG image"],
+["image/svg+xml",".svg","SVG vector"],
 ["image/x-icon",".ico","Favicon"],
+["image/bmp",".bmp","Bitmap image"],
+["image/tiff",".tif,.tiff","TIFF image"],
+["image/avif",".avif","AV1 image"],
+["image/heic",".heic","HEIF image"]
+]},
+{category:"Audio Formats",types:[
 ["audio/mpeg",".mp3","MP3 audio"],
 ["audio/wav",".wav","WAV audio"],
-["video/mp4",".mp4","MP4 video"],
+["audio/ogg",".ogg","Ogg Vorbis"],
+["audio/webm",".webm","WebM audio"],
+["audio/mp4",".m4a,.aac","AAC/M4A audio"],
+["audio/flac",".flac","FLAC lossless"],
+["audio/midi",".mid,.midi","MIDI file"]
+]},
+{category:"Video Formats",types:[
+["video/mp4",".mp4,.m4v","MP4 video"],
 ["video/webm",".webm","WebM video"],
-["application/octet-stream",".bin","Binary"],
+["video/ogg",".ogv","Ogg video"],
+["video/quicktime",".mov","QuickTime"],
+["video/x-msvideo",".avi","AVI video"],
+["video/x-matroska",".mkv","Matroska"],
+["video/mpeg",".mpeg,.mpg","MPEG video"]
+]},
+{category:"Archive Formats",types:[
 ["application/zip",".zip","ZIP archive"],
 ["application/gzip",".gz,.gzip","Gzip"],
 ["application/x-tar",".tar","TAR archive"],
+["application/x-rar-compressed",".rar","RAR archive"],
+["application/x-7z-compressed",".7z","7-Zip"],
+["application/x-bzip2",".bz2","Bzip2"],
+["application/x-xz",".xz","XZ compressed"]
+]},
+{category:"Font Formats",types:[
 ["font/woff",".woff","WOFF font"],
 ["font/woff2",".woff2","WOFF2 font"],
-["application/x-www-form-urlencoded","—","Form data"],
-["multipart/form-data","—","File upload"]
-]
-function render(){
-var q=(document.getElementById("filter").value||"").toLowerCase().trim()
-var tbody=document.getElementById("body")
-tbody.innerHTML=""
-mimes.forEach(function(m){
-if(q&&m[0].toLowerCase().indexOf(q)===-1&&m[1].toLowerCase().indexOf(q)===-1&&m[2].toLowerCase().indexOf(q)===-1)return
-var tr=document.createElement("tr")
-tr.innerHTML="<td><code>"+m[0]+"</code></td><td><code>"+m[1]+"</code></td><td>"+m[2]+"</td>"
-tbody.appendChild(tr)
-})
+["font/ttf",".ttf","TrueType font"],
+["font/otf",".otf","OpenType font"],
+["application/font-sfnt",".ttf,.otf","SFNT fonts"]
+]},
+{category:"Multipart/Binary",types:[
+["multipart/form-data","—","File upload form"],
+["multipart/mixed","—","Mixed content"],
+["application/octet-stream",".bin,.data","Binary data"],
+["application/x-executable",".exe","Executable"]]
 }
-document.getElementById("filter").addEventListener("input",render)
-render()
+];
+function render(){
+var q=(document.getElementById("filter").value||"").toLowerCase().trim();
+var container=document.getElementById("mime-content");
+container.innerHTML="";
+mimes.forEach(function(cat){
+var filtered=cat.types.filter(function(m){
+if(!q)return true;
+return m[0].toLowerCase().indexOf(q)>=0||m[1].toLowerCase().indexOf(q)>=0||m[2].toLowerCase().indexOf(q)>=0;
+});
+if(filtered.length===0)return;
+var section=document.createElement("div");
+section.innerHTML='<div class="category-header">'+cat.category+'</div>';
+var table=document.createElement("table");
+table.className="ref-table";
+table.innerHTML='<thead><tr><th>MIME Type</th><th>Extensions</th><th>Description</th></tr></thead>';
+var tbody=document.createElement("tbody");
+filtered.forEach(function(m){
+var tr=document.createElement("tr");
+tr.innerHTML='<td><code>'+m[0]+'</code></td><td><code>'+m[1]+'</code></td><td>'+m[2]+'</td>';
+tbody.appendChild(tr);
+});
+table.appendChild(tbody);
+section.appendChild(table);
+container.appendChild(section);
+});
+}
+document.getElementById("filter").addEventListener("input",render);
+render();
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>

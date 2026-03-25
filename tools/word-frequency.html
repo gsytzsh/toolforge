@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Word Frequency – Count Word Occurrences Online | ToolForge</title>
-<meta name="description" content="Free online Word Frequency tool to count how often each word appears in text. Part of the ToolForge developer tools collection.">
+<title>Word Frequency Analyzer – Count Word Occurrences in Text | ToolForge</title>
+<meta name="description" content="Word Frequency Analyzer counts word occurrences in text for content analysis, SEO keyword density, and text mining. Identify most frequently used words instantly. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/word-frequency.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Word Frequency – Count Word Occurrences Online | ToolForge">
-<meta property="og:description" content="Free online Word Frequency tool to count how often each word appears in text.">
+<meta property="og:title" content="Word Frequency Analyzer – Count Word Occurrences in Text | ToolForge">
+<meta property="og:description" content="Word Frequency Analyzer counts word occurrences in text for content analysis, SEO keyword density, and text mining. Identify most frequently used words instantly. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/word-frequency.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Word Frequency – Count Word Occurrences Online | ToolForge">
-<meta name="twitter:description" content="Free online Word Frequency tool to count how often each word appears in text.">
+<meta name="twitter:title" content="Word Frequency Analyzer – Count Word Occurrences in Text | ToolForge">
+<meta name="twitter:description" content="Word Frequency Analyzer counts word occurrences in text for content analysis, SEO keyword density, and text mining. Identify most frequently used words instantly. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Word Frequency?",
+      "name": "What is word frequency analysis and why is it useful?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Word Frequency is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Word frequency analysis counts how often each word appears in a text. It's useful for identifying key themes, analyzing writing style, SEO keyword density checking, content optimization, and text mining. High-frequency words often indicate the main topics of a document."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How does word frequency counting work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "The analyzer tokenizes text by splitting on whitespace and punctuation, converts to lowercase for case-insensitive counting, then uses a hash map to count occurrences. Results are sorted by frequency (descending) to show the most common words first."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What are stop words and should they be excluded?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Stop words are common function words (the, a, is, in, of, etc.) that appear frequently but carry little semantic meaning. For topic analysis, excluding stop words reveals more meaningful keywords. This tool counts all words; you can manually filter results or use a dedicated stop word list."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How is word frequency used in SEO?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "SEO professionals use word frequency to check keyword density—the percentage of times a target keyword appears relative to total words. Optimal density is typically 1-3%. Too high (keyword stuffing) can hurt rankings; too low may not signal relevance to search engines."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What is Zipf's Law in word frequency?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Zipf's Law states that in natural language, word frequency is inversely proportional to rank: the most frequent word occurs twice as often as the 2nd most frequent, three times as often as the 3rd, etc. This pattern holds across most large text corpora."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How do I interpret word frequency results?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "High-frequency content words (nouns, verbs, adjectives) indicate main themes. Function words (the, is, at) are typically less meaningful. Compare frequencies across documents to identify stylistic differences or topic shifts. Look for unexpectedly frequent terms that may need editing."
       }
     }
   ]
@@ -93,25 +98,152 @@
 <p id="status" class="inline-status"></p>
 
 <section class="tool-seo">
-<h3>About Word Frequency</h3>
-<p>This Word Frequency tool counts how often each word appears in your text. Useful for content analysis, SEO keyword density and text mining.</p>
+<h3>About Word Frequency Analyzer</h3>
+<p>This word frequency analyzer counts how often each word appears in your text and displays results sorted by occurrence count. It uses case-insensitive matching and strips punctuation for accurate word counting.</p>
+<p>It is useful for content analysis, SEO keyword density checking, text mining, writing style analysis, identifying overused words in editing, and linguistic research where understanding word distribution patterns matters.</p>
+
+<h4>How Word Frequency Analysis Works</h4>
+<p>The analyzer processes text through several steps:</p>
+<ol>
+  <li><strong>Normalization:</strong> Text is converted to lowercase for case-insensitive counting</li>
+  <li><strong>Tokenization:</strong> Text is split into individual words (tokens)</li>
+  <li><strong>Cleaning:</strong> Punctuation and special characters are removed</li>
+  <li><strong>Counting:</strong> A hash map tracks occurrence count for each unique word</li>
+  <li><strong>Sorting:</strong> Results are sorted by frequency in descending order</li>
+</ol>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Analysis algorithm:
+1. text.toLowerCase()
+2. replace(/[^\w\s]/g, " ")  // Remove punctuation
+3. split(/\s+/)              // Split on whitespace
+4. filter(Boolean)           // Remove empty strings
+5. Count occurrences in map
+6. Sort by count (descending)
+</pre>
+
+<h4>Word Frequency Metrics</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Metric</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Total Words</td>
+    <td style="border:1px solid #ddd;padding:8px">Total token count in the text</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Unique Words</td>
+    <td style="border:1px solid #ddd;padding:8px">Number of distinct words (vocabulary size)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Frequency</td>
+    <td style="border:1px solid #ddd;padding:8px">How many times each word appears</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Density</td>
+    <td style="border:1px solid #ddd;padding:8px">Frequency as percentage of total words</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Field</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Application</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">SEO</td>
+    <td style="border:1px solid #ddd;padding:8px">Keyword density analysis, content optimization</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Content Writing</td>
+    <td style="border:1px solid #ddd;padding:8px">Identify overused words, improve variety</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Linguistics</td>
+    <td style="border:1px solid #ddd;padding:8px">Corpus analysis, language pattern research</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Education</td>
+    <td style="border:1px solid #ddd;padding:8px">Vocabulary assessment, readability analysis</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Data Science</td>
+    <td style="border:1px solid #ddd;padding:8px">Text preprocessing, feature extraction for NLP</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Legal/Compliance</td>
+    <td style="border:1px solid #ddd;padding:8px">Document review, keyword spotting</td>
+  </tr>
+</table>
+
+<h4>Understanding Stop Words</h4>
+<p>Stop words are common function words that appear frequently but carry little semantic meaning:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Common English stop words:
+the, a, an, and, or, but, in, on, at, to, for,
+of, with, by, from, is, are, was, were, be, been,
+being, have, has, had, do, does, did, will, would,
+could, should, may, might, must, shall, can, need,
+dare, ought, used, it, its, this, that, these, those
+</pre>
+<p>For topic analysis, consider filtering out stop words to reveal more meaningful content keywords.</p>
+
+<h4>Keyword Density for SEO</h4>
+<p>Keyword density = (Keyword Count / Total Words) × 100%</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Density</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Assessment</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Below 1%</td>
+    <td style="border:1px solid #ddd;padding:8px">May be too low for target keyword</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">1% - 3%</td>
+    <td style="border:1px solid #ddd;padding:8px">Optimal range for most keywords</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Above 3%</td>
+    <td style="border:1px solid #ddd;padding:8px">Risk of keyword stuffing penalty</td>
+  </tr>
+</table>
+
+<h4>Zipf's Law</h4>
+<p>In natural language corpora, word frequency follows Zipf's Law: the frequency of any word is inversely proportional to its rank. The most frequent word occurs approximately twice as often as the 2nd most frequent, three times as often as the 3rd, and so on.</p>
+
+<h4>Tips for Better Analysis</h4>
+<ul>
+  <li>Use longer text samples (500+ words) for more reliable patterns</li>
+  <li>Consider filtering single-character words for cleaner results</li>
+  <li>Compare frequencies across multiple documents to identify differences</li>
+  <li>Look for unexpectedly high-frequency terms that may need editing</li>
+  <li>Combine with readability scores for comprehensive text analysis</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Word Frequency?</dt>
-  <dd>Word Frequency is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is word frequency analysis and why is it useful?</dt>
+  <dd>Word frequency analysis counts how often each word appears in a text. It's useful for identifying key themes, analyzing writing style, SEO keyword density checking, content optimization, and text mining. High-frequency words often indicate the main topics of a document.</dd>
+
+  <dt>How does word frequency counting work?</dt>
+  <dd>The analyzer tokenizes text by splitting on whitespace and punctuation, converts to lowercase for case-insensitive counting, then uses a hash map to count occurrences. Results are sorted by frequency (descending) to show the most common words first.</dd>
+
+  <dt>What are stop words and should they be excluded?</dt>
+  <dd>Stop words are common function words (the, a, is, in, of, etc.) that appear frequently but carry little semantic meaning. For topic analysis, excluding stop words reveals more meaningful keywords. This tool counts all words; you can manually filter results or use a dedicated stop word list.</dd>
+
+  <dt>How is word frequency used in SEO?</dt>
+  <dd>SEO professionals use word frequency to check keyword density—the percentage of times a target keyword appears relative to total words. Optimal density is typically 1-3%. Too high (keyword stuffing) can hurt rankings; too low may not signal relevance to search engines.</dd>
+
+  <dt>What is Zipf's Law in word frequency?</dt>
+  <dd>Zipf's Law states that in natural language, word frequency is inversely proportional to rank: the most frequent word occurs twice as often as the 2nd most frequent, three times as often as the 3rd, etc. This pattern holds across most large text corpora.</dd>
+
+  <dt>How do I interpret word frequency results?</dt>
+  <dd>High-frequency content words (nouns, verbs, adjectives) indicate main themes. Function words (the, is, at) are typically less meaningful. Compare frequencies across documents to identify stylistic differences or topic shifts. Look for unexpectedly frequent terms that may need editing.</dd>
 </dl>
 </section>
 </main>

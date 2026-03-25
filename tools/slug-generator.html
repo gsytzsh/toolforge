@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <title>Slug Generator – Create SEO-Friendly URL Slugs | ToolForge</title>
-<meta name="description" content="Free online Slug Generator to turn titles into clean SEO-friendly URL slugs for blog posts, CMS pages, products and site content. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Slug Generator converts titles and headings into clean, SEO-friendly URL slugs with proper formatting, special character handling, and CMS compatibility guidelines. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/slug-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Slug Generator – Create SEO-Friendly URL Slugs | ToolForge">
-<meta property="og:description" content="Free online Slug Generator to turn titles into clean SEO-friendly URL slugs for blog posts, CMS pages, products and site content. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Slug Generator converts titles and headings into clean, SEO-friendly URL slugs with proper formatting, special character handling, and CMS compatibility guidelines. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/slug-generator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Slug Generator – Create SEO-Friendly URL Slugs | ToolForge">
-<meta name="twitter:description" content="Free online Slug Generator to turn titles into clean SEO-friendly URL slugs for blog posts, CMS pages, products and site content. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Slug Generator converts titles and headings into clean, SEO-friendly URL slugs with proper formatting, special character handling, and CMS compatibility guidelines. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
-
 
 <script type="application/ld+json">
 {
@@ -26,121 +24,366 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Slug Generator?",
+      "name": "What is a URL slug and why is it important for SEO?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Slug Generator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "A URL slug is the part of a URL that identifies a specific page in readable form (e.g., /blog/seo-slug-guide). Slugs help search engines understand page content and improve click-through rates. Best practices include using lowercase letters, hyphens as separators, keeping it under 60 characters, and including target keywords naturally."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What characters are allowed in URL slugs?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "URL slugs should use only lowercase letters (a-z), numbers (0-9), and hyphens (-). Avoid spaces (use hyphens), underscores (Google treats as word joiners), special characters (!, @, #, $, %), and accented characters (é, ñ, ü). Hyphens are preferred over underscores as Google treats hyphens as word separators."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How do I handle special characters and accented letters?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Special characters should be removed or replaced. Accented letters (é, è, ñ, ü) should be converted to their ASCII equivalents (e, n, u) using Unicode normalization (NFKD). For example, 'Café Münchén' becomes 'cafe-munchen'. This ensures URLs work across all systems and are easier to type."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the ideal slug length?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Ideal slug length is 50-60 characters maximum. Google displays about 50-60 characters in search results. Shorter slugs (3-5 words) are easier to read, share, and remember. Remove stop words (a, an, the, in, on, at) unless they significantly affect meaning. Focus on the core topic keywords."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "Should I use hyphens or underscores in slugs?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Always use hyphens (-) not underscores (_). Google officially states hyphens are treated as word separators while underscores join words together. 'seo-tips' = 'seo tips', but 'seo_tips' = 'seotips' to Google. Hyphens also improve readability for users and are the web standard convention."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How do different CMS platforms handle slugs?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "WordPress auto-generates slugs from titles, allows manual editing, and stores in post_name column. Shopify creates slugs automatically with '/products/' or '/pages/' prefix. Drupal uses Pathauto module for automatic aliases. Joomla creates aliases manually or via extensions. All benefit from consistent lowercase, hyphenated, keyword-rich slugs."
       }
     }
   ]
 }
 </script>
 </head>
-
 <body>
-
 <main class="container">
-
 <h1>Slug Generator</h1>
-
-<p class="subtitle">Turn a title into a clean SEO-friendly URL slug for blog posts, pages, products and CMS content.</p>
-
+<p class="subtitle">Convert titles and headings into clean, SEO-friendly URL slugs with proper formatting and special character handling.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
-
 <h3>Title</h3>
 <label for="title" class="sr-only">Title</label>
 <input id="title" style="width:80%" placeholder="My Awesome Blog Post!" aria-label="Title">
-
 <br><br>
-
 <div class="tool-actions">
 <button onclick="makeSlug()">Generate Slug</button>
 <button type="button" onclick="copySlug()">Copy Slug</button>
 </div>
-
 <h3 style="margin-top:24px">Slug</h3>
 <label for="slug" class="sr-only">Slug</label>
 <input id="slug" style="width:80%" readonly aria-label="Slug">
 <p id="status" class="inline-status"></p>
-
 <section class="tool-seo">
 <h3>About Slug Generator</h3>
-<p>The Slug Generator tool lets you turn a title into a clean, URL-friendly slug for blog posts, pages and products.</p>
-<p>It is useful for editing copy, cleaning pasted text, comparing content and making small text transformations directly in the browser.</p>
+<p>This slug generator converts titles and headings into clean, URL-friendly slugs optimized for SEO. It automatically handles lowercase conversion, special character removal, accent normalization, and hyphen placement to create slugs that work across all CMS platforms and search engines.</p>
+<p>It is useful for creating blog post URLs, product page slugs, CMS page aliases, category URLs, documentation paths, portfolio item URLs, news article slugs, and any web content requiring clean, readable URL structures that improve search visibility and user experience.</p>
+
+<h4>URL Slug Structure</h4>
+<p>A URL slug is the readable portion of a webpage's address:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+URL Structure:
+  https://example.com/blog/seo-slug-generator
+
+Breakdown:
+  https://          = Protocol
+  example.com       = Domain
+  /blog/            = Section/Category
+  seo-slug-generator = SLUG (identifies specific page)
+
+Full URL Example:
+  Title: "10 Tips for Better SEO in 2024"
+  Slug: 10-tips-better-seo-2024
+  Full URL: https://example.com/blog/10-tips-better-seo-2024
+
+What Makes a Good Slug:
+  ✓ Lowercase letters only (a-z)
+  ✓ Hyphens as word separators (-)
+  ✓ Numbers preserved (0-9)
+  ✓ Special characters removed
+  ✓ Accented characters normalized (é → e)
+  ✓ Leading/trailing hyphens trimmed
+  ✓ Multiple hyphens collapsed
+  ✓ Stop words optionally removed
+</pre>
+
+<h4>Slug Generation Process</h4>
+<p>The transformation from title to slug follows these steps:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Step-by-Step Transformation:
+
+Input: "Café Münchén: A Beginner's Guide!"
+
+1. Convert to lowercase:
+   "café münchen: a beginner's guide!"
+
+2. Normalize accents (NFKD decomposition):
+   "cafe munchen: a beginner's guide!"
+
+3. Remove/replace special characters:
+   "cafe-munchen-a-beginner-s-guide"
+
+4. Replace spaces with hyphens:
+   "cafe-munchen-a-beginner-s-guide"
+
+5. Remove leading/trailing hyphens:
+   "cafe-munchen-a-beginner-s-guide"
+
+6. Collapse multiple hyphens:
+   "cafe-munchen-a-beginner-s-guide"
+
+Final Slug: "cafe-munchen-a-beginner-s-guide"
+
+Optimized (stop words removed):
+  "cafe-munchen-beginners-guide"
+</pre>
+
+<h4>Slug Best Practices</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Practice</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Good Example</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Avoid</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Use lowercase</td>
+    <td style="border:1px solid #ddd;padding:8px">/blog/seo-tips</td>
+    <td style="border:1px solid #ddd;padding:8px">/blog/SEO-Tips</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Use hyphens</td>
+    <td style="border:1px solid #ddd;padding:8px">/blog/seo-tips</td>
+    <td style="border:1px solid #ddd;padding:8px">/blog/seo_tips</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Keep it short</td>
+    <td style="border:1px solid #ddd;padding:8px">/blog/seo-guide</td>
+    <td style="border:1px solid #ddd;padding:8px">/blog/the-ultimate-comprehensive-guide-to-seo</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Include keywords</td>
+    <td style="border:1px solid #ddd;padding:8px">/blog/python-web-scraping</td>
+    <td style="border:1px solid #ddd;padding:8px">/blog/article-123</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Remove stop words</td>
+    <td style="border:1px solid #ddd;padding:8px">/blog/best-seo-tips</td>
+    <td style="border:1px solid #ddd;padding:8px">/blog/the-best-seo-tips-for-you</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">No special chars</td>
+    <td style="border:1px solid #ddd;padding:8px">/blog/c-sharp-tutorial</td>
+    <td style="border:1px solid #ddd;padding:8px">/blog/c#-tutorial!</td>
+  </tr>
+</table>
+
+<h4>Slug Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Blog Post Titles:
+  Input: "How to Build a REST API with Node.js"
+  Slug: how-to-build-rest-api-nodejs
+
+  Input: "The Ultimate Guide to React Hooks"
+  Slug: ultimate-guide-react-hooks
+
+  Input: "10 JavaScript Tips You Didn't Know"
+  Slug: 10-javascript-tips-you-didnt-know
+
+Product Names:
+  Input: "Apple iPhone 15 Pro (256GB) - Blue Titanium"
+  Slug: apple-iphone-15-pro-256gb-blue-titanium
+
+  Input: "Nike Air Max 270 - Men's Running Shoes"
+  Slug: nike-air-max-270-mens-running-shoes
+
+Category/Section:
+  Input: "Women's Clothing & Accessories"
+  Slug: womens-clothing-accessories
+
+  Input: "Home > Electronics > Computers > Laptops"
+  Slug: laptops (or: electronics-computers-laptops)
+
+News Articles:
+  Input: "Breaking: Tech Company Announces Q4 Earnings"
+  Slug: tech-company-announces-q4-earnings
+
+  Input: "Local Team Wins Championship 3-0"
+  Slug: local-team-wins-championship
+
+International Titles:
+  Input: "Café Münchén – Das Beste für Sie"
+  Slug: cafe-munchen-das-beste-fur-sie
+
+  Input: "日本語タイトル (Japanese Title)"
+  Slug: japanese-title (requires transliteration)
+
+  Input: "Привет мир (Hello World in Russian)"
+  Slug: privet-mir (Cyrillic transliterated)
+</pre>
+
+<h4>CMS Slug Handling</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">CMS Platform</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Slug Field/Setting</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">WordPress</td>
+    <td style="border:1px solid #ddd;padding:8px">Permalink / post_name</td>
+    <td style="border:1px solid #ddd;padding:8px">Auto-generates from title; Settings → Permalinks controls structure</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Shopify</td>
+    <td style="border:1px solid #ddd;padding:8px">URL and handle</td>
+    <td style="border:1px solid #ddd;padding:8px">Prefixes automatically: /products/, /pages/, /collections/</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Drupal</td>
+    <td style="border:1px solid #ddd;padding:8px">URL alias</td>
+    <td style="border:1px solid #ddd;padding:8px">Use Pathauto module for automatic alias generation patterns</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Joomla</td>
+    <td style="border:1px solid #ddd;padding:8px">Alias field</td>
+    <td style="border:1px solid #ddd;padding:8px">Auto-generates but can be manually overridden per article</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Magento</td>
+    <td style="border:1px solid #ddd;padding:8px">URL Key</td>
+    <td style="border:1px solid #ddd;padding:8px">Configurable per product/category; supports URL rewrites</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Squarespace</td>
+    <td style="border:1px solid #ddd;padding:8px">URL Slug field</td>
+    <td style="border:1px solid #ddd;padding:8px">Edit in page settings; auto-generates from page title</td>
+  </tr>
+</table>
+
+<h4>Stop Words Reference</h4>
+<p>Common stop words often removed from slugs for brevity:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Articles: a, an, the
+
+Prepositions: at, by, for, from, in, into, of, on, to, with, about, above, across, after, against, along, among, around, before, behind, below, beneath, beside, between, beyond, during, except, inside, near, outside, over, through, under, until, upon, within
+
+Conjunctions: and, but, or, nor, yet, so
+
+Pronouns: i, you, he, she, it, we, they, me, him, her, us, them, my, your, his, its, our, their
+
+Auxiliary Verbs: am, is, are, was, were, be, been, being, have, has, had, do, does, did, will, would, could, should, may, might, must, can
+
+When to Keep Stop Words:
+  - When removal changes meaning
+  - When stop word is part of a proper noun
+  - When slug becomes ambiguous
+  - For very short titles (3 words or less)
+
+Example:
+  "The Art of War" → "art-war" (too short, loses meaning)
+  Better: "art-of-war" (keeps recognizable title)
+</pre>
+
+<h4>URL Encoding for Special Cases</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Characters That Require Encoding:
+
+Space: %20 or + (in query strings)
+  "hello world" → "hello%20world" or "hello+world"
+
+Non-ASCII characters:
+  "café" → "caf%C3%A9" (UTF-8 percent encoded)
+
+Reserved characters (must encode if literal):
+  ? = %3F  (query string start)
+  & = %26  (parameter separator)
+  # = %23  (fragment identifier)
+  / = %2F  (path separator)
+  = = %3D  (key-value separator)
+
+When to Use URL Encoding:
+  - When slugs must contain special characters
+  - When supporting non-Latin scripts directly
+  - When passing data in query parameters
+
+Best Practice:
+  Avoid encoded URLs in public-facing slugs.
+  Instead, transliterate or remove special characters
+  for cleaner, more shareable URLs.
+</pre>
+
+<h4>SEO Impact of URL Structure</h4>
+<ul>
+  <li><strong>Keyword presence:</strong> Keywords in URL slug are a lightweight ranking factor. Google uses URL text in search snippets.</li>
+  <li><strong>Click-through rate:</strong> Readable slugs improve CTR from search results. Users prefer descriptive URLs over ID-based ones.</li>
+  <li><strong>Link sharing:</strong> Clean slugs are more likely to be shared as anchor text. "/blog/seo-tips" is more clickable than "/post?id=123".</li>
+  <li><strong>Breadcrumb display:</strong> Many themes show URL path in breadcrumbs, improving site navigation and user experience.</li>
+  <li><strong>Canonical URLs:</strong> Consistent slug format prevents duplicate content issues. Choose one format and stick with it.</li>
+</ul>
+
+<h4>Common Slug Mistakes</h4>
+<ul>
+  <li><strong>Using underscores:</strong> Google doesn't treat underscores as word separators. Use hyphens instead.</li>
+  <li><strong>Mixed case:</strong> "/Blog/Post" and "/blog/post" may be treated as different URLs. Always lowercase.</li>
+  <li><strong>Changing slugs post-publish:</strong> Breaking existing links causes 404 errors. Use 301 redirects if slug must change.</li>
+  <li><strong>Overly long slugs:</strong> Slugs over 60 characters get truncated in search results. Keep concise.</li>
+  <li><strong>Keyword stuffing:</strong> "/best-seo-tips-seo-guide-seo-help" looks spammy. Use natural language.</li>
+  <li><strong>Ignoring Unicode:</strong> Non-English content needs proper transliteration, not raw Unicode characters in URLs.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Slug Generator?</dt>
-  <dd>Slug Generator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is a URL slug and why is it important for SEO?</dt>
+  <dd>A URL slug is the part of a URL that identifies a specific page in readable form (e.g., /blog/seo-slug-guide). Slugs help search engines understand page content and improve click-through rates. Best practices include using lowercase letters, hyphens as separators, keeping it under 60 characters, and including target keywords naturally.</dd>
+
+  <dt>What characters are allowed in URL slugs?</dt>
+  <dd>URL slugs should use only lowercase letters (a-z), numbers (0-9), and hyphens (-). Avoid spaces (use hyphens), underscores (Google treats as word joiners), special characters (!, @, #, $, %), and accented characters (é, ñ, ü). Hyphens are preferred over underscores as Google treats hyphens as word separators.</dd>
+
+  <dt>How do I handle special characters and accented letters?</dt>
+  <dd>Special characters should be removed or replaced. Accented letters (é, è, ñ, ü) should be converted to their ASCII equivalents (e, n, u) using Unicode normalization (NFKD). For example, 'Café Münchén' becomes 'cafe-munchen'. This ensures URLs work across all systems and are easier to type.</dd>
+
+  <dt>What is the ideal slug length?</dt>
+  <dd>Ideal slug length is 50-60 characters maximum. Google displays about 50-60 characters in search results. Shorter slugs (3-5 words) are easier to read, share, and remember. Remove stop words (a, an, the, in, on, at) unless they significantly affect meaning. Focus on the core topic keywords.</dd>
+
+  <dt>Should I use hyphens or underscores in slugs?</dt>
+  <dd>Always use hyphens (-) not underscores (_). Google officially states hyphens are treated as word separators while underscores join words together. 'seo-tips' = 'seo tips', but 'seo_tips' = 'seotips' to Google. Hyphens also improve readability for users and are the web standard convention.</dd>
+
+  <dt>How do different CMS platforms handle slugs?</dt>
+  <dd>WordPress auto-generates slugs from titles, allows manual editing, and stores in post_name column. Shopify creates slugs automatically with '/products/' or '/pages/' prefix. Drupal uses Pathauto module for automatic aliases. Joomla creates aliases manually or via extensions. All benefit from consistent lowercase, hyphenated, keyword-rich slugs.</dd>
 </dl>
 </section>
 </main>
-
 <script>
-
 function makeSlug(){
-
 let text=document.getElementById("title").value
-
 let slug=text
 .toLowerCase()
 .normalize("NFKD").replace(/[\u0300-\u036f]/g,"")
 .replace(/[^a-z0-9]+/g,"-")
 .replace(/^-+|-+$/g,"")
-
 document.getElementById("slug").value=slug
 document.getElementById("status").innerText="Slug generated."
 document.getElementById("status").style.color="#16a34a"
-
 }
-
 function copySlug(){
 let value=document.getElementById("slug").value
 if(!value){
@@ -156,11 +399,8 @@ document.getElementById("status").innerText="Copy failed."
 document.getElementById("status").style.color="#b91c1c"
 })
 }
-
 </script>
-
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>
 </body>
 </html>
-

@@ -30,45 +30,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Cmyk Reference?",
+      "name": "What is CMYK and how does it differ from RGB?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Cmyk Reference is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "CMYK (Cyan, Magenta, Yellow, Key/Black) is a subtractive color model used in printing. Ink absorbs light wavelengths; combining all colors produces black. RGB (Red, Green, Blue) is additive, used for screens where light emission creates colors. CMYK has a smaller gamut than RGB, so some vibrant screen colors cannot be reproduced in print."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "Why is black (K) needed in CMYK printing?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Combining 100% cyan, magenta, and yellow theoretically produces black, but in practice creates muddy brown due to ink impurities. Black ink (K) provides deeper shadows, sharper text, better detail, and reduces ink costs. Using K instead of CMY mixtures prevents paper saturation and improves drying time."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is rich black and when should it be used?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Rich black combines black ink with CMY values (e.g., C:60 M:40 Y:40 K:100) for deeper, fuller blacks in large areas. Use rich black for backgrounds and large solid areas. Use 100% K only for text and fine details to avoid registration issues. Different printers have different rich black formulas."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do you convert RGB to CMYK?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "RGB to CMYK conversion requires color profiles (ICC profiles) for accuracy. Basic formula: K = 1 - max(R', G', B') where R', G', B' are normalized. Then C = (1-R'-K)/(1-K), M = (1-G'-K)/(1-K), Y = (1-B'-K)/(1-K). Professional tools like Photoshop use ICC profiles for gamut mapping and preserve visual intent."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What are common CMYK color profiles for print?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Common profiles include: GRACoL (commercial offset printing in North America), FOGRA39/FOGRA51 (European offset), Japan Color (Asian markets), and SWOP (web offset publication). Each profile defines ink behavior, dot gain, and color reproduction characteristics for specific printing conditions."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "Why do printed colors look different from screen colors?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Screens emit light (RGB additive) with wider gamut; printers reflect light (CMYK subtractive) with limited gamut. Monitor calibration, ambient lighting, paper type, ink absorption, and dot gain affect appearance. Uncoated paper absorbs more ink, producing duller colors. Always request physical proofs for critical color matching."</
       }
     }
   ]
@@ -90,23 +95,115 @@
 <h3>About CMYK Color Reference</h3>
 <p>CMYK (Cyan, Magenta, Yellow, Key/Black) is used in print. Values are 0–100%. This reference lists common colors with approximate HEX equivalents for screen preview.</p>
 <p>Useful for print design, branding and color matching between screen and print.</p>
+
+<h4>Understanding the CMYK Color Model</h4>
+<p>CMYK is a subtractive color model where inks absorb specific light wavelengths:</p>
+<ul>
+  <li><strong>Cyan (C):</strong> Absorbs red light, reflects blue and green</li>
+  <li><strong>Magenta (M):</strong> Absorbs green light, reflects red and blue</li>
+  <li><strong>Yellow (Y):</strong> Absorbs blue light, reflects red and green</li>
+  <li><strong>Key/Black (K):</strong> Absorbs all wavelengths, provides depth and detail</li>
+</ul>
+
+<h4>CMYK to HEX Conversion Formula</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Convert CMYK (0-100) to RGB
+function cmykToRgb(c, m, y, k) {
+  c = c / 100; m = m / 100; y = y / 100; k = k / 100;
+
+  const r = 255 * (1 - c) * (1 - k);
+  const g = 255 * (1 - m) * (1 - k);
+  const b = 255 * (1 - y) * (1 - k);
+
+  return {
+    r: Math.round(r),
+    g: Math.round(g),
+    b: Math.round(b)
+  };
+}
+
+// Convert RGB to HEX
+function rgbToHex(r, g, b) {
+  return "#" + [r, g, b].map(x => {
+    const hex = x.toString(16);
+    return hex.length === 1 ? "0" + hex : hex;
+  }).join("");
+}
+
+// Example: CMYK(0, 100, 100, 0) → RGB(255, 0, 0) → HEX #FF0000
+</pre>
+
+<h4>Common CMYK Color Values</h4>
+<table class="ref-table">
+<thead><tr><th>Color</th><th>CMYK Values</th><th>HEX Approximation</th><th>Use Case</th></tr></thead>
+<tbody>
+<tr><td>Black (Text)</td><td>0, 0, 0, 100</td><td>#000000</td><td>Body text, fine details</td></tr>
+<tr><td>Rich Black</td><td>60, 40, 40, 100</td><td>#000000</td><td>Large black areas, backgrounds</td></tr>
+<tr><td>White (Paper)</td><td>0, 0, 0, 0</td><td>#FFFFFF</td><td>Unprinted paper stock</td></tr>
+<tr><td>Process Red</td><td>0, 100, 100, 0</td><td>#ED1C24</td><td>Branding, accents</td></tr>
+<tr><td>Process Blue</td><td>100, 50, 0, 0</td><td>#0066FF</td><td>Corporate colors</td></tr>
+<tr><td>Process Green</td><td>100, 0, 100, 0</td><td>#00A651</td><td>Eco-friendly branding</td></tr>
+<tr><td>Warm Gray</td><td>0, 0, 0, 30</td><td>#B3B3B3</td><td>Neutral backgrounds</td></tr>
+<tr><td>Cool Gray</td><td>0, 0, 0, 60</td><td>#666666</td><td>Sophisticated designs</td></tr>
+</tbody>
+</table>
+
+<h4>Print Design Best Practices</h4>
+<ul>
+  <li><strong>Bleed:</strong> Extend artwork 3mm beyond trim edge to avoid white borders</li>
+  <li><strong>Safety margin:</strong> Keep text 5mm inside trim to avoid cutting into content</li>
+  <li><strong>Resolution:</strong> Use 300 DPI images for crisp print quality</li>
+  <li><strong>Font embedding:</strong> Outline fonts or embed to prevent substitution</li>
+  <li><strong>Color profile:</strong> Use printer-specified ICC profile (FOGRA, GRACoL, SWOP)</li>
+  <li><strong>Overprint:</strong> Set black text to overprint to avoid registration issues</li>
+  <li><strong>Proofing:</strong> Request physical proofs for critical color matching</li>
+</ul>
+
+<h4>Understanding Color Gamuts</h4>
+<table class="ref-table">
+<thead><tr><th>Color Space</th><th>Type</th><th>Use Case</th><th>Gamut Size</th></tr></thead>
+<tbody>
+<tr><td>CMYK</td><td>Subtractive</td><td>Offset printing, digital printing</td><td>Smallest</td></tr>
+<tr><td>RGB</td><td>Additive</td><td>Monitors, TVs, digital displays</td><td>Medium</td></tr>
+<tr><td>Adobe RGB</td><td>Additive</td><td>Professional photography</td><td>Larger than sRGB</td></tr>
+<tr><td>sRGB</td><td>Additive</td><td>Web, consumer electronics</td><td>Standard</td></tr>
+<tr><td>Pantone (PMS)</td><td>Spot colors</td><td>Brand colors, special inks</td><td>Widest (includes metallics, fluorescents)</td></tr>
+</tbody>
+</table>
+
+<h4>Rich Black Formulas by Application</h4>
+<table class="ref-table">
+<thead><tr><th>Application</th><th>CMYK Formula</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Text/Fine Details</td><td>0, 0, 0, 100</td><td>Single ink avoids registration issues</td></tr>
+<tr><td>Large Solid Areas</td><td>60, 40, 40, 100</td><td>Full, deep black</td></tr>
+<tr><td>Thin Lines/Borders</td><td>40, 30, 30, 100</td><td>Reduced CMY to prevent buildup</td></tr>
+<tr><td>FOGRA Standard</td><td>50, 40, 40, 100</td><td>European offset printing</td></tr>
+<tr><td>GRACoL Standard</td><td>60, 40, 40, 100</td><td>North American commercial printing</td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Cmyk Reference?</dt>
-  <dd>Cmyk Reference is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is CMYK and how does it differ from RGB?</dt>
+  <dd>CMYK (Cyan, Magenta, Yellow, Key/Black) is a subtractive color model used in printing. Ink absorbs light wavelengths; combining all colors produces black. RGB (Red, Green, Blue) is additive, used for screens where light emission creates colors. CMYK has a smaller gamut than RGB, so some vibrant screen colors cannot be reproduced in print.</dd>
+
+  <dt>Why is black (K) needed in CMYK printing?</dt>
+  <dd>Combining 100% cyan, magenta, and yellow theoretically produces black, but in practice creates muddy brown due to ink impurities. Black ink (K) provides deeper shadows, sharper text, better detail, and reduces ink costs. Using K instead of CMY mixtures prevents paper saturation and improves drying time.</dd>
+
+  <dt>What is rich black and when should it be used?</dt>
+  <dd>Rich black combines black ink with CMY values (e.g., C:60 M:40 Y:40 K:100) for deeper, fuller blacks in large areas. Use rich black for backgrounds and large solid areas. Use 100% K only for text and fine details to avoid registration issues. Different printers have different rich black formulas.</dd>
+
+  <dt>How do you convert RGB to CMYK?</dt>
+  <dd>RGB to CMYK conversion requires color profiles (ICC profiles) for accuracy. Basic formula: K = 1 - max(R', G', B') where R', G', B' are normalized. Then C = (1-R'-K)/(1-K), M = (1-G'-K)/(1-K), Y = (1-B'-K)/(1-K). Professional tools like Photoshop use ICC profiles for gamut mapping and preserve visual intent.</dd>
+
+  <dt>What are common CMYK color profiles for print?</dt>
+  <dd>Common profiles include: GRACoL (commercial offset printing in North America), FOGRA39/FOGRA51 (European offset), Japan Color (Asian markets), and SWOP (web offset publication). Each profile defines ink behavior, dot gain, and color reproduction characteristics for specific printing conditions.</dd>
+
+  <dt>Why do printed colors look different from screen colors?</dt>
+  <dd>Screens emit light (RGB additive) with wider gamut; printers reflect light (CMYK subtractive) with limited gamut. Monitor calibration, ambient lighting, paper type, ink absorption, and dot gain affect appearance. Uncoated paper absorbs more ink, producing duller colors. Always request physical proofs for critical color matching.</dd>
 </dl>
 </section>
 </main>

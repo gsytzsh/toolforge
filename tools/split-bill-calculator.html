@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Split Bill & Tip Calculator – Split a Bill with Tax and Tip | ToolForge</title>
-<meta name="description" content="Free online Split Bill and Tip Calculator to split a bill between multiple people with optional tax and tip. Useful as both a tip calculator and bill splitter. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Split Bill Calculator divides restaurant bills among multiple people with tax and tip calculations. Includes tip percentage guides, etiquette references, and itemized split functionality. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/split-bill-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Split Bill & Tip Calculator – Split a Bill with Tax and Tip | ToolForge">
-<meta property="og:description" content="Free online Split Bill and Tip Calculator to split a bill between multiple people with optional tax and tip. Useful as both a tip calculator and bill splitter.">
+<meta property="og:description" content="Split Bill Calculator divides restaurant bills among multiple people with tax and tip calculations. Includes tip percentage guides, etiquette references, and itemized split functionality. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/split-bill-calculator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Split Bill & Tip Calculator – Split a Bill with Tax and Tip | ToolForge">
-<meta name="twitter:description" content="Free online Split Bill and Tip Calculator to split a bill between multiple people with optional tax and tip. Useful as both a tip calculator and bill splitter.">
+<meta name="twitter:description" content="Split Bill Calculator divides restaurant bills among multiple people with tax and tip calculations. Includes tip percentage guides, etiquette references, and itemized split functionality. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Split Bill Calculator?",
+      "name": "How do I calculate tip and split a bill?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Split Bill Calculator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "First calculate tip: tip amount = bill × (tip percentage / 100). Then add tax: tax amount = bill × (tax percentage / 100). Total = bill + tip + tax. Finally divide by people: per person = total / number of people. Example: $100 bill, 18% tip, 8% tax, 4 people = $100 + $18 + $8 = $126 / 4 = $31.50 per person."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the standard tip percentage for restaurants?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "In the United States, standard tip percentages are: 15% for adequate service, 18% for good service (most common), 20% for excellent service, and 22-25% for exceptional service. Tips below 15% are considered low unless service was problematic. Many restaurants suggest 18-20% on the bill."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Should tip be calculated before or after tax?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Tip should be calculated on the pre-tax subtotal. Tax is a government charge, not a service provided by staff. Calculating tip on the total including tax means you're tipping on the tax amount, which is unnecessary. Professional etiquette guides recommend tipping 15-20% on the pre-tax amount."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I split a bill unevenly?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "For uneven splits, calculate each person's individual items plus their share of tax and tip. Person's total = their items + (their items / total items × tax) + (their items / total items × tip). Alternatively, split tax and tip proportionally: each person pays their items plus a proportional share of extras."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What is the difference between service charge and tip?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "A service charge is a mandatory fee added by the restaurant (often 18% for large groups). It goes to the restaurant, not necessarily to servers. A tip (gratuity) is voluntary and goes directly to service staff. If a service charge is included, additional tipping is optional but 5-10% extra is appreciated for excellent service."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How do I handle split bills with different orders?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Track each person's individual subtotal separately. Calculate tax and tip on the total bill, then distribute proportionally. Each person pays: their subtotal + (their subtotal / total × tax) + (their subtotal / total × tip). Apps and calculators can automate this, or request separate checks before ordering."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>Split Bill & Tip Calculator</h1>
-<p class="subtitle">Calculate tip, tax, total and per-person cost in one place.</p>
+<p class="subtitle">Calculate tip, tax, total and per-person cost for restaurant bills and shared expenses.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <label for="bill" class="sr-only">Bill amount</label>
 <input id="bill" type="number" step="0.01" placeholder="100" aria-label="Bill amount">
@@ -89,26 +94,316 @@
 <pre id="result"></pre>
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
-<h3>About Split Bill &amp; Tip Calculator</h3>
-<p>This split bill and tip calculator works out tax, tip, total cost and the amount each person should pay, all in one simple result.</p>
-<p>It is useful for restaurant bills, group meals, travel costs and other shared expenses where you want a quick per-person number without doing the math by hand.</p>
+<h3>About Split Bill & Tip Calculator</h3>
+<p>This split bill and tip calculator computes tax, tip, total cost, and per-person amounts for restaurant bills and shared expenses. It handles both even splits (equal division among all people) and provides the mathematical foundation for uneven splits using proportional distribution.</p>
+<p>It is useful for restaurant group dining, travel expense splitting, roommate bill division, event cost sharing, calculating fair tips for large groups, determining individual costs when some people ordered differently, and settling shared expenses from trips or gatherings.</p>
+
+<h4>Bill Split Calculation Formulas</h4>
+<p>The calculator uses these formulas for even split calculations:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Even Split Formulas:
+
+Tax Amount = Bill × (Tax % / 100)
+Tip Amount = Bill × (Tip % / 100)
+Total = Bill + Tax Amount + Tip Amount
+Per Person = Total / Number of People
+
+Example Calculation:
+  Bill: $100.00
+  Tax: 8% → $8.00
+  Tip: 18% → $18.00
+  Total: $126.00
+  4 People → $31.50 per person
+
+Uneven Split (Proportional):
+Each person's share = (Their subtotal / Total bill) × Total with tip/tax
+
+Person A ordered $40 of $100 total (40%):
+  Person A pays: 40% × $126.00 = $50.40
+Person B ordered $60 of $100 total (60%):
+  Person B pays: 60% × $126.00 = $75.60
+</pre>
+
+<h4>Tip Percentage Guide</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Service Quality</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Tip Percentage</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">When to Use</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Exceptional</td>
+    <td style="border:1px solid #ddd;padding:8px">22-25%</td>
+    <td style="border:1px solid #ddd;padding:8px">Outstanding service, special accommodations, large complex orders</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Excellent</td>
+    <td style="border:1px solid #ddd;padding:8px">20%</td>
+    <td style="border:1px solid #ddd;padding:8px">Great service, attentive staff, quick seating, friendly experience</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Good</td>
+    <td style="border:1px solid #ddd;padding:8px">18%</td>
+    <td style="border:1px solid #ddd;padding:8px">Standard good service, everything as expected (most common)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Adequate</td>
+    <td style="border:1px solid #ddd;padding:8px">15%</td>
+    <td style="border:1px solid #ddd;padding:8px">Basic service met expectations, nothing exceptional</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Below Average</td>
+    <td style="border:1px solid #ddd;padding:8px">10-12%</td>
+    <td style="border:1px solid #ddd;padding:8px">Slow service, mistakes made, but effort was shown</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Poor</td>
+    <td style="border:1px solid #ddd;padding:8px">0-5%</td>
+    <td style="border:1px solid #ddd;padding:8px">Significant problems, rude behavior, major order errors</td>
+  </tr>
+</table>
+
+<h4>Tip Guidelines by Service Type</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Restaurant Dining:
+  Sit-down restaurant: 15-20% of pre-tax bill
+  Buffet (server brings drinks): 10-15%
+  Fast casual (counter order, table service): 10% optional
+  Food truck/takeout: No tip expected, $1-5 appreciated
+
+Delivery Services:
+  Food delivery: 15-20% ($5 minimum for short distances)
+  Grocery delivery: 10-15% (more for heavy items)
+  Pizza delivery: $3-5 or 10%, whichever is higher
+
+Bar Service:
+  Bartender: $1-2 per drink or 15-20% of tab
+  Barista: $1 per drink or loose change
+  Coffee shop tip jar: Optional, $0.50-1
+
+Personal Services:
+  Hair stylist/barber: 15-20%
+  Nail technician: 15-20%
+  Massage therapist: 15-20%
+  Spa services: 15-20%
+
+Tourism & Transport:
+  Taxi/rideshare: 15-20%
+  Hotel bellhop: $2-5 per bag
+  Housekeeping: $3-5 per night
+  Tour guide: 10-20% for good tours
+</pre>
+
+<h4>International Tipping Customs</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Country</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Restaurant Tip</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">United States</td>
+    <td style="border:1px solid #ddd;padding:8px">15-20%</td>
+    <td style="border:1px solid #ddd;padding:8px">Tips are essential income for servers</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Canada</td>
+    <td style="border:1px solid #ddd;padding:8px">15-20%</td>
+    <td style="border:1px solid #ddd;padding:8px">Similar to US tipping culture</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">United Kingdom</td>
+    <td style="border:1px solid #ddd;padding:8px">10-12.5%</td>
+    <td style="border:1px solid #ddd;padding:8px">Service charge often included; check bill</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">France</td>
+    <td style="border:1px solid #ddd;padding:8px">5-10%</td>
+    <td style="border:1px solid #ddd;padding:8px">Service compris (service included) by law</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Germany</td>
+    <td style="border:1px solid #ddd;padding:8px">5-10%</td>
+    <td style="border:1px solid #ddd;padding:8px">Round up or add small percentage</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Japan</td>
+    <td style="border:1px solid #ddd;padding:8px">None</td>
+    <td style="border:1px solid #ddd;padding:8px">Tipping can be offensive; excellent service standard</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">China</td>
+    <td style="border:1px solid #ddd;padding:8px">None</td>
+    <td style="border:1px solid #ddd;padding:8px">Not customary, may be refused</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Australia</td>
+    <td style="border:1px solid #ddd;padding:8px">Optional 5-10%</td>
+    <td style="border:1px solid #ddd;padding:8px">Service included; tipping for exceptional service</td>
+  </tr>
+</table>
+
+<h4>Bill Split Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Even Split for 4 People
+  Bill subtotal: $120.00
+  Tax (8%): $9.60
+  Tip (18%): $21.60
+  Total: $151.20
+  Per person: $37.80
+
+Example 2: Couple's Dinner (2 People)
+  Bill subtotal: $85.00
+  Tax (7.5%): $6.38
+  Tip (20%): $17.00
+  Total: $108.38
+  Per person: $54.19
+
+Example 3: Large Group (8 People)
+  Bill subtotal: $450.00
+  Tax (9%): $40.50
+  Tip (18%): $81.00
+  Total: $571.50
+  Per person: $71.44
+
+Example 4: Uneven Split
+  Total bill: $200 (before tax/tip)
+  Person A ordered: $80 (40%)
+  Person B ordered: $70 (35%)
+  Person C ordered: $50 (25%)
+
+  With 8% tax, 18% tip:
+  Total with tax/tip: $252
+
+  Person A pays: 40% × $252 = $100.80
+  Person B pays: 35% × $252 = $88.20
+  Person C pays: 25% × $252 = $63.00
+</pre>
+
+<h4>Service Charge vs Tip</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Service Charge (Auto-Gratuity):
+  - Mandatory fee added by restaurant
+  - Often 18-20% for parties of 6+
+  - Legally belongs to restaurant (not required to go to servers)
+  - Should be disclosed on menu
+  - Additional tip optional (5-10% extra for excellent service)
+
+Tip (Gratuity):
+  - Voluntary payment from customer
+  - Goes directly to service staff
+  - Amount determined by customer
+  - Tax-deductible for customer (business meals)
+  - Taxable income for server
+
+Important Notes:
+  - Always check if service charge is already included
+  - For large groups, ask about auto-gratuity policy
+  - Service charge does NOT replace tip unless stated
+  - Some restaurants distribute service charge among all staff
+  - Tips typically go to your specific server
+</pre>
+
+<h4>Common Split Scenarios</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Scenario</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Recommended Approach</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Equal orders, same appetite</td>
+    <td style="border:1px solid #ddd;padding:8px">Even split among all people</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Different order values</td>
+    <td style="border:1px solid #ddd;padding:8px">Proportional split based on individual subtotals</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Some drank alcohol, others didn't</td>
+    <td style="border:1px solid #ddd;padding:8px">Split alcohol separately among drinkers only</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">One person had expensive item</td>
+    <td style="border:1px solid #ddd;padding:8px">That person pays their item + proportional share</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Birthday dinner (honoree didn't pay)</td>
+    <td style="border:1px solid #ddd;padding:8px">Divide total among paying guests only</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Kids ate free or cheap</td>
+    <td style="border:1px solid #ddd;padding:8px">Adults split; kids' portions excluded from per-head</td>
+  </tr>
+</table>
+
+<h4>Tip Calculation Quick Reference</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Quick Tip Calculations (on $100 bill):
+
+15% tip: Move decimal left one place ($10), add half ($5) = $15
+18% tip: 10% ($10) + 8% ($8) = $18
+20% tip: Move decimal left ($10), double it = $20
+22% tip: 20% ($20) + 2% ($2) = $22
+25% tip: Divide by 4 = $25
+
+Mental Math Tricks:
+  10% = Move decimal one place left
+  5% = Half of 10%
+  1% = Move decimal two places left
+
+  To calculate 18%:
+  10% + 5% + 3(1%) = 18%
+  $10 + $5 + $3 = $18 (on $100 bill)
+
+Tax-Inclusive Calculation Warning:
+  If you calculate tip on total WITH tax:
+  $100 + $8 tax = $108
+  20% of $108 = $21.60 (vs $20 on pre-tax)
+  You're tipping an extra $1.60 on the tax!
+
+  Always calculate tip on PRE-TAX subtotal.
+</pre>
+
+<h4>Payment App Split Features</h4>
+<ul>
+  <li><strong>Venmo:</strong> Split bills feature allows itemized splitting with friends</li>
+  <li><strong>PayPal:</strong> Request money feature for collecting shares</li>
+  <li><strong>Cash App:</strong> Split costs with linked contacts</li>
+  <li><strong>Zelle:</strong> Direct bank transfers for immediate reimbursement</li>
+  <li><strong>Splitwise:</strong> Dedicated expense splitting with ongoing balances</li>
+  <li><strong>Tab:</strong> Restaurant-specific splitting with photo bill upload</li>
+</ul>
+
+<h4>Tax Considerations</h4>
+<ul>
+  <li><strong>Business meals:</strong> 50% deductible (US tax law); keep itemized receipts</li>
+  <li><strong>Sales tax:</strong> Varies by location (0-10% typical in US)</li>
+  <li><strong>Tip reporting:</strong> Servers must report tips as income; cash tips often underreported</li>
+  <li><strong>Automatic gratuity:</strong> Classified as service charge, taxed differently</li>
+  <li><strong>International:</strong> VAT/GST often included in menu prices (Europe, Asia)</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Split Bill Calculator?</dt>
-  <dd>Split Bill Calculator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How do I calculate tip and split a bill?</dt>
+  <dd>First calculate tip: tip amount = bill × (tip percentage / 100). Then add tax: tax amount = bill × (tax percentage / 100). Total = bill + tip + tax. Finally divide by people: per person = total / number of people. Example: $100 bill, 18% tip, 8% tax, 4 people = $100 + $18 + $8 = $126 / 4 = $31.50 per person.</dd>
+
+  <dt>What is the standard tip percentage for restaurants?</dt>
+  <dd>In the United States, standard tip percentages are: 15% for adequate service, 18% for good service (most common), 20% for excellent service, and 22-25% for exceptional service. Tips below 15% are considered low unless service was problematic. Many restaurants suggest 18-20% on the bill.</dd>
+
+  <dt>Should tip be calculated before or after tax?</dt>
+  <dd>Tip should be calculated on the pre-tax subtotal. Tax is a government charge, not a service provided by staff. Calculating tip on the total including tax means you're tipping on the tax amount, which is unnecessary. Professional etiquette guides recommend tipping 15-20% on the pre-tax amount.</dd>
+
+  <dt>How do I split a bill unevenly?</dt>
+  <dd>For uneven splits, calculate each person's individual items plus their share of tax and tip. Person's total = their items + (their items / total items × tax) + (their items / total items × tip). Alternatively, split tax and tip proportionally: each person pays their items plus a proportional share of extras.</dd>
+
+  <dt>What is the difference between service charge and tip?</dt>
+  <dd>A service charge is a mandatory fee added by the restaurant (often 18% for large groups). It goes to the restaurant, not necessarily to servers. A tip (gratuity) is voluntary and goes directly to service staff. If a service charge is included, additional tipping is optional but 5-10% extra is appreciated for excellent service.</dd>
+
+  <dt>How do I handle split bills with different orders?</dt>
+  <dd>Track each person's individual subtotal separately. Calculate tax and tip on the total bill, then distribute proportionally. Each person pays: their subtotal + (their subtotal / total × tax) + (their subtotal / total × tip). Apps and calculators can automate this, or request separate checks before ordering.</dd>
 </dl>
 </section>
 </main>

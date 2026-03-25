@@ -3,19 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <title>Open Graph Generator – Create OG Tags Online | ToolForge</title>
-<meta name="description" content="Free online Open Graph Generator to create OG meta tags for social sharing. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Generate Open Graph meta tags for Facebook, LinkedIn, and social platforms. Includes Twitter Card support and OG image best practices. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/open-graph-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Open Graph Generator – Create OG Tags Online | ToolForge">
-<meta property="og:description" content="Free online Open Graph Generator to create OG meta tags for social sharing. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Generate Open Graph meta tags for Facebook, LinkedIn, and social platforms. Includes Twitter Card support and OG image best practices. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/open-graph-generator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Open Graph Generator – Create OG Tags Online | ToolForge">
-<meta name="twitter:description" content="Free online Open Graph Generator to create OG meta tags for social sharing. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Generate Open Graph meta tags for Facebook, LinkedIn, and social platforms. Includes Twitter Card support and OG image best practices. Part of the ToolForge developer tools collection.">
+<meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are Open Graph tags?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open Graph (OG) tags are meta tags that control how content appears when shared on social media. Originally created by Facebook, they're now supported by LinkedIn, Pinterest, and other platforms. OG tags define title, description, image, and content type for rich link previews."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between Open Graph and Twitter Cards?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open Graph (og:) is used by Facebook, LinkedIn, and Pinterest. Twitter Cards (twitter:) are Twitter-specific. Twitter supports both but prefers its own tags. Best practice is to include both OG and Twitter tags for maximum compatibility across all platforms."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the recommended OG image sizes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Facebook recommends 1200×630px (1.91:1 ratio) for shared links. Minimum is 200×200px. Twitter recommends 1200×600px for summary cards. LinkedIn uses 1200×627px. For best results across all platforms, use 1200×630px PNG or JPG images."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What OG type values are available?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common OG types include: website (default), article, blog, book, music.song, music.album, video.movie, profile, product. Article type supports additional tags like published_time, author, and section for richer metadata."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I test Open Graph tags?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use platform-specific debuggers: Facebook Sharing Debugger (shares.facebook.com), LinkedIn Post Inspector (linkedin.com/post-inspector), Twitter Card Validator (cards-dev.twitter.com). These tools show preview and report errors."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where should OG tags be placed in HTML?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "OG tags belong in the <head> section of your HTML document, typically after charset and viewport meta tags. They should appear before any external CSS or JavaScript links for optimal crawler access."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <main class="container">
@@ -46,68 +103,394 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Open Graph Generator</h3>
-<p>This Open Graph generator creates OG meta tags for pages that need richer previews on Facebook, LinkedIn and other social platforms.</p>
-<p>It is useful when shared links are missing the right title, description or image and you want social posts to look cleaner and more clickable.</p>
+<p>This Open Graph generator creates OG meta tags and Twitter Card tags for social media sharing. Open Graph protocol was introduced by Facebook in 2010 and is now supported by LinkedIn, Pinterest, Slack, and other platforms. The generator produces properly formatted meta tags for optimal social preview display.</p>
+<p>It is useful for web developers, content managers, SEO specialists, and marketers who need to ensure their content displays correctly when shared on social platforms with rich previews including title, description, and thumbnail images.</p>
+
+<h4>Open Graph Protocol</h4>
+<p>Open Graph enables web pages to become rich objects in social graphs:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Open Graph Basics:
+
+Protocol: ogp.me
+Namespace: xmlns:og="http://ogp.me/ns#"
+
+Required Properties:
+  - og:title: Title of your content
+  - og:type: Content type (website, article, etc.)
+  - og:image: Image URL for preview
+  - og:url: Canonical URL of the page
+
+Optional Properties:
+  - og:description: Content description
+  - og:site_name: Overall site name
+  - og:locale: Language/region (en_US default)
+  - og:video: Video URL for rich content
+
+Complete Example:
+  &lt;head&gt;
+    &lt;meta property="og:type" content="website"&gt;
+    &lt;meta property="og:title" content="Page Title"&gt;
+    &lt;meta property="og:description" content="Page description"&gt;
+    &lt;meta property="og:url" content="https://example.com/page"&gt;
+    &lt;meta property="og:image" content="https://example.com/image.jpg"&gt;
+    &lt;meta property="og:site_name" content="Site Name"&gt;
+    &lt;meta property="og:locale" content="en_US"&gt;
+  &lt;/head&gt;
+</pre>
+
+<h4>OG Type Values</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">website</td>
+    <td style="border:1px solid #ddd;padding:8px">Default type for web pages</td>
+    <td style="border:1px solid #ddd;padding:8px">Homepages, landing pages</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">article</td>
+    <td style="border:1px solid #ddd;padding:8px">News articles and blog posts</td>
+    <td style="border:1px solid #ddd;padding:8px">Blog posts, news stories</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">book</td>
+    <td style="border:1px solid #ddd;padding:8px">Books with ISBN metadata</td>
+    <td style="border:1px solid #ddd;padding:8px">Book pages, reviews</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">profile</td>
+    <td style="border:1px solid #ddd;padding:8px">Person profiles</td>
+    <td style="border:1px solid #ddd;padding:8px">User profiles, bios</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">product</td>
+    <td style="border:1px solid #ddd;padding:8px">E-commerce products</td>
+    <td style="border:1px solid #ddd;padding:8px">Product pages, shops</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">video.movie</td>
+    <td style="border:1px solid #ddd;padding:8px">Movies and films</td>
+    <td style="border:1px solid #ddd;padding:8px">Movie pages, streaming</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">music.song</td>
+    <td style="border:1px solid #ddd;padding:8px">Music tracks</td>
+    <td style="border:1px solid #ddd;padding:8px">Song pages, lyrics</td>
+  </tr>
+</table>
+
+<h4>Twitter Card Types</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Twitter Card Types:
+
+1. summary (Default)
+   - 100×100px minimum image
+   - Title + description + small image
+   - Best for: Articles, blog posts
+
+   &lt;meta name="twitter:card" content="summary"&gt;
+
+2. summary_large_image
+   - 300×157px minimum (1200×600 recommended)
+   - Full-width preview image
+   - Best for: Photography, featured content
+
+   &lt;meta name="twitter:card" content="summary_large_image"&gt;
+
+3. app (Deprecated)
+   - Mobile app downloads
+   - Now use standard cards with app links
+
+4. player (Requires approval)
+   - Embedded media player
+   - Video/audio content
+
+Complete Twitter Tags:
+  &lt;meta name="twitter:card" content="summary_large_image"&gt;
+  &lt;meta name="twitter:site" content="@username"&gt;
+  &lt;meta name="twitter:creator" content="@author"&gt;
+  &lt;meta name="twitter:title" content="Page Title"&gt;
+  &lt;meta name="twitter:description" content="Description"&gt;
+  &lt;meta name="twitter:image" content="https://example.com/image.jpg"&gt;
+</pre>
+
+<h4>Image Specifications</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Platform</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Recommended Size</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Aspect Ratio</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">File Size</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Facebook</td>
+    <td style="border:1px solid #ddd;padding:8px">1200×630px</td>
+    <td style="border:1px solid #ddd;padding:8px">1.91:1</td>
+    <td style="border:1px solid #ddd;padding:8px">&lt;8MB</td>
+    <td style="border:1px solid #ddd;padding:8px">JPG, PNG</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Twitter</td>
+    <td style="border:1px solid #ddd;padding:8px">1200×600px</td>
+    <td style="border:1px solid #ddd;padding:8px">2:1</td>
+    <td style="border:1px solid #ddd;padding:8px">&lt;5MB</td>
+    <td style="border:1px solid #ddd;padding:8px">JPG, PNG, GIF</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">LinkedIn</td>
+    <td style="border:1px solid #ddd;padding:8px">1200×627px</td>
+    <td style="border:1px solid #ddd;padding:8px">1.91:1</td>
+    <td style="border:1px solid #ddd;padding:8px">&lt;5MB</td>
+    <td style="border:1px solid #ddd;padding:8px">JPG, PNG</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Pinterest</td>
+    <td style="border:1px solid #ddd;padding:8px">1000×1500px</td>
+    <td style="border:1px solid #ddd;padding:8px">2:3</td>
+    <td style="border:1px solid #ddd;padding:8px">&lt;20MB</td>
+    <td style="border:1px solid #ddd;padding:8px">JPG, PNG</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Slack</td>
+    <td style="border:1px solid #ddd;padding:8px">1200×630px</td>
+    <td style="border:1px solid #ddd;padding:8px">1.91:1</td>
+    <td style="border:1px solid #ddd;padding:8px">N/A</td>
+    <td style="border:1px solid #ddd;padding:8px">JPG, PNG</td>
+  </tr>
+</table>
+
+<h4>Article-Specific Tags</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Article Type Properties:
+
+For blog posts and news articles, use og:type="article"
+with additional metadata:
+
+  &lt;meta property="og:type" content="article"&gt;
+  &lt;meta property="article:published_time" content="2024-03-15T10:00:00Z"&gt;
+  &lt;meta property="article:modified_time" content="2024-03-16T08:30:00Z"&gt;
+  &lt;meta property="article:author" content="https://example.com/author/john"&gt;
+  &lt;meta property="article:section" content="Technology"&gt;
+  &lt;meta property="article:tag" content="Web Development"&gt;
+
+ISO 8601 Date Format:
+  YYYY-MM-DDTHH:MM:SSZ
+  Example: 2024-03-15T10:00:00Z
+
+Multiple Authors:
+  Use separate meta tags for each:
+  &lt;meta property="article:author" content="Author 1"&gt;
+  &lt;meta property="article:author" content="Author 2"&gt;
+
+Multiple Tags:
+  &lt;meta property="article:tag" content="Tag 1"&gt;
+  &lt;meta property="article:tag" content="Tag 2"&gt;
+</pre>
+
+<h4>Complete Example</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Full Implementation Example:
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+
+  &lt;!-- Primary Meta Tags --&gt;
+  &lt;title&gt;Web Development Guide | ToolForge&lt;/title&gt;
+  &lt;meta name="title" content="Web Development Guide | ToolForge"&gt;
+  &lt;meta name="description" content="Complete guide to modern web development."&gt;
+
+  &lt;!-- Open Graph / Facebook --&gt;
+  &lt;meta property="og:type" content="website"&gt;
+  &lt;meta property="og:url" content="https://toolforge.site/guide/"&gt;
+  &lt;meta property="og:title" content="Web Development Guide | ToolForge"&gt;
+  &lt;meta property="og:description" content="Complete guide to modern web development."&gt;
+  &lt;meta property="og:image" content="https://toolforge.site/images/og-guide.jpg"&gt;
+  &lt;meta property="og:site_name" content="ToolForge"&gt;
+  &lt;meta property="og:locale" content="en_US"&gt;
+
+  &lt;!-- Twitter Card --&gt;
+  &lt;meta name="twitter:card" content="summary_large_image"&gt;
+  &lt;meta name="twitter:site" content="@toolforge"&gt;
+  &lt;meta name="twitter:creator" content="@author"&gt;
+  &lt;meta name="twitter:title" content="Web Development Guide | ToolForge"&gt;
+  &lt;meta name="twitter:description" content="Complete guide to modern web development."&gt;
+  &lt;meta name="twitter:image" content="https://toolforge.site/images/og-guide.jpg"&gt;
+
+  &lt;!-- Additional SEO --&gt;
+  &lt;link rel="canonical" href="https://toolforge.site/guide/"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  ...
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<h4>Testing and Debugging</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Tool</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">URL</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Platform</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Sharing Debugger</td>
+    <td style="border:1px solid #ddd;padding:8px">shares.facebook.com</td>
+    <td style="border:1px solid #ddd;padding:8px">Facebook</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Post Inspector</td>
+    <td style="border:1px solid #ddd;padding:8px">linkedin.com/post-inspector</td>
+    <td style="border:1px solid #ddd;padding:8px">LinkedIn</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Card Validator</td>
+    <td style="border:1px solid #ddd;padding:8px">cards-dev.twitter.com</td>
+    <td style="border:1px solid #ddd;padding:8px">Twitter</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Pin It Button</td>
+    <td style="border:1px solid #ddd;padding:8px">developers.pinterest.com</td>
+    <td style="border:1px solid #ddd;padding:8px">Pinterest</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Slack Preview</td>
+    <td style="border:1px solid #ddd;padding:8px">Paste URL in Slack</td>
+    <td style="border:1px solid #ddd;padding:8px">Slack</td>
+  </tr>
+</table>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Use absolute URLs:</strong> Always use full URLs (https://...) for og:url and og:image to ensure crawlers can access them.</li>
+  <li><strong>Host images on your domain:</strong> Some platforms may not display images from certain CDNs or external hosts.</li>
+  <li><strong>Include both OG and Twitter tags:</strong> Maximum compatibility across all social platforms requires both tag sets.</li>
+  <li><strong>Keep titles concise:</strong> 60 characters or less for optimal display across platforms.</li>
+  <li><strong>Write compelling descriptions:</strong> 150-160 characters, similar to meta description best practices.</li>
+  <li><strong>Refresh caches:</strong> Use platform debuggers to refresh cached previews after updating tags.</li>
+  <li><strong>Validate image accessibility:</strong> Ensure OG images are publicly accessible without authentication.</li>
+</ul>
+
+<h4>Common Mistakes</h4>
+<ul>
+  <li><strong>Relative image URLs:</strong> Using /image.jpg instead of https://example.com/image.jpg causes broken images.</li>
+  <li><strong>Images too small:</strong> Images under 200×200px may not display or appear pixelated.</li>
+  <li><strong>Missing og:type:</strong> Without type, platforms may not render preview correctly.</li>
+  <li><strong>Inconsistent tags:</strong> Different titles in OG vs Twitter tags create confusing previews.</li>
+  <li><strong>Protected images:</strong> Images behind login walls or hotlink protection won't load in previews.</li>
+  <li><strong>Wrong aspect ratio:</strong> Incorrect ratios cause awkward cropping on different platforms.</li>
+  <li><strong>Not refreshing cache:</strong> Updated tags may not appear until cache is manually refreshed via debugger tools.</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>Platform variations:</strong> Each platform interprets OG tags slightly differently; testing on each is recommended.</li>
+  <li><strong>Cache delays:</strong> Social platforms cache previews; changes may take time to propagate even after cache refresh.</li>
+  <li><strong>No video preview:</strong> This generator creates static tags only; video OG tags require additional configuration.</li>
+  <li><strong>Limited type support:</strong> Some specialized OG types (music.*, video.*) require additional properties not covered here.</li>
+  <li><strong>No structured data:</strong> OG tags are separate from Schema.org structured data; both may be needed for optimal SEO.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Open Graph Generator?</dt>
-  <dd>Open Graph Generator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What are Open Graph tags?</dt>
+  <dd>Open Graph (OG) tags are meta tags that control how content appears when shared on social media. Originally created by Facebook, they're now supported by LinkedIn, Pinterest, and other platforms. OG tags define title, description, image, and content type for rich link previews.</dd>
+
+  <dt>What is the difference between Open Graph and Twitter Cards?</dt>
+  <dd>Open Graph (og:) is used by Facebook, LinkedIn, and Pinterest. Twitter Cards (twitter:) are Twitter-specific. Twitter supports both but prefers its own tags. Best practice is to include both OG and Twitter tags for maximum compatibility across all platforms.</dd>
+
+  <dt>What are the recommended OG image sizes?</dt>
+  <dd>Facebook recommends 1200×630px (1.91:1 ratio) for shared links. Minimum is 200×200px. Twitter recommends 1200×600px for summary cards. LinkedIn uses 1200×627px. For best results across all platforms, use 1200×630px PNG or JPG images.</dd>
+
+  <dt>What OG type values are available?</dt>
+  <dd>Common OG types include: website (default), article, blog, book, music.song, music.album, video.movie, profile, product. Article type supports additional tags like published_time, author, and section for richer metadata.</dd>
+
+  <dt>How do I test Open Graph tags?</dt>
+  <dd>Use platform-specific debuggers: Facebook Sharing Debugger (shares.facebook.com), LinkedIn Post Inspector (linkedin.com/post-inspector), Twitter Card Validator (cards-dev.twitter.com). These tools show preview and report errors.</dd>
+
+  <dt>Where should OG tags be placed in HTML?</dt>
+  <dd>OG tags belong in the <head> section of your HTML document, typically after charset and viewport meta tags. They should appear before any external CSS or JavaScript links for optimal crawler access.</dd>
 </dl>
 </section>
 </main>
 <script>
 function setStatus(message,color){
-let status=document.getElementById("status")
-status.innerText=message
-status.style.color=color
+let status=document.getElementById("status");
+status.innerText=message;
+status.style.color=color;
 }
 function generateTags(){
-let title=document.getElementById("og-title").value.trim()
-let desc=document.getElementById("og-description").value.trim()
-let url=document.getElementById("og-url").value.trim()
-let image=document.getElementById("og-image").value.trim()
-let type=document.getElementById("og-type").value.trim()||"website"
-let lines=[
-  '<meta property="og:type" content="'+type+'">',
-  '<meta property="og:title" content="'+title+'">',
-  '<meta property="og:description" content="'+desc+'">',
-  '<meta property="og:url" content="'+url+'">'
-]
+let title=document.getElementById("og-title").value.trim();
+let desc=document.getElementById("og-description").value.trim();
+let url=document.getElementById("og-url").value.trim();
+let image=document.getElementById("og-image").value.trim();
+let type=document.getElementById("og-type").value.trim()||"website";
+
+let lines=[];
+
+// Open Graph tags
+lines.push('<!-- Open Graph / Facebook -->');
+lines.push('<meta property="og:type" content="'+escapeHtml(type)+'">');
+lines.push('<meta property="og:title" content="'+escapeHtml(title)+'">');
+if(desc){
+lines.push('<meta property="og:description" content="'+escapeHtml(desc)+'">');
+}
+if(url){
+lines.push('<meta property="og:url" content="'+escapeHtml(url)+'">');
+}
 if(image){
-lines.push('<meta property="og:image" content="'+image+'">')
+lines.push('<meta property="og:image" content="'+escapeHtml(image)+'">');
 }
-document.getElementById("output").value=lines.join("\n")
-setStatus("Open Graph tags generated.","#16a34a")
+
+// Twitter Card tags
+lines.push('');
+lines.push('<!-- Twitter Card -->');
+lines.push('<meta name="twitter:card" content="summary_large_image">');
+if(title){
+lines.push('<meta name="twitter:title" content="'+escapeHtml(title)+'">');
 }
+if(desc){
+lines.push('<meta name="twitter:description" content="'+escapeHtml(desc)+'">');
+}
+if(image){
+lines.push('<meta name="twitter:image" content="'+escapeHtml(image)+'">');
+}
+
+document.getElementById("output").value=lines.join("\n");
+setStatus("Open Graph tags generated.","#16a34a");
+}
+
+function escapeHtml(text){
+let div=document.createElement("div");
+div.textContent=text;
+return div.innerHTML;
+}
+
 function copyOutput(){
-let value=document.getElementById("output").value
+let value=document.getElementById("output").value;
 if(!value){
-setStatus("Generate tags first.","#b91c1c")
-return
+setStatus("Generate tags first.","#b91c1c");
+return;
 }
 navigator.clipboard.writeText(value).then(function(){
-setStatus("OG tags copied.","#16a34a")
+setStatus("OG tags copied.","#16a34a");
 }).catch(function(){
-setStatus("Copy failed.","#b91c1c")
-})
+setStatus("Copy failed.","#b91c1c");
+});
 }
-document.getElementById("og-title").value="ToolForge Open Graph Generator"
-document.getElementById("og-description").value="Generate Open Graph tags for social sharing."
-document.getElementById("og-url").value="https://toolforge.site/tools/open-graph-generator.html"
-generateTags()
+
+document.getElementById("og-title").value="ToolForge Open Graph Generator";
+document.getElementById("og-description").value="Generate Open Graph tags for social sharing.";
+document.getElementById("og-url").value="https://toolforge.site/tools/open-graph-generator.html";
+generateTags();
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>

@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Filter by Length – Filter Lines by Min/Max Length | ToolForge</title>
-<meta name="description" content="Free online tool to filter lines by minimum or maximum length. Keep or remove short/long lines. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Filter text lines by minimum or maximum character length. Remove short or long lines from lists, keywords, URLs, and data sets. Essential text processing tool for developers and data analysts.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/filter-by-length.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Filter by Length – Filter Lines by Min/Max Length | ToolForge">
-<meta property="og:description" content="Free online tool to filter lines by min/max length. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Filter text lines by minimum or maximum character length. Remove short or long lines from lists, keywords, URLs, and data sets.">
 <meta property="og:url" content="https://toolforge.site/tools/filter-by-length.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Filter by Length – Filter Lines by Min/Max Length | ToolForge">
-<meta name="twitter:description" content="Free online tool to filter lines by min/max length. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Filter text lines by character length. Remove short or long lines from lists and data.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Filter By Length?",
+      "name": "What is line length filtering used for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Filter By Length is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Line length filtering removes lines that don't meet minimum or maximum character requirements. Common uses: cleaning keyword lists for SEO (removing too-short or too-long keywords), filtering URLs by length, validating input data, preparing text for systems with character limits, and removing noise from scraped data."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How does character count differ from word count?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Character count includes every character: letters, digits, spaces, punctuation, and symbols. Word count counts whitespace-separated words. A line 'Hello World!' has 12 characters (including space and !) but only 2 words. For length filtering, character count is more precise for technical constraints."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What are common minimum length thresholds?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Common minimums: 3-4 chars for keywords (removes noise words), 10 chars for URLs (removes incomplete links), 20-50 chars for sentences (ensures meaningful content), 8+ chars for passwords (security requirement). The threshold depends on your data type and quality requirements."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "When should I use maximum length filtering?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Use max length for: Twitter/X posts (280 char limit), meta descriptions (155-160 chars for SEO), SMS messages (160 chars), database field constraints, URL length limits (2048 chars for most browsers), title tags (60 chars), and any system with storage or display constraints."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How do I handle whitespace in length calculations?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Leading/trailing whitespace counts toward length. A line with '  hello  ' is 9 characters, not 5. To ignore whitespace, trim lines before filtering. Some use cases require counting whitespace (fixed-width formats), others don't (keyword analysis). Consider your specific needs."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "Can I filter by both min and max simultaneously?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Yes, set both values to keep only lines within a specific range. For example, min=10 and max=50 keeps lines between 10 and 50 characters inclusive. This is useful for finding content that fits specific requirements, like meta descriptions between 150-160 characters."
       }
     }
   ]
@@ -76,7 +81,7 @@
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Input</h3>
 <label for="input" class="sr-only">Input text</label>
-<textarea id="input" rows="10" style="width:90%" aria-label="Input text"></textarea>
+<textarea id="input" rows="10" style="width:90%" placeholder="Enter text with multiple lines&#10;Each line is filtered separately&#10;Short&#10;This is a longer line" aria-label="Input text"></textarea>
 <br><br>
 <label for="min">Min length:</label>
 <input id="min" type="number" min="0" value="0" style="width:80px;padding:6px;margin:0 8px">
@@ -89,25 +94,144 @@
 <textarea id="output" rows="10" style="width:90%" aria-label="Output text"></textarea>
 <section class="tool-seo">
 <h3>About Filter by Length</h3>
-<p>This tool filters lines by minimum and/or maximum character length. Leave min at 0 or max empty for no limit.</p>
-<p>It is useful for cleaning keyword lists, filtering URLs, validating line lengths and preparing data for systems with length limits.</p>
+<p>This tool filters lines of text by character length, keeping only those that meet your minimum and/or maximum criteria. Each line is evaluated independently, making it ideal for processing lists, keyword sets, URLs, and line-separated data.</p>
+<p>Common uses include SEO keyword research (removing too-short or too-long terms), cleaning scraped data, validating input against database constraints, preparing content for character-limited platforms, and quality control for text datasets.</p>
+
+<h4>Character Counting Rules</h4>
+<p>Every character counts toward line length:</p>
+<ul>
+  <li><strong>Letters and digits:</strong> Each counts as 1 character</li>
+  <li><strong>Spaces:</strong> Count as 1 character each</li>
+  <li><strong>Punctuation:</strong> Commas, periods, quotes all count</li>
+  <li><strong>Symbols:</strong> @, #, $, %, etc. all count</li>
+  <li><strong>Unicode characters:</strong> Emoji and special chars count as 1</li>
+  <li><strong>Tabs:</strong> Count as 1 character (not expanded width)</li>
+</ul>
+
+<h4>Common Length Thresholds by Use Case</h4>
+<table class="ref-table">
+<thead><tr><th>Use Case</th><th>Min Length</th><th>Max Length</th><th>Reason</th></tr></thead>
+<tbody>
+<tr><td>SEO keywords</td><td>3-4 chars</td><td>50-60 chars</td><td>Remove noise, fit search intent</td></tr>
+<tr><td>Password validation</td><td>8 chars</td><td>128 chars</td><td>Security requirements</td></tr>
+<tr><td>Meta descriptions</td><td>120 chars</td><td>160 chars</td><td>SEO optimal length</td></tr>
+<tr><td>Twitter/X posts</td><td>0</td><td>280 chars</td><td>Platform limit</td></tr>
+<tr><td>URL validation</td><td>10 chars</td><td>2048 chars</td><td>Remove incomplete, browser limits</td></tr>
+<tr><td>Title tags</td><td>30 chars</td><td>60 chars</td><td>SEO and display requirements</td></tr>
+<tr><td>SMS messages</td><td>0</td><td>160 chars</td><td>Single message limit</td></tr>
+<tr><td>Database fields</td><td>0</td><td>Field-defined</td><td>VARCHAR constraints</td></tr>
+</tbody>
+</table>
+
+<h4>Example: Filtering Keyword Lists</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Input (mixed quality keywords):
+  a
+  seo
+  buy
+  how to optimize website for search engines
+  digital marketing tips
+  seo tips
+  x
+  best practices
+
+Filter: min=5, max=50
+
+Output (quality keywords only):
+  digital marketing tips
+  seo tips
+  best practices
+</pre>
+
+<h4>Example: Validating Meta Descriptions</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Input (draft meta descriptions):
+  Shop now!
+  Find the best products at great prices. Our store offers...
+  Welcome to our website. We have been in business since 1995 providing quality products and excellent customer service.
+  Discover amazing deals on electronics, home goods, and more. Free shipping on orders over $50.
+
+Filter: min=120, max=160
+
+Output (SEO-optimal descriptions):
+  (only descriptions between 120-160 chars kept)
+</pre>
+
+<h4>Whitespace Handling</h4>
+<p>Leading and trailing whitespace affects length:</p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+"hello" = 5 characters
+"  hello" = 7 characters (2 leading spaces)
+"hello  " = 7 characters (2 trailing spaces)
+"  hello  " = 9 characters (both)
+
+To trim before filtering, preprocess your text:
+- Use a text editor's trim function
+- Run through a trim whitespace tool first
+- Add trimming logic in code: line.trim().length
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>SEO keyword research:</strong> Remove single-letter noise and overly long phrases</li>
+  <li><strong>Content validation:</strong> Ensure meta descriptions, titles meet guidelines</li>
+  <li><strong>Data cleaning:</strong> Filter scraped data by quality thresholds</li>
+  <li><strong>Password auditing:</strong> Find passwords below minimum length</li>
+  <li><strong>URL list processing:</strong> Remove incomplete or too-long URLs</li>
+  <li><strong>Social media:</strong> Prepare content for character-limited platforms</li>
+  <li><strong>Database migration:</strong> Find values exceeding field limits</li>
+  <li><strong>Quality control:</strong> Flag unusually short/long entries for review</li>
+</ul>
+
+<h4>Line Length Statistics</h4>
+<p>For analyzing text datasets, consider these metrics:</p>
+<ul>
+  <li><strong>Average line length:</strong> Total characters ÷ number of lines</li>
+  <li><strong>Median length:</strong> Middle value when sorted by length</li>
+  <li><strong>Length range:</strong> Shortest and longest lines</li>
+  <li><strong>Standard deviation:</strong> How much lengths vary from average</li>
+</ul>
 </section>
 
+<section class="how-to-use">
+<h3>How to Filter Lines by Length</h3>
+<ol class="how-to-steps">
+  <li><strong>Paste your text:</strong> Enter or paste multi-line text into the input area.</li>
+  <li><strong>Set minimum length:</strong> Enter the minimum character count (use 0 for no minimum).</li>
+  <li><strong>Set maximum length:</strong> Enter the maximum character count (leave empty for no maximum).</li>
+  <li><strong>Click Filter Lines:</strong> The tool keeps only lines matching your criteria.</li>
+  <li><strong>Copy the result:</strong> Use the filtered output in your project or analysis.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Use min only to remove short noise (single chars, incomplete entries)</li>
+  <li>Use max only to find content exceeding limits</li>
+  <li>Use both to find content within a specific range</li>
+  <li>Empty lines have 0 length and are removed by min≥1</li>
+  <li>Consider trimming whitespace before filtering for accurate counts</li>
+</ul>
+</section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Filter By Length?</dt>
-  <dd>Filter By Length is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is line length filtering used for?</dt>
+  <dd>Line length filtering removes lines that don't meet minimum or maximum character requirements. Common uses: cleaning keyword lists for SEO (removing too-short or too-long keywords), filtering URLs by length, validating input data, preparing text for systems with character limits, and removing noise from scraped data.</dd>
+
+  <dt>How does character count differ from word count?</dt>
+  <dd>Character count includes every character: letters, digits, spaces, punctuation, and symbols. Word count counts whitespace-separated words. A line 'Hello World!' has 12 characters (including space and !) but only 2 words. For length filtering, character count is more precise for technical constraints.</dd>
+
+  <dt>What are common minimum length thresholds?</dt>
+  <dd>Common minimums: 3-4 chars for keywords (removes noise words), 10 chars for URLs (removes incomplete links), 20-50 chars for sentences (ensures meaningful content), 8+ chars for passwords (security requirement). The threshold depends on your data type and quality requirements.</dd>
+
+  <dt>When should I use maximum length filtering?</dt>
+  <dd>Use max length for: Twitter/X posts (280 char limit), meta descriptions (155-160 chars for SEO), SMS messages (160 chars), database field constraints, URL length limits (2048 chars for most browsers), title tags (60 chars), and any system with storage or display constraints.</dd>
+
+  <dt>How do I handle whitespace in length calculations?</dt>
+  <dd>Leading/trailing whitespace counts toward length. A line with '  hello  ' is 9 characters, not 5. To ignore whitespace, trim lines before filtering. Some use cases require counting whitespace (fixed-width formats), others don't (keyword analysis). Consider your specific needs.</dd>
+
+  <dt>Can I filter by both min and max simultaneously?</dt>
+  <dd>Yes, set both values to keep only lines within a specific range. For example, min=10 and max=50 keeps lines between 10 and 50 characters inclusive. This is useful for finding content that fits specific requirements, like meta descriptions between 150-160 characters.</dd>
 </dl>
 </section>
 </main>

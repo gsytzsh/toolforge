@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Pomodoro Timer – Online Focus Timer | ToolForge</title>
-<meta name="description" content="Free online Pomodoro Timer to alternate focused work sessions and short breaks in your browser. Useful for study, work and daily productivity. Part of the ToolForge developer tools collection.">
+<title>Pomodoro Timer – Online Focus Timer for Productivity | ToolForge</title>
+<meta name="description" content="Pomodoro timer with customizable work and break intervals. Implements the Pomodoro Technique for focused work sessions and productivity management. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/pomodoro-timer.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Pomodoro Timer – Online Focus Timer | ToolForge">
-<meta property="og:description" content="Free online Pomodoro Timer to alternate focused work sessions and short breaks in your browser. Useful for study, work and daily productivity.">
+<meta property="og:title" content="Pomodoro Timer – Online Focus Timer for Productivity | ToolForge">
+<meta property="og:description" content="Pomodoro timer with customizable work and break intervals. Implements the Pomodoro Technique for focused work sessions and productivity management. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/pomodoro-timer.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pomodoro Timer – Online Focus Timer | ToolForge">
-<meta name="twitter:description" content="Free online Pomodoro Timer to alternate focused work sessions and short breaks in your browser. Useful for study, work and daily productivity.">
+<meta name="twitter:title" content="Pomodoro Timer – Online Focus Timer for Productivity | ToolForge">
+<meta name="twitter:description" content="Pomodoro timer with customizable work and break intervals. Implements the Pomodoro Technique for focused work sessions and productivity management. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Pomodoro Timer used for?",
+      "name": "What is the Pomodoro Technique?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Pomodoro Timer is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "The Pomodoro Technique is a time management method developed by Francesco Cirillo in the 1980s. It uses a timer to break work into 25-minute focused intervals (pomodoros) separated by 5-minute short breaks. After four pomodoros, take a longer 15-30 minute break. This cycle helps maintain concentration and prevents mental fatigue."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "Why 25 minutes for work sessions?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "The 25-minute duration balances urgency and manageability. It's long enough to make meaningful progress but short enough to maintain focus without feeling overwhelming. Research on ultradian rhythms suggests the brain can focus for 20-30 minutes before needing rest, making 25 minutes optimal for sustained attention."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "How does timer accuracy work in browsers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Browser timers use setInterval/setTimeout which are not perfectly accurate. Chrome throttles timers to 1 second minimum, and background tabs may be throttled to 1000ms or more. For Pomodoro timers, this drift is negligible over 25 minutes. Web Workers can improve accuracy but are unnecessary for break timers."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are optimal Pomodoro interval lengths?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Standard: 25 min work / 5 min break. Deep work: 45-50 min work / 10 min break (matches class/lecture format). Short attention: 15 min work / 3 min break for beginners. Extended: 90 min work / 20 min break (matches ultradian rhythm cycles). Choose based on task type and personal focus capacity."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "Why are breaks important in the Pomodoro method?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Breaks allow cognitive recovery and prevent decision fatigue. During breaks, the brain consolidates information and restores attention resources. Physical movement, hydration, or brief meditation during breaks improves the restorative effect. Screen-free breaks are more effective than switching to different digital activities."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How many Pomodoro cycles should I do?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Traditional method: 4 pomodoros followed by a long break (15-30 min). Daily goal: 6-8 pomodoros for knowledge work, 10-12 for intense focus work. Start with 2-3 pomodoros if new to the technique. Track completed pomodoros to estimate task effort and improve time estimation skills."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>Pomodoro Timer</h1>
-<p class="subtitle">Run focused work sessions and short breaks with a simple Pomodoro timer.</p>
+<p class="subtitle">Time-managed focus timer implementing the Pomodoro Technique for productivity.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <label for="work" class="sr-only">Work minutes</label>
 <input id="work" type="number" min="1" value="25" style="width:90px" aria-label="Work minutes">
@@ -86,27 +91,301 @@
 <button type="button" onclick="resetTimer()">Reset</button>
 </div>
 <p id="status" class="inline-status"></p>
+
 <section class="tool-seo">
 <h3>About Pomodoro Timer</h3>
-<p>This Pomodoro timer runs focused work sessions and break intervals with a simple start, pause and reset flow.</p>
-<p>It is useful for study sessions, writing, coding and other deep-work tasks when you want a lightweight timer that helps you stay on track without extra distractions.</p>
+<p>This Pomodoro timer implements the time management technique developed by Francesco Cirillo in the 1980s. The method uses timed work intervals (traditionally 25 minutes) called "pomodoros" separated by short breaks to maintain focus and prevent mental fatigue.</p>
+
+<h4>The Pomodoro Technique</h4>
+<p>The Pomodoro Technique follows a structured cycle of focused work and rest:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Phase</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Duration</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Purpose</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Work Session</td>
+    <td style="border:1px solid #ddd;padding:8px">25 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">Focused, uninterrupted work on a single task</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Short Break</td>
+    <td style="border:1px solid #ddd;padding:8px">5 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">Mental rest, physical movement, hydration</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Long Break</td>
+    <td style="border:1px solid #ddd;padding:8px">15-30 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">Extended recovery after 4 pomodoros</td>
+  </tr>
+</table>
+
+<h4>Timer Algorithm Implementation</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript Timer Implementation:
+
+let timerId = null;
+let remaining = 25 * 60; // Convert minutes to seconds
+let currentMode = "work";
+
+// Format and display time
+function render() {
+  const minutes = Math.floor(remaining / 60);
+  const seconds = remaining % 60;
+  const display = String(minutes).padStart(2, '0') + ':' +
+                  String(seconds).padStart(2, '0');
+  document.getElementById("display").innerText = display;
+}
+
+// Countdown tick function
+function tick() {
+  remaining--;
+
+  if (remaining <= 0) {
+    // Switch modes when timer reaches zero
+    currentMode = currentMode === "work" ? "break" : "work";
+    const newDuration = currentMode === "work" ? workMinutes : breakMinutes;
+    remaining = newDuration * 60;
+    // Optionally play notification sound
+    return;
+  }
+
+  render();
+}
+
+// Start timer with setInterval
+function startTimer() {
+  if (timerId) return; // Prevent multiple intervals
+  timerId = setInterval(tick, 1000); // 1 second interval
+}
+
+// Pause timer
+function pauseTimer() {
+  if (timerId) {
+    clearInterval(timerId);
+    timerId = null;
+  }
+}
+
+// Reset timer
+function resetTimer() {
+  pauseTimer();
+  remaining = initialWorkMinutes * 60;
+  currentMode = "work";
+  render();
+}
+</pre>
+
+<h4>Interval Variations</h4>
+<p>Different work types and attention spans benefit from adjusted intervals:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Method</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Work</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Break</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Best For</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Standard Pomodoro</td>
+    <td style="border:1px solid #ddd;padding:8px">25 min</td>
+    <td style="border:1px solid #ddd;padding:8px">5 min</td>
+    <td style="border:1px solid #ddd;padding:8px">General knowledge work</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Deep Work</td>
+    <td style="border:1px solid #ddd;padding:8px">45-50 min</td>
+    <td style="border:1px solid #ddd;padding:8px">10 min</td>
+    <td style="border:1px solid #ddd;padding:8px">Complex problem solving, coding</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Ultradian Rhythm</td>
+    <td style="border:1px solid #ddd;padding:8px">90 min</td>
+    <td style="border:1px solid #ddd;padding:8px">20 min</td>
+    <td style="border:1px solid #ddd;padding:8px">Creative work, writing</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Beginner</td>
+    <td style="border:1px solid #ddd;padding:8px">15 min</td>
+    <td style="border:1px solid #ddd;padding:8px">3 min</td>
+    <td style="border:1px solid #ddd;padding:8px">Building focus stamina</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Flowmodoro</td>
+    <td style="border:1px solid #ddd;padding:8px">Until interrupted</td>
+    <td style="border:1px solid #ddd;padding:8px">Work/5 min</td>
+    <td style="border:1px solid #ddd;padding:8px">Flow state work</td>
+  </tr>
+</table>
+
+<h4>Browser Timer Accuracy</h4>
+<p>JavaScript timers have inherent limitations that affect accuracy:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Factor</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Effect</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Impact on Pomodoro</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">setInterval Minimum</td>
+    <td style="border:1px solid #ddd;padding:8px">Clamped to 4-15ms minimum</td>
+    <td style="border:1px solid #ddd;padding:8px">Negligible for 1-second ticks</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Background Tab Throttling</td>
+    <td style="border:1px solid #ddd;padding:8px">Timers reduced to 1000ms+</td>
+    <td style="border:1px solid #ddd;padding:8px">May cause slight drift</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">CPU Load</td>
+    <td style="border:1px solid #ddd;padding:8px">Callback execution delayed</td>
+    <td style="border:1px solid #ddd;padding:8px">Minor accumulated error</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Sleep/Suspend</td>
+    <td style="border:1px solid #ddd;padding:8px">Timer pauses completely</td>
+    <td style="border:1px solid #ddd;padding:8px">Resume continues from pause</td>
+  </tr>
+</table>
+
+<h4>Break Activity Recommendations</h4>
+<ul>
+  <li><strong>Physical movement:</strong> Stand, stretch, walk around to counteract sitting</li>
+  <li><strong>Eye rest:</strong> Look at distant objects (20-20-20 rule: every 20 minutes, look 20 feet away for 20 seconds)</li>
+  <li><strong>Hydration:</strong> Drink water to maintain cognitive function</li>
+  <li><strong>Breathing exercises:</strong> Deep breathing reduces stress and restores focus</li>
+  <li><strong>Avoid screens:</strong> Don't switch to phone or social media during breaks</li>
+</ul>
+
+<h4>Pomodoro Tracking and Metrics</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Daily Pomodoro Tracking:
+
+Completed Pomodoros: |||| |||| ||
+Target: 8 pomodoros
+Completion Rate: 75% (6/8)
+
+Weekly Summary:
+  Monday:    8 pomodoros
+  Tuesday:   6 pomodoros
+  Wednesday: 7 pomodoros
+  Thursday:  8 pomodoros
+  Friday:    5 pomodoros
+  Total:     34 pomodoros
+  Average:   6.8 pomodoros/day
+
+Task Estimation Accuracy:
+  Estimated: 4 pomodoros
+  Actual:    5 pomodoros
+  Variance:  +25% (underestimated)
+</pre>
+
+<h4>Cognitive Science Behind Pomodoro</h4>
+<p>The Pomodoro Technique leverages several cognitive principles:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Principle</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Application</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Ultradian Rhythms</td>
+    <td style="border:1px solid #ddd;padding:8px">90-120 minute energy cycles</td>
+    <td style="border:1px solid #ddd;padding:8px">Work with natural energy fluctuations</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Parkinson's Law</td>
+    <td style="border:1px solid #ddd;padding:8px">Work expands to fill available time</td>
+    <td style="border:1px solid #ddd;padding:8px">Fixed deadlines create urgency</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Attention Restoration</td>
+    <td style="border:1px solid #ddd;padding:8px">Directed attention depletes with use</td>
+    <td style="border:1px solid #ddd;padding:8px">Breaks restore attentional capacity</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Zeigarnik Effect</td>
+    <td style="border:1px solid #ddd;padding:8px">Unfinished tasks create mental tension</td>
+    <td style="border:1px solid #ddd;padding:8px">Complete pomodoros provide closure</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Time Boxing</td>
+    <td style="border:1px solid #ddd;padding:8px">Allocating fixed time to tasks</td>
+    <td style="border:1px solid #ddd;padding:8px">Prevents perfectionism and overwork</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Study Sessions:</strong> Maintain focus during exam preparation and reading</li>
+  <li><strong>Programming:</strong> Deep work on complex code without context switching</li>
+  <li><strong>Writing:</strong> Overcome writer's block with timed writing sprints</li>
+  <li><strong>Administrative Work:</strong> Power through email and routine tasks</li>
+  <li><strong>Creative Projects:</strong> Dedicated time for design, art, or music practice</li>
+  <li><strong>Language Learning:</strong> Focused vocabulary or grammar study sessions</li>
+</ul>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Single tasking:</strong> Commit to one task per pomodoro; note interruptions for later</li>
+  <li><strong>Track interruptions:</strong> Mark internal (thoughts) and external (notifications) interruptions</li>
+  <li><strong>Respect the timer:</strong> When timer rings, stop immediately even if in flow</li>
+  <li><strong>Plan pomodoros:</strong> Estimate tasks in pomodoro units before starting</li>
+  <li><strong>Review daily:</strong> Track completed pomodoros to improve estimation</li>
+  <li><strong>Adapt intervals:</strong> Adjust work/break lengths based on task type and energy</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>Not suitable for all work:</strong> Collaborative work, meetings don't fit fixed intervals</li>
+  <li><strong>May interrupt flow:</strong> Creative work sometimes benefits from longer uninterrupted sessions</li>
+  <li><strong>Requires discipline:</strong> Effectiveness depends on respecting work/break boundaries</li>
+  <li><strong>Timer accuracy:</strong> Browser throttling may cause minor timing drift</li>
+  <li><strong>No task management:</strong> Does not track which tasks were worked on</li>
+</ul>
+</section>
+
+<section class="how-to-use">
+<h3>How to Use the Pomodoro Timer</h3>
+<ol class="how-to-steps">
+  <li><strong>Set intervals:</strong> Adjust work (default 25 min) and break (default 5 min) durations.</li>
+  <li><strong>Choose a task:</strong> Select a single task to focus on during the work session.</li>
+  <li><strong>Start timer:</strong> Click Start and work until the timer signals the break.</li>
+  <li><strong>Take the break:</strong> Step away from your work when the break timer starts.</li>
+  <li><strong>Repeat:</strong> After the break, start another work session.</li>
+  <li><strong>Long break:</strong> After 4 work sessions, take a longer 15-30 minute break.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Keep a notepad nearby to jot down distracting thoughts during work sessions</li>
+  <li>Use physical movement during breaks to counteract sitting</li>
+  <li>Don't check email or social media during short breaks</li>
+  <li>Track completed pomodoros to estimate future task effort</li>
+  <li>Adjust interval lengths based on your attention span and task type</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Pomodoro Timer used for?</dt>
-  <dd>Pomodoro Timer is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is the Pomodoro Technique?</dt>
+  <dd>The Pomodoro Technique is a time management method developed by Francesco Cirillo in the 1980s. It uses a timer to break work into 25-minute focused intervals (pomodoros) separated by 5-minute short breaks. After four pomodoros, take a longer 15-30 minute break. This cycle helps maintain concentration and prevents mental fatigue.</dd>
+
+  <dt>Why 25 minutes for work sessions?</dt>
+  <dd>The 25-minute duration balances urgency and manageability. It's long enough to make meaningful progress but short enough to maintain focus without feeling overwhelming. Research on ultradian rhythms suggests the brain can focus for 20-30 minutes before needing rest, making 25 minutes optimal for sustained attention.</dd>
+
+  <dt>How does timer accuracy work in browsers?</dt>
+  <dd>Browser timers use setInterval/setTimeout which are not perfectly accurate. Chrome throttles timers to 1 second minimum, and background tabs may be throttled to 1000ms or more. For Pomodoro timers, this drift is negligible over 25 minutes. Web Workers can improve accuracy but are unnecessary for break timers.</dd>
+
+  <dt>What are optimal Pomodoro interval lengths?</dt>
+  <dd>Standard: 25 min work / 5 min break. Deep work: 45-50 min work / 10 min break (matches class/lecture format). Short attention: 15 min work / 3 min break for beginners. Extended: 90 min work / 20 min break (matches ultradian rhythm cycles). Choose based on task type and personal focus capacity.</dd>
+
+  <dt>Why are breaks important in the Pomodoro method?</dt>
+  <dd>Breaks allow cognitive recovery and prevent decision fatigue. During breaks, the brain consolidates information and restores attention resources. Physical movement, hydration, or brief meditation during breaks improves the restorative effect. Screen-free breaks are more effective than switching to different digital activities.</dd>
+
+  <dt>How many Pomodoro cycles should I do?</dt>
+  <dd>Traditional method: 4 pomodoros followed by a long break (15-30 min). Daily goal: 6-8 pomodoros for knowledge work, 10-12 for intense focus work. Start with 2-3 pomodoros if new to the technique. Track completed pomodoros to estimate task effort and improve time estimation skills.</dd>
 </dl>
 </section>
 </main>

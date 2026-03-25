@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Reading Time Calculator – Estimate Reading Time | ToolForge</title>
-<meta name="description" content="Free online Reading Time Calculator to estimate how long text takes to read based on word count and reading speed. Part of the ToolForge developer tools collection.">
+<title>Reading Time Calculator – Estimate Reading Time by Word Count | ToolForge</title>
+<meta name="description" content="Calculate estimated reading time from word count and reading speed. Supports custom WPM settings and displays time in minutes and seconds. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/reading-time-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Reading Time Calculator – Estimate Reading Time | ToolForge">
-<meta property="og:description" content="Free online Reading Time Calculator to estimate how long text takes to read based on word count and reading speed.">
+<meta property="og:title" content="Reading Time Calculator – Estimate Reading Time by Word Count | ToolForge">
+<meta property="og:description" content="Calculate estimated reading time from word count and reading speed. Supports custom WPM settings and displays time in minutes and seconds. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/reading-time-calculator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Reading Time Calculator – Estimate Reading Time | ToolForge">
-<meta name="twitter:description" content="Free online Reading Time Calculator to estimate how long text takes to read based on word count and reading speed.">
+<meta name="twitter:title" content="Reading Time Calculator – Estimate Reading Time by Word Count | ToolForge">
+<meta name="twitter:description" content="Calculate estimated reading time from word count and reading speed. Supports custom WPM settings and displays time in minutes and seconds. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Reading Time Calculator used for?",
+      "name": "How is reading time calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Reading Time Calculator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "Reading time is calculated by dividing the total word count by the reading speed in words per minute (WPM). Formula: Reading Time (minutes) = Word Count / WPM. For example, a 1000-word article at 200 WPM takes 5 minutes to read. This assumes continuous reading at a steady pace without pauses."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is a normal reading speed?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Average adult reading speed is 200-250 WPM for general material. Silent reading is faster than oral reading (100-150 WPM). Speed varies by text difficulty: simple prose (250-300 WPM), technical content (150-200 WPM), dense academic text (100-150 WPM). Speed readers can reach 400-700+ WPM with comprehension training."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What factors affect reading speed?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Factors include: text complexity (vocabulary, sentence structure), topic familiarity, reading purpose (skimming vs studying), font size and type, line spacing, screen vs print, reader's language proficiency, fatigue level, and distractions. Technical content with formulas or code requires slower speeds."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How accurate are reading time estimates?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Reading time estimates provide a rough guideline, typically within ±20-30% of actual time. They don't account for: re-reading difficult passages, taking notes, looking up references, comprehension pauses, or individual reading ability. For technical content, actual time may be 1.5-2x the estimate."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "Why do blogs show reading time?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Reading time indicators help users decide whether to engage with content, set expectations, and improve user experience. Studies show content with reading time estimates have lower bounce rates. It's a UX best practice adopted by Medium, LinkedIn, and many content platforms."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How do I calculate speaking time from word count?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Speaking speed is typically 120-150 WPM for presentations, slower than reading speed. Formula: Speaking Time = Word Count / Speaking WPM. A 1000-word speech at 130 WPM takes ~7.7 minutes. TED talks average 150 WPM. Audiobook narration averages 150-160 WPM."
       }
     }
   ]
@@ -72,10 +77,11 @@
 <body>
 <main class="container">
 <h1>Reading Time Calculator</h1>
-<p class="subtitle">Estimate reading time from word count and reading speed.</p>
+<p class="subtitle">Estimate how long text takes to read based on word count and reading speed.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <label for="wpm" class="sr-only">Words per minute</label>
 <input id="wpm" type="number" min="50" value="200" style="width:110px" aria-label="Words per minute">
+<span style="margin-left:8px">Words per minute (WPM)</span>
 <br><br>
 <label for="text" class="sr-only">Text input</label>
 <textarea id="text" rows="12" class="pdf-editor" aria-label="Text input" placeholder="Paste article or text here"></textarea>
@@ -85,27 +91,328 @@
 <h3>Result</h3>
 <p id="result"></p>
 <p id="status" class="inline-status"></p>
+
 <section class="tool-seo">
 <h3>About Reading Time Calculator</h3>
-<p>This reading time calculator estimates how long a piece of text will take to read based on word count and reading speed.</p>
-<p>It is useful for blog posts, newsletters, study material and documentation when you want to set expectations for readers or plan content length more clearly.</p>
+<p>This reading time calculator estimates how long a piece of text will take to read based on word count and reading speed (words per minute, WPM). The calculation helps content creators, bloggers, and publishers set reader expectations and improve user experience.</p>
+
+<h4>Reading Time Formula</h4>
+<p>Reading time is calculated using a simple division formula:</p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Reading Time Calculation:
+
+Formula:
+  Reading Time (minutes) = Word Count / Reading Speed (WPM)
+
+Example Calculations:
+  500 words / 200 WPM = 2.5 minutes
+  1000 words / 200 WPM = 5 minutes
+  2000 words / 200 WPM = 10 minutes
+  5000 words / 200 WPM = 25 minutes
+
+With Custom Speeds:
+  1000 words / 150 WPM (slow) = 6.67 minutes
+  1000 words / 250 WPM (fast) = 4 minutes
+</pre>
+
+<h4>JavaScript Implementation</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+function calculateReadingTime(text, wpm = 200) {
+  // Count words by splitting on whitespace
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
+
+  // Calculate reading time in minutes
+  const minutes = words / wpm;
+
+  // Convert to minutes and seconds
+  const mins = Math.floor(minutes);
+  const secs = Math.round((minutes - mins) * 60);
+
+  return {
+    wordCount: words,
+    totalMinutes: minutes.toFixed(2),
+    formatted: mins > 0 ? `${mins} min ${secs} sec` : `${secs} sec`
+  };
+}
+
+// Usage examples:
+calculateReadingTime("Hello world test text", 200);
+// Returns: { wordCount: 4, totalMinutes: "0.02", formatted: "1 sec" }
+
+calculateReadingTime(longArticle, 250);
+// Returns: { wordCount: 1500, totalMinutes: "6.00", formatted: "6 min 0 sec" }
+</pre>
+
+<h4>Reading Speed Standards</h4>
+<p>Different audiences and content types require different WPM assumptions:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Category</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Speed (WPM)</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Slow/Careful</td>
+    <td style="border:1px solid #ddd;padding:8px">100-150 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Technical docs, academic papers, non-native speakers</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Average Adult</td>
+    <td style="border:1px solid #ddd;padding:8px">200-250 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">General content, blog posts, news articles</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Fast Reader</td>
+    <td style="border:1px solid #ddd;padding:8px">300-400 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Experienced readers, familiar topics</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Speed Reader</td>
+    <td style="border:1px solid #ddd;padding:8px">400-700+ WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Trained speed readers, skimming</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Oral Reading</td>
+    <td style="border:1px solid #ddd;padding:8px">100-150 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Reading aloud, audiobook narration</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Speaking (Presentations)</td>
+    <td style="border:1px solid #ddd;padding:8px">120-150 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Speeches, TED talks, podcasts</td>
+  </tr>
+</table>
+
+<h4>Content Type Adjustments</h4>
+<p>Adjust WPM based on content complexity for more accurate estimates:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Content Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Recommended WPM</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Simple Blog Post</td>
+    <td style="border:1px solid #ddd;padding:8px">250 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Casual, conversational tone</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">News Article</td>
+    <td style="border:1px solid #ddd;padding:8px">225 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Standard journalism style</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Technical Documentation</td>
+    <td style="border:1px solid #ddd;padding:8px">150 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Code examples, API references</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Academic Paper</td>
+    <td style="border:1px solid #ddd;padding:8px">125 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Dense concepts, citations</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Children's Content</td>
+    <td style="border:1px solid #ddd;padding:8px">150 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Simpler vocabulary, shorter sentences</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Poetry/Lyrics</td>
+    <td style="border:1px solid #ddd;padding:8px">100 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Requires reflection and pauses</td>
+  </tr>
+</table>
+
+<h4>Reading Time Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Word Count to Reading Time (at 200 WPM):
+
+  100 words  →  0.5 minutes (30 seconds)
+  250 words  →  1.25 minutes (1 min 15 sec)
+  500 words  →  2.5 minutes (2 min 30 sec)
+  750 words  →  3.75 minutes (3 min 45 sec)
+  1000 words →  5 minutes
+  1500 words →  7.5 minutes (7 min 30 sec)
+  2000 words →  10 minutes
+  3000 words →  15 minutes
+  5000 words →  25 minutes
+  7500 words →  37.5 minutes (37 min 30 sec)
+  10000 words → 50 minutes
+
+Common Content Lengths:
+  Twitter thread (10 tweets)  → ~280 words → 1.4 min
+  Medium blog post            → ~1000 words → 5 min
+  News article                → ~800 words → 4 min
+  Academic paper (short)      → ~5000 words → 25 min
+  White paper                 → ~3000 words → 15 min
+</pre>
+
+<h4>Speaking Time vs Reading Time</h4>
+<p>Speaking speed differs from reading speed due to pauses, emphasis, and audience comprehension:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Context</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">WPM Range</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Casual Conversation</td>
+    <td style="border:1px solid #ddd;padding:8px">120-140 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Everyday speech</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Professional Presentation</td>
+    <td style="border:1px solid #ddd;padding:8px">140-160 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Business meetings, conferences</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">TED Talks</td>
+    <td style="border:1px solid #ddd;padding:8px">150-170 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Polished presentations</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Audiobook Narration</td>
+    <td style="border:1px solid #ddd;padding:8px">150-160 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Professional narration</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Podcast Hosts</td>
+    <td style="border:1px solid #ddd;padding:8px">150-180 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Conversational podcasts</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Radio Advertising</td>
+    <td style="border:1px solid #ddd;padding:8px">160-180 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">30-second spots (~75-90 words)</td>
+  </tr>
+</table>
+
+<h4>Factors Affecting Reading Speed</h4>
+<ul>
+  <li><strong>Text Complexity:</strong> Vocabulary difficulty, sentence length, and technical terminology slow reading</li>
+  <li><strong>Topic Familiarity:</strong> Readers process familiar topics 20-30% faster</li>
+  <li><strong>Formatting:</strong> Good typography, headings, and white space improve speed</li>
+  <li><strong>Medium:</strong> Print reading is typically 10-15% faster than screen reading</li>
+  <li><strong>Distractions:</strong> Environmental noise and interruptions reduce comprehension and speed</li>
+  <li><strong>Reader Fatigue:</strong> Reading speed decreases after extended sessions</li>
+  <li><strong>Language Proficiency:</strong> Non-native speakers may read 20-40% slower in second language</li>
+  <li><strong>Reading Purpose:</strong> Skimming is 2-3x faster than careful study reading</li>
+</ul>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Blog Publishing:</strong> Display reading time to set reader expectations and reduce bounce rates</li>
+  <li><strong>Content Planning:</strong> Estimate content length for target reading time</li>
+  <li><strong>E-learning:</strong> Design course materials with appropriate segment lengths</li>
+  <li><strong>Newsletter Creation:</strong> Keep email content within optimal reading time (2-5 minutes)</li>
+  <li><strong>Social Media:</strong> Plan thread length for target engagement time</li>
+  <li><strong>Speech Writing:</strong> Calculate speaking time from script word count</li>
+  <li><strong>Accessibility:</strong> Provide time estimates for users with reading difficulties</li>
+</ul>
+
+<h4>Word Count by Content Type</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Content Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Typical Word Count</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Reading Time (200 WPM)</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Social Media Post</td>
+    <td style="border:1px solid #ddd;padding:8px">50-150 words</td>
+    <td style="border:1px solid #ddd;padding:8px">15-45 seconds</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Email Newsletter</td>
+    <td style="border:1px solid #ddd;padding:8px">300-500 words</td>
+    <td style="border:1px solid #ddd;padding:8px">1.5-2.5 minutes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Blog Post (Short)</td>
+    <td style="border:1px solid #ddd;padding:8px">500-800 words</td>
+    <td style="border:1px solid #ddd;padding:8px">2.5-4 minutes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Blog Post (Standard)</td>
+    <td style="border:1px solid #ddd;padding:8px">1000-1500 words</td>
+    <td style="border:1px solid #ddd;padding:8px">5-7.5 minutes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Feature Article</td>
+    <td style="border:1px solid #ddd;padding:8px">2000-3000 words</td>
+    <td style="border:1px solid #ddd;padding:8px">10-15 minutes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">White Paper</td>
+    <td style="border:1px solid #ddd;padding:8px">3000-5000 words</td>
+    <td style="border:1px solid #ddd;padding:8px">15-25 minutes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Research Paper</td>
+    <td style="border:1px solid #ddd;padding:8px">5000-8000 words</td>
+    <td style="border:1px solid #ddd;padding:8px">25-40 minutes</td>
+  </tr>
+</table>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>Doesn't account for comprehension pauses:</strong> Complex material requires re-reading and reflection time</li>
+  <li><strong>Ignores visual elements:</strong> Images, charts, and code blocks add to total engagement time</li>
+  <li><strong>Assumes continuous reading:</strong> Real reading includes breaks and interruptions</li>
+  <li><strong>Individual variation:</strong> Actual speed varies by ±30% based on reader ability and conditions</li>
+  <li><strong>Language differences:</strong> Word boundaries vary by language; calculation optimized for English</li>
+  <li><strong>Doesn't measure engagement:</strong> Time spent doesn't guarantee content was understood or retained</li>
+</ul>
+
+<h4>Best Practices for Content Creators</h4>
+<ul>
+  <li><strong>Show reading time prominently:</strong> Display near title or publication date</li>
+  <li><strong>Round appropriately:</strong> Use "3 min read" instead of "2.7 minutes"</li>
+  <li><strong>Consider your audience:</strong> Technical audiences may prefer slower WPM assumptions</li>
+  <li><strong>Segment long content:</strong> Break 20+ minute reads into sections with individual time estimates</li>
+  <li><strong>Test with real users:</strong> Validate estimates against actual engagement metrics</li>
+</ul>
+</section>
+
+<section class="how-to-use">
+<h3>How to Use Reading Time Calculator</h3>
+<ol class="how-to-steps">
+  <li><strong>Set reading speed:</strong> Enter words per minute (default 200 WPM for average adult).</li>
+  <li><strong>Paste text:</strong> Enter or paste the text you want to analyze.</li>
+  <li><strong>Calculate:</strong> Click Calculate to see word count and estimated reading time.</li>
+  <li><strong>Adjust if needed:</strong> Modify WPM for different audiences or content types.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Use 200 WPM for general blog content and articles</li>
+  <li>Use 150 WPM for technical documentation or academic content</li>
+  <li>Use 250 WPM for simple, conversational content</li>
+  <li>For speaking time estimates, use 130-150 WPM</li>
+  <li>Consider showing reading time on your published content for better UX</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Reading Time Calculator used for?</dt>
-  <dd>Reading Time Calculator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>How is reading time calculated?</dt>
+  <dd>Reading time is calculated by dividing the total word count by the reading speed in words per minute (WPM). Formula: Reading Time (minutes) = Word Count / WPM. For example, a 1000-word article at 200 WPM takes 5 minutes to read. This assumes continuous reading at a steady pace without pauses.</dd>
+
+  <dt>What is a normal reading speed?</dt>
+  <dd>Average adult reading speed is 200-250 WPM for general material. Silent reading is faster than oral reading (100-150 WPM). Speed varies by text difficulty: simple prose (250-300 WPM), technical content (150-200 WPM), dense academic text (100-150 WPM). Speed readers can reach 400-700+ WPM with comprehension training.</dd>
+
+  <dt>What factors affect reading speed?</dt>
+  <dd>Factors include: text complexity (vocabulary, sentence structure), topic familiarity, reading purpose (skimming vs studying), font size and type, line spacing, screen vs print, reader's language proficiency, fatigue level, and distractions. Technical content with formulas or code requires slower speeds.</dd>
+
+  <dt>How accurate are reading time estimates?</dt>
+  <dd>Reading time estimates provide a rough guideline, typically within ±20-30% of actual time. They don't account for: re-reading difficult passages, taking notes, looking up references, comprehension pauses, or individual reading ability. For technical content, actual time may be 1.5-2x the estimate.</dd>
+
+  <dt>Why do blogs show reading time?</dt>
+  <dd>Reading time indicators help users decide whether to engage with content, set expectations, and improve user experience. Studies show content with reading time estimates have lower bounce rates. It's a UX best practice adopted by Medium, LinkedIn, and many content platforms.</dd>
+
+  <dt>How do I calculate speaking time from word count?</dt>
+  <dd>Speaking speed is typically 120-150 WPM for presentations, slower than reading speed. Formula: Speaking Time = Word Count / Speaking WPM. A 1000-word speech at 130 WPM takes ~7.7 minutes. TED talks average 150 WPM. Audiobook narration averages 150-160 WPM.</dd>
 </dl>
 </section>
 </main>
@@ -121,7 +428,10 @@ document.getElementById("status").style.color="#b91c1c"
 return
 }
 let minutes=words/wpm
-document.getElementById("result").innerText="Words: "+words+" | Estimated reading time: "+minutes.toFixed(1)+" minutes"
+let mins=Math.floor(minutes)
+let secs=Math.round((minutes-mins)*60)
+let timeStr=mins>0?mins+" min "+secs+" sec":secs+" sec"
+document.getElementById("result").innerText="Words: "+words+" | Estimated reading time: "+timeStr+" ("+minutes.toFixed(1)+" minutes)"
 document.getElementById("status").innerText="Reading time estimated."
 document.getElementById("status").style.color="#16a34a"
 }

@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Speed Converter – km/h, mph, m/s, Knots Online | ToolForge</title>
-<meta name="description" content="Free online Speed Converter between kilometers per hour, miles per hour, meters per second and knots. Great for travel, navigation and physics. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Speed Converter converts between kilometers per hour, miles per hour, meters per second, and knots with precise conversion factors. Includes reference tables for common speeds and unit comparisons. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/speed-converter.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Speed Converter – km/h, mph, m/s, Knots Online | ToolForge">
-<meta property="og:description" content="Free online Speed Converter between kilometers per hour, miles per hour, meters per second and knots. Great for travel, navigation and physics. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Speed Converter converts between kilometers per hour, miles per hour, meters per second, and knots with precise conversion factors. Includes reference tables for common speeds and unit comparisons. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/speed-converter.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Speed Converter – km/h, mph, m/s, Knots Online | ToolForge">
-<meta name="twitter:description" content="Free online Speed Converter between kilometers per hour, miles per hour, meters per second and knots. Great for travel, navigation and physics. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Speed Converter converts between kilometers per hour, miles per hour, meters per second, and knots with precise conversion factors. Includes reference tables for common speeds and unit comparisons. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Speed Converter?",
+      "name": "What are the speed conversion formulas?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Speed Converter is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "To convert km/h to mph: multiply by 0.621371. To convert km/h to m/s: divide by 3.6. To convert km/h to knots: multiply by 0.539957. To convert mph to km/h: multiply by 1.609344. To convert m/s to km/h: multiply by 3.6. To convert knots to km/h: multiply by 1.852."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between km/h and mph?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Kilometers per hour (km/h) is the metric unit used worldwide for road speeds and weather. Miles per hour (mph) is used primarily in the United States and United Kingdom. 1 mph equals 1.609344 km/h, meaning 60 mph equals approximately 97 km/h."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is a knot and where is it used?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "A knot equals one nautical mile per hour (1.852 km/h or 1.151 mph). It is the standard unit for maritime navigation and aviation because nautical miles relate directly to Earth's latitude (1 nautical mile = 1 minute of latitude). Wind speeds, ship speeds, and aircraft speeds commonly use knots."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "Why is m/s used in science?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Meters per second (m/s) is the SI derived unit for speed and velocity. It integrates directly with other SI units (meters for distance, seconds for time) making physics calculations consistent. Force (Newtons), acceleration (m/s²), and energy (Joules) all use m/s as the base speed unit."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What is the speed of sound in different units?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "At sea level and 20°C (68°F), the speed of sound (Mach 1) equals approximately 343 m/s, 1235 km/h, 767 mph, or 667 knots. This varies with temperature and altitude—sound travels faster in warmer air and slower at higher altitudes where air is thinner."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How do I convert Mach number to speed?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Mach number is the ratio of object speed to the speed of sound. Mach 2 means twice the speed of sound. To convert: Speed = Mach × speed of sound. At standard conditions: Mach 1 ≈ 343 m/s ≈ 1235 km/h ≈ 767 mph ≈ 667 knots. Multiply the Mach number by these values."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>Speed Converter</h1>
-<p class="subtitle">Convert between km/h, mph, m/s and knots.</p>
+<p class="subtitle">Convert between kilometers per hour, miles per hour, meters per second, and knots with precise conversion factors.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Value</h3>
 <label for="val" class="sr-only">Value</label>
@@ -93,25 +98,350 @@
 <p>knots: <b id="kt"></b></p>
 <section class="tool-seo">
 <h3>About Speed Converter</h3>
-<p>This speed converter compares kilometers per hour, miles per hour, meters per second and knots in one place. It is useful for travel, aviation, boating, sports tracking and science or physics homework.</p>
-<p>Type one value and instantly see the equivalent speed in the other common units without needing multiple manual conversions.</p>
+<p>This speed converter transforms values between four common speed units: kilometers per hour (km/h), miles per hour (mph), meters per second (m/s), and knots (kt). The tool uses exact conversion factors defined by international standards for accurate results in navigation, aviation, automotive, and scientific applications.</p>
+<p>It is useful for travel planning, aviation navigation, maritime operations, sports performance analysis, physics calculations, engineering specifications, weather reporting (wind speeds), and comparing speed limits across countries using different measurement systems.</p>
+
+<h4>Speed Unit Conversion Factors</h4>
+<p>These exact conversion factors are used for all calculations:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Base Conversions (to m/s):
+  1 km/h = 0.2777778 m/s  (exactly 1000/3600)
+  1 mph  = 0.44704 m/s    (exactly defined)
+  1 m/s  = 1 m/s          (base unit)
+  1 knot = 0.514444 m/s   (exactly 1852/3600)
+
+Conversion Formulas:
+  km/h → mph:   multiply by 0.621371
+  km/h → m/s:   divide by 3.6
+  km/h → knots: multiply by 0.539957
+
+  mph → km/h:   multiply by 1.609344
+  mph → m/s:    multiply by 0.44704
+  mph → knots:  multiply by 0.868976
+
+  m/s → km/h:   multiply by 3.6
+  m/s → mph:    multiply by 2.236936
+  m/s → knots:  multiply by 1.943844
+
+  knots → km/h: multiply by 1.852
+  knots → mph:  multiply by 1.150779
+  knots → m/s:  multiply by 0.514444
+</pre>
+
+<h4>Speed Unit Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Unit</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Symbol</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">System</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Primary Usage</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Kilometers per hour</td>
+    <td style="border:1px solid #ddd;padding:8px">km/h, kmph</td>
+    <td style="border:1px solid #ddd;padding:8px">Metric (SI derived)</td>
+    <td style="border:1px solid #ddd;padding:8px">Road signs, weather, most countries</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Miles per hour</td>
+    <td style="border:1px solid #ddd;padding:8px">mph, mi/h</td>
+    <td style="border:1px solid #ddd;padding:8px">Imperial/US Customary</td>
+    <td style="border:1px solid #ddd;padding:8px">USA, UK road speeds, speed limits</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Meters per second</td>
+    <td style="border:1px solid #ddd;padding:8px">m/s, m·s⁻¹</td>
+    <td style="border:1px solid #ddd;padding:8px">SI (Scientific)</td>
+    <td style="border:1px solid #ddd;padding:8px">Physics, engineering, science</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Knots</td>
+    <td style="border:1px solid #ddd;padding:8px">kt, kn</td>
+    <td style="border:1px solid #ddd;padding:8px">Nautical/Aviation</td>
+    <td style="border:1px solid #ddd;padding:8px">Maritime, aviation, meteorology</td>
+  </tr>
+</table>
+
+<h4>Common Speed Reference Table</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Scenario</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">km/h</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">mph</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">m/s</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">knots</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Walking speed</td>
+    <td style="border:1px solid #ddd;padding:8px">5</td>
+    <td style="border:1px solid #ddd;padding:8px">3.1</td>
+    <td style="border:1px solid #ddd;padding:8px">1.4</td>
+    <td style="border:1px solid #ddd;padding:8px">2.7</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Running (recreational)</td>
+    <td style="border:1px solid #ddd;padding:8px">10</td>
+    <td style="border:1px solid #ddd;padding:8px">6.2</td>
+    <td style="border:1px solid #ddd;padding:8px">2.8</td>
+    <td style="border:1px solid #ddd;padding:8px">5.4</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Cycling (leisure)</td>
+    <td style="border:1px solid #ddd;padding:8px">15</td>
+    <td style="border:1px solid #ddd;padding:8px">9.3</td>
+    <td style="border:1px solid #ddd;padding:8px">4.2</td>
+    <td style="border:1px solid #ddd;padding:8px">8.1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Urban speed limit</td>
+    <td style="border:1px solid #ddd;padding:8px">50</td>
+    <td style="border:1px solid #ddd;padding:8px">31</td>
+    <td style="border:1px solid #ddd;padding:8px">13.9</td>
+    <td style="border:1px solid #ddd;padding:8px">27</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Highway speed (Europe)</td>
+    <td style="border:1px solid #ddd;padding:8px">130</td>
+    <td style="border:1px solid #ddd;padding:8px">81</td>
+    <td style="border:1px solid #ddd;padding:8px">36.1</td>
+    <td style="border:1px solid #ddd;padding:8px">70</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Highway speed (USA)</td>
+    <td style="border:1px solid #ddd;padding:8px">120</td>
+    <td style="border:1px solid #ddd;padding:8px">75</td>
+    <td style="border:1px solid #ddd;padding:8px">33.3</td>
+    <td style="border:1px solid #ddd;padding:8px">65</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Train (intercity)</td>
+    <td style="border:1px solid #ddd;padding:8px">200</td>
+    <td style="border:1px solid #ddd;padding:8px">124</td>
+    <td style="border:1px solid #ddd;padding:8px">55.6</td>
+    <td style="border:1px solid #ddd;padding:8px">108</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Speed of sound (Mach 1)</td>
+    <td style="border:1px solid #ddd;padding:8px">1235</td>
+    <td style="border:1px solid #ddd;padding:8px">767</td>
+    <td style="border:1px solid #ddd;padding:8px">343</td>
+    <td style="border:1px solid #ddd;padding:8px">667</td>
+  </tr>
+</table>
+
+<h4>Aviation Speed Reference</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Aircraft Typical Speeds:
+
+Commercial Jet (cruise):
+  900 km/h = 560 mph = 486 knots = 250 m/s
+
+Regional Turboprop:
+  500 km/h = 310 mph = 270 knots = 139 m/s
+
+General Aviation (Cessna 172):
+  230 km/h = 140 mph = 124 knots = 64 m/s
+
+Helicopter (typical):
+  250 km/h = 155 mph = 135 knots = 69 m/s
+
+Fighter Jet (supersonic):
+  Mach 2 = 2470 km/h = 1535 mph = 1334 knots = 686 m/s
+
+Takeoff Speeds:
+  Boeing 737: 250-280 km/h (135-150 knots)
+  Airbus A320: 260-280 km/h (140-150 knots)
+  Cessna 172: 100-110 km/h (55-60 knots)
+
+Landing Speeds:
+  Boeing 737: 230-250 km/h (125-135 knots)
+  Airbus A320: 240-260 km/h (130-140 knots)
+</pre>
+
+<h4>Maritime Speed Reference</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Vessel Typical Speeds:
+
+Container Ship:
+  35-45 km/h = 19-24 knots
+
+Cruise Ship:
+  37-46 km/h = 20-25 knots
+
+Ferry:
+  40-65 km/h = 22-35 knots
+
+Speedboat:
+  80-160 km/h = 43-86 knots
+
+Naval Destroyer:
+  55-60 km/h = 30-32 knots
+
+Submarine (submerged):
+  65-80 km/h = 35-43 knots
+
+Wind Speed Categories (Beaufort Scale):
+  Calm (Force 0): &lt; 1 knot
+  Light Air (Force 1): 1-3 knots
+  Gentle Breeze (Force 3): 7-10 knots
+  Moderate Gale (Force 5): 17-21 knots
+  Strong Gale (Force 9): 41-47 knots
+  Hurricane (Force 12): &gt; 64 knots
+</pre>
+
+<h4>Speed Conversion Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Convert 100 km/h to mph
+  mph = 100 × 0.621371
+  mph = 62.14
+  Answer: 100 km/h = 62.14 mph
+
+Example 2: Convert 60 mph to km/h
+  km/h = 60 × 1.609344
+  km/h = 96.56
+  Answer: 60 mph = 96.56 km/h
+
+Example 3: Convert 50 knots to km/h
+  km/h = 50 × 1.852
+  km/h = 92.6
+  Answer: 50 knots = 92.6 km/h
+
+Example 4: Convert 10 m/s to km/h
+  km/h = 10 × 3.6
+  km/h = 36
+  Answer: 10 m/s = 36 km/h
+
+Example 5: Convert Mach 2 to km/h
+  km/h = 2 × 1235 (at sea level)
+  km/h = 2470
+  Answer: Mach 2 ≈ 2470 km/h
+</pre>
+
+<h4>World Speed Limit Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Country</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Urban (km/h)</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Rural (km/h)</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Highway (km/h)</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Germany (Autobahn)</td>
+    <td style="border:1px solid #ddd;padding:8px">50</td>
+    <td style="border:1px solid #ddd;padding:8px">100</td>
+    <td style="border:1px solid #ddd;padding:8px">No limit* (130 advised)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">France</td>
+    <td style="border:1px solid #ddd;padding:8px">50</td>
+    <td style="border:1px solid #ddd;padding:8px">80-90</td>
+    <td style="border:1px solid #ddd;padding:8px">130</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">United Kingdom</td>
+    <td style="border:1px solid #ddd;padding:8px">48 (30 mph)</td>
+    <td style="border:1px solid #ddd;padding:8px">97 (60 mph)</td>
+    <td style="border:1px solid #ddd;padding:8px">113 (70 mph)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">United States</td>
+    <td style="border:1px solid #ddd;padding:8px">40-72 (25-45 mph)</td>
+    <td style="border:1px solid #ddd;padding:8px">89-105 (55-65 mph)</td>
+    <td style="border:1px solid #ddd;padding:8px">89-137 (55-85 mph)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Japan</td>
+    <td style="border:1px solid #ddd;padding:8px">40-50</td>
+    <td style="border:1px solid #ddd;padding:8px">50-60</td>
+    <td style="border:1px solid #ddd;padding:8px">100</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Australia</td>
+    <td style="border:1px solid #ddd;padding:8px">50-60</td>
+    <td style="border:1px solid #ddd;padding:8px">100-110</td>
+    <td style="border:1px solid #ddd;padding:8px">110-130</td>
+  </tr>
+</table>
+<p style="font-size:12px;color:#666">*Germany has a recommended speed (Richtgeschwindigkeit) of 130 km/h but no mandatory limit on many Autobahn sections.</p>
+
+<h4>Unit History and Origins</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Kilometers per hour (km/h):
+  - Introduced with the metric system (1790s, France)
+  - Kilometer defined as 1/10,000 of Earth's quadrant
+  - Now defined as exactly 1000 meters per 3600 seconds
+  - Adopted worldwide for road transport
+
+Miles per hour (mph):
+  - Mile originates from Roman "mille passus" (1000 paces)
+  - Statute mile defined as 5,280 feet (1593, England)
+  - mph became standard with railway development
+  - Still used in USA, UK, and some Commonwealth nations
+
+Meters per second (m/s):
+  - SI derived unit, defined in 1960
+  - Base unit for all scientific speed measurements
+  - Integrates with Newton's laws and energy equations
+  - Used universally in physics and engineering
+
+Knots:
+  - Named after the "chip log" method (17th century)
+  - Sailors counted knots in a rope over 28 seconds
+  - 1 knot = 1 nautical mile per hour
+  - Nautical mile = 1 minute of latitude (1852 m exactly)
+</pre>
+
+<h4>Speed in Physics</h4>
+<p>Speed and velocity are fundamental in physics equations:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Basic Kinematics:
+  speed = distance / time
+  v = d / t
+
+  acceleration = change in velocity / time
+  a = Δv / Δt
+
+Newton's Second Law:
+  F = ma (force = mass × acceleration)
+
+Kinetic Energy:
+  KE = ½mv² (requires m/s for Joules)
+
+Momentum:
+  p = mv (momentum = mass × velocity)
+
+Wave Speed:
+  v = fλ (frequency × wavelength)
+
+Special Relativity:
+  c = 299,792,458 m/s (speed of light)
+  E = mc² (mass-energy equivalence)
+
+Escape Velocity (Earth):
+  vₑ = 11.2 km/s = 40,320 km/h = 25,054 mph
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Speed Converter?</dt>
-  <dd>Speed Converter is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What are the speed conversion formulas?</dt>
+  <dd>To convert km/h to mph: multiply by 0.621371. To convert km/h to m/s: divide by 3.6. To convert km/h to knots: multiply by 0.539957. To convert mph to km/h: multiply by 1.609344. To convert m/s to km/h: multiply by 3.6. To convert knots to km/h: multiply by 1.852.</dd>
+
+  <dt>What is the difference between km/h and mph?</dt>
+  <dd>Kilometers per hour (km/h) is the metric unit used worldwide for road speeds and weather. Miles per hour (mph) is used primarily in the United States and United Kingdom. 1 mph equals 1.609344 km/h, meaning 60 mph equals approximately 97 km/h.</dd>
+
+  <dt>What is a knot and where is it used?</dt>
+  <dd>A knot equals one nautical mile per hour (1.852 km/h or 1.151 mph). It is the standard unit for maritime navigation and aviation because nautical miles relate directly to Earth's latitude (1 nautical mile = 1 minute of latitude). Wind speeds, ship speeds, and aircraft speeds commonly use knots.</dd>
+
+  <dt>Why is m/s used in science?</dt>
+  <dd>Meters per second (m/s) is the SI derived unit for speed and velocity. It integrates directly with other SI units (meters for distance, seconds for time) making physics calculations consistent. Force (Newtons), acceleration (m/s²), and energy (Joules) all use m/s as the base speed unit.</dd>
+
+  <dt>What is the speed of sound in different units?</dt>
+  <dd>At sea level and 20°C (68°F), the speed of sound (Mach 1) equals approximately 343 m/s, 1235 km/h, 767 mph, or 667 knots. This varies with temperature and altitude—sound travels faster in warmer air and slower at higher altitudes where air is thinner.</dd>
+
+  <dt>How do I convert Mach number to speed?</dt>
+  <dd>Mach number is the ratio of object speed to the speed of sound. Mach 2 means twice the speed of sound. To convert: Speed = Mach × speed of sound. At standard conditions: Mach 1 ≈ 343 m/s ≈ 1235 km/h ≈ 767 mph ≈ 667 knots. Multiply the Mach number by these values.</dd>
 </dl>
 </section>
 </main>

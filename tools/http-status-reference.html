@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>HTTP Status Codes Reference – Full HTTP Status Code Table | ToolForge</title>
-<meta name="description" content="Free online HTTP status codes reference. Complete table of 1xx, 2xx, 3xx, 4xx, 5xx status codes with descriptions. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Complete HTTP status codes reference table. All 1xx, 2xx, 3xx, 4xx, 5xx status codes with descriptions for web development and API debugging. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/http-status-reference.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="HTTP Status Codes Reference – Full HTTP Status Code Table | ToolForge">
-<meta property="og:description" content="Free online HTTP status codes reference. Complete table of status codes. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Complete HTTP status codes reference with all 1xx-5xx codes and descriptions.">
 <meta property="og:url" content="https://toolforge.site/tools/http-status-reference.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP Status Codes Reference – Full HTTP Status Code Table | ToolForge">
-<meta name="twitter:description" content="Free online HTTP status codes reference. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Complete HTTP status codes reference.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
@@ -37,45 +37,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Http Status Reference used for?",
+      "name": "How are HTTP status codes organized?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Http Status Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "HTTP status codes are organized into 5 classes by first digit: 1xx (Informational - request received), 2xx (Success - processed successfully), 3xx (Redirection - further action needed), 4xx (Client Error - invalid request), 5xx (Server Error - server failed valid request). Each class has specific codes for different scenarios."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between PUT and PATCH responses?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "PUT (full replacement) typically returns 200 OK with updated resource or 204 No Content. PATCH (partial update) returns similar codes. Both return 201 Created if creating new resource, 400 Bad Request for invalid data, 404 Not Found if resource doesn't exist, 409 Conflict for version mismatches."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "When should I use 201 vs 200?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Use 201 Created when a POST request successfully creates a new resource. Include Location header with the new resource URL. Use 200 OK for successful updates, retrievals, or operations that don't create new resources. 201 specifically indicates resource creation."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are the most common API status codes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "REST APIs commonly use: 200 OK (success), 201 Created (resource created), 204 No Content (success, empty response), 400 Bad Request (invalid input), 401 Unauthorized (missing auth), 403 Forbidden (insufficient permissions), 404 Not Found, 429 Too Many Requests (rate limited), 500 Internal Server Error."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What is the purpose of 304 Not Modified?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "304 Not Modified enables efficient caching. When client sends If-None-Match (ETag) or If-Modified-Since headers, server returns 304 if resource unchanged (no body, saves bandwidth) or 200 with new content if modified. Critical for performance optimization."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How do I handle 429 Too Many Requests?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "When receiving 429: 1) Stop sending requests immediately, 2) Check Retry-After header for wait time, 3) Implement exponential backoff, 4) Reduce request rate, 5) Consider caching responses. Prevention: implement client-side rate limiting, batch requests, use webhooks instead of polling."
       }
     }
   ]
@@ -85,7 +90,7 @@
 <body>
 <main class="container">
 <h1>HTTP Status Codes Reference</h1>
-<p class="subtitle">Complete reference table for HTTP response status codes. <a href="/tools/http-status-lookup.html">Quick lookup</a> by code.</p>
+<p class="subtitle">Complete reference table for HTTP response status codes.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <label for="filter" class="sr-only">Filter</label>
@@ -96,10 +101,10 @@
 <table class="ref-table">
 <thead><tr><th>Code</th><th>Status</th><th>Description</th></tr></thead>
 <tbody>
-<tr class="1xx"><td class="code">100</td><td>Continue</td><td>Request received, client should continue</td></tr>
-<tr class="1xx"><td class="code">101</td><td>Switching Protocols</td><td>Server agrees to switch protocol</td></tr>
-<tr class="1xx"><td class="code">102</td><td>Processing</td><td>Request is being processed (WebDAV)</td></tr>
-<tr class="1xx"><td class="code">103</td><td>Early Hints</td><td>Preload hints for the browser</td></tr>
+<tr class="1xx"><td class="code">100</td><td>Continue</td><td>Initial part of request received, client should continue sending</td></tr>
+<tr class="1xx"><td class="code">101</td><td>Switching Protocols</td><td>Server agrees to switch protocols (e.g., WebSocket upgrade)</td></tr>
+<tr class="1xx"><td class="code">102</td><td>Processing</td><td>Request is being processed, no response available yet (WebDAV)</td></tr>
+<tr class="1xx"><td class="code">103</td><td>Early Hints</td><td>Return headers before final response (preload hints)</td></tr>
 </tbody>
 </table>
 </div>
@@ -109,14 +114,16 @@
 <table class="ref-table">
 <thead><tr><th>Code</th><th>Status</th><th>Description</th></tr></thead>
 <tbody>
-<tr class="2xx"><td class="code">200</td><td>OK</td><td>Request succeeded</td></tr>
-<tr class="2xx"><td class="code">201</td><td>Created</td><td>Resource successfully created</td></tr>
-<tr class="2xx"><td class="code">202</td><td>Accepted</td><td>Request accepted but not yet processed</td></tr>
-<tr class="2xx"><td class="code">203</td><td>Non-Authoritative Info</td><td>Transformed response from proxy</td></tr>
-<tr class="2xx"><td class="code">204</td><td>No Content</td><td>Success with no response body</td></tr>
-<tr class="2xx"><td class="code">205</td><td>Reset Content</td><td>Client should reset document view</td></tr>
-<tr class="2xx"><td class="code">206</td><td>Partial Content</td><td>Partial GET response (range request)</td></tr>
-<tr class="2xx"><td class="code">207</td><td>Multi-Status</td><td>Multiple status codes (WebDAV)</td></tr>
+<tr class="2xx"><td class="code">200</td><td>OK</td><td>Request succeeded, response contains requested resource</td></tr>
+<tr class="2xx"><td class="code">201</td><td>Created</td><td>Resource successfully created, Location header points to it</td></tr>
+<tr class="2xx"><td class="code">202</td><td>Accepted</td><td>Request accepted for processing but not completed</td></tr>
+<tr class="2xx"><td class="code">203</td><td>Non-Authoritative Information</td><td>Transformed response from proxy or intermediary</td></tr>
+<tr class="2xx"><td class="code">204</td><td>No Content</td><td>Success but no response body (common for DELETE)</td></tr>
+<tr class="2xx"><td class="code">205</td><td>Reset Content</td><td>Client should reset document view (form reset)</td></tr>
+<tr class="2xx"><td class="code">206</td><td>Partial Content</td><td>Server delivering partial resource (range request)</td></tr>
+<tr class="2xx"><td class="code">207</td><td>Multi-Status</td><td>Multiple status codes in single response (WebDAV)</td></tr>
+<tr class="2xx"><td class="code">208</td><td>Already Reported</td><td>Members of DAV binding already listed (WebDAV)</td></tr>
+<tr class="2xx"><td class="code">226</td><td>IM Used</td><td>Response is result of delta applied (RFC 3229)</td></tr>
 </tbody>
 </table>
 </div>
@@ -126,13 +133,14 @@
 <table class="ref-table">
 <thead><tr><th>Code</th><th>Status</th><th>Description</th></tr></thead>
 <tbody>
-<tr class="3xx"><td class="code">300</td><td>Multiple Choices</td><td>Multiple options for the resource</td></tr>
-<tr class="3xx"><td class="code">301</td><td>Moved Permanently</td><td>Resource permanently moved</td></tr>
-<tr class="3xx"><td class="code">302</td><td>Found</td><td>Temporary redirect</td></tr>
-<tr class="3xx"><td class="code">303</td><td>See Other</td><td>Redirect to different URI via GET</td></tr>
-<tr class="3xx"><td class="code">304</td><td>Not Modified</td><td>Use cached version</td></tr>
-<tr class="3xx"><td class="code">307</td><td>Temporary Redirect</td><td>Same as 302 but method preserved</td></tr>
-<tr class="3xx"><td class="code">308</td><td>Permanent Redirect</td><td>Same as 301 but method preserved</td></tr>
+<tr class="3xx"><td class="code">300</td><td>Multiple Choices</td><td>Multiple options available for requested resource</td></tr>
+<tr class="3xx"><td class="code">301</td><td>Moved Permanently</td><td>Resource has new permanent URL, update bookmarks</td></tr>
+<tr class="3xx"><td class="code">302</td><td>Found</td><td>Temporary redirect, continue using original URL</td></tr>
+<tr class="3xx"><td class="code">303</td><td>See Other</td><td>Redirect to different URI using GET method</td></tr>
+<tr class="3xx"><td class="code">304</td><td>Not Modified</td><td>Use cached version, resource unchanged</td></tr>
+<tr class="3xx"><td class="code">305</td><td>Use Proxy</td><td>Access through proxy (deprecated for security)</td></tr>
+<tr class="3xx"><td class="code">307</td><td>Temporary Redirect</td><td>Temp redirect, original method preserved</td></tr>
+<tr class="3xx"><td class="code">308</td><td>Permanent Redirect</td><td>Perm redirect, original method preserved</td></tr>
 </tbody>
 </table>
 </div>
@@ -142,19 +150,35 @@
 <table class="ref-table">
 <thead><tr><th>Code</th><th>Status</th><th>Description</th></tr></thead>
 <tbody>
-<tr class="4xx"><td class="code">400</td><td>Bad Request</td><td>Invalid request syntax</td></tr>
-<tr class="4xx"><td class="code">401</td><td>Unauthorized</td><td>Authentication required</td></tr>
-<tr class="4xx"><td class="code">403</td><td>Forbidden</td><td>Access denied</td></tr>
-<tr class="4xx"><td class="code">404</td><td>Not Found</td><td>Resource not found</td></tr>
-<tr class="4xx"><td class="code">405</td><td>Method Not Allowed</td><td>HTTP method not allowed</td></tr>
-<tr class="4xx"><td class="code">408</td><td>Request Timeout</td><td>Server timed out waiting</td></tr>
-<tr class="4xx"><td class="code">409</td><td>Conflict</td><td>Request conflicts with current state</td></tr>
-<tr class="4xx"><td class="code">410</td><td>Gone</td><td>Resource permanently removed</td></tr>
-<tr class="4xx"><td class="code">413</td><td>Payload Too Large</td><td>Request entity too large</td></tr>
-<tr class="4xx"><td class="code">414</td><td>URI Too Long</td><td>Request URI too long</td></tr>
-<tr class="4xx"><td class="code">415</td><td>Unsupported Media Type</td><td>Format not supported</td></tr>
-<tr class="4xx"><td class="code">429</td><td>Too Many Requests</td><td>Rate limit exceeded</td></tr>
-<tr class="4xx"><td class="code">431</td><td>Request Header Fields Too Large</td><td>Headers too large</td></tr>
+<tr class="4xx"><td class="code">400</td><td>Bad Request</td><td>Invalid syntax, malformed request</td></tr>
+<tr class="4xx"><td class="code">401</td><td>Unauthorized</td><td>Authentication required or failed</td></tr>
+<tr class="4xx"><td class="code">402</td><td>Payment Required</td><td>Reserved for future use (payment systems)</td></tr>
+<tr class="4xx"><td class="code">403</td><td>Forbidden</td><td>Server understands request but refuses access</td></tr>
+<tr class="4xx"><td class="code">404</td><td>Not Found</td><td>Resource not found at specified URL</td></tr>
+<tr class="4xx"><td class="code">405</td><td>Method Not Allowed</td><td>HTTP method not supported for this resource</td></tr>
+<tr class="4xx"><td class="code">406</td><td>Not Acceptable</td><td>Cannot produce acceptable response format</td></tr>
+<tr class="4xx"><td class="code">407</td><td>Proxy Authentication Required</td><td>Proxy requires authentication</td></tr>
+<tr class="4xx"><td class="code">408</td><td>Request Timeout</td><td>Server timed out waiting for request</td></tr>
+<tr class="4xx"><td class="code">409</td><td>Conflict</td><td>Request conflicts with current resource state</td></tr>
+<tr class="4xx"><td class="code">410</td><td>Gone</td><td>Resource permanently removed, won't return</td></tr>
+<tr class="4xx"><td class="code">411</td><td>Length Required</td><td>Content-Length header required</td></tr>
+<tr class="4xx"><td class="code">412</td><td>Precondition Failed</td><td>Conditional headers failed (ETag, If-Match)</td></tr>
+<tr class="4xx"><td class="code">413</td><td>Payload Too Large</td><td>Request entity exceeds server limits</td></tr>
+<tr class="4xx"><td class="code">414</td><td>URI Too Long</td><td>Request URL exceeds server limits</td></tr>
+<tr class="4xx"><td class="code">415</td><td>Unsupported Media Type</td><td>Request format not supported</td></tr>
+<tr class="4xx"><td class="code">416</td><td>Range Not Satisfiable</td><td>Requested range is invalid for resource</td></tr>
+<tr class="4xx"><td class="code">417</td><td>Expectation Failed</td><td>Expect header requirement not met</td></tr>
+<tr class="4xx"><td class="code">418</td><td>I'm a Teapot</td><td>April Fools' joke (RFC 2324)</td></tr>
+<tr class="4xx"><td class="code">421</td><td>Misdirected Request</td><td>Request sent to wrong server/host</td></tr>
+<tr class="4xx"><td class="code">422</td><td>Unprocessable Entity</td><td>Well-formed but contains errors (WebDAV)</td></tr>
+<tr class="4xx"><td class="code">423</td><td>Locked</td><td>Resource is locked (WebDAV)</td></tr>
+<tr class="4xx"><td class="code">424</td><td>Failed Dependency</td><td>Previous request failed, this one can't proceed</td></tr>
+<tr class="4xx"><td class="code">425</td><td>Too Early</td><td>Server unwilling to process due to replay risk</td></tr>
+<tr class="4xx"><td class="code">426</td><td>Upgrade Required</td><td>Client should upgrade protocol</td></tr>
+<tr class="4xx"><td class="code">428</td><td>Precondition Required</td><td>Request should be conditional</td></tr>
+<tr class="4xx"><td class="code">429</td><td>Too Many Requests</td><td>Rate limit exceeded, slow down</td></tr>
+<tr class="4xx"><td class="code">431</td><td>Request Header Fields Too Large</td><td>Headers exceed server limits</td></tr>
+<tr class="4xx"><td class="code">451</td><td>Unavailable for Legal Reasons</td><td>Resource blocked for legal reasons</td></tr>
 </tbody>
 </table>
 </div>
@@ -164,56 +188,91 @@
 <table class="ref-table">
 <thead><tr><th>Code</th><th>Status</th><th>Description</th></tr></thead>
 <tbody>
-<tr class="5xx"><td class="code">500</td><td>Internal Server Error</td><td>Server encountered error</td></tr>
-<tr class="5xx"><td class="code">501</td><td>Not Implemented</td><td>Feature not supported</td></tr>
-<tr class="5xx"><td class="code">502</td><td>Bad Gateway</td><td>Invalid response from upstream</td></tr>
-<tr class="5xx"><td class="code">503</td><td>Service Unavailable</td><td>Server temporarily unavailable</td></tr>
-<tr class="5xx"><td class="code">504</td><td>Gateway Timeout</td><td>Upstream server timeout</td></tr>
-<tr class="5xx"><td class="code">505</td><td>HTTP Version Not Supported</td><td>HTTP version not supported</td></tr>
-<tr class="5xx"><td class="code">511</td><td>Network Auth Required</td><td>Network authentication required</td></tr>
+<tr class="5xx"><td class="code">500</td><td>Internal Server Error</td><td>Generic server error, no specific code applies</td></tr>
+<tr class="5xx"><td class="code">501</td><td>Not Implemented</td><td>Server doesn't support requested functionality</td></tr>
+<tr class="5xx"><td class="code">502</td><td>Bad Gateway</td><td>Upstream server returned invalid response</td></tr>
+<tr class="5xx"><td class="code">503</td><td>Service Unavailable</td><td>Server temporarily unable (overload/maintenance)</td></tr>
+<tr class="5xx"><td class="code">504</td><td>Gateway Timeout</td><td>Upstream server didn't respond in time</td></tr>
+<tr class="5xx"><td class="code">505</td><td>HTTP Version Not Supported</td><td>Requested HTTP version not supported</td></tr>
+<tr class="5xx"><td class="code">506</td><td>Variant Also Negotiates</td><td>Transparent content negotiation issue</td></tr>
+<tr class="5xx"><td class="code">507</td><td>Insufficient Storage</td><td>Not enough storage to complete (WebDAV)</td></tr>
+<tr class="5xx"><td class="code">508</td><td>Loop Detected</td><td>Infinite loop detected (WebDAV)</td></tr>
+<tr class="5xx"><td class="code">510</td><td>Not Extended</td><td>Further extensions required (RFC 2774)</td></tr>
+<tr class="5xx"><td class="code">511</td><td>Network Authentication Required</td><td>Network access requires authentication</td></tr>
 </tbody>
 </table>
 </div>
 
 <section class="tool-seo">
-<h3>About HTTP Status Reference</h3>
-<p>This HTTP status codes reference lists standard response codes from 1xx to 5xx with brief descriptions.</p>
-<p>It is useful for API development, debugging server responses and understanding what each status code means.</p>
+<h3>About HTTP Status Codes Reference</h3>
+<p>This HTTP status codes reference lists standard response codes from 1xx to 5xx with descriptions. Use the search box to quickly find specific codes or browse by category.</p>
+<p>It is useful for API development, debugging server responses, understanding HTTP communication, and implementing proper error handling in applications.</p>
+
+<h4>HTTP Status Code Best Practices</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Success Responses:
+  200 OK - Standard success for GET/PUT/PATCH
+  201 Created - POST created new resource
+  204 No Content - Success with no body (DELETE)
+
+Client Errors:
+  400 Bad Request - Invalid input, check validation
+  401 Unauthorized - Missing/invalid authentication
+  403 Forbidden - Authenticated but no permission
+  404 Not Found - Resource doesn't exist
+  429 Too Many Requests - Rate limited, check Retry-After
+
+Server Errors:
+  500 Internal Server Error - Check application logs
+  502 Bad Gateway - Check upstream/proxy health
+  503 Service Unavailable - Retry later, check status page
+  504 Gateway Timeout - Increase timeout or fix backend
+
+Redirects:
+  301 Moved Permanently - Update bookmarks/links
+  302 Found - Temporary, keep original URL
+  304 Not Modified - Use cached response
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Http Status Reference used for?</dt>
-  <dd>Http Status Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>How are HTTP status codes organized?</dt>
+  <dd>HTTP status codes are organized into 5 classes by first digit: 1xx (Informational - request received), 2xx (Success - processed successfully), 3xx (Redirection - further action needed), 4xx (Client Error - invalid request), 5xx (Server Error - server failed valid request). Each class has specific codes for different scenarios.</dd>
+
+  <dt>What is the difference between PUT and PATCH responses?</dt>
+  <dd>PUT (full replacement) typically returns 200 OK with updated resource or 204 No Content. PATCH (partial update) returns similar codes. Both return 201 Created if creating new resource, 400 Bad Request for invalid data, 404 Not Found if resource doesn't exist, 409 Conflict for version mismatches.</dd>
+
+  <dt>When should I use 201 vs 200?</dt>
+  <dd>Use 201 Created when a POST request successfully creates a new resource. Include Location header with the new resource URL. Use 200 OK for successful updates, retrievals, or operations that don't create new resources. 201 specifically indicates resource creation.</dd>
+
+  <dt>What are the most common API status codes?</dt>
+  <dd>REST APIs commonly use: 200 OK (success), 201 Created (resource created), 204 No Content (success, empty response), 400 Bad Request (invalid input), 401 Unauthorized (missing auth), 403 Forbidden (insufficient permissions), 404 Not Found, 429 Too Many Requests (rate limited), 500 Internal Server Error.</dd>
+
+  <dt>What is the purpose of 304 Not Modified?</dt>
+  <dd>304 Not Modified enables efficient caching. When client sends If-None-Match (ETag) or If-Modified-Since headers, server returns 304 if resource unchanged (no body, saves bandwidth) or 200 with new content if modified. Critical for performance optimization.</dd>
+
+  <dt>How do I handle 429 Too Many Requests?</dt>
+  <dd>When receiving 429: 1) Stop sending requests immediately, 2) Check Retry-After header for wait time, 3) Implement exponential backoff, 4) Reduce request rate, 5) Consider caching responses. Prevention: implement client-side rate limiting, batch requests, use webhooks instead of polling.</dd>
 </dl>
 </section>
 </main>
 <script>
 (function(){
-var input=document.getElementById("filter")
-var tables=document.querySelectorAll(".ref-section")
+var input=document.getElementById("filter");
+var tables=document.querySelectorAll(".ref-section");
 input.addEventListener("input",function(){
-var q=(input.value||"").toLowerCase().trim()
+var q=(input.value||"").toLowerCase().trim();
 tables.forEach(function(section){
-var rows=section.querySelectorAll("tbody tr")
+var rows=section.querySelectorAll("tbody tr");
 rows.forEach(function(tr){
-var text=(tr.textContent||"").toLowerCase()
-tr.style.display=(!q||text.indexOf(q)!==-1)?"":"none"
-})
-})
-})
-})()
+var text=(tr.textContent||"").toLowerCase();
+tr.style.display=(!q||text.indexOf(q)!==-1)?"":"none";
+});
+});
+});
+})();
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>

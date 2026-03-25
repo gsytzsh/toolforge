@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Common Port Numbers Reference – TCP/UDP Port Lookup | ToolForge</title>
-<meta name="description" content="Free online common port numbers reference for TCP and UDP. Look up FTP, SSH, HTTP, HTTPS, SMTP and 80+ well-known ports. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Reference table for TCP and UDP port numbers. Look up well-known ports including FTP, SSH, HTTP, HTTPS, SMTP, DNS and 80+ common network service ports. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/port-reference.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Common Port Numbers Reference – TCP/UDP Port Lookup | ToolForge">
-<meta property="og:description" content="Free online common port numbers reference for TCP and UDP. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Reference table for TCP and UDP port numbers. Look up well-known ports including FTP, SSH, HTTP, HTTPS, SMTP, DNS and 80+ common network service ports. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/port-reference.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Common Port Numbers Reference – TCP/UDP Port Lookup | ToolForge">
-<meta name="twitter:description" content="Free online common port numbers reference for TCP and UDP. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Reference table for TCP and UDP port numbers. Look up well-known ports including FTP, SSH, HTTP, HTTPS, SMTP, DNS and 80+ common network service ports. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
@@ -30,45 +30,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Port Reference used for?",
+      "name": "What are TCP and UDP ports?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Port Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "Ports are logical endpoints for network communications. TCP (Transmission Control Protocol) provides reliable, ordered delivery with connection establishment. UDP (User Datagram Protocol) provides faster, connectionless delivery without guaranteed order. Port numbers range from 0-65535, with 0-1023 being well-known ports assigned by IANA."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What are the three port ranges?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Well-known ports (0-1023): Assigned by IANA for system services like HTTP (80), SSH (22). Registered ports (1024-49151): Assigned for user applications like MySQL (3306), PostgreSQL (5432). Dynamic/private ports (49152-65535): Ephemeral ports used temporarily by client connections."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "Why are some ports TCP and others UDP?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "TCP is used when reliable delivery matters: web pages (HTTP), email (SMTP), file transfer (FTP). UDP is used for speed-sensitive applications: DNS queries, streaming, VoIP. Some services like DNS use both: UDP for queries, TCP for zone transfers."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the difference between well-known and ephemeral ports?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Well-known ports (0-1023) are fixed ports where servers listen for incoming connections. Ephemeral ports (49152-65535) are temporary ports assigned by the OS to client applications for the duration of a connection. Servers have fixed ports; clients use random ephemeral ports."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "How do I check which ports are open on my system?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Linux/Mac: 'netstat -tulpn' or 'ss -tulpn'. Windows: 'netstat -ano'. These commands show listening ports and associated processes. Use 'lsof -i :PORT' on Unix to find which process uses a specific port. Firewall rules may block external access even if port is listening."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "Why shouldn't I run services on well-known ports?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Well-known ports below 1024 typically require root/admin privileges and are reserved for standard services. Running custom services on these ports can conflict with system services, create security vulnerabilities, and violate security policies. Use ports above 1024 for custom applications."
       }
     }
   ]
@@ -78,7 +83,7 @@
 <body>
 <main class="container">
 <h1>Common Port Numbers Reference</h1>
-<p class="subtitle">Reference table for well-known TCP and UDP port numbers. Search by port or service name.</p>
+<p class="subtitle">Reference table for TCP and UDP port numbers used by common network services.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
 <label for="filter" class="sr-only">Filter</label>
@@ -92,25 +97,290 @@
 
 <section class="tool-seo">
 <h3>About Port Reference</h3>
-<p>This port reference lists well-known TCP and UDP port numbers used by common network services such as HTTP, SSH, FTP, SMTP and DNS.</p>
-<p>It is useful for firewall rules, server configuration, debugging network issues and understanding which services use which ports.</p>
+<p>This port reference lists well-known TCP and UDP port numbers used by common network services. Port numbers are 16-bit integers (0-65535) that identify specific processes or services on a host.</p>
+
+<h4>Port Number Ranges</h4>
+<p>Port numbers are divided into three ranges defined by IANA (Internet Assigned Numbers Authority):</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Range</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Name</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Examples</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">0-1023</td>
+    <td style="border:1px solid #ddd;padding:8px">Well-known ports</td>
+    <td style="border:1px solid #ddd;padding:8px">System services, requires root/admin</td>
+    <td style="border:1px solid #ddd;padding:8px">HTTP(80), SSH(22), DNS(53)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">1024-49151</td>
+    <td style="border:1px solid #ddd;padding:8px">Registered ports</td>
+    <td style="border:1px solid #ddd;padding:8px">User applications, vendor-specific</td>
+    <td style="border:1px solid #ddd;padding:8px">MySQL(3306), Redis(6379)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">49152-65535</td>
+    <td style="border:1px solid #ddd;padding:8px">Dynamic/Ephemeral</td>
+    <td style="border:1px solid #ddd;padding:8px">Temporary client connections</td>
+    <td style="border:1px solid #ddd;padding:8px">OS-assigned ephemeral ports</td>
+  </tr>
+</table>
+
+<h4>TCP vs UDP</h4>
+<p>Transport layer protocols determine how data is transmitted:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Feature</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">TCP</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">UDP</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Connection</td>
+    <td style="border:1px solid #ddd;padding:8px">Connection-oriented (3-way handshake)</td>
+    <td style="border:1px solid #ddd;padding:8px">Connectionless</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Reliability</td>
+    <td style="border:1px solid #ddd;padding:8px">Guaranteed delivery, retransmission</td>
+    <td style="border:1px solid #ddd;padding:8px">Best effort, no guarantee</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Ordering</td>
+    <td style="border:1px solid #ddd;padding:8px">Packets delivered in order</td>
+    <td style="border:1px solid #ddd;padding:8px">No ordering guarantee</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Speed</td>
+    <td style="border:1px solid #ddd;padding:8px">Slower due to overhead</td>
+    <td style="border:1px solid #ddd;padding:8px">Faster, minimal overhead</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Use Cases</td>
+    <td style="border:1px solid #ddd;padding:8px">Web, email, file transfer</td>
+    <td style="border:1px solid #ddd;padding:8px">DNS, streaming, VoIP, gaming</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Examples</td>
+    <td style="border:1px solid #ddd;padding:8px">HTTP(80), SSH(22), FTP(21)</td>
+    <td style="border:1px solid #ddd;padding:8px">DNS(53), DHCP(67/68), NTP(123)</td>
+  </tr>
+</table>
+
+<h4>Common Port Categories</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Category</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Ports</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Services</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Web Services</td>
+    <td style="border:1px solid #ddd;padding:8px">80, 443, 8080, 8443</td>
+    <td style="border:1px solid #ddd;padding:8px">HTTP, HTTPS, HTTP alternate</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Remote Access</td>
+    <td style="border:1px solid #ddd;padding:8px">22, 23, 3389, 5900</td>
+    <td style="border:1px solid #ddd;padding:8px">SSH, Telnet, RDP, VNC</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Email Services</td>
+    <td style="border:1px solid #ddd;padding:8px">25, 110, 143, 587, 993, 995</td>
+    <td style="border:1px solid #ddd;padding:8px">SMTP, POP3, IMAP, SMTPS, IMAPS</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">File Transfer</td>
+    <td style="border:1px solid #ddd;padding:8px">20, 21, 69, 873</td>
+    <td style="border:1px solid #ddd;padding:8px">FTP, FTP-data, TFTP, rsync</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Database</td>
+    <td style="border:1px solid #ddd;padding:8px">1433, 1521, 3306, 5432, 6379, 27017</td>
+    <td style="border:1px solid #ddd;padding:8px">MSSQL, Oracle, MySQL, PostgreSQL, Redis, MongoDB</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Network Infrastructure</td>
+    <td style="border:1px solid #ddd;padding:8px">53, 67, 68, 123, 161</td>
+    <td style="border:1px solid #ddd;padding:8px">DNS, DHCP, NTP, SNMP</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Authentication</td>
+    <td style="border:1px solid #ddd;padding:8px">88, 389, 636</td>
+    <td style="border:1px solid #ddd;padding:8px">Kerberos, LDAP, LDAPS</td>
+  </tr>
+</table>
+
+<h4>Port Security Considerations</h4>
+<p>Open ports are potential attack vectors. Follow these security practices:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Risk</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Mitigation</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Unnecessary open ports</td>
+    <td style="border:1px solid #ddd;padding:8px">Close unused ports, minimize attack surface</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Default credentials</td>
+    <td style="border:1px solid #ddd;padding:8px">Change default passwords on all services</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Unencrypted protocols</td>
+    <td style="border:1px solid #ddd;padding:8px">Use TLS/SSL variants (HTTPS, SSH, SFTP)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Port scanning</td>
+    <td style="border:1px solid #ddd;padding:8px">Use firewall rules, rate limiting, IDS/IPS</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Privilege escalation</td>
+    <td style="border:1px solid #ddd;padding:8px">Don't run services as root unnecessarily</td>
+  </tr>
+</table>
+
+<h4>Checking Open Ports</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Linux/Mac - List all listening ports:
+  netstat -tulpn
+  ss -tulpn  # Modern replacement for netstat
+
+Linux - Check specific port:
+  netstat -tulpn | grep :80
+  lsof -i :80
+
+Windows - List all connections:
+  netstat -ano
+
+Windows - Check specific port:
+  netstat -ano | findstr :80
+
+macOS - Check port usage:
+  lsof -i :80
+  netstat -an | grep LISTEN
+
+Docker - List container ports:
+  docker port &lt;container_id&gt;
+</pre>
+
+<h4>Firewall Configuration Examples</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+iptables (Linux):
+  # Allow SSH
+  iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+  # Allow HTTP/HTTPS
+  iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+  iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+  # Drop all other incoming
+  iptables -A INPUT -j DROP
+
+ufw (Ubuntu):
+  ufw allow 22/tcp    # SSH
+  ufw allow 80/tcp    # HTTP
+  ufw allow 443/tcp   # HTTPS
+  ufw enable
+
+firewalld (RHEL/CentOS):
+  firewall-cmd --permanent --add-service=ssh
+  firewall-cmd --permanent --add-service=http
+  firewall-cmd --permanent --add-service=https
+  firewall-cmd --reload
+
+Windows Firewall (PowerShell):
+  New-NetFirewallRule -DisplayName "SSH" -Direction Inbound -LocalPort 22 -Protocol TCP -Action Allow
+  New-NetFirewallRule -DisplayName "HTTP" -Direction Inbound -LocalPort 80 -Protocol TCP -Action Allow
+</pre>
+
+<h4>Common Port Conflicts</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Port</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Common Conflict</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Solution</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">80</td>
+    <td style="border:1px solid #ddd;padding:8px">Apache vs Nginx vs IIS</td>
+    <td style="border:1px solid #ddd;padding:8px">Stop conflicting service or use alternate port</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">443</td>
+    <td style="border:1px solid #ddd;padding:8px">Multiple web servers with SSL</td>
+    <td style="border:1px solid #ddd;padding:8px">Use reverse proxy or different ports</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">3306</td>
+    <td style="border:1px solid #ddd;padding:8px">Multiple MySQL instances</td>
+    <td style="border:1px solid #ddd;padding:8px">Configure different ports in my.cnf</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">8080</td>
+    <td style="border:1px solid #ddd;padding:8px">Tomcat, Jenkins, proxies</td>
+    <td style="border:1px solid #ddd;padding:8px">Change server.xml or Jenkins config</td>
+  </tr>
+</table>
+
+<h4>IANA Port Assignment Process</h4>
+<p>Port numbers are assigned by the Internet Assigned Numbers Authority (IANA):</p>
+<ul>
+  <li><strong>Well-known ports (0-1023):</strong> Assigned by IANA for standardized services</li>
+  <li><strong>Registered ports (1024-49151):</strong> Assigned to vendors for specific applications</li>
+  <li><strong>Dynamic ports (49152-65535):</strong> Not assigned, used for ephemeral connections</li>
+</ul>
+<p>To request a port assignment, submit an application to IANA with service description, transport protocol, and contact information.</p>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Firewall Configuration:</strong> Identify which ports to allow/block for specific services</li>
+  <li><strong>Troubleshooting:</strong> Determine which service uses a specific port</li>
+  <li><strong>Security Auditing:</strong> Review open ports for potential vulnerabilities</li>
+  <li><strong>Network Documentation:</strong> Document port assignments for infrastructure</li>
+  <li><strong>Application Deployment:</strong> Configure applications to use correct ports</li>
+  <li><strong>Penetration Testing:</strong> Identify services running on target systems</li>
+</ul>
+</section>
+
+<section class="how-to-use">
+<h3>How to Use Port Reference</h3>
+<ol class="how-to-steps">
+  <li><strong>Search by port:</strong> Enter a port number (e.g., 80) to find the associated service.</li>
+  <li><strong>Search by service:</strong> Enter a service name (e.g., http, ssh) to find the port number.</li>
+  <li><strong>Review results:</strong> The table shows port, service name, and description.</li>
+  <li><strong>Use for configuration:</strong> Apply port information to firewall rules or service configuration.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Port numbers are case-insensitive in search</li>
+  <li>Search supports partial matches for service names</li>
+  <li>Some services use both TCP and UDP on the same port</li>
+  <li>Well-known ports below 1024 typically require administrator privileges</li>
+  <li>Use firewall rules to restrict access to sensitive ports</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Port Reference used for?</dt>
-  <dd>Port Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What are TCP and UDP ports?</dt>
+  <dd>Ports are logical endpoints for network communications. TCP (Transmission Control Protocol) provides reliable, ordered delivery with connection establishment. UDP (User Datagram Protocol) provides faster, connectionless delivery without guaranteed order. Port numbers range from 0-65535, with 0-1023 being well-known ports assigned by IANA.</dd>
+
+  <dt>What are the three port ranges?</dt>
+  <dd>Well-known ports (0-1023): Assigned by IANA for system services like HTTP (80), SSH (22). Registered ports (1024-49151): Assigned for user applications like MySQL (3306), PostgreSQL (5432). Dynamic/private ports (49152-65535): Ephemeral ports used temporarily by client connections.</dd>
+
+  <dt>Why are some ports TCP and others UDP?</dt>
+  <dd>TCP is used when reliable delivery matters: web pages (HTTP), email (SMTP), file transfer (FTP). UDP is used for speed-sensitive applications: DNS queries, streaming, VoIP. Some services like DNS use both: UDP for queries, TCP for zone transfers.</dd>
+
+  <dt>What is the difference between well-known and ephemeral ports?</dt>
+  <dd>Well-known ports (0-1023) are fixed ports where servers listen for incoming connections. Ephemeral ports (49152-65535) are temporary ports assigned by the OS to client applications for the duration of a connection. Servers have fixed ports; clients use random ephemeral ports.</dd>
+
+  <dt>How do I check which ports are open on my system?</dt>
+  <dd>Linux/Mac: 'netstat -tulpn' or 'ss -tulpn'. Windows: 'netstat -ano'. These commands show listening ports and associated processes. Use 'lsof -i :PORT' on Unix to find which process uses a specific port. Firewall rules may block external access even if port is listening.</dd>
+
+  <dt>Why shouldn't I run services on well-known ports?</dt>
+  <dd>Well-known ports below 1024 typically require root/admin privileges and are reserved for standard services. Running custom services on these ports can conflict with system services, create security vulnerabilities, and violate security policies. Use ports above 1024 for custom applications.</dd>
 </dl>
 </section>
 </main>

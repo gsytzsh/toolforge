@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Line Number Adder – Add Line Numbers to Text | ToolForge</title>
-<meta name="description" content="Free online Line Number Adder to add line numbers to text. Part of the ToolForge developer tools collection.">
+<title>Line Number Adder – Add Line Numbers to Text with Custom Formatting | ToolForge</title>
+<meta name="description" content="Add line numbers to text with customizable formatting: starting number, padding, separator, and increment. Useful for code review, legal documents, and transcripts. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/line-number-adder.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Line Number Adder – Add Line Numbers to Text | ToolForge">
-<meta property="og:description" content="Free online Line Number Adder to add line numbers to text. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Line Number Adder – Add Line Numbers to Text with Custom Formatting | ToolForge">
+<meta property="og:description" content="Add line numbers to text with customizable formatting: starting number, padding, separator, and increment. Useful for code review, legal documents, and transcripts. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/line-number-adder.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Line Number Adder – Add Line Numbers to Text | ToolForge">
-<meta name="twitter:description" content="Free online Line Number Adder to add line numbers to text. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Line Number Adder – Add Line Numbers to Text with Custom Formatting | ToolForge">
+<meta name="twitter:description" content="Add line numbers to text with customizable formatting: starting number, padding, separator, and increment. Useful for code review, legal documents, and transcripts. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Line Number Adder used for?",
+      "name": "How does line numbering work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Line Number Adder is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "Line numbering splits text on newline characters (\\n or \\r\\n), then prefixes each line with an incrementing number. The format is: [number][separator][original line]. Common separators include tab, space, colon, or period. Line numbers typically start at 1, but can be customized for specific use cases."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What line number formats are supported?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "This tool supports: plain numbers (1, 2, 3), zero-padded numbers (001, 002, 003), Roman numerals (I, II, III), and alphabetic (a, b, c). Separators can be tab, space, colon, period, or custom. Padding ensures consistent width for sorting and alignment."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "Why use line numbers in code?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Line numbers enable precise referencing during code review, debugging, and documentation. Instead of 'the function near the top', you can say 'line 47'. Legal documents, court transcripts, and academic texts also use line numbers for citation and cross-reference."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I remove line numbers from text?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "To remove line numbers, use a regex replace: find '^\\d+[\\t:. ]+' and replace with empty string. For padded numbers, use '^\\d+\\s+' or '^\\d+[\\t:. ]'. This tool adds numbers; use find-replace tool with regex to remove them."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What separator should I use?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Tab provides best alignment in monospace fonts. Space is simplest for plain text. Colon (:) mimics code editor display (file.js:42). Period (.) is common in legal documents. Choose based on your output format and whether you need visual alignment."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "When should I use zero-padded line numbers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Zero-padding (001, 002, ... 100) ensures consistent column width and proper numeric sorting. Use padding when: output will be sorted alphabetically, visual alignment matters, or line count exceeds 99. Padding width should match expected max lines (3 digits for <1000, 4 for <10000)."
       }
     }
   ]
@@ -72,44 +77,299 @@
 <body>
 <main class="container">
 <h1>Line Number Adder</h1>
-<p class="subtitle">Add line numbers (1, 2, 3…) to each line of text.</p>
+<p class="subtitle">Add line numbers to text with customizable starting number, padding, and separator.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
-<h3>Input</h3>
+<h3>Input Text</h3>
 <label for="input" class="sr-only">Input text</label>
-<textarea id="input" rows="10" style="width:90%" aria-label="Input text"></textarea>
+<textarea id="input" rows="10" style="width:90%;font-family:monospace" aria-label="Input text"></textarea>
+<h3>Options</h3>
+<label for="startNum">Starting number:</label>
+<input id="startNum" type="number" min="1" value="1" style="width:60px">
+<label for="padding" style="margin-left:12px">Zero-pad to:</label>
+<select id="padding">
+  <option value="0">No padding</option>
+  <option value="2">2 digits (01-99)</option>
+  <option value="3" selected>3 digits (001-999)</option>
+  <option value="4">4 digits (0001-9999)</option>
+  <option value="5">5 digits (00001-99999)</option>
+</select>
+<label for="separator" style="margin-left:12px">Separator:</label>
+<select id="separator">
+  <option value=":">Colon (:)</option>
+  <option value="\t" selected>Tab</option>
+  <option value=" ">Space</option>
+  <option value=". ">Period (. )</option>
+  <option value="| ">Pipe (| )</option>
+</select>
 <br><br>
 <button onclick="add()">Add Line Numbers</button>
-<h3>Result</h3>
+<button type="button" onclick="copyResult()">Copy Result</button>
+<h3 style="margin-top:20px">Result</h3>
 <label for="output" class="sr-only">Output text</label>
-<textarea id="output" rows="10" style="width:90%" aria-label="Output text"></textarea>
+<textarea id="output" rows="10" style="width:90%;font-family:monospace" aria-label="Output text"></textarea>
+<p id="status" style="color:#666"></p>
 <section class="tool-seo">
 <h3>About Line Number Adder</h3>
-<p>This line-number adder prefixes each line of text with an incrementing number.</p>
-<p>It is useful for code samples, review notes, transcripts and any text where line references make discussion or debugging easier.</p>
+<p>This line number adder prefixes each line of text with an incrementing number, supporting customizable formatting for different use cases. Options include starting number, zero-padding width, and separator style.</p>
+
+<h4>Line Numbering Algorithm</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript Line Numbering Implementation:
+
+function addLineNumbers(text, options) {
+  const {
+    startNum = 1,
+    padding = 3,
+    separator = '\t'
+  } = options;
+
+  // Split on newlines (handles \r\n and \n)
+  const lines = text.split(/\r?\n/);
+
+  // Add line numbers
+  return lines.map((line, index) => {
+    const num = startNum + index;
+    const padded = padding > 0
+      ? String(num).padStart(padding, '0')
+      : String(num);
+    return padded + separator + line;
+  }).join('\n');
+}
+
+// Usage examples:
+const code = "function hello() {\n  return 'world';\n}";
+
+// Default: 1-based, 3-digit pad, tab separator
+addLineNumbers(code, {});
+// 001\tfunction hello() {
+// 002\t  return 'world';
+// 003\t}
+
+// Zero-based, no padding, colon separator
+addLineNumbers(code, { startNum: 0, padding: 0, separator: ':' });
+// 0:function hello() {
+// 1:  return 'world';
+// 2:}
+</pre>
+
+<h4>Line Number Format Examples</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example Output</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Plain (no padding)</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>1 line one</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Simple lists, notes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Zero-padded (3 digit)</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>001:line one</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Code, scripts, logs</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Colon separator</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>42:error here</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Error messages, logs</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Period separator</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>1. First item</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Legal documents, lists</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Tab separator</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>001\taligned text</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Monospace alignment</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Pipe separator</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>1 | text</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Markdown, documentation</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Code Review:</strong> Add line numbers to code snippets for precise referencing in pull requests and bug reports</li>
+  <li><strong>Legal Documents:</strong> Number lines in contracts, briefs, and court filings for citation (standard in legal publishing)</li>
+  <li><strong>Transcripts:</strong> Number deposition, interview, or meeting transcripts for reference</li>
+  <li><strong>Log Analysis:</strong> Add line numbers to log files for discussing specific entries</li>
+  <li><strong>Academic Writing:</strong> Number manuscript lines for peer review and editorial comments</li>
+  <li><strong>Poetry/Scripts:</strong> Number lines in poetry, screenplays, or scripts for analysis</li>
+  <li><strong>Documentation:</strong> Reference specific configuration lines in technical docs</li>
+</ul>
+
+<h4>Line Numbering Standards by Field</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Field</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Format</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Programming</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>1:</code> or <code>1</code></td>
+    <td style="border:1px solid #ddd;padding:8px">1-based, often colon or no separator</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Legal (US)</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>1  </code> (2-space align)</td>
+    <td style="border:1px solid #ddd;padding:8px">Every line numbered, 5-line spacing common</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Legal (UK)</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>1</code> (margin)</td>
+    <td style="border:1px solid #ddd;padding:8px">Numbers in margin, every line</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Academic</td>
+    <td style="border:1px solid #ddd;padding:8px"><code>[1]</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Bracketed, for poetry/prose analysis</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Screenwriting</td>
+    <td style="border:1px solid #ddd;padding:8px">Scene numbers</td>
+    <td style="border:1px solid #ddd;padding:8px">Scene headings numbered, not every line</td>
+  </tr>
+</table>
+
+<h4>Line Numbering Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Input Text:
+function greet(name) {
+  console.log("Hello, " + name);
+  return true;
+}
+
+Output (default: 3-digit pad, tab separator):
+001	function greet(name) {
+002	  console.log("Hello, " + name);
+003	  return true;
+004	}
+
+Output (colon separator, no padding):
+1:function greet(name) {
+2:  console.log("Hello, " + name);
+3:  return true;
+4:}
+
+Output (period separator, 2-digit pad):
+01. function greet(name) {
+02.   console.log("Hello, " + name);
+03.   return true;
+04. }
+</pre>
+
+<h4>Removing Line Numbers</h4>
+<p>To remove previously added line numbers, use regex replacement:</p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Regex patterns for removing line numbers:
+
+// Remove tab-separated numbers (001\t)
+Pattern: ^\d+\t
+Replace: (empty)
+
+// Remove colon-separated numbers (1:)
+Pattern: ^\d+:
+Replace: (empty)
+
+// Remove period-separated with space (1. )
+Pattern: ^\d+\.
+Replace: (empty)
+
+// Remove zero-padded with any separator
+Pattern: ^\d+[\t:.| ]+
+Replace: (empty)
+
+// Remove bracketed numbers ([1])
+Pattern: ^\[\d+\]\s*
+Replace: (empty)
+
+Use the Find and Replace tool with regex mode enabled.
+</pre>
+
+<h4>Line Numbering Best Practices</h4>
+<ul>
+  <li><strong>Consistent padding:</strong> Use padding width matching expected max lines (3 digits for <1000 lines)</li>
+  <li><strong>Separator choice:</strong> Tab for alignment, colon for error-style, period for formal documents</li>
+  <li><strong>Starting at 1:</strong> Most conventions use 1-based numbering; 0-based is programming-specific</li>
+  <li><strong>Preserve indentation:</strong> Line numbers should prefix, not replace, existing whitespace</li>
+  <li><strong>Empty lines:</strong> Decide whether to number empty lines (legal: yes; code: usually yes)</li>
+</ul>
 </section>
 
+<section class="how-to-use">
+<h3>How to Add Line Numbers</h3>
+<ol class="how-to-steps">
+  <li><strong>Paste text:</strong> Enter or paste the text to number.</li>
+  <li><strong>Configure options:</strong> Set starting number, padding width, and separator.</li>
+  <li><strong>Click Add:</strong> Line numbers are prefixed to each line.</li>
+  <li><strong>Copy result:</strong> Use the numbered text in documents or code.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Use monospace font for best visual alignment with tab separators</li>
+  <li>3-digit padding (001-999) works for most code files</li>
+  <li>Colon separator mimics editor error messages (file.js:42)</li>
+  <li>For legal documents, use period separator with 2-digit padding</li>
+  <li>Empty input produces empty output</li>
+</ul>
+</section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Line Number Adder used for?</dt>
-  <dd>Line Number Adder is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+
+  <dt>How does line numbering work?</dt>
+  <dd>Line numbering splits text on newline characters (\n or \r\n), then prefixes each line with an incrementing number. The format is: [number][separator][original line]. Common separators include tab, space, colon, or period. Line numbers typically start at 1, but can be customized for specific use cases.</dd>
+
+  <dt>What line number formats are supported?</dt>
+  <dd>This tool supports: plain numbers (1, 2, 3), zero-padded numbers (001, 002, 003), and various separators (tab, space, colon, period, pipe). Padding ensures consistent width for sorting and alignment.</dd>
+
+  <dt>Why use line numbers in code?</dt>
+  <dd>Line numbers enable precise referencing during code review, debugging, and documentation. Instead of 'the function near the top', you can say 'line 47'. Legal documents, court transcripts, and academic texts also use line numbers for citation and cross-reference.</dd>
+
+  <dt>How do I remove line numbers from text?</dt>
+  <dd>To remove line numbers, use a regex replace: find '^\d+[\t:. ]+' and replace with empty string. For padded numbers, use '^\d+\s+' or '^\d+[\t:. ]'. This tool adds numbers; use find-replace tool with regex to remove them.</dd>
+
+  <dt>What separator should I use?</dt>
+  <dd>Tab provides best alignment in monospace fonts. Space is simplest for plain text. Colon (:) mimics code editor display (file.js:42). Period (.) is common in legal documents. Choose based on your output format and whether you need visual alignment.</dd>
+
+  <dt>When should I use zero-padded line numbers?</dt>
+  <dd>Zero-padding (001, 002, ... 100) ensures consistent column width and proper numeric sorting. Use padding when: output will be sorted alphabetically, visual alignment matters, or line count exceeds 99. Padding width should match expected max lines (3 digits for <1000, 4 for <10000).</dd>
 </dl>
 </section>
 </main>
 <script>
 function add(){
-var lines=document.getElementById("input").value.split(/\r?\n/)
-document.getElementById("output").value=lines.map(function(l,i){return (i+1)+"\t"+l}).join("\n")
+var text=document.getElementById("input").value;
+var startNum=parseInt(document.getElementById("startNum").value,10)||1;
+var padding=parseInt(document.getElementById("padding").value,10)||0;
+var sepInput=document.getElementById("separator").value;
+var separator=sepInput==="\\t"?"\t":sepInput;
+var lines=text.split(/\r?\n/);
+var result=lines.map(function(l,i){
+var num=startNum+i;
+var padded=padding>0?String(num).padStart(padding,"0"):String(num);
+return padded+separator+l;
+}).join("\n");
+document.getElementById("output").value=result;
+document.getElementById("status").innerText="Added "+lines.length+" line numbers.";
+}
+function copyResult(){
+var value=document.getElementById("output").value;
+if(!value){
+document.getElementById("status").innerText="Nothing to copy.";
+return;
+}
+navigator.clipboard.writeText(value).then(function(){
+document.getElementById("status").innerText="Result copied.";
+}).catch(function(){
+document.getElementById("status").innerText="Copy failed.";
+});
 }
 </script>
 <script src="/js/favorites.js"></script>

@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Speech Time Calculator – Estimate Speaking Time | ToolForge</title>
-<meta name="description" content="Free online Speech Time Calculator to estimate how long a script or speech will take to say out loud based on speaking speed. Part of the ToolForge developer tools collection.">
+<title>Speech Time Calculator – Estimate Speaking Duration from Word Count | ToolForge</title>
+<meta name="description" content="Calculate how long a script or speech will take to speak aloud based on words per minute (WPM). Includes speaking speed standards, presentation timing guide, and speech pacing tips. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/speech-time-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Speech Time Calculator – Estimate Speaking Time | ToolForge">
-<meta property="og:description" content="Free online Speech Time Calculator to estimate how long a script or speech will take to say out loud based on speaking speed.">
+<meta property="og:title" content="Speech Time Calculator – Estimate Speaking Duration from Word Count | ToolForge">
+<meta property="og:description" content="Calculate how long a script or speech will take to speak aloud based on words per minute (WPM). Includes speaking speed standards and presentation timing guide.">
 <meta property="og:url" content="https://toolforge.site/tools/speech-time-calculator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Speech Time Calculator – Estimate Speaking Time | ToolForge">
-<meta name="twitter:description" content="Free online Speech Time Calculator to estimate how long a script or speech will take to say out loud based on speaking speed.">
+<meta name="twitter:title" content="Speech Time Calculator – Estimate Speaking Duration from Word Count | ToolForge">
+<meta name="twitter:description" content="Calculate how long a script or speech will take to speak aloud based on words per minute (WPM).">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Speech Time Calculator used for?",
+      "name": "What is the average speaking speed?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Speech Time Calculator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "Average speaking speed is 130-150 words per minute (WPM) for native English speakers. Professional speakers (TED talks, podcasts) average 150-160 WPM. Audiobook narrators target 150-160 WPM for fiction, 140-150 WPM for non-fiction. Public presentations should aim for 120-140 WPM for clarity and audience comprehension."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I calculate speaking time from word count?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Speaking time (minutes) = Word count ÷ Speaking speed (WPM). For example, a 1000-word speech at 130 WPM takes 1000/130 = 7.7 minutes. At 150 WPM, the same speech takes 1000/150 = 6.7 minutes. Add 10-15% buffer for pauses, audience reactions, and transitions."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What is a good speaking pace for presentations?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "For presentations, aim for 120-140 WPM. Slower pacing (120 WPM) works better for: complex topics, non-native audiences, formal settings, and instructional content. Faster pacing (140-150 WPM) suits: casual talks, familiar topics, energetic presentations, and experienced speakers."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How many words is a 5-minute speech?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "A 5-minute speech contains approximately 650-750 words at average speaking pace (130-150 WPM). For presentations with slides or pauses, target 600-650 words. For TED-style talks (faster delivery), target 700-800 words. Always rehearse with timing to confirm."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "Why is speaking speed important?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Speaking speed affects audience comprehension, engagement, and retention. Too fast (>170 WPM) overwhelms listeners and reduces understanding. Too slow (<110 WPM) causes audience disengagement. Optimal speed (120-150 WPM) balances clarity with momentum, keeping audiences engaged while ensuring comprehension."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How can I improve my speaking pace?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Practice techniques: Record yourself and measure WPM, pause between key points (2-3 seconds), emphasize important words with slower delivery, vary pace for engagement (faster for stories, slower for key messages), use a timer during rehearsal, and get feedback from others on clarity and pace."
       }
     }
   ]
@@ -72,60 +77,361 @@
 <body>
 <main class="container">
 <h1>Speech Time Calculator</h1>
-<p class="subtitle">Estimate speaking time from a script and your words-per-minute pace.</p>
+<p class="subtitle">Estimate speaking duration from script word count and words per minute (WPM) pace.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
-<label for="wpm" class="sr-only">Speaking speed words per minute</label>
-<input id="wpm" type="number" min="80" value="130" style="width:110px" aria-label="Speaking speed words per minute">
-<br><br>
+
+<label for="wpm">Speaking Speed (WPM):</label>
+<input id="wpm" type="number" min="80" max="200" value="130" style="width:100px;margin-left:8px">
+<span style="margin-left:8px;font-size:14px;color:#666" id="wpm-label">(Average)</span>
+
+<h3 style="margin-top:20px">Script Text</h3>
 <label for="text" class="sr-only">Speech text</label>
-<textarea id="text" rows="12" class="pdf-editor" aria-label="Speech text" placeholder="Paste script or speech text here"></textarea>
-<div class="tool-actions">
-<button type="button" onclick="calculateSpeech()">Calculate</button>
+<textarea id="text" rows="12" style="width:90%" placeholder="Paste your script or speech text here to count words and calculate speaking time"></textarea>
+
+<div class="tool-actions" style="margin-top:16px">
+<button type="button" onclick="calculateSpeech()">Calculate Speaking Time</button>
 </div>
-<h3>Result</h3>
-<p id="result"></p>
+
+<h3 style="margin-top:24px">Result</h3>
+<div id="result" style="font-size:1.2rem;padding:16px;background:#f5f5f5;border-radius:8px"></div>
 <p id="status" class="inline-status"></p>
+
 <section class="tool-seo">
 <h3>About Speech Time Calculator</h3>
-<p>This speech time calculator estimates how long a script will take to say aloud based on your speaking pace.</p>
-<p>It is useful for presentations, video scripts, interviews and public speaking practice when you need to fit a message into a fixed time slot.</p>
+<p>This speech time calculator estimates how long a script will take to speak aloud based on word count and speaking pace (words per minute, WPM). It helps speakers, presenters, and content creators plan presentations, podcasts, videos, and speeches to fit specific time slots.</p>
+<p>The calculator counts words in your text and divides by your selected speaking speed to produce estimated duration in minutes and seconds. It also shows word count for reference and planning purposes.</p>
+
+<h4>Speaking Time Formula</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:14px;overflow:auto">
+Speaking Time (minutes) = Word Count ÷ Speaking Speed (WPM)
+
+Example Calculations:
+  500 words ÷ 130 WPM = 3.85 minutes (3 min 51 sec)
+  1000 words ÷ 140 WPM = 7.14 minutes (7 min 8 sec)
+  1500 words ÷ 150 WPM = 10.0 minutes (10 min 0 sec)
+  2000 words ÷ 130 WPM = 15.38 minutes (15 min 23 sec)
+
+With 10% pause buffer:
+  Speaking Time × 1.10 = Total time with pauses
+</pre>
+
+<h4>JavaScript Implementation</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Speech Time Calculator Implementation
+
+function calculateSpeechTime(text, wpm) {
+  // Count words (split on whitespace, filter empty)
+  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+
+  // Calculate time in minutes
+  const minutes = words / wpm;
+
+  // Convert to minutes and seconds
+  const minWhole = Math.floor(minutes);
+  const seconds = Math.round((minutes - minWhole) * 60);
+
+  return {
+    words: words,
+    minutes: minWhole,
+    seconds: seconds,
+    totalMinutes: minutes
+  };
+}
+
+// Usage example:
+const script = "Hello everyone, thank you for joining...";
+const result = calculateSpeechTime(script, 130);
+console.log(`${result.words} words = ${result.minutes}m ${result.seconds}s`);
+</pre>
+
+<h4>Speaking Speed Standards by Context</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Context</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Recommended WPM</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Casual conversation</td>
+    <td style="border:1px solid #ddd;padding:8px">140-160 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Natural, relaxed pace</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Public presentations</td>
+    <td style="border:1px solid #ddd;padding:8px">120-140 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Clear, deliberate delivery</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">TED Talks</td>
+    <td style="border:1px solid #ddd;padding:8px">150-160 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Polished, practiced delivery</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Audiobook (fiction)</td>
+    <td style="border:1px solid #ddd;padding:8px">150-160 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Engaging narrative pace</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Audiobook (non-fiction)</td>
+    <td style="border:1px solid #ddd;padding:8px">140-150 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Slower for comprehension</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Podcast/interview</td>
+    <td style="border:1px solid #ddd;padding:8px">140-160 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Conversational tone</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Educational/instructional</td>
+    <td style="border:1px solid #ddd;padding:8px">110-130 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Allow time for note-taking</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">News broadcasting</td>
+    <td style="border:1px solid #ddd;padding:8px">150-170 WPM</td>
+    <td style="border:1px solid #ddd;padding:8px">Fast, information-dense</td>
+  </tr>
+</table>
+
+<h4>Speech Duration Reference by Word Count</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Word Count</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">At 120 WPM</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">At 130 WPM</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">At 140 WPM</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">At 150 WPM</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">250 words</td>
+    <td style="border:1px solid #ddd;padding:8px">2 min 5 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">1 min 55 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">1 min 47 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">1 min 40 sec</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">500 words</td>
+    <td style="border:1px solid #ddd;padding:8px">4 min 10 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">3 min 50 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">3 min 34 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">3 min 20 sec</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">750 words</td>
+    <td style="border:1px solid #ddd;padding:8px">6 min 15 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">5 min 46 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">5 min 21 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">5 min 0 sec</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">1000 words</td>
+    <td style="border:1px solid #ddd;padding:8px">8 min 20 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">7 min 42 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">7 min 8 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">6 min 40 sec</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">1500 words</td>
+    <td style="border:1px solid #ddd;padding:8px">12 min 30 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">11 min 32 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">10 min 43 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">10 min 0 sec</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">2000 words</td>
+    <td style="border:1px solid #ddd;padding:8px">16 min 40 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">15 min 23 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">14 min 17 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">13 min 20 sec</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">2500 words</td>
+    <td style="border:1px solid #ddd;padding:8px">20 min 50 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">19 min 14 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">17 min 51 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">16 min 40 sec</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">3000 words</td>
+    <td style="border:1px solid #ddd;padding:8px">25 min 0 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">23 min 5 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">21 min 26 sec</td>
+    <td style="border:1px solid #ddd;padding:8px">20 min 0 sec</td>
+  </tr>
+</table>
+
+<h4>Common Speech Length Guidelines</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Speech Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Target Duration</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Word Count (130 WPM)</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Word Count (150 WPM)</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Elevator pitch</td>
+    <td style="border:1px solid #ddd;padding:8px">1-2 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">130-260 words</td>
+    <td style="border:1px solid #ddd;padding:8px">150-300 words</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Lightning talk</td>
+    <td style="border:1px solid #ddd;padding:8px">5 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">650 words</td>
+    <td style="border:1px solid #ddd;padding:8px">750 words</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Short presentation</td>
+    <td style="border:1px solid #ddd;padding:8px">10 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">1,300 words</td>
+    <td style="border:1px solid #ddd;padding:8px">1,500 words</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Standard talk</td>
+    <td style="border:1px solid #ddd;padding:8px">15 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">1,950 words</td>
+    <td style="border:1px solid #ddd;padding:8px">2,250 words</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">TED-style talk</td>
+    <td style="border:1px solid #ddd;padding:8px">18 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">2,340 words</td>
+    <td style="border:1px solid #ddd;padding:8px">2,700 words</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Keynote speech</td>
+    <td style="border:1px solid #ddd;padding:8px">30 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">3,900 words</td>
+    <td style="border:1px solid #ddd;padding:8px">4,500 words</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Lecture/sermon</td>
+    <td style="border:1px solid #ddd;padding:8px">45 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">5,850 words</td>
+    <td style="border:1px solid #ddd;padding:8px">6,750 words</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Long presentation</td>
+    <td style="border:1px solid #ddd;padding:8px">60 minutes</td>
+    <td style="border:1px solid #ddd;padding:8px">7,800 words</td>
+    <td style="border:1px solid #ddd;padding:8px">9,000 words</td>
+  </tr>
+</table>
+
+<h4>Factors That Affect Speaking Time</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Factor</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Effect on Time</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Adjustment</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Pauses for emphasis</td>
+    <td style="border:1px solid #ddd;padding:8px">+5-10%</td>
+    <td style="border:1px solid #ddd;padding:8px">Add buffer time</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Audience reactions (laughter, applause)</td>
+    <td style="border:1px solid #ddd;padding:8px">+5-15%</td>
+    <td style="border:1px solid #ddd;padding:8px">Pause for response</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Slide transitions</td>
+    <td style="border:1px solid #ddd;padding:8px">+2-5%</td>
+    <td style="border:1px solid #ddd;padding:8px">Practice transitions</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Technical terms/jargon</td>
+    <td style="border:1px solid #ddd;padding:8px">Slower pace</td>
+    <td style="border:1px solid #ddd;padding:8px">Reduce WPM by 10-20</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Non-native audience</td>
+    <td style="border:1px solid #ddd;padding:8px">Slower pace</td>
+    <td style="border:1px solid #ddd;padding:8px">Reduce WPM by 20-30</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Q&A interruptions</td>
+    <td style="border:1px solid #ddd;padding:8px">+10-20%</td>
+    <td style="border:1px solid #ddd;padding:8px">Plan separate Q&A time</td>
+  </tr>
+</table>
+
+<h4>Speaking Pace Tips for Different Contexts</h4>
+<ul>
+  <li><strong>Presentations:</strong> Start slower (120 WPM) to establish credibility, vary pace throughout, slow down for key points</li>
+  <li><strong>Podcasts:</strong> Maintain conversational pace (140-160 WPM), speed up for stories, slow down for important information</li>
+  <li><strong>Video scripts:</strong> Aim for 140-150 WPM for YouTube, 130-140 WPM for tutorials, add pauses for visual elements</li>
+  <li><strong>Audiobooks:</strong> Fiction allows faster pace (150-160 WPM), non-fiction should be slower (140-150 WPM) for comprehension</li>
+  <li><strong>Elevator pitches:</strong> Slightly faster (140-150 WPM) to convey energy, but ensure clarity on key value propositions</li>
+  <li><strong>Educational content:</strong> Slower pace (110-130 WPM) to allow note-taking and mental processing</li>
+</ul>
+
+<h4>How to Practice Speaking Pace</h4>
+<ol>
+  <li><strong>Record yourself:</strong> Use voice memo app, speak for 1 minute, count words, calculate WPM</li>
+  <li><strong>Use a metronome:</strong> Set to 120-150 BPM, practice speaking one word per beat</li>
+  <li><strong>Read aloud:</strong> Practice with books, measure time, adjust pace accordingly</li>
+  <li><strong>Mark your script:</strong> Add pause markers (//) for emphasis points, breathe marks (|) for natural breaks</li>
+  <li><strong>Time rehearsals:</strong> Practice full speech multiple times, note duration variations</li>
+  <li><strong>Get feedback:</strong> Ask others if pace feels too fast, too slow, or just right</li>
+</ol>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Speech Time Calculator used for?</dt>
-  <dd>Speech Time Calculator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is the average speaking speed?</dt>
+  <dd>Average speaking speed is 130-150 words per minute (WPM) for native English speakers. Professional speakers (TED talks, podcasts) average 150-160 WPM. Audiobook narrators target 150-160 WPM for fiction, 140-150 WPM for non-fiction. Public presentations should aim for 120-140 WPM for clarity and audience comprehension.</dd>
+
+  <dt>How do I calculate speaking time from word count?</dt>
+  <dd>Speaking time (minutes) = Word count ÷ Speaking speed (WPM). For example, a 1000-word speech at 130 WPM takes 1000/130 = 7.7 minutes. At 150 WPM, the same speech takes 1000/150 = 6.7 minutes. Add 10-15% buffer for pauses, audience reactions, and transitions.</dd>
+
+  <dt>What is a good speaking pace for presentations?</dt>
+  <dd>For presentations, aim for 120-140 WPM. Slower pacing (120 WPM) works better for: complex topics, non-native audiences, formal settings, and instructional content. Faster pacing (140-150 WPM) suits: casual talks, familiar topics, energetic presentations, and experienced speakers.</dd>
+
+  <dt>How many words is a 5-minute speech?</dt>
+  <dd>A 5-minute speech contains approximately 650-750 words at average speaking pace (130-150 WPM). For presentations with slides or pauses, target 600-650 words. For TED-style talks (faster delivery), target 700-800 words. Always rehearse with timing to confirm.</dd>
+
+  <dt>Why is speaking speed important?</dt>
+  <dd>Speaking speed affects audience comprehension, engagement, and retention. Too fast (>170 WPM) overwhelms listeners and reduces understanding. Too slow (<110 WPM) causes audience disengagement. Optimal speed (120-150 WPM) balances clarity with momentum, keeping audiences engaged while ensuring comprehension.</dd>
+
+  <dt>How can I improve my speaking pace?</dt>
+  <dd>Practice techniques: Record yourself and measure WPM, pause between key points (2-3 seconds), emphasize important words with slower delivery, vary pace for engagement (faster for stories, slower for key messages), use a timer during rehearsal, and get feedback from others on clarity and pace.</dd>
 </dl>
 </section>
 </main>
 <script>
 function calculateSpeech(){
-let text=document.getElementById("text").value.trim()
-let words=text?text.split(/\s+/).filter(Boolean).length:0
-let wpm=parseInt(document.getElementById("wpm").value,10)||130
+var text=document.getElementById("wpm").value;
+var wpmLabel=document.getElementById("wpm-label");
+var wpm=parseInt(text,10)||130;
+if(wpm<80){wpm=80;wpmLabel.textContent="(Very Slow)";}
+else if(wpm<120){wpmLabel.textContent="(Slow)";}
+else if(wpm<140){wpmLabel.textContent="(Average)";}
+else if(wpm<160){wpmLabel.textContent="(Fast)";}
+else{wpmLabel.textContent="(Very Fast)";}
+document.getElementById("wpm").value=wpm;
+var text=document.getElementById("text").value.trim();
+var words=text?text.split(/\s+/).filter(Boolean).length:0;
 if(!words){
-document.getElementById("result").innerText=""
-document.getElementById("status").innerText="Paste a speech or script first."
-document.getElementById("status").style.color="#b91c1c"
-return
+document.getElementById("result").innerHTML="";
+document.getElementById("status").innerText="Paste your script or speech text to calculate speaking time.";
+document.getElementById("status").style.color="#b91c1c";
+return;
 }
-let minutes=words/wpm
-let minWhole=Math.floor(minutes)
-let sec=Math.round((minutes-minWhole)*60)
-document.getElementById("result").innerText="Words: "+words+" | Estimated speaking time: "+minWhole+" min "+sec+" sec"
-document.getElementById("status").innerText="Speech time estimated."
-document.getElementById("status").style.color="#16a34a"
+var minutes=words/wpm;
+var minWhole=Math.floor(minutes);
+var sec=Math.round((minutes-minWhole)*60);
+var withBuffer=Math.round(minutes*1.1*60);
+var bufferMin=Math.floor(withBuffer/60);
+var bufferSec=withBuffer%60;
+document.getElementById("result").innerHTML=
+"<p><strong>Word Count:</strong> "+words+" words</p>"+
+"<p><strong>Speaking Time:</strong> "+minWhole+" minute"+(minWhole!==1?"s":"")+" "+sec+" second"+(sec!==1?"s":"")+" at "+wpm+" WPM</p>"+
+"<p><strong>With 10% pause buffer:</strong> "+bufferMin+" minute"+(bufferMin!==1?"s":"")+" "+bufferSec+" second"+(bufferSec!==1?"s":"")+"</p>";
+document.getElementById("status").innerText="Speaking time calculated.";
+document.getElementById("status").style.color="#16a34a";
 }
 </script>
 <script src="/js/favorites.js"></script>

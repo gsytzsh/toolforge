@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Webhook Payload Viewer – Inspect Webhook JSON Online | ToolForge</title>
-<meta name="description" content="Free online Webhook Payload Viewer to pretty print webhook JSON, flatten nested key paths and inspect event payloads in the browser. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Webhook Payload Viewer inspects JSON webhook events with pretty printing and nested key flattening. Debug GitHub, Stripe, Slack payloads with readable field paths. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/webhook-payload-viewer.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Webhook Payload Viewer – Inspect Webhook JSON Online | ToolForge">
-<meta property="og:description" content="Free online Webhook Payload Viewer to pretty print webhook JSON, flatten nested key paths and inspect event payloads in the browser. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Webhook Payload Viewer inspects JSON webhook events with pretty printing and nested key flattening. Debug GitHub, Stripe, Slack payloads with readable field paths. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/webhook-payload-viewer.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Webhook Payload Viewer – Inspect Webhook JSON Online | ToolForge">
-<meta name="twitter:description" content="Free online Webhook Payload Viewer to pretty print webhook JSON, flatten nested key paths and inspect event payloads in the browser. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Webhook Payload Viewer inspects JSON webhook events with pretty printing and nested key flattening. Debug GitHub, Stripe, Slack payloads with readable field paths. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Webhook Payload Viewer?",
+      "name": "What is a webhook payload?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Webhook Payload Viewer is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "A webhook payload is a JSON object sent by a service to notify your application of an event. It contains event metadata (event type, timestamp, ID) and a data object with details about the resource that changed. Common examples include GitHub push events, Stripe payment notifications, and Slack message events."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I flatten nested JSON keys?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Flattening converts nested paths like data.user.email into readable dot notation. For arrays, bracket notation is used: items[0].name. The flattening process recursively traverses each level, building the full path from root to leaf value. This makes it easy to locate specific fields in large payloads."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What are common webhook event types?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Common webhook events include: GitHub (push, pull_request, issues, release), Stripe (payment_intent.succeeded, customer.created, invoice.paid), Slack (message, app_mention, reaction_added), Shopify (orders/create, products/update), and Discord (MESSAGE_CREATE, GUILD_MEMBER_ADD). Each event has a unique payload structure."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "Why flatten webhook payload keys?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Flattening reveals the complete structure of deeply nested payloads, making it easier to write code that accesses specific fields. Instead of guessing the path to data.user.profile.email, you see the exact flattened key. This is especially useful for documentation, debugging, and generating type definitions."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How do I validate webhook JSON structure?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Validate JSON by parsing it with JSON.parse() to check syntax. Then inspect the root-level keys: most webhooks include an 'event' or 'type' field, an 'id' for the event, a 'created_at' timestamp, and a 'data' or 'object' containing the resource. Use pretty printing to verify proper nesting and array structures."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What is the difference between webhook and API polling?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Webhooks push events to your endpoint in real-time when something happens, reducing latency and server load. API polling requires periodic requests to check for changes, which introduces delay and consumes rate limits. Webhooks are more efficient for event-driven architectures; polling is simpler for infrequent checks."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>Webhook Payload Viewer</h1>
-<p class="subtitle">Inspect webhook events by pretty printing JSON and flattening nested keys into readable field paths.</p>
+<p class="subtitle">Inspect webhook JSON events with pretty printing and nested key flattening for debugging and documentation.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <label for="payload" class="sr-only">Webhook payload JSON</label>
 <textarea id="payload" rows="14" class="pdf-editor pdf-editor-mono" aria-label="Webhook payload JSON" placeholder='{"event":"user.created","data":{"id":1,"user":{"email":"test@example.com"}}}'></textarea>
@@ -87,25 +92,167 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Webhook Payload Viewer</h3>
-<p>This webhook payload viewer pretty prints JSON webhook events and flattens nested keys into readable paths.</p>
-<p>It is useful for webhook debugging, event inspection and payload reviews when you need to understand what changed inside a large nested event body.</p>
+<p>This webhook payload viewer pretty prints JSON webhook events and flattens nested object keys into readable dot-notation paths for easier inspection and documentation.</p>
+<p>It is useful for webhook debugging, API integration testing, event payload inspection, generating type definitions, documenting webhook structures for team reference, and understanding the complete field hierarchy of complex nested payloads from services like GitHub, Stripe, and Slack.</p>
+
+<h4>Webhook Payload Structure</h4>
+<p>Most webhook providers follow a consistent structure with event metadata and a data object:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+{
+  "id": "evt_123456",           // Unique event ID
+  "event": "user.created",      // Event type
+  "created_at": 1234567890,     // Unix timestamp
+  "data": {                     // Resource data
+    "id": "usr_789",
+    "email": "user@example.com",
+    "profile": { ... }
+  }
+}
+</pre>
+
+<h4>Common Webhook Providers</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Provider</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Root Keys</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Common Events</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">GitHub</td>
+    <td style="border:1px solid #ddd;padding:8px">action, sender, repository, pull_request</td>
+    <td style="border:1px solid #ddd;padding:8px">push, pull_request, issues, release</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Stripe</td>
+    <td style="border:1px solid #ddd;padding:8px">id, object, type, api_version</td>
+    <td style="border:1px solid #ddd;padding:8px">payment_intent.succeeded, customer.created</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Slack</td>
+    <td style="border:1px solid #ddd;padding:8px">type, event, authed_users, team_id</td>
+    <td style="border:1px solid #ddd;padding:8px">message, app_mention, reaction_added</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Shopify</td>
+    <td style="border:1px solid #ddd;padding:8px">id, topic, shop, order/product</td>
+    <td style="border:1px solid #ddd;padding:8px">orders/create, products/update</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Discord</td>
+    <td style="border:1px solid #ddd;padding:8px">type, d (data), t (type)</td>
+    <td style="border:1px solid #ddd;padding:8px">MESSAGE_CREATE, GUILD_MEMBER_ADD</td>
+  </tr>
+</table>
+
+<h4>JSON Flattening Algorithm</h4>
+<p>The flattening process converts nested objects into dot-notation paths:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Flattening examples:
+Input:  { data: { user: { email: "x@example.com" } } }
+Output: data.user.email: x@example.com
+
+Input:  { items: [{ name: "A" }, { name: "B" }] }
+Output: items[0].name: A
+        items[1].name: B
+
+// Recursive traversal:
+function flatten(value, prefix, output) {
+  if (Array.isArray(value)) {
+    value.forEach((item, i) => flatten(item, `${prefix}[${i}]`, output))
+  } else if (value && typeof value === "object") {
+    Object.keys(value).forEach(key =>
+      flatten(value[key], prefix ? `${prefix}.${key}` : key, output)
+    )
+  } else {
+    output.push(`${prefix}: ${String(value)}`)
+  }
+}
+</pre>
+
+<h4>Webhook HTTP Headers</h4>
+<p>Webhook requests include headers for verification and routing:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Header</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Purpose</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Content-Type</td>
+    <td style="border:1px solid #ddd;padding:8px">Payload format</td>
+    <td style="border:1px solid #ddd;padding:8px">application/json</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">X-Hub-Signature</td>
+    <td style="border:1px solid #ddd;padding:8px">HMAC signature (GitHub)</td>
+    <td style="border:1px solid #ddd;padding:8px">sha256=abc123...</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">X-Stripe-Signature</td>
+    <td style="border:1px solid #ddd;padding:8px">Signing header (Stripe)</td>
+    <td style="border:1px solid #ddd;padding:8px">t=123,v1=abc</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">X-Slack-Signature</td>
+    <td style="border:1px solid #ddd;padding:8px">Request verification</td>
+    <td style="border:1px solid #ddd;padding:8px">v0=abc123...</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">X-Event-Key</td>
+    <td style="border:1px solid #ddd;padding:8px">Event type identifier</td>
+    <td style="border:1px solid #ddd;padding:8px">pull_request.opened</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Webhook debugging:</strong> Inspect actual payload structure during development</li>
+  <li><strong>API integration:</strong> Understand field paths before writing parser code</li>
+  <li><strong>Documentation:</strong> Generate field reference docs for team wikis</li>
+  <li><strong>Type generation:</strong> Create TypeScript interfaces from sample payloads</li>
+  <li><strong>Testing:</strong> Verify webhook payloads match expected schemas</li>
+  <li><strong>Support troubleshooting:</strong> Analyze customer webhook delivery issues</li>
+</ul>
+
+<h4>Webhook Security Considerations</h4>
+<ul>
+  <li><strong>Signature verification:</strong> Always verify HMAC signatures to confirm sender identity</li>
+  <li><strong>HTTPS only:</strong> Webhook endpoints must use HTTPS to encrypt payloads in transit</li>
+  <li><strong>Replay protection:</strong> Check event IDs or timestamps to prevent replay attacks</li>
+  <li><strong>Rate limiting:</strong> Implement rate limits to handle burst traffic from webhook storms</li>
+  <li><strong>Idempotency:</strong> Design handlers to safely process duplicate deliveries</li>
+</ul>
+
+<h4>Payload Inspection Tips</h4>
+<ul>
+  <li>Start with root-level keys to identify the event type and structure</li>
+  <li>Use flattened paths to quickly locate deeply nested fields</li>
+  <li>Compare multiple payloads to identify variable vs constant fields</li>
+  <li>Look for timestamp fields to understand event ordering</li>
+  <li>Check for nested objects that may contain related resource data</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Webhook Payload Viewer?</dt>
-  <dd>Webhook Payload Viewer is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is a webhook payload?</dt>
+  <dd>A webhook payload is a JSON object sent by a service to notify your application of an event. It contains event metadata (event type, timestamp, ID) and a data object with details about the resource that changed. Common examples include GitHub push events, Stripe payment notifications, and Slack message events.</dd>
+
+  <dt>How do I flatten nested JSON keys?</dt>
+  <dd>Flattening converts nested paths like data.user.email into readable dot notation. For arrays, bracket notation is used: items[0].name. The flattening process recursively traverses each level, building the full path from root to leaf value. This makes it easy to locate specific fields in large payloads.</dd>
+
+  <dt>What are common webhook event types?</dt>
+  <dd>Common webhook events include: GitHub (push, pull_request, issues, release), Stripe (payment_intent.succeeded, customer.created, invoice.paid), Slack (message, app_mention, reaction_added), Shopify (orders/create, products/update), and Discord (MESSAGE_CREATE, GUILD_MEMBER_ADD). Each event has a unique payload structure.</dd>
+
+  <dt>Why flatten webhook payload keys?</dt>
+  <dd>Flattening reveals the complete structure of deeply nested payloads, making it easier to write code that accesses specific fields. Instead of guessing the path to data.user.profile.email, you see the exact flattened key. This is especially useful for documentation, debugging, and generating type definitions.</dd>
+
+  <dt>How do I validate webhook JSON structure?</dt>
+  <dd>Validate JSON by parsing it with JSON.parse() to check syntax. Then inspect the root-level keys: most webhooks include an 'event' or 'type' field, an 'id' for the event, a 'created_at' timestamp, and a 'data' or 'object' containing the resource. Use pretty printing to verify proper nesting and array structures.</dd>
+
+  <dt>What is the difference between webhook and API polling?</dt>
+  <dd>Webhooks push events to your endpoint in real-time when something happens, reducing latency and server load. API polling requires periodic requests to check for changes, which introduces delay and consumes rate limits. Webhooks are more efficient for event-driven architectures; polling is simpler for infrequent checks.</dd>
 </dl>
 </section>
 </main>

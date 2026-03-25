@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Standard Deviation Calculator – Population & Sample | ToolForge</title>
-<meta name="description" content="Free online Standard Deviation Calculator for a list of numbers. Part of the ToolForge developer tools collection.">
+<title>Standard Deviation Calculator – Population and Sample Standard Deviation | ToolForge</title>
+<meta name="description" content="Calculate population and sample standard deviation, variance, and mean from a list of numbers. Statistical analysis tool with step-by-step calculations.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/standard-deviation-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Standard Deviation Calculator – Population &amp; Sample | ToolForge">
-<meta property="og:description" content="Free online Standard Deviation Calculator for a list of numbers. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Standard Deviation Calculator – Population and Sample Standard Deviation | ToolForge">
+<meta property="og:description" content="Calculate population and sample standard deviation, variance, and mean from a list of numbers.">
 <meta property="og:url" content="https://toolforge.site/tools/standard-deviation-calculator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Standard Deviation Calculator – Population &amp; Sample | ToolForge">
-<meta name="twitter:description" content="Free online Standard Deviation Calculator for a list of numbers. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Standard Deviation Calculator – Population and Sample Standard Deviation | ToolForge">
+<meta name="twitter:description" content="Calculate population and sample standard deviation, variance, and mean.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Standard Deviation Calculator used for?",
+      "name": "What is the difference between population and sample standard deviation?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Standard Deviation Calculator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "Population standard deviation (σ) uses N in the denominator and is used when you have data for the entire population. Sample standard deviation (s) uses N-1 (Bessel's correction) and is used when working with a sample to estimate population parameters. The N-1 correction accounts for the bias in estimating population variance from a sample."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the standard deviation formula?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Population: σ = √(Σ(xi - μ)² / N). Sample: s = √(Σ(xi - x̄)² / (N-1)). Where xi are individual values, μ is population mean, x̄ is sample mean, and N is the count of values. The squared differences from mean are summed, divided by N or N-1, then square rooted."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "When should I use N vs N-1 in standard deviation?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Use N (population formula) when you have complete data for the entire group you're studying. Use N-1 (sample formula) when your data is a subset used to estimate population parameters. Using N-1 gives an unbiased estimator of population variance."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What does standard deviation tell you?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Standard deviation measures how spread out values are from the mean. Low SD means values cluster near the mean; high SD means values are more spread out. In normal distributions: ~68% of values fall within ±1 SD, ~95% within ±2 SD, ~99.7% within ±3 SD of the mean."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What is variance and how does it relate to standard deviation?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Variance is the average of squared differences from the mean (σ² or s²). Standard deviation is the square root of variance. Variance is in squared units (e.g., meters²), while standard deviation is in the original units (meters), making SD more interpretable."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "Can standard deviation be negative?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "No. Standard deviation is always non-negative because it's the square root of variance, which is a sum of squared values. A standard deviation of zero means all values in the dataset are identical. The minimum possible value is 0."
       }
     }
   ]
@@ -72,50 +77,183 @@
 <body>
 <main class="container">
 <h1>Standard Deviation Calculator</h1>
-<p class="subtitle">Enter numbers separated by comma or space to get mean, population and sample standard deviation.</p>
+<p class="subtitle">Calculate mean, population standard deviation (σ), and sample standard deviation (s) from a list of numbers.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Numbers</h3>
 <label for="input" class="sr-only">Input text</label>
-<textarea id="input" rows="4" style="width:90%" placeholder="1, 2, 3, 4, 5" aria-label="Input text"></textarea>
+<textarea id="input" rows="4" style="width:90%" placeholder="1, 2, 3, 4, 5" aria-label="Input numbers separated by comma or space"></textarea>
 <br><br>
 <button onclick="calc()">Calculate</button>
 <h3>Result</h3>
-<p>Mean: <span id="mean"></span></p>
-<p>Population σ: <span id="pop"></span></p>
-<p>Sample s: <span id="samp"></span></p>
+<p>Count (N): <span id="count"></span></p>
+<p>Mean (x̄): <span id="mean"></span></p>
+<p>Sum: <span id="sum"></span></p>
+<p>Population Variance (σ²): <span id="pop-var"></span></p>
+<p>Population Standard Deviation (σ): <span id="pop"></span></p>
+<p>Sample Variance (s²): <span id="samp-var"></span></p>
+<p>Sample Standard Deviation (s): <span id="samp"></span></p>
 <section class="tool-seo">
 <h3>About Standard Deviation Calculator</h3>
-<p>This standard deviation calculator takes a list of numbers and returns the mean, population standard deviation and sample standard deviation.</p>
-<p>It is useful for test scores, survey data, experiment results and other datasets where you want to understand how spread out the values are.</p>
+<p>This standard deviation calculator computes both population (σ) and sample (s) standard deviation from a list of numbers. It also calculates mean, sum, count, and variance for complete statistical analysis.</p>
+<p>The calculator accepts numbers separated by commas or spaces. Results include up to 10 decimal places for precision in scientific and engineering applications.</p>
+
+<h4>Standard Deviation Formulas</h4>
+<p><strong>Population Standard Deviation:</strong></p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:14px;overflow:auto">
+σ = √(Σ(xi - μ)² / N)
+
+Where:
+  σ = population standard deviation
+  xi = each value in the dataset
+  μ = population mean (Σxi / N)
+  N = total number of values
+</pre>
+
+<p><strong>Sample Standard Deviation:</strong></p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:14px;overflow:auto">
+s = √(Σ(xi - x̄)² / (N - 1))
+
+Where:
+  s = sample standard deviation
+  x̄ = sample mean (Σxi / N)
+  N = number of values in sample
+  (N-1) = Bessel's correction for unbiased estimation
+</pre>
+
+<h4>Step-by-Step Calculation Example</h4>
+<p>For the dataset: 2, 4, 4, 4, 5, 5, 7, 9</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Step 1: Calculate the mean
+  Sum = 2+4+4+4+5+5+7+9 = 40
+  Mean = 40/8 = 5
+
+Step 2: Calculate squared differences from mean
+  (2-5)² = 9
+  (4-5)² = 1
+  (4-5)² = 1
+  (4-5)² = 1
+  (5-5)² = 0
+  (5-5)² = 0
+  (7-5)² = 4
+  (9-5)² = 16
+  Sum of squares = 32
+
+Step 3: Calculate variance
+  Population variance = 32/8 = 4
+  Sample variance = 32/7 = 4.571
+
+Step 4: Calculate standard deviation
+  Population σ = √4 = 2
+  Sample s = √4.571 = 2.138
+</pre>
+
+<h4>When to Use Population vs Sample Formula</h4>
+<table class="ref-table">
+<thead><tr><th>Situation</th><th>Formula</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td>Complete census data</td><td>Population (N)</td><td>All employees in a company</td></tr>
+<tr><td>Quality control (all items)</td><td>Population (N)</td><td>Every unit in a production batch</td></tr>
+<tr><td>Survey sample</td><td>Sample (N-1)</td><td>1000 voters polled from millions</td></tr>
+<tr><td>Scientific experiment</td><td>Sample (N-1)</td><td>Test subjects representing larger population</td></tr>
+<tr><td>A/B test results</td><td>Sample (N-1)</td><td>Users in test variant group</td></tr>
+</tbody>
+</table>
+
+<h4>Interpreting Standard Deviation</h4>
+<p>Standard deviation indicates data spread and is used in many applications:</p>
+<ul>
+  <li><strong>Quality Control:</strong> Low SD means consistent product quality; high SD signals process variation</li>
+  <li><strong>Finance:</strong> SD of returns measures investment risk and volatility</li>
+  <li><strong>Research:</strong> SD shows variability in experimental measurements</li>
+  <li><strong>Education:</strong> SD of test scores indicates how varied student performance is</li>
+  <li><strong>Weather:</strong> SD of temperatures shows climate stability vs variability</li>
+</ul>
+
+<h4>Empirical Rule (68-95-99.7 Rule)</h4>
+<p>For normally distributed data:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+  μ - 3σ  |  μ - 2σ  |  μ - σ  |  μ  |  μ + σ  |  μ + 2σ  |  μ + 3σ
+    0.13%     2.14%      13.59%   |    34.13%     13.59%      2.14%    0.13%
+  |---------|---------|---------|---------|---------|---------|
+              68.27% of data within ±1σ
+                        95.45% of data within ±2σ
+                                  99.73% of data within ±3σ
+</pre>
+
+<h4>Coefficient of Variation</h4>
+<p>The coefficient of variation (CV) expresses standard deviation as a percentage of the mean:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px">
+CV = (σ / μ) × 100%
+
+Use CV to compare variability between datasets with different means or units.
+CV < 10%: Low variation
+CV 10-30%: Moderate variation
+CV > 30%: High variation
+</pre>
+
+<h4>Common Applications</h4>
+<ul>
+  <li><strong>Statistical Analysis:</strong> Foundation for hypothesis testing, confidence intervals, and regression</li>
+  <li><strong>Risk Assessment:</strong> Portfolio volatility, insurance risk modeling</li>
+  <li><strong>Manufacturing:</strong> Six Sigma quality control, process capability analysis</li>
+  <li><strong>Data Science:</strong> Feature scaling, outlier detection, normality testing</li>
+  <li><strong>Research:</strong> Error bars in scientific graphs, measurement precision</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Standard Deviation Calculator used for?</dt>
-  <dd>Standard Deviation Calculator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is the difference between population and sample standard deviation?</dt>
+  <dd>Population standard deviation (σ) uses N in the denominator and is used when you have data for the entire population. Sample standard deviation (s) uses N-1 (Bessel's correction) and is used when working with a sample to estimate population parameters. The N-1 correction accounts for the bias in estimating population variance from a sample.</dd>
+
+  <dt>What is the standard deviation formula?</dt>
+  <dd>Population: σ = √(Σ(xi - μ)² / N). Sample: s = √(Σ(xi - x̄)² / (N-1)). Where xi are individual values, μ is population mean, x̄ is sample mean, and N is the count of values. The squared differences from mean are summed, divided by N or N-1, then square rooted.</dd>
+
+  <dt>When should I use N vs N-1 in standard deviation?</dt>
+  <dd>Use N (population formula) when you have complete data for the entire group you're studying. Use N-1 (sample formula) when your data is a subset used to estimate population parameters. Using N-1 gives an unbiased estimator of population variance.</dd>
+
+  <dt>What does standard deviation tell you?</dt>
+  <dd>Standard deviation measures how spread out values are from the mean. Low SD means values cluster near the mean; high SD means values are more spread out. In normal distributions: ~68% of values fall within ±1 SD, ~95% within ±2 SD, ~99.7% within ±3 SD of the mean.</dd>
+
+  <dt>What is variance and how does it relate to standard deviation?</dt>
+  <dd>Variance is the average of squared differences from the mean (σ² or s²). Standard deviation is the square root of variance. Variance is in squared units (e.g., meters²), while standard deviation is in the original units (meters), making SD more interpretable.</dd>
+
+  <dt>Can standard deviation be negative?</dt>
+  <dd>No. Standard deviation is always non-negative because it's the square root of variance, which is a sum of squared values. A standard deviation of zero means all values in the dataset are identical. The minimum possible value is 0.</dd>
 </dl>
 </section>
 </main>
 <script>
 function calc(){
 var t=document.getElementById("input").value.replace(/,/g," ").split(/\s+/).filter(Boolean).map(Number).filter(n=>!isNaN(n))
-if(t.length<2){document.getElementById("mean").innerText="";document.getElementById("pop").innerText="";document.getElementById("samp").innerText="Enter at least 2 numbers.";return}
-var n=t.length,sum=t.reduce((a,b)=>a+b,0),mean=sum/n
+if(t.length<2){
+document.getElementById("mean").innerText="";
+document.getElementById("pop").innerText="";
+document.getElementById("samp").innerText="";
+document.getElementById("count").innerText="";
+document.getElementById("sum").innerText="";
+document.getElementById("pop-var").innerText="";
+document.getElementById("samp-var").innerText="";
+document.getElementById("status").innerText="Enter at least 2 numbers.";
+document.getElementById("status").style.color="#b91c1c";
+return
+}
+var n=t.length
+var sum=t.reduce((a,b)=>a+b,0)
+var mean=sum/n
 var sq=t.reduce((a,b)=>a+(b-mean)*(b-mean),0)
-document.getElementById("mean").innerText=mean.toFixed(4)
-document.getElementById("pop").innerText=(Math.sqrt(sq/n)).toFixed(4)
-document.getElementById("samp").innerText=(Math.sqrt(sq/(n-1))).toFixed(4)
+var popVar=sq/n
+var sampVar=sq/(n-1)
+document.getElementById("count").innerText=n
+document.getElementById("mean").innerText=mean.toFixed(6)
+document.getElementById("sum").innerText=sum.toFixed(6)
+document.getElementById("pop-var").innerText=popVar.toFixed(6)
+document.getElementById("samp-var").innerText=sampVar.toFixed(6)
+document.getElementById("pop").innerText=Math.sqrt(popVar).toFixed(6)
+document.getElementById("samp").innerText=Math.sqrt(sampVar).toFixed(6)
+document.getElementById("status").innerText="Calculation complete."
+document.getElementById("status").style.color="#16a34a"
 }
 </script>
 <script src="/js/favorites.js"></script>

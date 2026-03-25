@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Invert Case – Swap Uppercase and Lowercase | ToolForge</title>
-<meta name="description" content="Free online Invert Case tool to swap uppercase and lowercase letters. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Invert case of text: swap uppercase to lowercase and vice versa. Essential text transformation tool for developers, writers, and data processing. Hello World → hELLO wORLD.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/invert-case.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Invert Case – Swap Uppercase and Lowercase | ToolForge">
-<meta property="og:description" content="Free online Invert Case tool to swap uppercase and lowercase letters. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Invert case of text: swap uppercase to lowercase and vice versa. HELLO → hello, hello → HELLO.">
 <meta property="og:url" content="https://toolforge.site/tools/invert-case.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Invert Case – Swap Uppercase and Lowercase | ToolForge">
-<meta name="twitter:description" content="Free online Invert Case tool to swap uppercase and lowercase letters. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Invert case of text: swap uppercase to lowercase and vice versa.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Invert Case?",
+      "name": "What is case inversion and when is it useful?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Invert Case is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Case inversion (also called toggle case or swap case) converts uppercase letters to lowercase and lowercase to uppercase. It's useful for: fixing incorrectly capitalized text, creating alternating case effects, normalizing inconsistent data, debugging case-sensitive issues, and meeting specific formatting requirements."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How does case inversion handle non-alphabetic characters?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Non-alphabetic characters remain unchanged: digits (0-9), punctuation, symbols, spaces, and special characters pass through unmodified. Only A-Z and a-z letters are affected. Unicode letters with diacritics (é, ñ, ü) are also inverted when supported by the browser."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the difference between invert case and other case transformations?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Invert case swaps existing case (A→a, a→A). Uppercase converts all to caps (HELLO). Lowercase converts all to small (hello). Title case capitalizes first letters (Hello World). Each serves different purposes: invert for toggling, uppercase for emphasis, lowercase for normalization, title case for headings."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "Does invert case work with accented characters?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Modern browsers support Unicode case conversion, so accented letters like é↔É, ñ↔Ñ, ü↔Ü are inverted. However, support varies by browser and JavaScript engine. Simple ASCII (A-Z, a-z) works universally. Test with your specific characters if using extended Unicode."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What are common use cases for case inversion?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Common uses: fixing caps lock mistakes, alternating case for stylistic effect (mOcKiNg tExT), normalizing mixed-case data, debugging case-sensitive code or passwords, creating test data with varied casing, and reversing accidental double-capitalization."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How is case inversion implemented in programming?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Most languages provide case inversion: JavaScript uses char.toUpperCase() and char.toLowerCase() in a map; Python has str.swapcase(); PHP uses strtr with range mapping; Java has manual iteration with Character.isUpperCase(). The algorithm checks each character and applies the opposite case."
       }
     }
   ]
@@ -72,11 +77,11 @@
 <body>
 <main class="container">
 <h1>Invert Case</h1>
-<p class="subtitle">Swap uppercase and lowercase: Hello → hELLO.</p>
+<p class="subtitle">Swap uppercase and lowercase: Hello World → hELLO wORLD.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Input</h3>
 <label for="input" class="sr-only">Input text</label>
-<textarea id="input" rows="6" style="width:90%" aria-label="Input text"></textarea>
+<textarea id="input" rows="6" style="width:90%" placeholder="Type or paste text here&#10;Hello World → hELLO wORLD&#10;ABC xyz → abc XYZ" aria-label="Input text"></textarea>
 <br><br>
 <button onclick="invert()">Invert Case</button>
 <h3>Result</h3>
@@ -84,25 +89,154 @@
 <textarea id="output" rows="6" style="width:90%" aria-label="Output text"></textarea>
 <section class="tool-seo">
 <h3>About Invert Case</h3>
-<p>The Invert Case tool lets you swap uppercase and lowercase: Hello → hELLO.</p>
-<p>It is useful for editing copy, cleaning pasted text, comparing content and making small text transformations directly in the browser.</p>
+<p>The Invert Case tool swaps uppercase letters to lowercase and lowercase to uppercase, transforming "Hello World" into "hELLO wORLD". This case transformation is useful for fixing capitalization errors, creating stylistic text effects, normalizing inconsistent data, and debugging case-sensitive issues.</p>
+<p>Also known as "toggle case" or "swap case", this transformation is distinct from uppercase (all caps) or lowercase (all small) conversions. It preserves the character positions while inverting their case state.</p>
+
+<h4>Case Transformation Types</h4>
+<table class="ref-table">
+<thead><tr><th>Type</th><th>Input</th><th>Output</th><th>Use Case</th></tr></thead>
+<tbody>
+<tr><td><strong>Invert/Toggle</strong></td><td>Hello World</td><td>hELLO wORLD</td><td>Swap existing case</td></tr>
+<tr><td><strong>Uppercase</strong></td><td>Hello World</td><td>HELLO WORLD</td><td>Emphasis, acronyms</td></tr>
+<tr><td><strong>Lowercase</strong></td><td>Hello World</td><td>hello world</td><td>Normalization, emails</td></tr>
+<tr><td><strong>Title Case</strong></td><td>hello world</td><td>Hello World</td><td>Headings, names</td></tr>
+<tr><td><strong>Sentence case</strong></td><td>HELLO WORLD</td><td>Hello world</td><td>Regular prose</td></tr>
+</tbody>
+</table>
+
+<h4>Character Handling Rules</h4>
+<table class="ref-table">
+<thead><tr><th>Character Type</th><th>Examples</th><th>Invert Case Result</th></tr></thead>
+<tbody>
+<tr><td>Uppercase letters</td><td>A-Z</td><td>Converted to lowercase (a-z)</td></tr>
+<tr><td>Lowercase letters</td><td>a-z</td><td>Converted to uppercase (A-Z)</td></tr>
+<tr><td>Digits</td><td>0-9</td><td>Unchanged</td></tr>
+<tr><td>Punctuation</td><td>. , ! ? ; :</td><td>Unchanged</td></tr>
+<tr><td>Symbols</td><td>@ # $ % &amp; *</td><td>Unchanged</td></tr>
+<tr><td>Whitespace</td><td>Space, tab, newline</td><td>Unchanged</td></tr>
+<tr><td>Accented letters</td><td>é, ñ, ü, É, Ñ, Ü</td><td>Case swapped (browser dependent)</td></tr>
+</tbody>
+</table>
+
+<h4>Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Basic examples:
+  Hello World        → hELLO wORLD
+  ABC xyz            → abc XYZ
+  The Quick Brown Fox → tHE qUICK bROWN fOX
+  a1B2c3             → A1b2C3
+
+Mixed content (letters affected, rest unchanged):
+  Email: USER@Example.COM → eMAIL: user@eXAMPLE.com
+  Price: $99.99 USD      → pRICE: $99.99 usd
+  Path: /Home/User/docs   → pATH: /hOME/uSER/DOCS
+
+Code snippets:
+  function myFunction()  → FUNCTION MYfUNCTION()
+  const API_KEY = "abc"  → CONST api_key = "ABC"
+  &lt;div class="nav"&gt;     → &lt;DIV CLASS="NAV"&gt;
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Fix caps lock mistakes:</strong> Recover text typed with caps lock on accidentally</li>
+  <li><strong>Alternating case style:</strong> Create mOcKiNg tExT effect for memes or stylistic purposes</li>
+  <li><strong>Data normalization:</strong> Handle inconsistently capitalized datasets</li>
+  <li><strong>Debugging:</strong> Test case-sensitive code, passwords, or API keys</li>
+  <li><strong>Double inversion recovery:</strong> Fix text that was uppercased then lowercased (or vice versa)</li>
+  <li><strong>Test data generation:</strong> Create varied case patterns for testing</li>
+  <li><strong>Accessibility:</strong> Some users find alternating case easier to read</li>
+</ul>
+
+<h4>Case Inversion in Programming</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript:
+  function invertCase(str) {
+    return str.split('').map(c => {
+      return c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase();
+    }).join('');
+  }
+
+Python:
+  text = "Hello World"
+  inverted = text.swapcase()
+  # Result: "hELLO wORLD"
+
+PHP:
+  $text = "Hello World";
+  $inverted = strtr($text,
+    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
+
+Java:
+  StringBuilder result = new StringBuilder();
+  for (char c : text.toCharArray()) {
+    if (Character.isUpperCase(c)) {
+      result.append(Character.toLowerCase(c));
+    } else {
+      result.append(Character.toUpperCase(c));
+    }
+  }
+</pre>
+
+<h4>Unicode and International Characters</h4>
+<p>Modern JavaScript engines support Unicode case conversion:</p>
+<ul>
+  <li><strong>Latin extended:</strong> Á↔á, Ñ↔ñ, Ü↔ü, ß↔SS (German sharp s)</li>
+  <li><strong>Greek:</strong> Α↔α, Β↔β, Γ↔γ</li>
+  <li><strong>Cyrillic:</strong> А↔а, Б↔б, В↔в</li>
+  <li><strong>Special cases:</strong> Turkish İ↔i, I↔ı (dotted/dotless)</li>
+</ul>
+<p>Note: Some locale-specific cases (like Turkish dotted I) may require special handling in production code.</p>
+
+<h4>Technical Notes</h4>
+<ul>
+  <li><strong>Performance:</strong> O(n) time complexity where n is string length</li>
+  <li><strong>Memory:</strong> Creates new string; original unchanged</li>
+  <li><strong>Encoding:</strong> Works with UTF-8 encoded text</li>
+  <li><strong>Browser support:</strong> Universal for ASCII; Unicode varies by engine</li>
+  <li><strong>Reversibility:</strong> Applying invert twice returns original text</li>
+</ul>
 </section>
 
+<section class="how-to-use">
+<h3>How to Invert Case</h3>
+<ol class="how-to-steps">
+  <li><strong>Enter your text:</strong> Type or paste the text you want to transform.</li>
+  <li><strong>Click Invert Case:</strong> The tool swaps uppercase to lowercase and vice versa.</li>
+  <li><strong>Review the result:</strong> Check that the transformation looks correct.</li>
+  <li><strong>Copy the output:</strong> Use the inverted text in your document or application.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Invert twice returns the original text (useful for verification)</li>
+  <li>Non-letter characters remain unchanged</li>
+  <li>Works with multi-line text and code snippets</li>
+  <li>For title case or other transformations, use dedicated case converters</li>
+  <li>Unicode support depends on your browser's JavaScript engine</li>
+</ul>
+</section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Invert Case?</dt>
-  <dd>Invert Case is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is case inversion and when is it useful?</dt>
+  <dd>Case inversion (also called toggle case or swap case) converts uppercase letters to lowercase and lowercase to uppercase. It's useful for: fixing incorrectly capitalized text, creating alternating case effects, normalizing inconsistent data, debugging case-sensitive issues, and meeting specific formatting requirements.</dd>
+
+  <dt>How does case inversion handle non-alphabetic characters?</dt>
+  <dd>Non-alphabetic characters remain unchanged: digits (0-9), punctuation, symbols, spaces, and special characters pass through unmodified. Only A-Z and a-z letters are affected. Unicode letters with diacritics (é, ñ, ü) are also inverted when supported by the browser.</dd>
+
+  <dt>What is the difference between invert case and other case transformations?</dt>
+  <dd>Invert case swaps existing case (A→a, a→A). Uppercase converts all to caps (HELLO). Lowercase converts all to small (hello). Title case capitalizes first letters (Hello World). Each serves different purposes: invert for toggling, uppercase for emphasis, lowercase for normalization, title case for headings.</dd>
+
+  <dt>Does invert case work with accented characters?</dt>
+  <dd>Modern browsers support Unicode case conversion, so accented letters like é↔É, ñ↔Ñ, ü↔Ü are inverted. However, support varies by browser and JavaScript engine. Simple ASCII (A-Z, a-z) works universally. Test with your specific characters if using extended Unicode.</dd>
+
+  <dt>What are common use cases for case inversion?</dt>
+  <dd>Common uses: fixing caps lock mistakes, alternating case for stylistic effect (mOcKiNg tExT), normalizing mixed-case data, debugging case-sensitive code or passwords, creating test data with varied casing, and reversing accidental double-capitalization.</dd>
+
+  <dt>How is case inversion implemented in programming?</dt>
+  <dd>Most languages provide case inversion: JavaScript uses char.toUpperCase() and char.toLowerCase() in a map; Python has str.swapcase(); PHP uses strtr with range mapping; Java has manual iteration with Character.isUpperCase(). The algorithm checks each character and applies the opposite case.</dd>
 </dl>
 </section>
 </main>

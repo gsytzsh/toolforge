@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Prime Number Checker – Check if Number is Prime | ToolForge</title>
-<meta name="description" content="Free online Prime Number Checker to determine if a number is prime. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Check if a number is prime using trial division and optimized algorithms. Includes prime factorization and mathematical properties. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/prime-checker.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Prime Number Checker – Check if Number is Prime | ToolForge">
-<meta property="og:description" content="Free online Prime Number Checker to determine if a number is prime. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Check if a number is prime using trial division and optimized algorithms. Includes prime factorization and mathematical properties. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/prime-checker.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Prime Number Checker – Check if Number is Prime | ToolForge">
-<meta name="twitter:description" content="Free online Prime Number Checker to determine if a number is prime. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Check if a number is prime using trial division and optimized algorithms. Includes prime factorization and mathematical properties. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Prime Checker?",
+      "name": "What is a prime number?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Prime Checker is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. Examples include 2, 3, 5, 7, 11, 13, 17, 19, 23, 29. The number 1 is neither prime nor composite. Every integer greater than 1 is either prime or can be uniquely factored into primes."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do you check if a number is prime?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "The simplest method is trial division: check if the number is divisible by any integer from 2 to √n. If no divisor is found, the number is prime. Optimizations include checking only odd numbers after 2, and using the 6k±1 rule (all primes > 3 are of form 6k±1)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Why is 2 the only even prime number?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Two is prime because its only divisors are 1 and 2. All other even numbers are divisible by 2 (in addition to 1 and themselves), making them composite. Therefore, 2 is the unique even prime. All other primes are odd numbers."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is prime factorization?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Prime factorization expresses a composite number as a product of prime numbers. For example, 60 = 2² × 3 × 5. The Fundamental Theorem of Arithmetic states that every integer > 1 has a unique prime factorization. This is essential for cryptography and number theory."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What are twin primes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Twin primes are pairs of primes that differ by 2, such as (3,5), (5,7), (11,13), (17,19). The Twin Prime Conjecture proposes that infinitely many twin primes exist, but this remains unproven. Recent work has shown there are infinitely many prime pairs with gap less than 246."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How are prime numbers used in cryptography?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Prime numbers are fundamental to RSA encryption. Two large primes are multiplied to create a public key; the security relies on the difficulty of factoring the product back into primes. Prime generation and primality testing are critical operations in cryptographic systems."
       }
     }
   ]
@@ -83,35 +88,502 @@
 <p id="result"></p>
 <section class="tool-seo">
 <h3>About Prime Number Checker</h3>
-<p>This prime number checker tells you whether a positive integer is prime.</p>
-<p>It is useful for math practice, number theory exercises and quick checks when working with factors or algorithm examples.</p>
+<p>This prime number checker determines whether a positive integer is prime using trial division up to √n. For each input, it checks divisibility by integers from 2 to the square root of the number. If no divisor is found, the number is prime. The tool also displays prime factorization for composite numbers.</p>
+<p>It is useful for mathematics education, number theory exercises, cryptography applications, verifying prime factors, and exploring properties of prime and composite numbers.</p>
+
+<h4>Prime Number Definition</h4>
+<p>A prime number is a natural number greater than 1 with exactly two positive divisors:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Prime Numbers:
+  - Greater than 1
+  - Divisible only by 1 and itself
+  - Examples: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29...
+
+Not Prime:
+  - 1 is neither prime nor composite
+  - 0 is not prime (has infinite divisors)
+  - Negative numbers are not prime
+  - Composite numbers have more than 2 divisors
+
+First 25 Prime Numbers:
+  2, 3, 5, 7, 11, 13, 17, 19, 23, 29,
+  31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
+  73, 79, 83, 89, 97
+
+Prime Count by Range:
+  1-100:    25 primes
+  1-500:    95 primes
+  1-1000:   168 primes
+  1-10000:  1229 primes
+  1-100000: 9592 primes
+</pre>
+
+<h4>Primality Testing Algorithms</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Algorithm</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Time Complexity</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Trial Division</td>
+    <td style="border:1px solid #ddd;padding:8px">O(√n)</td>
+    <td style="border:1px solid #ddd;padding:8px">Deterministic</td>
+    <td style="border:1px solid #ddd;padding:8px">Small numbers</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Sieve of Eratosthenes</td>
+    <td style="border:1px solid #ddd;padding:8px">O(n log log n)</td>
+    <td style="border:1px solid #ddd;padding:8px">Deterministic</td>
+    <td style="border:1px solid #ddd;padding:8px">Generate all primes ≤ n</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Fermat Test</td>
+    <td style="border:1px solid #ddd;padding:8px">O(k log³n)</td>
+    <td style="border:1px solid #ddd;padding:8px">Probabilistic</td>
+    <td style="border:1px solid #ddd;padding:8px">Quick screening</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Miller-Rabin</td>
+    <td style="border:1px solid #ddd;padding:8px">O(k log³n)</td>
+    <td style="border:1px solid #ddd;padding:8px">Probabilistic</td>
+    <td style="border:1px solid #ddd;padding:8px">Large numbers</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">AKS Test</td>
+    <td style="border:1px solid #ddd;padding:8px">O(log⁶n)</td>
+    <td style="border:1px solid #ddd;padding:8px">Deterministic</td>
+    <td style="border:1px solid #ddd;padding:8px">Theoretical importance</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">ECPP</td>
+    <td style="border:1px solid #ddd;padding:8px">O(log⁴n)</td>
+    <td style="border:1px solid #ddd;padding:8px">Deterministic</td>
+    <td style="border:1px solid #ddd;padding:8px">Very large primes</td>
+  </tr>
+</table>
+
+<h4>Trial Division Method</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Trial Division Algorithm:
+
+1. If n < 2: not prime
+2. If n = 2: prime (only even prime)
+3. If n is even: not prime
+4. Check odd divisors from 3 to √n:
+   - If n % i == 0: not prime
+   - If no divisor found: prime
+
+Optimization (6k ± 1 rule):
+  All primes > 3 are of form 6k±1
+  Check divisibility by 2 and 3 first
+  Then check 5, 7, 11, 13, 17, 19...
+  (skip multiples of 2 and 3)
+
+JavaScript Implementation:
+  function isPrime(n) {
+    if (n < 2) return false;
+    if (n === 2) return true;
+    if (n % 2 === 0) return false;
+
+    const sqrt = Math.floor(Math.sqrt(n));
+    for (let i = 3; i <= sqrt; i += 2) {
+      if (n % i === 0) return false;
+    }
+    return true;
+  }
+
+Optimized Implementation:
+  function isPrimeOptimized(n) {
+    if (n <= 1) return false;
+    if (n <= 3) return true;
+    if (n % 2 === 0 || n % 3 === 0) return false;
+
+    for (let i = 5; i * i <= n; i += 6) {
+      if (n % i === 0 || n % (i + 2) === 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+Example: Check if 97 is prime
+  √97 ≈ 9.85
+  Check divisors: 2, 3, 5, 7, 9
+  97 % 2 = 1 ✓
+  97 % 3 = 1 ✓
+  97 % 5 = 2 ✓
+  97 % 7 = 6 ✓
+  97 % 9 = 7 ✓
+  Result: 97 is prime!
+</pre>
+
+<h4>Prime Factorization</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Prime Factorization Algorithm:
+
+1. Start with smallest prime (2)
+2. Divide n by prime while divisible
+3. Move to next prime
+4. Repeat until n = 1
+
+Example: Factorize 360
+  360 ÷ 2 = 180
+  180 ÷ 2 = 90
+  90 ÷ 2 = 45
+  45 ÷ 3 = 15
+  15 ÷ 3 = 5
+  5 ÷ 5 = 1
+
+  Result: 360 = 2³ × 3² × 5
+
+Example: Factorize 84
+  84 ÷ 2 = 42
+  42 ÷ 2 = 21
+  21 ÷ 3 = 7
+  7 ÷ 7 = 1
+
+  Result: 84 = 2² × 3 × 7
+
+JavaScript Implementation:
+  function primeFactorize(n) {
+    const factors = {};
+    let divisor = 2;
+
+    while (n > 1) {
+      while (n % divisor === 0) {
+        factors[divisor] = (factors[divisor] || 0) + 1;
+        n /= divisor;
+      }
+      divisor++;
+      if (divisor * divisor > n) {
+        if (n > 1) {
+          factors[n] = (factors[n] || 0) + 1;
+          break;
+        }
+      }
+    }
+    return factors;
+  }
+</pre>
+
+<h4>Special Prime Categories</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Category</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Definition</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Examples</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Twin Primes</td>
+    <td style="border:1px solid #ddd;padding:8px">Pairs differing by 2</td>
+    <td style="border:1px solid #ddd;padding:8px">(3,5), (5,7), (11,13), (17,19)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Mersenne Primes</td>
+    <td style="border:1px solid #ddd;padding:8px">Of form 2^p - 1</td>
+    <td style="border:1px solid #ddd;padding:8px">3, 7, 31, 127, 8191</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Fermat Primes</td>
+    <td style="border:1px solid #ddd;padding:8px">Of form 2^(2^n) + 1</td>
+    <td style="border:1px solid #ddd;padding:8px">3, 5, 17, 257, 65537</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Sophie Germain</td>
+    <td style="border:1px solid #ddd;padding:8px">p and 2p+1 both prime</td>
+    <td style="border:1px solid #ddd;padding:8px">2, 3, 5, 11, 23, 29</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Emirp</td>
+    <td style="border:1px solid #ddd;padding:8px">Prime reversed is different prime</td>
+    <td style="border:1px solid #ddd;padding:8px">13↔31, 17↔71, 37↔73</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Palindromic</td>
+    <td style="border:1px solid #ddd;padding:8px">Reads same forwards/backwards</td>
+    <td style="border:1px solid #ddd;padding:8px">2, 3, 5, 7, 11, 101, 131</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Lucky Primes</td>
+    <td style="border:1px solid #ddd;padding:8px">Prime in lucky number sequence</td>
+    <td style="border:1px solid #ddd;padding:8px">3, 7, 13, 31, 37, 43</td>
+  </tr>
+</table>
+
+<h4>Code Examples by Language</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript:
+  // Basic trial division
+  function isPrime(n) {
+    if (n < 2) return false;
+    for (let i = 2; i * i <= n; i++) {
+      if (n % i === 0) return false;
+    }
+    return true;
+  }
+
+Python:
+  def is_prime(n):
+      if n < 2:
+          return False
+      for i in range(2, int(n**0.5) + 1):
+          if n % i == 0:
+              return False
+      return True
+
+  # Using sympy library
+  from sympy import isprime
+  isprime(97)  # True
+
+PHP:
+  function isPrime($n) {
+      if ($n < 2) return false;
+      for ($i = 2; $i * $i <= $n; $i++) {
+          if ($n % $i === 0) return false;
+      }
+      return true;
+  }
+
+Java:
+  public static boolean isPrime(int n) {
+      if (n < 2) return false;
+      for (int i = 2; i * i <= n; i++) {
+          if (n % i == 0) return false;
+      }
+      return true;
+  }
+
+C++:
+  bool isPrime(int n) {
+      if (n < 2) return false;
+      for (int i = 2; i * i <= n; i++) {
+          if (n % i == 0) return false;
+      }
+      return true;
+  }
+
+Bash:
+  is_prime() {
+      local n=$1
+      if [ $n -lt 2 ]; then return 1; fi
+      local i=2
+      while [ $((i * i)) -le $n ]; do
+          if [ $((n % i)) -eq 0 ]; then return 1; fi
+          ((i++))
+      done
+      return 0
+  }
+</pre>
+
+<h4>Prime Number Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Small Primes:
+  2  - Only even prime
+  3  - First odd prime
+  5  - Divisible only by 1, 5
+  7  - Lucky number
+  11 - Palindromic prime
+
+Two-Digit Primes:
+  13, 17, 19, 23, 29, 31, 37, 41, 43, 47,
+  53, 59, 61, 67, 71, 73, 79, 83, 89, 97
+
+Large Primes:
+  101  - First 3-digit prime
+  1009 - First 4-digit prime
+  9973 - Largest 4-digit prime
+
+Composite Examples:
+  4  = 2²
+  6  = 2 × 3
+  12 = 2² × 3
+  30 = 2 × 3 × 5
+  60 = 2² × 3 × 5
+  100 = 2² × 5²
+
+Special Cases:
+  1  - Neither prime nor composite
+  0  - Not prime (infinite divisors)
+  -5 - Not prime (negative)
+  2.5 - Not prime (not an integer)
+</pre>
+
+<h4>Mathematical Properties</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Fundamental Theorem of Arithmetic:
+  Every integer > 1 is either prime or can be
+  uniquely represented as a product of primes.
+
+  Example: 60 = 2² × 3 × 5 (unique factorization)
+
+Prime Number Theorem:
+  The number of primes ≤ n is approximately n/ln(n).
+
+  For n = 1000:
+  Actual: 168 primes
+  Approx: 1000/ln(1000) ≈ 145 primes
+
+  As n → ∞, the approximation becomes exact.
+
+Goldbach's Conjecture (Unproven):
+  Every even integer > 2 can be expressed as
+  the sum of two primes.
+
+  Examples:
+  4 = 2 + 2
+  10 = 3 + 7 = 5 + 5
+  100 = 3 + 97 = 11 + 89 = 17 + 83
+
+Euclid's Theorem:
+  There are infinitely many prime numbers.
+
+  Proof (by contradiction):
+  Assume finite primes: p₁, p₂, ..., pₙ
+  Let N = p₁ × p₂ × ... × pₙ + 1
+  N is not divisible by any pᵢ
+  Therefore N is prime or has a new prime factor
+  Contradiction! → Infinitely many primes
+
+Wilson's Theorem:
+  (p-1)! ≡ -1 (mod p) if and only if p is prime.
+
+  Example for p = 5:
+  4! = 24
+  24 mod 5 = 4 = -1 (mod 5) ✓
+</pre>
+
+<h4>Applications of Prime Numbers</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Field</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Application</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Cryptography</td>
+    <td style="border:1px solid #ddd;padding:8px">RSA Encryption</td>
+    <td style="border:1px solid #ddd;padding:8px">Product of two large primes as public key</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Hash Tables</td>
+    <td style="border:1px solid #ddd;padding:8px">Prime-sized tables</td>
+    <td style="border:1px solid #ddd;padding:8px">Reduces collisions in hash functions</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Random Numbers</td>
+    <td style="border:1px solid #ddd;padding:8px">LCG parameters</td>
+    <td style="border:1px solid #ddd;padding:8px">Prime modulus for full period</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Error Correction</td>
+    <td style="border:1px solid #ddd;padding:8px">Reed-Solomon codes</td>
+    <td style="border:1px solid #ddd;padding:8px">Finite fields of prime order</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Music Theory</td>
+    <td style="border:1px solid #ddd;padding:8px">Tuning systems</td>
+    <td style="border:1px solid #ddd;padding:8px">Prime harmonics in just intonation</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Nature</td>
+    <td style="border:1px solid #ddd;padding:8px">Cicada life cycles</td>
+    <td style="border:1px solid #ddd;padding:8px">13 and 17 year cycles avoid predators</td>
+  </tr>
+</table>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Use optimized algorithms:</strong> For large numbers, use Miller-Rabin or AKS instead of simple trial division.</li>
+  <li><strong>Consider number size:</strong> Trial division works for small numbers; cryptographic primes need specialized libraries.</li>
+  <li><strong>Verify with multiple methods:</strong> For critical applications, cross-check results with different algorithms.</li>
+  <li><strong>Understand limitations:</strong> Browser JavaScript has integer precision limits (~2^53).</li>
+  <li><strong>Use appropriate libraries:</strong> For cryptographic applications, use established crypto libraries.</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>Integer precision:</strong> JavaScript Number type limits accuracy to ~2^53 (9 × 10^15).</li>
+  <li><strong>Performance:</strong> Trial division becomes slow for very large numbers (> 10^12).</li>
+  <li><strong>No probabilistic testing:</strong> Does not implement Miller-Rabin or other probabilistic methods.</li>
+  <li><strong>Single number only:</strong> Checks one number at a time; no batch processing.</li>
+  <li><strong>No primality proof:</strong> Does not generate mathematical proof of primality.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Prime Checker?</dt>
-  <dd>Prime Checker is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is a prime number?</dt>
+  <dd>A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. Examples include 2, 3, 5, 7, 11, 13, 17, 19, 23, 29. The number 1 is neither prime nor composite. Every integer greater than 1 is either prime or can be uniquely factored into primes.</dd>
+
+  <dt>How do you check if a number is prime?</dt>
+  <dd>The simplest method is trial division: check if the number is divisible by any integer from 2 to √n. If no divisor is found, the number is prime. Optimizations include checking only odd numbers after 2, and using the 6k±1 rule (all primes > 3 are of form 6k±1).</dd>
+
+  <dt>Why is 2 the only even prime number?</dt>
+  <dd>Two is prime because its only divisors are 1 and 2. All other even numbers are divisible by 2 (in addition to 1 and themselves), making them composite. Therefore, 2 is the unique even prime. All other primes are odd numbers.</dd>
+
+  <dt>What is prime factorization?</dt>
+  <dd>Prime factorization expresses a composite number as a product of prime numbers. For example, 60 = 2² × 3 × 5. The Fundamental Theorem of Arithmetic states that every integer > 1 has a unique prime factorization. This is essential for cryptography and number theory.</dd>
+
+  <dt>What are twin primes?</dt>
+  <dd>Twin primes are pairs of primes that differ by 2, such as (3,5), (5,7), (11,13), (17,19). The Twin Prime Conjecture proposes that infinitely many twin primes exist, but this remains unproven. Recent work has shown there are infinitely many prime pairs with gap less than 246.</dd>
+
+  <dt>How are prime numbers used in cryptography?</dt>
+  <dd>Prime numbers are fundamental to RSA encryption. Two large primes are multiplied to create a public key; the security relies on the difficulty of factoring the product back into primes. Prime generation and primality testing are critical operations in cryptographic systems.</dd>
 </dl>
 </section>
 </main>
 <script>
 function check(){
-var n=parseInt(document.getElementById("n").value,10)
-if(isNaN(n)||n<2){document.getElementById("result").innerText="Enter an integer ≥ 2.";return}
-var prime=true
-for(var i=2;i*i<=n;i++)if(n%i===0){prime=false;break}
-document.getElementById("result").innerText=prime?"Prime.":"Not prime."
+var n=parseInt(document.getElementById("n").value,10);
+if(isNaN(n)||n<2){
+document.getElementById("result").innerText="Enter an integer ≥ 2.";
+return;
+}
+var prime=true;
+for(var i=2;i*i<=n;i++){
+if(n%i===0){
+prime=false;
+break;
+}
+}
+var factors="";
+if(!prime){
+factors=getFactors(n);
+}
+if(prime){
+document.getElementById("result").innerText=n+" is a prime number.";
+}else{
+document.getElementById("result").innerText=n+" is not prime. Factors: "+factors;
+}
+}
+
+function getFactors(n){
+var factors={};
+var divisor=2;
+var temp=n;
+while(temp>1){
+while(temp%divisor===0){
+factors[divisor]=(factors[divisor]||0)+1;
+temp/=divisor;
+}
+divisor++;
+if(divisor*divisor>temp&&temp>1){
+factors[temp]=(factors[temp]||0)+1;
+break;
+}
+}
+var result=[];
+for(var p in factors){
+if(factors[p]>1){
+result.push(p+"^"+factors[p]);
+}else{
+result.push(p);
+}
+}
+return result.join(" × ");
 }
 </script>
 <script src="/js/favorites.js"></script>

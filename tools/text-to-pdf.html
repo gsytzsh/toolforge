@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Text to PDF – Convert Plain Text into PDF Online | ToolForge</title>
-<meta name="description" content="Free online Text to PDF tool to turn plain text into a downloadable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Text to PDF converts plain text files and content into formatted PDF documents with customizable font size. Ideal for logs, notes, code snippets, and documentation export. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/text-to-pdf.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Text to PDF – Convert Plain Text into PDF Online | ToolForge">
-<meta property="og:description" content="Free online Text to PDF tool to turn plain text into a downloadable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Text to PDF converts plain text files and content into formatted PDF documents with customizable font size. Ideal for logs, notes, code snippets, and documentation export. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/text-to-pdf.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Text to PDF – Convert Plain Text into PDF Online | ToolForge">
-<meta name="twitter:description" content="Free online Text to PDF tool to turn plain text into a downloadable PDF directly in your browser. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Text to PDF converts plain text files and content into formatted PDF documents with customizable font size. Ideal for logs, notes, code snippets, and documentation export. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
@@ -25,45 +25,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Text To Pdf?",
+      "name": "What text formats does this tool support?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Text To Pdf is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "This tool supports plain text files (.txt), log files (.log), markdown files (.md), and any text that can be pasted into the editor. It preserves line breaks and whitespace using monospace Courier font. Markdown syntax is not rendered (no bold/italic formatting), but the structure remains readable."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How does the PDF text wrapping work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "The tool uses jsPDF's splitTextToSize function to wrap long lines to fit within page margins (40pt on each side). Each line is processed individually, and multi-line wraps automatically create new pages when content exceeds page height. Line height is set to 1.5× font size for readability."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What font size should I choose?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Recommended font sizes: 10-11pt for dense documents and code, 12pt for standard readability, 14-16pt for presentations or large-print needs. The default 11pt balances content density with readability. Larger fonts create more pages but are easier to read when printed."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "Can I convert large text files to PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Yes, but very large files (10+ MB) may cause browser memory issues or slow processing. For large documents, consider splitting into multiple files or using server-side PDF generation tools. The tool automatically creates multiple pages as needed, so document length is not a limitation."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "Does the PDF preserve special characters?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Yes, Unicode characters (emoji, international text, symbols) are preserved in the PDF. However, jsPDF's standard fonts have limited character set support. For best results with special characters, ensure your browser supports the characters and consider using UTF-8 encoded text files."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What are common use cases for text to PDF conversion?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Common uses include: converting log files for archival, creating printable documentation, exporting code snippets for sharing, generating meeting notes handouts, preserving terminal output, creating readable versions of API responses, and converting markdown drafts to shareable PDF format."
       }
     }
   ]
@@ -73,7 +78,7 @@
 <body>
 <main class="container">
 <h1>Text to PDF</h1>
-<p class="subtitle">Paste plain text and download it as a paginated PDF directly in your browser.</p>
+<p class="subtitle">Convert plain text files and content into formatted PDF documents with customizable font size and automatic pagination.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Upload Text File</h3>
 <label for="text-file" class="sr-only">Text file</label>
@@ -92,25 +97,269 @@ Font size:
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Text to PDF</h3>
-<p>This Text to PDF tool turns plain text into a simple paginated PDF. It is useful for notes, logs, snippets, drafts and quick printable text documents.</p>
-<p>The conversion is done entirely in your browser, so your text stays on your device during export.</p>
+<p>This Text to PDF converter transforms plain text content into paginated PDF documents using jsPDF library. It supports file upload or direct text pasting, with customizable font size (8-20pt) and automatic line wrapping to fit standard A4 page margins.</p>
+<p>It is useful for converting log files to archival format, creating printable documentation from text editors, exporting code snippets for code review or sharing, generating meeting notes handouts, preserving terminal/command output, creating readable API response exports, and converting any plain text content into universally readable PDF format.</p>
+
+<h4>Text to PDF Conversion Process</h4>
+<p>The conversion follows these steps:</p>
+<ol>
+  <li><strong>Input:</strong> Text is loaded from file upload or textarea paste</li>
+  <li><strong>Parse:</strong> Text is split into individual lines by newline characters</li>
+  <li><strong>Wrap:</strong> Long lines are wrapped to fit within page margins using splitTextToSize</li>
+  <li><strong>Paginate:</strong> Lines are placed on pages, creating new pages when height is exceeded</li>
+  <li><strong>Export:</strong> PDF is generated and downloaded to local device</li>
+</ol>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Conversion Flow:
+Plain Text → Line Split → Text Wrapping →
+Page Placement → Multi-page Handling → PDF Export
+
+<!-- jsPDF configuration:
+     - Page size: A4 (595 × 842 points)
+     - Orientation: Portrait
+     - Margins: 40 points (~14mm) each side
+     - Font: Courier (monospace)
+     - Line height: 1.5× font size
+-->
+</pre>
+
+<h4>PDF Output Settings</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Setting</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Value</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Page Size</td>
+    <td style="border:1px solid #ddd;padding:8px">A4 (595 × 842 pt)</td>
+    <td style="border:1px solid #ddd;padding:8px">Standard international size</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Orientation</td>
+    <td style="border:1px solid #ddd;padding:8px">Portrait</td>
+    <td style="border:1px solid #ddd;padding:8px">Optimal for text documents</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Font Family</td>
+    <td style="border:1px solid #ddd;padding:8px">Courier</td>
+    <td style="border:1px solid #ddd;padding:8px">Monospace, preserves alignment</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Font Size</td>
+    <td style="border:1px solid #ddd;padding:8px">8-20 pt (default: 11)</td>
+    <td style="border:1px solid #ddd;padding:8px">User configurable</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Line Height</td>
+    <td style="border:1px solid #ddd;padding:8px">1.5× font size</td>
+    <td style="border:1px solid #ddd;padding:8px">Standard readability ratio</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Margins</td>
+    <td style="border:1px solid #ddd;padding:8px">40 points (~14mm)</td>
+    <td style="border:1px solid #ddd;padding:8px">All four sides</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Text Color</td>
+    <td style="border:1px solid #ddd;padding:8px">Black (#000000)</td>
+    <td style="border:1px solid #ddd;padding:8px">Maximum contrast</td>
+  </tr>
+</table>
+
+<h4>Font Size Recommendations</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Font Size</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Lines per Page (approx)</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">8-9 pt</td>
+    <td style="border:1px solid #ddd;padding:8px">Dense code, compact logs</td>
+    <td style="border:1px solid #ddd;padding:8px">50-55 lines</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">10-11 pt</td>
+    <td style="border:1px solid #ddd;padding:8px">Standard documents, code</td>
+    <td style="border:1px solid #ddd;padding:8px">40-45 lines</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">12 pt</td>
+    <td style="border:1px solid #ddd;padding:8px">General readability</td>
+    <td style="border:1px solid #ddd;padding:8px">35-40 lines</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">14-16 pt</td>
+    <td style="border:1px solid #ddd;padding:8px">Presentations, large print</td>
+    <td style="border:1px solid #ddd;padding:8px">25-30 lines</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Domain</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Development</td>
+    <td style="border:1px solid #ddd;padding:8px">Code snippet export</td>
+    <td style="border:1px solid #ddd;padding:8px">Share algorithm logic</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">DevOps</td>
+    <td style="border:1px solid #ddd;padding:8px">Log file archival</td>
+    <td style="border:1px solid #ddd;padding:8px">Preserve error logs</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Documentation</td>
+    <td style="border:1px solid #ddd;padding:8px">README export</td>
+    <td style="border:1px solid #ddd;padding:8px">Printable install guides</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Business</td>
+    <td style="border:1px solid #ddd;padding:8px">Meeting notes</td>
+    <td style="border:1px solid #ddd;padding:8px">Distribute action items</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Education</td>
+    <td style="border:1px solid #ddd;padding:8px">Lecture notes</td>
+    <td style="border:1px solid #ddd;padding:8px">Handout preparation</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Legal</td>
+    <td style="border:1px solid #ddd;padding:8px">Evidence preservation</td>
+    <td style="border:1px solid #ddd;padding:8px">Print email threads</td>
+  </tr>
+</table>
+
+<h4>Supported File Types</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Accepted File Extensions:
+  .txt  - Plain text files
+  .log  - Log files (application, server, debug)
+  .md   - Markdown files (raw format, not rendered)
+  .text - Alternative plain text extension
+
+MIME Types:
+  text/plain        - Standard plain text
+  text/markdown     - Markdown files
+  application/octet-stream - Binary fallback
+
+Note: Markdown syntax (bold, italic, headers)
+is NOT rendered—displayed as raw text with
+monospace formatting.
+</pre>
+
+<h4>Example Text Formats</h4>
+<p>This tool handles various text content types:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+1. Code Snippet:
+   function hello() {
+     console.log("Hello, World!");
+   }
+
+2. Log Output:
+   [2024-03-15 10:23:45] INFO: Server started
+   [2024-03-15 10:23:46] DEBUG: Loading config
+   [2024-03-15 10:23:47] ERROR: Connection failed
+
+3. Terminal Output:
+   $ npm install
+   added 142 packages in 3.2s
+   $ npm run build
+   Build completed successfully!
+
+4. API Response:
+   {
+     "status": "success",
+     "data": {"id": 123}
+   }
+
+5. Meeting Notes:
+   Attendees: Alice, Bob, Carol
+   Action Items:
+   - Alice: Review PR #45
+   - Bob: Update documentation
+</pre>
+
+<h4>Character Encoding Support</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Character Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Support Level</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">ASCII (0-127)</td>
+    <td style="border:1px solid #ddd;padding:8px">Full support</td>
+    <td style="border:1px solid #ddd;padding:8px">All standard characters</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Latin Extended</td>
+    <td style="border:1px solid #ddd;padding:8px">Good support</td>
+    <td style="border:1px solid #ddd;padding:8px">European language chars</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">CJK Characters</td>
+    <td style="border:1px solid #ddd;padding:8px">Limited support</td>
+    <td style="border:1px solid #ddd;padding:8px">May render as boxes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Emoji</td>
+    <td style="border:1px solid #ddd;padding:8px">Variable support</td>
+    <td style="border:1px solid #ddd;padding:8px">Browser-dependent</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Symbols</td>
+    <td style="border:1px solid #ddd;padding:8px">Good support</td>
+    <td style="border:1px solid #ddd;padding:8px">Math, currency, arrows</td>
+  </tr>
+</table>
+
+<h4>Tips for Best Results</h4>
+<ul>
+  <li>Use UTF-8 encoding for text files to ensure proper character rendering</li>
+  <li>Keep line length under 80-100 characters for optimal wrapping</li>
+  <li>For code, 10-11pt font preserves monospace alignment best</li>
+  <li>Remove ANSI color codes from log files before conversion (they show as raw characters)</li>
+  <li>For very long documents, consider splitting into logical sections</li>
+  <li>Preview in browser print dialog before downloading to check pagination</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>No rich formatting:</strong> Bold, italic, colors are not supported (plain text only)</li>
+  <li><strong>No images:</strong> Embedded images or ASCII art may not render correctly</li>
+  <li><strong>Limited CJK support:</strong> Chinese, Japanese, Korean characters may not display</li>
+  <li><strong>Fixed font only:</strong> Courier monospace font is the only option</li>
+  <li><strong>No headers/footers:</strong> Page numbers and titles are not automatically added</li>
+  <li><strong>Memory limits:</strong> Very large files (10+ MB) may cause browser issues</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Text To Pdf?</dt>
-  <dd>Text To Pdf is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What text formats does this tool support?</dt>
+  <dd>This tool supports plain text files (.txt), log files (.log), markdown files (.md), and any text that can be pasted into the editor. It preserves line breaks and whitespace using monospace Courier font. Markdown syntax is not rendered (no bold/italic formatting), but the structure remains readable.</dd>
+
+  <dt>How does the PDF text wrapping work?</dt>
+  <dd>The tool uses jsPDF's splitTextToSize function to wrap long lines to fit within page margins (40pt on each side). Each line is processed individually, and multi-line wraps automatically create new pages when content exceeds page height. Line height is set to 1.5× font size for readability.</dd>
+
+  <dt>What font size should I choose?</dt>
+  <dd>Recommended font sizes: 10-11pt for dense documents and code, 12pt for standard readability, 14-16pt for presentations or large-print needs. The default 11pt balances content density with readability. Larger fonts create more pages but are easier to read when printed.</dd>
+
+  <dt>Can I convert large text files to PDF?</dt>
+  <dd>Yes, but very large files (10+ MB) may cause browser memory issues or slow processing. For large documents, consider splitting into multiple files or using server-side PDF generation tools. The tool automatically creates multiple pages as needed, so document length is not a limitation.</dd>
+
+  <dt>Does the PDF preserve special characters?</dt>
+  <dd>Yes, Unicode characters (emoji, international text, symbols) are preserved in the PDF. However, jsPDF's standard fonts have limited character set support. For best results with special characters, ensure your browser supports the characters and consider using UTF-8 encoded text files.</dd>
+
+  <dt>What are common use cases for text to PDF conversion?</dt>
+  <dd>Common uses include: converting log files for archival, creating printable documentation, exporting code snippets for sharing, generating meeting notes handouts, preserving terminal output, creating readable versions of API responses, and converting markdown drafts to shareable PDF format.</dd>
 </dl>
 </section>
 </main>

@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Remove Empty Lines – Strip Blank Lines from Text | ToolForge</title>
-<meta name="description" content="Free online tool to remove empty lines from text. Strip blank lines and trim whitespace. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Remove empty lines and blank lines from text. Filter whitespace-only lines with regex-based processing. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/remove-empty-lines.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Remove Empty Lines – Strip Blank Lines from Text | ToolForge">
-<meta property="og:description" content="Free online tool to remove empty lines from text. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Remove empty lines and blank lines from text. Filter whitespace-only lines with regex-based processing. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/remove-empty-lines.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Remove Empty Lines – Strip Blank Lines from Text | ToolForge">
-<meta name="twitter:description" content="Free online tool to remove empty lines from text. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Remove empty lines and blank lines from text. Filter whitespace-only lines with regex-based processing. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Remove Empty Lines?",
+      "name": "What constitutes an empty line?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Remove Empty Lines is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "An empty line contains no characters (zero-length string). A blank line may contain only whitespace characters (spaces, tabs) but no visible content. This tool can remove both truly empty lines and whitespace-only lines depending on the selected option."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between empty and whitespace-only lines?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Empty lines contain nothing (zero characters between line breaks). Whitespace-only lines contain spaces, tabs, or other invisible characters but no visible text. For example, '\\n\\n' has empty lines; '\\n   \\n' has whitespace-only lines with 3 spaces."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How does the whitespace trimming option work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "When enabled, the tool uses String.trim() to remove leading and trailing whitespace from each line before checking if it's empty. Lines containing only spaces/tabs are treated as empty and removed. This is useful for cleaning up indented code or formatted text."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are common use cases for removing empty lines?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Common uses include: cleaning up log files with excessive spacing, compacting code output, preparing data for CSV import, removing paragraph breaks from copied text, condensing email threads, and reducing vertical whitespace in documentation."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How can I remove multiple consecutive empty lines but keep single empty lines?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Use a regex pattern like /\\n{3,}/g to find 3+ consecutive newlines (which represent 2+ empty lines) and replace with \\n\\n. This collapses multiple blank lines while preserving paragraph breaks. Many text editors support this in find/replace."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "Does this tool preserve the order of non-empty lines?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Yes, the tool uses a filter operation that preserves the original order of all non-empty lines. Only empty or whitespace-only lines are removed. Line sequence, indentation within lines, and content remain unchanged."
       }
     }
   ]
@@ -86,34 +91,435 @@
 <textarea id="output" rows="10" style="width:90%" aria-label="Output text"></textarea>
 <section class="tool-seo">
 <h3>About Remove Empty Lines</h3>
-<p>This tool removes empty lines from pasted text. You can optionally treat lines that contain only spaces or tabs as empty.</p>
-<p>It is useful for cleaning up pasted content, logs, exported data and any text with excessive blank lines.</p>
+<p>This tool removes empty lines from text by filtering out lines that contain no content or only whitespace. It splits input by line breaks, applies a filter function to each line, and joins the remaining lines back together. The optional trim mode treats whitespace-only lines as empty.</p>
+<p>It is useful for cleaning up log files with excessive spacing, compacting code output, preparing data for CSV import, removing paragraph breaks from copied text, condensing email threads, and reducing vertical whitespace in documentation.</p>
+
+<h4>Empty Line Detection</h4>
+<p>Empty lines are identified using string operations:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Empty Line Types:
+
+1. Truly Empty Line
+   - Contains zero characters
+   - JavaScript: line === ""
+   - Example: "line1\n\nline2" (empty line between)
+
+2. Whitespace-Only Line
+   - Contains only spaces, tabs, or other whitespace
+   - JavaScript: line.trim() === ""
+   - Example: "line1\n   \nline2" (3 spaces on middle line)
+
+3. Mixed Whitespace
+   - Contains combination of spaces and tabs
+   - JavaScript: line.trim() === ""
+   - Example: "line1\n  \t  \nline2"
+
+Detection Logic:
+  // Strict mode (only truly empty)
+  lines.filter(l => l !== "")
+
+  // Trim mode (empty + whitespace-only)
+  lines.filter(l => l.trim() !== "")
+</pre>
+
+<h4>Whitespace Characters Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Character</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Name</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Unicode</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">JavaScript</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"> </td>
+    <td style="border:1px solid #ddd;padding:8px">Space</td>
+    <td style="border:1px solid #ddd;padding:8px">U+0020</td>
+    <td style="border:1px solid #ddd;padding:8px">" "</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">	</td>
+    <td style="border:1px solid #ddd;padding:8px">Tab</td>
+    <td style="border:1px solid #ddd;padding:8px">U+0009</td>
+    <td style="border:1px solid #ddd;padding:8px">"\t"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">
+</td>
+    <td style="border:1px solid #ddd;padding:8px">Line Feed</td>
+    <td style="border:1px solid #ddd;padding:8px">U+000A</td>
+    <td style="border:1px solid #ddd;padding:8px">"\n"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">
+</td>
+    <td style="border:1px solid #ddd;padding:8px">Carriage Return</td>
+    <td style="border:1px solid #ddd;padding:8px">U+000D</td>
+    <td style="border:1px solid #ddd;padding:8px">"\r"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"> </td>
+    <td style="border:1px solid #ddd;padding:8px">Non-breaking Space</td>
+    <td style="border:1px solid #ddd;padding:8px">U+00A0</td>
+    <td style="border:1px solid #ddd;padding:8px">"\u00A0"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"> </td>
+    <td style="border:1px solid #ddd;padding:8px">En Space</td>
+    <td style="border:1px solid #ddd;padding:8px">U+2002</td>
+    <td style="border:1px solid #ddd;padding:8px">"\u2002"</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"> </td>
+    <td style="border:1px solid #ddd;padding:8px">Em Space</td>
+    <td style="border:1px solid #ddd;padding:8px">U+2003</td>
+    <td style="border:1px solid #ddd;padding:8px">"\u2003"</td>
+  </tr>
+</table>
+
+<h4>Filtering Methods Comparison</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Method 1: Remove Only Empty Lines
+  Input:
+    "Line 1
+
+    Line 2
+       "
+
+  Output:
+    "Line 1
+    Line 2
+       "
+
+  Keeps whitespace-only lines
+
+Method 2: Remove Empty + Whitespace-Only
+  Input:
+    "Line 1
+
+    Line 2
+       "
+
+  Output:
+    "Line 1
+    Line 2"
+
+  Removes all blank lines
+
+Method 3: Collapse Multiple Empty Lines
+  Input:
+    "Line 1
+
+
+
+
+    Line 2"
+
+  Output:
+    "Line 1
+
+    Line 2"
+
+  Keeps single blank lines
+
+Method 4: Remove and Trim Each Line
+  Input:
+    "  Line 1
+
+  Line 2  "
+
+  Output:
+    "Line 1
+    Line 2"
+
+  Trims leading/trailing whitespace
+</pre>
+
+<h4>Common Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Trim Mode</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Log File Cleanup</td>
+    <td style="border:1px solid #ddd;padding:8px">Remove excessive spacing from log output</td>
+    <td style="border:1px solid #ddd;padding:8px">Enabled</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Code Compaction</td>
+    <td style="border:1px solid #ddd;padding:8px">Reduce vertical space in code listings</td>
+    <td style="border:1px solid #ddd;padding:8px">Optional</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">CSV Data Cleaning</td>
+    <td style="border:1px solid #ddd;padding:8px">Remove blank rows before import</td>
+    <td style="border:1px solid #ddd;padding:8px">Enabled</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Email Thread Cleanup</td>
+    <td style="border:1px solid #ddd;padding:8px">Condense forwarded email chains</td>
+    <td style="border:1px solid #ddd;padding:8px">Enabled</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Markdown Formatting</td>
+    <td style="border:1px solid #ddd;padding:8px">Adjust paragraph spacing in documents</td>
+    <td style="border:1px solid #ddd;padding:8px">Disabled</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Data Export Cleaning</td>
+    <td style="border:1px solid #ddd;padding:8px">Remove blank lines from exported data</td>
+    <td style="border:1px solid #ddd;padding:8px">Enabled</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Terminal Output</td>
+    <td style="border:1px solid #ddd;padding:8px">Compact command output for sharing</td>
+    <td style="border:1px solid #ddd;padding:8px">Enabled</td>
+  </tr>
+</table>
+
+<h4>Code Examples by Language</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript:
+  // Remove empty lines only
+  text.split(/\r?\n/).filter(l => l !== "").join("\n")
+
+  // Remove empty + whitespace-only
+  text.split(/\r?\n/).filter(l => l.trim() !== "").join("\n")
+
+  // Collapse multiple empty lines
+  text.replace(/\n{3,}/g, "\n\n")
+
+  // Using regex to filter
+  text.split(/\r?\n/).filter(l => /\S/.test(l)).join("\n")
+
+Python:
+  # Remove empty lines only
+  '\n'.join([l for l in text.split('\n') if l != ""])
+
+  # Remove empty + whitespace-only
+  '\n'.join([l for l in text.splitlines() if l.strip()])
+
+  # Collapse multiple empty lines
+  re.sub(r'\n{3,}', '\n\n', text)
+
+Bash/sed:
+  # Remove empty lines
+  sed '/^$/d' file.txt
+
+  # Remove empty + whitespace-only
+  sed '/^[[:space:]]*$/d' file.txt
+
+  # Using grep
+  grep -v '^[[:space:]]*$' file.txt
+
+PowerShell:
+  # Remove empty lines
+  Get-Content file.txt | Where-Object { $_ -ne "" }
+
+  # Remove whitespace-only
+  Get-Content file.txt | Where-Object { $_.Trim() -ne "" }
+
+PHP:
+  // Remove empty lines
+  implode("\n", array_filter(file('file.txt'), fn($l) => trim($l) !== ""));
+
+  // Using preg_filter
+  preg_filter('/^\s*$/m', '', $text)
+</pre>
+
+<h4>Regex Patterns for Empty Lines</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Pattern        | Matches                    | Description
+---------------|----------------------------|------------------
+^$             | Empty lines only           | Start + end anchor
+^\s*$          | Empty + whitespace-only    | Zero or more whitespace
+^[\t ]*$       | Space/tab only lines       | Explicit space/tab
+^\h*$          | Horizontal whitespace      | POSIX horizontal class
+^(?=\s*$)      | Lookahead for blank lines  | PCRE/JavaScript
+[\r\n]{3,}     | Multiple consecutive       | 3+ line breaks
+
+JavaScript Examples:
+  // Test if line is empty or whitespace-only
+  /^\s*$/.test(line)
+
+  // Remove all empty/whitespace lines
+  text.split(/\r?\n/).filter(l => !/^\s*$/.test(l)).join("\n")
+
+  // Collapse 3+ newlines to 2
+  text.replace(/[\r\n]{3,}/g, "\n\n")
+
+  // Keep lines with at least one non-whitespace
+  text.split(/\r?\n/).filter(l => /\S/.test(l)).join("\n")
+</pre>
+
+<h4>Empty Line Removal Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Simple Empty Lines
+  Input:
+    "Line 1
+
+    Line 2
+
+    Line 3"
+
+  Output:
+    "Line 1
+    Line 2
+    Line 3"
+
+Example 2: Whitespace-Only Lines
+  Input:
+    "Line 1
+
+    Line 2
+
+    Line 3"
+
+  With trim: "Line 1\nLine 2\nLine 3"
+  Without trim: Keeps whitespace lines
+
+Example 3: Multiple Consecutive Empty Lines
+  Input:
+    "Header
+
+
+
+
+    Body
+
+
+
+
+    Footer"
+
+  Collapse to single blank:
+    "Header
+
+    Body
+
+    Footer"
+
+Example 4: Log File Cleanup
+  Input:
+    "2024-01-15 INFO: Started
+
+    2024-01-15 ERROR: Failed
+
+    2024-01-15 INFO: Retrying"
+
+  Output:
+    "2024-01-15 INFO: Started
+    2024-01-15 ERROR: Failed
+    2024-01-15 INFO: Retrying"
+
+Example 5: Code with Excessive Spacing
+  Input:
+    "function test() {
+
+      console.log("Hi");
+
+    }"
+
+  Output:
+    "function test() {
+      console.log("Hi");
+    }"
+
+Example 6: CSV Data Cleaning
+  Input:
+    "name,age
+
+    John,30
+
+    Jane,25"
+
+  Output:
+    "name,age
+    John,30
+    Jane,25"
+
+Example 7: Email Thread
+  Input:
+    "From: John
+
+    > From: Jane
+    >
+    > Original message
+
+    Reply here"
+
+  Output:
+    "From: John
+    > From: Jane
+    >
+    > Original message
+    Reply here"
+
+Example 8: Mixed Content
+  Input:
+    "Paragraph 1.
+
+
+    Paragraph 2.
+
+    Paragraph 3."
+
+  Output (trim mode):
+    "Paragraph 1.
+    Paragraph 2.
+    Paragraph 3."
+</pre>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Preserve intentional spacing:</strong> Some documents use blank lines for paragraph separation; review before removing all.</li>
+  <li><strong>Use trim mode for code:</strong> Whitespace-only lines in code are often artifacts; enable trim for cleaner output.</li>
+  <li><strong>Consider collapsing vs removing:</strong> Collapsing multiple blanks to single blank preserves readability.</li>
+  <li><strong>Check for trailing whitespace:</strong> Lines that appear empty may have trailing spaces; trim mode handles these.</li>
+  <li><strong>Batch processing:</strong> For large files, process in chunks to avoid browser memory issues.</li>
+  <li><strong>Combine with other tools:</strong> Use with trim-lines or sort-lines tools for comprehensive text cleanup.</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>No selective removal:</strong> Cannot skip specific empty lines based on context or position.</li>
+  <li><strong>Unicode whitespace:</strong> Some Unicode whitespace characters may not be detected by trim().</li>
+  <li><strong>Large files:</strong> Processing very large text inputs may cause browser slowdowns.</li>
+  <li><strong>Structure loss:</strong> Removing all empty lines destroys paragraph and section boundaries.</li>
+  <li><strong>No undo:</strong> Once processed, original spacing information is lost; keep backup of input.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Remove Empty Lines?</dt>
-  <dd>Remove Empty Lines is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What constitutes an empty line?</dt>
+  <dd>An empty line contains no characters (zero-length string). A blank line may contain only whitespace characters (spaces, tabs) but no visible content. This tool can remove both truly empty lines and whitespace-only lines depending on the selected option.</dd>
+
+  <dt>What is the difference between empty and whitespace-only lines?</dt>
+  <dd>Empty lines contain nothing (zero characters between line breaks). Whitespace-only lines contain spaces, tabs, or other invisible characters but no visible text. For example, '\n\n' has empty lines; '\n   \n' has whitespace-only lines with 3 spaces.</dd>
+
+  <dt>How does the whitespace trimming option work?</dt>
+  <dd>When enabled, the tool uses String.trim() to remove leading and trailing whitespace from each line before checking if it's empty. Lines containing only spaces/tabs are treated as empty and removed. This is useful for cleaning up indented code or formatted text.</dd>
+
+  <dt>What are common use cases for removing empty lines?</dt>
+  <dd>Common uses include: cleaning up log files with excessive spacing, compacting code output, preparing data for CSV import, removing paragraph breaks from copied text, condensing email threads, and reducing vertical whitespace in documentation.</dd>
+
+  <dt>How can I remove multiple consecutive empty lines but keep single empty lines?</dt>
+  <dd>Use a regex pattern like /\n{3,}/g to find 3+ consecutive newlines (which represent 2+ empty lines) and replace with \n\n. This collapses multiple blank lines while preserving paragraph breaks. Many text editors support this in find/replace.</dd>
+
+  <dt>Does this tool preserve the order of non-empty lines?</dt>
+  <dd>Yes, the tool uses a filter operation that preserves the original order of all non-empty lines. Only empty or whitespace-only lines are removed. Line sequence, indentation within lines, and content remain unchanged.</dd>
 </dl>
 </section>
 </main>
 <script>
 function run(){
-var lines=document.getElementById("input").value.split(/\r?\n/)
-var trim=document.getElementById("trim").checked
-var out=lines.filter(function(l){return trim?l.trim()!=="":l!==""})
-document.getElementById("output").value=out.join("\n")
+var lines=document.getElementById("input").value.split(/\r?\n/);
+var trim=document.getElementById("trim").checked;
+var out=lines.filter(function(l){return trim?l.trim()!=="":l!==""});
+document.getElementById("output").value=out.join("\n");
 }
 </script>
 <script src="/js/favorites.js"></script>

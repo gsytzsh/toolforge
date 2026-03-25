@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Extended ASCII Table – EASCII Character Codes 128–255 | ToolForge</title>
-<meta name="description" content="Free online Extended ASCII table (128–255) with decimal, hex and character codes. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Complete Extended ASCII character table (128–255) with decimal, hexadecimal, and character representations. Reference for Latin-1, Windows-1252 encodings and special symbols.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/eascii-table.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Extended ASCII Table – EASCII Character Codes 128–255 | ToolForge">
-<meta property="og:description" content="Free online Extended ASCII table (128–255). Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Complete Extended ASCII character table (128–255) with decimal, hex, and character codes.">
 <meta property="og:url" content="https://toolforge.site/tools/eascii-table.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Extended ASCII Table – EASCII Character Codes 128–255 | ToolForge">
-<meta name="twitter:description" content="Free online Extended ASCII table (128–255). Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Extended ASCII character reference table for developers.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
@@ -21,6 +21,7 @@
 .ref-table th,.ref-table td{border:1px solid #eee;padding:8px 12px;text-align:left}
 .ref-table th{background:#f8fafc;font-weight:600}
 .ref-table input{width:100%;max-width:120px;padding:6px;border:1px solid #ddd;border-radius:4px}
+.char-cell{font-family:monospace;font-size:1.1em;text-align:center}
 </style>
 
 <script type="application/ld+json">
@@ -30,45 +31,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Eascii Table used for?",
+      "name": "What is Extended ASCII?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Eascii Table is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "Extended ASCII refers to character encodings that use 8 bits per character, providing 256 possible characters (0-255). The first 128 (0-127) are standard ASCII. The extended range (128-255) varies by encoding—common variants include ISO-8859-1 (Latin-1), Windows-1252, and ISO-8859-15. These encodings add accented letters, currency symbols, and special characters."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between ASCII and Extended ASCII?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Standard ASCII uses 7 bits (0-127) and includes basic Latin letters, digits, and control characters. Extended ASCII uses 8 bits (0-255), doubling the character set. The upper 128 characters (128-255) are not standardized—different encodings define them differently. Windows-1252 adds smart quotes and the euro symbol; Latin-1 adds accented European characters."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What encoding should I use for web pages?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "UTF-8 is the universal standard for web pages. It's backward-compatible with ASCII (0-127 are identical) and supports all Unicode characters (over 140,000 characters from all writing systems). UTF-8 replaced legacy encodings like Latin-1 and Windows-1252. Always declare <meta charset=\"UTF-8\"> in HTML documents."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are the common Extended ASCII characters?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Common Extended ASCII characters include: 160 (non-breaking space), 162-165 (currency symbols ¢£¤¥), 167 (section sign §), 169 (copyright ©), 176 (degree °), 177 (plus-minus ±), 182 (pilcrow ¶), 187 (right guillemet »), 215 (multiplication ×), 247 (division ÷). Windows-1252 adds 128-159 with smart quotes and dashes."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What is Windows-1252 encoding?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Windows-1252 (also called CP-1252) is a Microsoft extension of ISO-8859-1 that uses the 128-159 range for printable characters instead of control codes. It includes smart quotes (145-148: ''""), en/em dashes (150-151), trademark (153), euro (128), and other typography symbols. It's the default encoding for legacy Windows text files."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How do I convert Extended ASCII to UTF-8?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Most modern tools handle conversion automatically. In programming: JavaScript uses TextEncoder/TextDecoder with encoding parameter; Python uses .encode('utf-8') and bytes.decode('cp1252'); Node.js uses Buffer.from(data, 'latin1').toString('utf8'). For files, use iconv: iconv -f ISO-8859-1 -t UTF-8 input.txt. Always backup before batch conversion."
       }
     }
   ]
@@ -92,25 +98,137 @@
 
 <section class="tool-seo">
 <h3>About Extended ASCII Table</h3>
-<p>This Extended ASCII table lists character codes from 128 to 255 in decimal, hex and character form. Values 128–255 vary by encoding (Latin-1, Windows-1252, etc.).</p>
-<p>It is useful for encoding references, special character lookups and debugging extended character display issues.</p>
+<p>This Extended ASCII table lists character codes from 128 to 255 in decimal, hexadecimal, and character form. The displayed characters depend on your system's encoding—modern systems use UTF-8, while the table shows Windows-1252 (CP-1252) characters for the 128-159 range and ISO-8859-1 for 160-255.</p>
+<p>It is useful for encoding references, special character lookups, debugging character display issues, and understanding legacy file formats that predate Unicode.</p>
+
+<h4>ASCII vs Extended ASCII vs Unicode</h4>
+<table class="ref-table">
+<thead><tr><th>Encoding</th><th>Bits</th><th>Characters</th><th>Range</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><strong>ASCII</strong></td><td>7</td><td>128</td><td>0-127</td><td>Base standard, universal</td></tr>
+<tr><td><strong>Extended ASCII</strong></td><td>8</td><td>256</td><td>0-255</td><td>Legacy (various incompatible variants)</td></tr>
+<tr><td><strong>ISO-8859-1 (Latin-1)</strong></td><td>8</td><td>256</td><td>0-255</td><td>Legacy European encoding</td></tr>
+<tr><td><strong>Windows-1252</strong></td><td>8</td><td>256</td><td>0-255</td><td>Legacy Windows encoding</td></tr>
+<tr><td><strong>UTF-8</strong></td><td>8-32</td><td>1,112,064</td><td>0-0x10FFFF</td><td>Modern standard (98%+ web usage)</td></tr>
+</tbody>
+</table>
+
+<h4>Windows-1252 Control Range (128-159)</h4>
+<p class="web-safe-note">Unlike ISO-8859-1 which defines 128-159 as C1 control codes, Windows-1252 uses this range for printable punctuation and symbols.</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px">
+Windows-1252 printable characters in 128-159 range:
+
+128 €  Euro sign           144 [unused]
+129 [unused]                145 '  Left single quote
+130 ‚  Single low quote     146 '  Right single quote
+131 ƒ  Latin small f hook   147 "  Left double quote
+132 „  Double low quote     148 "  Right double quote
+133 …  Horizontal ellipsis  149 •  Bullet
+134 †  Dagger               150 –  En dash
+135 ‡  Double dagger        151 —  Em dash
+136 ˆ  Modifier circumflex  152 ˜  Small tilde
+137 ‰  Per mille            153 ™  Trade mark sign
+138 Š  S caron              154 š  Small s caron
+139 ‹  Single left angle    155 œ  OE ligature
+140 Œ  OE ligature          156 [unused]
+141 [unused]                157 [unused]
+142 Ž  Z caron              158 ž  Small z caron
+143 [unused]                159 Ÿ  Y with diaeresis
+</pre>
+
+<h4>Common Extended ASCII Symbols (160-255)</h4>
+<table class="ref-table">
+<thead><tr><th>Dec</th><th>Hex</th><th>Char</th><th>Name</th><th>HTML Entity</th></tr></thead>
+<tbody>
+<tr><td>160</td><td>A0</td><td class="char-cell"> </td><td>Non-breaking space</td><td><code>&amp;nbsp;</code></td></tr>
+<tr><td>161</td><td>A1</td><td class="char-cell">¡</td><td>Inverted exclamation</td><td><code>&amp;iexcl;</code></td></tr>
+<tr><td>162</td><td>A2</td><td class="char-cell">¢</td><td>Cent sign</td><td><code>&amp;cent;</code></td></tr>
+<tr><td>163</td><td>A3</td><td class="char-cell">£</td><td>Pound sign</td><td><code>&amp;pound;</code></td></tr>
+<tr><td>164</td><td>A4</td><td class="char-cell">¤</td><td>Currency sign</td><td><code>&amp;curren;</code></td></tr>
+<tr><td>165</td><td>A5</td><td class="char-cell">¥</td><td>Yen sign</td><td><code>&amp;yen;</code></td></tr>
+<tr><td>166</td><td>A6</td><td class="char-cell">¦</td><td>Broken bar</td><td><code>&amp;brvbar;</code></td></tr>
+<tr><td>167</td><td>A7</td><td class="char-cell">§</td><td>Section sign</td><td><code>&amp;sect;</code></td></tr>
+<tr><td>169</td><td>A9</td><td class="char-cell">©</td><td>Copyright sign</td><td><code>&amp;copy;</code></td></tr>
+<tr><td>170</td><td>AA</td><td class="char-cell">ª</td><td>Feminine ordinal</td><td><code>&amp;ordf;</code></td></tr>
+<tr><td>171</td><td>AB</td><td class="char-cell">«</td><td>Left guillemet</td><td><code>&amp;laquo;</code></td></tr>
+<tr><td>174</td><td>AE</td><td class="char-cell">®</td><td>Registered sign</td><td><code>&amp;reg;</code></td></tr>
+<tr><td>175</td><td>AF</td><td class="char-cell">¯</td><td>Macron</td><td><code>&amp;macr;</code></td></tr>
+<tr><td>176</td><td>B0</td><td class="char-cell">°</td><td>Degree sign</td><td><code>&amp;deg;</code></td></tr>
+<tr><td>177</td><td>B1</td><td class="char-cell">±</td><td>Plus-minus sign</td><td><code>&amp;plusmn;</code></td></tr>
+<tr><td>182</td><td>B6</td><td class="char-cell">¶</td><td>Pilcrow sign</td><td><code>&amp;para;</code></td></tr>
+<tr><td>183</td><td>B7</td><td class="char-cell">·</td><td>Middle dot</td><td><code>&amp;middot;</code></td></tr>
+<tr><td>187</td><td>BB</td><td class="char-cell">»</td><td>Right guillemet</td><td><code>&amp;raquo;</code></td></tr>
+<tr><td>191</td><td>BF</td><td class="char-cell">¿</td><td>Inverted question</td><td><code>&amp;iquest;</code></td></tr>
+<tr><td>215</td><td>D7</td><td class="char-cell">×</td><td>Multiplication sign</td><td><code>&amp;times;</code></td></tr>
+<tr><td>247</td><td>F7</td><td class="char-cell">÷</td><td>Division sign</td><td><code>&amp;divide;</code></td></tr>
+</tbody>
+</table>
+
+<h4>Character Encoding Conversion</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript:
+  // Encode string to bytes in specific encoding
+  const encoder = new TextEncoder();  // UTF-8 only
+  const bytes = encoder.encode("Hello");
+
+  // Decode bytes from specific encoding
+  const decoder = new TextDecoder('windows-1252');
+  const text = decoder.decode(bytes);
+
+Python:
+  # String to bytes (encode)
+  text = "Hello"
+  utf8_bytes = text.encode('utf-8')
+  latin1_bytes = text.encode('latin-1')
+
+  # Bytes to string (decode)
+  decoded = latin1_bytes.decode('latin-1')
+  text = utf8_bytes.decode('utf-8')
+
+Node.js Buffer:
+  // Convert between encodings
+  const buf = Buffer.from(input, 'latin1');
+  const utf8String = buf.toString('utf8');
+
+Command line (iconv):
+  iconv -f ISO-8859-1 -t UTF-8 input.txt > output.txt
+  iconv -f CP1252 -t UTF-8 windows.txt > unicode.txt
+</pre>
+
+<h4>Why UTF-8 Replaced Extended ASCII</h4>
+<table class="ref-table">
+<thead><tr><th>Issue</th><th>Extended ASCII</th><th>UTF-8</th></tr></thead>
+<tbody>
+<tr><td><strong>Character coverage</strong></td><td>256 characters max</td><td>Over 1 million characters</td></tr>
+<tr><td><strong>Language support</strong></td><td>Single script per variant</td><td>All writing systems unified</td></tr>
+<tr><td><strong>Compatibility</strong></td><td>Multiple incompatible variants</td><td>Single universal standard</td></tr>
+<tr><td><strong>ASCII compatibility</strong></td><td>Yes (0-127 identical)</td><td>Yes (0-127 identical)</td></tr>
+<tr><td><strong>Web adoption</strong></td><td>Legacy/deprecated</td><td>98%+ of all web pages</td></tr>
+<tr><td><strong>Emoji support</strong></td><td>None</td><td>Full emoji set</td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Eascii Table used for?</dt>
-  <dd>Eascii Table is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is Extended ASCII?</dt>
+  <dd>Extended ASCII refers to character encodings that use 8 bits per character, providing 256 possible characters (0-255). The first 128 (0-127) are standard ASCII. The extended range (128-255) varies by encoding—common variants include ISO-8859-1 (Latin-1), Windows-1252, and ISO-8859-15. These encodings add accented letters, currency symbols, and special characters.</dd>
+
+  <dt>What is the difference between ASCII and Extended ASCII?</dt>
+  <dd>Standard ASCII uses 7 bits (0-127) and includes basic Latin letters, digits, and control characters. Extended ASCII uses 8 bits (0-255), doubling the character set. The upper 128 characters (128-255) are not standardized—different encodings define them differently. Windows-1252 adds smart quotes and the euro symbol; Latin-1 adds accented European characters.</dd>
+
+  <dt>What encoding should I use for web pages?</dt>
+  <dd>UTF-8 is the universal standard for web pages. It's backward-compatible with ASCII (0-127 are identical) and supports all Unicode characters (over 140,000 characters from all writing systems). UTF-8 replaced legacy encodings like Latin-1 and Windows-1252. Always declare &lt;meta charset="UTF-8"&gt; in HTML documents.</dd>
+
+  <dt>What are the common Extended ASCII characters?</dt>
+  <dd>Common Extended ASCII characters include: 160 (non-breaking space), 162-165 (currency symbols ¢£¤¥), 167 (section sign §), 169 (copyright ©), 176 (degree °), 177 (plus-minus ±), 182 (pilcrow ¶), 187 (right guillemet »), 215 (multiplication ×), 247 (division ÷). Windows-1252 adds 128-159 with smart quotes and dashes.</dd>
+
+  <dt>What is Windows-1252 encoding?</dt>
+  <dd>Windows-1252 (also called CP-1252) is a Microsoft extension of ISO-8859-1 that uses the 128-159 range for printable characters instead of control codes. It includes smart quotes (145-148: '"'), en/em dashes (150-151), trademark (153), euro (128), and other typography symbols. It's the default encoding for legacy Windows text files.</dd>
+
+  <dt>How do I convert Extended ASCII to UTF-8?</dt>
+  <dd>Most modern tools handle conversion automatically. In programming: JavaScript uses TextEncoder/TextDecoder with encoding parameter; Python uses .encode('utf-8') and bytes.decode('cp1252'); Node.js uses Buffer.from(data, 'latin1').toString('utf8'). For files, use iconv: iconv -f ISO-8859-1 -t UTF-8 input.txt. Always backup before batch conversion.</dd>
 </dl>
 </section>
 </main>
@@ -124,7 +242,7 @@ var c1=String.fromCharCode(i),c2=String.fromCharCode(i+1)
 var dec1=""+i,hex1=i.toString(16).toUpperCase(),dec2=""+(i+1),hex2=(i+1).toString(16).toUpperCase()
 if(q&&dec1.indexOf(q)===-1&&hex1.toLowerCase().indexOf(q)===-1&&c1.indexOf(q)===-1&&dec2.indexOf(q)===-1&&hex2.toLowerCase().indexOf(q)===-1&&c2.indexOf(q)===-1)continue
 var tr=document.createElement("tr")
-tr.innerHTML="<td>"+i+"</td><td>"+hex1+"</td><td>"+escapeHtml(c1)+"</td><td>"+(i+1)+"</td><td>"+hex2+"</td><td>"+escapeHtml(c2)+"</td>"
+tr.innerHTML="<td>"+i+"</td><td>"+hex1+"</td><td class='char-cell'>"+escapeHtml(c1)+"</td><td>"+(i+1)+"</td><td>"+hex2+"</td><td class='char-cell'>"+escapeHtml(c2)+"</td>"
 tbody.appendChild(tr)
 }
 }

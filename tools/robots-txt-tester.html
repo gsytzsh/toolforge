@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Robots.txt Tester – Test Robots Rules Online | ToolForge</title>
-<meta name="description" content="Free online Robots.txt Tester to check whether a URL is allowed or blocked for a user-agent based on robots.txt rules. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Robots.txt Tester validates whether a URL path is allowed or blocked for specific user-agents based on robots.txt rules. Includes path matching explanation and troubleshooting guide. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/robots-txt-tester.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Robots.txt Tester – Test Robots Rules Online | ToolForge">
-<meta property="og:description" content="Free online Robots.txt Tester to check whether a URL is allowed or blocked for a user-agent based on robots.txt rules. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Robots.txt Tester validates whether a URL path is allowed or blocked for specific user-agents based on robots.txt rules. Includes path matching explanation and troubleshooting guide. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/robots-txt-tester.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Robots.txt Tester – Test Robots Rules Online | ToolForge">
-<meta name="twitter:description" content="Free online Robots.txt Tester to check whether a URL is allowed or blocked for a user-agent based on robots.txt rules. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Robots.txt Tester validates whether a URL path is allowed or blocked for specific user-agents based on robots.txt rules. Includes path matching explanation and troubleshooting guide. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Robots Txt Tester?",
+      "name": "How does the robots.txt path matching algorithm work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Robots Txt Tester is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Path matching finds the most specific rule that applies to a URL. Rules are matched by checking if the URL path starts with the Disallow or Allow path value. When multiple rules match, the longest (most specific) path wins. For example, if Disallow: /admin/ and Allow: /admin/public/ both match, the longer Allow rule takes precedence for /admin/public/page."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What happens if no rule matches my URL?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "If no Disallow or Allow rule matches the tested URL path, the URL is considered allowed by default. Search crawlers can access and index URLs that aren't explicitly blocked. This is why an empty robots.txt file (or one with only 'User-agent: *' and no Disallow directives) allows full site access."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How do I test rules for a specific crawler?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Enter the crawler's user-agent name (e.g., Googlebot, bingbot, Slurp) in the User-agent field. The tester first looks for rules specific to that user-agent. If no specific rules exist, it falls back to rules for '*' (wildcard), which applies to all crawlers. This matches how real crawlers interpret robots.txt."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "Do wildcards (*) work in robots.txt testing?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Google supports * (matches any sequence) and $ (end-of-URL anchor) wildcards in robots.txt. However, not all crawlers support wildcards. This tester uses simple prefix matching for compatibility. For wildcard testing, verify with Google Search Console's robots.txt tester for Googlebot-specific behavior."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What is the order of rule evaluation?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Crawlers evaluate rules in order: 1) Find the user-agent group (specific agent or wildcard), 2) Collect all Allow and Disallow rules for that group, 3) Find rules that match the URL path, 4) Select the longest matching path, 5) Apply that rule (Allow or Disallow). If no rules match, access is allowed."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "Why is my URL blocked even though I have an Allow rule?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "The Allow rule might be less specific than a Disallow rule. For example, 'Allow: /page' and 'Disallow: /page/' - the URL '/page/sub' matches both, but '/page/' is longer, so Disallow wins. Ensure Allow paths are more specific than Disallow paths, or reorder rules so Allow appears after Disallow."
       }
     }
   ]
@@ -72,10 +77,10 @@
 <body>
 <main class="container">
 <h1>Robots.txt Tester</h1>
-<p class="subtitle">Test whether a URL path is allowed or blocked for a given user-agent.</p>
+<p class="subtitle">Test whether a URL path is allowed or blocked for a specific user-agent based on robots.txt rules.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <label for="robots-input" class="sr-only">Robots.txt input</label>
-<textarea id="robots-input" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Robots.txt input"></textarea>
+<textarea id="robots-input" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Robots.txt input" placeholder="Paste your robots.txt content here..."></textarea>
 <p>User-agent:
 <label for="test-agent" class="sr-only">User-agent</label>
 <input id="test-agent" type="text" value="Googlebot" style="width:220px" aria-label="User-agent"></p>
@@ -90,25 +95,292 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Robots.txt Tester</h3>
-<p>This robots.txt tester checks whether a URL path is allowed or blocked for a specific user-agent based on your rules.</p>
-<p>It is useful when troubleshooting crawl issues, verifying new directives and making sure important pages are not blocked by accident.</p>
+<p>This robots.txt tester simulates how search engine crawlers interpret robots.txt rules. It parses your robots.txt content, finds rules for a specific user-agent, and determines whether a given URL path would be allowed or blocked based on the most specific matching rule.</p>
+<p>It is useful for troubleshooting why pages aren't being indexed, verifying new robots.txt rules before deployment, testing edge cases with Allow/Disallow conflicts, debugging crawler access issues, and ensuring important pages aren't accidentally blocked from search engines.</p>
+
+<h4>How Path Matching Works</h4>
+<p>The tester uses the same matching logic as search engine crawlers:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Matching Algorithm:
+
+1. Parse robots.txt into rule groups by user-agent
+2. Find rules for the specified user-agent
+3. If no specific rules, fall back to "*" (wildcard)
+4. Check all Allow and Disallow rules against the path
+5. Find the LONGEST matching path (most specific rule)
+6. Apply that rule: Allow = accessible, Disallow = blocked
+7. If no rules match, URL is ALLOWED by default
+
+Example:
+  User-agent: Googlebot
+  Disallow: /admin/
+  Disallow: /private/
+  Allow: /admin/public/
+
+Test Path: /admin/public/page.html
+  - Matches: Disallow: /admin/ (length 7)
+  - Matches: Allow: /admin/public/ (length 15)
+  - Winner: Allow (longer path)
+  - Result: ALLOWED
+
+Test Path: /admin/settings
+  - Matches: Disallow: /admin/ (length 7)
+  - No Allow rule matches
+  - Result: BLOCKED
+
+Test Path: /public/page
+  - No matching rules
+  - Result: ALLOWED (default)
+</pre>
+
+<h4>Test Result Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Simple Block
+robots.txt:
+  User-agent: *
+  Disallow: /private/
+
+Test: User-agent = Googlebot, Path = /private/secret
+Result: BLOCKED
+Matched rule: DISALLOW: /private/
+
+Example 2: Allow Override
+robots.txt:
+  User-agent: *
+  Disallow: /admin/
+  Allow: /admin/public/
+
+Test: User-agent = Googlebot, Path = /admin/public/docs
+Result: ALLOWED
+Matched rule: ALLOW: /admin/public/
+
+Example 3: Specific User-Agent
+robots.txt:
+  User-agent: Googlebot
+  Disallow: /no-google/
+
+  User-agent: Bingbot
+  Disallow: /no-bing/
+
+Test: User-agent = Googlebot, Path = /no-google/page
+Result: BLOCKED
+Matched rule: DISALLOW: /no-google/
+
+Test: User-agent = Bingbot, Path = /no-google/page
+Result: ALLOWED (no matching rule for Bingbot)
+
+Example 4: No Match = Allowed
+robots.txt:
+  User-agent: *
+  Disallow: /admin/
+
+Test: User-agent = Googlebot, Path = /public/page
+Result: ALLOWED
+Reason: No matching rule found
+</pre>
+
+<h4>Common User-Agent Strings</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Search Engine</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">User-Agent Value</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Test With</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Google (Main)</td>
+    <td style="border:1px solid #ddd;padding:8px">Googlebot</td>
+    <td style="border:1px solid #ddd;padding:8px">Googlebot</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Google Images</td>
+    <td style="border:1px solid #ddd;padding:8px">Googlebot-Image</td>
+    <td style="border:1px solid #ddd;padding:8px">Googlebot-Image</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Google News</td>
+    <td style="border:1px solid #ddd;padding:8px">Googlebot-News</td>
+    <td style="border:1px solid #ddd;padding:8px">Googlebot-News</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Bing</td>
+    <td style="border:1px solid #ddd;padding:8px">bingbot</td>
+    <td style="border:1px solid #ddd;padding:8px">bingbot</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Yahoo</td>
+    <td style="border:1px solid #ddd;padding:8px">Slurp</td>
+    <td style="border:1px solid #ddd;padding:8px">Slurp</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">DuckDuckGo</td>
+    <td style="border:1px solid #ddd;padding:8px">DuckDuckBot</td>
+    <td style="border:1px solid #ddd;padding:8px">DuckDuckBot</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Baidu</td>
+    <td style="border:1px solid #ddd;padding:8px">Baiduspider</td>
+    <td style="border:1px solid #ddd;padding:8px">Baiduspider</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Yandex</td>
+    <td style="border:1px solid #ddd;padding:8px">YandexBot</td>
+    <td style="border:1px solid #ddd;padding:8px">YandexBot</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">All Crawlers</td>
+    <td style="border:1px solid #ddd;padding:8px">*</td>
+    <td style="border:1px solid #ddd;padding:8px">* or any agent</td>
+  </tr>
+</table>
+
+<h4>Path Matching Scenarios</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Scenario 1: Exact Directory Match
+  Rule: Disallow: /admin/
+  /admin/        → BLOCKED
+  /admin/page    → BLOCKED
+  /admin         → ALLOWED (no trailing slash)
+  /administrator → ALLOWED (different path)
+
+Scenario 2: File Extension Block
+  Rule: Disallow: /*.pdf$
+  /file.pdf      → BLOCKED
+  /file.pdf?id=1 → BLOCKED (if crawler supports $)
+  /file.html     → ALLOWED
+  /pdf/file.html → ALLOWED
+
+Scenario 3: Nested Allow/Disallow
+  Rules:
+    Disallow: /files/
+    Allow: /files/public/
+
+  /files/            → BLOCKED
+  /files/private/    → BLOCKED
+  /files/public/     → ALLOWED
+  /files/public/doc  → ALLOWED
+
+Scenario 4: Multiple Rules Same Path
+  Rules:
+    Allow: /page
+    Disallow: /page
+
+  /page → ALLOWED (Allow listed last wins for same length)
+
+Scenario 5: Wildcard Patterns (Google only)
+  Rule: Disallow: /*?
+  /page          → ALLOWED (no query string)
+  /page?id=1     → BLOCKED (has query parameter)
+  /page?a=1&b=2  → BLOCKED
+
+Note: Wildcards (* and $) are Google-specific.
+Other crawlers may ignore them.
+</pre>
+
+<h4>Troubleshooting Guide</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Problem</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Possible Cause</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Solution</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Page not indexed</td>
+    <td style="border:1px solid #ddd;padding:8px">Accidentally blocked by robots.txt</td>
+    <td style="border:1px solid #ddd;padding:8px">Test URL path; remove or adjust Disallow rule</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Wrong crawler blocked</td>
+    <td style="border:1px solid #ddd;padding:8px">Using * instead of specific user-agent</td>
+    <td style="border:1px solid #ddd;padding:8px">Create crawler-specific rule groups</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Allow not working</td>
+    <td style="border:1px solid #ddd;padding:8px">Allow path shorter than Disallow</td>
+    <td style="border:1px solid #ddd;padding:8px">Make Allow path more specific (longer)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Subdirectories blocked</td>
+    <td style="border:1px solid #ddd;padding:8px">Missing trailing slash on Disallow</td>
+    <td style="border:1px solid #ddd;padding:8px">Add trailing slash: /admin/ not /admin</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Query strings blocked</td>
+    <td style="border:1px solid #ddd;padding:8px">Wildcard rule affecting URLs with ?</td>
+    <td style="border:1px solid #ddd;padding:8px">Review /* patterns; test with query strings</td>
+  </tr>
+</table>
+
+<h4>Robots.txt Syntax Reference</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Valid Directives:
+  User-agent: [crawler-name]  - Specifies which crawler
+  Disallow: [path]            - Blocks access to path
+  Allow: [path]               - Permits access to path
+  Sitemap: [url]              - Sitemap location
+  Crawl-delay: [seconds]      - Request delay (ignored by Google)
+  Host: [domain]              - Preferred domain (Yandex only)
+
+Comments:
+  # This is a comment
+  # Comments are ignored by crawlers
+  # Use comments to document your rules
+
+Syntax Rules:
+  - One directive per line
+  - Format: Directive: value
+  - No quotes around values
+  - Case-sensitive paths
+  - Paths must start with /
+  - Empty Disallow means "allow all"
+  - Lines are case-insensitive for directives
+
+Invalid Syntax (will be ignored):
+  Disallow:admin      # Missing leading /
+  disallow: /admin    # Lowercase directive (OK in some parsers)
+  Disallow: admin     # Relative path (invalid)
+  "Disallow: /admin"  # Quotes included (invalid)
+</pre>
+
+<h4>Testing Best Practices</h4>
+<ul>
+  <li><strong>Test critical URLs:</strong> Always test your homepage, important landing pages, and product pages to ensure they're not blocked.</li>
+  <li><strong>Test multiple crawlers:</strong> If you have crawler-specific rules, test with each relevant user-agent (Googlebot, bingbot, etc.).</li>
+  <li><strong>Test edge cases:</strong> Check URLs at directory boundaries, with query strings, and with file extensions.</li>
+  <li><strong>Verify after changes:</strong> Re-test all critical URLs after modifying your robots.txt file.</li>
+  <li><strong>Use Google Search Console:</strong> For production sites, verify your robots.txt in Search Console's robots.txt Tester tool.</li>
+  <li><strong>Document your rules:</strong> Add comments explaining why certain paths are blocked for future reference.</li>
+</ul>
+
+<h4>Limitations of This Tester</h4>
+<ul>
+  <li><strong>Wildcard support:</strong> This tester uses simple prefix matching. Google's advanced wildcards (* and $) are not fully simulated.</li>
+  <li><strong>Crawl-delay:</strong> This directive is not tested; Google ignores it anyway.</li>
+  <li><strong>Multiple rule groups:</strong> Complex multi-group robots.txt files may have edge cases not covered.</li>
+  <li><strong>Real-time fetching:</strong> This tester doesn't fetch your actual robots.txt; you must paste the content.</li>
+  <li><strong>Crawler behavior:</strong> Different crawlers may interpret rules slightly differently. Always verify with official tools.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Robots Txt Tester?</dt>
-  <dd>Robots Txt Tester is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How does the robots.txt path matching algorithm work?</dt>
+  <dd>Path matching finds the most specific rule that applies to a URL. Rules are matched by checking if the URL path starts with the Disallow or Allow path value. When multiple rules match, the longest (most specific) path wins. For example, if Disallow: /admin/ and Allow: /admin/public/ both match, the longer Allow rule takes precedence for /admin/public/page.</dd>
+
+  <dt>What happens if no rule matches my URL?</dt>
+  <dd>If no Disallow or Allow rule matches the tested URL path, the URL is considered allowed by default. Search crawlers can access and index URLs that aren't explicitly blocked. This is why an empty robots.txt file (or one with only 'User-agent: *' and no Disallow directives) allows full site access.</dd>
+
+  <dt>How do I test rules for a specific crawler?</dt>
+  <dd>Enter the crawler's user-agent name (e.g., Googlebot, bingbot, Slurp) in the User-agent field. The tester first looks for rules specific to that user-agent. If no specific rules exist, it falls back to rules for '*' (wildcard), which applies to all crawlers. This matches how real crawlers interpret robots.txt.</dd>
+
+  <dt>Do wildcards (*) work in robots.txt testing?</dt>
+  <dd>Google supports * (matches any sequence) and $ (end-of-URL anchor) wildcards in robots.txt. However, not all crawlers support wildcards. This tester uses simple prefix matching for compatibility. For wildcard testing, verify with Google Search Console's robots.txt tester for Googlebot-specific behavior.</dd>
+
+  <dt>What is the order of rule evaluation?</dt>
+  <dd>Crawlers evaluate rules in order: 1) Find the user-agent group (specific agent or wildcard), 2) Collect all Allow and Disallow rules for that group, 3) Find rules that match the URL path, 4) Select the longest matching path, 5) Apply that rule (Allow or Disallow). If no rules match, access is allowed.</dd>
+
+  <dt>Why is my URL blocked even though I have an Allow rule?</dt>
+  <dd>The Allow rule might be less specific than a Disallow rule. For example, 'Allow: /page' and 'Disallow: /page/' - the URL '/page/sub' matches both, but '/page/' is longer, so Disallow wins. Ensure Allow paths are more specific than Disallow paths, or reorder rules so Allow appears after Disallow.</dd>
 </dl>
 </section>
 </main>

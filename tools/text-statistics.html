@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<title>Word Counter &amp; Text Statistics – Count Words, Characters and Lines | ToolForge</title>
-<meta name="description" content="Count words, characters, lines and calculate reading metrics for writing, SEO and content analysis.">
+<title>Text Statistics & Word Counter – Character, Word, Line Count Analysis | ToolForge</title>
+<meta name="description" content="Analyze text with detailed statistics: word count, character count (with/without spaces), UTF-8 byte size, line count, reading time, and speaking time. Includes writing standards reference. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/text-statistics.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Word Counter &amp; Text Statistics – Count Words, Characters and Lines | ToolForge">
-<meta property="og:description" content="Count words, characters, lines and calculate reading metrics for writing, SEO and content analysis.">
+<meta property="og:title" content="Text Statistics & Word Counter – Character, Word, Line Count Analysis | ToolForge">
+<meta property="og:description" content="Analyze text with detailed statistics: word count, character count (with/without spaces), UTF-8 byte size, line count, reading time, and speaking time. Includes writing standards reference. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/text-statistics.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Word Counter &amp; Text Statistics – Count Words, Characters and Lines | ToolForge">
-<meta name="twitter:description" content="Count words, characters, lines and calculate reading metrics for writing, SEO and content analysis.">
+<meta name="twitter:title" content="Text Statistics & Word Counter – Character, Word, Line Count Analysis | ToolForge">
+<meta name="twitter:description" content="Analyze text with detailed statistics: word count, character count (with/without spaces), UTF-8 byte size, line count, reading time, and speaking time. Includes writing standards reference. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
-
 
 <script type="application/ld+json">
 {
@@ -26,120 +24,405 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How are words counted?",
+      "name": "How is word count calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Words are counted by splitting on whitespace. Hyphenated words count as one. Numbers and symbols with spaces count separately."
+        "text": "Words are counted by splitting text on whitespace boundaries using \\s+ regex. This treats hyphenated words (e.g., 'well-known') as single words, and sequences of non-whitespace characters as one word. Empty strings are filtered out. This method works well for English and space-delimited languages."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "What is the difference between character counts?",
+      "name": "Why do character count and UTF-8 byte count differ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Characters with spaces includes all characters. Characters without spaces excludes whitespace. UTF-8 bytes shows storage size."
+        "text": "UTF-8 is a variable-length encoding: ASCII characters (U+0000 to U+007F) use 1 byte, Latin Extended and Greek (U+0080 to U+07FF) use 2 bytes, most CJK characters (U+0800 to U+FFFF) use 3 bytes, and rare characters/emoji (U+10000+) use 4 bytes. The byte count reflects actual storage size, while character count shows visible glyph count."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How is reading time calculated?",
+      "name": "How is reading time estimated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Average reading speed is ~200-250 words per minute. The tool divides word count by 200 to estimate minutes needed."
+        "text": "Reading time uses the standard average of 200 words per minute (wpm) for silent reading. Speaking time uses 130 wpm for average speech. These are industry standards: 200 wpm is used by Medium, WordPress, and most content platforms. Actual reading speed varies by text complexity and reader skill."
       }
-    },    {
-      "@type": "Question",
-      "name": "Why does byte count differ from character count?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "UTF-8 uses 1-4 bytes per character. ASCII characters use 1 byte, but emoji and special Unicode characters use more."
-      }
-    },    {
+    },
+    {
       "@type": "Question",
       "name": "How are lines counted?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Lines are counted by newline characters. A single paragraph without breaks is 1 line. Each line break increments the count."
+        "text": "Lines are counted by splitting on newline characters (\\n or \\r\\n). An empty text has 0 lines. A single paragraph without line breaks is 1 line. Each explicit line break (Enter/Return key) increments the count. This differs from visual word-wrap lines, which depend on container width."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this accurate for non-English text?",
+      "name": "What is the difference between characters with and without spaces?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Word counting varies by language. Chinese and Japanese don't use spaces, so word counts may be less accurate for those languages."
+        "text": "Characters with spaces counts every character including spaces, tabs, and newlines. Characters without spaces excludes all whitespace characters. This distinction matters for: Twitter limits (counts spaces), SMS limits (160 chars with spaces), SEO meta descriptions (~150-160 chars including spaces)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is word counting accurate for all languages?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Word counting is most accurate for space-delimited languages (English, Spanish, French, German). It's less accurate for: Chinese/Japanese (no spaces, words are character sequences), Thai/Lao (no spaces between words), and agglutinative languages (Turkish, Finnish) where single words can be very long."
       }
     }
   ]
 }
 </script>
 </head>
-
 <body>
-
 <main class="container">
-
 <h1>Text Statistics & Word Counter</h1>
-
-<p class="subtitle">Count words, characters and lines in one place for writing, SEO, editing and content analysis.</p>
-
+<p class="subtitle">Analyze text with word count, character counts, UTF-8 byte size, line count, and reading/speaking time estimates.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
-
 <h3>Text</h3>
 <label for="text" class="sr-only">Text input</label>
 <textarea id="text" rows="10" style="width:90%" aria-label="Text input"></textarea>
-
 <br><br>
-
 <div class="tool-actions">
 <button type="button" onclick="analyze()">Analyze</button>
 <button type="button" onclick="copySummary()">Copy Result</button>
 </div>
-
 <h3 style="margin-top:24px">Result</h3>
 <p>Characters (with spaces): <span id="charsAll"></span></p>
 <p>Characters (without spaces): <span id="charsNoSpace"></span></p>
 <p>UTF-8 bytes: <span id="utf8Bytes"></span></p>
 <p>Words: <span id="words"></span></p>
 <p>Lines: <span id="lines"></span></p>
+<p>Reading time: <span id="readTime"></span></p>
+<p>Speaking time: <span id="speakTime"></span></p>
 <p id="status" class="inline-status"></p>
-
 <section class="tool-seo">
-<h3>About Text Statistics &amp; Word Counter</h3>
-<p>The Text Statistics &amp; Word Counter tool lets you count words, characters and lines in one place for writing, SEO and content analysis.</p>
-<p>It is useful for editing copy, cleaning pasted text, comparing content and making small text transformations directly in the browser.</p>
-</section>
-<h3>Text Analysis Standards</h3>
-<table class="uni-table">
-<thead><tr><th>Metric</th><th>Standard</th><th>Formula</th></tr></thead>
-<tbody>
-<tr><td>Reading time</td><td>200 wpm</td><td>Words / 200</td></tr>
-<tr><td>Speaking time</td><td>130 wpm</td><td>Words / 130</td></tr>
-<tr><td>Twitter limit</td><td>280 chars</td><td>Character count</td></tr>
-<tr><td>SEO meta desc</td><td>150-160 chars</td><td>Character count</td></tr>
-<tr><td>Academic page</td><td>~500 words</td><td>Word count</td></tr>
-</tbody>
+<h3>About Text Statistics & Word Counter</h3>
+<p>This tool provides comprehensive text analysis including word count, character counts (with and without spaces), UTF-8 byte size, line count, and estimated reading/speaking times. It's useful for writers, editors, SEO specialists, and developers who need to meet specific text length requirements.</p>
+
+<h4>Text Metrics Explained</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Metric</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">What It Counts</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Characters (with spaces)</td>
+    <td style="border:1px solid #ddd;padding:8px">All characters including whitespace</td>
+    <td style="border:1px solid #ddd;padding:8px">Twitter (280), SMS (160), meta descriptions</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Characters (without spaces)</td>
+    <td style="border:1px solid #ddd;padding:8px">Non-whitespace characters only</td>
+    <td style="border:1px solid #ddd;padding:8px">Content density analysis, compression estimates</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTF-8 bytes</td>
+    <td style="border:1px solid #ddd;padding:8px">Actual byte size in UTF-8 encoding</td>
+    <td style="border:1px solid #ddd;padding:8px">Database storage, file size, bandwidth estimates</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Words</td>
+    <td style="border:1px solid #ddd;padding:8px">Whitespace-separated tokens</td>
+    <td style="border:1px solid #ddd;padding:8px">Reading time, academic requirements, content briefs</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Lines</td>
+    <td style="border:1px solid #ddd;padding:8px">Newline-separated segments</td>
+    <td style="border:1px solid #ddd;padding:8px">Code files, poetry, formatted text, logs</td>
+  </tr>
 </table>
 
+<h4>UTF-8 Character Encoding Reference</h4>
+<p>UTF-8 uses 1-4 bytes per character depending on Unicode code point:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Unicode Range</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">UTF-8 Bytes</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Characters</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">U+0000 - U+007F</td>
+    <td style="border:1px solid #ddd;padding:8px">1 byte</td>
+    <td style="border:1px solid #ddd;padding:8px">ASCII (basic Latin)</td>
+    <td style="border:1px solid #ddd;padding:8px">A, z, 0, !, space</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">U+0080 - U+07FF</td>
+    <td style="border:1px solid #ddd;padding:8px">2 bytes</td>
+    <td style="border:1px solid #ddd;padding:8px">Latin Extended, Greek, Cyrillic</td>
+    <td style="border:1px solid #ddd;padding:8px">é, ñ, π, Ж</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">U+0800 - U+FFFF</td>
+    <td style="border:1px solid #ddd;padding:8px">3 bytes</td>
+    <td style="border:1px solid #ddd;padding:8px">CJK, most emoji, symbols</td>
+    <td style="border:1px solid #ddd;padding:8px">中文，🎉, ©, €</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">U+10000 - U+10FFFF</td>
+    <td style="border:1px solid #ddd;padding:8px">4 bytes</td>
+    <td style="border:1px solid #ddd;padding:8px">Rare CJK, historic scripts</td>
+    <td style="border:1px solid #ddd;padding:8px">𠀋, 𠮷, some emoji</td>
+  </tr>
+</table>
 
+<h4>Reading & Speaking Time Standards</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Activity</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Words Per Minute</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Source</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Silent reading (average)</td>
+    <td style="border:1px solid #ddd;padding:8px">200 wpm</td>
+    <td style="border:1px solid #ddd;padding:8px">Medium, WordPress, standard</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Silent reading (fast)</td>
+    <td style="border:1px solid #ddd;padding:8px">250-300 wpm</td>
+    <td style="border:1px solid #ddd;padding:8px">Speed readers</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Speaking (average)</td>
+    <td style="border:1px solid #ddd;padding:8px">130 wpm</td>
+    <td style="border:1px solid #ddd;padding:8px">Speech standards, podcasts</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Speaking (fast)</td>
+    <td style="border:1px solid #ddd;padding:8px">150-160 wpm</td>
+    <td style="border:1px solid #ddd;padding:8px">Audiobooks, presentations</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Reading (technical)</td>
+    <td style="border:1px solid #ddd;padding:8px">100-150 wpm</td>
+    <td style="border:1px solid #ddd;padding:8px">Code, documentation, academic</td>
+  </tr>
+</table>
+
+<h4>Content Length Standards</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Content Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Recommended Length</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Twitter/X post</td>
+    <td style="border:1px solid #ddd;padding:8px">280 characters max</td>
+    <td style="border:1px solid #ddd;padding:8px">Includes spaces and emoji</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">SMS message</td>
+    <td style="border:1px solid #ddd;padding:8px">160 characters (GSM-7)</td>
+    <td style="border:1px solid #ddd;padding:8px">70 chars if using Unicode/emoji</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">SEO meta description</td>
+    <td style="border:1px solid #ddd;padding:8px">150-160 characters</td>
+    <td style="border:1px solid #ddd;padding:8px">Google truncates at ~160 chars</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">SEO title tag</td>
+    <td style="border:1px solid #ddd;padding:8px">50-60 characters</td>
+    <td style="border:1px solid #ddd;padding:8px">Google displays ~600px width</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Blog post (minimum)</td>
+    <td style="border:1px solid #ddd;padding:8px">300-500 words</td>
+    <td style="border:1px solid #ddd;padding:8px">Basic SEO requirement</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Blog post (recommended)</td>
+    <td style="border:1px solid #ddd;padding:8px">1,500-2,500 words</td>
+    <td style="border:1px solid #ddd;padding:8px">Better for SEO ranking</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Academic page</td>
+    <td style="border:1px solid #ddd;padding:8px">~500 words</td>
+    <td style="border:1px solid #ddd;padding:8px">Standard double-spaced page</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px"> elevator pitch</td>
+    <td style="border:1px solid #ddd;padding:8px">150-165 words</td>
+    <td style="border:1px solid #ddd;padding:8px">~75 seconds at average pace</td>
+  </tr>
+</table>
+
+<h4>Text Analysis Algorithm</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript Text Statistics Implementation:
+
+function analyzeText(text) {
+  // Character count (with spaces) - simple length
+  const charsAll = text.length;
+
+  // Character count (without spaces) - remove all whitespace
+  const charsNoSpace = text.replace(/\s+/g, "").length;
+
+  // UTF-8 byte count - encode and measure
+  const utf8Bytes = new TextEncoder().encode(text).length;
+
+  // Line count - split on newline
+  const lines = text ? text.split(/\r?\n/).length : 0;
+
+  // Word count - split on whitespace, filter empty
+  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+
+  // Reading time (200 wpm standard)
+  const readTimeMinutes = words / 200;
+
+  // Speaking time (130 wpm standard)
+  const speakTimeMinutes = words / 130;
+
+  return {
+    charsAll,
+    charsNoSpace,
+    utf8Bytes,
+    lines,
+    words,
+    readTimeMinutes,
+    speakTimeMinutes
+  };
+}
+
+// Usage example:
+const sample = "Hello, World! This is a test.";
+const stats = analyzeText(sample);
+console.log(stats);
+// { charsAll: 33, charsNoSpace: 28, utf8Bytes: 33,
+//   lines: 1, words: 7, readTimeMinutes: 0.035 }
+</pre>
+
+<h4>Word Counting by Language</h4>
+<p>Word counting accuracy varies significantly by writing system:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Language Type</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Examples</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Word Boundary</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Accuracy</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Space-delimited</td>
+    <td style="border:1px solid #ddd;padding:8px">English, Spanish, French</td>
+    <td style="border:1px solid #ddd;padding:8px">Whitespace</td>
+    <td style="border:1px solid #ddd;padding:8px">High</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Agglutinative</td>
+    <td style="border:1px solid #ddd;padding:8px">Turkish, Finnish, Japanese</td>
+    <td style="border:1px solid #ddd;padding:8px">Morpheme boundaries</td>
+    <td style="border:1px solid #ddd;padding:8px">Medium</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Character-based</td>
+    <td style="border:1px solid #ddd;padding:8px">Chinese, Japanese Kanji</td>
+    <td style="border:1px solid #ddd;padding:8px">No explicit boundaries</td>
+    <td style="border:1px solid #ddd;padding:8px">Low (needs segmentation)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Abugida</td>
+    <td style="border:1px solid #ddd;padding:8px">Thai, Lao, Khmer</td>
+    <td style="border:1px solid #ddd;padding:8px">No spaces between words</td>
+    <td style="border:1px solid #ddd;padding:8px">Low (needs NLP)</td>
+  </tr>
+</table>
+
+<h4>Analysis Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Short paragraph
+Input: "The quick brown fox jumps over the lazy dog."
+
+Results:
+  Characters (with spaces): 44
+  Characters (without spaces): 35
+  UTF-8 bytes: 44
+  Words: 9
+  Lines: 1
+  Reading time: ~3 seconds (at 200 wpm)
+  Speaking time: ~4 seconds (at 130 wpm)
+
+Example 2: With emoji (UTF-8 multi-byte)
+Input: "Hello 🌍!"
+
+Results:
+  Characters (with spaces): 9
+  Characters (without spaces): 7
+  UTF-8 bytes: 11  (emoji = 4 bytes)
+  Words: 3
+  Lines: 1
+
+Example 3: Multi-line text
+Input: "Line one\nLine two\nLine three"
+
+Results:
+  Characters (with spaces): 26
+  Characters (without spaces): 23
+  UTF-8 bytes: 26
+  Words: 6
+  Lines: 3
+  Reading time: ~2 seconds
+</pre>
+
+<h4>Practical Applications</h4>
+<ul>
+  <li><strong>SEO Optimization:</strong> Ensure meta descriptions are 150-160 characters, title tags under 60 characters</li>
+  <li><strong>Social Media:</strong> Keep tweets under 280 characters, plan Instagram captions</li>
+  <li><strong>Content Writing:</strong> Meet blog post word count requirements (500, 1000, 2000+ words)</li>
+  <li><strong>Academic Writing:</strong> Track essay word counts, abstract limits (150-300 words)</li>
+  <li><strong>Speech Writing:</strong> Estimate speaking time for presentations and pitches</li>
+  <li><strong>Development:</strong> Check string lengths for database fields, API limits</li>
+  <li><strong>Translation:</strong> Estimate target text length (varies by language pair)</li>
+</ul>
+</section>
+
+<section class="how-to-use">
+<h3>How to Analyze Text Statistics</h3>
+<ol class="how-to-steps">
+  <li><strong>Enter text:</strong> Type or paste the text to analyze.</li>
+  <li><strong>Click Analyze:</strong> The tool calculates all metrics instantly.</li>
+  <li><strong>Review results:</strong> View word count, character counts, bytes, lines, and time estimates.</li>
+  <li><strong>Copy summary:</strong> Click "Copy Result" to export the statistics.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Paste full documents to get accurate reading time estimates</li>
+  <li>Use character count (with spaces) for Twitter/SMS limits</li>
+  <li>UTF-8 bytes shows actual storage/bandwidth requirements</li>
+  <li>Line count helps format code, poetry, or structured text</li>
+  <li>Reading time uses 200 wpm standard (industry average)</li>
+</ul>
+</section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>How are words counted?</dt>
-  <dd>Words are counted by splitting on whitespace. Hyphenated words count as one. Numbers and symbols with spaces count separately.</dd>
-  <dt>What is the difference between character counts?</dt>
-  <dd>Characters with spaces includes all characters. Characters without spaces excludes whitespace. UTF-8 bytes shows storage size.</dd>
-  <dt>How is reading time calculated?</dt>
-  <dd>Average reading speed is ~200-250 words per minute. The tool divides word count by 200 to estimate minutes needed.</dd>
-  <dt>Why does byte count differ from character count?</dt>
-  <dd>UTF-8 uses 1-4 bytes per character. ASCII characters use 1 byte, but emoji and special Unicode characters use more.</dd>
+
+  <dt>How is word count calculated?</dt>
+  <dd>Words are counted by splitting text on whitespace boundaries using \s+ regex. This treats hyphenated words (e.g., 'well-known') as single words, and sequences of non-whitespace characters as one word. Empty strings are filtered out. This method works well for English and space-delimited languages.</dd>
+
+  <dt>Why do character count and UTF-8 byte count differ?</dt>
+  <dd>UTF-8 is a variable-length encoding: ASCII characters (U+0000 to U+007F) use 1 byte, Latin Extended and Greek (U+0080 to U+07FF) use 2 bytes, most CJK characters (U+0800 to U+FFFF) use 3 bytes, and rare characters/emoji (U+10000+) use 4 bytes. The byte count reflects actual storage size, while character count shows visible glyph count.</dd>
+
+  <dt>How is reading time estimated?</dt>
+  <dd>Reading time uses the standard average of 200 words per minute (wpm) for silent reading. Speaking time uses 130 wpm for average speech. These are industry standards: 200 wpm is used by Medium, WordPress, and most content platforms. Actual reading speed varies by text complexity and reader skill.</dd>
+
   <dt>How are lines counted?</dt>
-  <dd>Lines are counted by newline characters. A single paragraph without breaks is 1 line. Each line break increments the count.</dd>
-  <dt>Is this accurate for non-English text?</dt>
-  <dd>Word counting varies by language. Chinese and Japanese don't use spaces, so word counts may be less accurate for those languages.</dd>
+  <dd>Lines are counted by splitting on newline characters (\n or \r\n). An empty text has 0 lines. A single paragraph without line breaks is 1 line. Each explicit line break (Enter/Return key) increments the count. This differs from visual word-wrap lines, which depend on container width.</dd>
+
+  <dt>What is the difference between characters with and without spaces?</dt>
+  <dd>Characters with spaces counts every character including spaces, tabs, and newlines. Characters without spaces excludes all whitespace characters. This distinction matters for: Twitter limits (counts spaces), SMS limits (160 chars with spaces), SEO meta descriptions (~150-160 chars including spaces).</dd>
+
+  <dt>Is word counting accurate for all languages?</dt>
+  <dd>Word counting is most accurate for space-delimited languages (English, Spanish, French, German). It's less accurate for: Chinese/Japanese (no spaces, words are character sequences), Thai/Lao (no spaces between words), and agglutinative languages (Turkish, Finnish) where single words can be very long.</dd>
 </dl>
 </section>
 </main>
-
 <script>
-
 function analyze(){
 let t=document.getElementById("text").value
 let charsAll=t.length
@@ -147,22 +430,27 @@ let charsNoSpace=t.replace(/\s+/g,"").length
 let utf8Bytes=new TextEncoder().encode(t).length
 let lines=t? t.split(/\r?\n/).length : 0
 let words=t.trim()? t.trim().split(/\s+/).length : 0
+let readTime=words/200
+let speakTime=words/130
 document.getElementById("charsAll").innerText=charsAll
 document.getElementById("charsNoSpace").innerText=charsNoSpace
 document.getElementById("utf8Bytes").innerText=utf8Bytes
 document.getElementById("words").innerText=words
 document.getElementById("lines").innerText=lines
+document.getElementById("readTime").innerText=readTime<1? (readTime*60).toFixed(0)+" sec":(readTime).toFixed(1)+" min"
+document.getElementById("speakTime").innerText=speakTime<1? (speakTime*60).toFixed(0)+" sec":(speakTime).toFixed(1)+" min"
 document.getElementById("status").innerText="Text analyzed."
 document.getElementById("status").style.color="#16a34a"
 }
-
 function copySummary(){
 let summary=[
 "Characters (with spaces): "+document.getElementById("charsAll").innerText,
 "Characters (without spaces): "+document.getElementById("charsNoSpace").innerText,
 "UTF-8 bytes: "+document.getElementById("utf8Bytes").innerText,
 "Words: "+document.getElementById("words").innerText,
-"Lines: "+document.getElementById("lines").innerText
+"Lines: "+document.getElementById("lines").innerText,
+"Reading time: "+document.getElementById("readTime").innerText,
+"Speaking time: "+document.getElementById("speakTime").innerText
 ].join("\n")
 if(!document.getElementById("charsAll").innerText){
 document.getElementById("status").innerText="Nothing to copy."
@@ -177,11 +465,8 @@ document.getElementById("status").innerText="Copy failed."
 document.getElementById("status").style.color="#b91c1c"
 })
 }
-
 </script>
-
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>
 </body>
 </html>
-

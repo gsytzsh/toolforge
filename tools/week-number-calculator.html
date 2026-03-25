@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Week Number Calculator – ISO Week Number | ToolForge</title>
-<meta name="description" content="Free online Week Number Calculator: get ISO week number of the year for any date. Part of the ToolForge developer tools collection.">
+<title>Week Number Calculator – Calculate ISO 8601 Week of Year | ToolForge</title>
+<meta name="description" content="Week Number Calculator calculates ISO 8601 week numbers for any date. Find the week of year for project planning, reporting periods, and scheduling. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/week-number-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Week Number Calculator – ISO Week Number | ToolForge">
-<meta property="og:description" content="Free online Week Number Calculator: get ISO week number of the year for any date. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Week Number Calculator – Calculate ISO 8601 Week of Year | ToolForge">
+<meta property="og:description" content="Week Number Calculator calculates ISO 8601 week numbers for any date. Find the week of year for project planning, reporting periods, and scheduling. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/week-number-calculator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Week Number Calculator – ISO Week Number | ToolForge">
-<meta name="twitter:description" content="Free online Week Number Calculator: get ISO week number of the year for any date. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Week Number Calculator – Calculate ISO 8601 Week of Year | ToolForge">
+<meta name="twitter:description" content="Week Number Calculator calculates ISO 8601 week numbers for any date. Find the week of year for project planning, reporting periods, and scheduling. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Week Number Calculator?",
+      "name": "What is ISO 8601 week numbering?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Week Number Calculator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "ISO 8601 is an international standard for date and time representation. Week numbering starts at 1 for the week containing the first Thursday of the year. Weeks begin on Monday and end on Sunday. This system ensures consistent week numbers across different countries and systems."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How is ISO week number calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "ISO week 1 is the week containing January 4th (or the first Thursday). To calculate: find the Thursday of the target week, determine which year that Thursday belongs to, then count weeks from week 1. A year has 52 or 53 weeks depending on whether week 53 exists."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Can a year have 53 weeks?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Yes, ISO years can have 53 weeks when January 1st falls on a Thursday (or Wednesday in leap years). Years with 53 weeks occur approximately every 5-6 years. Recent examples: 2020, 2026. In these years, week 53 runs into early January of the next calendar year."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "Why does ISO week numbering use Thursday?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Thursday is used because it's the middle of the ISO week (Monday-Sunday). The rule ensures that week 1 always contains January 4th and that the first week has at least 4 days in the new year. This prevents ambiguity about which year a week belongs to."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What are common week numbering systems?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "ISO 8601 (used here): weeks start Monday, week 1 contains first Thursday. US system: weeks start Sunday, week 1 contains January 1st. Middle Eastern systems: weeks start Saturday. The ISO system is standard in Europe, Asia, and most international business contexts."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "When is week numbering useful?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Week numbering is useful for: project planning with sprint cycles, financial reporting periods, manufacturing schedules, payroll processing (bi-weekly), academic calendars, and any system requiring consistent time periods that don't align with month boundaries."
       }
     }
   ]
@@ -84,25 +89,154 @@
 <p>Year: <span id="year"></span></p>
 <section class="tool-seo">
 <h3>About Week Number Calculator</h3>
-<p>This week number calculator returns the ISO 8601 week number for a given date.</p>
-<p>It is useful for project schedules, reporting periods, payroll workflows and calendar-based planning that uses week numbers instead of month dates.</p>
+<p>This week number calculator returns the ISO 8601 week number (1-53) for any given date. The calculation follows the international standard where weeks begin on Monday and week 1 contains the first Thursday of the year.</p>
+<p>It is useful for project schedules, sprint planning, financial reporting periods, payroll workflows, manufacturing schedules, and any calendar-based planning that uses week numbers instead of month dates for consistent time periods.</p>
+
+<h4>ISO 8601 Week Numbering Rules</h4>
+<p>The ISO 8601 standard defines week numbering as follows:</p>
+<ol>
+  <li><strong>Week start:</strong> Weeks begin on Monday and end on Sunday</li>
+  <li><strong>Week 1:</strong> The week containing the first Thursday of the year (or January 4th)</li>
+  <li><strong>Week number:</strong> Sequential count from week 1 (1-53)</li>
+  <li><strong>Year assignment:</strong> A week belongs to the year containing its Thursday</li>
+</ol>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// ISO Week Number Algorithm:
+1. Find the Thursday of the target week
+2. Determine which year that Thursday belongs to
+3. Find January 4th of that year (always in week 1)
+4. Count full weeks from week 1 to target week
+
+// Key insight:
+- Week 1 always contains January 4th
+- Week 1 always contains the first Thursday
+- A year has 53 weeks if it starts on Thursday
+  (or Wednesday for leap years)
+</pre>
+
+<h4>Week Number Calculation Examples</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Date</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Day</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">ISO Week</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">ISO Year</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">2024-01-01</td>
+    <td style="border:1px solid #ddd;padding:8px">Monday</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+    <td style="border:1px solid #ddd;padding:8px">2024</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">2024-12-30</td>
+    <td style="border:1px solid #ddd;padding:8px">Monday</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+    <td style="border:1px solid #ddd;padding:8px">2025</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">2025-12-29</td>
+    <td style="border:1px solid #ddd;padding:8px">Monday</td>
+    <td style="border:1px solid #ddd;padding:8px">53</td>
+    <td style="border:1px solid #ddd;padding:8px">2025</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">2026-01-05</td>
+    <td style="border:1px solid #ddd;padding:8px">Monday</td>
+    <td style="border:1px solid #ddd;padding:8px">2</td>
+    <td style="border:1px solid #ddd;padding:8px">2026</td>
+  </tr>
+</table>
+
+<h4>Years with 53 Weeks</h4>
+<p>A year has 53 weeks when week 53 exists (rare occurrence). This happens when:</p>
+<ul>
+  <li><strong>Common year starts on Thursday:</strong> Jan 1 is Thursday → 53 weeks</li>
+  <li><strong>Leap year starts on Wednesday:</strong> Jan 1 is Wednesday → 53 weeks</li>
+  <li><strong>Frequency:</strong> Approximately every 5-6 years</li>
+</ul>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Recent 53-week Years</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Upcoming 53-week Years</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">2004, 2009, 2015, 2020</td>
+    <td style="border:1px solid #ddd;padding:8px">2026, 2031, 2037, 2042</td>
+  </tr>
+</table>
+
+<h4>ISO Week Date Format</h4>
+<p>ISO 8601 defines a week date format as: <code>YYYY-Www-D</code></p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Format: YYYY-Www-D
+  YYYY = ISO year (may differ from calendar year at boundaries)
+  W    = Literal 'W' separator
+  ww   = Week number (01-53)
+  D    = Day number (1=Monday, 7=Sunday)
+
+Examples:
+  2024-W01-1 = Monday, January 1, 2024
+  2024-W52-7 = Sunday, December 29, 2024
+  2025-W01-1 = Monday, December 30, 2024 (ISO year 2025!)
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Project management:</strong> Sprint planning with consistent week-based cycles</li>
+  <li><strong>Financial reporting:</strong> Weekly revenue reports aligned to ISO weeks</li>
+  <li><strong>Payroll:</strong> Bi-weekly or weekly pay period calculations</li>
+  <li><strong>Manufacturing:</strong> Production schedules using week numbers</li>
+  <li><strong>Academic:</strong> Semester planning using week-based calendars</li>
+  <li><strong>Healthcare:</strong> Treatment schedules and appointment planning</li>
+</ul>
+
+<h4>Week Numbering Systems Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">System</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Week Start</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Week 1 Definition</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">ISO 8601</td>
+    <td style="border:1px solid #ddd;padding:8px">Monday</td>
+    <td style="border:1px solid #ddd;padding:8px">Contains first Thursday</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">US Traditional</td>
+    <td style="border:1px solid #ddd;padding:8px">Sunday</td>
+    <td style="border:1px solid #ddd;padding:8px">Contains January 1st</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Middle Eastern</td>
+    <td style="border:1px solid #ddd;padding:8px">Saturday</td>
+    <td style="border:1px solid #ddd;padding:8px">Varies by country</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Week Number Calculator?</dt>
-  <dd>Week Number Calculator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is ISO 8601 week numbering?</dt>
+  <dd>ISO 8601 is an international standard for date and time representation. Week numbering starts at 1 for the week containing the first Thursday of the year. Weeks begin on Monday and end on Sunday. This system ensures consistent week numbers across different countries and systems.</dd>
+
+  <dt>How is ISO week number calculated?</dt>
+  <dd>ISO week 1 is the week containing January 4th (or the first Thursday). To calculate: find the Thursday of the target week, determine which year that Thursday belongs to, then count weeks from week 1. A year has 52 or 53 weeks depending on whether week 53 exists.</dd>
+
+  <dt>Can a year have 53 weeks?</dt>
+  <dd>Yes, ISO years can have 53 weeks when January 1st falls on a Thursday (or Wednesday in leap years). Years with 53 weeks occur approximately every 5-6 years. Recent examples: 2020, 2026. In these years, week 53 runs into early January of the next calendar year.</dd>
+
+  <dt>Why does ISO week numbering use Thursday?</dt>
+  <dd>Thursday is used because it's the middle of the ISO week (Monday-Sunday). The rule ensures that week 1 always contains January 4th and that the first week has at least 4 days in the new year. This prevents ambiguity about which year a week belongs to.</dd>
+
+  <dt>What are common week numbering systems?</dt>
+  <dd>ISO 8601 (used here): weeks start Monday, week 1 contains first Thursday. US system: weeks start Sunday, week 1 contains January 1st. Middle Eastern systems: weeks start Saturday. The ISO system is standard in Europe, Asia, and most international business contexts.</dd>
+
+  <dt>When is week numbering useful?</dt>
+  <dd>Week numbering is useful for: project planning with sprint cycles, financial reporting periods, manufacturing schedules, payroll processing (bi-weekly), academic calendars, and any system requiring consistent time periods that don't align with month boundaries.</dd>
 </dl>
 </section>
 </main>

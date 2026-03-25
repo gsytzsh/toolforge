@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>HTML Table Generator – Create HTML Tables Online | ToolForge</title>
-<meta name="description" content="Free online HTML Table Generator to create HTML table code from rows and columns. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Generate HTML table code from rows and columns. Visual table builder with header row support, cell editing, and clean markup output. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/html-table-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="HTML Table Generator – Create HTML Tables Online | ToolForge">
-<meta property="og:description" content="Free online HTML Table Generator to create HTML table code from rows and columns.">
+<meta property="og:description" content="Generate HTML table code from rows and columns with visual editor.">
 <meta property="og:url" content="https://toolforge.site/tools/html-table-generator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTML Table Generator – Create HTML Tables Online | ToolForge">
-<meta name="twitter:description" content="Free online HTML Table Generator to create HTML table code from rows and columns.">
+<meta name="twitter:description" content="Visual HTML table builder with clean markup output.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Html Table Generator used for?",
+      "name": "What is the basic structure of an HTML table?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Html Table Generator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "An HTML table uses <table> as the container, <thead> for header rows, <tbody> for body rows, <tr> for each row, <th> for header cells, and <td> for data cells. Example: <table><thead><tr><th>Name</th></tr></thead><tbody><tr><td>Data</td></tr></tbody></table>."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between th and td?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "<th> (table header) cells are for column/row headers and are bold and centered by default. <td> (table data) cells contain regular data. Screen readers treat th elements as headers, improving accessibility. Always use th for headers, not just for styling."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "How do I make tables accessible?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Use <th> for headers with scope attribute (scope=\"col\" or scope=\"row\"). Add <caption> for table description. Use <thead>, <tbody>, <tfoot> for structure. Avoid using tables for layout. Ensure sufficient color contrast. Test with screen readers."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is colspan and rowspan?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "colspan merges cells horizontally across multiple columns. rowspan merges cells vertically across multiple rows. Example: <td colspan=\"2\"> spans 2 columns, <td rowspan=\"3\"> spans 3 rows. Useful for complex table layouts and grouped headers."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "Should I use border attribute for styling?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "No, the border attribute is deprecated. Use CSS for table styling: border-collapse, border-spacing, padding, background colors. Example: table { border-collapse: collapse; } th, td { border: 1px solid #ddd; padding: 8px; }. Separates presentation from structure."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "When should I use tables vs other layouts?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Use tables for tabular data (spreadsheets, schedules, comparison charts). Don't use tables for page layout (use CSS Grid/Flexbox instead). Tables should present data relationships, not control visual layout. Screen readers expect tables to contain data."
       }
     }
   ]
@@ -75,10 +80,11 @@
 <p class="subtitle">Generate HTML table code from rows and columns. First row is used as header.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
-<p>Rows: <input type="number" id="rows" min="1" max="50" value="3" style="width:60px"> Columns: <input type="number" id="cols" min="1" max="20" value="3" style="width:60px"> <button type="button" onclick="buildGrid()">Build Grid</button></p>
+<p>Rows: <input type="number" id="rows" min="1" max="50" value="3" style="width:60px;padding:4px"> Columns: <input type="number" id="cols" min="1" max="20" value="3" style="width:60px;padding:4px"> <button type="button" onclick="buildGrid()" style="padding:6px 12px">Build Grid</button></p>
 
-<h3>Table Data (comma-separated per row, or one value per cell)</h3>
-<div id="grid"></div>
+<h3>Table Data</h3>
+<p style="font-size:0.9rem;color:#666">Enter content for each cell. First row will become table headers.</p>
+<div id="grid" style="margin:16px 0"></div>
 
 <div class="tool-actions">
 <button type="button" onclick="generate()">Generate HTML</button>
@@ -86,29 +92,178 @@
 </div>
 
 <h3>Output</h3>
-<textarea id="output" rows="12" style="width:90%;font-family:monospace" readonly aria-label="Generated HTML"></textarea>
+<textarea id="output" rows="12" style="width:90%;font-family:monospace;font-size:13px" readonly aria-label="Generated HTML"></textarea>
 <p id="status" class="inline-status"></p>
 
 <section class="tool-seo">
 <h3>About HTML Table Generator</h3>
-<p>This HTML Table Generator creates table markup from your data. Enter values per cell; the first row becomes the header. Useful for quick table scaffolding and email HTML.</p>
+<p>This HTML Table Generator creates table markup from your data. Enter values per cell; the first row becomes the header using <code>&lt;th&gt;</code> elements. Subsequent rows use <code>&lt;td&gt;</code> data cells.</p>
+<p>It is useful for quickly scaffolding tables for documentation, email HTML, data exports, and creating accessible table structures without manually writing markup.</p>
+
+<h4>HTML Table Structure</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+&lt;!-- Basic table structure --&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Header 1&lt;/th&gt;
+      &lt;th&gt;Header 2&lt;/th&gt;
+      &lt;th&gt;Header 3&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Data 1&lt;/td&gt;
+      &lt;td&gt;Data 2&lt;/td&gt;
+      &lt;td&gt;Data 3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Data 4&lt;/td&gt;
+      &lt;td&gt;Data 5&lt;/td&gt;
+      &lt;td&gt;Data 6&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</pre>
+
+<h4>Recommended CSS Styling</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+/* Modern table styling */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+/* Responsive tables */
+@media screen and (max-width: 600px) {
+  table {
+    font-size: 14px;
+  }
+}
+</pre>
+
+<h4>Table Attributes Reference</h4>
+<table class="ref-table">
+<thead><tr><th>Attribute</th><th>Purpose</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><code>colspan</code></td><td>Span cell across columns</td><td><code>&lt;td colspan="2"&gt;</code></td></tr>
+<tr><td><code>rowspan</code></td><td>Span cell across rows</td><td><code>&lt;td rowspan="3"&gt;</code></td></tr>
+<tr><td><code>scope</code></td><td>Header scope (accessibility)</td><td><code>&lt;th scope="col"&gt;</code></td></tr>
+<tr><td><code>headers</code></td><td>Associate cell with headers</td><td><code>&lt;td headers="h1 h2"&gt;</code></td></tr>
+<tr><td><code>caption</code></td><td>Table title/description</td><td><code>&lt;caption&gt;Sales Data&lt;/caption&gt;</code></td></tr>
+</tbody>
+</table>
+
+<h4>Accessible Table Example</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+&lt;table&gt;
+  &lt;caption&gt;Monthly Sales Report 2024&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;Month&lt;/th&gt;
+      &lt;th scope="col"&gt;Sales&lt;/th&gt;
+      &lt;th scope="col"&gt;Growth&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;January&lt;/td&gt;
+      &lt;td&gt;$10,000&lt;/td&gt;
+      &lt;td&gt;5%&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;February&lt;/td&gt;
+      &lt;td&gt;$12,000&lt;/td&gt;
+      &lt;td&gt;20%&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;Total&lt;/th&gt;
+      &lt;td&gt;$22,000&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;
+</pre>
+
+<h4>Complex Table with Merged Cells</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th rowspan="2"&gt;Product&lt;/th&gt;
+      &lt;th colspan="2"&gt;Q1 2024&lt;/th&gt;
+      &lt;th colspan="2"&gt;Q2 2024&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Sales&lt;/th&gt;
+      &lt;th&gt;Profit&lt;/th&gt;
+      &lt;th&gt;Sales&lt;/th&gt;
+      &lt;th&gt;Profit&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Widget A&lt;/td&gt;
+      &lt;td&gt;$5,000&lt;/td&gt;
+      &lt;td&gt;$1,000&lt;/td&gt;
+      &lt;td&gt;$6,000&lt;/td&gt;
+      &lt;td&gt;$1,200&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Widget B&lt;/td&gt;
+      &lt;td&gt;$3,000&lt;/td&gt;
+      &lt;td&gt;$600&lt;/td&gt;
+      &lt;td&gt;$4,000&lt;/td&gt;
+      &lt;td&gt;$800&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Html Table Generator used for?</dt>
-  <dd>Html Table Generator is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What is the basic structure of an HTML table?</dt>
+  <dd>An HTML table uses <table> as the container, <thead> for header rows, <tbody> for body rows, <tr> for each row, <th> for header cells, and <td> for data cells. Example: <table><thead><tr><th>Name</th></tr></thead><tbody><tr><td>Data</td></tr></tbody></table>.</dd>
+
+  <dt>What is the difference between th and td?</dt>
+  <dd><th> (table header) cells are for column/row headers and are bold and centered by default. <td> (table data) cells contain regular data. Screen readers treat th elements as headers, improving accessibility. Always use th for headers, not just for styling.</dd>
+
+  <dt>How do I make tables accessible?</dt>
+  <dd>Use <th> for headers with scope attribute (scope="col" or scope="row"). Add <caption> for table description. Use <thead>, <tbody>, <tfoot> for structure. Avoid using tables for layout. Ensure sufficient color contrast. Test with screen readers.</dd>
+
+  <dt>What is colspan and rowspan?</dt>
+  <dd>colspan merges cells horizontally across multiple columns. rowspan merges cells vertically across multiple rows. Example: <td colspan="2"> spans 2 columns, <td rowspan="3"> spans 3 rows. Useful for complex table layouts and grouped headers.</dd>
+
+  <dt>Should I use border attribute for styling?</dt>
+  <dd>No, the border attribute is deprecated. Use CSS for table styling: border-collapse, border-spacing, padding, background colors. Example: table { border-collapse: collapse; } th, td { border: 1px solid #ddd; padding: 8px; }. Separates presentation from structure.</dd>
+
+  <dt>When should I use tables vs other layouts?</dt>
+  <dd>Use tables for tabular data (spreadsheets, schedules, comparison charts). Don't use tables for page layout (use CSS Grid/Flexbox instead). Tables should present data relationships, not control visual layout. Screen readers expect tables to contain data.</dd>
 </dl>
 </section>
 </main>
@@ -125,12 +280,17 @@ g.innerHTML=""
 for(var i=0;i<r;i++){
 var row=document.createElement("div")
 row.style.marginBottom="8px"
+row.style.display="flex"
+row.style.flexWrap="wrap"
+row.style.gap="4px"
 for(var j=0;j<c;j++){
 var inp=document.createElement("input")
 inp.type="text"
-inp.placeholder="Cell"
+inp.placeholder="Cell ("+(i+1)+","+(j+1)+")"
 inp.style.width="100px"
-inp.style.marginRight="4px"
+inp.style.padding="6px"
+inp.style.border="1px solid #ddd"
+inp.style.borderRadius="4px"
 inp.setAttribute("data-r",i)
 inp.setAttribute("data-c",j)
 row.appendChild(inp)
@@ -154,7 +314,7 @@ idx++
 }
 rows.push(cells)
 }
-var html="<table border=\"1\" cellpadding=\"8\" cellspacing=\"0\">\n"
+var html="<table>\n"
 rows.forEach(function(row,i){
 var t=i===0?"th":"td"
 html+="  <tr>\n"

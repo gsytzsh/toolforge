@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>X-Robots-Tag Generator – Create X-Robots-Tag Headers Online | ToolForge</title>
-<meta name="description" content="Free online X-Robots-Tag Generator to create SEO header directives such as noindex and nofollow. Part of the ToolForge developer tools collection.">
+<title>X-Robots-Tag Generator – Create HTTP Robot Directives Online | ToolForge</title>
+<meta name="description" content="X-Robots-Tag Generator creates HTTP header directives for search engine crawlers. Generate noindex, nofollow, noarchive headers for PDFs, images, and non-HTML files. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/x-robots-tag-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="X-Robots-Tag Generator – Create X-Robots-Tag Headers Online | ToolForge">
-<meta property="og:description" content="Free online X-Robots-Tag Generator to create SEO header directives such as noindex and nofollow. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="X-Robots-Tag Generator – Create HTTP Robot Directives Online | ToolForge">
+<meta property="og:description" content="X-Robots-Tag Generator creates HTTP header directives for search engine crawlers. Generate noindex, nofollow, noarchive headers for PDFs, images, and non-HTML files. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/x-robots-tag-generator.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="X-Robots-Tag Generator – Create X-Robots-Tag Headers Online | ToolForge">
-<meta name="twitter:description" content="Free online X-Robots-Tag Generator to create SEO header directives such as noindex and nofollow. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="X-Robots-Tag Generator – Create HTTP Robot Directives Online | ToolForge">
+<meta name="twitter:description" content="X-Robots-Tag Generator creates HTTP header directives for search engine crawlers. Generate noindex, nofollow, noarchive headers for PDFs, images, and non-HTML files. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is X Robots Tag Generator?",
+      "name": "What is the X-Robots-Tag HTTP header?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "X Robots Tag Generator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "The X-Robots-Tag is an HTTP response header that provides search engine crawlers with indexing and crawling directives. Unlike meta robots tags that work only for HTML pages, X-Robots-Tag works for any file type including PDFs, images, videos, and downloads."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between X-Robots-Tag and meta robots?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Meta robots tags (<meta name=\"robots\">) only work in HTML documents. X-Robots-Tag is an HTTP header that works for any content type. Use X-Robots-Tag for PDFs, images, and other non-HTML files where you cannot embed meta tags."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What directives does X-Robots-Tag support?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Common directives include: noindex (don't show in search results), nofollow (don't follow links), noarchive (don't show cached version), nosnippet (don't show description preview), notranslate (don't offer translation), and unavailable_after (remove after specific date)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I set the X-Robots-Tag header on my server?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Apache: Header set X-Robots-Tag \"noindex, nofollow\" in .htaccess. Nginx: add_header X-Robots-Tag \"noindex, nofollow\"; in server block. PHP: header('X-Robots-Tag: noindex, nofollow'). For PDFs and static files, configure your web server or use a CDN to add the header."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "When should I use X-Robots-Tag instead of robots.txt?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Use robots.txt to block crawler access entirely. Use X-Robots-Tag when you want crawlers to access content but control how it appears in search results. X-Robots-Tag is more granular and allows indexing while controlling specific behaviors like snippets or caching."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "Can I use X-Robots-Tag for specific search engines?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Yes, you can target specific crawlers by using their user-agent names: X-Robots-Tag: googlebot: noindex or X-Robots-Tag: bingbot: nofollow. However, not all search engines support user-agent-specific directives in HTTP headers."
       }
     }
   ]
@@ -89,25 +94,157 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About X-Robots-Tag Generator</h3>
-<p>This X-Robots-Tag generator creates an HTTP header for controlling indexing and crawling behavior outside of HTML pages.</p>
-<p>It is useful for PDFs, images, downloads and other file responses where you need robot directives at the header level instead of a meta tag.</p>
+<p>This X-Robots-Tag generator creates HTTP header directives for controlling search engine crawler behavior. It supports common directives including noindex, nofollow, noarchive, and nosnippet that can be combined into a single header value.</p>
+<p>It is useful for PDFs, images, downloads, and other non-HTML files where you need robot directives at the HTTP header level instead of HTML meta tags. X-Robots-Tag is the only way to control indexing for non-HTML content.</p>
+
+<h4>X-Robots-Tag Directives</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Directive</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">noindex</td>
+    <td style="border:1px solid #ddd;padding:8px">Exclude from search results</td>
+    <td style="border:1px solid #ddd;padding:8px">Private documents, internal PDFs</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">nofollow</td>
+    <td style="border:1px solid #ddd;padding:8px">Don't follow links in content</td>
+    <td style="border:1px solid #ddd;padding:8px">Pages with untrusted outbound links</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">noarchive</td>
+    <td style="border:1px solid #ddd;padding:8px">Don't show cached version</td>
+    <td style="border:1px solid #ddd;padding:8px">Time-sensitive content, pricing pages</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">nosnippet</td>
+    <td style="border:1px solid #ddd;padding:8px">Don't show description preview</td>
+    <td style="border:1px solid #ddd;padding:8px">Content you don't want previewed</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">notranslate</td>
+    <td style="border:1px solid #ddd;padding:8px">Don't offer translation</td>
+    <td style="border:1px solid #ddd;padding:8px">Content that loses meaning when translated</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">unavailable_after</td>
+    <td style="border:1px solid #ddd;padding:8px">Remove after specific date</td>
+    <td style="border:1px solid #ddd;padding:8px">Event pages, limited-time offers</td>
+  </tr>
+</table>
+
+<h4>Setting X-Robots-Tag on Different Servers</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+<!-- Apache (.htaccess or httpd.conf) -->
+Header set X-Robots-Tag "noindex, nofollow"
+
+<!-- Nginx -->
+location ~* \.(pdf|jpg|png)$ {
+    add_header X-Robots-Tag "noindex";
+}
+
+<!-- PHP -->
+&lt;?php
+header('X-Robots-Tag: noindex, nofollow');
+?&gt;
+
+<!-- Node.js (Express) -->
+res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+
+<!-- Python (Flask) -->
+response.headers['X-Robots-Tag'] = 'noindex, nofollow'
+</pre>
+
+<h4>X-Robots-Tag vs Meta Robots vs Robots.txt</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Method</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Works For</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Limitations</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">X-Robots-Tag</td>
+    <td style="border:1px solid #ddd;padding:8px">All file types</td>
+    <td style="border:1px solid #ddd;padding:8px">Requires server configuration</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Meta Robots</td>
+    <td style="border:1px solid #ddd;padding:8px">HTML pages only</td>
+    <td style="border:1px solid #ddd;padding:8px">Cannot be used for PDFs, images</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Robots.txt</td>
+    <td style="border:1px solid #ddd;padding:8px">All crawlable URLs</td>
+    <td style="border:1px solid #ddd;padding:8px">Blocks access, doesn't control indexing</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>PDF documents:</strong> Prevent internal documents, whitepapers, or drafts from appearing in search</li>
+  <li><strong>Image files:</strong> Control indexing of sensitive or private images</li>
+  <li><strong>Download files:</strong> Prevent software, datasets, or media files from being indexed</li>
+  <li><strong>API responses:</strong> Control how API endpoint URLs appear in search results</li>
+  <li><strong>Staging environments:</strong> Block all indexing on non-production servers</li>
+  <li><strong>Time-limited content:</strong> Use unavailable_after for event pages or promotions</li>
+</ul>
+
+<h4>Directive Combinations</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+<!-- Multiple directives (comma-separated) -->
+X-Robots-Tag: noindex, nofollow, noarchive
+
+<!-- Crawler-specific directives -->
+X-Robots-Tag: googlebot: noindex
+X-Robots-Tag: bingbot: nofollow
+
+<!-- Combined approach -->
+X-Robots-Tag: noindex, nofollow
+X-Robots-Tag: googlebot: nosnippet
+</pre>
+
+<h4>Testing and Validation</h4>
+<p>To verify X-Robots-Tag headers are being sent correctly:</p>
+<ul>
+  <li><strong>curl:</strong> <code>curl -I https://example.com/file.pdf</code> to see response headers</li>
+  <li><strong>Browser DevTools:</strong> Check Network tab for X-Robots-Tag in response headers</li>
+  <li><strong>Google Search Console:</strong> URL Inspection tool shows indexing status</li>
+  <li><strong>Online header checkers:</strong> Various tools display HTTP response headers</li>
+</ul>
+
+<h4>Important Considerations</h4>
+<ul>
+  <li>X-Robots-Tag must be sent in the HTTP response, not set in HTML</li>
+  <li>Directives are case-insensitive (noindex = NoIndex)</li>
+  <li>Multiple values should be comma-separated</li>
+  <li>Google supports all major directives; other engines may vary</li>
+  <li>For complete removal from search, combine with robots.txt blocking after deindexing</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is X Robots Tag Generator?</dt>
-  <dd>X Robots Tag Generator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the X-Robots-Tag HTTP header?</dt>
+  <dd>The X-Robots-Tag is an HTTP response header that provides search engine crawlers with indexing and crawling directives. Unlike meta robots tags that work only for HTML pages, X-Robots-Tag works for any file type including PDFs, images, videos, and downloads.</dd>
+
+  <dt>What is the difference between X-Robots-Tag and meta robots?</dt>
+  <dd>Meta robots tags (&lt;meta name="robots"&gt;) only work in HTML documents. X-Robots-Tag is an HTTP header that works for any content type. Use X-Robots-Tag for PDFs, images, and other non-HTML files where you cannot embed meta tags.</dd>
+
+  <dt>What directives does X-Robots-Tag support?</dt>
+  <dd>Common directives include: noindex (don't show in search results), nofollow (don't follow links), noarchive (don't show cached version), nosnippet (don't show description preview), notranslate (don't offer translation), and unavailable_after (remove after specific date).</dd>
+
+  <dt>How do I set the X-Robots-Tag header on my server?</dt>
+  <dd>Apache: Header set X-Robots-Tag "noindex, nofollow" in .htaccess. Nginx: add_header X-Robots-Tag "noindex, nofollow"; in server block. PHP: header('X-Robots-Tag: noindex, nofollow'). For PDFs and static files, configure your web server or use a CDN to add the header.</dd>
+
+  <dt>When should I use X-Robots-Tag instead of robots.txt?</dt>
+  <dd>Use robots.txt to block crawler access entirely. Use X-Robots-Tag when you want crawlers to access content but control how it appears in search results. X-Robots-Tag is more granular and allows indexing while controlling specific behaviors like snippets or caching.</dd>
+
+  <dt>Can I use X-Robots-Tag for specific search engines?</dt>
+  <dd>Yes, you can target specific crawlers by using their user-agent names: X-Robots-Tag: googlebot: noindex or X-Robots-Tag: bingbot: nofollow. However, not all search engines support user-agent-specific directives in HTTP headers.</dd>
 </dl>
 </section>
 </main>

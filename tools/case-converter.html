@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Case Converter – Uppercase & Lowercase Text Online | ToolForge</title>
-<meta name="description" content="Free online Case Converter to quickly switch text between UPPERCASE, lowercase, Title Case, and Sentence case. Essential tool for content editing and code formatting. Part of the ToolForge developer tools collection.">
+<title>Case Converter – Text Case Transformation Tool | ToolForge</title>
+<meta name="description" content="Transform text between UPPERCASE, lowercase, Title Case, Sentence case, and programming naming conventions. Includes case format reference and style guide. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/case-converter.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Case Converter – Uppercase & Lowercase Text Online | ToolForge">
-<meta property="og:description" content="Free online Case Converter to quickly switch text between UPPERCASE, lowercase, Title Case, and Sentence case. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Case Converter – Text Case Transformation Tool | ToolForge">
+<meta property="og:description" content="Transform text between UPPERCASE, lowercase, Title Case, Sentence case, and programming naming conventions. Includes case format reference and style guide. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/case-converter.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Case Converter – Uppercase & Lowercase Text Online | ToolForge">
-<meta name="twitter:description" content="Free online Case Converter to quickly switch text between UPPERCASE, lowercase, Title Case, and Sentence case. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Case Converter – Text Case Transformation Tool | ToolForge">
+<meta name="twitter:description" content="Transform text between UPPERCASE, lowercase, Title Case, Sentence case, and programming naming conventions. Includes case format reference and style guide. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,42 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What are the different text case formats?",
+      "name": "What are the standard text case formats?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Common case formats: UPPERCASE (all caps), lowercase (all small), Title Case (Capitalize Each Word), Sentence case (First letter only), camelCase (firstLowerThenUpper), snake_case (under_scores). Each has specific use cases.\""
+        "text": "Standard case formats include: UPPERCASE (ALL CAPS), lowercase (all small), Title Case (Capitalize Major Words), Sentence case (First letter only), camelCase (firstLowerThenUpper), snake_case (under_scores), and kebab-case (dash-separated). Each serves specific purposes in writing and programming."
       }
     },
     {
       "@type": "Question",
-      "name": "When should I use UPPERCASE?",
+      "name": "What is Title Case and what are the rules?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "UPPERCASE is used for: emphasis or headings, acronyms (NASA, FBI), constants in code (MAX_VALUE), warnings/alarms, and button labels. Avoid long passages as they're harder to read.\""
+        "text": "Title Case capitalizes major words while lowercasing minor words. Rules: capitalize first/last words, nouns, verbs, adjectives, adverbs, pronouns; lowercase articles (a, an, the), coordinating conjunctions (and, but, or), and prepositions (in, on, at, by) unless they're the first word. Style guides (APA, MLA, Chicago) have slight variations."
       }
     },
     {
       "@type": "Question",
-      "name": "What is Title Case and when is it used?",
+      "name": "What is the difference between camelCase and PascalCase?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Title Case capitalizes the first letter of major words. Used for: book/movie titles, article headlines, section headings. Minor words (a, an, the, and, but, or) are typically lowercase unless first word.\""
+        "text": "camelCase starts with lowercase (userName, calculateTotal), while PascalCase starts with uppercase (UserName, CalculateTotal). In programming: JavaScript/TypeScript use camelCase for variables/functions, PascalCase for classes/types; C# uses PascalCase for methods/properties; Java uses camelCase for methods/variables, PascalCase for classes."
       }
     },
     {
       "@type": "Question",
-      "name": "What is Sentence case?",
+      "name": "Why is snake_case used in Python?",
       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sentence case capitalizes only the first word and proper nouns, like standard writing. Used for: body text, descriptions, captions, and most prose. It's the default case for readable content.\""
+        "type": "Answer",
+        "text": "Python's PEP 8 style guide recommends snake_case for variables and functions because it's highly readable, especially with long names. Underscores act as word separators similar to spaces. Python also uses UPPERCASE_SNAKE for constants and PascalCase for class names."
       }
     },
     {
       "@type": "Question",
-      "name": "Why is text case important in programming?",
+      "name": "What is alternating case used for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Most programming languages are case-sensitive. Variable names, function names, and keywords must match exactly. Following language conventions (camelCase, snake_case) improves code readability and maintainability.\""
+        "text": "Alternating case (aLtErNaTiNg CaSe) has no formal use—it's primarily internet slang used mockingly to indicate sarcasm or mock repetition. The pattern alternates lowercase/uppercase letters. Not used in professional writing or code due to poor readability."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does case sensitivity affect programming?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most programming languages (JavaScript, Python, Java, C#, etc.) are case-sensitive: userName and UserName are different identifiers. This allows distinct naming but requires consistency. SQL is case-insensitive for keywords but case-sensitive for string values. File systems vary: Windows/macOS are case-insensitive, Linux is case-sensitive."
       }
     }
   ]
@@ -73,7 +81,7 @@
 
 <h1>Case Converter</h1>
 
-<p class="subtitle">Convert text between UPPERCASE, lowercase, Title Case, Sentence case, and more.</p>
+<p class="subtitle">Transform text between UPPERCASE, lowercase, Title Case, Sentence case, and other formats.</p>
 
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
@@ -95,168 +103,274 @@
 
 <section class="tool-seo">
 <h3>About Case Converter</h3>
-<p>The Case Converter tool transforms text between different capitalization formats instantly. Whether you need to fix accidentally caps-locked text, format headings, or prepare content for different contexts, this tool handles all common case conversions.</p>
+<p>This tool performs text case transformations for writing, editing, and code formatting workflows. It handles standard case formats (UPPERCASE, lowercase, Title Case, Sentence case) plus programming conventions and special formats.</p>
 
 <h4>Text Case Format Reference</h4>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Case Type</th>
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Primary Use Case</th>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">UPPERCASE</td>
     <td style="border:1px solid #ddd;padding:8px">HELLO WORLD</td>
-    <td style="border:1px solid #ddd;padding:8px">Emphasis, acronyms, constants</td>
+    <td style="border:1px solid #ddd;padding:8px">Acronyms, constants, emphasis, alarms</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">lowercase</td>
     <td style="border:1px solid #ddd;padding:8px">hello world</td>
-    <td style="border:1px solid #ddd;padding:8px">Informal text, code, emails</td>
+    <td style="border:1px solid #ddd;padding:8px">Informal text, code, data normalization</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Title Case</td>
     <td style="border:1px solid #ddd;padding:8px">Hello World</td>
-    <td style="border:1px solid #ddd;padding:8px">Titles, headings, names</td>
+    <td style="border:1px solid #ddd;padding:8px">Book titles, article headlines, names</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">Sentence case</td>
     <td style="border:1px solid #ddd;padding:8px">Hello world</td>
-    <td style="border:1px solid #ddd;padding:8px">Body text, descriptions</td>
+    <td style="border:1px solid #ddd;padding:8px">Body text, descriptions, captions</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">camelCase</td>
     <td style="border:1px solid #ddd;padding:8px">helloWorld</td>
-    <td style="border:1px solid #ddd;padding:8px">JavaScript variables, JSON</td>
+    <td style="border:1px solid #ddd;padding:8px">JavaScript/TypeScript variables, JSON keys</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
+    <td style="border:1px solid #ddd;padding:8px">HelloWorld</td>
+    <td style="border:1px solid #ddd;padding:8px">Class names, types, components</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">snake_case</td>
     <td style="border:1px solid #ddd;padding:8px">hello_world</td>
-    <td style="border:1px solid #ddd;padding:8px">Python, Ruby, SQL</td>
+    <td style="border:1px solid #ddd;padding:8px">Python/Ruby variables, SQL columns</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">kebab-case</td>
     <td style="border:1px solid #ddd;padding:8px">hello-world</td>
-    <td style="border:1px solid #ddd;padding:8px">URLs, CSS, HTML attributes</td>
+    <td style="border:1px solid #ddd;padding:8px">URLs, CSS classes, HTML attributes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">SCREAMING_SNAKE</td>
+    <td style="border:1px solid #ddd;padding:8px">HELLO_WORLD</td>
+    <td style="border:1px solid #ddd;padding:8px">Constants, environment variables</td>
   </tr>
 </table>
 
-<h4>Title Case Rules</h4>
-<p>Standard title case capitalization follows these rules:</p>
-<ul>
-  <li><strong>Capitalize:</strong> First and last words, nouns, verbs, adjectives, adverbs, pronouns</li>
-  <li><strong>Lowercase:</strong> Articles (a, an, the), coordinating conjunctions (and, but, or), prepositions (in, on, at, by) unless they're the first word</li>
-</ul>
-
-<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
-Input:  "the quick brown fox jumps over the lazy dog"
-Title:  "The Quick Brown Fox Jumps Over the Lazy Dog"
-
-Note: "the" and "over" are lowercase (preposition/article in middle)
-</pre>
-
-<h4>Common Use Cases</h4>
-<ul>
-  <li><strong>Content Editing:</strong> Fix accidentally caps-locked text</li>
-  <li><strong>Headline Formatting:</strong> Convert article titles to proper Title Case</li>
-  <li><strong>Code Cleanup:</strong> Standardize variable naming conventions</li>
-  <li><strong>Email Correction:</strong> Fix ALL CAPS emails that seem aggressive</li>
-  <li><strong>Social Media:</strong> Format posts for different platforms</li>
-  <li><strong>Data Normalization:</strong> Standardize text data for databases</li>
-</ul>
-
-<h4>Case Conversion Examples</h4>
-<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
-Original: "the quick brown fox"
-─────────────────────────────────
-UPPERCASE:      THE QUICK BROWN FOX
-lowercase:      the quick brown fox
-Title Case:     The Quick Brown Fox
-Sentence case:  The quick brown fox
-camelCase:      theQuickBrownFox
-snake_case:     the_quick_brown_fox
-kebab-case:     the-quick-brown-fox
-Alternating:    ThE qUiCk BrOwN fOx
-</pre>
-
-<h4>Readability Tips</h4>
-<ul>
-  <li><strong>Avoid long UPPERCASE passages:</strong> Studies show all-caps text is 13-20% slower to read</li>
-  <li><strong>Use Title Case sparingly:</strong> Best for short titles, not body text</li>
-  <li><strong>Sentence case is most readable:</strong> Default choice for paragraphs and descriptions</li>
-  <li><strong>Mix cases for emphasis:</strong> Strategic UPPERCASE draws attention to key points</li>
-</ul>
-
-<h4>Programming Case Conventions</h4>
+<h4>Title Case Rules by Style Guide</h4>
+<p>Different style guides have varying Title Case rules:</p>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Element</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Convention</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Style Guide</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Capitalizes</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Lowercases</th>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">JavaScript variables</td>
-    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
-    <td style="border:1px solid #ddd;padding:8px"><code>userName</code></td>
+    <td style="border:1px solid #ddd;padding:8px">APA (7th ed.)</td>
+    <td style="border:1px solid #ddd;padding:8px">Words 4+ letters, first/last words</td>
+    <td style="border:1px solid #ddd;padding:8px">Articles, conjunctions, prepositions &lt;4 letters</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">Python variables</td>
-    <td style="border:1px solid #ddd;padding:8px">snake_case</td>
-    <td style="border:1px solid #ddd;padding:8px"><code>user_name</code></td>
+    <td style="border:1px solid #ddd;padding:8px">MLA (9th ed.)</td>
+    <td style="border:1px solid #ddd;padding:8px">Major words, first/last words</td>
+    <td style="border:1px solid #ddd;padding:8px">Articles, prepositions, coordinating conjunctions</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">Java classes</td>
-    <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
-    <td style="border:1px solid #ddd;padding:8px"><code>UserService</code></td>
+    <td style="border:1px solid #ddd;padding:8px">Chicago (17th ed.)</td>
+    <td style="border:1px solid #ddd;padding:8px">Major words, first/last words</td>
+    <td style="border:1px solid #ddd;padding:8px">Articles, coordinating conjunctions, prepositions</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ddd;padding:8px">CSS classes</td>
-    <td style="border:1px solid #ddd;padding:8px">kebab-case</td>
-    <td style="border:1px solid #ddd;padding:8px"><code>user-profile</code></td>
-  </tr>
-  <tr>
-    <td style="border:1px solid #ddd;padding:8px">Constants (all languages)</td>
-    <td style="border:1px solid #ddd;padding:8px">UPPER_CASE</td>
-    <td style="border:1px solid #ddd;padding:8px"><code>MAX_SIZE</code></td>
+    <td style="border:1px solid #ddd;padding:8px">AP Stylebook</td>
+    <td style="border:1px solid #ddd;padding:8px">Principal words, first/last words</td>
+    <td style="border:1px solid #ddd;padding:8px">Articles, conjunctions &lt;4 letters, prepositions &lt;4 letters</td>
   </tr>
 </table>
+
+<h4>Case Conversion Algorithm</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript Case Transformation Functions:
+
+// UPPERCASE - simple toUpperCase()
+function toUpperCase(text) {
+  return text.toUpperCase();
+}
+
+// lowercase - simple toLowerCase()
+function toLowerCase(text) {
+  return text.toLowerCase();
+}
+
+// Title Case - capitalize major words
+function toTitleCase(text) {
+  const minorWords = ['a', 'an', 'the', 'and', 'but', 'or', 'nor',
+                      'for', 'so', 'yet', 'in', 'on', 'at', 'to',
+                      'by', 'of', 'with', 'as'];
+  return text.toLowerCase().split(' ').map((word, i) => {
+    if (i === 0 || i === words.length - 1) {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    }
+    if (minorWords.includes(word)) return word;
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }).join(' ');
+}
+
+// Sentence case - capitalize first letter of sentences
+function toSentenceCase(text) {
+  return text.toLowerCase().replace(/(^\s*\w|[\.\!\?]\s*\w)/g, c =>
+    c.toUpperCase()
+  );
+}
+</pre>
+
+<h4>Programming Language Naming Conventions</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Language</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Variables</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Functions</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Classes</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Constants</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">JavaScript</td>
+    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
+    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
+    <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
+    <td style="border:1px solid #ddd;padding:8px">UPPER_CASE</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">TypeScript</td>
+    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
+    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
+    <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
+    <td style="border:1px solid #ddd;padding:8px">UPPER_CASE</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Python</td>
+    <td style="border:1px solid #ddd;padding:8px">snake_case</td>
+    <td style="border:1px solid #ddd;padding:8px">snake_case</td>
+    <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
+    <td style="border:1px solid #ddd;padding:8px">UPPER_CASE</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Java</td>
+    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
+    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
+    <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
+    <td style="border:1px solid #ddd;padding:8px">UPPER_CASE</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">C#</td>
+    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
+    <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
+    <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
+    <td style="border:1px solid #ddd;padding:8px">UPPER_CASE</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Ruby</td>
+    <td style="border:1px solid #ddd;padding:8px">snake_case</td>
+    <td style="border:1px solid #ddd;padding:8px">snake_case</td>
+    <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
+    <td style="border:1px solid #ddd;padding:8px">UPPER_CASE</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Go</td>
+    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
+    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
+    <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
+    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Rust</td>
+    <td style="border:1px solid #ddd;padding:8px">snake_case</td>
+    <td style="border:1px solid #ddd;padding:8px">snake_case</td>
+    <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
+    <td style="border:1px solid #ddd;padding:8px">UPPER_CASE</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">PHP</td>
+    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
+    <td style="border:1px solid #ddd;padding:8px">camelCase</td>
+    <td style="border:1px solid #ddd;padding:8px">PascalCase</td>
+    <td style="border:1px solid #ddd;padding:8px">UPPER_CASE</td>
+  </tr>
+</table>
+
+<h4>Case Conversion Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Input: "the quick brown fox jumps over the lazy dog"
+─────────────────────────────────────────────────────
+UPPERCASE:      THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
+lowercase:      the quick brown fox jumps over the lazy dog
+Title Case:     The Quick Brown Fox Jumps Over the Lazy Dog
+Sentence case:  The quick brown fox jumps over the lazy dog
+camelCase:      theQuickBrownFoxJumpsOverTheLazyDog
+PascalCase:     TheQuickBrownFoxJumpsOverTheLazyDog
+snake_case:     the_quick_brown_fox_jumps_over_the_lazy_dog
+kebab-case:     the-quick-brown-fox-jumps-over-the-lazy-dog
+SCREAMING:      THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG
+</pre>
+
+<h4>Readability Research</h4>
+<ul>
+  <li><strong>UPPERCASE readability:</strong> Studies show all-caps text is 13-20% slower to read due to lack of letter shape variation (word superiority effect)</li>
+  <li><strong>Sentence case optimal:</strong> Default case for body text—familiar pattern reduces cognitive load</li>
+  <li><strong>Title Case for short text:</strong> Effective for headings under 10 words; longer titles become harder to scan</li>
+  <li><strong>mixedCase recognition:</strong> camelCase and PascalCase improve identifier recognition in code vs underscore variants (Binkley et al., 2006)</li>
+</ul>
+
+<h4>Edge Cases and Special Handling</h4>
+<ul>
+  <li><strong>Acronyms:</strong> "NASA" → lowercase "nasa" loses meaning; consider preserving known acronyms</li>
+  <li><strong>Proper nouns:</strong> "john smith" → Title Case "John Smith" requires name detection</li>
+  <li><strong>Hyphenated words:</strong> "state-of-the-art" → Title Case varies by style guide</li>
+  <li><strong>Unicode characters:</strong> Non-ASCII letters (é, ñ, ü) may not transform correctly in all environments</li>
+  <li><strong>Turkish I problem:</strong> Turkish has dotted İ and dotless ı—toUpperCase/toLowerCase behave differently</li>
+</ul>
 </section>
 
 <section class="how-to-use">
 <h3>How to Convert Text Case</h3>
 <ol class="how-to-steps">
-  <li><strong>Enter text:</strong> Type or paste the text you want to convert.</li>
-  <li><strong>Choose format:</strong> Click the button for your desired case format.</li>
-  <li><strong>View result:</strong> The converted text replaces the original instantly.</li>
-  <li><strong>Copy output:</strong> Click "Copy Result" to use the converted text elsewhere.</li>
+  <li><strong>Enter text:</strong> Type or paste the text to convert.</li>
+  <li><strong>Select format:</strong> Click the button for your target case format.</li>
+  <li><strong>Review result:</strong> Converted text replaces the original instantly.</li>
+  <li><strong>Copy output:</strong> Use "Copy Result" or Ctrl/Cmd+C to copy.</li>
 </ol>
 
 <h4 style="margin-top:20px">Tips</h4>
 <ul>
-  <li>Multiple clicks apply cumulative transformations</li>
-  <li>Clear the text box with Ctrl/Cmd+A then Delete</li>
-  <li>Works with multi-line text and paragraphs</li>
-  <li>Preserves punctuation and special characters</li>
+  <li>Transformations apply to entire text area content</li>
+  <li>Clear all text with Ctrl/Cmd+A then Delete</li>
+  <li>Multi-line text and paragraphs are preserved</li>
+  <li>Punctuation and special characters remain unchanged</li>
+  <li>For code: use language-appropriate conventions from the table above</li>
 </ul>
 </section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
 
-  <dt>What are the different text case formats?</dt>
-  <dd>Common case formats: UPPERCASE (all caps), lowercase (all small), Title Case (Capitalize Each Word), Sentence case (First letter only), camelCase (firstLowerThenUpper), snake_case (under_scores). Each has specific use cases.</dd>
+  <dt>What are the standard text case formats?</dt>
+  <dd>Standard case formats include: UPPERCASE (ALL CAPS), lowercase (all small), Title Case (Capitalize Major Words), Sentence case (First letter only), camelCase (firstLowerThenUpper), snake_case (under_scores), and kebab-case (dash-separated). Each serves specific purposes in writing and programming.</dd>
 
-  <dt>When should I use UPPERCASE?</dt>
-  <dd>UPPERCASE is used for: emphasis or headings, acronyms (NASA, FBI), constants in code (MAX_VALUE), warnings/alarms, and button labels. Avoid long passages as they're harder to read.</dd>
+  <dt>What is Title Case and what are the rules?</dt>
+  <dd>Title Case capitalizes major words while lowercasing minor words. Rules: capitalize first/last words, nouns, verbs, adjectives, adverbs, pronouns; lowercase articles (a, an, the), coordinating conjunctions (and, but, or), and prepositions (in, on, at, by) unless they're the first word. Style guides (APA, MLA, Chicago) have slight variations.</dd>
 
-  <dt>What is Title Case and when is it used?</dt>
-  <dd>Title Case capitalizes the first letter of major words. Used for: book/movie titles, article headlines, section headings. Minor words (a, an, the, and, but, or) are typically lowercase unless first word.</dd>
+  <dt>What is the difference between camelCase and PascalCase?</dt>
+  <dd>camelCase starts with lowercase (userName, calculateTotal), while PascalCase starts with uppercase (UserName, CalculateTotal). In programming: JavaScript/TypeScript use camelCase for variables/functions, PascalCase for classes/types; C# uses PascalCase for methods/properties; Java uses camelCase for methods/variables, PascalCase for classes.</dd>
 
-  <dt>What is Sentence case?</dt>
-  <dd>Sentence case capitalizes only the first word and proper nouns, like standard writing. Used for: body text, descriptions, captions, and most prose. It's the default case for readable content.</dd>
+  <dt>Why is snake_case used in Python?</dt>
+  <dd>Python's PEP 8 style guide recommends snake_case for variables and functions because it's highly readable, especially with long names. Underscores act as word separators similar to spaces. Python also uses UPPERCASE_SNAKE for constants and PascalCase for class names.</dd>
 
-  <dt>Why is text case important in programming?</dt>
-  <dd>Most programming languages are case-sensitive. Variable names, function names, and keywords must match exactly. Following language conventions (camelCase, snake_case) improves code readability and maintainability.</dd>
+  <dt>What is alternating case used for?</dt>
+  <dd>Alternating case (aLtErNaTiNg CaSe) has no formal use—it's primarily internet slang used mockingly to indicate sarcasm or mock repetition. The pattern alternates lowercase/uppercase letters. Not used in professional writing or code due to poor readability.</dd>
+
+  <dt>How does case sensitivity affect programming?</dt>
+  <dd>Most programming languages (JavaScript, Python, Java, C#, etc.) are case-sensitive: userName and UserName are different identifiers. This allows distinct naming but requires consistency. SQL is case-insensitive for keywords but case-sensitive for string values. File systems vary: Windows/macOS are case-insensitive, Linux is case-sensitive.</dd>
 </dl>
 </section>
 </main>

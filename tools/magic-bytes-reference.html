@@ -2,26 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Magic Bytes Reference – File Signatures Table | ToolForge</title>
-<meta name="description" content="Free online magic bytes and file signatures reference for identifying file types. Part of the ToolForge developer tools collection.">
+<title>Magic Bytes Reference – File Signatures and Header Hex Values | ToolForge</title>
+<meta name="description" content="Complete magic bytes (file signatures) reference table. Identify file types by hex header values. Includes images, documents, archives, executables, and more. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/magic-bytes-reference.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Magic Bytes Reference – File Signatures Table | ToolForge">
-<meta property="og:description" content="Free online magic bytes and file signatures reference. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Magic Bytes Reference – File Signatures and Header Hex Values | ToolForge">
+<meta property="og:description" content="Complete magic bytes (file signatures) reference table for file type identification.">
 <meta property="og:url" content="https://toolforge.site/tools/magic-bytes-reference.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Magic Bytes Reference – File Signatures Table | ToolForge">
-<meta name="twitter:description" content="Free online magic bytes and file signatures reference. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Magic Bytes Reference – File Signatures and Header Hex Values | ToolForge">
+<meta name="twitter:description" content="Complete magic bytes (file signatures) reference table for file type identification.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
-.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem}
+.ref-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd;font-size:0.9rem;margin:16px 0}
 .ref-table th,.ref-table td{border:1px solid #eee;padding:8px 12px;text-align:left}
 .ref-table th{background:#f8fafc;font-weight:600}
-.ref-table code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:0.9em}
-.ref-table input{width:100%;max-width:200px;padding:6px;border:1px solid #ddd;border-radius:4px}
+.ref-table code{background:#1e1e1e;color:#f0f0f0;padding:2px 6px;border-radius:4px;font-size:0.9em}
+.filter-box{margin-bottom:16px}
+.category-header{background:#e7f3ff;padding:10px 12px;font-weight:600;border-radius:6px;margin:20px 0 10px}
+.info-box{background:#f5f5f5;padding:12px;border-radius:8px;margin:16px 0}
 </style>
 
 <script type="application/ld+json">
@@ -31,45 +33,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Magic Bytes Reference used for?",
+      "name": "What are magic bytes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Magic Bytes Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "Magic bytes (file signatures) are unique byte sequences at the start of files that identify the file type. They're called 'magic' because they reliably identify formats regardless of filename extension. Example: PNG files always start with 89 50 4E 47 (hex for 'PNG')."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "Why use magic bytes instead of file extensions?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "File extensions can be changed, removed, or spoofed. Magic bytes are embedded in the file itself and cannot be easily faked. Security software uses magic bytes to detect malicious files disguised as safe types. File type detection by content is more reliable than by extension."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "How do I read magic bytes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Magic bytes are shown in hexadecimal (base-16). Each pair represents one byte (0-255). Example: 'FF D8 FF' means bytes 255, 216, 255. Read a file's first bytes with a hex editor and compare to the signature table to identify the format."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What file types can be identified by magic bytes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Most binary formats: images (JPEG, PNG, GIF, WebP), documents (PDF, DOCX, XLSX), archives (ZIP, GZIP, TAR, RAR), executables (ELF, PE, Mach-O), audio/video (MP3, WAV, MP4, MKV), fonts (TTF, WOFF), and more. Plain text files typically lack magic bytes."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What is the 'file' command?",
       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+      "@type": "Answer",
+        "text": "The 'file' command (Linux/Unix/macOS) identifies file types using magic bytes. Usage: 'file filename' returns the detected type. It uses a magic database (/usr/share/file/magic) containing thousands of signatures. Windows equivalents include TrID and File Identifier."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "Can magic bytes be spoofed?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Yes, magic bytes can be prepended to files to disguise them, but this requires binary editing and doesn't change the actual content structure. Security tools perform deeper inspection beyond magic bytes. Simple extension checking is less secure than magic byte validation."
       }
     }
   ]
@@ -79,81 +86,327 @@
 <body>
 <main class="container">
 <h1>Magic Bytes Reference</h1>
-<p class="subtitle">File signatures (magic bytes) for identifying file types by their header bytes.</p>
+<p class="subtitle">File signatures (magic bytes) for identifying file types by header bytes.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
-<label for="filter" class="sr-only">Filter</label>
-<input id="filter" placeholder="Search by hex, extension or type" style="width:100%;max-width:400px;padding:10px;margin-bottom:16px;border:1px solid #ddd;border-radius:6px" aria-label="Filter">
+<div class="info-box">
+<strong>What are magic bytes?</strong> Magic bytes are unique byte sequences at the start of files that identify the file type. They're embedded in the file format specification and remain constant regardless of filename. Example: All PNG files start with <code>89 50 4E 47 0D 0A 1A 0A</code>.
+</div>
 
-<h3>Common File Signatures</h3>
-<table class="ref-table">
-<thead><tr><th>Hex (first bytes)</th><th>Extension</th><th>File Type</th></tr></thead>
-<tbody id="body"></tbody>
-</table>
+<div class="filter-box">
+<label for="filter" class="sr-only">Filter</label>
+<input id="filter" placeholder="Search by hex, extension, or file type..." style="width:100%;max-width:500px;padding:10px;border:1px solid #ddd;border-radius:6px;font-size:14px" aria-label="Filter">
+</div>
+
+<div id="sigs-content"></div>
 
 <section class="tool-seo">
 <h3>About Magic Bytes Reference</h3>
-<p>This reference lists magic bytes (file signatures) used to identify file types when the extension is missing or unreliable.</p>
-<p>It is useful for file validation, security checks and building file-type detection logic.</p>
+<p>This reference lists magic bytes (file signatures) used to identify file types when extensions are missing, unreliable, or potentially spoofed. Security software, file managers, and forensic tools use magic bytes for accurate file type detection.</p>
+<p>Each signature shows the hexadecimal values of the first bytes of a file, along with associated extensions and format description.</p>
+
+<h4>How to Read File Headers</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Hex Format:
+  FF D8 FF E0 00 10 4A 46 49 46 00 01
+  │  │  │  │  │  │  │  │  │  │  │  │
+  │  │  │  │  │  │  │  │  │  │  │  └─ Null terminator
+  │  │  │  │  │  │  │  │  │  │  └──── ASCII 'F'
+  │  │  │  │  │  │  │  │  │  └─────── ASCII 'I'
+  │  │  │  │  │  │  │  │  └────────── ASCII 'F'
+  │  │  │  │  │  │  │  └───────────── ASCII 'J'
+  │  │  │  │  │  │  └──────────────── Length marker
+  │  │  │  │  │  └─────────────────── APP0 marker
+  │  │  │  │  └────────────────────── Start of Image
+  │  │  │  └───────────────────────── JPEG marker
+  │  │  └──────────────────────────── JPEG marker
+  │  └─────────────────────────────── JPEG marker
+  └────────────────────────────────── JPEG SOI marker
+
+This is a JPEG file with JFIF header.
+</pre>
+
+<h4>Reading Magic Bytes in Code</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Node.js - Read file header
+const fs = require('fs');
+
+function getFileType(filePath) {
+  const buffer = fs.readFileSync(filePath, { encoding: 'hex', start: 0, end: 16 });
+  const hex = buffer.toUpperCase().match(/.{2}/g).join(' ');
+
+  if (hex.startsWith('89 50 4E 47')) return 'PNG image';
+  if (hex.startsWith('FF D8 FF')) return 'JPEG image';
+  if (hex.startsWith('47 49 46')) return 'GIF image';
+  if (hex.startsWith('25 50 44 46')) return 'PDF document';
+  if (hex.startsWith('50 4B 03 04')) return 'ZIP archive';
+  if (hex.startsWith('7F 45 4C 46')) return 'ELF executable';
+
+  return 'Unknown';
+}
+
+// Python - Read file header
+def get_file_type(path):
+    with open(path, 'rb') as f:
+        header = f.read(8).hex().upper()
+
+    if header.startswith('89504E47'):
+        return 'PNG image'
+    if header.startswith('FFD8FF'):
+        return 'JPEG image'
+    if header.startswith('474946'):
+        return 'GIF image'
+    if header.startswith('25504446'):
+        return 'PDF document'
+    if header.startswith('504B0304'):
+        return 'ZIP archive'
+
+    return 'Unknown'
+
+// Bash - Using file command
+$ file image.png
+image.png: PNG image data, 1920 x 1080, 8-bit/color RGB
+
+// Bash - Using xxd to view hex
+$ xxd -l 16 image.png
+00000000: 8950 4e47 0d0a 1a0a 0000 000d 4948 4452  .PNG........IHDR
+</pre>
+
+<h4>Magic Bytes by Category</h4>
+
+<h5>Image Formats</h5>
+<table class="ref-table">
+<thead><tr><th>Hex Signature</th><th>Extension</th><th>File Type</th></tr></thead>
+<tbody>
+<tr><td><code>FF D8 FF</code></td><td>.jpg, .jpeg</td><td>JPEG image (Start of Image)</td></tr>
+<tr><td><code>89 50 4E 47 0D 0A 1A 0A</code></td><td>.png</td><td>PNG image (includes DOS line endings)</td></tr>
+<tr><td><code>47 49 46 38 37 61</code></td><td>.gif</td><td>GIF 87a image</td></tr>
+<tr><td><code>47 49 46 38 39 61</code></td><td>.gif</td><td>GIF 89a image (supports animation)</td></tr>
+<tr><td><code>52 49 46 46 ?? ?? ?? ?? 57 45 42 50</code></td><td>.webp</td><td>WebP image (RIFF header)</td></tr>
+<tr><td><code>42 4D</code></td><td>.bmp</td><td>Bitmap image (ASCII 'BM')</td></tr>
+<tr><td><code>00 00 01 00</code></td><td>.ico</td><td>Windows icon</td></tr>
+<tr><td><code>49 49 2A 00</code></td><td>.tif, .tiff</td><td>TIFF (little-endian)</td></tr>
+<tr><td><code>4D 4D 00 2A</code></td><td>.tif, .tiff</td><td>TIFF (big-endian)</td></tr>
+<tr><td><code>FF 0A</code></td><td>.avif</td><td>AVIF image</td></tr>
+</tbody>
+</table>
+
+<h5>Document Formats</h5>
+<table class="ref-table">
+<thead><tr><th>Hex Signature</th><th>Extension</th><th>File Type</th></tr></thead>
+<tbody>
+<tr><td><code>25 50 44 46 2D</code></td><td>.pdf</td><td>PDF document ("%PDF-")</td></tr>
+<tr><td><code>D0 CF 11 E0 A1 B1 1A E1</code></td><td>.doc, .xls, .ppt</td><td>Microsoft Office (OLE compound)</td></tr>
+<tr><td><code>50 4B 03 04</code></td><td>.docx, .xlsx, .pptx</td><td>Office Open XML (ZIP-based)</td></tr>
+<tr><td><code>09 08 10 00 00 06 05 00</code></td><td>.xls</td><td>Excel spreadsheet</td></tr>
+<tr><td><code>7B 5C 72 74 66 31</code></td><td>.rtf</td><td>Rich Text Format ("{\rtf1")</td></tr>
+<tr><td><code>3C 3F 78 6D 6C</code></td><td>.xml</td><td>XML document ("&lt;?xml")</td></tr>
+<tr><td><code>3C 68 74 6D 6C</code></td><td>.html, .htm</td><td>HTML document ("&lt;html")</td></tr>
+</tbody>
+</table>
+
+<h5>Archive/Compressed Formats</h5>
+<table class="ref-table">
+<thead><tr><th>Hex Signature</th><th>Extension</th><th>File Type</th></tr></thead>
+<tbody>
+<tr><td><code>50 4B 03 04</code></td><td>.zip</td><td>ZIP archive ("PK..")</td></tr>
+<tr><td><code>50 4B 05 06</code></td><td>.zip</td><td>ZIP (empty archive)</td></tr>
+<tr><td><code>50 4B 07 08</code></td><td>.zip</td><td>ZIP (spanned archive)</td></tr>
+<tr><td><code>1F 8B</code></td><td>.gz, .gzip</td><td>Gzip compressed</td></tr>
+<tr><td><code>42 5A 68</code></td><td>.bz2</td><td>Bzip2 compressed ("BZh")</td></tr>
+<tr><td><code>FD 37 7A 58 5A 00</code></td><td>.xz</td><td>XZ compressed (7z/LZMA)</td></tr>
+<tr><td><code>37 7A BC AF 27 1C</code></td><td>.7z</td><td>7-Zip archive</td></tr>
+<tr><td><code>52 61 72 21 1A 07</code></td><td>.rar</td><td>RAR archive ("Rar!")</td></tr>
+<tr><td><code>75 73 74 61 72</code></td><td>.tar</td><td>TAR archive ("ustar" at offset 257)</td></tr>
+</tbody>
+</table>
+
+<h5>Executable Formats</h5>
+<table class="ref-table">
+<thead><tr><th>Hex Signature</th><th>Extension</th><th>File Type</th></tr></thead>
+<tbody>
+<tr><td><code>7F 45 4C 46</code></td><td>—</td><td>ELF executable (Linux/Unix)</td></tr>
+<tr><td><code>4D 5A</code></td><td>.exe, .dll</td><td>PE executable (Windows "MZ")</td></tr>
+<tr><td><code>CA FE BA BE</code></td><td>.class</td><td>Java class file</td></tr>
+<tr><td><code>CA FE 00 00</code></td><td>.macho</td><td>Mach-O (macOS)</td></tr>
+<tr><td><code>23 21 2F 75 73 72</code></td><td>—</td><td>Shell script ("#!/usr")</td></tr>
+</tbody>
+</table>
+
+<h5>Audio/Video Formats</h5>
+<table class="ref-table">
+<thead><tr><th>Hex Signature</th><th>Extension</th><th>File Type</th></tr></thead>
+<tbody>
+<tr><td><code>49 44 33</code></td><td>.mp3</td><td>MP3 with ID3 tag</td></tr>
+<tr><td><code>FF FB</code></td><td>.mp3</td><td>MP3 (MPEG layer 3)</td></tr>
+<tr><td><code>FF FA</code></td><td>.mp3</td><td>MP3 (MPEG layer 2)</td></tr>
+<tr><td><code>52 49 46 46 ?? ?? ?? ?? 57 41 56 45</code></td><td>.wav</td><td>WAV audio ("RIFF....WAVE")</td></tr>
+<tr><td><code>4F 67 67 53 00</code></td><td>.ogg, .ogv</td><td>Ogg Vorbis/Theora ("OggS")</td></tr>
+<tr><td><code>00 00 00 18 66 74 79 70</code></td><td>.mp4, .m4v</td><td>MP4 video ("....ftyp")</td></tr>
+<tr><td><code>1A 45 DF A3</code></td><td>.mkv, .webm</td><td>Matroska/WebM container</td></tr>
+<tr><td><code>66 74 79 70 71 74 20 20</code></td><td>.mov</td><td>QuickTime ("ftypqt  ")</td></tr>
+<tr><td><code>00 00 01 BA</code></td><td>.mpg, .mpeg</td><td>MPEG program stream</td></tr>
+</tbody>
+</table>
+
+<h5>Font Formats</h5>
+<table class="ref-table">
+<thead><tr><th>Hex Signature</th><th>Extension</th><th>File Type</th></tr></thead>
+<tbody>
+<tr><td><code>00 01 00 00</code></td><td>.ttf</td><td>TrueType font</td></tr>
+<tr><td><code>4F 54 54 4F</code></td><td>.otf</td><td>OpenType font ("OTTO")</td></tr>
+<tr><td><code>77 4F 46 46</code></td><td>.woff</td><td>WOFF font ("wOFF")</td></tr>
+<tr><td><code>77 4F 46 32</code></td><td>.woff2</td><td>WOFF2 font ("wOF2")</td></tr>
+</tbody>
+</table>
+
+<h5>Database/Cache Formats</h5>
+<table class="ref-table">
+<thead><tr><th>Hex Signature</th><th>Extension</th><th>File Type</th></tr></thead>
+<tbody>
+<tr><td><code>53 51 4C 69 74 65 20 66</code></td><td>.db, .sqlite</td><td>SQLite database ("SQLite f")</td></tr>
+<tr><td><code>00 00 00 02</code></td><td>.dex</td><td>Android Dalvik executable</td></tr>
+<tr><td><code>4A 45 52 50 02</code></td><td>.jar</td><td>Java JAR file</td></tr>
+</tbody>
+</table>
+
+<h5>Encoding Signatures (BOM)</h5>
+<table class="ref-table">
+<thead><tr><th>Hex Signature</th><th>Extension</th><th>File Type</th></tr></thead>
+<tbody>
+<tr><td><code>EF BB BF</code></td><td>—</td><td>UTF-8 BOM (optional)</td></tr>
+<tr><td><code>FF FE</code></td><td>—</td><td>UTF-16 LE BOM</td></tr>
+<tr><td><code>FE FF</code></td><td>—</td><td>UTF-16 BE BOM</td></tr>
+<tr><td><code>FF FE 00 00</code></td><td>—</td><td>UTF-32 LE BOM</td></tr>
+<tr><td><code>00 00 FE FF</code></td><td>—</td><td>UTF-32 BE BOM</td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Magic Bytes Reference used for?</dt>
-  <dd>Magic Bytes Reference is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What are magic bytes?</dt>
+  <dd>Magic bytes (file signatures) are unique byte sequences at the start of files that identify the file type. They're called 'magic' because they reliably identify formats regardless of filename extension. Example: PNG files always start with 89 50 4E 47 (hex for 'PNG').</dd>
+
+  <dt>Why use magic bytes instead of file extensions?</dt>
+  <dd>File extensions can be changed, removed, or spoofed. Magic bytes are embedded in the file itself and cannot be easily faked. Security software uses magic bytes to detect malicious files disguised as safe types. File type detection by content is more reliable than by extension.</dd>
+
+  <dt>How do I read magic bytes?</dt>
+  <dd>Magic bytes are shown in hexadecimal (base-16). Each pair represents one byte (0-255). Example: 'FF D8 FF' means bytes 255, 216, 255. Read a file's first bytes with a hex editor and compare to the signature table to identify the format.</dd>
+
+  <dt>What file types can be identified by magic bytes?</dt>
+  <dd>Most binary formats: images (JPEG, PNG, GIF, WebP), documents (PDF, DOCX, XLSX), archives (ZIP, GZIP, TAR, RAR), executables (ELF, PE, Mach-O), audio/video (MP3, WAV, MP4, MKV), fonts (TTF, WOFF), and more. Plain text files typically lack magic bytes.</dd>
+
+  <dt>What is the 'file' command?</dt>
+  <dd>The 'file' command (Linux/Unix/macOS) identifies file types using magic bytes. Usage: 'file filename' returns the detected type. It uses a magic database (/usr/share/file/magic) containing thousands of signatures. Windows equivalents include TrID and File Identifier.</dd>
+
+  <dt>Can magic bytes be spoofed?</dt>
+  <dd>Yes, magic bytes can be prepended to files to disguise them, but this requires binary editing and doesn't change the actual content structure. Security tools perform deeper inspection beyond magic bytes. Simple extension checking is less secure than magic byte validation.</dd>
 </dl>
 </section>
 </main>
 <script>
 var sigs=[
-["FF D8 FF",".jpg,.jpeg","JPEG image"],
-["89 50 4E 47 0D 0A 1A 0A",".png","PNG image"],
-["47 49 46 38 37 61","GIF87a","GIF image"],
-["47 49 46 38 39 61","GIF89a","GIF image (animated)"],
-["52 49 46 46","RIFF","WAV/WebP (RIFF)"],
-["25 50 44 46",".pdf","PDF document"],
-["50 4B 03 04",".zip,.docx,.xlsx","ZIP archive"],
-["50 4B 05 06",".zip","ZIP (empty)"],
-["1F 8B",".gz,.gzip","Gzip"],
-["42 5A 68",".bz2","Bzip2"],
-["7F 45 4C 46",".elf","ELF executable"],
-["CA FE BA BE",".class","Java class"],
-["D0 CF 11 E0",".doc,.xls,.ppt","Microsoft Office (OLE)"],
-["00 00 00",".mp4,.mov","MP4/MOV (ftyp)"],
-["FF FB","","MP3 (ID3 optional)"],
-["49 44 33",".mp3","MP3 (ID3)"],
-["3C 3F 78 6D 6C","<?xml",".xml","XML"],
-["7B 22",".json","JSON"],
-["3C 21 44 4F 43 54 59 50 45",".html","HTML document"],
-["EF BB BF","","UTF-8 BOM"],
-["FF FE","","UTF-16 LE BOM"],
-["FE FF","","UTF-16 BE BOM"]
-]
+{category:"Image Formats",types:[
+[["FF D8 FF"],".jpg,.jpeg","JPEG image"],
+[["89 50 4E 47 0D 0A 1A 0A"],".png","PNG image"],
+[["47 49 46 38 37 61"],".gif","GIF 87a"],
+[["47 49 46 38 39 61"],".gif","GIF 89a (animated)"],
+[["52 49 46 46"],".webp","WebP (RIFF)"],
+[["42 4D"],".bmp","Bitmap ('BM')"],
+[["00 00 01 00"],".ico","Windows icon"],
+[["49 49 2A 00","4D 4D 00 2A"],".tif,.tiff","TIFF (little/big endian)"],
+[["FF 0A"],".avif","AVIF image"]
+]},
+{category:"Document Formats",types:[
+[["25 50 44 46 2D"],".pdf","PDF ('%PDF-')"],
+[["D0 CF 11 E0 A1 B1 1A E1"],".doc,.xls,.ppt","MS Office (OLE)"],
+[["50 4B 03 04"],".docx,.xlsx,.pptx","Office Open XML"],
+[["09 08 10 00 00 06 05 00"],".xls","Excel"],
+[["7B 5C 72 74 66 31"],".rtf","Rich Text ('{\\rtf1')"],
+[["3C 3F 78 6D 6C"],".xml","XML ('&lt;?xml')"],
+[["3C 68 74 6D 6C"],".html,.htm","HTML ('&lt;html')"]
+]},
+{category:"Archive Formats",types:[
+[["50 4B 03 04"],".zip","ZIP archive"],
+[["50 4B 05 06"],".zip","ZIP (empty)"],
+[["50 4B 07 08"],".zip","ZIP (spanned)"],
+[["1F 8B"],".gz,.gzip","Gzip"],
+[["42 5A 68"],".bz2","Bzip2 ('BZh')"],
+[["FD 37 7A 58 5A 00"],".xz","XZ/LZMA"],
+[["37 7A BC AF 27 1C"],".7z","7-Zip"],
+[["52 61 72 21 1A 07"],".rar","RAR ('Rar!')"],
+[["75 73 74 61 72"],".tar","TAR ('ustar')"]
+]},
+{category:"Executable Formats",types:[
+[["7F 45 4C 46"],"—","ELF (Linux/Unix)"],
+[["4D 5A"],".exe,.dll","PE (Windows 'MZ')"],
+[["CA FE BA BE"],".class","Java class"],
+[["CA FE 00 00"],"—","Mach-O (macOS)"],
+[["23 21 2F 75 73 72"],"—","Shell script ('#!/usr')"]
+]},
+{category:"Audio/Video Formats",types:[
+[["49 44 33"],".mp3","MP3 (ID3)"],
+[["FF FB","FF FA"],".mp3","MP3 (MPEG)"],
+[["52 49 46 46"],".wav","WAV (RIFF)"],
+[["4F 67 67 53 00"],".ogg,.ogv","Ogg ('OggS')"],
+[["00 00 00 18 66 74 79 70"],".mp4,.m4v","MP4 ('ftyp')"],
+[["1A 45 DF A3"],".mkv,.webm","Matroska/WebM"],
+[["66 74 79 70 71 74 20 20"],".mov","QuickTime"],
+[["00 00 01 BA"],".mpg,.mpeg","MPEG PS"]
+]},
+{category:"Font Formats",types:[
+[["00 01 00 00"],".ttf","TrueType"],
+[["4F 54 54 4F"],".otf","OpenType ('OTTO')"],
+[["77 4F 46 46"],".woff","WOFF ('wOFF')"],
+[["77 4F 46 32"],".woff2","WOFF2 ('wOF2')"]
+]},
+{category:"Database/Cache",types:[
+[["53 51 4C 69 74 65 20 66"],".db,.sqlite","SQLite"],
+[["00 00 00 02"],".dex","Dalvik Executable"],
+[["4A 45 52 50 02"],".jar","Java JAR"]
+]},
+{category:"Encoding (BOM)",types:[
+[["EF BB BF"],"—","UTF-8 BOM"],
+[["FF FE"],"—","UTF-16 LE BOM"],
+[["FE FF"],"—","UTF-16 BE BOM"],
+[["FF FE 00 00"],"—","UTF-32 LE BOM"],
+[["00 00 FE FF"],"—","UTF-32 BE BOM"]
+]}
+];
 function render(){
-var q=(document.getElementById("filter").value||"").toLowerCase().trim()
-var tbody=document.getElementById("body")
-tbody.innerHTML=""
-sigs.forEach(function(s){
-var hex=s[0],ext=s[1],type=s[2]
-if(q&&hex.toLowerCase().indexOf(q)===-1&&ext.toLowerCase().indexOf(q)===-1&&type.toLowerCase().indexOf(q)===-1)return
-var tr=document.createElement("tr")
-tr.innerHTML="<td><code>"+hex+"</code></td><td><code>"+ext+"</code></td><td>"+type+"</td>"
-tbody.appendChild(tr)
-})
+var q=(document.getElementById("filter").value||"").toLowerCase().trim();
+var container=document.getElementById("sigs-content");
+container.innerHTML="";
+sigs.forEach(function(cat){
+var filtered=cat.types.filter(function(t){
+if(!q)return true;
+var hexStr=t[0].join(" ").toLowerCase();
+var extStr=t[1].toLowerCase();
+var descStr=t[2].toLowerCase();
+return hexStr.indexOf(q)>=0||extStr.indexOf(q)>=0||descStr.indexOf(q)>=0;
+});
+if(filtered.length===0)return;
+var section=document.createElement("div");
+section.innerHTML='<div class="category-header">'+cat.category+'</div>';
+var table=document.createElement("table");
+table.className="ref-table";
+table.innerHTML='<thead><tr><th>Hex Signature</th><th>Extension</th><th>File Type</th></tr></thead>';
+var tbody=document.createElement("tbody");
+filtered.forEach(function(t){
+var hexes=t[0].map(function(h){return '<code>'+h+'</code>';}).join(" ");
+var tr=document.createElement("tr");
+tr.innerHTML='<td>'+hexes+'</td><td><code>'+t[1]+'</code></td><td>'+t[2]+'</td>';
+tbody.appendChild(tr);
+});
+table.appendChild(tbody);
+section.appendChild(table);
+container.appendChild(section);
+});
 }
-document.getElementById("filter").addEventListener("input",render)
-render()
+document.getElementById("filter").addEventListener("input",render);
+render();
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>

@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Stopwatch – Online Stopwatch | ToolForge</title>
-<meta name="description" content="Free online Stopwatch to measure elapsed time. Part of the ToolForge developer tools collection.">
+<title>Stopwatch – Online Stopwatch with Lap Times | ToolForge</title>
+<meta name="description" content="Free online stopwatch with lap times, start/pause/reset controls, and millisecond precision. Includes timer accuracy reference and browser timing comparison. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/stopwatch.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Stopwatch – Online Stopwatch | ToolForge">
-<meta property="og:description" content="Free online Stopwatch to measure elapsed time. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Stopwatch – Online Stopwatch with Lap Times | ToolForge">
+<meta property="og:description" content="Free online stopwatch with lap times, start/pause/reset controls, and millisecond precision. Includes timer accuracy reference and browser timing comparison.">
 <meta property="og:url" content="https://toolforge.site/tools/stopwatch.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Stopwatch – Online Stopwatch | ToolForge">
-<meta name="twitter:description" content="Free online Stopwatch to measure elapsed time. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Stopwatch – Online Stopwatch with Lap Times | ToolForge">
+<meta name="twitter:description" content="Free online stopwatch with lap times, start/pause/reset controls, and millisecond precision.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Stopwatch used for?",
+      "name": "How accurate is this online stopwatch?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Stopwatch is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "This stopwatch uses JavaScript's Date.now() for timestamp tracking, which provides millisecond precision. The display updates every 100ms via setInterval. Actual accuracy depends on browser timer throttling: Chrome/Firefox limit timers to 4ms minimum, background tabs may throttle to 1000ms. For most timing tasks, accuracy is within ±10-50ms."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between stopwatch and timer?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "A stopwatch counts UP from zero to measure elapsed time (useful for workouts, experiments, response time). A timer counts DOWN from a set time to zero (useful for cooking, Pomodoro, countdowns). This tool is a stopwatch for measuring duration, not a countdown timer."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "Does the stopwatch work in background tabs?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "The stopwatch continues tracking time accurately in background tabs because it uses Date.now() timestamps rather than counting intervals. However, the display updates may be throttled by browsers to save battery. When you return to the tab, the displayed time will jump to the correct elapsed time."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is lap time and how is it different from split time?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Lap time shows the duration for each individual segment (lap 1: 0:30, lap 2: 0:45). Split time shows cumulative time at each checkpoint (split 1: 0:30, split 2: 1:15). This stopwatch tracks lap times, useful for interval training, experiment trials, or measuring repeated tasks."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "Why do browser timers have accuracy limits?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Browser timers (setInterval, setTimeout) are not perfectly accurate due to: JavaScript being single-threaded (timers queue behind other code), browser throttling for battery saving (especially in background tabs), OS scheduling priorities, and the Spectre/Meltdown security patches that reduced timer resolution to mitigate side-channel attacks."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "Can I use this stopwatch for professional timing?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "For casual use (workouts, cooking, presentations) this stopwatch is sufficient. For professional timing (sports competitions, scientific experiments, legal depositions), use dedicated timing equipment with certified accuracy. Browser timers have ±10-50ms variance and may throttle in background tabs."
       }
     }
   ]
@@ -72,49 +77,350 @@
 <body>
 <main class="container">
 <h1>Stopwatch</h1>
-<p class="subtitle">Simple stopwatch: start, pause and reset.</p>
+<p class="subtitle">Online stopwatch with start, pause, reset controls and lap time tracking.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
-<h2 id="display" style="font-size:2.5rem;font-family:monospace">00:00:00.0</h2>
-<br>
-<button onclick="start()">Start</button>
-<button onclick="pause()">Pause</button>
-<button onclick="reset()">Reset</button>
+
+<div class="stopwatch-display" id="display" style="font-size:4rem;font-family:monospace;text-align:center;padding:20px">00:00:00.0</div>
+
+<div style="text-align:center;margin:20px 0">
+<button onclick="toggleStartStop()" id="startStopBtn" style="font-size:1.2rem;padding:12px 24px;margin:4px">Start</button>
+<button onclick="recordLap()" id="lapBtn" style="font-size:1.2rem;padding:12px 24px;margin:4px">Lap</button>
+<button onclick="resetStopwatch()" style="font-size:1.2rem;padding:12px 24px;margin:4px">Reset</button>
+</div>
+
+<div id="laps-container" style="max-height:300px;overflow-y:auto;margin:20px 0">
+<h3 style="margin-bottom:10px">Lap Times</h3>
+<table id="laps-table" style="width:100%;border-collapse:collapse;font-size:14px;font-family:monospace">
+<thead>
+<tr style="background:#f5f5f5">
+<th style="border:1px solid #ddd;padding:8px;text-align:left">#</th>
+<th style="border:1px solid #ddd;padding:8px;text-align:left">Lap Time</th>
+<th style="border:1px solid #ddd;padding:8px;text-align:left">Total Time</th>
+</tr>
+</thead>
+<tbody id="laps-body"></tbody>
+</table>
+</div>
+
 <section class="tool-seo">
 <h3>About Stopwatch</h3>
-<p>This stopwatch gives you a simple timer with start, pause and reset controls.</p>
-<p>It is useful for workouts, practice sessions, response-time checks and any task where you need to measure elapsed time instead of counting down to zero.</p>
+<p>This online stopwatch provides precise elapsed time measurement with start, pause, reset, and lap recording functionality. It uses JavaScript's high-resolution timestamps (Date.now()) for accurate time tracking, updating the display every 100 milliseconds.</p>
+<p>The stopwatch continues tracking accurately even when the browser tab is in the background, as it calculates elapsed time from stored timestamps rather than counting timer intervals. This makes it suitable for long-duration timing tasks.</p>
+
+<h4>Stopwatch Display Format</h4>
+<p>The display shows time in HH:MM:SS.d format (hours, minutes, seconds, tenths of seconds):</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:14px;overflow:auto">
+Format: HH:MM:SS.d
+  HH = Hours (00-99)
+  MM = Minutes (00-59)
+  SS = Seconds (00-59)
+  d  = Deciseconds (tenths of seconds, 0-9)
+
+Examples:
+  00:00:00.0 = Start (zero elapsed time)
+  00:01:30.5 = 1 minute, 30.5 seconds
+  01:00:00.0 = Exactly 1 hour
+  02:45:30.0 = 2 hours, 45 minutes, 30 seconds
+</pre>
+
+<h4>Stopwatch Algorithm Implementation</h4>
+<p>This stopwatch uses timestamp-based timing rather than interval counting for accuracy:</p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Stopwatch uses Date.now() timestamps for accuracy
+
+let startTime = 0;      // Timestamp when started
+let elapsed = 0;        // Accumulated elapsed time (ms)
+let timerId = null;     // setInterval reference
+let laps = [];          // Lap times array
+
+function start() {
+  if (timerId) return;  // Already running
+  startTime = Date.now();
+  timerId = setInterval(updateDisplay, 100);
+}
+
+function pause() {
+  if (!timerId) return;
+  clearInterval(timerId);
+  elapsed += Date.now() - startTime;  // Accumulate elapsed
+  timerId = null;
+}
+
+function reset() {
+  pause();
+  elapsed = 0;
+  laps = [];
+  updateDisplay();
+}
+
+function updateDisplay() {
+  const total = elapsed + (timerId ? Date.now() - startTime : 0);
+  const h = Math.floor(total / 3600000);
+  const m = Math.floor((total % 3600000) / 60000);
+  const s = Math.floor((total % 60000) / 1000);
+  const d = Math.floor((total % 1000) / 100);
+  display.textContent =
+    String(h).padStart(2, '0') + ':' +
+    String(m).padStart(2, '0') + ':' +
+    String(s).padStart(2, '0') + '.' + d;
+}
+
+function recordLap() {
+  const currentTotal = elapsed + (timerId ? Date.now() - startTime : 0);
+  const lastLapTotal = laps.length > 0 ? laps[laps.length - 1].total : 0;
+  laps.push({
+    lap: laps.length + 1,
+    time: currentTotal - lastLapTotal,  // This lap duration
+    total: currentTotal
+  });
+  renderLaps();
+}
+</pre>
+
+<h4>Browser Timer Accuracy Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Browser</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Foreground Timer</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Background Timer</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Chrome (Desktop)</td>
+    <td style="border:1px solid #ddd;padding:8px">~4ms minimum</td>
+    <td style="border:1px solid #ddd;padding:8px">Throttled to 1000ms</td>
+    <td style="border:1px solid #ddd;padding:8px">Uses V8 timer throttling</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Firefox (Desktop)</td>
+    <td style="border:1px solid #ddd;padding:8px">~4ms minimum</td>
+    <td style="border:1px solid #ddd;padding:8px">Throttled to 1000ms</td>
+    <td style="border:1px solid #ddd;padding:8px">Similar throttling to Chrome</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Safari (macOS/iOS)</td>
+    <td style="border:1px solid #ddd;padding:8px">~4ms minimum</td>
+    <td style="border:1px solid #ddd;padding:8px">Aggressive throttling</td>
+    <td style="border:1px solid #ddd;padding:8px">Battery optimization</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Edge (Chromium)</td>
+    <td style="border:1px solid #ddd;padding:8px">~4ms minimum</td>
+    <td style="border:1px solid #ddd;padding:8px">Throttled to 1000ms</td>
+    <td style="border:1px solid #ddd;padding:8px">Same as Chrome (Chromium)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Mobile Browsers</td>
+    <td style="border:1px solid #ddd;padding:8px">~4-10ms</td>
+    <td style="border:1px solid #ddd;padding:8px">Very aggressive</td>
+    <td style="border:1px solid #ddd;padding:8px">Battery saving priority</td>
+  </tr>
+</table>
+
+<h4>Why Timestamp-Based Timing is More Accurate</h4>
+<p>Many simple stopwatches use setInterval alone to count elapsed time, but this approach accumulates errors:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:14px;overflow:auto">
+Interval-Based (Less Accurate):
+  let count = 0;
+  setInterval(() => { count += 100; }, 100);
+  // Problem: Browser may delay callbacks
+  // After 10 seconds real time, count might be 9500 or 10500
+
+Timestamp-Based (More Accurate):
+  const start = Date.now();
+  setInterval(() => {
+    const elapsed = Date.now() - start;
+    // Always shows correct elapsed time
+    // Display may lag, but calculation is accurate
+  }, 100);
+</pre>
+
+<h4>Common Stopwatch Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Domain</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Typical Duration</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Fitness</td>
+    <td style="border:1px solid #ddd;padding:8px">Interval training, lap times</td>
+    <td style="border:1px solid #ddd;padding:8px">30 sec - 2 hours</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Cooking</td>
+    <td style="border:1px solid #ddd;padding:8px">Recipe timing, multiple dishes</td>
+    <td style="border:1px solid #ddd;padding:8px">1 min - 3 hours</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Presentations</td>
+    <td style="border:1px solid #ddd;padding:8px">Speech timing, Q&A tracking</td>
+    <td style="border:1px solid #ddd;padding:8px">5 min - 1 hour</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Development</td>
+    <td style="border:1px solid #ddd;padding:8px">Performance testing, benchmarks</td>
+    <td style="border:1px solid #ddd;padding:8px">100ms - 30 min</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Science</td>
+    <td style="border:1px solid #ddd;padding:8px">Experiment duration, reactions</td>
+    <td style="border:1px solid #ddd;padding:8px">1 sec - 24 hours</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Gaming</td>
+    <td style="border:1px solid #ddd;padding:8px">Speedruns, challenge timers</td>
+    <td style="border:1px solid #ddd;padding:8px">1 min - 10 hours</td>
+  </tr>
+</table>
+
+<h4>Time Format Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Unit</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Milliseconds</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Symbol</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Millisecond</td>
+    <td style="border:1px solid #ddd;padding:8px">1 ms</td>
+    <td style="border:1px solid #ddd;padding:8px">ms</td>
+    <td style="border:1px solid #ddd;padding:8px">100 ms = 0.1 sec</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Second</td>
+    <td style="border:1px solid #ddd;padding:8px">1,000 ms</td>
+    <td style="border:1px solid #ddd;padding:8px">s</td>
+    <td style="border:1px solid #ddd;padding:8px">60 s = 1 min</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Minute</td>
+    <td style="border:1px solid #ddd;padding:8px">60,000 ms</td>
+    <td style="border:1px solid #ddd;padding:8px">m</td>
+    <td style="border:1px solid #ddd;padding:8px">60 m = 1 hour</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Hour</td>
+    <td style="border:1px solid #ddd;padding:8px">3,600,000 ms</td>
+    <td style="border:1px solid #ddd;padding:8px">h</td>
+    <td style="border:1px solid #ddd;padding:8px">24 h = 1 day</td>
+  </tr>
+</table>
+
+<h4>Stopwatch vs Timer: When to Use Each</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Feature</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Stopwatch</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Timer/Countdown</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Direction</td>
+    <td style="border:1px solid #ddd;padding:8px">Counts UP from 0</td>
+    <td style="border:1px solid #ddd;padding:8px">Counts DOWN to 0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Use Case</td>
+    <td style="border:1px solid #ddd;padding:8px">Measure elapsed time</td>
+    <td style="border:1px solid #ddd;padding:8px">Track until deadline</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">End Condition</td>
+    <td style="border:1px solid #ddd;padding:8px">Manual stop</td>
+    <td style="border:1px solid #ddd;padding:8px">Alarm at zero</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Example</td>
+    <td style="border:1px solid #ddd;padding:8px">How long did this take?</td>
+    <td style="border:1px solid #ddd;padding:8px">When will this finish?</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Stopwatch used for?</dt>
-  <dd>Stopwatch is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>How accurate is this online stopwatch?</dt>
+  <dd>This stopwatch uses JavaScript's Date.now() for timestamp tracking, which provides millisecond precision. The display updates every 100ms via setInterval. Actual accuracy depends on browser timer throttling: Chrome/Firefox limit timers to 4ms minimum, background tabs may throttle to 1000ms. For most timing tasks, accuracy is within ±10-50ms.</dd>
+
+  <dt>What is the difference between stopwatch and timer?</dt>
+  <dd>A stopwatch counts UP from zero to measure elapsed time (useful for workouts, experiments, response time). A timer counts DOWN from a set time to zero (useful for cooking, Pomodoro, countdowns). This tool is a stopwatch for measuring duration, not a countdown timer.</dd>
+
+  <dt>Does the stopwatch work in background tabs?</dt>
+  <dd>The stopwatch continues tracking time accurately in background tabs because it uses Date.now() timestamps rather than counting intervals. However, the display updates may be throttled by browsers to save battery. When you return to the tab, the displayed time will jump to the correct elapsed time.</dd>
+
+  <dt>What is lap time and how is it different from split time?</dt>
+  <dd>Lap time shows the duration for each individual segment (lap 1: 0:30, lap 2: 0:45). Split time shows cumulative time at each checkpoint (split 1: 0:30, split 2: 1:15). This stopwatch tracks lap times, useful for interval training, experiment trials, or measuring repeated tasks.</dd>
+
+  <dt>Why do browser timers have accuracy limits?</dt>
+  <dd>Browser timers (setInterval, setTimeout) are not perfectly accurate due to: JavaScript being single-threaded (timers queue behind other code), browser throttling for battery saving (especially in background tabs), OS scheduling priorities, and the Spectre/Meltdown security patches that reduced timer resolution to mitigate side-channel attacks.</dd>
+
+  <dt>Can I use this stopwatch for professional timing?</dt>
+  <dd>For casual use (workouts, cooking, presentations) this stopwatch is sufficient. For professional timing (sports competitions, scientific experiments, legal depositions), use dedicated timing equipment with certified accuracy. Browser timers have ±10-50ms variance and may throttle in background tabs.</dd>
 </dl>
 </section>
 </main>
 <script>
-var startTime=0,elapsed=0,tid=null
-function show(){
-var ms=elapsed+(tid?Date.now()-startTime:0)
-var h=Math.floor(ms/3600000),m=Math.floor((ms%3600000)/60000),s=Math.floor((ms%60000)/1000),t=Math.floor((ms%1000)/100)
-document.getElementById("display").innerText=
-String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")+"."+t
+var startTime=0,elapsed=0,timerId=null,laps=[]
+var display=document.getElementById("display")
+var lapsBody=document.getElementById("laps-body")
+var startStopBtn=document.getElementById("startStopBtn")
+var lapBtn=document.getElementById("lapBtn")
+
+function formatTime(ms){
+var h=Math.floor(ms/3600000)
+var m=Math.floor((ms%3600000)/60000)
+var s=Math.floor((ms%60000)/1000)
+var d=Math.floor((ms%1000)/100)
+return String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")+"."+d
 }
-function start(){if(tid)return;startTime=Date.now();tid=setInterval(show,100)}
-function pause(){if(tid){clearInterval(tid);elapsed+=Date.now()-startTime;tid=null}}
-function reset(){pause();elapsed=0;show()}
-show()
+
+function updateDisplay(){
+var total=elapsed+(timerId?Date.now()-startTime:0)
+display.textContent=formatTime(total)
+}
+
+function toggleStartStop(){
+if(timerId){
+clearInterval(timerId)
+elapsed+=Date.now()-startTime
+timerId=null
+startStopBtn.textContent="Start"
+lapBtn.disabled=true
+}else{
+startTime=Date.now()
+timerId=setInterval(updateDisplay,100)
+startStopBtn.textContent="Stop"
+lapBtn.disabled=false
+}
+}
+
+function resetStopwatch(){
+if(timerId){clearInterval(timerId);timerId=null}
+elapsed=0
+laps=[]
+lapsBody.innerHTML=""
+updateDisplay()
+startStopBtn.textContent="Start"
+lapBtn.disabled=true
+}
+
+function recordLap(){
+if(!timerId&&elapsed===0)return
+var total=elapsed+(timerId?Date.now()-startTime:0)
+var lastTotal=laps.length>0?laps[laps.length-1].total:0
+var lapTime=total-lastTotal
+laps.push({lap:laps.length+1,time:lapTime,total:total})
+var row=document.createElement("tr")
+row.innerHTML="<td style=\"border:1px solid #ddd;padding:8px\">"+laps.length+"</td>"+
+"<td style=\"border:1px solid #ddd;padding:8px\">"+formatTime(lapTime)+"</td>"+
+"<td style=\"border:1px solid #ddd;padding:8px\">"+formatTime(total)+"</td>"
+lapsBody.insertBefore(row,lapsBody.firstChild)
+}
+
+updateDisplay()
+lapBtn.disabled=true
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>

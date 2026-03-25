@@ -3,21 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Font Preview Tool – Preview Fonts with Custom Text | ToolForge</title>
-<meta name="description" content="Free online font preview tool. Input text, select font family and see live preview. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Live font preview tool for web developers and designers. Test system fonts with custom text, adjust size and weight, compare typography for web design decisions.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/font-preview-tool.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Font Preview Tool – Preview Fonts with Custom Text | ToolForge">
-<meta property="og:description" content="Preview fonts with custom text.">
+<meta property="og:description" content="Live font preview tool for testing system fonts with custom text and sizing.">
 <meta property="og:url" content="https://toolforge.site/tools/font-preview-tool.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Font Preview Tool – Preview Fonts with Custom Text | ToolForge">
-<meta name="twitter:description" content="Preview fonts with custom text.">
+<meta name="twitter:description" content="Live font preview tool for web developers and designers.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 <style>
-#preview{min-height:120px;padding:24px;border:1px solid #e5e7eb;background:#fff;margin:16px 0;font-size:1.5rem}
+#preview{min-height:120px;padding:24px;border:1px solid #e5e7eb;background:#fff;margin:16px 0;font-size:1.5rem;line-height:1.6}
+.controls-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.controls-row label{min-width:100px;font-weight:500;color:#374151}
+.controls-row input,.controls-row select{flex:1;min-width:200px;max-width:400px}
+.font-category{margin-top:24px}
+.font-category h4{font-size:0.9rem;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em}
+.web-safe-note{font-size:0.85rem;color:#64748b;margin-top:8px}
 </style>
 
 <script type="application/ld+json">
@@ -27,45 +33,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Font Preview Tool used for?",
+      "name": "What are web-safe fonts?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Font Preview Tool is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "Web-safe fonts are typefaces pre-installed on most operating systems and devices, ensuring consistent display across platforms. Classic web-safe fonts include Arial, Times New Roman, Georgia, Verdana, Tahoma, and Courier New. Modern web-safe options include system-ui (uses OS default), Trebuchet MS, and Impact."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between serif and sans-serif fonts?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Serif fonts have small decorative strokes (serifs) at the ends of letterforms, conveying tradition and formality (e.g., Times New Roman, Georgia). Sans-serif fonts lack these strokes, appearing cleaner and more modern (e.g., Arial, Helvetica, Verdana). Serif is often used for print body text; sans-serif dominates digital interfaces."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "How do I use custom fonts in CSS?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Use the @font-face rule to define custom fonts: @font-face { font-family: 'MyFont'; src: url('font.woff2') format('woff2'); } Then apply: body { font-family: 'MyFont', sans-serif; }. Always include fallback fonts. Modern formats are WOFF2 (best compression) and WOFF (widely supported)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What font formats are supported in web browsers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "WOFF2 offers the best compression and is supported in all modern browsers. WOFF has universal support including older browsers. TTF/OTF work but have larger file sizes. EOT is legacy IE-only. SVG fonts are deprecated. Best practice: serve WOFF2 with WOFF fallback for maximum compatibility."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What is system-ui font family?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "system-ui is a generic font family that automatically uses the default system font of the user's operating system: San Francisco on macOS/iOS, Segoe UI on Windows, Roboto on Android, Cantarell on GNOME. Using font-family: system-ui, sans-serif gives native OS appearance and excellent readability."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How do I choose readable fonts for web design?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "For body text, use 16px minimum (14px absolute minimum), 1.4-1.6 line height, and high contrast (4.5:1 ratio for AA compliance). Sans-serif fonts generally read better on screens. Test fonts at actual sizes with real content. Consider x-height, letter spacing, and how fonts render at different weights."
       }
     }
   ]
@@ -78,57 +89,174 @@
 <p class="subtitle">Input text, select font family and see live preview.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 
+<div class="controls-row">
 <label for="text">Sample text</label>
-<input id="text" type="text" value="The quick brown fox jumps over the lazy dog. 0123456789" style="width:90%">
-<br><br>
+<input id="text" type="text" value="The quick brown fox jumps over the lazy dog. 0123456789" style="flex:1;min-width:300px;max-width:600px;padding:10px;border:1px solid #ddd;border-radius:6px">
+</div>
 
+<div class="controls-row">
 <label for="font">Font family</label>
-<select id="font" style="width:90%">
-<option value="Arial, sans-serif">Arial</option>
-<option value="'Times New Roman', serif">Times New Roman</option>
-<option value="Georgia, serif">Georgia</option>
-<option value="'Courier New', monospace">Courier New</option>
-<option value="Verdana, sans-serif">Verdana</option>
-<option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
-<option value="Impact, sans-serif">Impact</option>
-<option value="'Comic Sans MS', cursive">Comic Sans MS</option>
-<option value="'Lucida Console', monospace">Lucida Console</option>
-<option value="'Palatino Linotype', serif">Palatino Linotype</option>
-<option value="Tahoma, sans-serif">Tahoma</option>
-<option value="system-ui, sans-serif">system-ui</option>
-<option value="'Segoe UI', sans-serif">Segoe UI</option>
-<option value="'Apple Color Emoji', 'Segoe UI Emoji', sans-serif">Emoji</option>
+<select id="font" style="flex:1;min-width:200px;max-width:400px;padding:10px;border:1px solid #ddd;border-radius:6px">
+<optgroup label="Sans-Serif">
+<option value="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">system-ui (Default OS)</option>
+<option value="Arial, Helvetica, sans-serif">Arial</option>
+<option value="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Segoe UI</option>
+<option value="Verdana, Geneva, sans-serif">Verdana</option>
+<option value="Tahoma, Geneva, sans-serif">Tahoma</option>
+<option value="'Trebuchet MS', Helvetica, sans-serif">Trebuchet MS</option>
+<option value="'Lucida Sans', 'Lucida Sans Unicode', sans-serif">Lucida Sans</option>
+<option value="Impact, Charcoal, sans-serif">Impact</option>
+<option value="'Comic Sans MS', 'Comic Sans', cursive">Comic Sans MS</option>
+</optgroup>
+<optgroup label="Serif">
+<option value="Georgia, 'Times New Roman', serif">Georgia</option>
+<option value="'Times New Roman', Times, serif">Times New Roman</option>
+<option value="Palatino, 'Palatino Linotype', 'Book Antiqua', serif">Palatino</option>
+<option value="Garamond, 'Book Antiqua', serif">Garamond</option>
+<option value="Cambria, Georgia, serif">Cambria</option>
+</optgroup>
+<optgroup label="Monospace">
+<option value="'Courier New', Courier, monospace">Courier New</option>
+<option value="Consolas, 'Courier New', monospace">Consolas</option>
+<option value="Monaco, 'Lucida Console', monospace">Monaco</option>
+<option value="'Lucida Console', 'Courier New', monospace">Lucida Console</option>
+</optgroup>
+<optgroup label="Display &amp; Other">
+<option value="'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif">Emoji</option>
+<option value="Arial Black, Impact, sans-serif">Arial Black</option>
+<option value="'Brush Script MT', cursive">Brush Script MT</option>
+</optgroup>
 </select>
-<br><br>
+</div>
 
+<div class="controls-row">
 <label for="size">Font size (px)</label>
-<input id="size" type="number" min="8" max="120" value="24" style="width:80px">
-<br><br>
+<input id="size" type="number" min="8" max="120" value="24" style="width:80px;padding:10px;border:1px solid #ddd;border-radius:6px">
+<label for="weight" style="margin-left:16px">Font weight</label>
+<select id="weight" style="width:120px;padding:10px;border:1px solid #ddd;border-radius:6px">
+<option value="300">300 (Light)</option>
+<option value="400" selected>400 (Normal)</option>
+<option value="500">500 (Medium)</option>
+<option value="600">600 (Semi-bold)</option>
+<option value="700">700 (Bold)</option>
+<option value="800">800 (Extra-bold)</option>
+</select>
+<label for="lineheight" style="margin-left:16px">Line height</label>
+<input id="lineheight" type="number" min="0.8" max="3" step="0.1" value="1.5" style="width:70px;padding:10px;border:1px solid #ddd;border-radius:6px">
+</div>
 
 <h3>Preview</h3>
-<div id="preview"></div>
+<div id="preview">The quick brown fox jumps over the lazy dog. 0123456789</div>
 
 <section class="tool-seo">
 <h3>About Font Preview Tool</h3>
-<p>This tool lets you preview different font families with your own text. Useful for typography decisions and design mockups.</p>
-<p>Fonts shown are those installed on your system. Web fonts require separate loading.</p>
+<p>This font preview tool lets you visualize how different typefaces render with your own text content. Simply type your sample text, select a font family from the dropdown, and adjust size and weight to see real-time previews. The tool uses fonts installed on your local system.</p>
+<p>It is useful for web designers selecting typography, developers testing CSS font stacks, content creators previewing headings, and anyone making typography decisions for digital projects.</p>
+
+<h4>Font Category Reference</h4>
+<table class="ref-table">
+<thead><tr><th>Category</th><th>Characteristics</th><th>Common Uses</th><th>Examples</th></tr></thead>
+<tbody>
+<tr><td><strong>Sans-Serif</strong></td><td>Clean, no decorative strokes, modern</td><td>UI text, body copy, headings</td><td>Arial, Helvetica, Verdana, system-ui</td></tr>
+<tr><td><strong>Serif</strong></td><td>Traditional, decorative strokes, formal</td><td>Long-form reading, print, formal docs</td><td>Georgia, Times New Roman, Palatino</td></tr>
+<tr><td><strong>Monospace</strong></td><td>Fixed-width, uniform character spacing</td><td>Code, data, terminal emulation</td><td>Courier New, Consolas, Monaco</td></tr>
+<tr><td><strong>Display</strong></td><td>Decorative, high impact, unique personality</td><td>Headlines, logos, attention-grabbing</td><td>Impact, Brush Script, Comic Sans</td></tr>
+<tr><td><strong>Script</strong></td><td>Cursive, handwritten, calligraphic</td><td>Invitations, signatures, accents</td><td>Brush Script, Lucida Handwriting</td></tr>
+</tbody>
+</table>
+
+<h4>CSS Font Stack Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+/* Modern system font stack */
+font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+/* Sans-serif fallback stack */
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+
+/* Serif for long-form reading */
+font-family: Georgia, 'Times New Roman', Times, serif;
+
+/* Monospace for code */
+font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+
+/* Custom font with fallbacks */
+@font-face {
+  font-family: 'Inter';
+  src: url('inter.woff2') format('woff2');
+}
+body { font-family: 'Inter', system-ui, sans-serif; }
+</pre>
+
+<h4>Font Weight Reference</h4>
+<table class="ref-table">
+<thead><tr><th>Weight</th><th>Numeric Value</th><th>CSS Name</th><th>Typical Use</th></tr></thead>
+<tbody>
+<tr><td>Thin</td><td>100</td><td>thin</td><td>Large display text only</td></tr>
+<tr><td>Extra Light</td><td>200</td><td>extra-light</td><td>Large headings</td></tr>
+<tr><td>Light</td><td>300</td><td>light</td><td>Headings, subtle emphasis</td></tr>
+<tr><td>Normal</td><td>400</td><td>normal</td><td>Body text (default)</td></tr>
+<tr><td>Medium</td><td>500</td><td>medium</td><td>Subheadings, emphasized text</td></tr>
+<tr><td>Semi-Bold</td><td>600</td><td>semi-bold</td><td>Subheadings, buttons</td></tr>
+<tr><td>Bold</td><td>700</td><td>bold</td><td>Headings, strong emphasis</td></tr>
+<tr><td>Extra Bold</td><td>800</td><td>extra-bold</td><td>Display headings</td></tr>
+<tr><td>Black</td><td>900</td><td>black</td><td>Maximum impact headings</td></tr>
+</tbody>
+</table>
+
+<h4>Web Font Performance Best Practices</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px">
+1. Use WOFF2 format (best compression, ~30% smaller than WOFF)
+2. Subset fonts to include only needed characters
+3. Limit font weights (2-3 weights typically sufficient)
+4. Use font-display: swap for better perceived loading
+5. Preload critical fonts: &lt;link rel="preload" href="font.woff2" as="font"&gt;
+6. Consider variable fonts (single file, multiple weights)
+7. Use system fonts as fallbacks in font stack
+
+Example @font-face with best practices:
+@font-face {
+  font-family: 'Inter';
+  src: url('inter.woff2') format('woff2');
+  font-weight: 400 700;  /* Variable font range */
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0100-024F;  /* Latin subset */
+}
+</pre>
+
+<h4>Typography Readability Guidelines</h4>
+<table class="ref-table">
+<thead><tr><th>Property</th><th>Recommendation</th><th>WCAG Reference</th></tr></thead>
+<tbody>
+<tr><td>Body text size</td><td>16px minimum (14px absolute min)</td><td>1.4.4 Resize Text</td></tr>
+<tr><td>Line height (body)</td><td>1.4 to 1.6</td><td>1.4.12 Text Spacing</td></tr>
+<tr><td>Line length</td><td>45-75 characters per line</td><td>Best practice</td></tr>
+<tr><td>Color contrast</td><td>4.5:1 minimum (AA), 7:1 (AAA)</td><td>1.4.3 Contrast</td></tr>
+<tr><td>Paragraph spacing</td><td>0.75em to 1.5em between paragraphs</td><td>1.4.12 Text Spacing</td></tr>
+<tr><td>Letter spacing</td><td>Don't reduce below default; can increase</td><td>1.4.12 Text Spacing</td></tr>
+</tbody>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Font Preview Tool used for?</dt>
-  <dd>Font Preview Tool is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>What are web-safe fonts?</dt>
+  <dd>Web-safe fonts are typefaces pre-installed on most operating systems and devices, ensuring consistent display across platforms. Classic web-safe fonts include Arial, Times New Roman, Georgia, Verdana, Tahoma, and Courier New. Modern web-safe options include system-ui (uses OS default), Trebuchet MS, and Impact.</dd>
+
+  <dt>What is the difference between serif and sans-serif fonts?</dt>
+  <dd>Serif fonts have small decorative strokes (serifs) at the ends of letterforms, conveying tradition and formality (e.g., Times New Roman, Georgia). Sans-serif fonts lack these strokes, appearing cleaner and more modern (e.g., Arial, Helvetica, Verdana). Serif is often used for print body text; sans-serif dominates digital interfaces.</dd>
+
+  <dt>How do I use custom fonts in CSS?</dt>
+  <dd>Use the @font-face rule to define custom fonts: @font-face { font-family: 'MyFont'; src: url('font.woff2') format('woff2'); } Then apply: body { font-family: 'MyFont', sans-serif; }. Always include fallback fonts. Modern formats are WOFF2 (best compression) and WOFF (widely supported).</dd>
+
+  <dt>What font formats are supported in web browsers?</dt>
+  <dd>WOFF2 offers the best compression and is supported in all modern browsers. WOFF has universal support including older browsers. TTF/OTF work but have larger file sizes. EOT is legacy IE-only. SVG fonts are deprecated. Best practice: serve WOFF2 with WOFF fallback for maximum compatibility.</dd>
+
+  <dt>What is system-ui font family?</dt>
+  <dd>system-ui is a generic font family that automatically uses the default system font of the user's operating system: San Francisco on macOS/iOS, Segoe UI on Windows, Roboto on Android, Cantarell on GNOME. Using font-family: system-ui, sans-serif gives native OS appearance and excellent readability.</dd>
+
+  <dt>How do I choose readable fonts for web design?</dt>
+  <dd>For body text, use 16px minimum (14px absolute minimum), 1.4-1.6 line height, and high contrast (4.5:1 ratio for AA compliance). Sans-serif fonts generally read better on screens. Test fonts at actual sizes with real content. Consider x-height, letter spacing, and how fonts render at different weights.</dd>
 </dl>
 </section>
 </main>
@@ -138,8 +266,10 @@ var el=document.getElementById("preview")
 el.textContent=document.getElementById("text").value||"Sample text"
 el.style.fontFamily=document.getElementById("font").value
 el.style.fontSize=(document.getElementById("size").value||24)+"px"
+el.style.fontWeight=document.getElementById("weight").value
+el.style.lineHeight=document.getElementById("lineheight").value||1.5
 }
-["text","font","size"].forEach(function(id){
+["text","font","size","weight","lineheight"].forEach(function(id){
 document.getElementById(id).addEventListener("input",update)
 document.getElementById(id).addEventListener("change",update)
 })

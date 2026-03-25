@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Whitespace Remover – Remove Extra Spaces Online | ToolForge</title>
-<meta name="description" content="Free online Whitespace Remover to normalize and remove extra spaces. Part of the ToolForge developer tools collection.">
+<title>Whitespace Remover – Remove Extra Spaces, Trim Lines Online | ToolForge</title>
+<meta name="description" content="Whitespace Remover removes extra spaces, trims lines, and normalizes whitespace in text. Clean up pasted content, fix formatting, and prepare text for processing. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/whitespace-remover.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Whitespace Remover – Remove Extra Spaces Online | ToolForge">
-<meta property="og:description" content="Free online Whitespace Remover to normalize and remove extra spaces. Part of the ToolForge developer tools collection.">
+<meta property="og:title" content="Whitespace Remover – Remove Extra Spaces, Trim Lines Online | ToolForge">
+<meta property="og:description" content="Whitespace Remover removes extra spaces, trims lines, and normalizes whitespace in text. Clean up pasted content, fix formatting, and prepare text for processing. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/whitespace-remover.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Whitespace Remover – Remove Extra Spaces Online | ToolForge">
-<meta name="twitter:description" content="Free online Whitespace Remover to normalize and remove extra spaces. Part of the ToolForge developer tools collection.">
+<meta name="twitter:title" content="Whitespace Remover – Remove Extra Spaces, Trim Lines Online | ToolForge">
+<meta name="twitter:description" content="Whitespace Remover removes extra spaces, trims lines, and normalizes whitespace in text. Clean up pasted content, fix formatting, and prepare text for processing. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Whitespace Remover?",
+      "name": "What characters are considered whitespace?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Whitespace Remover is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Whitespace characters include: space (0x20), tab (\\t, 0x09), newline (\\n, 0x0A), carriage return (\\r, 0x0D), form feed (\\f, 0x0C), vertical tab (\\v, 0x0B), and non-breaking space (0xA0). JavaScript's \\s regex pattern matches all of these."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between collapsing and removing whitespace?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Collapsing whitespace replaces multiple consecutive whitespace characters with a single space, preserving word boundaries. Removing all whitespace deletes every space character, joining all text together. Use collapse for readable text normalization; use remove-all for compact strings or identifiers."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "When should I trim lines vs collapse spaces?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Trim lines removes leading/trailing whitespace from each line while preserving internal spacing and line breaks—useful for code or structured text. Collapse spaces normalizes all whitespace to single spaces on one line—useful for cleaning pasted text or preparing single-line input."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How does whitespace affect data processing?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Extra whitespace can cause issues in data comparison (\"hello\" ≠ \" hello \"), CSV parsing, URL construction, and database lookups. Normalizing whitespace before processing ensures consistent results and prevents hard-to-debug string mismatch errors."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What are common whitespace problems in text?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Common issues include: multiple spaces between words, trailing spaces at line ends, mixed tab/space indentation, Windows (CRLF) vs Unix (LF) line endings, non-breaking spaces from word processors or web copy-paste, and invisible Unicode whitespace characters."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "How do I remove non-breaking spaces and special whitespace?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Non-breaking spaces ( , 0xA0) and other Unicode whitespace may not be caught by standard trim(). Use a regex that includes Unicode whitespace: /[\\s\\u00A0\\u2000-\\u200B\\u3000]/g. This tool's remove-all function handles most common cases including non-breaking spaces."
       }
     }
   ]
@@ -86,25 +91,165 @@
 <textarea id="output" rows="8" style="width:90%" aria-label="Output text"></textarea>
 <section class="tool-seo">
 <h3>About Whitespace Remover</h3>
-<p>This whitespace remover trims lines, removes extra spaces and can collapse all whitespace to single spaces.</p>
-<p>It is useful for messy pasted text, content cleanup and normalizing text before comparing, storing or reusing it.</p>
+<p>This whitespace remover trims lines, removes extra spaces, and normalizes text using three different methods: collapse spaces (normalize to single spaces), trim each line (remove leading/trailing whitespace per line), and remove all spaces (delete all whitespace characters).</p>
+<p>It is useful for cleaning messy pasted text, normalizing content before comparison or storage, fixing formatting issues in copied data, and preparing text for further processing.</p>
+
+<h4>Types of Whitespace Characters</h4>
+<p>Whitespace includes both visible spacing characters and invisible control characters:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Character</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Code</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Space</td>
+    <td style="border:1px solid #ddd;padding:8px">0x20</td>
+    <td style="border:1px solid #ddd;padding:8px">Standard space character</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Tab</td>
+    <td style="border:1px solid #ddd;padding:8px">0x09 (\\t)</td>
+    <td style="border:1px solid #ddd;padding:8px">Horizontal tabulation</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Newline</td>
+    <td style="border:1px solid #ddd;padding:8px">0x0A (\\n)</td>
+    <td style="border:1px solid #ddd;padding:8px">Line feed (Unix line ending)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Carriage Return</td>
+    <td style="border:1px solid #ddd;padding:8px">0x0D (\\r)</td>
+    <td style="border:1px solid #ddd;padding:8px">Carriage return (part of Windows line ending)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Form Feed</td>
+    <td style="border:1px solid #ddd;padding:8px">0x0C (\\f)</td>
+    <td style="border:1px solid #ddd;padding:8px">Page break character</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Vertical Tab</td>
+    <td style="border:1px solid #ddd;padding:8px">0x0B (\\v)</td>
+    <td style="border:1px solid #ddd;padding:8px">Vertical tabulation</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Non-breaking Space</td>
+    <td style="border:1px solid #ddd;padding:8px">0xA0 (&nbsp;)</td>
+    <td style="border:1px solid #ddd;padding:8px">HTML non-breaking space</td>
+  </tr>
+</table>
+
+<h4>Whitespace Normalization Methods</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Collapse spaces: multiple whitespace → single space
+"  hello    world  " → "hello world"
+
+// Trim each line: remove leading/trailing per line
+"  line1  \n  line2  " → "line1\nline2"
+
+// Remove all: delete all whitespace
+"  hello world  " → "helloworld"
+</pre>
+
+<h4>Regular Expressions for Whitespace</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Pattern</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Matches</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">\s+</td>
+    <td style="border:1px solid #ddd;padding:8px">One or more whitespace</td>
+    <td style="border:1px solid #ddd;padding:8px">Collapse multiple spaces</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">^\s+|\s+$</td>
+    <td style="border:1px solid #ddd;padding:8px">Leading or trailing whitespace</td>
+    <td style="border:1px solid #ddd;padding:8px">Trim string edges</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">\t</td>
+    <td style="border:1px solid #ddd;padding:8px">Tab characters only</td>
+    <td style="border:1px solid #ddd;padding:8px">Convert tabs to spaces</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">\r?\n</td>
+    <td style="border:1px solid #ddd;padding:8px">Line breaks (Unix or Windows)</td>
+    <td style="border:1px solid #ddd;padding:8px">Normalize line endings</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">\s</td>
+    <td style="border:1px solid #ddd;padding:8px">Any single whitespace</td>
+    <td style="border:1px solid #ddd;padding:8px">Remove all whitespace</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Data cleaning:</strong> Normalize user input before database storage or comparison</li>
+  <li><strong>Code formatting:</strong> Remove trailing spaces from code before committing</li>
+  <li><strong>Text processing:</strong> Clean pasted content from word processors or PDFs</li>
+  <li><strong>CSV preparation:</strong> Trim whitespace that could break parsing</li>
+  <li><strong>URL cleanup:</strong> Remove accidental spaces in copied URLs</li>
+  <li><strong>Log analysis:</strong> Normalize log file formatting for parsing</li>
+</ul>
+
+<h4>Line Ending Differences</h4>
+<p>Different operating systems use different line ending conventions:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">System</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Line Ending</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Characters</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Unix/Linux/macOS</td>
+    <td style="border:1px solid #ddd;padding:8px">LF</td>
+    <td style="border:1px solid #ddd;padding:8px">\n</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Windows</td>
+    <td style="border:1px solid #ddd;padding:8px">CRLF</td>
+    <td style="border:1px solid #ddd;padding:8px">\r\n</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Classic Mac OS (pre-X)</td>
+    <td style="border:1px solid #ddd;padding:8px">CR</td>
+    <td style="border:1px solid #ddd;padding:8px">\r</td>
+  </tr>
+</table>
+
+<h4>Common Whitespace Issues</h4>
+<ul>
+  <li><strong>Trailing spaces:</strong> Invisible spaces at line ends that cause diff noise</li>
+  <li><strong>Mixed indentation:</strong> Inconsistent use of tabs and spaces in code</li>
+  <li><strong>Non-breaking spaces:</strong> HTML &nbsp; characters from web copy-paste</li>
+  <li><strong>Multiple spaces:</strong> Extra spaces between words from formatted text</li>
+  <li><strong>Zero-width characters:</strong> Invisible Unicode characters that can break parsing</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Whitespace Remover?</dt>
-  <dd>Whitespace Remover is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What characters are considered whitespace?</dt>
+  <dd>Whitespace characters include: space (0x20), tab (\t, 0x09), newline (\n, 0x0A), carriage return (\r, 0x0D), form feed (\f, 0x0C), vertical tab (\v, 0x0B), and non-breaking space (0xA0). JavaScript's \s regex pattern matches all of these.</dd>
+
+  <dt>What is the difference between collapsing and removing whitespace?</dt>
+  <dd>Collapsing whitespace replaces multiple consecutive whitespace characters with a single space, preserving word boundaries. Removing all whitespace deletes every space character, joining all text together. Use collapse for readable text normalization; use remove-all for compact strings or identifiers.</dd>
+
+  <dt>When should I trim lines vs collapse spaces?</dt>
+  <dd>Trim lines removes leading/trailing whitespace from each line while preserving internal spacing and line breaks—useful for code or structured text. Collapse spaces normalizes all whitespace to single spaces on one line—useful for cleaning pasted text or preparing single-line input.</dd>
+
+  <dt>How does whitespace affect data processing?</dt>
+  <dd>Extra whitespace can cause issues in data comparison ("hello" ≠ " hello "), CSV parsing, URL construction, and database lookups. Normalizing whitespace before processing ensures consistent results and prevents hard-to-debug string mismatch errors.</dd>
+
+  <dt>What are common whitespace problems in text?</dt>
+  <dd>Common issues include: multiple spaces between words, trailing spaces at line ends, mixed tab/space indentation, Windows (CRLF) vs Unix (LF) line endings, non-breaking spaces from word processors or web copy-paste, and invisible Unicode whitespace characters.</dd>
+
+  <dt>How do I remove non-breaking spaces and special whitespace?</dt>
+  <dd>Non-breaking spaces ( , 0xA0) and other Unicode whitespace may not be caught by standard trim(). Use a regex that includes Unicode whitespace: /[\s\u00A0\u2000-\u200B\u3000]/g. This tool's remove-all function handles most common cases including non-breaking spaces.</dd>
 </dl>
 </section>
 </main>

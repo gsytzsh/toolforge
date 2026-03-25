@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>URL Rewrite Tester – Test Rewrite Rules Online | ToolForge</title>
-<meta name="description" content="Free online URL Rewrite Tester to test regex-style URL rewrite rules and preview rewritten output paths in the browser. Part of the ToolForge developer tools collection.">
+<meta name="description" content="URL Rewrite Tester validates regex-based URL rewrite rules for Apache mod_rewrite, Nginx, and IIS. Test pattern matching and replacement before deploying to production servers. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/url-rewrite-tester.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="URL Rewrite Tester – Test Rewrite Rules Online | ToolForge">
-<meta property="og:description" content="Free online URL Rewrite Tester to test regex-style URL rewrite rules and preview rewritten output paths in the browser.">
+<meta property="og:description" content="URL Rewrite Tester validates regex-based URL rewrite rules for Apache mod_rewrite, Nginx, and IIS. Test pattern matching and replacement before deploying to production servers. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/url-rewrite-tester.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="URL Rewrite Tester – Test Rewrite Rules Online | ToolForge">
-<meta name="twitter:description" content="Free online URL Rewrite Tester to test regex-style URL rewrite rules and preview rewritten output paths in the browser.">
+<meta name="twitter:description" content="URL Rewrite Tester validates regex-based URL rewrite rules for Apache mod_rewrite, Nginx, and IIS. Test pattern matching and replacement before deploying to production servers. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Url Rewrite Tester?",
+      "name": "How do URL rewrite rules work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Url Rewrite Tester is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "URL rewrite rules use regular expressions to match incoming URL paths and transform them into different paths. The pattern (regex) matches the source URL, capturing groups extract values, and the replacement string uses backreferences ($1, $2) to insert captured values into the new URL. This enables clean URLs like /blog/123 to internally route to /posts?id=123."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between rewrite and redirect?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Rewrite changes the URL internally—the server processes a different path but the browser URL stays unchanged. Redirect sends an HTTP 3xx response telling the browser to request a different URL, changing what users see in the address bar. Rewrite is server-side; redirect is client-side."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What do capture groups like (\\d+) mean in rewrite patterns?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Parentheses create capture groups that extract matching values. \\d+ matches one or more digits. In the pattern ^/blog/(\\d+)$, the parentheses capture the ID number. The replacement string references it as $1 (first group), $2 (second group), etc. Example: /blog/123 matches with $1=123, rewritten to /posts?id=$1 becomes /posts?id=123."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are common URL rewrite patterns?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Common patterns include: ^/blog/(\\d+)$ → /post?id=$1 (numeric ID), ^/user/([a-z]+)$ → /profile.php?name=$1 (username slug), ^/products/(\\d+)/(\\d+)$ → /products.php?cat=$1&id=$2 (multiple parameters), ^/archive/(\\d{4})/(\\d{2})$ → /archive.php?year=$1&month=$2 (date-based URLs)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "Why test rewrite rules before deploying?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Incorrect rewrite rules can break all URLs on a site, cause infinite redirect loops, expose sensitive paths, or create duplicate content SEO issues. Testing validates that patterns match expected URLs and produce correct replacements before changes affect production traffic and search engine crawling."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What is the difference between mod_rewrite and Nginx rewrite syntax?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Apache mod_rewrite uses RewriteRule with flags like [L,R=301,QSA]. Nginx uses rewrite directive with flags like last, break, redirect. Apache uses $1, $2 for backreferences; Nginx also uses $1 but in replacement uses different syntax. Apache .htaccess paths are relative; Nginx location blocks match absolute paths."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>URL Rewrite Tester</h1>
-<p class="subtitle">Test regex rewrite patterns and replacement rules before adding them to server configs.</p>
+<p class="subtitle">Test regex-based URL rewrite rules for Apache, Nginx, and IIS before deploying to production.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <label for="source-url" class="sr-only">Source URL path</label>
 <input id="source-url" style="width:90%" aria-label="Source URL path" placeholder="/blog/123">
@@ -91,25 +96,261 @@
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About URL Rewrite Tester</h3>
-<p>The URL Rewrite Tester tool lets you test regex rewrite patterns and replacement rules before adding them to server configs.</p>
-<p>It is useful for testing patterns, rewrite rules and other debugging scenarios before applying changes in production tools or code.</p>
+<p>This URL rewrite tester validates regex-based rewrite rules by testing pattern matching and replacement transformations before deploying to Apache, Nginx, or IIS servers.</p>
+<p>It is useful for testing mod_rewrite rules, Nginx location blocks, IIS URL Rewrite configurations, debugging complex regex patterns, verifying capture group extraction, preventing production URL breaks, and ensuring clean URL routing works correctly before server configuration changes.</p>
+
+<h4>How URL Rewrite Rules Work</h4>
+<p>Rewrite rules follow a three-step process:</p>
+<ol>
+  <li><strong>Pattern Matching:</strong> The regex pattern is tested against the source URL path</li>
+  <li><strong>Capture Extraction:</strong> Parentheses groups (capture groups) extract matching values</li>
+  <li><strong>Replacement:</strong> The target string uses $1, $2, etc. to insert captured values</li>
+</ol>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example Rewrite Rule:
+Source URL:  /blog/123
+Pattern:     ^/blog/(\d+)$
+Target:      /posts?id=$1
+
+Step 1: Match pattern against /blog/123 ✓
+Step 2: Capture group (\d+) extracts "123"
+Step 3: Replace $1 with "123" → /posts?id=123
+
+Result: /blog/123 → /posts?id=123
+</pre>
+
+<h4>Common Rewrite Pattern Examples</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Pattern</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Target</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example Match</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Blog Post ID</td>
+    <td style="border:1px solid #ddd;padding:8px">^/blog/(\d+)$</td>
+    <td style="border:1px solid #ddd;padding:8px">/post?id=$1</td>
+    <td style="border:1px solid #ddd;padding:8px">/blog/456 → /post?id=456</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">User Profile</td>
+    <td style="border:1px solid #ddd;padding:8px">^/user/([a-z]+)$</td>
+    <td style="border:1px solid #ddd;padding:8px">/profile.php?name=$1</td>
+    <td style="border:1px solid #ddd;padding:8px">/user/john → /profile.php?name=john</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Category/Slug</td>
+    <td style="border:1px solid #ddd;padding:8px">^/([a-z]+)/([a-z0-9-]+)$</td>
+    <td style="border:1px solid #ddd;padding:8px">/$1.php?slug=$2</td>
+    <td style="border:1px solid #ddd;padding:8px">/products/blue-widget → /products.php?slug=blue-widget</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Date Archive</td>
+    <td style="border:1px solid #ddd;padding:8px">^/archive/(\d{4})/(\d{2})$</td>
+    <td style="border:1px solid #ddd;padding:8px">/archive.php?year=$1&month=$2</td>
+    <td style="border:1px solid #ddd;padding:8px">/archive/2024/03 → /archive.php?year=2024&month=03</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Remove Extension</td>
+    <td style="border:1px solid #ddd;padding:8px">^(.+)\.html$</td>
+    <td style="border:1px solid #ddd;padding:8px">$1</td>
+    <td style="border:1px solid #ddd;padding:8px">/about.html → /about</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Force HTTPS</td>
+    <td style="border:1px solid #ddd;padding:8px">^(.*)$</td>
+    <td style="border:1px solid #ddd;padding:8px">https://example.com$1</td>
+    <td style="border:1px solid #ddd;padding:8px">HTTP → HTTPS redirect</td>
+  </tr>
+</table>
+
+<h4>Regex Pattern Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Pattern</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Matches</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">\d+</td>
+    <td style="border:1px solid #ddd;padding:8px">One or more digits</td>
+    <td style="border:1px solid #ddd;padding:8px">123, 4567, 0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">[a-z]+</td>
+    <td style="border:1px solid #ddd;padding:8px">One or more lowercase letters</td>
+    <td style="border:1px solid #ddd;padding:8px">hello, world, abc</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">[a-zA-Z]+</td>
+    <td style="border:1px solid #ddd;padding:8px">One or more letters (any case)</td>
+    <td style="border:1px solid #ddd;padding:8px">Hello, WORLD, abc</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">[a-z0-9-]+</td>
+    <td style="border:1px solid #ddd;padding:8px">Slug-style strings</td>
+    <td style="border:1px solid #ddd;padding:8px">my-page, item-123</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">\d{4}</td>
+    <td style="border:1px solid #ddd;padding:8px">Exactly 4 digits</td>
+    <td style="border:1px solid #ddd;padding:8px">2024, 1999</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">.*</td>
+    <td style="border:1px solid #ddd;padding:8px">Any characters (greedy)</td>
+    <td style="border:1px solid #ddd;padding:8px">matches everything</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">^ and $</td>
+    <td style="border:1px solid #ddd;padding:8px">Start and end anchors</td>
+    <td style="border:1px solid #ddd;padding:8px">ensures exact match</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">?</td>
+    <td style="border:1px solid #ddd;padding:8px">Optional (0 or 1)</td>
+    <td style="border:1px solid #ddd;padding:8px">colou?r matches color/colour</td>
+  </tr>
+</table>
+
+<h4>Apache mod_rewrite Example</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+# Enable rewrite engine
+RewriteEngine On
+
+# Clean URL for blog posts
+RewriteRule ^blog/([0-9]+)$ /post.php?id=$1 [L,QSA]
+
+# Clean URL for user profiles
+RewriteRule ^user/([a-zA-Z0-9_-]+)$ /profile.php?username=$1 [L,QSA]
+
+# Remove .html extension
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+<!-- Flags explained:
+  [L]     - Last rule (stop processing)
+  [QSA]   - Query String Append (preserve existing params)
+  [R=301] - Redirect with 301 status
+-->
+</pre>
+
+<h4>Nginx Rewrite Example</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+# Enable rewrite in server block
+server {
+    listen 80;
+    server_name example.com;
+
+    # Blog post clean URLs
+    rewrite ^/blog/([0-9]+)$ /post.php?id=$1 last;
+
+    # User profile URLs
+    rewrite ^/user/([a-zA-Z0-9_-]+)$ /profile.php?username=$1 last;
+
+    # Remove .html extension
+    location ~ ^(.+)\.html$ {
+        if (-f $document_root$1) {
+            rewrite ^(.+)\.html$ $1 last;
+        }
+    }
+
+    # Force HTTPS
+    if ($scheme = http) {
+        return 301 https://$server_name$request_uri;
+    }
+}
+
+<!-- Flags explained:
+  last    - Stop processing, start new location search
+  break   - Stop processing, use current location
+  redirect - Return 302 temporary redirect
+  permanent - Return 301 permanent redirect
+-->
+</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Clean URLs:</strong> Convert /page.php?id=123 to /page/123 for better SEO</li>
+  <li><strong>Migration:</strong> Redirect old URL structures to new ones during site redesign</li>
+  <li><strong>Canonicalization:</strong> Force www vs non-www, HTTP vs HTTPS, trailing slashes</li>
+  <li><strong>Language Routing:</strong> Route /en/, /es/, /fr/ to appropriate language handlers</li>
+  <li><strong>API Versioning:</strong> Route /api/v1/users to version-specific handlers</li>
+  <li><strong>Legacy Support:</strong> Maintain old URLs while migrating to new structure</li>
+</ul>
+
+<h4>Rewrite vs Redirect</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Aspect</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Rewrite (Internal)</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Redirect (External)</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Browser URL</td>
+    <td style="border:1px solid #ddd;padding:8px">Unchanged</td>
+    <td style="border:1px solid #ddd;padding:8px">Changes to new URL</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Server Processing</td>
+    <td style="border:1px solid #ddd;padding:8px">Internal path mapping</td>
+    <td style="border:1px solid #ddd;padding:8px">HTTP 3xx response</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">SEO Impact</td>
+    <td style="border:1px solid #ddd;padding:8px">Original URL indexed</td>
+    <td style="border:1px solid #ddd;padding:8px">New URL indexed (301)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Use Case</td>
+    <td style="border:1px solid #ddd;padding:8px">Clean URLs, routing</td>
+    <td style="border:1px solid #ddd;padding:8px">Domain changes, moved pages</td>
+  </tr>
+</table>
+
+<h4>Testing Checklist</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Before deploying rewrite rules:
+
+□ Pattern matches expected URLs
+□ Pattern does NOT match unrelated URLs
+□ Capture groups extract correct values
+□ Replacement produces valid target URLs
+□ No infinite rewrite loops
+□ Query parameters preserved (QSA flag)
+□ Special characters properly escaped
+□ Case sensitivity is correct
+□ Anchors (^ and $) used appropriately
+□ Tested with edge cases (empty, special chars)
+</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Url Rewrite Tester?</dt>
-  <dd>Url Rewrite Tester is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How do URL rewrite rules work?</dt>
+  <dd>URL rewrite rules use regular expressions to match incoming URL paths and transform them into different paths. The pattern (regex) matches the source URL, capturing groups extract values, and the replacement string uses backreferences ($1, $2) to insert captured values into the new URL. This enables clean URLs like /blog/123 to internally route to /posts?id=123.</dd>
+
+  <dt>What is the difference between rewrite and redirect?</dt>
+  <dd>Rewrite changes the URL internally—the server processes a different path but the browser URL stays unchanged. Redirect sends an HTTP 3xx response telling the browser to request a different URL, changing what users see in the address bar. Rewrite is server-side; redirect is client-side.</dd>
+
+  <dt>What do capture groups like (\d+) mean in rewrite patterns?</dt>
+  <dd>Parentheses create capture groups that extract matching values. \d+ matches one or more digits. In the pattern ^/blog/(\d+)$, the parentheses capture the ID number. The replacement string references it as $1 (first group), $2 (second group), etc. Example: /blog/123 matches with $1=123, rewritten to /posts?id=$1 becomes /posts?id=123.</dd>
+
+  <dt>What are common URL rewrite patterns?</dt>
+  <dd>Common patterns include: ^/blog/(\d+)$ → /post?id=$1 (numeric ID), ^/user/([a-z]+)$ → /profile.php?name=$1 (username slug), ^/products/(\d+)/(\d+)$ → /products.php?cat=$1&id=$2 (multiple parameters), ^/archive/(\d{4})/(\d{2})$ → /archive.php?year=$1&month=$2 (date-based URLs).</dd>
+
+  <dt>Why test rewrite rules before deploying?</dt>
+  <dd>Incorrect rewrite rules can break all URLs on a site, cause infinite redirect loops, expose sensitive paths, or create duplicate content SEO issues. Testing validates that patterns match expected URLs and produce correct replacements before changes affect production traffic and search engine crawling.</dd>
+
+  <dt>What is the difference between mod_rewrite and Nginx rewrite syntax?</dt>
+  <dd>Apache mod_rewrite uses RewriteRule with flags like [L,R=301,QSA]. Nginx uses rewrite directive with flags like last, break, redirect. Apache uses $1, $2 for backreferences; Nginx also uses $1 but in replacement uses different syntax. Apache .htaccess paths are relative; Nginx location blocks match absolute paths.</dd>
 </dl>
 </section>
 </main>

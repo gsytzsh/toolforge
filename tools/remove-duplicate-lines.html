@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Remove Duplicate Lines – Dedupe Lines Online | ToolForge</title>
-<meta name="description" content="Free online tool to remove duplicate lines from text, keeping first occurrence. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Remove duplicate lines from text using Set-based deduplication. Keeps first occurrence, preserves order. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/remove-duplicate-lines.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Remove Duplicate Lines – Dedupe Lines Online | ToolForge">
-<meta property="og:description" content="Free online tool to remove duplicate lines from text, keeping first occurrence. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Remove duplicate lines from text using Set-based deduplication. Keeps first occurrence, preserves order. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/remove-duplicate-lines.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Remove Duplicate Lines – Dedupe Lines Online | ToolForge">
-<meta name="twitter:description" content="Free online tool to remove duplicate lines from text, keeping first occurrence. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Remove duplicate lines from text using Set-based deduplication. Keeps first occurrence, preserves order. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Remove Duplicate Lines?",
+      "name": "How does duplicate line removal work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Remove Duplicate Lines is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "The tool uses a Set data structure to track seen lines. It iterates through each line, checking if it exists in the Set. If not seen, the line is kept and added to the Set. If already in the Set, it's skipped. This ensures O(1) lookup time and preserves the first occurrence of each line."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "Does this tool preserve the original order of lines?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Yes, the tool preserves the original order of lines. It keeps the first occurrence of each unique line and removes subsequent duplicates. For example, if 'apple' appears at line 1 and line 5, only the line 1 occurrence is kept."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Is the comparison case-sensitive?",
       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "type": "Answer",
+        "text": "Yes, the comparison is case-sensitive by default. 'Hello' and 'hello' are treated as different lines. For case-insensitive deduplication, convert text to lowercase first using a text transformation tool or text editor function."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are common use cases for removing duplicate lines?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Common uses include: cleaning up email lists, removing duplicate entries from exported data, deduplicating keyword lists for SEO, cleaning log files with repeated entries, preparing unique value lists for programming, and consolidating search results."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "How does this compare to sorting and removing duplicates?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Sorting first groups duplicates together but changes original order. This tool preserves order but doesn't group duplicates visually. For unique sorted output, use sort-lines tool first, then remove duplicates. Order preservation is key difference."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "Can this tool handle large lists?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "The tool uses JavaScript Set which has O(1) lookup time, making it efficient for large lists. However, browser memory limits apply. For very large files (100,000+ lines), consider using command-line tools like sort -u or dedicated deduplication software."
       }
     }
   ]
@@ -84,34 +89,458 @@
 <textarea id="output" rows="10" style="width:90%" aria-label="Output text"></textarea>
 <section class="tool-seo">
 <h3>About Remove Duplicate Lines</h3>
-<p>This remove-duplicate-lines tool keeps the first occurrence of each line and removes repeated entries.</p>
-<p>It is useful for deduplicating keyword lists, email lists, exported values and other line-based text before saving or reusing it elsewhere.</p>
+<p>This tool removes duplicate lines from text using a Set-based deduplication algorithm. It tracks each unique line encountered and keeps only the first occurrence, removing subsequent duplicates. The algorithm operates in O(n) time complexity with O(1) lookup per line using JavaScript's Set data structure.</p>
+<p>It is useful for cleaning up email lists, removing duplicate entries from exported data, deduplicating keyword lists for SEO, cleaning log files with repeated entries, preparing unique value lists for programming, and consolidating search results.</p>
+
+<h4>Deduplication Algorithm</h4>
+<p>The tool uses a Set to track seen lines:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Algorithm Steps:
+
+1. Split input text into lines by newline character
+2. Create empty Set to track seen lines
+3. Create empty array for output
+4. For each line:
+   a. Check if line exists in Set (O(1) operation)
+   b. If not in Set: add to output and add to Set
+   c. If in Set: skip (duplicate detected)
+5. Join output array with newlines
+
+JavaScript Implementation:
+  function dedupe(text) {
+    const lines = text.split(/\r?\n/);
+    const seen = new Set();
+    const output = [];
+
+    for (const line of lines) {
+      if (!seen.has(line)) {
+        seen.add(line);
+        output.push(line);
+      }
+    }
+
+    return output.join('\n');
+  }
+
+Time Complexity: O(n) where n = number of lines
+Space Complexity: O(n) for Set storage
+Lookup Time: O(1) average case per line
+</pre>
+
+<h4>Deduplication Methods Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Method</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Order Preserved</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Time Complexity</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Set-based (this tool)</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">O(n)</td>
+    <td style="border:1px solid #ddd;padding:8px">General purpose, order matters</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Sort then uniq</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+    <td style="border:1px solid #ddd;padding:8px">O(n log n)</td>
+    <td style="border:1px solid #ddd;padding:8px">When sorted output needed</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Nested loop comparison</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">O(n²)</td>
+    <td style="border:1px solid #ddd;padding:8px">Small lists, no Set support</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Hash map counting</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">O(n)</td>
+    <td style="border:1px solid #ddd;padding:8px">When count statistics needed</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Email List Cleanup</td>
+    <td style="border:1px solid #ddd;padding:8px">Remove duplicate email addresses</td>
+    <td style="border:1px solid #ddd;padding:8px">user@example.com x3 → x1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Keyword Deduplication</td>
+    <td style="border:1px solid #ddd;padding:8px">Clean SEO keyword lists</td>
+    <td style="border:1px solid #ddd;padding:8px">"buy shoes" x5 → x1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Log File Cleaning</td>
+    <td style="border:1px solid #ddd;padding:8px">Remove repeated log entries</td>
+    <td style="border:1px solid #ddd;padding:8px">Error messages x100 → x1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Export Data Cleaning</td>
+    <td style="border:1px solid #ddd;padding:8px">Deduplicate database exports</td>
+    <td style="border:1px solid #ddd;padding:8px">Customer IDs x multiple → x1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Search Results</td>
+    <td style="border:1px solid #ddd;padding:8px">Consolidate duplicate search hits</td>
+    <td style="border:1px solid #ddd;padding:8px">URLs appearing multiple times</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Programming Lists</td>
+    <td style="border:1px solid #ddd;padding:8px">Create unique value arrays</td>
+    <td style="border:1px solid #ddd;padding:8px">Unique tags, categories, IDs</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Contact List Merge</td>
+    <td style="border:1px solid #ddd;padding:8px">Merge contact lists without dupes</td>
+    <td style="border:1px solid #ddd;padding:8px">Phone numbers, names</td>
+  </tr>
+</table>
+
+<h4>Code Examples by Language</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript:
+  // Using Set (ES6)
+  const unique = [...new Set(lines)];
+
+  // Manual implementation
+  function dedupe(lines) {
+    const seen = new Set();
+    return lines.filter(l => {
+      if (seen.has(l)) return false;
+      seen.add(l);
+      return true;
+    });
+  }
+
+Python:
+  # Using set (order not preserved)
+  unique = list(set(lines))
+
+  # Order-preserving (Python 3.7+)
+  unique = list(dict.fromkeys(lines))
+
+  # Manual implementation
+  def dedupe(lines):
+      seen = set()
+      result = []
+      for line in lines:
+          if line not in seen:
+              seen.add(line)
+              result.append(line)
+      return result
+
+Bash/sort:
+  # Sort and remove duplicates
+  sort -u file.txt
+
+  # Remove duplicates, preserve order
+  awk '!seen[$0]++' file.txt
+
+  # Using sort with uniq
+  sort file.txt | uniq
+
+PowerShell:
+  # Get unique lines (order preserved in PS 7+)
+  Get-Content file.txt | Select-Object -Unique
+
+  # Manual deduplication
+  $seen = @{}
+  Get-Content file.txt | Where-Object {
+    if ($seen[$_.ToString()]) { $false }
+    else { $seen[$_.ToString()] = $true; $true }
+  }
+
+PHP:
+  // Using array_unique (preserves keys)
+  $unique = array_unique($lines);
+
+  // Using array_flip (fast, reindexes)
+  $unique = array_keys(array_flip($lines));
+
+Java:
+  // Using LinkedHashSet (order-preserving)
+  Set<String> unique = new LinkedHashSet<>(lines);
+
+  // Using Stream API (Java 8+)
+  List<String> unique = lines.stream()
+      .distinct()
+      .collect(Collectors.toList());
+</pre>
+
+<h4>Case Sensitivity and Comparison</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Comparison Behavior:
+
+Default (Case-Sensitive):
+  Input:
+    "Apple
+    apple
+    APPLE
+    Apple"
+
+  Output:
+    "Apple
+    apple
+    APPLE"
+
+  (All three kept, last "Apple" removed)
+
+Case-Insensitive Deduplication:
+  Input:
+    "Apple
+    apple
+    APPLE
+    Apple"
+
+  Output (lowercase):
+    "Apple"
+
+  Or output (first occurrence):
+    "Apple"
+
+Implementation:
+  // Case-insensitive in JavaScript
+  const seen = new Set();
+  lines.filter(l => {
+    const lower = l.toLowerCase();
+    if (seen.has(lower)) return false;
+    seen.add(lower);
+    return true;
+  });
+
+Trimming Before Comparison:
+  Input:
+    "apple
+     apple
+    apple"
+
+  With trim:
+    "apple"
+
+  Without trim:
+    "apple
+     apple
+    apple"
+
+  (All kept due to whitespace differences)
+</pre>
+
+<h4>Deduplication Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Simple Duplicates
+  Input:
+    "apple
+    banana
+    apple
+    cherry
+    banana"
+
+  Output:
+    "apple
+    banana
+    cherry"
+
+Example 2: Consecutive Duplicates
+  Input:
+    "line1
+    line1
+    line1
+    line2
+    line2
+    line3"
+
+  Output:
+    "line1
+    line2
+    line3"
+
+Example 3: Email List
+  Input:
+    "john@example.com
+    jane@example.com
+    john@example.com
+    bob@example.com
+    jane@example.com"
+
+  Output:
+    "john@example.com
+    jane@example.com
+    bob@example.com"
+
+Example 4: Mixed Case
+  Input:
+    "Hello
+    hello
+    HELLO
+    World"
+
+  Output (case-sensitive):
+    "Hello
+    hello
+    HELLO
+    World"
+
+Example 5: With Empty Lines
+  Input:
+    "apple
+
+    banana
+    apple
+
+    cherry"
+
+  Output:
+    "apple
+
+    banana
+    cherry"
+
+  (Empty line treated as unique value)
+
+Example 6: Numeric IDs
+  Input:
+    "1001
+    1002
+    1001
+    1003
+    1002
+    1001"
+
+  Output:
+    "1001
+    1002
+    1003"
+
+Example 7: URLs
+  Input:
+    "https://example.com/page1
+    https://example.com/page2
+    https://example.com/page1
+    https://other.com/"
+
+  Output:
+    "https://example.com/page1
+    https://example.com/page2
+    https://other.com/"
+
+Example 8: Log Entries
+  Input:
+    "ERROR: Connection failed
+    INFO: Retrying
+    ERROR: Connection failed
+    INFO: Success
+    ERROR: Connection failed"
+
+  Output:
+    "ERROR: Connection failed
+    INFO: Retrying
+    INFO: Success"
+</pre>
+
+<h4>Advanced Deduplication Options</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Option 1: Keep Last Occurrence
+  Instead of first, keep last duplicate:
+
+  function dedupeLast(lines) {
+    const seen = new Set();
+    const result = [];
+    // Iterate backwards
+    for (let i = lines.length - 1; i >= 0; i--) {
+      if (!seen.has(lines[i])) {
+        seen.add(lines[i]);
+        result.unshift(lines[i]);
+      }
+    }
+    return result;
+  }
+
+Option 2: Count Occurrences
+  Track how many times each line appears:
+
+  function countOccurrences(lines) {
+    const counts = new Map();
+    for (const line of lines) {
+      counts.set(line, (counts.get(line) || 0) + 1);
+    }
+    return counts;
+  }
+
+Option 3: Remove Lines Appearing N+ Times
+  Keep only lines that appear exactly once:
+
+  function keepUniqueOnly(lines) {
+    const counts = new Map();
+    for (const line of lines) {
+      counts.set(line, (counts.get(line) || 0) + 1);
+    }
+    return lines.filter(l => counts.get(l) === 1);
+  }
+
+Option 4: Fuzzy Matching
+  Remove near-duplicates using similarity:
+  (Requires external library like string-similarity)
+</pre>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Backup original data:</strong> Keep a copy of input before deduplication; process is not reversible.</li>
+  <li><strong>Consider case sensitivity:</strong> Decide if "Hello" and "hello" should be treated as same.</li>
+  <li><strong>Check for whitespace:</strong> Leading/trailing spaces can prevent duplicate detection; trim if needed.</li>
+  <li><strong>Review results:</strong> Verify deduplicated output makes sense for your use case.</li>
+  <li><strong>Combine with sorting:</strong> For organized output, sort lines after deduplication.</li>
+  <li><strong>Handle empty lines:</strong> Decide if empty lines should be kept or removed separately.</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>Exact match only:</strong> Does not detect near-duplicates or fuzzy matches.</li>
+  <li><strong>Case-sensitive:</strong> "Hello" and "hello" are treated as different lines.</li>
+  <li><strong>Whitespace-sensitive:</strong> Lines with different spacing are not detected as duplicates.</li>
+  <li><strong>Memory limits:</strong> Very large files may cause browser performance issues.</li>
+  <li><strong>No context awareness:</strong> Cannot determine if duplicates are intentional or errors.</li>
+  <li><strong>Line-by-line only:</strong> Does not detect duplicates spanning multiple lines.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Remove Duplicate Lines?</dt>
-  <dd>Remove Duplicate Lines is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How does duplicate line removal work?</dt>
+  <dd>The tool uses a Set data structure to track seen lines. It iterates through each line, checking if it exists in the Set. If not seen, the line is kept and added to the Set. If already in the Set, it's skipped. This ensures O(1) lookup time and preserves the first occurrence of each line.</dd>
+
+  <dt>Does this tool preserve the original order of lines?</dt>
+  <dd>Yes, the tool preserves the original order of lines. It keeps the first occurrence of each unique line and removes subsequent duplicates. For example, if 'apple' appears at line 1 and line 5, only the line 1 occurrence is kept.</dd>
+
+  <dt>Is the comparison case-sensitive?</dt>
+  <dd>Yes, the comparison is case-sensitive by default. 'Hello' and 'hello' are treated as different lines. For case-insensitive deduplication, convert text to lowercase first using a text transformation tool or text editor function.</dd>
+
+  <dt>What are common use cases for removing duplicate lines?</dt>
+  <dd>Common uses include: cleaning up email lists, removing duplicate entries from exported data, deduplicating keyword lists for SEO, cleaning log files with repeated entries, preparing unique value lists for programming, and consolidating search results.</dd>
+
+  <dt>How does this compare to sorting and removing duplicates?</dt>
+  <dd>Sorting first groups duplicates together but changes original order. This tool preserves order but doesn't group duplicates visually. For unique sorted output, use sort-lines tool first, then remove duplicates. Order preservation is key difference.</dd>
+
+  <dt>Can this tool handle large lists?</dt>
+  <dd>The tool uses JavaScript Set which has O(1) lookup time, making it efficient for large lists. However, browser memory limits apply. For very large files (100,000+ lines), consider using command-line tools like sort -u or dedicated deduplication software.</dd>
 </dl>
 </section>
 </main>
 <script>
 function dedupe(){
-var lines=document.getElementById("input").value.split(/\r?\n/)
-var seen=new Set()
-var out=lines.filter(function(l){if(seen.has(l))return false;seen.add(l);return true})
-document.getElementById("output").value=out.join("\n")
+var lines=document.getElementById("input").value.split(/\r?\n/);
+var seen=new Set();
+var out=lines.filter(function(l){if(seen.has(l))return false;seen.add(l);return true});
+document.getElementById("output").value=out.join("\n");
 }
 </script>
 <script src="/js/favorites.js"></script>

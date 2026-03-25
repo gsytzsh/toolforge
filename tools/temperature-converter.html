@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Temperature Converter – Celsius, Fahrenheit, Kelvin | ToolForge</title>
-<meta name="description" content="Free online Temperature Converter between Celsius, Fahrenheit and Kelvin. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Temperature Converter converts between Celsius, Fahrenheit, and Kelvin with formulas, conversion tables, and scientific reference data. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/temperature-converter.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Temperature Converter – Celsius, Fahrenheit, Kelvin | ToolForge">
-<meta property="og:description" content="Free online Temperature Converter between Celsius, Fahrenheit and Kelvin. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Temperature Converter converts between Celsius, Fahrenheit, and Kelvin with formulas, conversion tables, and scientific reference data. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/temperature-converter.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Temperature Converter – Celsius, Fahrenheit, Kelvin | ToolForge">
-<meta name="twitter:description" content="Free online Temperature Converter between Celsius, Fahrenheit and Kelvin. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Temperature Converter converts between Celsius, Fahrenheit, and Kelvin with formulas, conversion tables, and scientific reference data. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Temperature Converter?",
+      "name": "What are the temperature conversion formulas?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Temperature Converter is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Celsius to Fahrenheit: F = C × 9/5 + 32. Celsius to Kelvin: K = C + 273.15. Fahrenheit to Celsius: C = (F - 32) × 5/9. Fahrenheit to Kelvin: K = (F - 32) × 5/9 + 273.15. Kelvin to Celsius: C = K - 273.15. Kelvin to Fahrenheit: F = (K - 273.15) × 9/5 + 32."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is absolute zero?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Absolute zero is the lowest possible temperature where molecular motion reaches minimum energy. It equals 0 K, -273.15°C, or -459.67°F. The Kelvin scale starts at absolute zero, making it the standard for scientific thermodynamic calculations."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Why is 273.15 used in conversions?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "The value 273.15 represents the exact offset between Celsius and Kelvin scales. It derives from the triple point of water (0.01°C = 273.16 K) and the definition that 0 K equals -273.15°C. This constant ensures thermodynamic accuracy in scientific calculations."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "When should I use Kelvin vs Celsius?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "Use Kelvin for thermodynamic equations, gas laws (PV=nRT), physics calculations, and astronomy. Use Celsius for weather, cooking, medical applications, and daily life. Kelvin is required when temperature appears in exponential or ratio contexts since it starts at true zero."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What is the Fahrenheit scale based on?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Fahrenheit was originally defined using three fixed points: 0°F (brine ice mixture), 32°F (freezing water), and 96°F (human body temperature, later recalibrated to 98.6°F). The scale divides the water freezing-boiling range into 180 degrees (212°F - 32°F = 180°F)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "At what temperature are Celsius and Fahrenheit equal?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Celsius and Fahrenheit are equal at -40 degrees: -40°C = -40°F. This can be verified algebraically by setting C = F in the conversion formula F = C × 9/5 + 32, solving for C = -40."
       }
     }
   ]
@@ -72,7 +77,7 @@
 <body>
 <main class="container">
 <h1>Temperature Converter</h1>
-<p class="subtitle">Convert between Celsius, Fahrenheit and Kelvin.</p>
+<p class="subtitle">Convert between Celsius, Fahrenheit, and Kelvin with precise thermodynamic formulas.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Value</h3>
 <label for="val" class="sr-only">Value</label>
@@ -91,25 +96,282 @@
 <p>Kelvin: <span id="K"></span></p>
 <section class="tool-seo">
 <h3>About Temperature Converter</h3>
-<p>This temperature converter switches between Celsius, Fahrenheit and Kelvin.</p>
-<p>It is useful for weather checks, cooking references, lab work and international communication when temperature units differ.</p>
+<p>This temperature converter performs conversions between Celsius (°C), Fahrenheit (°F), and Kelvin (K) using standard thermodynamic formulas. The tool applies the exact conversion constants defined by the International Bureau of Weights and Measures (BIPM) for scientific accuracy.</p>
+<p>It is useful for scientific calculations, engineering applications, weather data analysis, cooking temperature conversions, HVAC system design, medical temperature monitoring, chemistry lab work, and educational demonstrations of thermodynamic principles.</p>
+
+<h4>Temperature Conversion Formulas</h4>
+<p>The three temperature scales use these exact conversion formulas:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Celsius ↔ Fahrenheit:
+  F = C × 9/5 + 32
+  C = (F - 32) × 5/9
+
+Celsius ↔ Kelvin:
+  K = C + 273.15
+  C = K - 273.15
+
+Fahrenheit ↔ Kelvin:
+  K = (F - 32) × 5/9 + 273.15
+  F = (K - 273.15) × 9/5 + 32
+
+<!-- Derivation note:
+     The 9/5 factor comes from the ratio of scale ranges:
+     Fahrenheit has 180° between water freezing/boiling (32°F to 212°F)
+     Celsius has 100° between the same points (0°C to 100°C)
+     180/100 = 9/5 = 1.8
+--->
+</pre>
+
+<h4>Key Temperature Reference Points</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Physical Point</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Celsius</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Fahrenheit</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Kelvin</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Absolute Zero</td>
+    <td style="border:1px solid #ddd;padding:8px">-273.15°C</td>
+    <td style="border:1px solid #ddd;padding:8px">-459.67°F</td>
+    <td style="border:1px solid #ddd;padding:8px">0 K</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Water Freezing Point</td>
+    <td style="border:1px solid #ddd;padding:8px">0°C</td>
+    <td style="border:1px solid #ddd;padding:8px">32°F</td>
+    <td style="border:1px solid #ddd;padding:8px">273.15 K</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Water Triple Point</td>
+    <td style="border:1px solid #ddd;padding:8px">0.01°C</td>
+    <td style="border:1px solid #ddd;padding:8px">32.018°F</td>
+    <td style="border:1px solid #ddd;padding:8px">273.16 K</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Human Body Temperature</td>
+    <td style="border:1px solid #ddd;padding:8px">37°C</td>
+    <td style="border:1px solid #ddd;padding:8px">98.6°F</td>
+    <td style="border:1px solid #ddd;padding:8px">310.15 K</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Water Boiling Point (1 atm)</td>
+    <td style="border:1px solid #ddd;padding:8px">100°C</td>
+    <td style="border:1px solid #ddd;padding:8px">212°F</td>
+    <td style="border:1px solid #ddd;padding:8px">373.15 K</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Equal C/F Point</td>
+    <td style="border:1px solid #ddd;padding:8px">-40°C</td>
+    <td style="border:1px solid #ddd;padding:8px">-40°F</td>
+    <td style="border:1px solid #ddd;padding:8px">233.15 K</td>
+  </tr>
+</table>
+
+<h4>Temperature Scale Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Property</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Celsius (°C)</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Fahrenheit (°F)</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Kelvin (K)</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Symbol</td>
+    <td style="border:1px solid #ddd;padding:8px">°C</td>
+    <td style="border:1px solid #ddd;padding:8px">°F</td>
+    <td style="border:1px solid #ddd;padding:8px">K (no degree symbol)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Zero Point</td>
+    <td style="border:1px solid #ddd;padding:8px">Water freezing</td>
+    <td style="border:1px solid #ddd;padding:8px">Brine mixture (historical)</td>
+    <td style="border:1px solid #ddd;padding:8px">Absolute zero</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Scale Interval</td>
+    <td style="border:1px solid #ddd;padding:8px">1/100 of water range</td>
+    <td style="border:1px solid #ddd;padding:8px">1/180 of water range</td>
+    <td style="border:1px solid #ddd;padding:8px">Same as Celsius</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">SI Unit</td>
+    <td style="border:1px solid #ddd;padding:8px">No (derived)</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes (base unit)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Primary Usage</td>
+    <td style="border:1px solid #ddd;padding:8px">Worldwide, science</td>
+    <td style="border:1px solid #ddd;padding:8px">USA, some territories</td>
+    <td style="border:1px solid #ddd;padding:8px">Scientific thermodynamics</td>
+  </tr>
+</table>
+
+<h4>Common Temperature Conversions</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Weather Temperatures:
+  -40°C = -40°F (extreme cold)
+  -18°C = 0°F (freezer temperature)
+  0°C = 32°F (freezing point)
+  10°C = 50°F (cool day)
+  20°C = 68°F (room temperature)
+  25°C = 77°F (warm day)
+  37°C = 98.6°F (body temperature)
+  40°C = 104°F (hot day)
+
+Cooking Temperatures:
+  100°C = 212°F (water boils)
+  160°C = 320°F (baking)
+  180°C = 356°F (moderate oven)
+  200°C = 392°F (hot oven)
+  220°C = 428°F (very hot oven)
+
+Scientific Temperatures:
+  0 K = -273.15°C = -459.67°F (absolute zero)
+  77 K = -196.15°C = -321.07°F (liquid nitrogen)
+  273.15 K = 0°C = 32°F (water freezes)
+  293.15 K = 20°C = 68°F (standard lab temp)
+  373.15 K = 100°C = 212°F (water boils)
+</pre>
+
+<h4>Temperature in Different Contexts</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Domain</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Typical Range</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Preferred Scale</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Meteorology</td>
+    <td style="border:1px solid #ddd;padding:8px">-50°C to 50°C</td>
+    <td style="border:1px solid #ddd;padding:8px">Celsius (global), Fahrenheit (US)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Medicine</td>
+    <td style="border:1px solid #ddd;padding:8px">35°C to 42°C (body)</td>
+    <td style="border:1px solid #ddd;padding:8px">Celsius (global), Fahrenheit (US)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Physics</td>
+    <td style="border:1px solid #ddd;padding:8px">0 K to 10^9 K</td>
+    <td style="border:1px solid #ddd;padding:8px">Kelvin</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Chemistry</td>
+    <td style="border:1px solid #ddd;padding:8px">77 K to 1500 K</td>
+    <td style="border:1px solid #ddd;padding:8px">Kelvin (calculations), Celsius (lab)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Cooking</td>
+    <td style="border:1px solid #ddd;padding:8px">-18°C to 260°C</td>
+    <td style="border:1px solid #ddd;padding:8px">Celsius (metric), Fahrenheit (US)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">HVAC</td>
+    <td style="border:1px solid #ddd;padding:8px">10°C to 30°C (indoor)</td>
+    <td style="border:1px solid #ddd;padding:8px">Celsius (global), Fahrenheit (US)</td>
+  </tr>
+</table>
+
+<h4>Temperature Conversion Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Convert 25°C to Fahrenheit
+  F = 25 × 9/5 + 32
+  F = 45 + 32
+  F = 77°F
+
+Example 2: Convert 98.6°F to Celsius
+  C = (98.6 - 32) × 5/9
+  C = 66.6 × 5/9
+  C = 37°C
+
+Example 3: Convert 300 K to Celsius
+  C = 300 - 273.15
+  C = 26.85°C
+
+Example 4: Convert -40°F to Kelvin
+  K = (-40 - 32) × 5/9 + 273.15
+  K = -72 × 5/9 + 273.15
+  K = -40 + 273.15
+  K = 233.15 K
+</pre>
+
+<h4>Historical Background</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Temperature Scale Origins:
+
+Celsius (1742):
+  - Created by Anders Celsius (Swedish astronomer)
+  - Originally 0=boiling, 100=freezing (reversed later)
+  - Based on water phase transitions at 1 atm
+  - Adopted worldwide as metric standard
+
+Fahrenheit (1724):
+  - Created by Daniel Gabriel Fahrenheit (German physicist)
+  - 0°F = coldest brine mixture (ice, water, ammonium chloride)
+  - 32°F = water freezing point
+  - 96°F = human body temperature (original scale)
+  - Still used in USA and some Caribbean nations
+
+Kelvin (1848):
+  - Created by William Thomson, 1st Baron Kelvin
+  - Based on thermodynamic absolute zero
+  - 0 K = point of minimum molecular energy
+  - Adopted as SI base unit for temperature
+  - Essential for gas laws and thermodynamics
+</pre>
+
+<h4>Thermodynamic Equations Requiring Kelvin</h4>
+<p>These physics and chemistry equations require temperature in Kelvin:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Ideal Gas Law:
+  PV = nRT
+  R = 8.314 J/(mol·K) — requires Kelvin
+
+Stefan-Boltzmann Law:
+  P = σAT⁴
+  σ = 5.67 × 10⁻⁸ W/(m²·K⁴) — requires Kelvin
+
+Boltzmann Factor:
+  E = kT
+  k = 1.38 × 10⁻²³ J/K — requires Kelvin
+
+Arrhenius Equation:
+  k = A × exp(-Ea/RT)
+  Requires Kelvin for exponential term
+</pre>
+
+<h4>Temperature Precision and Rounding</h4>
+<ul>
+  <li><strong>Weather:</strong> Round to nearest whole degree (±0.5°C accuracy)</li>
+  <li><strong>Medical:</strong> Use one decimal place (±0.1°C for fever detection)</li>
+  <li><strong>Scientific:</strong> Use appropriate significant figures based on instrument precision</li>
+  <li><strong>Cooking:</strong> Round to nearest 5°F or 1°C for practical use</li>
+  <li><strong>Engineering:</strong> Maintain ±0.01°C for thermal calculations</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Temperature Converter?</dt>
-  <dd>Temperature Converter is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What are the temperature conversion formulas?</dt>
+  <dd>Celsius to Fahrenheit: F = C × 9/5 + 32. Celsius to Kelvin: K = C + 273.15. Fahrenheit to Celsius: C = (F - 32) × 5/9. Fahrenheit to Kelvin: K = (F - 32) × 5/9 + 273.15. Kelvin to Celsius: C = K - 273.15. Kelvin to Fahrenheit: F = (K - 273.15) × 9/5 + 32.</dd>
+
+  <dt>What is absolute zero?</dt>
+  <dd>Absolute zero is the lowest possible temperature where molecular motion reaches minimum energy. It equals 0 K, -273.15°C, or -459.67°F. The Kelvin scale starts at absolute zero, making it the standard for scientific thermodynamic calculations.</dd>
+
+  <dt>Why is 273.15 used in conversions?</dt>
+  <dd>The value 273.15 represents the exact offset between Celsius and Kelvin scales. It derives from the triple point of water (0.01°C = 273.16 K) and the definition that 0 K equals -273.15°C. This constant ensures thermodynamic accuracy in scientific calculations.</dd>
+
+  <dt>When should I use Kelvin vs Celsius?</dt>
+  <dd>Use Kelvin for thermodynamic equations, gas laws (PV=nRT), physics calculations, and astronomy. Use Celsius for weather, cooking, medical applications, and daily life. Kelvin is required when temperature appears in exponential or ratio contexts since it starts at true zero.</dd>
+
+  <dt>What is the Fahrenheit scale based on?</dt>
+  <dd>Fahrenheit was originally defined using three fixed points: 0°F (brine ice mixture), 32°F (freezing water), and 96°F (human body temperature, later recalibrated to 98.6°F). The scale divides the water freezing-boiling range into 180 degrees (212°F - 32°F = 180°F).</dd>
+
+  <dt>At what temperature are Celsius and Fahrenheit equal?</dt>
+  <dd>Celsius and Fahrenheit are equal at -40 degrees: -40°C = -40°F. This can be verified algebraically by setting C = F in the conversion formula F = C × 9/5 + 32, solving for C = -40.</dd>
 </dl>
 </section>
 </main>

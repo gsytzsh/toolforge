@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Remove Line Breaks – Join Lines Online | ToolForge</title>
-<meta name="description" content="Free online tool to remove line breaks and join lines with space or nothing. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Remove line breaks and join lines with space or custom separator. Supports LF, CRLF, CR line endings. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/remove-line-breaks.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Remove Line Breaks – Join Lines Online | ToolForge">
-<meta property="og:description" content="Free online tool to remove line breaks and join lines with space or nothing. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Remove line breaks and join lines with space or custom separator. Supports LF, CRLF, CR line endings. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/remove-line-breaks.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Remove Line Breaks – Join Lines Online | ToolForge">
-<meta name="twitter:description" content="Free online tool to remove line breaks and join lines with space or nothing. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Remove line breaks and join lines with space or custom separator. Supports LF, CRLF, CR line endings. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Remove Line Breaks?",
+      "name": "What are line breaks and how do they work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Remove Line Breaks is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Line breaks are special characters that mark the end of a line of text. The three main types are LF (Line Feed, \\n, Unix/Linux/macOS), CRLF (Carriage Return + Line Feed, \\r\\n, Windows), and CR (Carriage Return, \\r, legacy Mac). When text is split into lines, these characters separate each line."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between LF, CRLF, and CR?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "LF (\\n) is a single character used by Unix, Linux, and modern macOS. CRLF (\\r\\n) is two characters used by Windows. CR (\\r) is a single character used by legacy Mac OS (pre-OS X). CRLF originates from typewriters requiring two actions: carriage return and line feed."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "When should I join lines with space vs without space?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Join with space when lines contain sentences or paragraphs that should flow naturally. Join without space when lines contain code, URLs, or data that should concatenate directly. For example, joining 'Hello\\nWorld' with space gives 'Hello World'; without space gives 'HelloWorld'."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I normalize line endings?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "To normalize line endings, first convert all CRLF to LF by replacing \\r\\n with \\n, then convert any remaining CR to LF by replacing \\r with \\n. This ensures consistent LF line endings across all platforms. Many code editors offer this as a built-in feature."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "What are common use cases for removing line breaks?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Common uses include: cleaning up pasted text from PDFs or emails, preparing CSV data for import, joining wrapped log lines, formatting code snippets, removing artificial line breaks in JSON or SQL queries, and consolidating multi-line paragraphs into single lines for processing."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "Can I use a custom separator instead of space or nothing?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Yes, line breaks can be replaced with any custom separator such as comma, semicolon, pipe character, or HTML break tags. This is useful for creating CSV output (comma), SQL lists (comma), or preparing text for HTML display (br tags)."
       }
     }
   ]
@@ -85,25 +90,371 @@
 <textarea id="output" rows="6" style="width:90%" aria-label="Output text"></textarea>
 <section class="tool-seo">
 <h3>About Remove Line Breaks</h3>
-<p>This remove-line-breaks tool joins multiple lines by replacing breaks with a space or removing them entirely.</p>
-<p>It is useful for pasted paragraphs, CSV fragments, email content and other text that needs to be flattened into a single line quickly.</p>
+<p>This tool removes line breaks from text by replacing newline characters with a space or custom separator. It handles all three line ending types: LF (Unix/Linux), CRLF (Windows), and CR (legacy Mac). The tool uses JavaScript's string split and join operations to process text.</p>
+<p>It is useful for cleaning up pasted text from PDFs or emails, preparing CSV data for import, joining wrapped log lines, formatting code snippets, removing artificial line breaks in JSON or SQL queries, and consolidating multi-line paragraphs into single lines for processing.</p>
+
+<h4>Line Break Types</h4>
+<p>Line breaks are control characters that mark the end of a text line:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Line Ending Types:
+
+1. LF (Line Feed)
+   - Character: \n
+   - ASCII: 10 (0x0A)
+   - Used by: Unix, Linux, macOS (OS X+), iOS, Android
+   - JavaScript: "line1\nline2"
+
+2. CRLF (Carriage Return + Line Feed)
+   - Characters: \r\n
+   - ASCII: 13 + 10 (0x0D 0x0A)
+   - Used by: Windows, DOS, Symbian OS
+   - JavaScript: "line1\r\nline2"
+
+3. CR (Carriage Return)
+   - Character: \r
+   - ASCII: 13 (0x0D)
+   - Used by: Legacy Mac OS (pre-OS X), older systems
+   - JavaScript: "line1\rline2"
+
+Historical Note:
+  CR and LF come from typewriters:
+  - Carriage Return: return carriage to start of line
+  - Line Feed: advance paper to next line
+  Windows kept both; Unix simplified to LF only.
+</pre>
+
+<h4>Operating System Line Endings</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Operating System</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Line Ending</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Characters</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Hex</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Windows 10/11</td>
+    <td style="border:1px solid #ddd;padding:8px">CRLF</td>
+    <td style="border:1px solid #ddd;padding:8px">\r\n</td>
+    <td style="border:1px solid #ddd;padding:8px">0D 0A</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Linux (all distros)</td>
+    <td style="border:1px solid #ddd;padding:8px">LF</td>
+    <td style="border:1px solid #ddd;padding:8px">\n</td>
+    <td style="border:1px solid #ddd;padding:8px">0A</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">macOS (OS X+)</td>
+    <td style="border:1px solid #ddd;padding:8px">LF</td>
+    <td style="border:1px solid #ddd;padding:8px">\n</td>
+    <td style="border:1px solid #ddd;padding:8px">0A</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Classic Mac OS (pre-X)</td>
+    <td style="border:1px solid #ddd;padding:8px">CR</td>
+    <td style="border:1px solid #ddd;padding:8px">\r</td>
+    <td style="border:1px solid #ddd;padding:8px">0D</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Android</td>
+    <td style="border:1px solid #ddd;padding:8px">LF</td>
+    <td style="border:1px solid #ddd;padding:8px">\n</td>
+    <td style="border:1px solid #ddd;padding:8px">0A</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">iOS</td>
+    <td style="border:1px solid #ddd;padding:8px">LF</td>
+    <td style="border:1px solid #ddd;padding:8px">\n</td>
+    <td style="border:1px solid #ddd;padding:8px">0A</td>
+  </tr>
+</table>
+
+<h4>Line Break Removal Methods</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Method 1: Join with Space
+  Input:
+    "Hello
+    World"
+
+  Output: "Hello World"
+
+  Use case: Joining sentences, paragraphs
+
+Method 2: Join without Space
+  Input:
+    "Hello
+    World"
+
+  Output: "HelloWorld"
+
+  Use case: Concatenating code, URLs, identifiers
+
+Method 3: Normalize Line Endings (CRLF → LF)
+  Input: "line1\r\nline2\r\nline3"
+  Output: "line1\nline2\nline3"
+
+  Use case: Cross-platform file conversion
+
+Method 4: Replace with Custom Separator
+  Input:
+    "apple
+    banana
+    cherry"
+
+  Output (comma): "apple,banana,cherry"
+  Output (pipe): "apple|banana|cherry"
+
+  Use case: CSV generation, list formatting
+</pre>
+
+<h4>Common Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Separator</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">PDF Text Cleanup</td>
+    <td style="border:1px solid #ddd;padding:8px">Remove artificial breaks from PDF copy/paste</td>
+    <td style="border:1px solid #ddd;padding:8px">Space</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Email Formatting</td>
+    <td style="border:1px solid #ddd;padding:8px">Join wrapped email lines for clean quoting</td>
+    <td style="border:1px solid #ddd;padding:8px">Space</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">CSV Preparation</td>
+    <td style="border:1px solid #ddd;padding:8px">Convert multi-line cells to single line</td>
+    <td style="border:1px solid #ddd;padding:8px">Space or custom</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Code Formatting</td>
+    <td style="border:1px solid #ddd;padding:8px">Join wrapped code lines (e.g., long strings)</td>
+    <td style="border:1px solid #ddd;padding:8px">None</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Log File Processing</td>
+    <td style="border:1px solid #ddd;padding:8px">Join wrapped log entries for analysis</td>
+    <td style="border:1px solid #ddd;padding:8px">Space or marker</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">JSON/SQL Cleanup</td>
+    <td style="border:1px solid #ddd;padding:8px">Remove breaks from strings in queries</td>
+    <td style="border:1px solid #ddd;padding:8px">None or escaped</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">List to CSV</td>
+    <td style="border:1px solid #ddd;padding:8px">Convert vertical list to comma-separated</td>
+    <td style="border:1px solid #ddd;padding:8px">Comma</td>
+  </tr>
+</table>
+
+<h4>Code Examples by Language</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript:
+  // Remove all line breaks, join with space
+  text.split(/\r?\n/).join(' ')
+
+  // Remove all line breaks, no separator
+  text.split(/\r?\n/).join('')
+
+  // Normalize CRLF to LF
+  text.replace(/\r\n/g, '\n').replace(/\r/g, '\n')
+
+  // Replace with custom separator
+  text.split(/\r?\n/).join(',')
+
+Python:
+  # Remove all line breaks, join with space
+  ' '.join(text.splitlines())
+
+  # Normalize line endings
+  text.replace('\r\n', '\n').replace('\r', '\n')
+
+  # Replace with custom separator
+  ','.join(text.splitlines())
+
+Bash/sed:
+  # Join all lines with space
+  tr '\n' ' ' < file.txt
+
+  # Remove all newlines
+  tr -d '\n' < file.txt
+
+  # CRLF to LF conversion
+  sed 's/\r$//' file.txt
+
+PowerShell:
+  # Join with space
+  (Get-Content file.txt) -join ' '
+
+  # Normalize line endings
+  (Get-Content file.txt) -join "`n"
+
+PHP:
+  // Join with space
+  implode(' ', file('file.txt'));
+
+  // Normalize line endings
+  str_replace(["\r\n", "\r"], "\n", $text);
+</pre>
+
+<h4>Regex Patterns for Line Breaks</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Pattern       | Matches                  | Notes
+--------------|--------------------------|------------------
+\n            | LF only                  | Unix/Linux/macOS
+\r\n          | CRLF                     | Windows
+\r            | CR only                  | Legacy Mac
+\r?\n         | LF or CRLF               | Cross-platform
+[\r\n]+       | Any line break(s)        | One or more
+(?:\r\n|\r|\n)| Any line break (grouped) | Explicit alternation
+
+JavaScript Examples:
+  // Split on any line break type
+  text.split(/\r?\n/)
+
+  // Replace all line breaks with space
+  text.replace(/[\r\n]+/g, ' ')
+
+  // Normalize to LF
+  text.replace(/\r\n/g, '\n').replace(/\r/g, '\n')
+</pre>
+
+<h4>Line Break Removal Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Simple Paragraph
+  Input:
+    "Hello
+    World"
+
+  Join with space: "Hello World"
+  Join (no space): "HelloWorld"
+
+Example 2: Multiple Lines
+  Input:
+    "Line 1
+    Line 2
+    Line 3"
+
+  Join with space: "Line 1 Line 2 Line 3"
+  Join (no space): "Line1Line2Line3"
+
+Example 3: CRLF (Windows) Line Endings
+  Input: "Line1\r\nLine2\r\nLine3"
+
+  After removal: "Line1 Line2 Line3"
+
+Example 4: Mixed Line Endings
+  Input: "Line1\nLine2\r\nLine3\rLine4"
+
+  Normalized: "Line1\nLine2\nLine3\nLine4"
+
+Example 5: CSV Data
+  Input:
+    "name,age
+    John,30
+    Jane,25"
+
+  Join with comma: "name,age,John,30,Jane,25"
+  Join with semicolon: "name,age;John,30;Jane,25"
+
+Example 6: Code String
+  Input:
+    "const msg = 'Hello
+    World';"
+
+  Join (no space): "const msg = 'HelloWorld';"
+  Join with space: "const msg = 'Hello World';"
+
+Example 7: Wrapped Log Entry
+  Input:
+    "2024-01-15 10:30:45 ERROR: Database
+    connection failed after 30000ms
+    timeout"
+
+  Join with space:
+    "2024-01-15 10:30:45 ERROR: Database connection failed after 30000ms timeout"
+
+Example 8: HTML List to Inline
+  Input:
+    "<li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>"
+
+  Join (no space): "<li>Item 1</li><li>Item 2</li><li>Item 3</li>"
+</pre>
+
+<h4>Line Ending Conversion</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Conversion Matrix:
+
+From → To    | LF (\n) | CRLF (\r\n) | CR (\r)
+-------------|---------|-------------|--------
+LF (\n)      | -       | \n → \r\n   | \n → \r
+CRLF (\r\n)  | \r\n → \n | -         | \r\n → \r
+CR (\r)      | \r → \n | \r → \r\n   | -
+
+Common Conversions:
+
+1. Windows to Unix (CRLF → LF):
+   text.replace(/\r\n/g, '\n')
+
+2. Unix to Windows (LF → CRLF):
+   text.replace(/\n/g, '\r\n')
+
+3. Legacy Mac to Unix (CR → LF):
+   text.replace(/\r/g, '\n')
+
+4. Normalize all to LF:
+   text.replace(/\r\n/g, '\n').replace(/\r/g, '\n')
+
+5. Remove all line breaks:
+   text.replace(/[\r\n]+/g, '')
+</pre>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Preserve intentional breaks:</strong> Review text before removing all breaks; some may be structurally important.</li>
+  <li><strong>Use appropriate separator:</strong> Space for natural language, none for code/URLs, comma for CSV.</li>
+  <li><strong>Normalize first:</strong> Convert all line endings to LF before processing for consistent results.</li>
+  <li><strong>Handle edge cases:</strong> Multiple consecutive breaks may need special handling (collapse to single space).</li>
+  <li><strong>Consider encoding:</strong> Some files may use different character encodings affecting line break detection.</li>
+  <li><strong>Git configuration:</strong> Use <code>git config core.autocrlf</code> to handle line endings in version control.</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>Loss of structure:</strong> Removing all line breaks destroys paragraph and section boundaries.</li>
+  <li><strong>Context unaware:</strong> Cannot distinguish intentional breaks from unwanted wrapping.</li>
+  <li><strong>Unicode line separators:</strong> Does not handle Unicode line separator characters (U+2028, U+2029).</li>
+  <li><strong>Large files:</strong> Very large text inputs may cause browser performance issues.</li>
+  <li><strong>Formatting loss:</strong> Indentation and visual structure are lost when line breaks are removed.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Remove Line Breaks?</dt>
-  <dd>Remove Line Breaks is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What are line breaks and how do they work?</dt>
+  <dd>Line breaks are special characters that mark the end of a line of text. The three main types are LF (Line Feed, \n, Unix/Linux/macOS), CRLF (Carriage Return + Line Feed, \r\n, Windows), and CR (Carriage Return, \r, legacy Mac). When text is split into lines, these characters separate each line.</dd>
+
+  <dt>What is the difference between LF, CRLF, and CR?</dt>
+  <dd>LF (\n) is a single character used by Unix, Linux, and modern macOS. CRLF (\r\n) is two characters used by Windows. CR (\r) is a single character used by legacy Mac OS (pre-OS X). CRLF originates from typewriters requiring two actions: carriage return and line feed.</dd>
+
+  <dt>When should I join lines with space vs without space?</dt>
+  <dd>Join with space when lines contain sentences or paragraphs that should flow naturally. Join without space when lines contain code, URLs, or data that should concatenate directly. For example, joining 'Hello\nWorld' with space gives 'Hello World'; without space gives 'HelloWorld'.</dd>
+
+  <dt>How do I normalize line endings?</dt>
+  <dd>To normalize line endings, first convert all CRLF to LF by replacing \r\n with \n, then convert any remaining CR to LF by replacing \r with \n. This ensures consistent LF line endings across all platforms. Many code editors offer this as a built-in feature.</dd>
+
+  <dt>What are common use cases for removing line breaks?</dt>
+  <dd>Common uses include: cleaning up pasted text from PDFs or emails, preparing CSV data for import, joining wrapped log lines, formatting code snippets, removing artificial line breaks in JSON or SQL queries, and consolidating multi-line paragraphs into single lines for processing.</dd>
+
+  <dt>Can I use a custom separator instead of space or nothing?</dt>
+  <dd>Yes, line breaks can be replaced with any custom separator such as comma, semicolon, pipe character, or HTML break tags. This is useful for creating CSV output (comma), SQL lists (comma), or preparing text for HTML display (br tags).</dd>
 </dl>
 </section>
 </main>

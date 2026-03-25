@@ -26,45 +26,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Color Converter?",
+      "name": "What is the difference between HEX and RGB color formats?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Color Converter is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "HEX colors use hexadecimal notation (#RRGGBB) where each pair represents red, green, and blue values from 00-FF (0-255). RGB uses decimal notation rgb(red, green, blue) with values 0-255. HEX is compact and common in CSS; RGB is readable and supports alpha channel (RGBA). Both represent the same additive RGB color space."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do you convert HEX to RGB mathematically?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Split the 6-digit HEX into three 2-digit pairs. Convert each hexadecimal pair to decimal: R = hex[0-1] to decimal, G = hex[2-3] to decimal, B = hex[4-5] to decimal. Example: #3498db → R=0x34=52, G=0x98=152, B=0xdb=219 → rgb(52, 152, 219). For 3-digit HEX (#RGB), double each digit first."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the purpose of the alpha channel in colors?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "The alpha channel controls transparency from 0 (fully transparent) to 1 or 100% (fully opaque). RGBA format: rgba(255, 0, 0, 0.5) for semi-transparent red. HEX equivalent: #RRGGBBAA where AA is hex alpha (00-FF). Alpha enables layering effects, overlays, and subtle visual treatments without full opacity."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are common color spaces and when are they used?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
+        "text": "RGB/HEX for screens and web design (additive light model). CMYK for print (subtractive ink model). HSL/HSV for intuitive color selection (hue, saturation, lightness/value). LAB for perceptual uniformity and color science. XYZ as device-independent reference. Use RGB for digital, CMYK for print, HSL for color pickers."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is this tool free to use?",
+      "name": "Why do colors look different on different screens?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
+        "text": "Monitor calibration, panel technology (IPS, TN, OLED), color gamut (sRGB, Adobe RGB, DCI-P3), brightness settings, and ambient lighting all affect color appearance. Manufacturers tune displays differently. Professional work requires calibrated monitors with ICC profiles. Web colors assume sRGB color space as the standard."</
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report a bug?",
+      "name": "What is color gamut and why does it matter?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Color gamut is the range of colors a device can display or reproduce. sRGB is the web standard (~35% of visible spectrum). Adobe RGB covers ~50%, DCI-P3 ~45%. Wide-gamut displays show more vibrant colors but may oversaturate sRGB content. Gamut mapping ensures colors translate correctly between color spaces."</
       }
     }
   ]
@@ -107,23 +112,122 @@ B: <label for="b" class="sr-only">B</label>
 <h3>About Color Converter</h3>
 <p>The Color Converter tool lets you convert colors between HEX and RGB for CSS, design systems and branding.</p>
 <p>It is useful for quick browser-based image processing, asset cleanup, color work and lightweight visual tasks without extra software.</p>
+
+<h4>Understanding HEX Color Notation</h4>
+<p>HEX colors use hexadecimal (base-16) notation to represent RGB values:</p>
+<ul>
+  <li><strong>Format:</strong> #RRGGBB where RR=red, GG=green, BB=blue</li>
+  <li><strong>Range:</strong> 00-FF in hex equals 0-255 in decimal</li>
+  <li><strong>Shorthand:</strong> #RGB expands to #RRGGBB (e.g., #f00 → #ff0000)</li>
+  <li><strong>Alpha:</strong> #RRGGBBAA adds transparency (00=transparent, FF=opaque)</li>
+  <li><strong>Case:</strong> Hex digits are case-insensitive (#ABC = #abc)</li>
+</ul>
+
+<h4>HEX to RGB Conversion Algorithm</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Convert HEX to RGB
+function hexToRgb(hex) {
+  // Remove # prefix
+  hex = hex.replace(/^#/, '');
+
+  // Expand shorthand (e.g., "03F" → "0033FF")
+  if (hex.length === 3) {
+    hex = hex.split('').map(c => c + c).join('');
+  }
+
+  // Parse hex pairs to decimal
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+
+  return { r, g, b };
+}
+
+// Example: #3498db → rgb(52, 152, 219)
+// 0x34 = 52, 0x98 = 152, 0xdb = 219
+</pre>
+
+<h4>RGB to HEX Conversion Algorithm</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Convert decimal to 2-digit hex
+function toHex(n) {
+  // Clamp to valid range (0-255)
+  const clamped = Math.max(0, Math.min(255, n));
+  const hex = clamped.toString(16).toUpperCase();
+  return hex.length === 1 ? '0' + hex : hex;
+}
+
+// Convert RGB to HEX
+function rgbToHex(r, g, b) {
+  return '#' + toHex(r) + toHex(g) + toHex(b);
+}
+
+// Example: rgb(52, 152, 219) → #3498DB
+// 52 → "34", 152 → "98", 219 → "DB"
+</pre>
+
+<h4>Color Format Comparison</h4>
+<table class="ref-table">
+<thead><tr><th>Format</th><th>Syntax</th><th>Alpha Support</th><th>Use Case</th></tr></thead>
+<tbody>
+<tr><td>HEX</td><td>#RRGGBB</td><td>#RRGGBBAA</td><td>CSS, web design, HTML</td></tr>
+<tr><td>RGB</td><td>rgb(r, g, b)</td><td>rgba(r, g, b, a)</td><td>CSS with transparency</td></tr>
+<tr><td>HSL</td><td>hsl(h, s%, l%)</td><td>hsla(h, s%, l%, a)</td><td>Intuitive color adjustment</td></tr>
+<tr><td>CMYK</td><td>cmyk(c, m, y, k)</td><td>N/A</td><td>Print design</td></tr>
+<tr><td>LAB</td><td>lab(l, a, b)</td><td>lab(l, a, b / alpha)</td><td>Color science, perceptual uniformity</td></tr>
+</tbody>
+</table>
+
+<h4>Common Web Colors</h4>
+<table class="ref-table">
+<thead><tr><th>Color Name</th><th>HEX</th><th>RGB</th><th>CSS Name</th></tr></thead>
+<tbody>
+<tr><td>Black</td><td>#000000</td><td>rgb(0, 0, 0)</td><td>black</td></tr>
+<tr><td>White</td><td>#FFFFFF</td><td>rgb(255, 255, 255)</td><td>white</td></tr>
+<tr><td>Red</td><td>#FF0000</td><td>rgb(255, 0, 0)</td><td>red</td></tr>
+<tr><td>Green</td><td>#008000</td><td>rgb(0, 128, 0)</td><td>green</td></tr>
+<tr><td>Blue</td><td>#0000FF</td><td>rgb(0, 0, 255)</td><td>blue</td></tr>
+<tr><td>Yellow</td><td>#FFFF00</td><td>rgb(255, 255, 0)</td><td>yellow</td></tr>
+<tr><td>Cyan/Aqua</td><td>#00FFFF</td><td>rgb(0, 255, 255)</td><td>aqua, cyan</td></tr>
+<tr><td>Magenta/Fuchsia</td><td>#FF00FF</td><td>rgb(255, 0, 255)</td><td>fuchsia, magenta</td></tr>
+<tr><td>Gray</td><td>#808080</td><td>rgb(128, 128, 128)</td><td>gray</td></tr>
+<tr><td>Navy</td><td>#000080</td><td>rgb(0, 0, 128)</td><td>navy</td></tr>
+<tr><td>Purple</td><td>#800080</td><td>rgb(128, 0, 128)</td><td>purple</td></tr>
+<tr><td>Lime</td><td>#00FF00</td><td>rgb(0, 255, 0)</td><td>lime</td></tr>
+</tbody>
+</table>
+
+<h4>CSS Color Best Practices</h4>
+<ul>
+  <li><strong>Use HEX for solid colors:</strong> Shorter syntax, widely supported</li>
+  <li><strong>Use RGBA for transparency:</strong> Better browser support than #RRGGBBAA</li>
+  <li><strong>Use HSL for dynamic colors:</strong> Easier to adjust saturation and lightness programmatically</li>
+  <li><strong>Name colors semantically:</strong> Use CSS custom properties (--primary-color: #3498db)</li>
+  <li><strong>Ensure accessibility:</strong> Maintain WCAG contrast ratios (4.5:1 for text)</li>
+  <li><strong>Test on multiple displays:</strong> Colors vary across monitors and phones</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Color Converter?</dt>
-  <dd>Color Converter is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the difference between HEX and RGB color formats?</dt>
+  <dd>HEX colors use hexadecimal notation (#RRGGBB) where each pair represents red, green, and blue values from 00-FF (0-255). RGB uses decimal notation rgb(red, green, blue) with values 0-255. HEX is compact and common in CSS; RGB is readable and supports alpha channel (RGBA). Both represent the same additive RGB color space.</dd>
+
+  <dt>How do you convert HEX to RGB mathematically?</dt>
+  <dd>Split the 6-digit HEX into three 2-digit pairs. Convert each hexadecimal pair to decimal: R = hex[0-1] to decimal, G = hex[2-3] to decimal, B = hex[4-5] to decimal. Example: #3498db → R=0x34=52, G=0x98=152, B=0xdb=219 → rgb(52, 152, 219). For 3-digit HEX (#RGB), double each digit first.</dd>
+
+  <dt>What is the purpose of the alpha channel in colors?</dt>
+  <dd>The alpha channel controls transparency from 0 (fully transparent) to 1 or 100% (fully opaque). RGBA format: rgba(255, 0, 0, 0.5) for semi-transparent red. HEX equivalent: #RRGGBBAA where AA is hex alpha (00-FF). Alpha enables layering effects, overlays, and subtle visual treatments without full opacity.</dd>
+
+  <dt>What are common color spaces and when are they used?</dt>
+  <dd>RGB/HEX for screens and web design (additive light model). CMYK for print (subtractive ink model). HSL/HSV for intuitive color selection (hue, saturation, lightness/value). LAB for perceptual uniformity and color science. XYZ as device-independent reference. Use RGB for digital, CMYK for print, HSL for color pickers.</dd>
+
+  <dt>Why do colors look different on different screens?</dt>
+  <dd>Monitor calibration, panel technology (IPS, TN, OLED), color gamut (sRGB, Adobe RGB, DCI-P3), brightness settings, and ambient lighting all affect color appearance. Manufacturers tune displays differently. Professional work requires calibrated monitors with ICC profiles. Web colors assume sRGB color space as the standard.</dd>
+
+  <dt>What is color gamut and why does it matter?</dt>
+  <dd>Color gamut is the range of colors a device can display or reproduce. sRGB is the web standard (~35% of visible spectrum). Adobe RGB covers ~50%, DCI-P3 ~45%. Wide-gamut displays show more vibrant colors but may oversaturate sRGB content. Gamut mapping ensures colors translate correctly between color spaces.</dd>
 </dl>
 </section>
 </main>

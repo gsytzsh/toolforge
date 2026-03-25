@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Meeting Time Finder – Compare Time Zones | ToolForge</title>
-<meta name="description" content="Free online Meeting Time Finder to compare local times across UTC offsets and find a reasonable meeting hour for distributed teams. Part of the ToolForge developer tools collection.">
+<title>Meeting Time Finder – Time Zone Converter for Global Teams | ToolForge</title>
+<meta name="description" content="Find optimal meeting times across multiple time zones. Compare local times, identify overlapping business hours, and schedule global team meetings. Includes UTC offset reference and time zone abbreviations. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/meeting-time-finder.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Meeting Time Finder – Compare Time Zones | ToolForge">
-<meta property="og:description" content="Free online Meeting Time Finder to compare local times across UTC offsets and find a reasonable meeting hour for distributed teams.">
+<meta property="og:title" content="Meeting Time Finder – Time Zone Converter for Global Teams | ToolForge">
+<meta property="og:description" content="Find optimal meeting times across multiple time zones. Compare local times, identify overlapping business hours, and schedule global team meetings. Includes UTC offset reference and time zone abbreviations. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/meeting-time-finder.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Meeting Time Finder – Compare Time Zones | ToolForge">
-<meta name="twitter:description" content="Free online Meeting Time Finder to compare local times across UTC offsets and find a reasonable meeting hour for distributed teams.">
+<meta name="twitter:title" content="Meeting Time Finder – Time Zone Converter for Global Teams | ToolForge">
+<meta name="twitter:description" content="Find optimal meeting times across multiple time zones. Compare local times, identify overlapping business hours, and schedule global team meetings. Includes UTC offset reference and time zone abbreviations. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Meeting Time Finder used for?",
+      "name": "How does meeting time calculation work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Meeting Time Finder is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "Meeting time calculation converts a base time to different time zones using UTC offsets. Each zone's offset (e.g., UTC-8, UTC+5:30) is added to the UTC time to get local time. For example, 3 PM UTC is 7 AM EST (UTC-5) and 11 PM IST (UTC+5:30). This tool handles half-hour and 45-minute offset zones like India (UTC+5:30) and Nepal (UTC+5:45)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What are common UTC offsets for major cities?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Major city offsets: New York UTC-5 (EST), Chicago UTC-6 (CST), Denver UTC-7 (MST), Los Angeles UTC-8 (PST), London UTC+0 (GMT), Paris UTC+1 (CET), Moscow UTC+3, Dubai UTC+4, Mumbai UTC+5:30, Singapore UTC+8, Tokyo UTC+9, Sydney UTC+10. Note: Many regions observe daylight saving time, shifting offsets by +1 hour in summer."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What is the best time for global team meetings?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "For US-Europe overlap: 2-4 PM CET (8 AM-10 AM EST). For US-Asia overlap: 8-10 PM JST (7-9 AM EST). For Europe-Asia: 2-4 PM CET (7:30-9:30 PM IST). Three-continent meetings are challenging—consider rotating times, recording sessions, or splitting into regional meetings. Tuesday-Thursday 14:00-16:00 UTC often works best for US-Europe."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is daylight saving time and how does it affect scheduling?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Daylight Saving Time (DST) shifts clocks forward 1 hour in spring, back 1 hour in fall. Observed in most of US, Canada, Europe, but NOT in most of Asia, Africa, or South America. DST dates vary by country, creating 'gap weeks' where offsets temporarily change. When scheduling year-round meetings, verify current offsets twice yearly during transition periods."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "What are time zone abbreviations and are they reliable?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "Common abbreviations: EST (Eastern Standard), PST (Pacific), GMT (Greenwich), CET (Central European), IST (Indian/Israel), JST (Japan), AEST (Australian Eastern). However, abbreviations are ambiguous: IST = India Standard Time OR Israel Standard Time OR Irish Standard Time. Always use UTC offsets or IANA time zone IDs (America/New_York) for clarity."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "How do I handle half-hour and 45-minute offset time zones?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "Some zones use non-hour offsets: India UTC+5:30, Nepal UTC+5:45, Australia Central UTC+9:30, Newfoundland UTC-3:30, Chatham Islands UTC+12:45, Marquesas UTC-9:30. When calculating, convert offsets to minutes: UTC+5:30 = 330 minutes. Add to UTC time in minutes, then convert back. This tool handles fractional offsets automatically."
       }
     }
   ]
@@ -72,41 +77,433 @@
 <body>
 <main class="container">
 <h1>Meeting Time Finder</h1>
-<p class="subtitle">Compare the same meeting hour across multiple UTC offsets.</p>
+<p class="subtitle">Compare local times across multiple time zones to find optimal meeting slots for global teams.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <label for="base-time" class="sr-only">Base meeting time</label>
 <input id="base-time" type="datetime-local" aria-label="Base meeting time">
 <br><br>
 <label for="zones" class="sr-only">Time zone offsets</label>
-<textarea id="zones" rows="6" class="pdf-editor pdf-editor-mono" aria-label="Time zone offsets" placeholder="UTC-8 Pacific&#10;UTC+0 London&#10;UTC+8 Singapore"></textarea>
+<textarea id="zones" rows="6" style="width:90%;font-family:monospace" aria-label="Time zone offsets" placeholder="UTC-8 Pacific&#10;UTC+0 London&#10;UTC+8 Singapore&#10;UTC+5:30 Mumbai"></textarea>
 <div class="tool-actions">
 <button type="button" onclick="findTimes()">Compare Times</button>
 <button type="button" onclick="copyResult()">Copy Result</button>
 </div>
 <h3>Local Times</h3>
-<pre id="result"></pre>
+<pre id="result" style="background:#f5f5f5;padding:12px;border-radius:4px;min-height:100px;overflow:auto"></pre>
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">
 <h3>About Meeting Time Finder</h3>
-<p>This meeting time finder shows how the same meeting slot appears across multiple UTC offsets so you can compare local times more easily.</p>
-<p>It is useful for remote teams, client calls and international scheduling when you need a fast way to avoid inconvenient or impossible meeting hours.</p>
+<p>This meeting time finder converts a base time across multiple time zones, displaying local times for each location. It's designed for distributed teams scheduling cross-timezone meetings, webinars, conference calls, and international events.</p>
+
+<h4>How Time Zone Conversion Works</h4>
+<p>Time conversion uses UTC (Coordinated Universal Time) as the reference point:</p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Time Zone Conversion Formula:
+
+localTime = utcTime + (offset × 60 minutes)
+
+Example: Convert 15:00 UTC to various zones
+
+UTC+0  London:    15:00 + (0 × 60)     = 15:00 (3:00 PM)
+UTC+1  Paris:     15:00 + (1 × 60)     = 16:00 (4:00 PM)
+UTC+5:30 Mumbai:  15:00 + (330 min)    = 20:30 (8:30 PM)
+UTC+8  Singapore: 15:00 + (8 × 60)     = 23:00 (11:00 PM)
+UTC-5  New York:  15:00 + (-5 × 60)    = 10:00 (10:00 AM)
+UTC-8  Los Angeles: 15:00 + (-8 × 60)  = 07:00 (7:00 AM)
+
+JavaScript Implementation:
+function convertUTC(utcDate, offsetHours) {
+  const utc = utcDate.getTime() + (utcDate.getTimezoneOffset() * 60000);
+  const local = new Date(utc + (offsetHours * 3600000));
+  return local;
+}
+</pre>
+
+<h4>Common UTC Offsets Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Offset</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Time Zone</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Major Cities</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC-10</td>
+    <td style="border:1px solid #ddd;padding:8px">HST (Hawaii)</td>
+    <td style="border:1px solid #ddd;padding:8px">Honolulu</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC-8</td>
+    <td style="border:1px solid #ddd;padding:8px">PST (Pacific)</td>
+    <td style="border:1px solid #ddd;padding:8px">Los Angeles, San Francisco, Vancouver</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC-7</td>
+    <td style="border:1px solid #ddd;padding:8px">MST (Mountain)</td>
+    <td style="border:1px solid #ddd;padding:8px">Denver, Phoenix, Calgary</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC-6</td>
+    <td style="border:1px solid #ddd;padding:8px">CST (Central)</td>
+    <td style="border:1px solid #ddd;padding:8px">Chicago, Houston, Mexico City</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC-5</td>
+    <td style="border:1px solid #ddd;padding:8px">EST (Eastern)</td>
+    <td style="border:1px solid #ddd;padding:8px">New York, Toronto, Bogota</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC-4</td>
+    <td style="border:1px solid #ddd;padding:8px">AST (Atlantic)</td>
+    <td style="border:1px solid #ddd;padding:8px">Halifax, Santiago, Caracas</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC-3</td>
+    <td style="border:1px solid #ddd;padding:8px">BRT (Brasilia)</td>
+    <td style="border:1px solid #ddd;padding:8px">Sao Paulo, Buenos Aires</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC+0</td>
+    <td style="border:1px solid #ddd;padding:8px">GMT/BST (London)</td>
+    <td style="border:1px solid #ddd;padding:8px">London, Dublin, Lisbon, Accra</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC+1</td>
+    <td style="border:1px solid #ddd;padding:8px">CET (Central European)</td>
+    <td style="border:1px solid #ddd;padding:8px">Paris, Berlin, Rome, Madrid</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC+2</td>
+    <td style="border:1px solid #ddd;padding:8px">EET (Eastern European)</td>
+    <td style="border:1px solid #ddd;padding:8px">Athens, Cairo, Johannesburg</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC+3</td>
+    <td style="border:1px solid #ddd;padding:8px">MSK (Moscow)</td>
+    <td style="border:1px solid #ddd;padding:8px">Moscow, Istanbul, Riyadh</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC+4</td>
+    <td style="border:1px solid #ddd;padding:8px">GST (Gulf)</td>
+    <td style="border:1px solid #ddd;padding:8px">Dubai, Baku, Tbilisi</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC+5:30</td>
+    <td style="border:1px solid #ddd;padding:8px">IST (India)</td>
+    <td style="border:1px solid #ddd;padding:8px">Mumbai, Delhi, Colombo</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC+7</td>
+    <td style="border:1px solid #ddd;padding:8px">ICT (Indochina)</td>
+    <td style="border:1px solid #ddd;padding:8px">Bangkok, Jakarta, Hanoi</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC+8</td>
+    <td style="border:1px solid #ddd;padding:8px">CST/SGT (China/Singapore)</td>
+    <td style="border:1px solid #ddd;padding:8px">Beijing, Singapore, Perth, Taipei</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC+9</td>
+    <td style="border:1px solid #ddd;padding:8px">JST/KST (Japan/Korea)</td>
+    <td style="border:1px solid #ddd;padding:8px">Tokyo, Seoul, Pyongyang</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC+10</td>
+    <td style="border:1px solid #ddd;padding:8px">AEST (Australian Eastern)</td>
+    <td style="border:1px solid #ddd;padding:8px">Sydney, Melbourne, Brisbane</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">UTC+12</td>
+    <td style="border:1px solid #ddd;padding:8px">NZST (New Zealand)</td>
+    <td style="border:1px solid #ddd;padding:8px">Auckland, Wellington, Fiji</td>
+  </tr>
+</table>
+
+<h4>Optimal Meeting Time Windows</h4>
+<p>Best overlapping hours for common region combinations (in local times):</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Regions</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Best Window</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">US West + US East</td>
+    <td style="border:1px solid #ddd;padding:8px">12-3 PM EST / 9 AM-12 PM PST</td>
+    <td style="border:1px solid #ddd;padding:8px">3-hour overlap during work hours</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">US East + Europe (UK)</td>
+    <td style="border:1px solid #ddd;padding:8px">2-4 PM GMT / 9-11 AM EST</td>
+    <td style="border:1px solid #ddd;padding:8px">Prime overlap window</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">US + Europe + Asia</td>
+    <td style="border:1px solid #ddd;padding:8px">Rotate times</td>
+    <td style="border:1px solid #ddd;padding:8px">No ideal time; consider recording</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Europe + Asia (India)</td>
+    <td style="border:1px solid #ddd;padding:8px">2-4 PM CET / 6:30-8:30 PM IST</td>
+    <td style="border:1px solid #ddd;padding:8px">Late afternoon Europe, evening India</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Asia (India) + Asia (Japan)</td>
+    <td style="border:1px solid #ddd;padding:8px">10 AM-12 PM JST / 7-9 AM IST</td>
+    <td style="border:1px solid #ddd;padding:8px">Morning overlap</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">US West + Asia (Japan)</td>
+    <td style="border:1px solid #ddd;padding:8px">8-10 PM JST / 4-6 AM PST</td>
+    <td style="border:1px solid #ddd;padding:8px">Very early US or late Asia</td>
+  </tr>
+</table>
+
+<h4>Time Zone Conversion Algorithm</h4>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript Time Zone Conversion:
+
+function parseOffset(offsetStr) {
+  // Handle formats: +8, -5, +5:30, -3:30
+  const match = offsetStr.match(/^([+-])(\d+)(?::(\d+))?$/);
+  if (!match) return null;
+
+  const sign = match[1] === '+' ? 1 : -1;
+  const hours = parseInt(match[2], 10);
+  const minutes = match[3] ? parseInt(match[3], 10) : 0;
+
+  return sign * (hours + minutes / 60);
+}
+
+function convertToZone(utcDate, offsetStr, label) {
+  const offset = parseOffset(offsetStr);
+  if (offset === null) return null;
+
+  // Get UTC timestamp in milliseconds
+  const utc = utcDate.getTime() + (utcDate.getTimezoneOffset() * 60000);
+
+  // Apply offset (convert hours to milliseconds)
+  const local = new Date(utc + (offset * 3600000));
+
+  // Format as readable string
+  const timeStr = local.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true
+  });
+
+  const dateStr = local.toLocaleDateString('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric'
+  });
+
+  return {
+    label: label,
+    offset: offsetStr,
+    time: timeStr,
+    date: dateStr,
+    iso: local.toISOString().slice(0, 16).replace('T', ' ')
+  };
+}
+
+// Usage:
+const baseTime = new Date('2024-03-15T14:00:00'); // 2 PM UTC
+const result = convertToZone(baseTime, '-5', 'New York');
+console.log(result);
+// { label: "New York", offset: "-5", time: "09:00 AM", date: "Mar 15" }
+</pre>
+
+<h4>Daylight Saving Time (DST) Reference</h4>
+<p>DST shifts clocks forward 1 hour during summer months. Not all regions observe DST:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Region</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Observes DST?</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">DST Period</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Offset Change</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">United States</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes (most states)</td>
+    <td style="border:1px solid #ddd;padding:8px">2nd Sun Mar - 1st Sun Nov</td>
+    <td style="border:1px solid #ddd;padding:8px">+1 hour</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">European Union</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes</td>
+    <td style="border:1px solid #ddd;padding:8px">Last Sun Mar - Last Sun Oct</td>
+    <td style="border:1px solid #ddd;padding:8px">+1 hour</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">United Kingdom</td>
+    <td style="border:1px solid #ddd;padding:8px">Yes (BST)</td>
+    <td style="border:1px solid #ddd;padding:8px">Last Sun Mar - Last Sun Oct</td>
+    <td style="border:1px solid #ddd;padding:8px">+1 hour</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">China</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+    <td style="border:1px solid #ddd;padding:8px">N/A</td>
+    <td style="border:1px solid #ddd;padding:8px">None</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">India</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+    <td style="border:1px solid #ddd;padding:8px">N/A</td>
+    <td style="border:1px solid #ddd;padding:8px">None</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Japan</td>
+    <td style="border:1px solid #ddd;padding:8px">No</td>
+    <td style="border:1px solid #ddd;padding:8px">N/A</td>
+    <td style="border:1px solid #ddd;padding:8px">None</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Australia</td>
+    <td style="border:1px solid #ddd;padding:8px">Some states</td>
+    <td style="border:1px solid #ddd;padding:8px">1st Sun Oct - 1st Sun Apr</td>
+    <td style="border:1px solid #ddd;padding:8px">+1 hour (southern summer)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Brazil</td>
+    <td style="border:1px solid #ddd;padding:8px">No (abolished 2019)</td>
+    <td style="border:1px solid #ddd;padding:8px">N/A</td>
+    <td style="border:1px solid #ddd;padding:8px">None</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>Global Team Standups:</strong> Find rotating times fair to all team members across continents</li>
+  <li><strong>Webinar Scheduling:</strong> Pick times that maximize attendance across target regions</li>
+  <li><strong>Client Calls:</strong> Schedule calls with international clients in their business hours</li>
+  <li><strong>Conference Planning:</strong> Set keynote times accessible to global virtual attendees</li>
+  <li><strong>Remote Work Coordination:</strong> Align async work windows for handoffs between time zones</li>
+  <li><strong>Customer Support:</strong> Plan 24/7 coverage across regional support centers</li>
+  <li><strong>Live Streaming:</strong> Schedule broadcasts for peak viewing in multiple regions</li>
+</ul>
+
+<h4>Time Zone Abbreviations Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Abbreviation</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Full Name</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">UTC Offset</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">EST</td>
+    <td style="border:1px solid #ddd;padding:8px">Eastern Standard Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC-5</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">EDT</td>
+    <td style="border:1px solid #ddd;padding:8px">Eastern Daylight Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC-4</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">CST</td>
+    <td style="border:1px solid #ddd;padding:8px">Central Standard Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC-6</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">PST</td>
+    <td style="border:1px solid #ddd;padding:8px">Pacific Standard Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC-8</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">PDT</td>
+    <td style="border:1px solid #ddd;padding:8px">Pacific Daylight Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC-7</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">GMT</td>
+    <td style="border:1px solid #ddd;padding:8px">Greenwich Mean Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC+0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">BST</td>
+    <td style="border:1px solid #ddd;padding:8px">British Summer Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC+1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">CET</td>
+    <td style="border:1px solid #ddd;padding:8px">Central European Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC+1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">CEST</td>
+    <td style="border:1px solid #ddd;padding:8px">Central European Summer Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC+2</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">IST</td>
+    <td style="border:1px solid #ddd;padding:8px">India Standard Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC+5:30</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">JST</td>
+    <td style="border:1px solid #ddd;padding:8px">Japan Standard Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC+9</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">AEST</td>
+    <td style="border:1px solid #ddd;padding:8px">Australian Eastern Standard Time</td>
+    <td style="border:1px solid #ddd;padding:8px">UTC+10</td>
+  </tr>
+</table>
+
+<h4>Scheduling Best Practices</h4>
+<ul>
+  <li><strong>Avoid early morning calls:</strong> Before 8 AM local time reduces engagement</li>
+  <li><strong>Respect lunch hours:</strong> 12-2 PM local is often unavailable</li>
+  <li><strong>Consider Friday afternoons:</strong> Many cultures end work early or avoid meetings</li>
+  <li><strong>Rotate inconvenient times:</strong> Share burden when no perfect time exists</li>
+  <li><strong>Send calendar invites with timezone:</strong> Use IANA timezone IDs (America/New_York) not just offsets</li>
+  <li><strong>Record meetings:</strong> Allow async participation for those who can't attend live</li>
+  <li><strong>Check DST transitions:</strong> Verify times during spring/fall transition weeks</li>
+</ul>
 </section>
 
+<section class="how-to-use">
+<h3>How to Find Meeting Times</h3>
+<ol class="how-to-steps">
+  <li><strong>Set base time:</strong> Select the meeting time in your local timezone or UTC.</li>
+  <li><strong>Enter time zones:</strong> List UTC offsets with optional labels (e.g., "UTC+8 Singapore").</li>
+  <li><strong>Click Compare:</strong> Local times display for each timezone.</li>
+  <li><strong>Review results:</strong> Identify if the time works for all participants.</li>
+  <li><strong>Copy result:</strong> Share the time comparison with your team.</li>
+</ol>
+
+<h4 style="margin-top:20px">Tips</h4>
+<ul>
+  <li>Use format "UTC+X Label" for clear output (e.g., "UTC+5:30 Mumbai")</li>
+  <li>Include half-hour offsets for India, Nepal, Australia Central</li>
+  <li>Check if any location falls outside business hours (before 8 AM or after 6 PM)</li>
+  <li>For recurring meetings, verify DST transition dates don't create conflicts</li>
+  <li>Consider using World Clock apps alongside for ongoing coordination</li>
+</ul>
+</section>
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Meeting Time Finder used for?</dt>
-  <dd>Meeting Time Finder is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+
+  <dt>How does meeting time calculation work?</dt>
+  <dd>Meeting time calculation converts a base time to different time zones using UTC offsets. Each zone's offset (e.g., UTC-8, UTC+5:30) is added to the UTC time to get local time. For example, 3 PM UTC is 7 AM EST (UTC-5) and 11 PM IST (UTC+5:30). This tool handles half-hour and 45-minute offset zones like India (UTC+5:30) and Nepal (UTC+5:45).</dd>
+
+  <dt>What are common UTC offsets for major cities?</dt>
+  <dd>Major city offsets: New York UTC-5 (EST), Chicago UTC-6 (CST), Denver UTC-7 (MST), Los Angeles UTC-8 (PST), London UTC+0 (GMT), Paris UTC+1 (CET), Moscow UTC+3, Dubai UTC+4, Mumbai UTC+5:30, Singapore UTC+8, Tokyo UTC+9, Sydney UTC+10. Note: Many regions observe daylight saving time, shifting offsets by +1 hour in summer.</dd>
+
+  <dt>What is the best time for global team meetings?</dt>
+  <dd>For US-Europe overlap: 2-4 PM CET (8 AM-10 AM EST). For US-Asia overlap: 8-10 PM JST (7-9 AM EST). For Europe-Asia: 2-4 PM CET (7:30-9:30 PM IST). Three-continent meetings are challenging—consider rotating times, recording sessions, or splitting into regional meetings. Tuesday-Thursday 14:00-16:00 UTC often works best for US-Europe.</dd>
+
+  <dt>What is daylight saving time and how does it affect scheduling?</dt>
+  <dd>Daylight Saving Time (DST) shifts clocks forward 1 hour in spring, back 1 hour in fall. Observed in most of US, Canada, Europe, but NOT in most of Asia, Africa, or South America. DST dates vary by country, creating 'gap weeks' where offsets temporarily change. When scheduling year-round meetings, verify current offsets twice yearly during transition periods.</dd>
+
+  <dt>What are time zone abbreviations and are they reliable?</dt>
+  <dd>Common abbreviations: EST (Eastern Standard), PST (Pacific), GMT (Greenwich), CET (Central European), IST (Indian/Israel), JST (Japan), AEST (Australian Eastern). However, abbreviations are ambiguous: IST = India Standard Time OR Israel Standard Time OR Irish Standard Time. Always use UTC offsets or IANA time zone IDs (America/New_York) for clarity.</dd>
+
+  <dt>How do I handle half-hour and 45-minute offset time zones?</dt>
+  <dd>Some zones use non-hour offsets: India UTC+5:30, Nepal UTC+5:45, Australia Central UTC+9:30, Newfoundland UTC-3:30, Chatham Islands UTC+12:45, Marquesas UTC-9:30. When calculating, convert offsets to minutes: UTC+5:30 = 330 minutes. Add to UTC time in minutes, then convert back. This tool handles fractional offsets automatically.</dd>
 </dl>
 </section>
 </main>
@@ -124,19 +521,27 @@ let base=new Date(value)
 let utc=base.getTime()-base.getTimezoneOffset()*60000
 try{
 let out=lines.map(function(line){
-let match=line.match(/^UTC([+-]\d{1,2})(?:\s+(.+))?$/i)
+let match=line.match(/^UTC([+-]\d{1,2}(?::\d{2})?)(?:\s+(.+))?$/i)
 if(!match) throw new Error("invalid")
-let offset=parseInt(match[1],10)
+let offsetStr=match[1]
 let label=(match[2]||("UTC"+match[1])).trim()
+// Parse offset (handle :30, :45 formats)
+let offsetParts=offsetStr.match(/^([+-])(\d+)(?::(\d+))?$/)
+let sign=offsetParts[1]==='+'?1:-1
+let hours=parseInt(offsetParts[2],10)
+let mins=offsetParts[3]?parseInt(offsetParts[3],10):0
+let offset=sign*(hours+mins/60)
 let local=new Date(utc+offset*3600000)
-return label+": "+local.toISOString().replace("T"," ").slice(0,16)
+let timeStr=local.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true})
+let dateStr=local.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})
+return label+": "+timeStr+" ("+dateStr+")"
 })
 document.getElementById("result").innerText=out.join("\n")
 document.getElementById("status").innerText="Meeting times compared."
 document.getElementById("status").style.color="#16a34a"
 }catch(e){
 document.getElementById("result").innerText=""
-document.getElementById("status").innerText="Use lines like UTC+8 Singapore or UTC-5 New York."
+document.getElementById("status").innerText="Use lines like UTC+8 Singapore or UTC+5:30 Mumbai."
 document.getElementById("status").style.color="#b91c1c"
 }
 }

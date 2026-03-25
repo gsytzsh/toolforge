@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Odd Even Lines – Split Text into Odd and Even Lines | ToolForge</title>
-<meta name="description" content="Free online tool to split text into odd lines and even lines. Extract alternating lines. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Split text into odd-numbered and even-numbered lines. Extract alternating lines from lists, logs, and data exports. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/odd-even-lines.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Odd Even Lines – Split Text into Odd and Even Lines | ToolForge">
-<meta property="og:description" content="Free online tool to split text into odd and even lines. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Split text into odd-numbered and even-numbered lines. Extract alternating lines from lists, logs, and data exports. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/odd-even-lines.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Odd Even Lines – Split Text into Odd and Even Lines | ToolForge">
-<meta name="twitter:description" content="Free online tool to split text into odd and even lines. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Split text into odd-numbered and even-numbered lines. Extract alternating lines from lists, logs, and data exports. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -24,45 +24,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Odd Even Lines used for?",
+      "name": "How does the odd/even line splitting work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Odd Even Lines is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation."
+        "text": "The tool splits input text by line breaks and separates lines based on their position. Lines at positions 1, 3, 5... (0-indexed: 0, 2, 4...) go to odd output. Lines at positions 2, 4, 6... (0-indexed: 1, 3, 5...) go to even output. This uses modulo arithmetic: line % 2 === 0 means odd position."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "Why is line 1 considered odd?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection."
+        "text": "Line numbering starts at 1 (not 0) for human readability. Line 1 is the first line, which is an odd number. In programming, arrays are 0-indexed, so line 1 is at index 0. The tool uses 1-based numbering for the output labels to match user expectations."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private and secure?",
+      "name": "What are common use cases for splitting odd/even lines?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere."
+        "text": "Common uses include: separating keys from values in paired data, extracting alternating record types from logs, splitting interleaved data streams, separating questions from answers, and processing output from tools that alternate between different data types."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How are empty lines handled?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled."
+        "text": "Empty lines are preserved and counted in the line sequence. An empty line at position 3 goes to the odd output. An empty line at position 4 goes to the even output. This maintains the original structure and line relationships."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I use this tool for free?",
+      "name": "Can I extract only odd or only even lines?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool is completely free to use with no registration, subscription, or payment required for any features."
+        "text": "This tool produces both outputs simultaneously. To get only odd or even lines, copy the desired output and discard the other. For repeated single-extraction needs, consider using command-line tools like awk 'NR%2==1' for odd or awk 'NR%2==0' for even."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "How do I report issues or bugs?",
+      "name": "What happens with a single-line input?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages."
+        "text": "A single line goes to the odd output (as line 1). The even output will be empty. This is correct because there is no line 2 (even) in a single-line input."
       }
     }
   ]
@@ -87,38 +92,417 @@
 <textarea id="even" rows="6" style="width:90%" aria-label="Even lines output"></textarea>
 <section class="tool-seo">
 <h3>About Odd Even Lines</h3>
-<p>This tool splits text into odd-numbered lines and even-numbered lines. Line 1 is the first line.</p>
-<p>It is useful for separating key-value pairs, alternating data, or extracting every other line from logs and exports.</p>
+<p>This tool splits text into odd-numbered lines and even-numbered lines based on their position in the input. Line 1 (the first line) is considered odd. The splitting uses modulo arithmetic to determine line placement: lines where (position-1) % 2 === 0 go to odd output, others go to even output.</p>
+<p>It is useful for separating keys from values in paired data, extracting alternating record types from logs, splitting interleaved data streams, separating questions from answers, and processing output from tools that alternate between different data types.</p>
+
+<h4>Line Splitting Algorithm</h4>
+<p>The tool uses index-based separation to split lines:</p>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Algorithm:
+
+1. Split input by line breaks (LF or CRLF)
+   lines = input.split(/\r?\n/)
+
+2. Initialize two output arrays
+   oddLines = []
+   evenLines = []
+
+3. For each line at index i (0-based):
+   if i % 2 === 0:
+     oddLines.push(line)    // Lines 1, 3, 5... (0-indexed: 0, 2, 4)
+   else:
+     evenLines.push(line)   // Lines 2, 4, 6... (0-indexed: 1, 3, 5)
+
+4. Join arrays with newlines
+   oddOutput = oddLines.join("\n")
+   evenOutput = evenLines.join("\n")
+
+Index Mapping:
+  Input Index | Line Number | Output
+  ------------|-------------|--------
+  0           | 1           | Odd
+  1           | 2           | Even
+  2           | 3           | Odd
+  3           | 4           | Even
+  4           | 5           | Odd
+  5           | 6           | Even
+
+JavaScript Implementation:
+  function splitOddEven(lines) {
+    const odd = [];
+    const even = [];
+    lines.forEach((line, index) => {
+      if (index % 2 === 0) {
+        odd.push(line);
+      } else {
+        even.push(line);
+      }
+    });
+    return { odd, even };
+  }
+</pre>
+
+<h4>Example Walkthrough</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example Input (6 lines):
+  Line 1: Name: John
+  Line 2: Age: 30
+  Line 3: City: New York
+  Line 4: Country: USA
+  Line 5: Phone: 555-1234
+  Line 6: Email: john@example.com
+
+Processing:
+  Index 0 (Line 1) → Odd:  "Name: John"
+  Index 1 (Line 2) → Even: "Age: 30"
+  Index 2 (Line 3) → Odd:  "City: New York"
+  Index 3 (Line 4) → Even: "Country: USA"
+  Index 4 (Line 5) → Odd:  "Phone: 555-1234"
+  Index 5 (Line 6) → Even: "Email: john@example.com"
+
+Odd Output (Lines 1, 3, 5):
+  Name: John
+  City: New York
+  Phone: 555-1234
+
+Even Output (Lines 2, 4, 6):
+  Age: 30
+  Country: USA
+  Email: john@example.com
+
+Result: Key-value pairs separated!
+  Odd contains keys, Even contains values
+</pre>
+
+<h4>Common Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Key-Value Separation</td>
+    <td style="border:1px solid #ddd;padding:8px">Extract keys and values from paired data</td>
+    <td style="border:1px solid #ddd;padding:8px">Line 1: key, Line 2: value</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Log File Analysis</td>
+    <td style="border:1px solid #ddd;padding:8px">Separate alternating log entry types</td>
+    <td style="border:1px solid #ddd;padding:8px">Header lines vs data lines</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Q&A Extraction</td>
+    <td style="border:1px solid #ddd;padding:8px">Split questions from answers</td>
+    <td style="border:1px solid #ddd;padding:8px">FAQ data, interview transcripts</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Data Stream Processing</td>
+    <td style="border:1px solid #ddd;padding:8px">Separate interleaved data sources</td>
+    <td style="border:1px solid #ddd;padding:8px">Sensor A / Sensor B readings</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">List Transformation</td>
+    <td style="border:1px solid #ddd;padding:8px">Convert alternating lists to columns</td>
+    <td style="border:1px solid #ddd;padding:8px">Item names and prices</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Code Processing</td>
+    <td style="border:1px solid #ddd;padding:8px">Separate code from comments</td>
+    <td style="border:1px solid #ddd;padding:8px">Alternating code/comment format</td>
+  </tr>
+</table>
+
+<h4>Code Examples by Language</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+JavaScript:
+  // Split into odd and even lines
+  function splitOddEven(text) {
+    const lines = text.split(/\r?\n/);
+    const odd = lines.filter((_, i) => i % 2 === 0);
+    const even = lines.filter((_, i) => i % 2 === 1);
+    return { odd: odd.join("\n"), even: even.join("\n") };
+  }
+
+Python:
+  # Split into odd and even lines
+  def split_odd_even(text):
+      lines = text.splitlines()
+      odd = lines[0::2]   # Start at 0, step by 2
+      even = lines[1::2]  # Start at 1, step by 2
+      return odd, even
+
+  # Using enumerate
+  def split_odd_even(text):
+      odd, even = [], []
+      for i, line in enumerate(text.splitlines()):
+          if i % 2 == 0:
+              odd.append(line)
+          else:
+              even.append(line)
+      return odd, even
+
+Bash/sed:
+  # Extract odd lines (1, 3, 5...)
+  sed -n '1~2p' file.txt
+
+  # Extract even lines (2, 4, 6...)
+  sed -n '2~2p' file.txt
+
+  # Using awk
+  awk 'NR%2==1' file.txt  # Odd lines
+  awk 'NR%2==0' file.txt  # Even lines
+
+PowerShell:
+  # Odd lines
+  Get-Content file.txt | Where-Object { $i++ % 2 -eq 0 }
+
+  # Even lines
+  Get-Content file.txt | Where-Object { $i++ % 2 -eq 1 }
+
+PHP:
+  // Split into odd and even lines
+  function splitOddEven($text) {
+      $lines = preg_split('/\r\n|\r|\n/', $text);
+      $odd = [];
+      $even = [];
+      foreach ($lines as $i => $line) {
+          if ($i % 2 === 0) {
+              $odd[] = $line;
+          } else {
+              $even[] = $line;
+          }
+      }
+      return [implode("\n", $odd), implode("\n", $even)];
+  }
+
+Java:
+  // Using streams (Java 8+)
+  List<String> lines = Files.lines(path).collect(toList());
+  List<String> odd = IntStream.range(0, lines.size())
+      .filter(i -> i % 2 == 0)
+      .mapToObj(lines::get)
+      .collect(toList());
+  List<String> even = IntStream.range(0, lines.size())
+      .filter(i -> i % 2 == 1)
+      .mapToObj(lines::get)
+      .collect(toList());
+</pre>
+
+<h4>Splitting Examples</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Example 1: Simple Alternating Data
+  Input:
+    Apple
+    Red
+    Banana
+    Yellow
+    Grape
+    Purple
+
+  Odd (1, 3, 5):
+    Apple
+    Banana
+    Grape
+
+  Even (2, 4, 6):
+    Red
+    Yellow
+    Purple
+
+  Result: Fruits separated from colors!
+
+Example 2: Key-Value Pairs
+  Input:
+    First Name
+    Smith
+    Last Name
+    John
+    ID
+    12345
+
+  Odd (1, 3, 5):
+    First Name
+    Last Name
+    ID
+
+  Even (2, 4, 6):
+    Smith
+    John
+    12345
+
+  Result: Keys separated from values!
+
+Example 3: Questions and Answers
+  Input:
+    Q: What is your name?
+    A: John Doe
+    Q: What is your age?
+    A: Thirty
+
+  Odd (1, 3):
+    Q: What is your name?
+    Q: What is your age?
+
+  Even (2, 4):
+    A: John Doe
+    A: Thirty
+
+  Result: All questions in one list, all answers in another!
+
+Example 4: With Empty Lines
+  Input:
+    Header 1
+
+    Header 2
+
+    Header 3
+
+  Odd (1, 3, 5):
+    Header 1
+    Header 2
+    Header 3
+
+  Even (2, 4, 6):
+
+
+
+
+  Result: Empty lines preserved in their respective outputs!
+
+Example 5: Single Line
+  Input:
+    Only line
+
+  Odd (1):
+    Only line
+
+  Even:
+    (empty)
+
+  Result: Single line goes to odd output!
+
+Example 6: Sensor Data
+  Input:
+    Temp: 72°F
+    Humidity: 45%
+    Temp: 73°F
+    Humidity: 47%
+    Temp: 71°F
+    Humidity: 44%
+
+  Odd (1, 3, 5):
+    Temp: 72°F
+    Temp: 73°F
+    Temp: 71°F
+
+  Even (2, 4, 6):
+    Humidity: 45%
+    Humidity: 47%
+    Humidity: 44%
+
+  Result: Temperature readings separated from humidity readings!
+</pre>
+
+<h4>Related Operations</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Every Nth Line Extraction:
+
+  Extract every 3rd line:
+  JavaScript: lines.filter((_, i) => i % 3 === 0)
+  Python: lines[0::3]
+  Bash: sed -n '1~3p' file.txt
+
+  Extract every 4th line:
+  JavaScript: lines.filter((_, i) => i % 4 === 0)
+  Python: lines[0::4]
+  Bash: sed -n '1~4p' file.txt
+
+Reverse Operation (Interleave):
+  Combine two lists by alternating:
+
+  JavaScript:
+    function interleave(odd, even) {
+      const result = [];
+      const max = Math.max(odd.length, even.length);
+      for (let i = 0; i < max; i++) {
+        if (i < odd.length) result.push(odd[i]);
+        if (i < even.length) result.push(even[i]);
+      }
+      return result.join("\n");
+    }
+
+  Python:
+    from itertools import zip_longest
+    def interleave(odd, even):
+        result = []
+        for o, e in zip_longest(odd, even):
+            if o: result.append(o)
+            if e: result.append(e)
+        return "\n".join(result)
+
+Line Numbering:
+  Add line numbers to output:
+
+  JavaScript:
+    lines.map((l, i) => `${i + 1}: ${l}`).join("\n")
+
+  Python:
+    "\n".join(f"{i+1}: {line}" for i, line in enumerate(lines))
+</pre>
+
+<h4>Best Practices</h4>
+<ul>
+  <li><strong>Verify line order:</strong> Ensure your data actually alternates in the expected pattern before splitting.</li>
+  <li><strong>Check line count:</strong> If input has odd number of lines, odd output will have one more line than even output.</li>
+  <li><strong>Preserve empty lines:</strong> Empty lines count as lines and affect the split; remove them first if not needed.</li>
+  <li><strong>Consider line endings:</strong> This tool handles both LF (Unix) and CRLF (Windows) line endings correctly.</li>
+  <li><strong>Test with sample data:</strong> Verify the split produces expected results before processing large files.</li>
+</ul>
+
+<h4>Limitations</h4>
+<ul>
+  <li><strong>Fixed pattern only:</strong> Only supports odd/even (every 2nd line) splitting, not custom intervals.</li>
+  <li><strong>No pattern detection:</strong> Does not automatically detect if data follows an alternating pattern.</li>
+  <li><strong>No recombination:</strong> Cannot merge the odd and even outputs back together.</li>
+  <li><strong>Memory limits:</strong> Very large files may cause browser performance issues.</li>
+  <li><strong>No filtering:</strong> Cannot selectively include/exclude lines based on content.</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Odd Even Lines used for?</dt>
-  <dd>Odd Even Lines is a utility tool that helps you perform specific tasks efficiently in your browser without requiring any software installation.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool runs entirely in your browser using JavaScript. No data is sent to servers, and it works without an internet connection.</dd>
-  <dt>Is my data private and secure?</dt>
-  <dd>Absolutely. All processing happens locally in your browser. Your input data never leaves your device or gets stored anywhere.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. JavaScript must be enabled.</dd>
-  <dt>Can I use this tool for free?</dt>
-  <dd>Yes, this tool is completely free to use with no registration, subscription, or payment required for any features.</dd>
-  <dt>How do I report issues or bugs?</dt>
-  <dd>If you encounter any problems, try refreshing the page, clearing your browser cache, or using a different browser. Check the browser console for error messages.</dd>
+  <dt>How does the odd/even line splitting work?</dt>
+  <dd>The tool splits input text by line breaks and separates lines based on their position. Lines at positions 1, 3, 5... (0-indexed: 0, 2, 4...) go to odd output. Lines at positions 2, 4, 6... (0-indexed: 1, 3, 5...) go to even output. This uses modulo arithmetic: line % 2 === 0 means odd position.</dd>
+
+  <dt>Why is line 1 considered odd?</dt>
+  <dd>Line numbering starts at 1 (not 0) for human readability. Line 1 is the first line, which is an odd number. In programming, arrays are 0-indexed, so line 1 is at index 0. The tool uses 1-based numbering for the output labels to match user expectations.</dd>
+
+  <dt>What are common use cases for splitting odd/even lines?</dt>
+  <dd>Common uses include: separating keys from values in paired data, extracting alternating record types from logs, splitting interleaved data streams, separating questions from answers, and processing output from tools that alternate between different data types.</dd>
+
+  <dt>How are empty lines handled?</dt>
+  <dd>Empty lines are preserved and counted in the line sequence. An empty line at position 3 goes to the odd output. An empty line at position 4 goes to the even output. This maintains the original structure and line relationships.</dd>
+
+  <dt>Can I extract only odd or only even lines?</dt>
+  <dd>This tool produces both outputs simultaneously. To get only odd or even lines, copy the desired output and discard the other. For repeated single-extraction needs, consider using command-line tools like awk 'NR%2==1' for odd or awk 'NR%2==0' for even.</dd>
+
+  <dt>What happens with a single-line input?</dt>
+  <dd>A single line goes to the odd output (as line 1). The even output will be empty. This is correct because there is no line 2 (even) in a single-line input.</dd>
 </dl>
 </section>
 </main>
 <script>
 function run(){
-var lines=document.getElementById("input").value.split(/\r?\n/)
-var odd=[],even=[]
+var lines=document.getElementById("input").value.split(/\r?\n/);
+var odd=[],even=[];
 lines.forEach(function(l,i){
-if(i%2===0)odd.push(l)
-else even.push(l)
-})
-document.getElementById("odd").value=odd.join("\n")
-document.getElementById("even").value=even.join("\n")
+if(i%2===0)odd.push(l);
+else even.push(l);
+});
+document.getElementById("odd").value=odd.join("\n");
+document.getElementById("even").value=even.join("\n");
 }
 </script>
 <script src="/js/favorites.js"></script>

@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Binary Calculator – Add Subtract Binary Numbers | ToolForge</title>
-<meta name="description" content="Free online Binary Calculator to add or subtract binary numbers instantly. Learn binary arithmetic with step-by-step results in both binary and decimal. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Perform binary addition and subtraction with step-by-step results. Supports binary arithmetic with carry/borrow visualization and decimal verification. Part of the ToolForge developer tools collection.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/binary-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Binary Calculator – Add Subtract Binary Numbers | ToolForge">
-<meta property="og:description" content="Free online Binary Calculator to add or subtract binary numbers instantly. Learn binary arithmetic with step-by-step results. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Perform binary addition and subtraction with step-by-step results. Supports binary arithmetic with carry/borrow visualization and decimal verification. Part of the ToolForge developer tools collection.">
 <meta property="og:url" content="https://toolforge.site/tools/binary-calculator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Binary Calculator – Add Subtract Binary Numbers | ToolForge">
-<meta name="twitter:description" content="Free online Binary Calculator to add or subtract binary numbers instantly. Learn binary arithmetic with step-by-step results. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Perform binary addition and subtraction with step-by-step results. Supports binary arithmetic with carry/borrow visualization and decimal verification. Part of the ToolForge developer tools collection.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -27,7 +27,7 @@
       "name": "How does binary addition work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Binary addition follows simple rules: 0+0=0, 0+1=1, 1+0=1, 1+1=10 (write 0, carry 1). When adding multiple bits, carry propagates left. Example: 1011 + 0101 = 10000 (11 + 5 = 16 in decimal).\""
+        "text": "Binary addition uses four rules: 0+0=0, 0+1=1, 1+0=1, 1+1=10 (write 0, carry 1). When adding column by column from right to left, carry values propagate to the next position. Example: 1011 + 0101 = 10000 (11 + 5 = 16 in decimal)."
       }
     },
     {
@@ -35,7 +35,7 @@
       "name": "How does binary subtraction work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Binary subtraction uses borrowing: 0-0=0, 1-0=1, 1-1=0, 0-1=1 (borrow from left). When you can't subtract, borrow 1 from the next position (worth 2 in binary). Example: 1010 - 0011 = 0111 (10 - 3 = 7).\""
+        "text": "Binary subtraction uses borrowing: 0-0=0, 1-0=1, 1-1=0, 0-1=1 (borrow from left). When the top bit is 0 and you need to subtract 1, borrow from the next position (which gives you 2 in binary, i.e., 10). Example: 1010 - 0011 = 0111 (10 - 3 = 7)."
       }
     },
     {
@@ -43,15 +43,15 @@
       "name": "What is two's complement notation?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Two's complement represents negative binary numbers. To negate: flip all bits (0→1, 1→0), then add 1. Example: -5 in 8-bit = ~00000101 + 1 = 11111011. This allows subtraction using addition circuitry.\""
+        "text": "Two's complement represents negative numbers in binary. To negate a number: invert all bits (0→1, 1→0), then add 1. For example, -5 in 8-bit = ~00000101 + 1 = 11111011. This system allows subtraction to be performed using addition circuitry."
       }
     },
     {
       "@type": "Question",
-      "name": "Why is binary important in computing?",
+      "name": "Why do computers use binary?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Computers use binary because electronic circuits have two stable states (on/off, high/low voltage). All data - numbers, text, images, programs - is ultimately stored and processed as binary digits (bits) in computer memory and processors.\""
+        "text": "Computers use binary because digital circuits have two stable states representing 0 and 1 (off/on, low/high voltage). Binary is reliable, noise-resistant, and maps directly to Boolean logic. All data and instructions are ultimately represented as binary in computer memory and processors."
       }
     },
     {
@@ -59,7 +59,15 @@
       "name": "How do I verify binary calculations?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Convert to decimal, perform the operation, then convert back. Example: 1011 + 0101 → (11 + 5 = 16) → 10000. This cross-check helps catch errors when learning binary arithmetic or debugging digital logic.\""
+        "text": "Convert operands to decimal, perform the operation, then convert the result back to binary. For example: 1011 + 0101 → (11 + 5 = 16) → 10000. This cross-verification helps catch errors when learning binary arithmetic or debugging digital logic designs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is binary overflow?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Overflow occurs when a calculation produces a result larger than the available bits can represent. In 8-bit arithmetic, adding 255 + 1 produces 256, which requires 9 bits. The 9th bit is lost, resulting in 0 (wraparound). Overflow detection is critical in computer arithmetic."
       }
     }
   ]
@@ -69,7 +77,7 @@
 <body>
 <main class="container">
 <h1>Binary Calculator</h1>
-<p class="subtitle">Add or subtract two binary numbers with instant results in binary and decimal.</p>
+<p class="subtitle">Add or subtract binary numbers with results in binary and decimal.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <h3>Binary A</h3>
 <label for="a" class="sr-only">A</label>
@@ -85,16 +93,16 @@
 <p>Decimal: <span id="dec"></span></p>
 <section class="tool-seo">
 <h3>About Binary Calculator</h3>
-<p>This binary calculator performs addition and subtraction on binary numbers, displaying results in both binary and decimal formats for easy verification.</p>
+<p>This binary calculator performs addition and subtraction on binary numbers, showing results in both binary and decimal formats for verification and learning.</p>
 
-<h4>Binary Addition Rules</h4>
-<p>Binary addition follows four basic rules:</p>
+<h4>Binary Addition Fundamentals</h4>
+<p>Binary addition operates on two digits (0 and 1) with carry propagation:</p>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
     <th style="border:1px solid #ddd;padding:8px;text-align:left">A</th>
     <th style="border:1px solid #ddd;padding:8px;text-align:left">B</th>
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Sum</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Carry</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Carry Out</th>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">0</td>
@@ -118,26 +126,35 @@
     <td style="border:1px solid #ddd;padding:8px">1</td>
     <td style="border:1px solid #ddd;padding:8px">1</td>
     <td style="border:1px solid #ddd;padding:8px">0</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
     <td style="border:1px solid #ddd;padding:8px">1</td>
   </tr>
 </table>
 
-<h4>Binary Addition Example</h4>
+<h4>Binary Addition Example with Carry</h4>
 <pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
   1011  (11 in decimal)
 + 0101  (5 in decimal)
 ------
  10000  (16 in decimal)
 
-Step by step (right to left):
-1+1 = 0, carry 1
-1+0+1(carry) = 0, carry 1
-0+1+1(carry) = 0, carry 1
-1+0+1(carry) = 0, carry 1
-Result: 10000
+Column-by-column (right to left):
+Column 0: 1 + 1 = 0, carry 1
+Column 1: 1 + 0 + 1(carry) = 0, carry 1
+Column 2: 0 + 1 + 1(carry) = 0, carry 1
+Column 3: 1 + 0 + 1(carry) = 0, carry 1
+Column 4: 1(carry) = 1
+
+Final result: 10000
 </pre>
 
-<h4>Binary Subtraction Rules</h4>
+<h4>Binary Subtraction Fundamentals</h4>
+<p>Binary subtraction uses borrowing when the minuend is smaller than the subtrahend:</p>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
     <th style="border:1px solid #ddd;padding:8px;text-align:left">A</th>
@@ -171,46 +188,97 @@ Result: 10000
   </tr>
 </table>
 
-<h4>Binary Subtraction Example</h4>
+<h4>Binary Subtraction Example with Borrowing</h4>
 <pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
   1010  (10 in decimal)
 - 0011  (3 in decimal)
 ------
   0111  (7 in decimal)
 
-Step by step (right to left):
-0-1 = 1, borrow 1 (10-1=1)
-0-1(borrowed)-1 = 1, borrow 1
-0-0(borrowed) = 0
-1-0 = 1
-Result: 0111
+Column-by-column (right to left):
+Column 0: 0 - 1 = need to borrow → 10 - 1 = 1, borrow 1
+Column 1: 0 - 1(borrowed) - 1 = need to borrow → 10 - 1 - 1 = 0, borrow 1
+          Actually: after first borrow, position 1 becomes 0, so 0-1 needs borrow again
+          Result: 1 (borrow chain continues)
+Column 2: After borrow chain: 1 - 0 = 1
+Column 3: 1 - 0 = 1 (but was borrowed, so 0)
+
+Simplified view:
+  1010 = 8 + 2 = 10
+  0011 = 2 + 1 = 3
+  10 - 3 = 7 = 0111
 </pre>
 
-<h4>Common Binary Patterns</h4>
+<h4>Decimal to Binary Reference</h4>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
   <tr style="background:#f5f5f5">
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Decimal</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Binary (8-bit)</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Binary</th>
     <th style="border:1px solid #ddd;padding:8px;text-align:left">Hex</th>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">0</td>
-    <td style="border:1px solid #ddd;padding:8px">00000000</td>
-    <td style="border:1px solid #ddd;padding:8px">0x00</td>
+    <td style="border:1px solid #ddd;padding:8px">0</td>
+    <td style="border:1px solid #ddd;padding:8px">0x0</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">1</td>
-    <td style="border:1px solid #ddd;padding:8px">00000001</td>
-    <td style="border:1px solid #ddd;padding:8px">0x01</td>
+    <td style="border:1px solid #ddd;padding:8px">1</td>
+    <td style="border:1px solid #ddd;padding:8px">0x1</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">2</td>
+    <td style="border:1px solid #ddd;padding:8px">10</td>
+    <td style="border:1px solid #ddd;padding:8px">0x2</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">3</td>
+    <td style="border:1px solid #ddd;padding:8px">11</td>
+    <td style="border:1px solid #ddd;padding:8px">0x3</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">4</td>
+    <td style="border:1px solid #ddd;padding:8px">100</td>
+    <td style="border:1px solid #ddd;padding:8px">0x4</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">7</td>
+    <td style="border:1px solid #ddd;padding:8px">111</td>
+    <td style="border:1px solid #ddd;padding:8px">0x7</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">8</td>
+    <td style="border:1px solid #ddd;padding:8px">1000</td>
+    <td style="border:1px solid #ddd;padding:8px">0x8</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">15</td>
-    <td style="border:1px solid #ddd;padding:8px">00001111</td>
-    <td style="border:1px solid #ddd;padding:8px">0x0F</td>
+    <td style="border:1px solid #ddd;padding:8px">1111</td>
+    <td style="border:1px solid #ddd;padding:8px">0xF</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">16</td>
+    <td style="border:1px solid #ddd;padding:8px">10000</td>
+    <td style="border:1px solid #ddd;padding:8px">0x10</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">31</td>
+    <td style="border:1px solid #ddd;padding:8px">11111</td>
+    <td style="border:1px solid #ddd;padding:8px">0x1F</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">32</td>
+    <td style="border:1px solid #ddd;padding:8px">100000</td>
+    <td style="border:1px solid #ddd;padding:8px">0x20</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">64</td>
+    <td style="border:1px solid #ddd;padding:8px">1000000</td>
+    <td style="border:1px solid #ddd;padding:8px">0x40</td>
   </tr>
   <tr>
     <td style="border:1px solid #ddd;padding:8px">127</td>
-    <td style="border:1px solid #ddd;padding:8px">01111111</td>
+    <td style="border:1px solid #ddd;padding:8px">1111111</td>
     <td style="border:1px solid #ddd;padding:8px">0x7F</td>
   </tr>
   <tr>
@@ -226,51 +294,85 @@ Result: 0111
 </table>
 
 <h4>Two's Complement (Negative Numbers)</h4>
-<p>Computers represent negative numbers using two's complement:</p>
+<p>Computers represent signed integers using two's complement notation:</p>
 <ol>
-  <li>Start with positive binary</li>
-  <li>Invert all bits (0→1, 1→0)</li>
-  <li>Add 1 to the result</li>
+  <li><strong>Positive numbers:</strong> Standard binary representation</li>
+  <li><strong>Negative numbers:</strong> Invert all bits of the positive value, then add 1</li>
+  <li><strong>Zero:</strong> All bits are 0 (only one representation, unlike sign-magnitude)</li>
 </ol>
 
 <pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
-Example: -5 in 8-bit two's complement
+Example: Representing -5 in 8-bit two's complement
 
-Step 1: +5 = 00000101
-Step 2: Invert = 11111010
-Step 3: Add 1 = 11111011
+Step 1: +5 in binary = 00000101
+Step 2: Invert bits    = 11111010
+Step 3: Add 1          = 11111011
 
 Result: -5 = 11111011
 
-Verification: 11111011 + 00000101 = 100000000 = 0 (overflow ignored)
+Verification using addition:
+  11111011 (-5)
++ 00000101 (+5)
+-----------
+ 100000000 = 256 (overflow ignored) = 0 ✓
+
+Range of 8-bit two's complement: -128 to +127
+Range of 16-bit two's complement: -32768 to +32767
+Range of 32-bit two's complement: -2147483648 to +2147483647
 </pre>
 
-<h4>Applications of Binary Arithmetic</h4>
+<h4>Binary Arithmetic in Computing</h4>
 <ul>
-  <li><strong>CPU Operations:</strong> All processor calculations use binary arithmetic</li>
-  <li><strong>Memory Addressing:</strong> Memory addresses are binary values</li>
-  <li><strong>Digital Logic:</strong> Adders, subtractors built from logic gates</li>
-  <li><strong>Cryptography:</strong> XOR and bit operations for encryption</li>
-  <li><strong>Error Detection:</strong> Checksums and CRC use binary math</li>
-  <li><strong>Graphics:</strong> Pixel operations use binary arithmetic</li>
+  <li><strong>ALU Operations:</strong> Arithmetic Logic Units perform binary addition/subtraction at hardware speed</li>
+  <li><strong>Address Calculation:</strong> Memory addresses are computed using binary arithmetic</li>
+  <li><strong>CRC and Checksums:</strong> Error detection uses binary polynomial arithmetic</li>
+  <li><strong>Cryptography:</strong> Encryption algorithms rely on binary XOR and modular arithmetic</li>
+  <li><strong>Digital Signal Processing:</strong> DSP operations use fixed-point binary math</li>
+  <li><strong>Graphics:</strong> Pixel blending and transformations use binary arithmetic</li>
 </ul>
+
+<h4>Overflow and Underflow</h4>
+<p>Fixed-width binary arithmetic has limits:</p>
+<ul>
+  <li><strong>Overflow:</strong> Result exceeds maximum representable value (e.g., 255 + 1 = 0 in 8-bit)</li>
+  <li><strong>Underflow:</strong> Result is below minimum representable value (e.g., 0 - 1 = 255 in unsigned 8-bit)</li>
+  <li><strong>Detection:</strong> Processors set overflow flags to signal these conditions</li>
+</ul>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+8-bit Unsigned Overflow Example:
+
+  11111111  (255)
++ 00000001  (1)
+-----------
+ 100000000  (256 - requires 9 bits)
+  ^^^^^^^^
+  Only 8 bits stored: 00000000 = 0 (overflow!)
+
+8-bit Signed Overflow Example:
+
+  01111111  (127, maximum positive)
++ 00000001  (1)
+-----------
+  10000000  (-128, minimum negative - wrong sign!)
+</pre>
 </section>
 
 <section class="how-to-use">
 <h3>How to Use Binary Calculator</h3>
 <ol class="how-to-steps">
-  <li><strong>Enter binary A:</strong> Type the first binary number (e.g., 1011).</li>
-  <li><strong>Enter binary B:</strong> Type the second binary number (e.g., 0101).</li>
+  <li><strong>Enter binary A:</strong> Type the first binary number using only 0 and 1 digits.</li>
+  <li><strong>Enter binary B:</strong> Type the second binary number.</li>
   <li><strong>Choose operation:</strong> Click "Add" for addition or "Subtract" for subtraction.</li>
-  <li><strong>View results:</strong> See the result in both binary and decimal formats.</li>
+  <li><strong>View results:</strong> See the result displayed in both binary and decimal formats.</li>
 </ol>
 
 <h4 style="margin-top:20px">Tips</h4>
 <ul>
-  <li>Only use digits 0 and 1 - other characters will cause errors</li>
-  <li>Leading zeros are optional (0011 = 11)</li>
-  <li>Use decimal output to verify your calculations</li>
-  <li>For subtraction, if B > A, the result will show as negative</li>
+  <li>Only use digits 0 and 1 - other characters will cause parsing errors</li>
+  <li>Leading zeros are optional and ignored (0011 = 11)</li>
+  <li>Use the decimal output to verify your binary calculations</li>
+  <li>For subtraction resulting in negative numbers, the decimal result shows the signed value</li>
 </ul>
 </section>
 <section class="faq">
@@ -278,19 +380,22 @@ Verification: 11111011 + 00000101 = 100000000 = 0 (overflow ignored)
 <dl class="faq-list">
 
   <dt>How does binary addition work?</dt>
-  <dd>Binary addition follows simple rules: 0+0=0, 0+1=1, 1+0=1, 1+1=10 (write 0, carry 1). When adding multiple bits, carry propagates left. Example: 1011 + 0101 = 10000 (11 + 5 = 16 in decimal).</dd>
+  <dd>Binary addition uses four rules: 0+0=0, 0+1=1, 1+0=1, 1+1=10 (write 0, carry 1). When adding column by column from right to left, carry values propagate to the next position. Example: 1011 + 0101 = 10000 (11 + 5 = 16 in decimal).</dd>
 
   <dt>How does binary subtraction work?</dt>
-  <dd>Binary subtraction uses borrowing: 0-0=0, 1-0=1, 1-1=0, 0-1=1 (borrow from left). When you can't subtract, borrow 1 from the next position (worth 2 in binary). Example: 1010 - 0011 = 0111 (10 - 3 = 7).</dd>
+  <dd>Binary subtraction uses borrowing: 0-0=0, 1-0=1, 1-1=0, 0-1=1 (borrow from left). When the top bit is 0 and you need to subtract 1, borrow from the next position (which gives you 2 in binary, i.e., 10). Example: 1010 - 0011 = 0111 (10 - 3 = 7).</dd>
 
   <dt>What is two's complement notation?</dt>
-  <dd>Two's complement represents negative binary numbers. To negate: flip all bits (0→1, 1→0), then add 1. Example: -5 in 8-bit = ~00000101 + 1 = 11111011. This allows subtraction using addition circuitry.</dd>
+  <dd>Two's complement represents negative numbers in binary. To negate a number: invert all bits (0→1, 1→0), then add 1. For example, -5 in 8-bit = ~00000101 + 1 = 11111011. This system allows subtraction to be performed using addition circuitry.</dd>
 
-  <dt>Why is binary important in computing?</dt>
-  <dd>Computers use binary because electronic circuits have two stable states (on/off, high/low voltage). All data - numbers, text, images, programs - is ultimately stored and processed as binary digits (bits) in computer memory and processors.</dd>
+  <dt>Why do computers use binary?</dt>
+  <dd>Computers use binary because digital circuits have two stable states representing 0 and 1 (off/on, low/high voltage). Binary is reliable, noise-resistant, and maps directly to Boolean logic. All data and instructions are ultimately represented as binary in computer memory and processors.</dd>
 
   <dt>How do I verify binary calculations?</dt>
-  <dd>Convert to decimal, perform the operation, then convert back. Example: 1011 + 0101 → (11 + 5 = 16) → 10000. This cross-check helps catch errors when learning binary arithmetic or debugging digital logic.</dd>
+  <dd>Convert operands to decimal, perform the operation, then convert the result back to binary. For example: 1011 + 0101 → (11 + 5 = 16) → 10000. This cross-verification helps catch errors when learning binary arithmetic or debugging digital logic designs.</dd>
+
+  <dt>What is binary overflow?</dt>
+  <dd>Overflow occurs when a calculation produces a result larger than the available bits can represent. In 8-bit arithmetic, adding 255 + 1 produces 256, which requires 9 bits. The 9th bit is lost, resulting in 0 (wraparound). Overflow detection is critical in computer arithmetic.</dd>
 </dl>
 </section>
 </main>
