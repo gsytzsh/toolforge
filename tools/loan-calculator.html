@@ -17,6 +17,46 @@
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is the monthly loan payment calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Monthly payment is calculated using the amortization formula: M = P * [r(1+r)^n] / [(1+r)^n - 1], where P is principal, r is monthly interest rate (annual rate / 12), and n is total number of payments (years * 12). This formula ensures each payment covers both interest and principal."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between APR and interest rate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The interest rate is the cost of borrowing the principal amount. APR (Annual Percentage Rate) includes the interest rate plus additional fees and costs, giving a more complete picture of the loan's true cost. This calculator uses the nominal annual interest rate."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does loan term affect monthly payments?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A longer loan term reduces monthly payments but increases total interest paid over the life of the loan. For example, a $100,000 loan at 5% costs $5,368/month over 20 years (total: $128,835) vs $4,219/month over 30 years (total: $151,879)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What types of loans can this calculator estimate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This calculator works for fixed-rate loans including mortgages, auto loans, personal loans, and student loans. It does not account for variable rates, balloon payments, or loans with irregular payment schedules."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <main class="container">
@@ -40,24 +80,103 @@
 <section class="tool-seo">
 <h3>About Loan Calculator</h3>
 <p>This loan calculator estimates the monthly payment and total repayment for a fixed-rate loan based on principal, rate and term.</p>
-<p>It is useful for mortgages, car loans and personal loans when you want to compare borrowing options before applying or refinancing.</p>
+
+<h4>Loan Payment Formula</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Monthly payment formula for fixed-rate loans
+function calculateMonthlyPayment(principal, annualRate, years) {
+  const r = (annualRate / 100) / 12;  // Monthly interest rate
+  const n = years * 12;  // Total number of payments
+
+  if (r === 0) return principal / n;
+
+  // Amortization formula: M = P * [r(1+r)^n] / [(1+r)^n - 1]
+  const payment = principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  return payment;
+}
+</pre>
+
+<h4>How Interest Rate Affects Monthly Payment</h4>
+<p>For a $100,000 loan over 30 years:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Interest Rate</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Monthly Payment</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Total Paid</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Total Interest</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">3.0%</td>
+    <td style="border:1px solid #ddd;padding:10px">$421.64</td>
+    <td style="border:1px solid #ddd;padding:10px">$151,790</td>
+    <td style="border:1px solid #ddd;padding:10px">$51,790</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">4.0%</td>
+    <td style="border:1px solid #ddd;padding:10px">$477.42</td>
+    <td style="border:1px solid #ddd;padding:10px">$171,869</td>
+    <td style="border:1px solid #ddd;padding:10px">$71,869</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">5.0%</td>
+    <td style="border:1px solid #ddd;padding:10px">$536.82</td>
+    <td style="border:1px solid #ddd;padding:10px">$193,255</td>
+    <td style="border:1px solid #ddd;padding:10px">$93,255</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">6.0%</td>
+    <td style="border:1px solid #ddd;padding:10px">$599.55</td>
+    <td style="border:1px solid #ddd;padding:10px">$215,838</td>
+    <td style="border:1px solid #ddd;padding:10px">$115,838</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">7.0%</td>
+    <td style="border:1px solid #ddd;padding:10px">$665.30</td>
+    <td style="border:1px solid #ddd;padding:10px">$239,508</td>
+    <td style="border:1px solid #ddd;padding:10px">$139,508</td>
+  </tr>
+</table>
+
+<h4>Loan Term Comparison</h4>
+<p>For a $100,000 loan at 5.0% interest:</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Term</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Monthly Payment</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Total Interest</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">15 years</td>
+    <td style="border:1px solid #ddd;padding:10px">$790.79</td>
+    <td style="border:1px solid #ddd;padding:10px">$42,342</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">20 years</td>
+    <td style="border:1px solid #ddd;padding:10px">$659.96</td>
+    <td style="border:1px solid #ddd;padding:10px">$58,390</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">30 years</td>
+    <td style="border:1px solid #ddd;padding:10px">$536.82</td>
+    <td style="border:1px solid #ddd;padding:10px">$93,255</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Loan Calculator?</dt>
-  <dd>Loan Calculator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How is the monthly loan payment calculated?</dt>
+  <dd>Monthly payment is calculated using the amortization formula: M = P * [r(1+r)^n] / [(1+r)^n - 1], where P is principal, r is monthly interest rate (annual rate / 12), and n is total number of payments (years * 12). This formula ensures each payment covers both interest and principal.</dd>
+
+  <dt>What is the difference between APR and interest rate?</dt>
+  <dd>The interest rate is the cost of borrowing the principal amount. APR (Annual Percentage Rate) includes the interest rate plus additional fees and costs, giving a more complete picture of the loan's true cost. This calculator uses the nominal annual interest rate.</dd>
+
+  <dt>How does loan term affect monthly payments?</dt>
+  <dd>A longer loan term reduces monthly payments but increases total interest paid over the life of the loan. For example, a $100,000 loan at 5% costs $5,368/month over 20 years (total: $128,835) vs $4,219/month over 30 years (total: $151,879).</dd>
+
+  <dt>What types of loans can this calculator estimate?</dt>
+  <dd>This calculator works for fixed-rate loans including mortgages, auto loans, personal loans, and student loans. It does not account for variable rates, balloon payments, or loans with irregular payment schedules.</dd>
 </dl>
 </section>
 </main>

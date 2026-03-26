@@ -24,45 +24,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Http Request Builder?",
+      "name": "What HTTP methods are supported?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Http Request Builder is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "This tool supports GET, POST, PUT, PATCH, and DELETE methods. GET retrieves data, POST creates new resources, PUT replaces resources, PATCH partially updates resources, and DELETE removes resources. Each method serves different REST API operations."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I add custom headers to requests?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Add headers in the format 'Header-Name: value' on separate lines. Common headers include: Content-Type: application/json, Authorization: Bearer token, Accept: application/json. Multiple headers are parsed line-by-line and included in the fetch request."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Why am I getting CORS errors?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "CORS (Cross-Origin Resource Sharing) errors occur when the target server doesn't allow requests from your origin. Browsers enforce CORS policies for security. Solutions: use a server-side proxy, configure the API server to allow your origin, or use browser extensions for development testing."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the difference between PUT and PATCH?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "PUT replaces the entire resource with the provided data (all fields required). PATCH applies partial updates (only changed fields needed). Example: PUT /users/1 requires full user object; PATCH /users/1 can update just {\"name\": \"new\"}."
       }
     }
   ]
@@ -101,24 +90,75 @@
 <section class="tool-seo">
 <h3>About HTTP Request Builder</h3>
 <p>This HTTP request builder lets you compose and send basic API requests from the browser, subject to the target server's CORS rules.</p>
-<p>It is useful for endpoint testing, header checks, payload experiments and quick request debugging when opening a full API client would be overkill.</p>
+
+<h4>HTTP Request Syntax</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Fetch API syntax
+fetch(url, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer token'
+  },
+  body: JSON.stringify({ name: 'value' })
+})
+
+// Common headers
+Content-Type: application/json
+Authorization: Bearer &lt;token&gt;
+Accept: application/json
+X-API-Key: your-api-key
+</pre>
+
+<h4>HTTP Methods</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Method</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Purpose</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Body</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">GET</td>
+    <td style="border:1px solid #ddd;padding:10px">Retrieve resources</td>
+    <td style="border:1px solid #ddd;padding:10px">No</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">POST</td>
+    <td style="border:1px solid #ddd;padding:10px">Create resources</td>
+    <td style="border:1px solid #ddd;padding:10px">Yes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">PUT</td>
+    <td style="border:1px solid #ddd;padding:10px">Replace resources</td>
+    <td style="border:1px solid #ddd;padding:10px">Yes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">PATCH</td>
+    <td style="border:1px solid #ddd;padding:10px">Partial update</td>
+    <td style="border:1px solid #ddd;padding:10px">Yes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">DELETE</td>
+    <td style="border:1px solid #ddd;padding:10px">Remove resources</td>
+    <td style="border:1px solid #ddd;padding:10px">No</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Http Request Builder?</dt>
-  <dd>Http Request Builder is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What HTTP methods are supported?</dt>
+  <dd>This tool supports GET, POST, PUT, PATCH, and DELETE methods. GET retrieves data, POST creates new resources, PUT replaces resources, PATCH partially updates resources, and DELETE removes resources. Each method serves different REST API operations.</dd>
+
+  <dt>How do I add custom headers to requests?</dt>
+  <dd>Add headers in the format 'Header-Name: value' on separate lines. Common headers include: Content-Type: application/json, Authorization: Bearer token, Accept: application/json. Multiple headers are parsed line-by-line and included in the fetch request.</dd>
+
+  <dt>Why am I getting CORS errors?</dt>
+  <dd>CORS (Cross-Origin Resource Sharing) errors occur when the target server doesn't allow requests from your origin. Browsers enforce CORS policies for security. Solutions: use a server-side proxy, configure the API server to allow your origin, or use browser extensions for development testing.</dd>
+
+  <dt>What is the difference between PUT and PATCH?</dt>
+  <dd>PUT replaces the entire resource with the provided data (all fields required). PATCH applies partial updates (only changed fields needed). Example: PUT /users/1 requires full user object; PATCH /users/1 can update just {"name": "new"}.</dd>
 </dl>
 </section>
 </main>

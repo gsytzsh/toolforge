@@ -24,45 +24,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Days Until Date?",
+      "name": "How is the days until date calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Days Until Date is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "The calculation finds the difference between today's date and the target date in milliseconds, then divides by 86,400,000 (milliseconds per day). The formula is: days = (targetDate - today) / 86400000. A positive result means days remaining; a negative result means days past."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "Does this calculation include the start date or end date?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "This calculator shows the number of days between today and the target date, not including today. For example, if today is March 1 and the target is March 2, the result is 1 day. If the target date is today, the result is 0 days."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What happens if I select a past date?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "If you select a past date, the calculator will show how many days ago that date was. For example, if the target date was 10 days before today, the result will be '10 days ago' instead of a countdown."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How are leap years handled in date calculations?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Leap years are automatically accounted for in the calculation. February has 29 days in leap years (divisible by 4, except century years must be divisible by 400). JavaScript's Date object handles this correctly when computing the difference."
       }
     }
   ]
@@ -83,25 +72,96 @@
 <p id="result"></p>
 <section class="tool-seo">
 <h3>About Days Until Date</h3>
-<p>This days-until-date tool shows how many days remain between today and a target date.</p>
-<p>It is useful for event countdowns, deadlines, launches, trips and renewal dates when you want a simple day-based countdown without opening a calendar app.</p>
+<p>This days-until-date calculator shows how many days remain between today and a target date, helping you plan for deadlines, events, and important milestones.</p>
+
+<h4>Date Countdown Formula</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Calculate days between two dates
+function daysUntil(targetDate) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);  // Reset to midnight
+
+  const target = new Date(targetDate);
+  target.setHours(0, 0, 0, 0);
+
+  const diffMs = target - today;  // Difference in milliseconds
+  const diffDays = diffMs / (1000 * 60 * 60 * 24);  // Convert to days
+
+  return diffDays;  // Positive = future, Negative = past
+}
+</pre>
+
+<h4>Common Countdown Use Cases</h4>
+<ul>
+  <li><strong>Event planning:</strong> Weddings, graduations, birthdays, anniversaries</li>
+  <li><strong>Project deadlines:</strong> Report submissions, product launches, deliverables</li>
+  <li><strong>Travel countdowns:</strong> Vacations, business trips, flights</li>
+  <li><strong>Financial dates:</strong> Tax deadlines, loan payments, investment maturities</li>
+  <li><strong>Personal goals:</strong> Diet milestones, savings targets, habit tracking</li>
+  <li><strong>Seasonal events:</strong> Holidays, vacations, school terms</li>
+</ul>
+
+<h4>Days per Month Reference</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Month</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Days</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Month</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Days</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">January</td>
+    <td style="border:1px solid #ddd;padding:10px">31</td>
+    <td style="border:1px solid #ddd;padding:10px">July</td>
+    <td style="border:1px solid #ddd;padding:10px">31</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">February</td>
+    <td style="border:1px solid #ddd;padding:10px">28 or 29</td>
+    <td style="border:1px solid #ddd;padding:10px">August</td>
+    <td style="border:1px solid #ddd;padding:10px">31</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">March</td>
+    <td style="border:1px solid #ddd;padding:10px">31</td>
+    <td style="border:1px solid #ddd;padding:10px">September</td>
+    <td style="border:1px solid #ddd;padding:10px">30</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">April</td>
+    <td style="border:1px solid #ddd;padding:10px">30</td>
+    <td style="border:1px solid #ddd;padding:10px">October</td>
+    <td style="border:1px solid #ddd;padding:10px">31</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">May</td>
+    <td style="border:1px solid #ddd;padding:10px">31</td>
+    <td style="border:1px solid #ddd;padding:10px">November</td>
+    <td style="border:1px solid #ddd;padding:10px">30</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">June</td>
+    <td style="border:1px solid #ddd;padding:10px">30</td>
+    <td style="border:1px solid #ddd;padding:10px">December</td>
+    <td style="border:1px solid #ddd;padding:10px">31</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Days Until Date?</dt>
-  <dd>Days Until Date is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How is the days until date calculated?</dt>
+  <dd>The calculation finds the difference between today's date and the target date in milliseconds, then divides by 86,400,000 (milliseconds per day). The formula is: days = (targetDate - today) / 86400000. A positive result means days remaining; a negative result means days past.</dd>
+
+  <dt>Does this calculation include the start date or end date?</dt>
+  <dd>This calculator shows the number of days between today and the target date, not including today. For example, if today is March 1 and the target is March 2, the result is 1 day. If the target date is today, the result is 0 days.</dd>
+
+  <dt>What happens if I select a past date?</dt>
+  <dd>If you select a past date, the calculator will show how many days ago that date was. For example, if the target date was 10 days before today, the result will be '10 days ago' instead of a countdown.</dd>
+
+  <dt>How are leap years handled in date calculations?</dt>
+  <dd>Leap years are automatically accounted for in the calculation. February has 29 days in leap years (divisible by 4, except century years must be divisible by 400). JavaScript's Date object handles this correctly when computing the difference.</dd>
 </dl>
 </section>
 </main>

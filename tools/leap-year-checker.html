@@ -24,45 +24,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Leap Year Checker?",
+      "name": "How do you determine if a year is a leap year?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Leap Year Checker is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "A year is a leap year if it is divisible by 4, except for century years (years ending in 00) which must be divisible by 400. For example, 2024 is a leap year (divisible by 4), 1900 is not (divisible by 100 but not 400), and 2000 is (divisible by 400)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "Why do we have leap years?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Leap years keep our calendar aligned with Earth's orbit around the sun. A solar year is approximately 365.2422 days long. Adding an extra day every 4 years (with exceptions) compensates for the ~0.2422 extra days, preventing seasonal drift over centuries."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What are the next leap years?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "The next leap years are 2028, 2032, 2036, 2040, and 2044. Leap years occur every 4 years, with the exception that century years must be divisible by 400. So 2100 will not be a leap year, but 2000 was."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How many days are in a leap year?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "A leap year has 366 days instead of the usual 365. The extra day is added to February, making it 29 days long instead of 28. This extra day is called Leap Day and falls on February 29."
       }
     }
   ]
@@ -83,25 +72,84 @@
 <p id="result"></p>
 <section class="tool-seo">
 <h3>About Leap Year Checker</h3>
-<p>This leap year checker tells you whether a given year is a leap year.</p>
-<p>It is useful for calendar logic, date calculations, scheduling systems and any workflow where February length affects the result.</p>
+<p>This leap year checker tells you whether a given year is a leap year using the standard Gregorian calendar rules.</p>
+
+<h4>Leap Year Rules</h4>
+<p>A year is a leap year if it meets these conditions:</p>
+<ol>
+  <li><strong>Divisible by 4:</strong> If the year is divisible by 4, it might be a leap year.</li>
+  <li><strong>Except divisible by 100:</strong> Century years (ending in 00) are NOT leap years, unless...</li>
+  <li><strong>Divisible by 400:</strong> If the century year is divisible by 400, it IS a leap year.</li>
+</ol>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Leap year check function
+function isLeapYear(year) {
+  if (year % 400 === 0) return true;   // Divisible by 400 = leap year
+  if (year % 100 === 0) return false;  // Divisible by 100 = not leap year
+  if (year % 4 === 0) return true;     // Divisible by 4 = leap year
+  return false;                         // Otherwise = not leap year
+}
+
+// Examples:
+isLeapYear(2024);  // true  (divisible by 4)
+isLeapYear(1900);  // false (divisible by 100, not 400)
+isLeapYear(2000);  // true  (divisible by 400)
+isLeapYear(2025);  // false (not divisible by 4)
+</pre>
+
+<h4>Leap Year Examples</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Year</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Leap Year?</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Reason</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">2020</td>
+    <td style="border:1px solid #ddd;padding:10px">Yes</td>
+    <td style="border:1px solid #ddd;padding:10px">Divisible by 4</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">2024</td>
+    <td style="border:1px solid #ddd;padding:10px">Yes</td>
+    <td style="border:1px solid #ddd;padding:10px">Divisible by 4</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">1900</td>
+    <td style="border:1px solid #ddd;padding:10px">No</td>
+    <td style="border:1px solid #ddd;padding:10px">Divisible by 100, not 400</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">2000</td>
+    <td style="border:1px solid #ddd;padding:10px">Yes</td>
+    <td style="border:1px solid #ddd;padding:10px">Divisible by 400</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">2100</td>
+    <td style="border:1px solid #ddd;padding:10px">No</td>
+    <td style="border:1px solid #ddd;padding:10px">Divisible by 100, not 400</td>
+  </tr>
+</table>
+
+<h4>Why Leap Years Matter</h4>
+<p>Without leap years, our calendar would drift by about 24 days every 100 years. After 700 years, summer would occur in December (in the Northern Hemisphere). The Gregorian calendar, introduced in 1582, refined the earlier Julian calendar by adding the century and 400-year rules for better accuracy.</p>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Leap Year Checker?</dt>
-  <dd>Leap Year Checker is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How do you determine if a year is a leap year?</dt>
+  <dd>A year is a leap year if it is divisible by 4, except for century years (years ending in 00) which must be divisible by 400. For example, 2024 is a leap year (divisible by 4), 1900 is not (divisible by 100 but not 400), and 2000 is (divisible by 400).</dd>
+
+  <dt>Why do we have leap years?</dt>
+  <dd>Leap years keep our calendar aligned with Earth's orbit around the sun. A solar year is approximately 365.2422 days long. Adding an extra day every 4 years (with exceptions) compensates for the ~0.2422 extra days, preventing seasonal drift over centuries.</dd>
+
+  <dt>What are the next leap years?</dt>
+  <dd>The next leap years are 2028, 2032, 2036, 2040, and 2044. Leap years occur every 4 years, with the exception that century years must be divisible by 400. So 2100 will not be a leap year, but 2000 was.</dd>
+
+  <dt>How many days are in a leap year?</dt>
+  <dd>A leap year has 366 days instead of the usual 365. The extra day is added to February, making it 29 days long instead of 28. This extra day is called Leap Day and falls on February 29.</dd>
 </dl>
 </section>
 </main>

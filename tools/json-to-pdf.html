@@ -25,45 +25,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Json To Pdf?",
+      "name": "What JSON formats are supported?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Json To Pdf is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "This tool supports any valid JSON format including: objects ({key: value}), arrays ([item1, item2]), nested structures, strings, numbers, booleans, and null. The JSON is validated using JSON.parse() and formatted with 2-space indentation for readability in the PDF output."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I convert JSON to PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Upload a .json file or paste JSON content into the editor. The tool validates the JSON syntax, formats it with proper indentation using JSON.stringify(obj, null, 2), and generates a PDF with monospace font for readability. Click 'Download PDF' to export. All processing happens locally using jsPDF."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Why export JSON to PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "PDF export is useful for: sharing API response examples in documentation, creating configuration snapshots for audits, attaching data payloads to bug reports, printing structured data for review meetings, and creating immutable records of JSON structures at a point in time."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is JSON used for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "JSON (JavaScript Object Notation) is used for: API request/response bodies, configuration files, data interchange between services, storing structured data, and frontend-backend communication. Its lightweight, human-readable format makes it the standard for web data exchange."
       }
     }
   ]
@@ -88,24 +77,64 @@
 <section class="tool-seo">
 <h3>About JSON to PDF</h3>
 <p>This JSON to PDF tool validates JSON, formats it with indentation and exports the result as a clean PDF. It is helpful for sharing configs, API examples, payloads and structured data snapshots.</p>
-<p>The conversion is handled entirely in the browser, so your JSON is not uploaded to a server.</p>
+
+<h4>JSON Data Types</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+{
+  "string": "hello world",
+  "number": 42,
+  "float": 3.14159,
+  "boolean": true,
+  "null": null,
+  "array": [1, 2, 3],
+  "object": {
+    "nested": "value"
+  }
+}
+
+// Formatting: JSON.stringify(obj, null, 2)
+// 2 = spaces per indentation level
+</pre>
+
+<h4>Common JSON Use Cases</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Use Case</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">API Response</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>{"status":"ok","data":[...]}</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Config File</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>{"port":8080,"debug":true}</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Request Payload</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>{"user":"name","action":"create"}</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Data Export</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>[{...},{...}]</code> records</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Json To Pdf?</dt>
-  <dd>Json To Pdf is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What JSON formats are supported?</dt>
+  <dd>This tool supports any valid JSON format including: objects ({key: value}), arrays ([item1, item2]), nested structures, strings, numbers, booleans, and null. The JSON is validated using JSON.parse() and formatted with 2-space indentation for readability in the PDF output.</dd>
+
+  <dt>How do I convert JSON to PDF?</dt>
+  <dd>Upload a .json file or paste JSON content into the editor. The tool validates the JSON syntax, formats it with proper indentation using JSON.stringify(obj, null, 2), and generates a PDF with monospace font for readability. Click 'Download PDF' to export. All processing happens locally using jsPDF.</dd>
+
+  <dt>Why export JSON to PDF?</dt>
+  <dd>PDF export is useful for: sharing API response examples in documentation, creating configuration snapshots for audits, attaching data payloads to bug reports, printing structured data for review meetings, and creating immutable records of JSON structures at a point in time.</dd>
+
+  <dt>What is JSON used for?</dt>
+  <dd>JSON (JavaScript Object Notation) is used for: API request/response bodies, configuration files, data interchange between services, storing structured data, and frontend-backend communication. Its lightweight, human-readable format makes it the standard for web data exchange.</dd>
 </dl>
 </section>
 </main>

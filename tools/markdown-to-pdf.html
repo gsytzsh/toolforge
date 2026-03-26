@@ -27,45 +27,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Markdown To Pdf?",
+      "name": "What Markdown syntax is supported?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Markdown To Pdf is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "This tool supports standard Markdown syntax including: headers (# H1, ## H2), bold (**text**), italic (*text*), lists (- items, 1. numbered), links [text](url), images ![alt](url), code blocks (```), blockquotes (>), and horizontal rules (---). Tables and task lists may have limited support."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I convert Markdown to PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Paste your Markdown content in the editor or upload a .md file, click 'Render Preview' to see the formatted HTML output, then click 'Download PDF'. The tool uses the marked library to parse Markdown, html2canvas to capture the preview, and jsPDF to generate the PDF file."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Does this tool support code blocks with syntax highlighting?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Code blocks are supported using triple backticks (```). Basic rendering is available, but full syntax highlighting requires additional CSS styling. For code-heavy documents, consider adding custom CSS or using a dedicated code documentation tool."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the difference between Markdown and HTML?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Markdown is a lightweight markup language with plain-text syntax designed for readability. HTML is the standard markup language for web pages with more verbose tag-based syntax. Markdown is easier to write quickly; HTML offers more precise control over styling and layout."
       }
     }
   ]
@@ -93,24 +82,82 @@
 <section class="tool-seo">
 <h3>About Markdown to PDF</h3>
 <p>This Markdown to PDF tool converts Markdown into a browser preview and exports the rendered result as a PDF. It works well for notes, documentation drafts, changelogs and lightweight printable content.</p>
-<p>For safety, raw HTML is escaped before rendering. Everything is processed locally in your browser without uploading your content to a server.</p>
+
+<h4>Markdown Syntax Reference</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+# Heading 1
+## Heading 2
+### Heading 3
+
+**Bold text**
+*Italic text*
+~~Strikethrough~~
+
+- Unordered list item
+1. Ordered list item
+
+[Link text](https://example.com)
+![Image alt](image.png)
+
+`inline code`
+```javascript
+// Code block
+function hello() {}
+```
+
+> Blockquote
+
+| Header | Header |
+|--------|--------|
+| Cell   | Cell   |
+
+--- (horizontal rule)
+</pre>
+
+<h4>Markdown vs HTML</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Element</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Markdown</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">HTML</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Heading</td>
+    <td style="border:1px solid #ddd;padding:10px"><code># Title</code></td>
+    <td style="border:1px solid #ddd;padding:10px"><code>&lt;h1&gt;Title&lt;/h1&gt;</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Bold</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>**text**</code></td>
+    <td style="border:1px solid #ddd;padding:10px"><code>&lt;strong&gt;text&lt;/strong&gt;</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Link</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>[text](url)</code></td>
+    <td style="border:1px solid #ddd;padding:10px"><code>&lt;a href="url"&gt;text&lt;/a&gt;</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Image</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>![alt](url)</code></td>
+    <td style="border:1px solid #ddd;padding:10px"><code>&lt;img src="url"&gt;</code></td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Markdown To Pdf?</dt>
-  <dd>Markdown To Pdf is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What Markdown syntax is supported?</dt>
+  <dd>This tool supports standard Markdown syntax including: headers (# H1, ## H2), bold (**text**), italic (*text*), lists (- items, 1. numbered), links [text](url), images ![alt](url), code blocks (```), blockquotes (>), and horizontal rules (---). Tables and task lists may have limited support.</dd>
+
+  <dt>How do I convert Markdown to PDF?</dt>
+  <dd>Paste your Markdown content in the editor or upload a .md file, click 'Render Preview' to see the formatted HTML output, then click 'Download PDF'. The tool uses the marked library to parse Markdown, html2canvas to capture the preview, and jsPDF to generate the PDF file.</dd>
+
+  <dt>Does this tool support code blocks with syntax highlighting?</dt>
+  <dd>Code blocks are supported using triple backticks (```). Basic rendering is available, but full syntax highlighting requires additional CSS styling. For code-heavy documents, consider adding custom CSS or using a dedicated code documentation tool.</dd>
+
+  <dt>What is the difference between Markdown and HTML?</dt>
+  <dd>Markdown is a lightweight markup language with plain-text syntax designed for readability. HTML is the standard markup language for web pages with more verbose tag-based syntax. Markdown is easier to write quickly; HTML offers more precise control over styling and layout.</dd>
 </dl>
 </section>
 </main>

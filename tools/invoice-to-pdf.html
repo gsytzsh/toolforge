@@ -26,45 +26,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Invoice To Pdf?",
+      "name": "What information should an invoice include?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Invoice To Pdf is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "A valid invoice should include: Invoice number (unique identifier), Invoice date, Seller information (From), Buyer information (To), Item description, Quantity, Unit price, Total amount, Payment terms, and Due date. These elements ensure legal compliance and clear payment expectations."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I calculate invoice totals?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Invoice total is calculated as: Total = Quantity × Unit Price. For multiple items, sum all line totals: Sum(Qty₁ × Price₁ + Qty₂ × Price₂ + ...). Add tax if applicable: Total with Tax = Subtotal × (1 + Tax Rate). Example: 5 items at $100 each = $500 subtotal."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is a valid invoice number format?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Invoice numbers should be unique and sequential. Common formats: INV-2024-001, 2024001, or simple sequential numbers (1, 2, 3...). Include year for organization. Avoid duplicate numbers. Sequential numbering is often required for tax compliance and audit trails."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I export this invoice as PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Fill in the invoice details (From, To, Invoice No, Date, Item, Quantity, Unit Price), click 'Render Invoice' to preview the formatted invoice with calculated total, then click 'Download PDF'. The tool uses html2canvas and jsPDF to generate the PDF entirely in your browser."
       }
     }
   ]
@@ -115,24 +104,71 @@ Unit Price:
 <section class="tool-seo">
 <h3>About Invoice to PDF</h3>
 <p>This Invoice to PDF tool creates a simple one-line invoice and exports it as a PDF. It is useful for quick freelance invoices, simple billing and lightweight invoice drafts.</p>
-<p>Everything is created and rendered locally in your browser.</p>
+
+<h4>Invoice Formula</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Invoice calculation
+Subtotal = Quantity × Unit Price
+Tax = Subtotal × Tax Rate
+Total = Subtotal + Tax
+
+// Example
+Quantity: 5
+Unit Price: $100.00
+Subtotal: $500.00
+Tax (8%): $40.00
+Total: $540.00
+
+// Invoice structure
+{
+  from: "Your Company",
+  to: "Client Name",
+  invoiceNo: "INV-2024-001",
+  date: "2024-03-26",
+  items: [{ description, qty, price, total }],
+  total: sum(lineTotals)
+}
+</pre>
+
+<h4>Invoice Number Formats</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Format</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Sequential</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>001, 002, 003...</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Year-based</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>2024-001, 2024-002...</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Prefix + Sequential</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>INV-001, INV-002...</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Client + Year</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>ACME-2024-001...</code></td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Invoice To Pdf?</dt>
-  <dd>Invoice To Pdf is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What information should an invoice include?</dt>
+  <dd>A valid invoice should include: Invoice number (unique identifier), Invoice date, Seller information (From), Buyer information (To), Item description, Quantity, Unit price, Total amount, Payment terms, and Due date. These elements ensure legal compliance and clear payment expectations.</dd>
+
+  <dt>How do I calculate invoice totals?</dt>
+  <dd>Invoice total is calculated as: Total = Quantity × Unit Price. For multiple items, sum all line totals: Sum(Qty₁ × Price₁ + Qty₂ × Price₂ + ...). Add tax if applicable: Total with Tax = Subtotal × (1 + Tax Rate). Example: 5 items at $100 each = $500 subtotal.</dd>
+
+  <dt>What is a valid invoice number format?</dt>
+  <dd>Invoice numbers should be unique and sequential. Common formats: INV-2024-001, 2024001, or simple sequential numbers (1, 2, 3...). Include year for organization. Avoid duplicate numbers. Sequential numbering is often required for tax compliance and audit trails.</dd>
+
+  <dt>How do I export this invoice as PDF?</dt>
+  <dd>Fill in the invoice details (From, To, Invoice No, Date, Item, Quantity, Unit Price), click 'Render Invoice' to preview the formatted invoice with calculated total, then click 'Download PDF'. The tool uses html2canvas and jsPDF to generate the PDF entirely in your browser.</dd>
 </dl>
 </section>
 </main>

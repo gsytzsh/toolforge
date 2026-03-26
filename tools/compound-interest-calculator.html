@@ -24,45 +24,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Compound Interest Calculator?",
+      "name": "What is the compound interest formula?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Compound Interest Calculator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "The compound interest formula is A = P(1 + r)^t, where A is the final amount, P is the principal (initial investment), r is the annual interest rate (as a decimal), and t is the time in years. This formula calculates interest earned on both the initial principal and accumulated interest from previous periods."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between simple and compound interest?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Simple interest is calculated only on the principal amount (I = P × r × t). Compound interest is calculated on the principal plus all previously earned interest. For example, $1000 at 5% for 10 years yields $500 simple interest vs $628.89 compound interest—a significant difference over time."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How does compound frequency affect returns?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "More frequent compounding produces higher returns. Annual compounding adds interest once per year, monthly compounding 12 times per year, and daily compounding 365 times. The formula A = P(1 + r/n)^(nt) accounts for compounding frequency n. Continuous compounding uses A = Pe^(rt) for the maximum possible growth."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the Rule of 72?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "The Rule of 72 estimates how long it takes to double your money at a given interest rate. Divide 72 by the annual rate to get the approximate years needed. For example, at 8% return, your investment doubles in about 9 years (72/8 = 9). This rule works well for rates between 6% and 10%."
       }
     }
   ]
@@ -91,24 +80,84 @@
 <section class="tool-seo">
 <h3>About Compound Interest Calculator</h3>
 <p>This compound interest calculator estimates the final balance and interest earned from an initial amount, annual rate and time period.</p>
-<p>It is useful for savings goals, investment projections and long-term planning when you want to see how growth adds up over time.</p>
+
+<h4>Compound Interest Formula</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Compound interest calculation
+function calculateCompoundInterest(principal, rate, years) {
+  const r = rate / 100;  // Convert percentage to decimal
+  const amount = principal * Math.pow(1 + r, years);
+  const interest = amount - principal;
+  return { amount, interest };
+}
+
+// Example: $10,000 at 5% for 10 years
+// A = 10000 × (1.05)^10 = $16,288.95
+// Interest earned = $6,288.95
+</pre>
+
+<h4>Growth Example: $10,000 at Different Rates</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Years</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">3% Rate</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">5% Rate</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">7% Rate</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">10% Rate</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">5 years</td>
+    <td style="border:1px solid #ddd;padding:10px">$11,593</td>
+    <td style="border:1px solid #ddd;padding:10px">$12,763</td>
+    <td style="border:1px solid #ddd;padding:10px">$14,026</td>
+    <td style="border:1px solid #ddd;padding:10px">$16,105</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">10 years</td>
+    <td style="border:1px solid #ddd;padding:10px">$13,439</td>
+    <td style="border:1px solid #ddd;padding:10px">$16,289</td>
+    <td style="border:1px solid #ddd;padding:10px">$19,672</td>
+    <td style="border:1px solid #ddd;padding:10px">$25,937</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">20 years</td>
+    <td style="border:1px solid #ddd;padding:10px">$18,061</td>
+    <td style="border:1px solid #ddd;padding:10px">$26,533</td>
+    <td style="border:1px solid #ddd;padding:10px">$38,697</td>
+    <td style="border:1px solid #ddd;padding:10px">$67,275</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">30 years</td>
+    <td style="border:1px solid #ddd;padding:10px">$24,273</td>
+    <td style="border:1px solid #ddd;padding:10px">$43,219</td>
+    <td style="border:1px solid #ddd;padding:10px">$76,123</td>
+    <td style="border:1px solid #ddd;padding:10px">$174,494</td>
+  </tr>
+</table>
+
+<h4>Key Insights</h4>
+<ul>
+  <li><strong>Time is your friend:</strong> The longer money compounds, the faster it grows. Most growth happens in later years.</li>
+  <li><strong>Rate matters:</strong> Small differences in interest rate create large gaps over decades.</li>
+  <li><strong>Start early:</strong> Investing $100/month starting at age 25 beats $200/month starting at 35 (at 7% return).</li>
+  <li><strong>The Rule of 72:</strong> Divide 72 by your rate to estimate doubling time (e.g., 72/8 = 9 years at 8%).</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Compound Interest Calculator?</dt>
-  <dd>Compound Interest Calculator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the compound interest formula?</dt>
+  <dd>The compound interest formula is A = P(1 + r)^t, where A is the final amount, P is the principal (initial investment), r is the annual interest rate (as a decimal), and t is the time in years. This formula calculates interest earned on both the initial principal and accumulated interest from previous periods.</dd>
+
+  <dt>What is the difference between simple and compound interest?</dt>
+  <dd>Simple interest is calculated only on the principal amount (I = P × r × t). Compound interest is calculated on the principal plus all previously earned interest. For example, $1000 at 5% for 10 years yields $500 simple interest vs $628.89 compound interest—a significant difference over time.</dd>
+
+  <dt>How does compound frequency affect returns?</dt>
+  <dd>More frequent compounding produces higher returns. Annual compounding adds interest once per year, monthly compounding 12 times per year, and daily compounding 365 times. The formula A = P(1 + r/n)^(nt) accounts for compounding frequency n. Continuous compounding uses A = Pe^(rt) for the maximum possible growth.</dd>
+
+  <dt>What is the Rule of 72?</dt>
+  <dd>The Rule of 72 estimates how long it takes to double your money at a given interest rate. Divide 72 by the annual rate to get the approximate years needed. For example, at 8% return, your investment doubles in about 9 years (72/8 = 9). This rule works well for rates between 6% and 10%.</dd>
 </dl>
 </section>
 </main>

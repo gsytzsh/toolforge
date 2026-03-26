@@ -27,45 +27,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Color Midpoint Calculator?",
+      "name": "How is color interpolation calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Color Midpoint Calculator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Color interpolation calculates the midpoint by averaging each RGB channel separately. For each channel: result = color1 + (color2 - color1) × ratio. At ratio 0.5, this gives the exact midpoint. For example, interpolating #FF0000 (red) and #0000FF (blue) at 0.5 gives #800080 (purple)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is color interpolation used for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Color interpolation is used for creating gradients, color ramps, smooth transitions in animations, generating color palettes, designing design systems with consistent color scales, and creating intermediate states for UI hover/focus effects."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the difference between RGB and HSL interpolation?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "RGB interpolation can produce grayish midpoints when mixing saturated colors. HSL interpolation (hue, saturation, lightness) often creates more visually pleasing gradients by following the color wheel. This tool uses RGB interpolation for simplicity and predictability."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I create a gradient with multiple steps?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Use multiple ratio values between 0 and 1. For a 5-step gradient: calculate colors at ratios 0, 0.25, 0.5, 0.75, and 1. Each step gives you the intermediate color. You can automate this with a loop that increments the ratio by 1/(steps-1)."
       }
     }
   ]
@@ -103,24 +92,93 @@
 <section class="tool-seo">
 <h3>About Color Midpoint Calculator</h3>
 <p>This tool calculates the interpolated color between two hex colors at a given ratio. Ratio 0.5 gives the exact midpoint.</p>
-<p>Useful for gradients, color ramps and design systems.</p>
+
+<h4>Color Interpolation Formula</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// RGB Color interpolation
+function interpolateColor(color1, color2, ratio) {
+  // Parse hex to RGB
+  const c1 = parseHex(color1);  // {r, g, b}
+  const c2 = parseHex(color2);
+
+  // Interpolate each channel
+  const r = Math.round(c1.r + (c2.r - c1.r) * ratio);
+  const g = Math.round(c1.g + (c2.g - c1.g) * ratio);
+  const b = Math.round(c1.b + (c2.b - c1.b) * ratio);
+
+  // Clamp values to 0-255
+  return {
+    r: Math.max(0, Math.min(255, r)),
+    g: Math.max(0, Math.min(255, g)),
+    b: Math.max(0, Math.min(255, b))
+  };
+}
+
+// Example: #FF0000 to #0000FF at ratio 0.5
+// R: 255 + (0 - 255) * 0.5 = 128
+// G: 0 + (0 - 0) * 0.5 = 0
+// B: 0 + (255 - 0) * 0.5 = 128
+// Result: #800080 (purple)
+</pre>
+
+<h4>Color Interpolation Examples</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Color 1</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Color 2</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Midpoint</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">#FF0000 (Red)</td>
+    <td style="border:1px solid #ddd;padding:10px">#0000FF (Blue)</td>
+    <td style="border:1px solid #ddd;padding:10px">#800080 (Purple)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">#FFFF00 (Yellow)</td>
+    <td style="border:1px solid #ddd;padding:10px">#0000FF (Blue)</td>
+    <td style="border:1px solid #ddd;padding:10px">#808000 (Olive)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">#00FF00 (Green)</td>
+    <td style="border:1px solid #ddd;padding:10px">#FF0000 (Red)</td>
+    <td style="border:1px solid #ddd;padding:10px">#808000 (Olive)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">#FFFFFF (White)</td>
+    <td style="border:1px solid #ddd;padding:10px">#000000 (Black)</td>
+    <td style="border:1px solid #ddd;padding:10px">#808080 (Gray)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">#FFA500 (Orange)</td>
+    <td style="border:1px solid #ddd;padding:10px">#FFFF00 (Yellow)</td>
+    <td style="border:1px solid #ddd;padding:10px">#FFD400 (Gold)</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>CSS Gradients:</strong> Generate intermediate colors for custom gradient stops</li>
+  <li><strong>Design Systems:</strong> Create consistent color scales and palettes</li>
+  <li><strong>Data Visualization:</strong> Build color ramps for heatmaps and charts</li>
+  <li><strong>UI Animations:</strong> Calculate transition colors for hover/focus states</li>
+  <li><strong>Brand Colors:</strong> Generate lighter/darker variants of brand colors</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Color Midpoint Calculator?</dt>
-  <dd>Color Midpoint Calculator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How is color interpolation calculated?</dt>
+  <dd>Color interpolation calculates the midpoint by averaging each RGB channel separately. For each channel: result = color1 + (color2 - color1) × ratio. At ratio 0.5, this gives the exact midpoint. For example, interpolating #FF0000 (red) and #0000FF (blue) at 0.5 gives #800080 (purple).</dd>
+
+  <dt>What is color interpolation used for?</dt>
+  <dd>Color interpolation is used for creating gradients, color ramps, smooth transitions in animations, generating color palettes, designing design systems with consistent color scales, and creating intermediate states for UI hover/focus effects.</dd>
+
+  <dt>What is the difference between RGB and HSL interpolation?</dt>
+  <dd>RGB interpolation can produce grayish midpoints when mixing saturated colors. HSL interpolation (hue, saturation, lightness) often creates more visually pleasing gradients by following the color wheel. This tool uses RGB interpolation for simplicity and predictability.</dd>
+
+  <dt>How do I create a gradient with multiple steps?</dt>
+  <dd>Use multiple ratio values between 0 and 1. For a 5-step gradient: calculate colors at ratios 0, 0.25, 0.5, 0.75, and 1. Each step gives you the intermediate color. You can automate this with a loop that increments the ratio by 1/(steps-1).</dd>
 </dl>
 </section>
 </main>

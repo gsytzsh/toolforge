@@ -26,45 +26,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Html Escape?",
+      "name": "What are HTML entities and why use them?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Html Escape is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "HTML entities are special character sequences that represent characters with reserved meaning in HTML. The five essential entities are: &amp; (ampersand), &lt; (less than), &gt; (greater than), &quot; (double quote), and &apos; (single quote). They prevent HTML injection and ensure special characters display correctly."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "When should I escape HTML?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Escape HTML when: displaying user-generated content to prevent XSS attacks, showing code examples in documentation, embedding JSON/XML in HTML pages, generating email templates, and inserting dynamic content into HTML attributes or text nodes."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the difference between encoding and escaping?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "In this context, 'escaping' and 'encoding' refer to the same process: converting special characters to their entity equivalents. HTML escaping replaces < with &lt;, > with &gt;, & with &amp;, etc. This is different from URL encoding (%XX format) or Base64 encoding."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I prevent XSS attacks?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Always escape user input before rendering in HTML. Never insert raw user data into the DOM using innerHTML. Use textContent for text insertion, or escape special characters first. For attribute values, always quote attributes and escape quotes within values."
       }
     }
   ]
@@ -103,24 +92,100 @@
 <section class="tool-seo">
 <h3>About HTML Escape / Unescape</h3>
 <p>The HTML Escape / Unescape tool lets you convert special characters to HTML entities and back when working with HTML, templates and emails.</p>
-<p>It is useful when working with encoded values, copied payloads, browser-safe strings and quick debugging tasks across common text formats.</p>
+
+<h4>HTML Entity Conversion</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// HTML Escape function
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, "&amp;")   // & must be first
+    .replace(/</g, "&lt;")    // Less than
+    .replace(/>/g, "&gt;")    // Greater than
+    .replace(/"/g, "&quot;")  // Double quote
+    .replace(/'/g, "&#39;");  // Single quote
+}
+
+// HTML Unescape function
+function unescapeHtml(text) {
+  return text
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, "&");
+}
+</pre>
+
+<h4>Common HTML Entities</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Character</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Entity Name</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Entity Number</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Description</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">&lt;</td>
+    <td style="border:1px solid #ddd;padding:10px">&amp;lt;</td>
+    <td style="border:1px solid #ddd;padding:10px">&amp;#60;</td>
+    <td style="border:1px solid #ddd;padding:10px">Less than</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">&gt;</td>
+    <td style="border:1px solid #ddd;padding:10px">&amp;gt;</td>
+    <td style="border:1px solid #ddd;padding:10px">&amp;#62;</td>
+    <td style="border:1px solid #ddd;padding:10px">Greater than</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">&amp;</td>
+    <td style="border:1px solid #ddd;padding:10px">&amp;amp;</td>
+    <td style="border:1px solid #ddd;padding:10px">&amp;#38;</td>
+    <td style="border:1px solid #ddd;padding:10px">Ampersand</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">&quot;</td>
+    <td style="border:1px solid #ddd;padding:10px">&amp;quot;</td>
+    <td style="border:1px solid #ddd;padding:10px">&amp;#34;</td>
+    <td style="border:1px solid #ddd;padding:10px">Double quote</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">&apos;</td>
+    <td style="border:1px solid #ddd;padding:10px">&amp;apos; (or &amp;#39;)</td>
+    <td style="border:1px solid #ddd;padding:10px">&amp;#39;</td>
+    <td style="border:1px solid #ddd;padding:10px">Single quote</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"> </td>
+    <td style="border:1px solid #ddd;padding:10px">&amp;nbsp;</td>
+    <td style="border:1px solid #ddd;padding:10px">&amp;#160;</td>
+    <td style="border:1px solid #ddd;padding:10px">Non-breaking space</td>
+  </tr>
+</table>
+
+<h4>XSS Prevention Example</h4>
+<p><strong>Malicious input:</strong></p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px">&lt;script&gt;alert('XSS')&lt;/script&gt;</pre>
+
+<p><strong>After escaping (safe to display):</strong></p>
+<pre style="background:#f5f5f5;color:#333;padding:12px;border-radius:4px;font-size:13px">&amp;lt;script&amp;gt;alert('XSS')&amp;lt;/script&amp;gt;</pre>
+
+<p>The escaped version displays as text instead of executing as JavaScript.</p>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Html Escape?</dt>
-  <dd>Html Escape is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What are HTML entities and why use them?</dt>
+  <dd>HTML entities are special character sequences that represent characters with reserved meaning in HTML. The five essential entities are: &amp; (ampersand), &lt; (less than), &gt; (greater than), &quot; (double quote), and &apos; (single quote). They prevent HTML injection and ensure special characters display correctly.</dd>
+
+  <dt>When should I escape HTML?</dt>
+  <dd>Escape HTML when: displaying user-generated content to prevent XSS attacks, showing code examples in documentation, embedding JSON/XML in HTML pages, generating email templates, and inserting dynamic content into HTML attributes or text nodes.</dd>
+
+  <dt>What is the difference between encoding and escaping?</dt>
+  <dd>In this context, 'escaping' and 'encoding' refer to the same process: converting special characters to their entity equivalents. HTML escaping replaces < with &lt;, > with &gt;, & with &amp;, etc. This is different from URL encoding (%XX format) or Base64 encoding.</dd>
+
+  <dt>How do I prevent XSS attacks?</dt>
+  <dd>Always escape user input before rendering in HTML. Never insert raw user data into the DOM using innerHTML. Use textContent for text insertion, or escape special characters first. For attribute values, always quote attributes and escape quotes within values.</dd>
 </dl>
 </section>
 </main>

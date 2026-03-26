@@ -27,45 +27,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Css Text Shadow Generator?",
+      "name": "What is the text-shadow syntax?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Css Text Shadow Generator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Text-shadow syntax is: text-shadow: x-offset y-offset blur-radius color. X-offset controls horizontal shift, y-offset controls vertical shift, blur creates soft edges, and color sets the shadow color. Multiple shadows can be comma-separated for layered effects."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I create readable text shadows?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "For subtle readability enhancement, use small offsets (1-2px) with minimal blur (0-2px) and low opacity. Example: text-shadow: 1px 1px 2px rgba(0,0,0,0.3). For light text on dark backgrounds, try: text-shadow: 0 0 10px rgba(255,255,255,0.5) for a glow effect."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the difference between text-shadow and box-shadow?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Text-shadow applies only to text content and follows the text shape, while box-shadow applies to the element's box. Text-shadow has no spread radius parameter. Text-shadow is useful for text legibility, glow effects, and 3D text; box-shadow creates depth for containers and cards."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I create 3D text effects?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Stack multiple text-shadows with incrementing offsets: text-shadow: 1px 1px 0 #ccc, 2px 2px 0 #c9c9c9, 3px 3px 0 #bbb. Each layer adds depth. Combine with bold fonts and contrasting colors for dramatic 3D lettering effects."
       }
     }
   ]
@@ -99,24 +88,68 @@
 <section class="tool-seo">
 <h3>About CSS Text Shadow Generator</h3>
 <p>This tool generates CSS text-shadow values with a live preview. Adjust horizontal and vertical offset, blur radius and color.</p>
-<p>Useful for headings, logos and typography effects.</p>
+
+<h4>Text Shadow Syntax</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+/* Basic syntax */
+text-shadow: x-offset y-offset blur color;
+
+/* Parameters */
+/* x-offset: horizontal shift (positive = right, negative = left) */
+/* y-offset: vertical shift (positive = down, negative = up) */
+/* blur: larger = softer edges (0 = sharp shadow) */
+/* color: shadow color (any CSS color format) */
+
+/* Examples */
+text-shadow: 2px 2px 4px rgba(0,0,0,0.5);       /* Basic shadow */
+text-shadow: -2px -2px 4px rgba(0,0,0,0.5);     /* Top-left shadow */
+text-shadow: 0 0 10px rgba(255,255,255,0.8);    /* Glow effect */
+text-shadow: 1px 1px 0 #ccc, 2px 2px 0 #bbb;    /* 3D effect */
+</pre>
+
+<h4>Common Text Shadow Patterns</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Effect</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">CSS</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Subtle depth</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>1px 1px 2px rgba(0,0,0,0.3)</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">White glow</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>0 0 10px rgba(255,255,255,0.8)</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Neon glow</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00de</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">3D text</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>1px 1px 0 #ccc, 2px 2px 0 #bbb, 3px 3px 0 #aaa</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Text emboss</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>0 1px 0 rgba(255,255,255,0.5), 0 -1px 0 rgba(0,0,0,0.5)</code></td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Css Text Shadow Generator?</dt>
-  <dd>Css Text Shadow Generator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the text-shadow syntax?</dt>
+  <dd>Text-shadow syntax is: text-shadow: x-offset y-offset blur-radius color. X-offset controls horizontal shift, y-offset controls vertical shift, blur creates soft edges, and color sets the shadow color. Multiple shadows can be comma-separated for layered effects.</dd>
+
+  <dt>How do I create readable text shadows?</dt>
+  <dd>For subtle readability enhancement, use small offsets (1-2px) with minimal blur (0-2px) and low opacity. Example: text-shadow: 1px 1px 2px rgba(0,0,0,0.3). For light text on dark backgrounds, try: text-shadow: 0 0 10px rgba(255,255,255,0.5) for a glow effect.</dd>
+
+  <dt>What is the difference between text-shadow and box-shadow?</dt>
+  <dd>Text-shadow applies only to text content and follows the text shape, while box-shadow applies to the element's box. Text-shadow has no spread radius parameter. Text-shadow is useful for text legibility, glow effects, and 3D text; box-shadow creates depth for containers and cards.</dd>
+
+  <dt>How do I create 3D text effects?</dt>
+  <dd>Stack multiple text-shadows with incrementing offsets: text-shadow: 1px 1px 0 #ccc, 2px 2px 0 #c9c9c9, 3px 3px 0 #bbb. Each layer adds depth. Combine with bold fonts and contrasting colors for dramatic 3D lettering effects.</dd>
 </dl>
 </section>
 </main>

@@ -26,45 +26,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Cron Generator?",
+      "name": "What is a cron expression?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Cron Generator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "A cron expression is a 5-field syntax that defines when scheduled tasks run. Fields represent: minute (0-59), hour (0-23), day of month (1-31), month (1-12), day of week (0-6, 0=Sunday). For example, '0 9 * * 1-5' runs at 9:00 AM every weekday."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What do the special characters in cron mean?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Cron supports special characters: * (every value), */n (every n units, e.g., */15 = every 15), - (range, e.g., 1-5 = Mon-Fri), , (list, e.g., 1,15 = 1st and 15th). These operators can be combined for complex schedules like */15 9-17 * * 1-5 (every 15 min, 9am-5pm, weekdays)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How do I schedule a task to run every day at midnight?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Use the cron expression '0 0 * * *'. This means: minute 0, hour 0 (midnight), every day of month, every month, every day of week. Common variations: '0 0 * * 1' (midnight on Mondays), '0 0 1 * *' (midnight on the 1st of every month)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are common cron schedule examples?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Common schedules include: '*/5 * * * *' (every 5 minutes), '0 * * * *' (every hour), '0 0 * * *' (daily at midnight), '0 0 * * 0' (weekly on Sundays), '0 0 1 * *' (monthly on the 1st), '0 9-17 * * 1-5' (every hour during business hours on weekdays)."
       }
     }
   ]
@@ -154,24 +143,92 @@
 <section class="tool-seo">
 <h3>About Cron Generator</h3>
 <p>This cron generator helps you build cron expressions from simple options and also explains pasted cron schedules.</p>
-<p>It is useful for server jobs, scheduled scripts, CI tasks and operations work when cron syntax is easy to get wrong by memory alone.</p>
+
+<h4>Cron Expression Format</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+# Cron format: minute hour day-of-month month day-of-week
+# Field ranges:
+#   Minute:     0-59
+#   Hour:       0-23
+#   Day of Month: 1-31
+#   Month:      1-12 (or JAN-DEC)
+#   Day of Week: 0-6 (or SUN-SAT, 0=Sunday)
+
+# Special characters:
+#   *   = every value (wildcard)
+#   */n = every n units (step)
+#   -   = range (e.g., 1-5)
+#   ,   = list (e.g., 1,15,30)
+</pre>
+
+<h4>Common Cron Schedules</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Cron Expression</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Description</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>* * * * *</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Every minute</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>*/5 * * * *</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Every 5 minutes</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>0 * * * *</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Every hour at minute 0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>0 0 * * *</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Daily at midnight</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>0 9 * * *</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Daily at 9:00 AM</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>0 0 * * 0</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Weekly on Sundays at midnight</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>0 0 1 * *</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Monthly on the 1st at midnight</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>0 9-17 * * 1-5</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Every hour from 9am-5pm on weekdays</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>*/15 9-17 * * 1-5</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Every 15 min from 9am-5pm on weekdays</td>
+  </tr>
+</table>
+
+<h4>Cron Use Cases</h4>
+<ul>
+  <li><strong>Backup automation:</strong> <code>0 2 * * *</code> (daily at 2 AM)</li>
+  <li><strong>Log rotation:</strong> <code>0 0 * * 0</code> (weekly on Sundays)</li>
+  <li><strong>Health checks:</strong> <code>*/5 * * * *</code> (every 5 minutes)</li>
+  <li><strong>Report generation:</strong> <code>0 8 1 * *</code> (monthly on the 1st at 8 AM)</li>
+  <li><strong>Cache cleanup:</strong> <code>0 */6 * * *</code> (every 6 hours)</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Cron Generator?</dt>
-  <dd>Cron Generator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is a cron expression?</dt>
+  <dd>A cron expression is a 5-field syntax that defines when scheduled tasks run. Fields represent: minute (0-59), hour (0-23), day of month (1-31), month (1-12), day of week (0-6, 0=Sunday). For example, '0 9 * * *' runs at 9:00 AM every weekday.</dd>
+
+  <dt>What do the special characters in cron mean?</dt>
+  <dd>Cron supports special characters: * (every value), */n (every n units, e.g., */15 = every 15), - (range, e.g., 1-5 = Mon-Fri), , (list, e.g., 1,15 = 1st and 15th). These operators can be combined for complex schedules like */15 9-17 * * 1-5 (every 15 min, 9am-5pm, weekdays).</dd>
+
+  <dt>How do I schedule a task to run every day at midnight?</dt>
+  <dd>Use the cron expression '0 0 * * *'. This means: minute 0, hour 0 (midnight), every day of month, every month, every day of week. Common variations: '0 0 * * 1' (midnight on Mondays), '0 0 1 * *' (midnight on the 1st of every month).</dd>
+
+  <dt>What are common cron schedule examples?</dt>
+  <dd>Common schedules include: '*/5 * * * *' (every 5 minutes), '0 * * * *' (every hour), '0 0 * * *' (daily at midnight), '0 0 * * 0' (weekly on Sundays), '0 0 1 * *' (monthly on the 1st), '0 9-17 * * 1-5' (every hour during business hours on weekdays).</dd>
 </dl>
 </section>
 </main>

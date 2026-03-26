@@ -24,45 +24,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Color Picker?",
+      "name": "What is a HEX color code?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Color Picker is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "A HEX color code is a 6-digit hexadecimal representation of RGB color values. Each pair of digits represents red, green, and blue channels (00-FF or 0-255). For example, #FF0000 is pure red, #00FF00 is pure green, and #0000FF is pure blue."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I pick colors for my design?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Start with a base color that matches your brand or mood. Use color theory: complementary colors (opposite on the wheel) for contrast, analogous colors (adjacent) for harmony. Test colors at different sizes and ensure sufficient contrast for text readability (WCAG AA requires 4.5:1 for normal text)."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the difference between HEX, RGB and HSL?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "HEX (#RRGGBB) is a compact hexadecimal format for web CSS. RGB (rgb(255, 128, 0)) uses decimal values 0-255 for each channel. HSL (hsl(30, 100%, 50%)) represents hue (0-360), saturation (0-100%), and lightness (0-100%). All three represent the same colors but HSL is more intuitive for adjustments."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "Can I use 3-digit HEX codes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Yes, 3-digit HEX codes (#RGB) are shorthand for 6-digit codes (#RRPPBB). Each digit is doubled: #F00 becomes #FF0000 (red), #0F0 becomes #00FF00 (green), #00F becomes #0000FF (blue). This shorthand only works when each pair has identical digits."
       }
     }
   ]
@@ -93,24 +82,90 @@
 <section class="tool-seo">
 <h3>About Color Picker</h3>
 <p>The Color Picker tool lets you pick a color and instantly copy its HEX value for CSS, design and branding work.</p>
-<p>It is useful for quick browser-based image processing, asset cleanup, color work and lightweight visual tasks without extra software.</p>
+
+<h4>HEX Color Format</h4>
+<p>HEX colors use a 6-digit hexadecimal format <code>#RRGGBB</code> where each pair represents red, green, and blue channels:</p>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// HEX color breakdown
+#RRGGBB
+ |||||
+ ||||+-- Blue (00-FF)
+ |||+---- Green (00-FF)
+ ||+----- Blue (00-FF)
+ |+------ Green (00-FF)
+ +------- Red (00-FF)
+
+// Examples:
+#FF0000 = Red (255, 0, 0)
+#00FF00 = Green (0, 255, 0)
+#0000FF = Blue (0, 0, 255)
+#FFFFFF = White (255, 255, 255)
+#000000 = Black (0, 0, 0)
+</pre>
+
+<h4>Common Color Values</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Color</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">HEX</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">RGB</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Red</td>
+    <td style="border:1px solid #ddd;padding:10px">#FF0000</td>
+    <td style="border:1px solid #ddd;padding:10px">rgb(255, 0, 0)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Green</td>
+    <td style="border:1px solid #ddd;padding:10px">#00FF00</td>
+    <td style="border:1px solid #ddd;padding:10px">rgb(0, 255, 0)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Blue</td>
+    <td style="border:1px solid #ddd;padding:10px">#0000FF</td>
+    <td style="border:1px solid #ddd;padding:10px">rgb(0, 0, 255)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Yellow</td>
+    <td style="border:1px solid #ddd;padding:10px">#FFFF00</td>
+    <td style="border:1px solid #ddd;padding:10px">rgb(255, 255, 0)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Cyan</td>
+    <td style="border:1px solid #ddd;padding:10px">#00FFFF</td>
+    <td style="border:1px solid #ddd;padding:10px">rgb(0, 255, 255)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Magenta</td>
+    <td style="border:1px solid #ddd;padding:10px">#FF00FF</td>
+    <td style="border:1px solid #ddd;padding:10px">rgb(255, 0, 255)</td>
+  </tr>
+</table>
+
+<h4>Color Theory Basics</h4>
+<ul>
+  <li><strong>Complementary:</strong> Colors opposite on the color wheel (high contrast)</li>
+  <li><strong>Analogous:</strong> Colors adjacent on the wheel (harmonious)</li>
+  <li><strong>Triadic:</strong> Three colors equally spaced (balanced variety)</li>
+  <li><strong>Monochromatic:</strong> Different shades/tints of one color (unified look)</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Color Picker?</dt>
-  <dd>Color Picker is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is a HEX color code?</dt>
+  <dd>A HEX color code is a 6-digit hexadecimal representation of RGB color values. Each pair of digits represents red, green, and blue channels (00-FF or 0-255). For example, #FF0000 is pure red, #00FF00 is pure green, and #0000FF is pure blue.</dd>
+
+  <dt>How do I pick colors for my design?</dt>
+  <dd>Start with a base color that matches your brand or mood. Use color theory: complementary colors (opposite on the wheel) for contrast, analogous colors (adjacent) for harmony. Test colors at different sizes and ensure sufficient contrast for text readability (WCAG AA requires 4.5:1 for normal text).</dd>
+
+  <dt>What is the difference between HEX, RGB and HSL?</dt>
+  <dd>HEX (#RRGGBB) is a compact hexadecimal format for web CSS. RGB (rgb(255, 128, 0)) uses decimal values 0-255 for each channel. HSL (hsl(30, 100%, 50%)) represents hue (0-360), saturation (0-100%), and lightness (0-100%). All three represent the same colors but HSL is more intuitive for adjustments.</dd>
+
+  <dt>Can I use 3-digit HEX codes?</dt>
+  <dd>Yes, 3-digit HEX codes (#RGB) are shorthand for 6-digit codes (#RRPPBB). Each digit is doubled: #F00 becomes #FF0000 (red), #0F0 becomes #00FF00 (green), #00F becomes #0000FF (blue). This shorthand only works when each pair has identical digits.</dd>
 </dl>
 </section>
 </main>

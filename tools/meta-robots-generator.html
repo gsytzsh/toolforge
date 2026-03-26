@@ -23,45 +23,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Meta Robots Generator?",
+      "name": "What is the meta robots tag syntax?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Meta Robots Generator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "The meta robots tag syntax is: <meta name=\"robots\" content=\"directive1, directive2\">. Common directives include: index/noindex (control indexing), follow/nofollow (control link crawling), noarchive (prevent cached copies), nosnippet (prevent search result previews). Multiple directives are comma-separated."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "When should I use noindex vs nofollow?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Use noindex to prevent a page from appearing in search results (staging pages, thin content, duplicate pages). Use nofollow to prevent search engines from following links on the page (untrusted content, paid links, comment sections). They can be combined: noindex, nofollow."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the difference between meta robots and robots.txt?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Meta robots tags control indexing and crawling of individual pages (noindex, nofollow). Robots.txt controls which URLs crawlers can access site-wide. Meta robots is more granular; robots.txt is broader. For sensitive pages, use both: block in robots.txt AND add noindex."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are noarchive and nosnippet used for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "noarchive prevents search engines from showing a cached copy of the page. nosnippet prevents search engines from showing a text snippet or video preview in search results. Use for time-sensitive content, pricing pages, or content that changes frequently."
       }
     }
   ]
@@ -89,24 +78,69 @@
 <section class="tool-seo">
 <h3>About Meta Robots Generator</h3>
 <p>This meta robots generator creates a meta robots tag for common indexing and crawling directives.</p>
-<p>It is useful when publishing staging pages, faceted content, search-result pages or temporary URLs that should be handled differently by search engines.</p>
+
+<h4>Meta Robots Tag Syntax</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+&lt;!-- Allow indexing and link crawling (default) --&gt;
+&lt;meta name="robots" content="index, follow"&gt;
+
+&lt;!-- Block indexing, allow link crawling --&gt;
+&lt;meta name="robots" content="noindex, follow"&gt;
+
+&lt;!-- Allow indexing, block link crawling --&gt;
+&lt;meta name="robots" content="index, nofollow"&gt;
+
+&lt;!-- Block both indexing and link crawling --&gt;
+&lt;meta name="robots" content="noindex, nofollow"&gt;
+
+&lt;!-- Block cached copies and snippets --&gt;
+&lt;meta name="robots" content="noarchive, nosnippet"&gt;
+</pre>
+
+<h4>Common Directives</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Directive</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>noindex</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Prevent search indexing</td>
+    <td style="border:1px solid #ddd;padding:10px">Staging, thin content</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>nofollow</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Don't follow page links</td>
+    <td style="border:1px solid #ddd;padding:10px">Untrusted/paid links</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>noarchive</code></td>
+    <td style="border:1px solid #ddd;padding:10px">No cached copy</td>
+    <td style="border:1px solid #ddd;padding:10px">Time-sensitive content</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>nosnippet</code></td>
+    <td style="border:1px solid #ddd;padding:10px">No search result preview</td>
+    <td style="border:1px solid #ddd;padding:10px">Pricing, dynamic content</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Meta Robots Generator?</dt>
-  <dd>Meta Robots Generator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the meta robots tag syntax?</dt>
+  <dd>The meta robots tag syntax is: &lt;meta name="robots" content="directive1, directive2"&gt;. Common directives include: index/noindex (control indexing), follow/nofollow (control link crawling), noarchive (prevent cached copies), nosnippet (prevent search result previews). Multiple directives are comma-separated.</dd>
+
+  <dt>When should I use noindex vs nofollow?</dt>
+  <dd>Use noindex to prevent a page from appearing in search results (staging pages, thin content, duplicate pages). Use nofollow to prevent search engines from following links on the page (untrusted content, paid links, comment sections). They can be combined: noindex, nofollow.</dd>
+
+  <dt>What is the difference between meta robots and robots.txt?</dt>
+  <dd>Meta robots tags control indexing and crawling of individual pages (noindex, nofollow). Robots.txt controls which URLs crawlers can access site-wide. Meta robots is more granular; robots.txt is broader. For sensitive pages, use both: block in robots.txt AND add noindex.</dd>
+
+  <dt>What are noarchive and nosnippet used for?</dt>
+  <dd>noarchive prevents search engines from showing a cached copy of the page. nosnippet prevents search engines from showing a text snippet or video preview in search results. Use for time-sensitive content, pricing pages, or content that changes frequently.</dd>
 </dl>
 </section>
 </main>

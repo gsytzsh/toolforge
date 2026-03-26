@@ -25,45 +25,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Gzip Encode Decode?",
+      "name": "What is gzip compression?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Gzip Encode Decode is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Gzip is a lossless compression format using the DEFLATE algorithm (LZ77 + Huffman coding). It can compress text by 70-90%, making it ideal for HTTP transmission. Gzip adds a header with metadata and CRC-32 checksum for data integrity verification."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How does gzip compression work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Gzip uses the DEFLATE algorithm which combines LZ77 (finds repeated byte sequences) and Huffman coding (assigns shorter codes to frequent bytes). This two-stage approach efficiently compresses text, JSON, HTML, CSS, and other repetitive data patterns."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "When should I use gzip compression?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Use gzip for: HTTP response compression (Content-Encoding: gzip), log file archival, reducing storage for text-based data, and speeding up data transfer. Avoid gzip for already-compressed formats like images, videos, or ZIP files."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "Why is the output Base64-encoded?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Binary gzip data contains non-printable bytes that can't be safely displayed or copied as text. Base64 encoding converts binary to ASCII characters (A-Z, a-z, 0-9, +, /), making it safe for copy-paste, JSON embedding, and text-based storage."
       }
     }
   ]
@@ -91,24 +80,87 @@
 <section class="tool-seo">
 <h3>About Gzip Encode Decode</h3>
 <p>This gzip tool compresses text to gzip format and decompresses gzip data back to text. The compressed output is Base64-encoded for easy copy and paste. Uses the pako library in the browser.</p>
-<p>It is useful for testing compression, debugging HTTP content-encoding, or preparing small payloads for gzip transfer.</p>
+
+<h4>Gzip Compression Algorithm</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Gzip compression using pako (DEFLATE algorithm)
+function compress(text) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(text);
+  const compressed = pako.gzip(data);
+  // Convert to Base64 for safe text representation
+  return btoa(String.fromCharCode.apply(null, compressed));
+}
+
+// Gzip decompression
+function decompress(base64) {
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  const decompressed = pako.ungzip(bytes);
+  return new TextDecoder().decode(decompressed);
+}
+</pre>
+
+<h4>Compression Ratio Examples</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Content Type</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Original</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Gzipped</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Reduction</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">HTML document</td>
+    <td style="border:1px solid #ddd;padding:10px">100 KB</td>
+    <td style="border:1px solid #ddd;padding:10px">25 KB</td>
+    <td style="border:1px solid #ddd;padding:10px">~75%</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">CSS stylesheet</td>
+    <td style="border:1px solid #ddd;padding:10px">50 KB</td>
+    <td style="border:1px solid #ddd;padding:10px">10 KB</td>
+    <td style="border:1px solid #ddd;padding:10px">~80%</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">JSON data</td>
+    <td style="border:1px solid #ddd;padding:10px">20 KB</td>
+    <td style="border:1px solid #ddd;padding:10px">5 KB</td>
+    <td style="border:1px solid #ddd;padding:10px">~75%</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">JavaScript file</td>
+    <td style="border:1px solid #ddd;padding:10px">80 KB</td>
+    <td style="border:1px solid #ddd;padding:10px">25 KB</td>
+    <td style="border:1px solid #ddd;padding:10px">~69%</td>
+  </tr>
+</table>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>HTTP Compression:</strong> Enable gzip on web servers to reduce bandwidth (Content-Encoding: gzip)</li>
+  <li><strong>Log Compression:</strong> Compress log files for archival and storage efficiency</li>
+  <li><strong>Data Transmission:</strong> Reduce payload size for API requests and responses</li>
+  <li><strong>Frontend Optimization:</strong> Compress static assets (CSS, JS, HTML) for faster page loads</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Gzip Encode Decode?</dt>
-  <dd>Gzip Encode Decode is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is gzip compression?</dt>
+  <dd>Gzip is a lossless compression format using the DEFLATE algorithm (LZ77 + Huffman coding). It can compress text by 70-90%, making it ideal for HTTP transmission. Gzip adds a header with metadata and CRC-32 checksum for data integrity verification.</dd>
+
+  <dt>How does gzip compression work?</dt>
+  <dd>Gzip uses the DEFLATE algorithm which combines LZ77 (finds repeated byte sequences) and Huffman coding (assigns shorter codes to frequent bytes). This two-stage approach efficiently compresses text, JSON, HTML, CSS, and other repetitive data patterns.</dd>
+
+  <dt>When should I use gzip compression?</dt>
+  <dd>Use gzip for: HTTP response compression (Content-Encoding: gzip), log file archival, reducing storage for text-based data, and speeding up data transfer. Avoid gzip for already-compressed formats like images, videos, or ZIP files.</dd>
+
+  <dt>Why is the output Base64-encoded?</dt>
+  <dd>Binary gzip data contains non-printable bytes that can't be safely displayed or copied as text. Base64 encoding converts binary to ASCII characters (A-Z, a-z, 0-9, +, /), making it safe for copy-paste, JSON embedding, and text-based storage.</dd>
 </dl>
 </section>
 </main>

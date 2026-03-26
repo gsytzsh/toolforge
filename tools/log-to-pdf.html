@@ -25,45 +25,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Log To Pdf?",
+      "name": "What log formats are supported?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Log To Pdf is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "This tool accepts plain text log files (.log, .txt) with any format. Common supported formats include: timestamped logs ([2024-03-13 10:00:00] INFO), JSON logs, Apache/Nginx access logs, application logs, and console output. Line numbers are added automatically in the PDF output."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I convert log files to PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Upload a .log or .txt file using the file input, or paste log content directly into the text area. The log content is formatted with line numbers in a monospace font for readability. Click 'Download PDF' to export. All processing happens locally in your browser using jsPDF."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Why export logs to PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "PDF export is useful for: incident reports and post-mortems, audit documentation, attaching logs to support tickets, sharing debugging sessions with team members, and creating immutable records for compliance. PDFs preserve formatting across devices."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What are common log levels?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Standard log levels (in order of severity): DEBUG (detailed diagnostic info), INFO (general operational messages), WARN (potential issues), ERROR (actual errors), FATAL/CRITICAL (severe failures requiring immediate attention). Some systems also use TRACE for very fine-grained debugging."
       }
     }
   ]
@@ -88,24 +77,60 @@
 <section class="tool-seo">
 <h3>About Log to PDF</h3>
 <p>This Log to PDF tool converts text logs into a simple PDF for incident reports, audits, troubleshooting notes and ticket attachments.</p>
-<p>Everything runs locally in your browser, so your logs stay on your device.</p>
+
+<h4>Common Log Levels</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Log level hierarchy (lowest to highest severity)
+TRACE   - Fine-grained debugging information
+DEBUG   - Diagnostic information for development
+INFO    - General operational messages
+WARN    - Potential issues, non-critical problems
+ERROR   - Actual errors requiring attention
+FATAL   - Critical failures, application may crash
+
+// Example log entry format
+[2024-03-13 10:00:00] [LEVEL] [Component] Message
+</pre>
+
+<h4>Log File Formats</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Format</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Timestamped</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>[2024-03-13 10:00:00] INFO Started</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Apache Access</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>192.168.1.1 - - [13/Mar/2024:10:00:00]</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">JSON</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>{"level":"info","msg":"started"}</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Syslog</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>Mar 13 10:00:00 host service[pid]: msg</code></td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Log To Pdf?</dt>
-  <dd>Log To Pdf is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What log formats are supported?</dt>
+  <dd>This tool accepts plain text log files (.log, .txt) with any format. Common supported formats include: timestamped logs ([2024-03-13 10:00:00] INFO), JSON logs, Apache/Nginx access logs, application logs, and console output. Line numbers are added automatically in the PDF output.</dd>
+
+  <dt>How do I convert log files to PDF?</dt>
+  <dd>Upload a .log or .txt file using the file input, or paste log content directly into the text area. The log content is formatted with line numbers in a monospace font for readability. Click 'Download PDF' to export. All processing happens locally in your browser using jsPDF.</dd>
+
+  <dt>Why export logs to PDF?</dt>
+  <dd>PDF export is useful for: incident reports and post-mortems, audit documentation, attaching logs to support tickets, sharing debugging sessions with team members, and creating immutable records for compliance. PDFs preserve formatting across devices.</dd>
+
+  <dt>What are common log levels?</dt>
+  <dd>Standard log levels (in order of severity): DEBUG (detailed diagnostic info), INFO (general operational messages), WARN (potential issues), ERROR (actual errors), FATAL/CRITICAL (severe failures requiring immediate attention). Some systems also use TRACE for very fine-grained debugging.</dd>
 </dl>
 </section>
 </main>

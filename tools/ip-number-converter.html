@@ -24,45 +24,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Ip Number Converter?",
+      "name": "How is an IP address converted to a number?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Ip Number Converter is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "An IPv4 address is converted to a number by treating each octet as an 8-bit value and combining them: number = (octet1 × 256³) + (octet2 × 256²) + (octet3 × 256) + octet4. For example, 192.168.1.1 becomes (192×16777216) + (168×65536) + (1×256) + 1 = 3232235777."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the range of valid IP numbers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "IPv4 numbers range from 0 to 4,294,967,295 (2³² - 1). This represents all possible 32-bit values. 0.0.0.0 equals 0, and 255.255.255.255 equals 4,294,967,295. Numbers outside this range are invalid for IPv4."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Why store IP addresses as numbers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Storing IPs as numbers is more efficient for databases (4 bytes vs 15 characters), enables fast range queries (BETWEEN 167772160 AND 184549375), simplifies IP arithmetic, and allows efficient indexing. Many geolocation and firewall systems use numeric IP storage."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I convert a number back to IP format?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Extract each octet using bit shifting: octet1 = (number >> 24) & 255, octet2 = (number >> 16) & 255, octet3 = (number >> 8) & 255, octet4 = number & 255. For example, 3232235777 becomes 192.168.1.1."
       }
     }
   ]
@@ -90,24 +79,89 @@
 <section class="tool-seo">
 <h3>About IP ⇄ Number Converter</h3>
 <p>This converter transforms IPv4 addresses to 32-bit decimal numbers and decimal numbers back to IP. Useful for database storage, range comparisons and IP arithmetic.</p>
-<p>It is useful when storing IPs as integers, comparing IP ranges, or converting between formats for APIs and databases.</p>
+
+<h4>IP to Number Conversion Formula</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// IP to Number
+function ipToNumber(ip) {
+  const parts = ip.split('.');
+  return (parseInt(parts[0]) * 16777216) +
+         (parseInt(parts[1]) * 65536) +
+         (parseInt(parts[2]) * 256) +
+         parseInt(parts[3]);
+}
+
+// Number to IP
+function numberToIp(num) {
+  return ((num >> 24) & 255) + '.' +
+         ((num >> 16) & 255) + '.' +
+         ((num >> 8) & 255) + '.' +
+         (num & 255);
+}
+
+// Example: 192.168.1.1 → 3232235777
+// 192 * 16777216 = 3221225472
+// 168 * 65536 = 11010048
+// 1 * 256 = 256
+// 1 = 1
+// Total = 3232235777
+</pre>
+
+<h4>Common IP Address Ranges</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Range</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">IP Range</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Number Range</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Use</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Private A</td>
+    <td style="border:1px solid #ddd;padding:10px">10.0.0.0 - 10.255.255.255</td>
+    <td style="border:1px solid #ddd;padding:10px">167772160 - 184549375</td>
+    <td style="border:1px solid #ddd;padding:10px">Private networks</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Private B</td>
+    <td style="border:1px solid #ddd;padding:10px">172.16.0.0 - 172.31.255.255</td>
+    <td style="border:1px solid #ddd;padding:10px">2886729728 - 2887778303</td>
+    <td style="border:1px solid #ddd;padding:10px">Private networks</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Private C</td>
+    <td style="border:1px solid #ddd;padding:10px">192.168.0.0 - 192.168.255.255</td>
+    <td style="border:1px solid #ddd;padding:10px">3232235520 - 3232301055</td>
+    <td style="border:1px solid #ddd;padding:10px">Home networks</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Loopback</td>
+    <td style="border:1px solid #ddd;padding:10px">127.0.0.0 - 127.255.255.255</td>
+    <td style="border:1px solid #ddd;padding:10px">2130706432 - 2147483647</td>
+    <td style="border:1px solid #ddd;padding:10px">Localhost</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Link-local</td>
+    <td style="border:1px solid #ddd;padding:10px">169.254.0.0 - 169.254.255.255</td>
+    <td style="border:1px solid #ddd;padding:10px">2851995648 - 2852061183</td>
+    <td style="border:1px solid #ddd;padding:10px">Auto-configuration</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Ip Number Converter?</dt>
-  <dd>Ip Number Converter is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How is an IP address converted to a number?</dt>
+  <dd>An IPv4 address is converted to a number by treating each octet as an 8-bit value and combining them: number = (octet1 × 256³) + (octet2 × 256²) + (octet3 × 256) + octet4. For example, 192.168.1.1 becomes (192×16777216) + (168×65536) + (1×256) + 1 = 3232235777.</dd>
+
+  <dt>What is the range of valid IP numbers?</dt>
+  <dd>IPv4 numbers range from 0 to 4,294,967,295 (2³² - 1). This represents all possible 32-bit values. 0.0.0.0 equals 0, and 255.255.255.255 equals 4,294,967,295. Numbers outside this range are invalid for IPv4.</dd>
+
+  <dt>Why store IP addresses as numbers?</dt>
+  <dd>Storing IPs as numbers is more efficient for databases (4 bytes vs 15 characters), enables fast range queries (BETWEEN 167772160 AND 184549375), simplifies IP arithmetic, and allows efficient indexing. Many geolocation and firewall systems use numeric IP storage.</dd>
+
+  <dt>How do I convert a number back to IP format?</dt>
+  <dd>Extract each octet using bit shifting: octet1 = (number >> 24) & 255, octet2 = (number >> 16) & 255, octet3 = (number >> 8) & 255, octet4 = number & 255. For example, 3232235777 becomes 192.168.1.1.</dd>
 </dl>
 </section>
 </main>

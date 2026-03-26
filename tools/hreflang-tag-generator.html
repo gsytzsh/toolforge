@@ -24,45 +24,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Hreflang Tag Generator?",
+      "name": "What is the hreflang tag syntax?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Hreflang Tag Generator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Hreflang tags follow the syntax: <link rel=\"alternate\" hreflang=\"language-code\" href=\"URL\"/>. Language codes use ISO 639-1 (en, fr, de). Regional variants use ISO 3166-1 (en-US, en-GB). Include x-default for users without a matching language. Place tags in <head> or HTTP headers."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "When should I use hreflang tags?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Use hreflang when: you have identical content in different languages, you target different regions with the same language (en-US vs en-GB), or you want search engines to serve the appropriate language version. Essential for international SEO and multilingual sites."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What are common hreflang language codes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Common codes: en (English), es (Spanish), fr (French), de (German), it (Italian), pt (Portuguese), zh (Chinese), ja (Japanese), ko (Korean), ru (Russian). Regional variants: en-US, en-GB, es-ES, es-MX, fr-FR, de-DE, zh-CN, zh-TW."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is x-default hreflang?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "x-default is a special hreflang value for users whose language doesn't match any of your specified languages. It typically points to a language selector page or your default/primary language version. Example: <link rel=\"alternate\" hreflang=\"x-default\" href=\"https://example.com/\"/>."
       }
     }
   ]
@@ -88,24 +77,73 @@
 <section class="tool-seo">
 <h3>About Hreflang Tag Generator</h3>
 <p>This hreflang tag generator creates alternate language and region tags for multilingual or multi-country pages.</p>
-<p>It is useful for international SEO when you need to map equivalent pages across locales and reduce the risk of users landing on the wrong language version in search.</p>
+
+<h4>Hreflang Tag Syntax</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+&lt;!-- Basic hreflang tag --&gt;
+&lt;link rel="alternate" hreflang="en" href="https://example.com/en/"&gt;
+
+&lt;!-- Regional variant --&gt;
+&lt;link rel="alternate" hreflang="en-US" href="https://example.com/us/"&gt;
+&lt;link rel="alternate" hreflang="en-GB" href="https://example.com/uk/"&gt;
+
+&lt;!-- Default fallback --&gt;
+&lt;link rel="alternate" hreflang="x-default" href="https://example.com/"&gt;
+
+&lt;!-- Complete set for one page --&gt;
+&lt;link rel="alternate" hreflang="en" href="https://example.com/en/"&gt;
+&lt;link rel="alternate" hreflang="fr" href="https://example.com/fr/"&gt;
+&lt;link rel="alternate" hreflang="de" href="https://example.com/de/"&gt;
+&lt;link rel="alternate" hreflang="x-default" href="https://example.com/"&gt;
+</pre>
+
+<h4>Common Language Codes</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Code</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Language</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>en</code></td>
+    <td style="border:1px solid #ddd;padding:10px">English</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>es</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Spanish</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>fr</code></td>
+    <td style="border:1px solid #ddd;padding:10px">French</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>de</code></td>
+    <td style="border:1px solid #ddd;padding:10px">German</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>zh-CN</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Chinese (Simplified)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>zh-TW</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Chinese (Traditional)</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Hreflang Tag Generator?</dt>
-  <dd>Hreflang Tag Generator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the hreflang tag syntax?</dt>
+  <dd>Hreflang tags follow the syntax: &lt;link rel="alternate" hreflang="language-code" href="URL"/&gt;. Language codes use ISO 639-1 (en, fr, de). Regional variants use ISO 3166-1 (en-US, en-GB). Include x-default for users without a matching language. Place tags in &lt;head&gt; or HTTP headers.</dd>
+
+  <dt>When should I use hreflang tags?</dt>
+  <dd>Use hreflang when: you have identical content in different languages, you target different regions with the same language (en-US vs en-GB), or you want search engines to serve the appropriate language version. Essential for international SEO and multilingual sites.</dd>
+
+  <dt>What are common hreflang language codes?</dt>
+  <dd>Common codes: en (English), es (Spanish), fr (French), de (German), it (Italian), pt (Portuguese), zh (Chinese), ja (Japanese), ko (Korean), ru (Russian). Regional variants: en-US, en-GB, es-ES, es-MX, fr-FR, de-DE, zh-CN, zh-TW.</dd>
+
+  <dt>What is x-default hreflang?</dt>
+  <dd>x-default is a special hreflang value for users whose language doesn't match any of your specified languages. It typically points to a language selector page or your default/primary language version. Example: &lt;link rel="alternate" hreflang="x-default" href="https://example.com/"&gt;.</dd>
 </dl>
 </section>
 </main>

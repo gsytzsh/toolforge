@@ -22,7 +22,52 @@
 
 <link rel="stylesheet" href="/css/style.css">
 
+<style>
+textarea{width:100%;font-family:monospace;}
+pre{background:#1e1e1e;color:#eee;padding:15px;border-radius:6px;overflow:auto;width:90%;}
+.error{color:red;font-weight:bold;}
+</style>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does JSON diff work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JSON diff compares two JSON objects by recursively walking through all keys and values. It identifies three types of differences: added keys (present in B but not A), removed keys (present in A but not B), and changed values (same key but different values). The comparison is type-aware and handles nested objects and arrays."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What types of JSON differences can this tool detect?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This tool detects: added fields (new keys in the second JSON), removed fields (missing keys from the first JSON), changed values (same key but different value), and nested differences (changes deep within object hierarchies). Array comparisons check for value differences at each index."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When should I use JSON diff?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JSON diff is useful for: comparing API request/response payloads before and after changes, reviewing configuration file modifications, debugging webhook data changes, validating data transformations, code review for JSON files, and identifying what changed between two versions of structured data."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this tool modify my JSON data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. This tool only reads and compares your JSON data without modifying it. All processing happens in your browser using JavaScript's JSON.parse() method. Your data is never sent to any server or stored persistently."
+      }
+    }
+  ]
+}
+</script>
 </head>
 
 <body>
@@ -67,24 +112,83 @@
 <section class="tool-seo">
 <h3>About JSON Diff</h3>
 <p>The JSON Diff tool lets you compare two JSON payloads and see added, removed or changed fields for debugging and reviews.</p>
-<p>It is useful for API payloads, structured data cleanup, import and export work, and quick browser-based debugging without extra setup.</p>
+
+<h4>JSON Diff Comparison Algorithm</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Recursive JSON diff function
+function diff(objA, objB, path = '') {
+  const differences = [];
+
+  // Check for removed and changed keys
+  for (const key in objA) {
+    const currentPath = path ? `${path}.${key}` : key;
+
+    if (!(key in objB)) {
+      differences.push(`Removed: ${currentPath}`);
+    } else if (typeof objA[key] === 'object' && typeof objB[key] === 'object') {
+      differences.push(...diff(objA[key], objB[key], currentPath));
+    } else if (objA[key] !== objB[key]) {
+      differences.push(`Changed: ${currentPath} = ${objA[key]} → ${objB[key]}`);
+    }
+  }
+
+  // Check for added keys
+  for (const key in objB) {
+    const currentPath = path ? `${path}.${key}` : key;
+    if (!(key in objA)) {
+      differences.push(`Added: ${currentPath} = ${objB[key]}`);
+    }
+  }
+
+  return differences;
+}
+</pre>
+
+<h4>Common Use Cases for JSON Diff</h4>
+<ul>
+  <li><strong>API Development:</strong> Compare request/response payloads between API versions</li>
+  <li><strong>Configuration Management:</strong> Review changes in config files between deployments</li>
+  <li><strong>Debugging:</strong> Identify why two JSON responses differ in production vs staging</li>
+  <li><strong>Data Migration:</strong> Verify data transformations preserve expected fields</li>
+  <li><strong>Code Review:</strong> Show exactly what changed in JSON fixtures or test data</li>
+  <li><strong>Webhook Testing:</strong> Compare webhook payloads across different event triggers</li>
+</ul>
+
+<h4>Example JSON Diff</h4>
+<p><strong>JSON A (original):</strong></p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px">{
+  "name": "John",
+  "age": 30,
+  "city": "New York"
+}</pre>
+
+<p><strong>JSON B (modified):</strong></p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px">{
+  "name": "John",
+  "age": 31,
+  "email": "john@example.com"
+}</pre>
+
+<p><strong>Differences:</strong></p>
+<pre style="background:#f5f5f5;color:#333;padding:12px;border-radius:4px;font-size:13px">Changed: age = 30 → 31
+Removed: city
+Added: email = john@example.com</pre>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Json Diff?</dt>
-  <dd>Json Diff is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How does JSON diff work?</dt>
+  <dd>JSON diff compares two JSON objects by recursively walking through all keys and values. It identifies three types of differences: added keys (present in B but not A), removed keys (present in A but not B), and changed values (same key but different value). The comparison is type-aware and handles nested objects and arrays.</dd>
+
+  <dt>What types of JSON differences can this tool detect?</dt>
+  <dd>This tool detects: added fields (new keys in the second JSON), removed fields (missing keys from the first JSON), changed values (same key but different value), and nested differences (changes deep within object hierarchies). Array comparisons check for value differences at each index.</dd>
+
+  <dt>When should I use JSON diff?</dt>
+  <dd>JSON diff is useful for: comparing API request/response payloads before and after changes, reviewing configuration file modifications, debugging webhook data changes, validating data transformations, code review for JSON files, and identifying what changed between two versions of structured data.</dd>
+
+  <dt>Does this tool modify my JSON data?</dt>
+  <dd>No. This tool only reads and compares your JSON data without modifying it. All processing happens in your browser using JavaScript's JSON.parse() method. Your data is never sent to any server or stored persistently.</dd>
 </dl>
 </section>
 </main>

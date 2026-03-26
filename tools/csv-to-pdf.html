@@ -26,45 +26,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Csv To Pdf?",
+      "name": "What is CSV format?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Csv To Pdf is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "CSV (Comma-Separated Values) is a plain-text format for tabular data. Each line is a row, values are separated by commas. Fields with commas/quotes are wrapped in double quotes. Quote characters inside fields are escaped by doubling them. Example: name,age\\n\"Smith, John\",30."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I convert CSV to PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Upload a .csv file or paste CSV data into the editor. The tool parses the CSV using a proper parser (handling quoted fields, escaped quotes, commas within fields), renders it as an HTML table, then converts to PDF using html2canvas and jsPDF. Click 'Download PDF' to export."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Why export CSV to PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "PDF export is useful for: sharing reports with non-technical users, creating printable data summaries, attaching data to emails/documents, preserving table formatting across devices, and creating immutable snapshots of data at a point in time for audits or records."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How are special characters handled in CSV?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "The CSV parser handles: commas within fields (wrap in quotes: \"value, with comma\"), double quotes (escape by doubling: \"He said \"\"Hello\"\"\"), newlines within quoted fields, and UTF-8 characters. Empty fields are represented as empty cells in the table output."
       }
     }
   ]
@@ -94,24 +83,77 @@
 <section class="tool-seo">
 <h3>About CSV to PDF</h3>
 <p>This CSV to PDF tool parses CSV data into a browser table and exports the table as a PDF. It is useful for quick reports, lightweight exports and printable tabular data.</p>
-<p>The conversion happens locally in your browser, so the CSV data stays on your device while you preview and export it.</p>
+
+<h4>CSV Parsing Algorithm</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// CSV Parser handles:
+// - Commas within quoted fields
+// - Escaped quotes (doubled: "")
+// - Newlines within quoted fields
+// - Empty fields
+
+function parseCsv(text) {
+  let rows = [], row = [], value = "", inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    let ch = text[i];
+    if (ch === '"') {
+      if (inQuotes && text[i+1] === '"') {
+        value += '"'; i++; // Escaped quote
+      } else {
+        inQuotes = !inQuotes; // Toggle quote state
+      }
+    } else if (ch === ',' && !inQuotes) {
+      row.push(value); value = ""; // Field separator
+    } else if ((ch === '\n' || ch === '\r') && !inQuotes) {
+      row.push(value); rows.push(row);
+      row = []; value = ""; // Row separator
+    } else {
+      value += ch;
+    }
+  }
+  return rows;
+}
+</pre>
+
+<h4>CSV Example</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">CSV Input</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Description</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>name,age,city</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Header row</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>Alice,25,New York</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Simple row</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>"Smith, John",30,"LA"</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Quoted field with comma</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>Bob,,Chicago</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Empty field (null)</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Csv To Pdf?</dt>
-  <dd>Csv To Pdf is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is CSV format?</dt>
+  <dd>CSV (Comma-Separated Values) is a plain-text format for tabular data. Each line is a row, values are separated by commas. Fields with commas/quotes are wrapped in double quotes. Quote characters inside fields are escaped by doubling them. Example: name,age\n"Smith, John",30.</dd>
+
+  <dt>How do I convert CSV to PDF?</dt>
+  <dd>Upload a .csv file or paste CSV data into the editor. The tool parses the CSV using a proper parser (handling quoted fields, escaped quotes, commas within fields), renders it as an HTML table, then converts to PDF using html2canvas and jsPDF. Click 'Download PDF' to export.</dd>
+
+  <dt>Why export CSV to PDF?</dt>
+  <dd>PDF export is useful for: sharing reports with non-technical users, creating printable data summaries, attaching data to emails/documents, preserving table formatting across devices, and creating immutable snapshots of data at a point in time for audits or records.</dd>
+
+  <dt>How are special characters handled in CSV?</dt>
+  <dd>The CSV parser handles: commas within fields (wrap in quotes: "value, with comma"), double quotes (escape by doubling: "He said ""Hello"""), newlines within quoted fields, and UTF-8 characters. Empty fields are represented as empty cells in the table output.</dd>
 </dl>
 </section>
 </main>

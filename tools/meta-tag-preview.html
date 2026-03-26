@@ -17,6 +17,46 @@
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the ideal title tag length?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Title tags should be 50-60 characters (or 600 pixels wide) to display fully in search results. Google typically displays the first 50-60 characters. Titles longer than 60 characters may be truncated with an ellipsis (...). Place important keywords near the beginning."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the ideal meta description length?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Meta descriptions should be 150-160 characters for desktop (around 920 pixels) and 120 characters for mobile. While not a ranking factor, well-written descriptions improve click-through rates. Include a call-to-action and relevant keywords."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I write effective title tags?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Write title tags that: accurately describe page content, place keywords near the front, keep under 60 characters, include brand name (at end), use separators like | or -, and avoid keyword stuffing. Format: Primary Keyword - Secondary Keyword | Brand."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do meta descriptions affect SEO rankings?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Meta descriptions are not a direct ranking factor, but they influence click-through rates (CTR) from search results. Higher CTR can indirectly improve rankings. Write compelling, accurate descriptions that match search intent and include a call-to-action."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <main class="container">
@@ -46,24 +86,77 @@
 <section class="tool-seo">
 <h3>About Meta Tag Preview</h3>
 <p>This meta tag preview tool shows how a page title, URL and meta description may appear in search results.</p>
-<p>It is useful for writing clearer snippets, checking title length and improving click-through potential before publishing or updating important landing pages.</p>
+
+<h4>Title Tag Best Practices</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+&lt;!-- Title tag syntax --&gt;
+&lt;title&gt;Primary Keyword - Secondary Keyword | Brand Name&lt;/title&gt;
+
+&lt;!-- Good examples --&gt;
+&lt;title&gt;CSS Box Shadow Generator - Live Preview | ToolForge&lt;/title&gt;
+&lt;title&gt;How to Write Title Tags for SEO (2024 Guide)&lt;/title&gt;
+&lt;title&gt;Contact Us - ToolForge Developer Tools&lt;/title&gt;
+
+&lt;!-- Character limits --&gt;
+Desktop: ~60 characters (600 pixels)
+Mobile: ~50 characters
+Truncated titles show: "..."
+</pre>
+
+<h4>Meta Description Guidelines</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Device</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Character Limit</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Pixel Width</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Desktop</td>
+    <td style="border:1px solid #ddd;padding:10px">150-160 characters</td>
+    <td style="border:1px solid #ddd;padding:10px">~920 pixels</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Mobile</td>
+    <td style="border:1px solid #ddd;padding:10px">120 characters</td>
+    <td style="border:1px solid #ddd;padding:10px">~680 pixels</td>
+  </tr>
+</table>
+
+<h4>SEO Snippet Examples</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Element</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Best Practice</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Title</td>
+    <td style="border:1px solid #ddd;padding:10px">Keywords first, brand last, under 60 chars</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">URL</td>
+    <td style="border:1px solid #ddd;padding:10px">Short, readable, include keywords</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Description</td>
+    <td style="border:1px solid #ddd;padding:10px">Active voice, CTA, 150-160 characters</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Meta Tag Preview?</dt>
-  <dd>Meta Tag Preview is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the ideal title tag length?</dt>
+  <dd>Title tags should be 50-60 characters (or 600 pixels wide) to display fully in search results. Google typically displays the first 50-60 characters. Titles longer than 60 characters may be truncated with an ellipsis (...). Place important keywords near the beginning.</dd>
+
+  <dt>What is the ideal meta description length?</dt>
+  <dd>Meta descriptions should be 150-160 characters for desktop (around 920 pixels) and 120 characters for mobile. While not a ranking factor, well-written descriptions improve click-through rates. Include a call-to-action and relevant keywords.</dd>
+
+  <dt>How do I write effective title tags?</dt>
+  <dd>Write title tags that: accurately describe page content, place keywords near the front, keep under 60 characters, include brand name (at end), use separators like | or -, and avoid keyword stuffing. Format: Primary Keyword - Secondary Keyword | Brand.</dd>
+
+  <dt>Do meta descriptions affect SEO rankings?</dt>
+  <dd>Meta descriptions are not a direct ranking factor, but they influence click-through rates (CTR) from search results. Higher CTR can indirectly improve rankings. Write compelling, accurate descriptions that match search intent and include a call-to-action.</dd>
 </dl>
 </section>
 </main>

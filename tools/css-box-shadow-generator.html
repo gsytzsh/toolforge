@@ -27,45 +27,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Css Box Shadow Generator?",
+      "name": "What is the box-shadow syntax?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Css Box Shadow Generator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Box-shadow syntax is: box-shadow: [inset] x-offset y-offset blur-radius spread-radius color. X-offset controls horizontal shadow, y-offset controls vertical shadow, blur creates soft edges, spread expands/contracts the shadow, and inset makes the shadow appear inside the element."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I create a soft shadow?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "For soft shadows, use a larger blur radius (10-30px) with low opacity (0.1-0.2). Example: box-shadow: 0 4px 20px rgba(0,0,0,0.15). The key is balancing blur radius with color opacity—higher blur needs lower opacity to avoid muddy appearance."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the spread radius in box-shadow?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Spread radius expands (positive) or contracts (negative) the shadow size. A positive spread makes the shadow larger on all sides; negative spread shrinks it. Useful for creating layered effects or tight shadows that hug the element closely."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I create multiple shadows?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Separate multiple shadows with commas: box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.15). Shadows render from top to bottom (first = closest to element). Use multiple shadows for depth, glow effects, or layered elevation."
       }
     }
   ]
@@ -98,24 +87,69 @@
 <section class="tool-seo">
 <h3>About CSS Box Shadow Generator</h3>
 <p>This tool generates CSS box-shadow values with a live preview. Adjust horizontal and vertical offset, blur radius, spread and color.</p>
-<p>Useful for designing card shadows, buttons and depth effects without trial and error.</p>
+
+<h4>Box Shadow Syntax</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+/* Basic syntax */
+box-shadow: [inset] x-offset y-offset blur spread color;
+
+/* Parameters */
+/* x-offset: horizontal distance (positive = right, negative = left) */
+/* y-offset: vertical distance (positive = down, negative = up) */
+/* blur: larger = softer edges (0 = sharp shadow) */
+/* spread: positive = larger shadow, negative = smaller shadow */
+/* inset: optional, makes shadow appear inside the element */
+
+/* Examples */
+box-shadow: 4px 4px 8px rgba(0,0,0,0.3);      /* Basic shadow */
+box-shadow: -4px -4px 8px rgba(0,0,0,0.3);    /* Top-left shadow */
+box-shadow: 0 4px 12px rgba(0,0,0,0.15);      /* Bottom shadow only */
+box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);  /* Inner shadow */
+</pre>
+
+<h4>Common Shadow Patterns</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Effect</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">CSS</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Subtle elevation</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>0 1px 3px rgba(0,0,0,0.12)</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Card shadow</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>0 4px 12px rgba(0,0,0,0.15)</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Deep shadow</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>0 8px 24px rgba(0,0,0,0.2)</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Glow effect</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>0 0 20px rgba(66,153,225,0.5)</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Multiple shadows</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>0 2px 4px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.15)</code></td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Css Box Shadow Generator?</dt>
-  <dd>Css Box Shadow Generator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the box-shadow syntax?</dt>
+  <dd>Box-shadow syntax is: box-shadow: [inset] x-offset y-offset blur-radius spread-radius color. X-offset controls horizontal shadow, y-offset controls vertical shadow, blur creates soft edges, spread expands/contracts the shadow, and inset makes the shadow appear inside the element.</dd>
+
+  <dt>How do I create a soft shadow?</dt>
+  <dd>For soft shadows, use a larger blur radius (10-30px) with low opacity (0.1-0.2). Example: box-shadow: 0 4px 20px rgba(0,0,0,0.15). The key is balancing blur radius with color opacity—higher blur needs lower opacity to avoid muddy appearance.</dd>
+
+  <dt>What is the spread radius in box-shadow?</dt>
+  <dd>Spread radius expands (positive) or contracts (negative) the shadow size. A positive spread makes the shadow larger on all sides; negative spread shrinks it. Useful for creating layered effects or tight shadows that hug the element closely.</dd>
+
+  <dt>How do I create multiple shadows?</dt>
+  <dd>Separate multiple shadows with commas: box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.15). Shadows render from top to bottom (first = closest to element). Use multiple shadows for depth, glow effects, or layered elevation.</dd>
 </dl>
 </section>
 </main>

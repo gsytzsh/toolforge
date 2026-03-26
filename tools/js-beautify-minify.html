@@ -17,6 +17,46 @@
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is JavaScript beautification?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JavaScript beautification is the process of formatting minified or compressed code to improve readability. It adds proper indentation, line breaks after statements, and consistent spacing. This makes code easier to read, debug, and understand, especially when working with minified libraries or obfuscated code."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is JavaScript minification?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JavaScript minification reduces file size by removing whitespace, comments, and unnecessary characters without changing functionality. Techniques include: removing comments (// and /* */), collapsing whitespace, removing semicolons where optional. Minification speeds up page loads by reducing download size."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When should I use beautify vs minify?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use beautify when: reading minified code, debugging production issues, learning from library code, or preparing code for review. Use minify when: preparing code for production, reducing file size for faster loads, or sharing compact code snippets. Development = beautified; Production = minified."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the beautify algorithm work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The beautify algorithm: 1) Adds line breaks after semicolons and braces, 2) Indents nested blocks, 3) Trims extra whitespace from each line, 4) Ensures consistent formatting. Example: 'function hello(){console.log(\"hi\");}' becomes properly indented with each statement on its own line."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <main class="container">
@@ -35,24 +75,64 @@
 <section class="tool-seo">
 <h3>About JavaScript Beautify and Minify</h3>
 <p>This JavaScript beautify and minify tool reformats JavaScript for readability or compresses simple snippets by removing comments and extra whitespace. It is useful for debugging copied code, sharing examples and cleaning small inline scripts.</p>
-<p>For complex production builds you should still use dedicated bundlers, but this page is handy for fast browser-side formatting and inspection.</p>
+
+<h4>Beautify vs Minify</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Original (minified)
+function hello(){var name="World";console.log("Hello, "+name);}
+
+// Beautified
+function hello() {
+  var name = "World";
+  console.log("Hello, " + name);
+}
+
+// Minify removes:
+// - Single-line comments (// ...)
+// - Multi-line comments (/* ... */)
+// - Extra whitespace and newlines
+// - Optional semicolons
+</pre>
+
+<h4>Code Size Comparison</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Format</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Size</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Beautified</td>
+    <td style="border:1px solid #ddd;padding:10px">~500 bytes</td>
+    <td style="border:1px solid #ddd;padding:10px">Development, debugging</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Minified</td>
+    <td style="border:1px solid #ddd;padding:10px">~150 bytes</td>
+    <td style="border:1px solid #ddd;padding:10px">Production, fast loads</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Gzipped</td>
+    <td style="border:1px solid #ddd;padding:10px">~80 bytes</td>
+    <td style="border:1px solid #ddd;padding:10px">HTTP compression</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Js Beautify Minify?</dt>
-  <dd>Js Beautify Minify is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is JavaScript beautification?</dt>
+  <dd>JavaScript beautification is the process of formatting minified or compressed code to improve readability. It adds proper indentation, line breaks after statements, and consistent spacing. This makes code easier to read, debug, and understand, especially when working with minified libraries or obfuscated code.</dd>
+
+  <dt>What is JavaScript minification?</dt>
+  <dd>JavaScript minification reduces file size by removing whitespace, comments, and unnecessary characters without changing functionality. Techniques include: removing comments (// and /* */), collapsing whitespace, removing semicolons where optional. Minification speeds up page loads by reducing download size.</dd>
+
+  <dt>When should I use beautify vs minify?</dt>
+  <dd>Use beautify when: reading minified code, debugging production issues, learning from library code, or preparing code for review. Use minify when: preparing code for production, reducing file size for faster loads, or sharing compact code snippets. Development = beautified; Production = minified.</dd>
+
+  <dt>How does the beautify algorithm work?</dt>
+  <dd>The beautify algorithm: 1) Adds line breaks after semicolons and braces, 2) Indents nested blocks, 3) Trims extra whitespace from each line, 4) Ensures consistent formatting. Example: 'function hello(){console.log("hi");}' becomes properly indented with each statement on its own line.</dd>
 </dl>
 </section>
 </main>

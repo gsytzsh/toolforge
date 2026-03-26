@@ -32,45 +32,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Web Dimensions Reference?",
+      "name": "What are CSS media query breakpoints?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Web Dimensions Reference is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "CSS media query breakpoints are specific viewport widths where the layout changes to adapt to different screen sizes. Common breakpoints include 320px (small phones), 768px (tablets), 1024px (laptops), and 1920px (desktop). These align with typical device widths and enable responsive design."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the difference between vh, dvh, svh, and lvh?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "vh is the standard viewport height unit. dvh (dynamic) adjusts for mobile browser UI like address bars. svh (small) uses the minimum visible height, while lvh (large) uses the maximum. Use dvh for mobile-friendly full-height layouts that respond to browser UI changes."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the ideal content width for readability?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "The ideal content width for readability is 45-75 characters per line, commonly expressed as max-width: 65ch in CSS. This translates to approximately 520-650px for body text at 14-16px font size. Wider lines cause eye fatigue; narrower lines create excessive line breaks."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I choose responsive breakpoints?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Choose breakpoints based on content needs, not specific devices. Start with mobile-first (@media (min-width: 640px), 768px, 1024px, 1280px). Test layouts at intermediate widths. Common frameworks use: Tailwind (640/768/1024/1280/1536px), Bootstrap (576/768/992/1200px)."
       }
     }
   ]
@@ -136,24 +125,105 @@
 <section class="tool-seo">
 <h3>About Web Dimensions Reference</h3>
 <p>This reference lists common web dimensions including responsive breakpoints, viewport height units and content widths.</p>
-<p>It is useful for CSS media queries, layout design and ensuring consistent sizing across devices.</p>
+
+<h4>CSS Media Query Breakpoints</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+/* Mobile-first breakpoints */
+@media (min-width: 640px) { /* sm - Small devices */ }
+@media (min-width: 768px) { /* md - Tablets */ }
+@media (min-width: 1024px) { /* lg - Desktops */ }
+@media (min-width: 1280px) { /* xl - Large screens */ }
+@media (min-width: 1536px) { /* 2xl - Extra large */ }
+
+/* Container queries (modern alternative) */
+@container (min-width: 400px) {
+  .card { grid-template-columns: 1fr 1fr; }
+}
+</pre>
+
+<h4>Common Device Widths</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Device</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Width (px)</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Breakpoint</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">iPhone SE / Small phones</td>
+    <td style="border:1px solid #ddd;padding:10px">320 - 375</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>xs, sm</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">iPhone 14/15</td>
+    <td style="border:1px solid #ddd;padding:10px">390</td>
+    <td style="border:1px solid #ddd;padding:10px">—</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">iPad (portrait)</td>
+    <td style="border:1px solid #ddd;padding:10px">768</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>md</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">iPad (landscape)</td>
+    <td style="border:1px solid #ddd;padding:10px">1024</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>lg</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Laptops</td>
+    <td style="border:1px solid #ddd;padding:10px">1280 - 1440</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>xl</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Desktop / 4K</td>
+    <td style="border:1px solid #ddd;padding:10px">1920 - 3840</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>2xl</code></td>
+  </tr>
+</table>
+
+<h4>Viewport Height Units</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Unit</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Description</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>vh</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Standard viewport height</td>
+    <td style="border:1px solid #ddd;padding:10px">Desktop layouts</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>dvh</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Dynamic (adjusts for browser UI)</td>
+    <td style="border:1px solid #ddd;padding:10px">Mobile full-height sections</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>svh</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Small (minimum visible)</td>
+    <td style="border:1px solid #ddd;padding:10px">Conservative mobile layouts</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>lvh</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Large (maximum visible)</td>
+    <td style="border:1px solid #ddd;padding:10px">Expanded mobile layouts</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Web Dimensions Reference?</dt>
-  <dd>Web Dimensions Reference is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What are CSS media query breakpoints?</dt>
+  <dd>CSS media query breakpoints are specific viewport widths where the layout changes to adapt to different screen sizes. Common breakpoints include 320px (small phones), 768px (tablets), 1024px (laptops), and 1920px (desktop). These align with typical device widths and enable responsive design.</dd>
+
+  <dt>What is the difference between vh, dvh, svh, and lvh?</dt>
+  <dd>vh is the standard viewport height unit. dvh (dynamic) adjusts for mobile browser UI like address bars. svh (small) uses the minimum visible height, while lvh (large) uses the maximum. Use dvh for mobile-friendly full-height layouts that respond to browser UI changes.</dd>
+
+  <dt>What is the ideal content width for readability?</dt>
+  <dd>The ideal content width for readability is 45-75 characters per line, commonly expressed as max-width: 65ch in CSS. This translates to approximately 520-650px for body text at 14-16px font size. Wider lines cause eye fatigue; narrower lines create excessive line breaks.</dd>
+
+  <dt>How do I choose responsive breakpoints?</dt>
+  <dd>Choose breakpoints based on content needs, not specific devices. Start with mobile-first (@media (min-width: 640px), 768px, 1024px, 1280px). Test layouts at intermediate widths. Common frameworks use: Tailwind (640/768/1024/1280/1536px), Bootstrap (576/768/992/1200px).</dd>
 </dl>
 </section>
 </main>

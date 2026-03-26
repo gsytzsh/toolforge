@@ -24,45 +24,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Http Header Builder?",
+      "name": "What is the standard HTTP header format?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Http Header Builder is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "HTTP headers follow the format 'Header-Name: value' with one header per line. Header names are case-insensitive but conventionally use Title-Case (Content-Type, Authorization). Values are trimmed of whitespace. Example: 'Content-Type: application/json' or 'Authorization: Bearer token123'."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I export headers for fetch API?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Select the 'JavaScript fetch headers' format to export headers as a const object. Example output: 'const headers = { "Content-Type": "application/json", "Authorization": "Bearer token" };'. Use this directly in fetch calls: fetch(url, { headers })."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What are common request headers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Common request headers include: Content-Type (media type of body), Authorization (credentials like Bearer tokens), Accept (expected response format), User-Agent (client identification), X-Requested-With (AJAX requests), and custom headers like X-API-Key for authentication."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the difference between request and response headers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Request headers are sent by the client (browser) to the server (e.g., Authorization, Content-Type). Response headers are sent by the server to the client (e.g., Content-Type, Set-Cookie, Cache-Control, X-Frame-Options). Some headers like Content-Type appear in both but may have different values."
       }
     }
   ]
@@ -93,24 +82,73 @@
 <section class="tool-seo">
 <h3>About HTTP Header Builder</h3>
 <p>This HTTP header builder helps you compose headers once and export them as raw text, JSON or a JavaScript headers object.</p>
-<p>It is useful for API setup, request debugging and documentation examples when you want to reuse a clean header block in different formats.</p>
+
+<h4>Header Export Formats</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Input (raw headers)
+Content-Type: application/json
+Authorization: Bearer token123
+
+// Output: Raw format
+Content-Type: application/json
+Authorization: Bearer token123
+
+// Output: JSON format
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer token123"
+}
+
+// Output: JavaScript fetch format
+const headers = {
+  "Content-Type": "application/json",
+  "Authorization": "Bearer token123"
+};
+</pre>
+
+<h4>Common HTTP Headers</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Header</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Use Case</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>Content-Type</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Specify body media type (json, form-data)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>Authorization</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Send credentials (Bearer, Basic, API key)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>Accept</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Specify expected response format</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>X-API-Key</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Send API key for authentication</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px"><code>User-Agent</code></td>
+    <td style="border:1px solid #ddd;padding:10px">Identify client application</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Http Header Builder?</dt>
-  <dd>Http Header Builder is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the standard HTTP header format?</dt>
+  <dd>HTTP headers follow the format 'Header-Name: value' with one header per line. Header names are case-insensitive but conventionally use Title-Case (Content-Type, Authorization). Values are trimmed of whitespace. Example: 'Content-Type: application/json' or 'Authorization: Bearer token123'.</dd>
+
+  <dt>How do I export headers for fetch API?</dt>
+  <dd>Select the 'JavaScript fetch headers' format to export headers as a const object. Example output: 'const headers = { "Content-Type": "application/json", "Authorization": "Bearer token" };'. Use this directly in fetch calls: fetch(url, { headers }).</dd>
+
+  <dt>What are common request headers?</dt>
+  <dd>Common request headers include: Content-Type (media type of body), Authorization (credentials like Bearer tokens), Accept (expected response format), User-Agent (client identification), X-Requested-With (AJAX requests), and custom headers like X-API-Key for authentication.</dd>
+
+  <dt>What is the difference between request and response headers?</dt>
+  <dd>Request headers are sent by the client (browser) to the server (e.g., Authorization, Content-Type). Response headers are sent by the server to the client (e.g., Content-Type, Set-Cookie, Cache-Control, X-Frame-Options). Some headers like Content-Type appear in both but may have different values.</dd>
 </dl>
 </section>
 </main>

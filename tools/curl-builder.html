@@ -24,45 +24,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Curl Builder?",
+      "name": "What is the cURL command syntax?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Curl Builder is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "cURL syntax is: curl [URL] [OPTIONS]. Common options: -X (HTTP method), -H (headers), -d (data/body), -u (authentication), -o (output file), -v (verbose). Example: curl https://api.example.com/users -X POST -H \"Content-Type: application/json\" -d '{\"name\":\"test\"}'."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I send a POST request with cURL?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Use -X POST and -d for data: curl \"https://api.example.com/users\" -X POST -H \"Content-Type: application/json\" -d '{\"name\":\"John\",\"email\":\"john@example.com\"}'. The -H flag adds headers, -d sends the request body. For JSON, always set Content-Type header."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How do I include authentication in cURL?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "For Basic auth: curl -u username:password https://api.example.com. For Bearer tokens: curl -H \"Authorization: Bearer token123\" https://api.example.com. For API keys: curl -H \"X-API-Key: your-key\" https://api.example.com. Never share credentials in public code."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I upload files with cURL?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Use -F for multipart form data: curl -F \"file=@/path/to/file.txt\" -F \"description=My file\" https://api.example.com/upload. The @ symbol reads from a file. For binary uploads: curl -T file.zip https://example.com/upload. Use -H \"Content-Type: multipart/form-data\" if needed."
       }
     }
   ]
@@ -101,24 +90,63 @@
 <section class="tool-seo">
 <h3>About cURL Builder</h3>
 <p>This cURL builder creates copy-ready curl commands from method, URL, headers and request body fields.</p>
-<p>It is useful for API docs, support handoffs and terminal-based request testing when you need a clean command without assembling every flag by hand.</p>
+
+<h4>cURL Command Syntax</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+# Basic cURL command structure
+curl [URL] [OPTIONS]
+
+# Common options:
+-X, --request       HTTP method (GET, POST, PUT, DELETE, etc.)
+-H, --header        Add HTTP header (can be repeated)
+-d, --data          POST data (use @filename for file upload)
+-u, --user          Username and password
+-o, --output        Write to file instead of stdout
+-v, --verbose       Show request details for debugging
+</pre>
+
+<h4>cURL Examples</h4>
+<p><strong>GET request with headers:</strong></p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px">curl "https://api.github.com/users/octocat" \
+  -H "Accept: application/json" \
+  -H "Authorization: Bearer token"</pre>
+
+<p><strong>POST request with JSON body:</strong></p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px">curl "https://api.example.com/users" \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"name":"John","email":"john@example.com"}'</pre>
+
+<p><strong>File upload with cURL:</strong></p>
+<pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:13px">curl "https://api.example.com/upload" \
+  -X POST \
+  -F "file=@/path/to/file.txt" \
+  -F "description=My file"</pre>
+
+<h4>Common Use Cases</h4>
+<ul>
+  <li><strong>API Testing:</strong> Quickly test API endpoints from the terminal</li>
+  <li><strong>Documentation:</strong> Generate reproducible examples for API docs</li>
+  <li><strong>Debugging:</strong> Inspect raw HTTP responses with verbose mode</li>
+  <li><strong>Automation:</strong> Create shell scripts for repetitive HTTP tasks</li>
+  <li><strong>Support:</strong> Provide customers with exact commands to reproduce issues</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Curl Builder?</dt>
-  <dd>Curl Builder is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What is the cURL command syntax?</dt>
+  <dd>cURL syntax is: curl [URL] [OPTIONS]. Common options: -X (HTTP method), -H (headers), -d (data/body), -u (authentication), -o (output file), -v (verbose). Example: curl https://api.example.com/users -X POST -H "Content-Type: application/json" -d '{"name":"test"}'.</dd>
+
+  <dt>How do I send a POST request with cURL?</dt>
+  <dd>Use -X POST and -d for data: curl "https://api.example.com/users" -X POST -H "Content-Type: application/json" -d '{"name":"John","email":"john@example.com"}'. The -H flag adds headers, -d sends the request body. For JSON, always set Content-Type header.</dd>
+
+  <dt>How do I include authentication in cURL?</dt>
+  <dd>For Basic auth: curl -u username:password https://api.example.com. For Bearer tokens: curl -H "Authorization: Bearer token123" https://api.example.com. For API keys: curl -H "X-API-Key: your-key" https://api.example.com. Never share credentials in public code.</dd>
+
+  <dt>How do I upload files with cURL?</dt>
+  <dd>Use -F for multipart form data: curl -F "file=@/path/to/file.txt" -F "description=My file" https://api.example.com/upload. The @ symbol reads from a file. For binary uploads: curl -T file.zip https://example.com/upload. Use -H "Content-Type: multipart/form-data" if needed.</dd>
 </dl>
 </section>
 </main>

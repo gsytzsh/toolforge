@@ -26,45 +26,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Resume To Pdf?",
+      "name": "What sections should a resume include?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Resume To Pdf is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "A standard resume includes: Contact information (name, email, phone), Professional summary (2-3 sentences), Work experience (reverse chronological), Skills (technical and soft skills), and optionally Education, Certifications, and Projects. Keep it to one page for less than 10 years experience."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I write a professional summary?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "A professional summary should be 2-3 sentences highlighting your role, key skills, and value proposition. Format: [Role] with [X] years of experience in [specialty]. Proven track record in [achievement]. Skilled in [key technologies]. Example: 'Frontend Engineer with 5 years building developer tools and UI systems.'"
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What format is best for resume experience?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "List experience in reverse chronological order. For each role include: Job title, Company, Dates, and 3-5 bullet points with action verbs and quantifiable achievements. Use format: 'Built X that improved Y by Z%'. Focus on impact, not just responsibilities."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I export this resume as PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Fill in your resume details in the form fields, click 'Render Resume' to preview, then click 'Download PDF'. The tool uses html2canvas to capture the rendered preview and jsPDF to generate a downloadable PDF file. All processing happens in your browser."
       }
     }
   ]
@@ -112,24 +101,65 @@ Phone:
 <section class="tool-seo">
 <h3>About Resume to PDF</h3>
 <p>This Resume to PDF tool creates a simple single-page style resume with core contact, summary, experience and skills sections. It is useful for quick resume drafts and lightweight profile sharing.</p>
-<p>The resume is rendered locally in your browser before export.</p>
+
+<h4>Resume Structure</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Resume sections
+1. Contact Info: Name, Role, Email, Phone
+2. Professional Summary: 2-3 sentence overview
+3. Experience: Work history (reverse chronological)
+4. Skills: Technical and soft skills
+
+// Example structure
+{
+  name: "Alex Johnson",
+  role: "Frontend Engineer",
+  contact: { email, phone },
+  summary: "Frontend engineer with 5 years...",
+  experience: "Company - Role (2020-2024)...",
+  skills: "JavaScript, HTML/CSS, React"
+}
+</pre>
+
+<h4>Resume Writing Tips</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Section</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Best Practice</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Summary</td>
+    <td style="border:1px solid #ddd;padding:10px">2-3 sentences, highlight value prop</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Experience</td>
+    <td style="border:1px solid #ddd;padding:10px">Action verbs + quantifiable results</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Skills</td>
+    <td style="border:1px solid #ddd;padding:10px">Match job description keywords</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Length</td>
+    <td style="border:1px solid #ddd;padding:10px">1 page (&lt;10 yrs), 2 pages (10+ yrs)</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Resume To Pdf?</dt>
-  <dd>Resume To Pdf is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What sections should a resume include?</dt>
+  <dd>A standard resume includes: Contact information (name, email, phone), Professional summary (2-3 sentences), Work experience (reverse chronological), Skills (technical and soft skills), and optionally Education, Certifications, and Projects. Keep it to one page for less than 10 years experience.</dd>
+
+  <dt>How do I write a professional summary?</dt>
+  <dd>A professional summary should be 2-3 sentences highlighting your role, key skills, and value proposition. Format: [Role] with [X] years of experience in [specialty]. Proven track record in [achievement]. Skilled in [key technologies]. Example: 'Frontend Engineer with 5 years building developer tools and UI systems.'</dd>
+
+  <dt>What format is best for resume experience?</dt>
+  <dd>List experience in reverse chronological order. For each role include: Job title, Company, Dates, and 3-5 bullet points with action verbs and quantifiable achievements. Use format: 'Built X that improved Y by Z%'. Focus on impact, not just responsibilities.</dd>
+
+  <dt>How do I export this resume as PDF?</dt>
+  <dd>Fill in your resume details in the form fields, click 'Render Resume' to preview, then click 'Download PDF'. The tool uses html2canvas to capture the rendered preview and jsPDF to generate a downloadable PDF file. All processing happens in your browser.</dd>
 </dl>
 </section>
 </main>

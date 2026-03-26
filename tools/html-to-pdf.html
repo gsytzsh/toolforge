@@ -26,45 +26,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Html To Pdf?",
+      "name": "How does HTML to PDF conversion work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Html To Pdf is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "HTML to PDF conversion renders the HTML content in the browser, captures it as a canvas using html2canvas, then converts the canvas image to a PDF using jsPDF. The process preserves visual styling, layout, and formatting as they appear in the browser preview."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What HTML elements are supported?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Most standard HTML elements are supported: headings, paragraphs, lists, tables, images, links, and CSS styling. For safety, scripts, iframes, objects, embeds, and event handlers (onclick, onerror, etc.) are removed during sanitization to prevent XSS attacks."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "How do I convert HTML to PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Paste HTML content in the editor or upload an .html file, click 'Render Preview' to see the formatted output with sanitization applied, then click 'Download PDF'. The tool uses html2canvas to capture the preview and jsPDF to generate a downloadable PDF file."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "Why is my CSS not rendering correctly?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "External stylesheets and @import rules may not load due to CORS restrictions. Use inline styles or embedded <style> tags for best results. Complex layouts, flexbox, and grid may have limited support. For complex documents, consider server-side PDF generators."
       }
     }
   ]
@@ -92,24 +81,69 @@
 <section class="tool-seo">
 <h3>About HTML to PDF</h3>
 <p>This HTML to PDF tool renders your HTML in the browser and exports the preview as a downloadable PDF. It is useful for simple invoices, formatted snippets, printable notes and quick HTML document exports.</p>
-<p>For safety, the preview removes scripts and potentially unsafe embedded content before rendering. Everything runs locally in your browser without sending your HTML to a server.</p>
+
+<h4>HTML to PDF Conversion Process</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Step 1: Parse and sanitize HTML
+const parser = new DOMParser();
+const doc = parser.parseFromString(html, "text/html");
+// Remove: script, iframe, object, embed, event handlers
+
+// Step 2: Render to canvas (html2canvas)
+const canvas = await html2canvas(element, {
+  scale: 2,           // Retina quality
+  backgroundColor: "#ffffff"
+});
+
+// Step 3: Convert to PDF (jsPDF)
+const pdf = new jsPDF("p", "pt", "a4");
+pdf.addImage(canvas.toDataURL("image/png"), ...);
+pdf.save("document.pdf");
+</pre>
+
+<h4>Supported HTML Elements</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Element</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Support</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Headings, Paragraphs</td>
+    <td style="border:1px solid #ddd;padding:10px">Full</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Lists (ul, ol, li)</td>
+    <td style="border:1px solid #ddd;padding:10px">Full</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Tables</td>
+    <td style="border:1px solid #ddd;padding:10px">Full</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Images</td>
+    <td style="border:1px solid #ddd;padding:10px">Same-origin/CORS</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">CSS Styles</td>
+    <td style="border:1px solid #ddd;padding:10px">Inline/embedded</td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Html To Pdf?</dt>
-  <dd>Html To Pdf is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How does HTML to PDF conversion work?</dt>
+  <dd>HTML to PDF conversion renders the HTML content in the browser, captures it as a canvas using html2canvas, then converts the canvas image to a PDF using jsPDF. The process preserves visual styling, layout, and formatting as they appear in the browser preview.</dd>
+
+  <dt>What HTML elements are supported?</dt>
+  <dd>Most standard HTML elements are supported: headings, paragraphs, lists, tables, images, links, and CSS styling. For safety, scripts, iframes, objects, embeds, and event handlers (onclick, onerror, etc.) are removed during sanitization to prevent XSS attacks.</dd>
+
+  <dt>How do I convert HTML to PDF?</dt>
+  <dd>Paste HTML content in the editor or upload an .html file, click 'Render Preview' to see the formatted output with sanitization applied, then click 'Download PDF'. The tool uses html2canvas to capture the preview and jsPDF to generate a downloadable PDF file.</dd>
+
+  <dt>Why is my CSS not rendering correctly?</dt>
+  <dd>External stylesheets and @import rules may not load due to CORS restrictions. Use inline styles or embedded &lt;style&gt; tags for best results. Complex layouts, flexbox, and grid may have limited support. For complex documents, consider server-side PDF generators.</dd>
 </dl>
 </section>
 </main>

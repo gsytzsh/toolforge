@@ -27,45 +27,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Css Border Radius Generator?",
+      "name": "How does the CSS border-radius property work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Css Border Radius Generator is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "The border-radius property defines the radius of an element's corners. It accepts 1-4 values: 1 value applies to all corners, 2 values (top-left/bottom-right, top-right/bottom-left), 3 values (top-left, top-right/bottom-left, bottom-right), or 4 values (top-left, top-right, bottom-right, bottom-left) in clockwise order."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What units can I use for border-radius?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Border-radius accepts length units (px, em, rem, etc.) and percentages. Pixels provide fixed rounding, while percentages create proportional curves relative to the element's dimensions. Percentages over 50% create overlapping curves for pill-shaped effects."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Can I create elliptical corners with border-radius?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Yes, use the slash syntax: border-radius: horizontal-radius / vertical-radius. For example, border-radius: 20px / 10px creates elliptical curves that are 20px wide and 10px tall. You can also specify different horizontal and vertical radii for each corner."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What is the maximum border-radius value?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "The maximum useful border-radius depends on the element size. For a square element, 50% creates a perfect circle. For rectangles, the maximum radius is limited by the shorter dimension. Values larger than half the element's width/height are clamped to the maximum possible radius."
       }
     }
   ]
@@ -108,24 +97,72 @@
 <section class="tool-seo">
 <h3>About CSS Border Radius Generator</h3>
 <p>This tool generates CSS border-radius values with a live preview. Set each corner independently in pixels.</p>
-<p>Useful for designing rounded corners on boxes, buttons and cards without guessing values.</p>
+
+<h4>Border Radius Syntax</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+/* 4-value syntax (clockwise from top-left) */
+border-radius: top-left top-right bottom-right bottom-left;
+
+/* Examples */
+border-radius: 10px 20px 30px 40px;  /* Different radius for each corner */
+border-radius: 10px;                  /* All corners same radius */
+border-radius: 10px 20px;             /* top/bottom, left/right */
+border-radius: 10px 20px 30px;        /* top-left, left/right, bottom-right */
+
+/* Elliptical corners */
+border-radius: 20px / 10px;           /* horizontal / vertical radius */
+</pre>
+
+<h4>Common Border Radius Patterns</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Effect</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">CSS</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Slight rounding</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>border-radius: 4px;</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Medium rounding</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>border-radius: 8px;</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Large rounding</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>border-radius: 16px;</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Pill shape (rectangle)</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>border-radius: 999px;</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Circle (square element)</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>border-radius: 50%;</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Top corners only</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>border-radius: 10px 10px 0 0;</code></td>
+  </tr>
+</table>
+
+<h4>Browser Support</h4>
+<p>Border-radius is supported in all modern browsers including Chrome, Firefox, Safari, Edge, and mobile browsers. No vendor prefixes needed.</p>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Css Border Radius Generator?</dt>
-  <dd>Css Border Radius Generator is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How does the CSS border-radius property work?</dt>
+  <dd>The border-radius property defines the radius of an element's corners. It accepts 1-4 values: 1 value applies to all corners, 2 values (top-left/bottom-right, top-right/bottom-left), 3 values (top-left, top-right/bottom-left, bottom-right), or 4 values (top-left, top-right, bottom-right, bottom-left) in clockwise order.</dd>
+
+  <dt>What units can I use for border-radius?</dt>
+  <dd>Border-radius accepts length units (px, em, rem, etc.) and percentages. Pixels provide fixed rounding, while percentages create proportional curves relative to the element's dimensions. Percentages over 50% create overlapping curves for pill-shaped effects.</dd>
+
+  <dt>Can I create elliptical corners with border-radius?</dt>
+  <dd>Yes, use the slash syntax: border-radius: horizontal-radius / vertical-radius. For example, border-radius: 20px / 10px creates elliptical curves that are 20px wide and 10px tall. You can also specify different horizontal and vertical radii for each corner.</dd>
+
+  <dt>What is the maximum border-radius value?</dt>
+  <dd>The maximum useful border-radius depends on the element size. For a square element, 50% creates a perfect circle. For rectangles, the maximum radius is limited by the shorter dimension. Values larger than half the element's width/height are clamped to the maximum possible radius.</dd>
 </dl>
 </section>
 </main>

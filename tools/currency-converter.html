@@ -24,45 +24,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Currency Converter?",
+      "name": "How are exchange rates calculated in this converter?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Currency Converter is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Exchange rates are fetched from the European Central Bank (ECB) via the Frankfurter API. Rates update daily and reflect the official ECB reference rates, which are based on regular consultations with other central banks worldwide."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "What is the mid-market exchange rate?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "The mid-market rate (also called interbank rate) is the midpoint between the buy and sell prices for a currency pair. It is the rate banks use when trading with each other. This tool uses mid-market rates, which are typically more favorable than retail rates offered by banks or currency exchange services."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "Why do exchange rates fluctuate?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "Exchange rates fluctuate based on supply and demand in the global forex market. Factors include interest rates, inflation, economic indicators (GDP, employment), political stability, trade balances, and market speculation. Rates can change multiple times per second during trading hours."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "What currency codes are supported?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "This converter supports 30+ currencies including major world currencies: USD (US Dollar), EUR (Euro), CNY (Chinese Yuan), GBP (British Pound), JPY (Japanese Yen), as well as regional currencies like HKD, KRW, AUD, CAD, CHF, SGD, THB, INR, and more. All codes follow the ISO 4217 standard."
       }
     }
   ]
@@ -105,25 +94,83 @@
 
 <section class="tool-seo">
 <h3>About Currency Converter</h3>
-<p>This currency converter lets you convert between major world currencies including USD, CNY, EUR, GBP, JPY, HKD and more. Exchange rates are fetched from the European Central Bank and update daily.</p>
-<p>It is useful for travel planning, international payments, e-commerce pricing, invoicing in foreign currencies and quick forex reference without leaving the page.</p>
+<p>This currency converter lets you convert between major world currencies including USD, CNY, EUR, GBP, JPY, HKD and more. Exchange rates are fetched daily from the European Central Bank (ECB) via the Frankfurter API, ensuring accurate and up-to-date conversion rates.</p>
+
+<h4>How Currency Conversion Works</h4>
+<p>Currency conversion uses exchange rates to determine the value of one currency in terms of another. The formula is straightforward:</p>
+
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+Converted Amount = Original Amount × Exchange Rate
+
+Example: Convert 100 USD to EUR (rate: 0.92)
+100 × 0.92 = 92 EUR
+</pre>
+
+<h4>Major World Currencies</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Currency</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Code</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Symbol</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Region</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">US Dollar</td>
+    <td style="border:1px solid #ddd;padding:10px">USD</td>
+    <td style="border:1px solid #ddd;padding:10px">$</td>
+    <td style="border:1px solid #ddd;padding:10px">United States</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Euro</td>
+    <td style="border:1px solid #ddd;padding:10px">EUR</td>
+    <td style="border:1px solid #ddd;padding:10px">€</td>
+    <td style="border:1px solid #ddd;padding:10px">Eurozone (20 countries)</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">British Pound</td>
+    <td style="border:1px solid #ddd;padding:10px">GBP</td>
+    <td style="border:1px solid #ddd;padding:10px">£</td>
+    <td style="border:1px solid #ddd;padding:10px">United Kingdom</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Japanese Yen</td>
+    <td style="border:1px solid #ddd;padding:10px">JPY</td>
+    <td style="border:1px solid #ddd;padding:10px">¥</td>
+    <td style="border:1px solid #ddd;padding:10px">Japan</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Chinese Yuan</td>
+    <td style="border:1px solid #ddd;padding:10px">CNY</td>
+    <td style="border:1px solid #ddd;padding:10px">¥</td>
+    <td style="border:1px solid #ddd;padding:10px">China</td>
+  </tr>
+</table>
+
+<h4>Understanding Exchange Rate Quotes</h4>
+<p>Exchange rates are quoted as currency pairs. For example, USD/EUR = 0.92 means 1 US Dollar equals 0.92 Euros. The first currency is the <strong>base currency</strong>, and the second is the <strong>quote currency</strong>.</p>
+
+<ul>
+  <li><strong>Base currency:</strong> The currency being converted from (always = 1)</li>
+  <li><strong>Quote currency:</strong> The currency being converted to</li>
+  <li><strong>Bid price:</strong> Rate at which dealers buy the base currency</li>
+  <li><strong>Ask price:</strong> Rate at which dealers sell the base currency</li>
+</ul>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Currency Converter?</dt>
-  <dd>Currency Converter is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>How are exchange rates calculated in this converter?</dt>
+  <dd>Exchange rates are fetched from the European Central Bank (ECB) via the Frankfurter API. Rates update daily and reflect the official ECB reference rates, which are based on regular consultations with other central banks worldwide.</dd>
+
+  <dt>What is the mid-market exchange rate?</dt>
+  <dd>The mid-market rate (also called interbank rate) is the midpoint between the buy and sell prices for a currency pair. It is the rate banks use when trading with each other. This tool uses mid-market rates, which are typically more favorable than retail rates offered by banks or currency exchange services.</dd>
+
+  <dt>Why do exchange rates fluctuate?</dt>
+  <dd>Exchange rates fluctuate based on supply and demand in the global forex market. Factors include interest rates, inflation, economic indicators (GDP, employment), political stability, trade balances, and market speculation. Rates can change multiple times per second during trading hours.</dd>
+
+  <dt>What currency codes are supported?</dt>
+  <dd>This converter supports 30+ currencies including major world currencies: USD (US Dollar), EUR (Euro), CNY (Chinese Yuan), GBP (British Pound), JPY (Japanese Yen), as well as regional currencies like HKD, KRW, AUD, CAD, CHF, SGD, THB, INR, and more. All codes follow the ISO 4217 standard.</dd>
 </dl>
 </section>
 </main>

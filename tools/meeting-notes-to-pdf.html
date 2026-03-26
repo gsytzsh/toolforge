@@ -26,45 +26,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Meeting Notes To Pdf?",
+      "name": "What should effective meeting notes include?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Meeting Notes To Pdf is a free online tool that runs entirely in your browser. No installation or registration required."
+        "text": "Effective meeting notes should include: Meeting title and date, Attendees list, Agenda items, Discussion notes/decisions made, and Action items with owners and deadlines. This structure ensures accountability and provides a clear record of what was discussed and decided."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Does this tool work offline?",
+      "name": "How do I write clear action items?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server."
+        "text": "Write action items using the format: [Person] - [Task] - [Deadline]. Be specific about what needs to be done, assign a single owner, and include a due date. Example: 'Alex - Review homepage grouping proposals - March 30'. Avoid vague tasks like 'follow up' without specifics."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is my data private?",
+      "name": "What is the best format for meeting agendas?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. All processing happens on your device. Your input never leaves your browser."
+        "text": "List agenda items in order of priority, with time allocations if possible. Format: '1. Topic (10 min) - Presenter', '2. Topic (15 min) - Presenter'. Send the agenda 24 hours before the meeting. Limit to 3-5 main topics for a 1-hour meeting."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Which browsers are supported?",
+      "name": "How do I export meeting notes as PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera."
-      }
-    },    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, this tool is completely free with no registration, subscription, or payment required."
-      }
-    },    {
-      "@type": "Question",
-      "name": "How do I report a bug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages."
+        "text": "Fill in the meeting details (title, date, attendees), agenda items, discussion notes, and action items. Click 'Render Notes' to preview the formatted output, then click 'Download PDF'. The tool uses html2canvas and jsPDF to generate a downloadable PDF file entirely in your browser."
       }
     }
   ]
@@ -107,24 +96,66 @@ Attendees:
 <section class="tool-seo">
 <h3>About Meeting Notes to PDF</h3>
 <p>This tool turns meeting notes into a structured PDF with title, attendees, agenda, discussion notes and follow-up actions. It is useful for internal syncs, client calls and status meetings.</p>
-<p>Everything is generated locally in your browser and can be exported without sending notes to a server.</p>
+
+<h4>Meeting Notes Structure</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+// Meeting notes template
+{
+  title: "Weekly Product Sync",
+  date: "2024-03-26",
+  attendees: ["Alex", "Sam", "Jamie"],
+  agenda: [
+    "Status updates (10 min)",
+    "PDF tools roadmap (20 min)",
+    "Open issues review (15 min)"
+  ],
+  notes: "Discussion points and decisions...",
+  actions: [
+    { owner: "Alex", task: "Review homepage grouping", due: "2024-03-30" },
+    { owner: "Sam", task: "Test PDF tools on mobile", due: "2024-03-28" }
+  ]
+}
+</pre>
+
+<h4>Action Items Format</h4>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Component</th>
+    <th style="border:1px solid #ddd;padding:10px;text-align:left">Example</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Owner</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>Alex</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Task</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>Review homepage grouping proposals</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Deadline</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>March 30, 2024</code></td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:10px">Status</td>
+    <td style="border:1px solid #ddd;padding:10px"><code>Pending / In Progress / Done</code></td>
+  </tr>
+</table>
 </section>
 
 <section class="faq">
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
-  <dt>What is Meeting Notes To Pdf?</dt>
-  <dd>Meeting Notes To Pdf is a free online tool that runs entirely in your browser. No installation or registration required.</dd>
-  <dt>Does this tool work offline?</dt>
-  <dd>Yes, this tool processes all data locally in your browser using JavaScript. No data is sent to any server.</dd>
-  <dt>Is my data private?</dt>
-  <dd>Absolutely. All processing happens on your device. Your input never leaves your browser.</dd>
-  <dt>Which browsers are supported?</dt>
-  <dd>This tool works in all modern browsers including Chrome, Firefox, Safari, Edge, and Opera.</dd>
-  <dt>Is this tool free to use?</dt>
-  <dd>Yes, this tool is completely free with no registration, subscription, or payment required.</dd>
-  <dt>How do I report a bug?</dt>
-  <dd>If you encounter any issues, try refreshing the page or clearing your browser cache. You can also check the browser console for error messages.</dd>
+  <dt>What should effective meeting notes include?</dt>
+  <dd>Effective meeting notes should include: Meeting title and date, Attendees list, Agenda items, Discussion notes/decisions made, and Action items with owners and deadlines. This structure ensures accountability and provides a clear record of what was discussed and decided.</dd>
+
+  <dt>How do I write clear action items?</dt>
+  <dd>Write action items using the format: [Person] - [Task] - [Deadline]. Be specific about what needs to be done, assign a single owner, and include a due date. Example: 'Alex - Review homepage grouping proposals - March 30'. Avoid vague tasks like 'follow up' without specifics.</dd>
+
+  <dt>What is the best format for meeting agendas?</dt>
+  <dd>List agenda items in order of priority, with time allocations if possible. Format: '1. Topic (10 min) - Presenter', '2. Topic (15 min) - Presenter'. Send the agenda 24 hours before the meeting. Limit to 3-5 main topics for a 1-hour meeting.</dd>
+
+  <dt>How do I export meeting notes as PDF?</dt>
+  <dd>Fill in the meeting details (title, date, attendees), agenda items, discussion notes, and action items. Click 'Render Notes' to preview the formatted output, then click 'Download PDF'. The tool uses html2canvas and jsPDF to generate a downloadable PDF file entirely in your browser.</dd>
 </dl>
 </section>
 </main>
