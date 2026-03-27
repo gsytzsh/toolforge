@@ -24,34 +24,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What hash algorithms are supported?",
+      "name": "What is SHA-256 and how does it work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool supports SHA-1 (160-bit), SHA-256 (256-bit), and SHA-512 (512-bit). SHA-1 is deprecated for security use but still useful for checksums. SHA-256 and SHA-512 are cryptographically secure and recommended for security-sensitive applications."
+        "text": "SHA-256 is a cryptographic hash function that accepts input of any length and outputs a fixed 256-bit digest, typically displayed as 64 hexadecimal characters. Small input changes produce very different outputs."
       }
     },
     {
       "@type": "Question",
-      "name": "What is the difference between SHA-1, SHA-256, and SHA-512?",
+      "name": "Can I reverse a SHA-256 hash to get the original text?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "SHA-1 produces 160-bit (40 hex chars) hashes but has known collision attacks. SHA-256 produces 256-bit (64 hex chars) and is secure. SHA-512 produces 512-bit (128 hex chars) with higher security margin. Use SHA-256/SHA-512 for security."
+        "text": "No. SHA-256 is designed as a one-way function. You cannot decrypt a hash back to the original input. Matching a target hash requires guessing inputs and re-hashing them."
       }
     },
     {
       "@type": "Question",
-      "name": "Can I reverse a hash to get the original text?",
+      "name": "What are common use cases for SHA-256 hashes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. All hash functions (SHA-1, SHA-256, SHA-512) are one-way by design. You cannot decrypt or reverse a hash to recover the original input. The only way is brute-force guessing, which is computationally infeasible for complex inputs."
+        "text": "Typical uses include file integrity verification, digital signatures, SSL/TLS certificates, blockchain systems, Git object hashing, and HMAC authentication. For password storage, use Argon2, bcrypt, scrypt, or PBKDF2 instead of plain SHA."
       }
     },
     {
       "@type": "Question",
-      "name": "When should I use each hash algorithm?",
+      "name": "Is SHA-256 still considered secure?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "SHA-1: Legacy systems, Git commit hashing, non-security verification. SHA-256: Password hashing (with salt), digital signatures, SSL/TLS, blockchain. SHA-512: High-security requirements, systems needing longer hashes."
+        "text": "SHA-256 is currently considered secure for integrity and signature workflows, with no known practical collision or preimage attacks. For password hashing, use dedicated password hashing algorithms such as Argon2, bcrypt, scrypt, or PBKDF2."
       }
     }
   ]
@@ -70,68 +70,73 @@
 <p class="static-tool-discovery"><a href="/category/security--tokens.html">More in Security &amp; Tokens</a></p>
 
 <label for="input" class="sr-only">Input text</label>
-<textarea id="input" rows="8" style="width:90%" placeholder="Enter text to hash" aria-label="Input text"></textarea>
+<textarea id="input" rows="8" style="width:90%;font-family:monospace" placeholder="Enter text to hash" aria-label="Input text" spellcheck="false" autocapitalize="off" autocorrect="off"></textarea>
 
 <br><br>
 
-<div class="tool-actions" style="display:flex;gap:8px;flex-wrap:wrap">
-<button onclick="generate('SHA-1')" title="160-bit hash (40 hex chars)">SHA-1</button>
-<button onclick="generate('SHA-256')" title="256-bit hash (64 hex chars)">SHA-256</button>
-<button onclick="generate('SHA-512')" title="512-bit hash (128 hex chars)">SHA-512</button>
+<div class="tool-actions">
+<button type="button" onclick="generate('SHA-1')" title="160-bit hash (40 hex chars)">SHA-1</button>
+<button type="button" onclick="generate('SHA-256')" title="256-bit hash (64 hex chars)">SHA-256</button>
+<button type="button" onclick="generate('SHA-512')" title="512-bit hash (128 hex chars)">SHA-512</button>
 <button type="button" onclick="copyOutput()">Copy Result</button>
 </div>
 
-<h3>Result</h3>
+<h2>Result</h2>
 <label for="output" class="sr-only">Output text</label>
-<textarea id="output" rows="5" style="width:90%" aria-label="Output text"></textarea>
+<textarea id="output" rows="5" style="width:90%;font-family:monospace" aria-label="Output text" readonly spellcheck="false"></textarea>
 
 <p id="algorithm-info" style="font-size:13px;color:#666;margin:8px 0"></p>
-<p id="status" class="inline-status"></p>
+<p id="status" class="inline-status" role="status" aria-live="polite" aria-atomic="true"></p>
 
 <section class="tool-seo">
-<h3>About Hash Generator</h3>
+<h2>About Hash Generator</h2>
 <p>This hash generator computes cryptographic digests using SHA-1, SHA-256, and SHA-512 algorithms entirely in your browser using the Web Crypto API. No data is sent to any server.</p>
+<p><strong>Last reviewed:</strong> March 27, 2026.</p>
 
-<h4>Hash Algorithm Overview</h4>
+<h3>Hash Algorithm Overview</h3>
 <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:13px">
-  <tr style="background:#f5f5f5">
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Algorithm</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Hash Size</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Hex Length</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Security</th>
-    <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
-  </tr>
-  <tr>
-    <td style="border:1px solid #ddd;padding:8px"><code>SHA-1</code></td>
-    <td style="border:1px solid #ddd;padding:8px">160 bits</td>
-    <td style="border:1px solid #ddd;padding:8px">40 chars</td>
-    <td style="border:1px solid #ddd;padding:8px">Deprecated</td>
-    <td style="border:1px solid #ddd;padding:8px">Legacy systems</td>
-  </tr>
-  <tr>
-    <td style="border:1px solid #ddd;padding:8px"><code>SHA-256</code></td>
-    <td style="border:1px solid #ddd;padding:8px">256 bits</td>
-    <td style="border:1px solid #ddd;padding:8px">64 chars</td>
-    <td style="border:1px solid #ddd;padding:8px">Secure</td>
-    <td style="border:1px solid #ddd;padding:8px">Recommended</td>
-  </tr>
-  <tr>
-    <td style="border:1px solid #ddd;padding:8px"><code>SHA-512</code></td>
-    <td style="border:1px solid #ddd;padding:8px">512 bits</td>
-    <td style="border:1px solid #ddd;padding:8px">128 chars</td>
-    <td style="border:1px solid #ddd;padding:8px">Very Secure</td>
-    <td style="border:1px solid #ddd;padding:8px">High security</td>
-  </tr>
+  <thead>
+    <tr style="background:#f5f5f5">
+      <th style="border:1px solid #ddd;padding:8px;text-align:left">Algorithm</th>
+      <th style="border:1px solid #ddd;padding:8px;text-align:left">Hash Size</th>
+      <th style="border:1px solid #ddd;padding:8px;text-align:left">Hex Length</th>
+      <th style="border:1px solid #ddd;padding:8px;text-align:left">Security</th>
+      <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #ddd;padding:8px"><code>SHA-1</code></td>
+      <td style="border:1px solid #ddd;padding:8px">160 bits</td>
+      <td style="border:1px solid #ddd;padding:8px">40 chars</td>
+      <td style="border:1px solid #ddd;padding:8px">Deprecated</td>
+      <td style="border:1px solid #ddd;padding:8px">Legacy systems</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd;padding:8px"><code>SHA-256</code></td>
+      <td style="border:1px solid #ddd;padding:8px">256 bits</td>
+      <td style="border:1px solid #ddd;padding:8px">64 chars</td>
+      <td style="border:1px solid #ddd;padding:8px">Secure</td>
+      <td style="border:1px solid #ddd;padding:8px">Recommended</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd;padding:8px"><code>SHA-512</code></td>
+      <td style="border:1px solid #ddd;padding:8px">512 bits</td>
+      <td style="border:1px solid #ddd;padding:8px">128 chars</td>
+      <td style="border:1px solid #ddd;padding:8px">Secure</td>
+      <td style="border:1px solid #ddd;padding:8px">High security margins</td>
+    </tr>
+  </tbody>
 </table>
 
-<h4>Hash Examples (Input: "Hello, World!")</h4>
+<h3>Hash Examples (Input: "Hello, World!")</h3>
 <pre style="background:#1e1e1e;color:#eee;padding:12px;border-radius:4px;font-size:12px;overflow:auto">
 SHA-1:   0a0a9f2a6772942557ab5355d76af442f8f65e01
 SHA-256: dffd6021bb2bd5b0af676290809ec3a53191dd81c7f70a4b28688a362182986f
 SHA-512: 374d794a95cdcfd8b35993185fef9ba368f160d8daf432d08ba9f1ed1e5abe6cc69291e0fa2fe0006a52570ef18c19def4e617c33ce52ef0a6e5fbe318cb0387
 </pre>
 
-<h4>Key Properties of Cryptographic Hashes</h4>
+<h3>Key Properties of Cryptographic Hashes</h3>
 <ul>
   <li><strong>Deterministic:</strong> Same input always produces the same hash</li>
   <li><strong>One-way:</strong> Cannot reverse the hash to recover the original input</li>
@@ -140,10 +145,10 @@ SHA-512: 374d794a95cdcfd8b35993185fef9ba368f160d8daf432d08ba9f1ed1e5abe6cc69291e
   <li><strong>Collision resistant:</strong> Extremely difficult to find two inputs with the same hash</li>
 </ul>
 
-<h4>Common Use Cases</h4>
+<h3>Common Use Cases</h3>
 <ul>
-  <li><strong>File Integrity:</strong> Verify downloaded files match expected checksums (MD5, SHA-256)</li>
-  <li><strong>Password Storage:</strong> Hash passwords with salt before database storage (SHA-256, SHA-512)</li>
+  <li><strong>File Integrity:</strong> Verify downloaded files match expected SHA checksums</li>
+  <li><strong>HMAC Authentication:</strong> Build message authentication codes with SHA-256/SHA-512</li>
   <li><strong>Digital Signatures:</strong> Sign documents and verify authenticity (SHA-256, SHA-512)</li>
   <li><strong>Blockchain:</strong> Bitcoin uses SHA-256 for mining and transactions</li>
   <li><strong>SSL/TLS:</strong> Secure web certificates use SHA-256 for signing</li>
@@ -151,25 +156,31 @@ SHA-512: 374d794a95cdcfd8b35993185fef9ba368f160d8daf432d08ba9f1ed1e5abe6cc69291e
   <li><strong>Data Deduplication:</strong> Identify duplicate files by comparing hashes</li>
 </ul>
 
-<h4>Security Recommendations</h4>
+<h3>Security Recommendations</h3>
 <ul>
-  <li><strong>For passwords:</strong> Use Argon2, bcrypt, or scrypt with salt (not plain SHA)</li>
+  <li><strong>For passwords:</strong> Use Argon2, bcrypt, scrypt, or PBKDF2 with unique salts (not plain SHA)</li>
   <li><strong>For new projects:</strong> Use SHA-256 or SHA-512</li>
   <li><strong>Avoid MD5/SHA-1:</strong> For any security-sensitive applications</li>
   <li><strong>Verify sources:</strong> Always get reference hashes from trusted sources</li>
 </ul>
+
+<h3>Standards and References</h3>
+<ul>
+  <li><a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final">NIST FIPS 180-4: Secure Hash Standard (SHS)</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest">MDN Web Docs: SubtleCrypto.digest()</a></li>
+</ul>
 </section>
 
 <section class="how-to-use">
-<h3>How to Generate SHA-256 Hashes</h3>
+<h2>How to Generate SHA-256 Hashes</h2>
 <ol class="how-to-steps">
   <li><strong>Enter your text:</strong> Type or paste the text you want to hash into the input box.</li>
-  <li><strong>Click SHA256:</strong> The tool will compute the SHA-256 hash using your browser's crypto API.</li>
+  <li><strong>Click SHA-256:</strong> The tool computes the digest using your browser's Web Crypto API.</li>
   <li><strong>Review the hash:</strong> The 64-character hexadecimal hash appears in the output box.</li>
   <li><strong>Copy the result:</strong> Click "Copy Result" to copy the hash to your clipboard.</li>
 </ol>
 
-<h4 style="margin-top:20px">Try These Examples</h4>
+<h3 style="margin-top:20px">Try These Examples</h3>
 <p>Test the tool with known inputs to verify correctness:</p>
 <ul>
   <li>Empty string → <code>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code></li>
@@ -178,7 +189,7 @@ SHA-512: 374d794a95cdcfd8b35993185fef9ba368f160d8daf432d08ba9f1ed1e5abe6cc69291e
 </ul>
 </section>
 <section class="faq">
-<h3>Frequently Asked Questions</h3>
+<h2>Frequently Asked Questions</h2>
 <dl class="faq-list">
 
   <dt>What is SHA-256 and how does it work?</dt>
@@ -188,10 +199,10 @@ SHA-512: 374d794a95cdcfd8b35993185fef9ba368f160d8daf432d08ba9f1ed1e5abe6cc69291e
   <dd>No. SHA-256 is a one-way function by design. You cannot decrypt or reverse a hash to recover the original input. The only way to find the original text is through brute-force guessing (trying many inputs until one produces the same hash), which is computationally infeasible for complex inputs.</dd>
 
   <dt>What are common use cases for SHA-256 hashes?</dt>
-  <dd>Common SHA-256 use cases include: password storage (with salt), file integrity verification, digital signatures, blockchain/cryptocurrency mining, SSL/TLS certificates, Git commit hashing, and HMAC authentication. It's one of the most widely used cryptographic primitives.</dd>
+  <dd>Common SHA-256 use cases include file integrity verification, digital signatures, blockchain/cryptocurrency systems, SSL/TLS certificates, Git object hashing, and HMAC authentication. For password storage, use dedicated password hashing functions such as Argon2, bcrypt, scrypt, or PBKDF2.</dd>
 
-  <dt>Is SHA-256 still secure in 2026?</dt>
-  <dd>Yes. As of 2026, SHA-256 remains cryptographically secure with no known practical attacks. It provides 128-bit collision resistance and 256-bit preimage resistance. For password hashing specifically, use dedicated functions like Argon2, bcrypt, or scrypt with proper salting.</dd>
+  <dt>Is SHA-256 still considered secure?</dt>
+  <dd>Yes. SHA-256 is currently considered secure for integrity and signature workflows, with no known practical collision or preimage attacks. This page was last reviewed on March 27, 2026. For password hashing specifically, use dedicated functions like Argon2, bcrypt, scrypt, or PBKDF2 with proper salting.</dd>
 
   <dt>What is the difference between SHA-256 and other hash algorithms?</dt>
   <dd>SHA-256 produces a 256-bit hash and is part of the SHA-2 family. MD5 (128-bit) and SHA-1 (160-bit) are considered broken due to collision attacks. SHA-3 uses a different internal structure (Keccak) but provides similar security. SHA-512 produces a longer 512-bit hash for higher security requirements.</dd>
@@ -204,39 +215,109 @@ SHA-512: 374d794a95cdcfd8b35993185fef9ba368f160d8daf432d08ba9f1ed1e5abe6cc69291e
 
 <script>
 
+var inputEl=document.getElementById("input");
+var outputEl=document.getElementById("output");
+var statusEl=document.getElementById("status");
+var algorithmInfoEl=document.getElementById("algorithm-info");
+
+function setStatus(message,type){
+statusEl.innerText=message;
+if(type==="success"){
+statusEl.style.color="#16a34a";
+return;
+}
+if(type==="error"){
+statusEl.style.color="#b91c1c";
+return;
+}
+statusEl.style.color="#6b7280";
+}
+
+function setAlgorithmInfo(algorithm,hex){
+if(!algorithm||!hex){
+algorithmInfoEl.innerText="Output is lowercase hexadecimal (SHA-1: 40 chars, SHA-256: 64 chars, SHA-512: 128 chars).";
+return;
+}
+var bitSize=parseInt(algorithm.split("-")[1],10);
+algorithmInfoEl.innerText=algorithm+" generated ("+bitSize+" bits, "+hex.length+" hex characters, UTF-8 input).";
+}
+
+function isDigestSupported(){
+return typeof window.crypto!=="undefined"&&window.crypto.subtle&&typeof window.crypto.subtle.digest==="function";
+}
+
+function fallbackCopyText(text){
+var temp=document.createElement("textarea");
+temp.value=text;
+temp.setAttribute("readonly","");
+temp.style.position="fixed";
+temp.style.opacity="0";
+document.body.appendChild(temp);
+temp.select();
+var ok=false;
+try{
+ok=document.execCommand("copy");
+}catch(e){
+ok=false;
+}
+document.body.removeChild(temp);
+return ok;
+}
+
 async function generate(type){
 
-let text=document.getElementById("input").value
+if(!isDigestSupported()){
+setStatus("Hashing is not supported in this browser.", "error");
+return;
+}
 
-let encoder=new TextEncoder()
-let data=encoder.encode(text)
+var text=inputEl.value;
+var encoder=new TextEncoder();
+var data=encoder.encode(text);
 
-let hash=await crypto.subtle.digest(type,data)
+try{
+var hash=await crypto.subtle.digest(type,data);
 
-let hex=[...new Uint8Array(hash)]
+var hex=[...new Uint8Array(hash)]
 .map(b=>b.toString(16).padStart(2,"0"))
-.join("")
+.join("");
 
-document.getElementById("output").value=hex
-document.getElementById("status").innerText="Hash generated."
-document.getElementById("status").style.color="#16a34a"
-
+outputEl.value=hex;
+setAlgorithmInfo(type,hex);
+setStatus("Hash generated.", "success");
+}catch(e){
+setStatus("Hash generation failed. Please check browser compatibility.", "error");
+}
 }
 
 function copyOutput(){
-let value=document.getElementById("output").value
+var value=outputEl.value;
 if(!value){
-document.getElementById("status").innerText="Nothing to copy."
-document.getElementById("status").style.color="#b91c1c"
-return
+setStatus("Nothing to copy.", "error");
+return;
 }
+if(navigator.clipboard&&window.isSecureContext){
 navigator.clipboard.writeText(value).then(function(){
-document.getElementById("status").innerText="Hash copied."
-document.getElementById("status").style.color="#16a34a"
+setStatus("Hash copied.", "success");
 }).catch(function(){
-document.getElementById("status").innerText="Copy failed."
-document.getElementById("status").style.color="#b91c1c"
-})
+if(fallbackCopyText(value)){
+setStatus("Hash copied.", "success");
+}else{
+setStatus("Copy failed.", "error");
+}
+});
+return;
+}
+if(fallbackCopyText(value)){
+setStatus("Hash copied.", "success");
+}else{
+setStatus("Copy failed.", "error");
+}
+}
+
+setAlgorithmInfo();
+if(!isDigestSupported()){
+setStatus("Hashing is not supported in this browser.", "error");
 }
 
 </script>
