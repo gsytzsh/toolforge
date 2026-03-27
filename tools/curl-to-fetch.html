@@ -31,7 +31,7 @@
       "name": "What is the fetch API syntax?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Fetch API syntax is: fetch(url, options). Options include: method (GET, POST, etc.), headers (object), body (string for POST/PUT), mode, credentials. Example: fetch('https://api.example.com/users', { method: 'GET', headers: { 'Accept': 'application/json' } }).then(res => res.json()).then(data => console.log(data))."
+        "text": "The basic format is fetch(url, options). In options, you usually set method, headers, and body. For example, a JSON POST request sets method: 'POST', a Content-Type header, and a string body."
       }
     },
     {
@@ -39,7 +39,7 @@
       "name": "How do I convert cURL to fetch?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Paste the cURL command into the converter. The tool extracts: URL (from curl 'url'), method (-X POST), headers (-H 'Content-Type: application/json'), and body (-d '{...}'). It generates equivalent JavaScript fetch code with proper method, headers object, and body string."
+        "text": "Paste your cURL command and click Convert. The tool maps common flags like URL, -X method, -H headers, and -d body into a fetch call. Then you can copy and adjust the generated code in your app."
       }
     },
     {
@@ -47,7 +47,7 @@
       "name": "What is the difference between cURL and fetch?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "cURL is a command-line tool for making HTTP requests from terminals. Fetch is a browser/Node.js API for making HTTP requests from JavaScript. cURL is used in scripts and terminals; fetch is used in web applications. Both support similar options (methods, headers, body) but with different syntax."
+        "text": "cURL runs in a terminal, while fetch runs in JavaScript code (browser or Node.js). They do similar HTTP tasks, but the syntax and runtime context are different."
       }
     },
     {
@@ -55,7 +55,7 @@
       "name": "How do I handle async/await with fetch?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Use async/await for cleaner code: const response = await fetch(url, options); const data = await response.json();. Wrap in try/catch for error handling. Example: async function getData() { try { const res = await fetch(url); const data = await res.json(); } catch(e) { console.error(e); } }."
+        "text": "Use await fetch(...) inside an async function, then await response.json(). Wrap the request in try/catch so network and parsing errors are handled cleanly."
       }
     }
   ]
@@ -151,16 +151,16 @@ const data = await response.json();
 <h3>Frequently Asked Questions</h3>
 <dl class="faq-list">
   <dt>What is the fetch API syntax?</dt>
-  <dd>Fetch API syntax is: fetch(url, options). Options include: method (GET, POST, etc.), headers (object), body (string for POST/PUT), mode, credentials. Example: fetch('https://api.example.com/users', { method: 'GET', headers: { 'Accept': 'application/json' } }).then(res => res.json()).then(data => console.log(data)).</dd>
+  <dd>The basic format is <code>fetch(url, options)</code>. In <code>options</code>, you usually set <code>method</code>, <code>headers</code>, and <code>body</code>. For example, a JSON POST request sets <code>method: "POST"</code>, a Content-Type header, and a string body.</dd>
 
   <dt>How do I convert cURL to fetch?</dt>
-  <dd>Paste the cURL command into the converter. The tool extracts: URL (from curl 'url'), method (-X POST), headers (-H 'Content-Type: application/json'), and body (-d '{...}'). It generates equivalent JavaScript fetch code with proper method, headers object, and body string.</dd>
+  <dd>Paste your cURL command and click <strong>Convert</strong>. The tool maps common flags like URL, <code>-X</code> method, <code>-H</code> headers, and <code>-d</code> body into a fetch call. Then you can copy and adjust the generated code in your app.</dd>
 
   <dt>What is the difference between cURL and fetch?</dt>
-  <dd>cURL is a command-line tool for making HTTP requests from terminals. Fetch is a browser/Node.js API for making HTTP requests from JavaScript. cURL is used in scripts and terminals; fetch is used in web applications. Both support similar options (methods, headers, body) but with different syntax.</dd>
+  <dd>cURL runs in a terminal, while fetch runs in JavaScript code (browser or Node.js). They do similar HTTP tasks, but the syntax and runtime context are different.</dd>
 
   <dt>How do I handle async/await with fetch?</dt>
-  <dd>Use async/await for cleaner code: const response = await fetch(url, options); const data = await response.json();. Wrap in try/catch for error handling. Example: async function getData() { try { const res = await fetch(url); const data = await res.json(); } catch(e) { console.error(e); } }.</dd>
+  <dd>Use <code>await fetch(...)</code> inside an async function, then <code>await response.json()</code>. Wrap the request in <code>try/catch</code> so network and parsing errors are handled cleanly.</dd>
 </dl>
 </section>
 </main>
