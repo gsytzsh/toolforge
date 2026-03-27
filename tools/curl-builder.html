@@ -66,7 +66,7 @@
 <p class="static-tool-discovery"><a href="/category/json--api.html">More in JSON &amp; API</a></p>
 <label for="method" class="sr-only">HTTP method</label>
 <select id="method" aria-label="HTTP method">
-<option>GET</option>
+<option selected>GET</option>
 <option>POST</option>
 <option>PUT</option>
 <option>PATCH</option>
@@ -74,13 +74,14 @@
 </select>
 <br><br>
 <label for="url" class="sr-only">Request URL</label>
-<input id="url" style="width:90%" aria-label="Request URL" placeholder="https://api.example.com/users">
+<input id="url" style="width:90%" aria-label="Request URL" value="https://api.example.com/users" placeholder="https://api.example.com/users">
 <br><br>
 <label for="headers" class="sr-only">Request headers</label>
-<textarea id="headers" rows="6" class="pdf-editor pdf-editor-mono" aria-label="Request headers" placeholder="Content-Type: application/json&#10;Authorization: Bearer token"></textarea>
+<textarea id="headers" rows="6" class="pdf-editor pdf-editor-mono" aria-label="Request headers" placeholder="Content-Type: application/json&#10;Authorization: Bearer token">Content-Type: application/json
+Authorization: Bearer token</textarea>
 <br><br>
 <label for="body" class="sr-only">Request body</label>
-<textarea id="body" rows="8" class="pdf-editor pdf-editor-mono" aria-label="Request body" placeholder='{"name":"ToolForge"}'></textarea>
+<textarea id="body" rows="8" class="pdf-editor pdf-editor-mono" aria-label="Request body">{"name":"toolforge"}</textarea>
 <div class="tool-actions">
 <button type="button" onclick="buildCurl()">Build cURL</button>
 <button type="button" onclick="copyCurl()">Copy Command</button>
@@ -156,24 +157,34 @@ curl [URL] [OPTIONS]
 function buildCurl(){
 let method=document.getElementById("method").value
 let url=document.getElementById("url").value.trim()
+if(!method){
+document.getElementById("status").innerText="Please select an HTTP method."
+document.getElementById("status").style.color="#b91c1c"
+document.getElementById("output").value=""
+return
+}
 if(!url){
 document.getElementById("status").innerText="Request URL is required."
 document.getElementById("status").style.color="#b91c1c"
 document.getElementById("output").value=""
 return
 }
+let body=document.getElementById("body").value.trim()
+let effectiveMethod=method
+if(body&&method==="GET"){
+effectiveMethod="POST"
+}
 let parts=['curl "'+url+'"']
-if(method!=="GET") parts.push('-X '+method)
+if(effectiveMethod!=="GET") parts.push('-X '+effectiveMethod)
 document.getElementById("headers").value.split(/\r?\n/).forEach(function(line){
 let trimmed=line.trim()
 if(trimmed) parts.push('-H "'+trimmed.replace(/"/g,'\\"')+'"')
 })
-let body=document.getElementById("body").value.trim()
-if(body&&method!=="GET"){
-parts.push("--data '"+body.replace(/'/g,"'\\''")+"'")
+if(body){
+parts.push("-d '"+body.replace(/'/g,"'\\''")+"'")
 }
 document.getElementById("output").value=parts.join(" \\\n  ")
-document.getElementById("status").innerText="cURL command generated."
+document.getElementById("status").innerText=body&&method==="GET"?"Body detected. Generated POST cURL with -d.":"cURL command generated."
 document.getElementById("status").style.color="#16a34a"
 }
 function copyCurl(){
