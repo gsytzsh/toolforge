@@ -21,6 +21,46 @@
 
 <link rel="stylesheet" href="/css/style.css">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the fetch API syntax?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fetch API syntax is: fetch(url, options). Options include: method (GET, POST, etc.), headers (object), body (string for POST/PUT), mode, credentials. Example: fetch('https://api.example.com/users', { method: 'GET', headers: { 'Accept': 'application/json' } }).then(res => res.json()).then(data => console.log(data))."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert cURL to fetch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Paste the cURL command into the converter. The tool extracts: URL (from curl 'url'), method (-X POST), headers (-H 'Content-Type: application/json'), and body (-d '{...}'). It generates equivalent JavaScript fetch code with proper method, headers object, and body string."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between cURL and fetch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "cURL is a command-line tool for making HTTP requests from terminals. Fetch is a browser/Node.js API for making HTTP requests from JavaScript. cURL is used in scripts and terminals; fetch is used in web applications. Both support similar options (methods, headers, body) but with different syntax."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I handle async/await with fetch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use async/await for cleaner code: const response = await fetch(url, options); const data = await response.json();. Wrap in try/catch for error handling. Example: async function getData() { try { const res = await fetch(url); const data = await res.json(); } catch(e) { console.error(e); } }."
+      }
+    }
+  ]
+}
+</script>
 
 </head>
 

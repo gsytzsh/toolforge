@@ -90,6 +90,12 @@
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <p class="static-tool-discovery"><a href="/category/developer-tools.html">More in Developer Tools</a></p>
 
+<section class="tool-seo">
+<h3>About Operator Precedence Reference</h3>
+<p>This operator precedence reference provides side-by-side tables for JavaScript, Python, and C so you can quickly verify expression evaluation order and associativity.</p>
+<p>Use it to debug ambiguous expressions, avoid precedence bugs, and improve readability with explicit parentheses where needed.</p>
+</section>
+
 <div class="example-box">
 <strong>Quick Example:</strong> In <code>2 + 3 * 4</code>, multiplication happens first: <code>2 + (3 * 4) = 14</code>, not <code>(2 + 3) * 4 = 20</code>.
 </div>
@@ -238,6 +244,29 @@ if (x > 0 &amp;&amp; x &lt; 10)  // Cannot chain in JS
 </tbody>
 </table>
 </div>
+
+<section class="faq">
+<h3>Frequently Asked Questions</h3>
+<dl class="faq-list">
+  <dt>What is operator precedence?</dt>
+  <dd>Operator precedence determines the order in which operations are evaluated in an expression. Higher precedence operators are evaluated before lower precedence ones. For example, in 2 + 3 * 4, multiplication has higher precedence, so it's 2 + (3 * 4) = 14, not (2 + 3) * 4 = 20.</dd>
+
+  <dt>What is associativity in operators?</dt>
+  <dd>Associativity determines evaluation order when operators have the same precedence. Left-to-right (L→R) means evaluate from left: a - b - c = (a - b) - c. Right-to-left (R→L) means evaluate from right: a = b = c means a = (b = c). Most operators are left-associative; assignment operators are typically right-associative.</dd>
+
+  <dt>Why does 2 + 3 * 4 equal 14 and not 20?</dt>
+  <dd>Multiplication (*) has higher precedence than addition (+). So 2 + 3 * 4 is evaluated as 2 + (3 * 4) = 2 + 12 = 14. To get 20, you'd need parentheses: (2 + 3) * 4 = 5 * 4 = 20. This follows standard mathematical order of operations (PEMDAS/BODMAS).</dd>
+
+  <dt>What is the precedence of logical operators?</dt>
+  <dd>In most languages: NOT (!) has highest precedence, then AND (&&), then OR (||). So !a && b || c means ((!a) && b) || c. This ensures logical NOT binds tightest, AND groups conditions, and OR provides alternatives.</dd>
+
+  <dt>How does Python's precedence differ from JavaScript?</dt>
+  <dd>Key differences: Python uses ** for exponentiation (higher than unary), Python has 'not' instead of !, Python chains comparisons (a &lt; b &lt; c means a &lt; b AND b &lt; c), Python uses 'and'/'or' keywords. JavaScript has >>> (unsigned right shift) and === (strict equality) which Python lacks.</dd>
+
+  <dt>When should I use parentheses?</dt>
+  <dd>Use parentheses when: precedence is unclear, you want to override default precedence, code readability improves, or mixing operators from same precedence level. Even when not strictly necessary, parentheses can make intent clearer: (a && b) || (c && d) is clearer than a && b || c && d.</dd>
+</dl>
+</section>
 </main>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>
