@@ -69,6 +69,14 @@
         "@type": "Answer",
         "text": "For most adults, BMI 18.5-24.9 is associated with lowest health risks. However, optimal BMI varies by individual factors including age, muscle mass, bone structure, and overall health status. Some research suggests BMI 20-25 may be optimal for longevity in most populations."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "How is BMI interpreted for children and teens?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For ages 2 to 19, BMI is interpreted using BMI-for-age percentiles and requires both age and sex. Categories are: Underweight (<5th percentile), Healthy weight (5th to <85th), Overweight (85th to <95th), and Obesity (>=95th). Severe obesity is often defined as >=120% of the 95th percentile or BMI >=35."
+      }
     }
   ]
 }
@@ -77,9 +85,28 @@
 <body>
 <main class="container">
 <h1>BMI Calculator</h1>
-<p class="subtitle">Calculate Body Mass Index from height and weight with health category classification.</p>
+<p class="subtitle">Calculate Body Mass Index (BMI) for adults or children/teens from height and weight.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <p class="static-tool-discovery"><a href="/category/calculators.html">More in Calculators</a></p>
+<p class="pdf-helper">For adults (20+), BMI categories use the same thresholds regardless of sex. For children and teens, age- and sex-specific BMI percentiles are required.</p>
+<h3>Mode</h3>
+<label for="bmi-mode" class="sr-only">BMI mode</label>
+<select id="bmi-mode" aria-label="BMI mode" onchange="onModeChange()">
+<option value="adult" selected>Adult (20+)</option>
+<option value="child">Child / Teen (2.0-19.9)</option>
+</select>
+<div id="child-fields" style="display:none;margin-top:12px">
+<h3>Age (years)</h3>
+<label for="age" class="sr-only">Age</label>
+<input id="age" type="number" min="2" max="19.9" step="0.1" placeholder="12.0" style="width:120px" aria-label="Age">
+<h3>Sex</h3>
+<label for="sex" class="sr-only">Sex</label>
+<select id="sex" aria-label="Sex" style="width:140px">
+<option value="">Select sex</option>
+<option value="male">Male</option>
+<option value="female">Female</option>
+</select>
+</div>
 <h3>Height (cm)</h3>
 <label for="height" class="sr-only">Height</label>
 <input id="height" type="number" placeholder="170" style="width:120px" aria-label="Height">
@@ -90,10 +117,11 @@
 <button onclick="calc()">Calculate BMI</button>
 <h3>Result</h3>
 <p>BMI: <span id="bmi"></span></p>
+<p id="pct-row" style="display:none">Percentile: <span id="pct"></span></p>
 <p>Category: <span id="cat"></span></p>
 <section class="tool-seo">
 <h3>About BMI Calculator</h3>
-<p>This BMI calculator computes Body Mass Index using the standard WHO formula and classifies results into established health categories. BMI serves as a population-level screening tool for weight-related health assessment.</p>
+<p>This BMI calculator computes Body Mass Index and classifies results for adults and for children/teens. BMI serves as a population-level screening tool for weight-related health assessment.</p>
 
 <h4>BMI Formula and Calculation</h4>
 <p><strong>Metric formula:</strong></p>
@@ -154,6 +182,41 @@ Note: 703 is the conversion factor from imperial to metric units
     <td style="border:1px solid #ddd;padding:8px">Obese Class III</td>
     <td style="border:1px solid #ddd;padding:8px">≥ 40.0</td>
     <td style="border:1px solid #ddd;padding:8px">Extremely high (morbid obesity)</td>
+  </tr>
+</table>
+
+<h4>Child &amp; Teen BMI-for-Age Categories (2.0-19.9 years)</h4>
+<p>Children and teens must be evaluated by BMI-for-age percentile, which depends on both age and sex.</p>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <tr style="background:#f5f5f5">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Category</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Percentile Range</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Underweight</td>
+    <td style="border:1px solid #ddd;padding:8px">&lt; 5th percentile</td>
+    <td style="border:1px solid #ddd;padding:8px">Below expected range for age/sex</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Healthy weight</td>
+    <td style="border:1px solid #ddd;padding:8px">5th to &lt; 85th percentile</td>
+    <td style="border:1px solid #ddd;padding:8px">Reference healthy range</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Overweight</td>
+    <td style="border:1px solid #ddd;padding:8px">85th to &lt; 95th percentile</td>
+    <td style="border:1px solid #ddd;padding:8px">Elevated risk; monitor and assess lifestyle</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Obesity</td>
+    <td style="border:1px solid #ddd;padding:8px">≥ 95th percentile</td>
+    <td style="border:1px solid #ddd;padding:8px">High risk category</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ddd;padding:8px">Severe obesity</td>
+    <td style="border:1px solid #ddd;padding:8px">≥ 120% of 95th percentile or BMI ≥ 35</td>
+    <td style="border:1px solid #ddd;padding:8px">Very high risk category</td>
   </tr>
 </table>
 
@@ -298,10 +361,11 @@ Weight Conversions:
 <section class="how-to-use">
 <h3>How to Calculate Your BMI</h3>
 <ol class="how-to-steps">
-  <li><strong>Enter height:</strong> Input your height in centimeters (e.g., 170 for 170cm or 5'7").</li>
-  <li><strong>Enter weight:</strong> Input your weight in kilograms (e.g., 70 for 70kg or 154 lbs).</li>
-  <li><strong>Calculate:</strong> Click "Calculate BMI" to compute your Body Mass Index.</li>
-  <li><strong>Review results:</strong> Your BMI value and health category appear instantly.</li>
+  <li><strong>Select mode:</strong> Choose Adult (20+) or Child / Teen (2.0-19.9).</li>
+  <li><strong>Enter height and weight:</strong> Input height in centimeters and weight in kilograms.</li>
+  <li><strong>If Child / Teen mode:</strong> Enter age and select sex for percentile-based classification.</li>
+  <li><strong>Calculate:</strong> Click "Calculate BMI" to compute BMI and category.</li>
+  <li><strong>Review results:</strong> Adult mode shows BMI category; Child / Teen mode also shows percentile.</li>
 </ol>
 
 <h4 style="margin-top:20px">Important Notes</h4>
@@ -333,22 +397,119 @@ Weight Conversions:
 
   <dt>What is a healthy BMI range?</dt>
   <dd>For most adults, BMI 18.5-24.9 is associated with lowest health risks. However, optimal BMI varies by individual factors including age, muscle mass, bone structure, and overall health status. Some research suggests BMI 20-25 may be optimal for longevity in most populations.</dd>
+
+  <dt>How is BMI interpreted for children and teens?</dt>
+  <dd>For ages 2 to 19, BMI must be interpreted using BMI-for-age percentiles and requires both age and sex. Categories are: Underweight (&lt;5th), Healthy weight (5th to &lt;85th), Overweight (85th to &lt;95th), and Obesity (≥95th percentile). Severe obesity is often defined as ≥120% of the 95th percentile or BMI ≥35.</dd>
 </dl>
 </section>
 </main>
+<script src="/js/bmi-child-lms.js"></script>
 <script>
+function onModeChange(){
+var mode=document.getElementById("bmi-mode").value
+document.getElementById("child-fields").style.display=mode==="child"?"block":"none"
+document.getElementById("pct-row").style.display=mode==="child"?"block":"none"
+if(mode!=="child")document.getElementById("pct").innerText=""
+}
+
+function interpolateLms(ageMonths,sexCode){
+var rows=window.BMI_CHILD_LMS&&window.BMI_CHILD_LMS[sexCode]
+if(!rows||!rows.length)return null
+if(ageMonths<rows[0][0]||ageMonths>rows[rows.length-1][0])return null
+for(var i=0;i<rows.length;i++){
+if(rows[i][0]===ageMonths)return {L:rows[i][1],M:rows[i][2],S:rows[i][3]}
+if(rows[i][0]>ageMonths){
+var lower=rows[i-1]
+var upper=rows[i]
+var t=(ageMonths-lower[0])/(upper[0]-lower[0])
+return {
+L:lower[1]+(upper[1]-lower[1])*t,
+M:lower[2]+(upper[2]-lower[2])*t,
+S:lower[3]+(upper[3]-lower[3])*t
+}
+}
+}
+return {L:rows[rows.length-1][1],M:rows[rows.length-1][2],S:rows[rows.length-1][3]}
+}
+
+function normalCdf(z){
+var abs=Math.abs(z)
+var t=1/(1+0.2316419*abs)
+var d=0.3989422804014327*Math.exp(-(abs*abs)/2)
+var p=1-d*t*(0.31938153+t*(-0.356563782+t*(1.781477937+t*(-1.821255978+t*1.330274429))))
+return z>=0?p:1-p
+}
+
+function ordinal(n){
+var v=Math.floor(n)%100
+if(v>=11&&v<=13)return "th"
+switch(Math.floor(n)%10){
+case 1:return "st"
+case 2:return "nd"
+case 3:return "rd"
+default:return "th"
+}
+}
+
+function formatPercentile(p){
+if(p<0.1)return "<0.1st percentile"
+if(p>99.9)return ">99.9th percentile"
+var rounded=Math.round(p*10)/10
+return rounded.toFixed(1)+ordinal(rounded)+" percentile"
+}
+
 function calc(){
+var mode=document.getElementById("bmi-mode").value
 var h=parseFloat(document.getElementById("height").value)/100
 var w=parseFloat(document.getElementById("weight").value)
-if(!h||!w||h<=0||w<=0){document.getElementById("bmi").innerText="";document.getElementById("cat").innerText="Enter valid height and weight.";return}
+if(!h||!w||h<=0||w<=0){
+document.getElementById("bmi").innerText=""
+document.getElementById("pct").innerText=""
+document.getElementById("cat").innerText="Enter valid height and weight."
+return
+}
 var bmi=w/(h*h)
 document.getElementById("bmi").innerText=bmi.toFixed(2)
+
+if(mode==="child"){
+var age=parseFloat(document.getElementById("age").value)
+var sex=document.getElementById("sex").value
+if(!age||age<2||age>=20||!sex){
+document.getElementById("pct").innerText=""
+document.getElementById("cat").innerText="For Child/Teen mode, enter age (2.0-19.9) and sex."
+return
+}
+var ageMonths=age*12
+var sexCode=sex==="male"?1:2
+var lms=interpolateLms(ageMonths,sexCode)
+if(!lms){
+document.getElementById("pct").innerText=""
+document.getElementById("cat").innerText="No reference data for the selected age/sex."
+return
+}
+var z=lms.L===0?Math.log(bmi/lms.M)/lms.S:(Math.pow(bmi/lms.M,lms.L)-1)/(lms.L*lms.S)
+var percentile=normalCdf(z)*100
+document.getElementById("pct").innerText=formatPercentile(percentile)
+var z95=1.6448536269514722
+var bmi95=lms.L===0?lms.M*Math.exp(lms.S*z95):lms.M*Math.pow(1+lms.L*lms.S*z95,1/lms.L)
+var severe=bmi>=35||bmi>=1.2*bmi95
+if(percentile<5)document.getElementById("cat").innerText="Underweight (<5th percentile)"
+else if(percentile<85)document.getElementById("cat").innerText="Healthy weight (5th to <85th percentile)"
+else if(percentile<95)document.getElementById("cat").innerText="Overweight (85th to <95th percentile)"
+else if(severe)document.getElementById("cat").innerText="Severe obesity (>=120% of 95th percentile or BMI >=35)"
+else document.getElementById("cat").innerText="Obesity (>=95th percentile)"
+return
+}
+
 var cat="Underweight"
-if(bmi>=30)cat="Obese"
+if(bmi>=40)cat="Obese Class III"
+else if(bmi>=35)cat="Obese Class II"
+else if(bmi>=30)cat="Obese Class I"
 else if(bmi>=25)cat="Overweight"
-else if(bmi>=18.5)cat="Normal"
+else if(bmi>=18.5)cat="Normal weight"
 document.getElementById("cat").innerText=cat
 }
+onModeChange()
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>
