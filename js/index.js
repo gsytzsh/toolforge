@@ -2,6 +2,12 @@
   "use strict";
 
   let allTools = [];
+  const MAX_AUTOCOMPLETE_RESULTS = 8;
+  let autocompleteMatches = [];
+  let autocompleteActiveIndex = -1;
+  const searchInput = document.getElementById("search");
+  const searchSuggestionsEl = document.getElementById("search-suggestions");
+  const searchWrap = document.querySelector(".search-wrap");
 
   // Navigation uses the same 14 canonical categories as tools-list.json.
   const CATEGORY_ORDER = [
@@ -56,11 +62,28 @@
 
   function sortTools(tools) {
     return tools.slice().sort(function(a, b) {
-      const aPopular = typeof a.popularOrder === "number" ? a.popularOrder : Number.POSITIVE_INFINITY;
-      const bPopular = typeof b.popularOrder === "number" ? b.popularOrder : Number.POSITIVE_INFINITY;
+      const aPopular = getPopularOrder(a);
+      const bPopular = getPopularOrder(b);
       if (aPopular !== bPopular) return aPopular - bPopular;
       return a.name.localeCompare(b.name);
     });
+  }
+
+  function getPopularOrder(tool) {
+    return typeof tool.popularOrder === "number" ? tool.popularOrder : Number.POSITIVE_INFINITY;
+  }
+
+  function escapeRegExp(str) {
+    return String(str).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
   }
 
   function render(list) {
@@ -181,12 +204,167 @@
     });
   }
 
+  function hideAutocomplete() {
+    autocompleteMatches = [];
+    autocompleteActiveIndex = -1;
+    if (searchSuggestionsEl) {
+      searchSuggestionsEl.classList.remove("visible");
+      searchSuggestionsEl.innerHTML = "";
+    }
+    if (searchInput) {
+      searchInput.setAttribute("aria-expanded", "false");
+      searchInput.removeAttribute("aria-activedescendant");
+    }
+  }
+
+  function setActiveSuggestion(index) {
+    if (!searchSuggestionsEl || !searchInput || autocompleteMatches.length === 0) return;
+    let nextIndex = index;
+    if (nextIndex < 0) nextIndex = autocompleteMatches.length - 1;
+    if (nextIndex >= autocompleteMatches.length) nextIndex = 0;
+    autocompleteActiveIndex = nextIndex;
+    const suggestions = searchSuggestionsEl.querySelectorAll(".search-suggestion");
+    suggestions.forEach(function(item, idx) {
+      const active = idx === autocompleteActiveIndex;
+      item.classList.toggle("active", active);
+      item.setAttribute("aria-selected", active ? "true" : "false");
+    });
+    const activeOption = suggestions[autocompleteActiveIndex];
+    if (activeOption) {
+      searchInput.setAttribute("aria-activedescendant", activeOption.id);
+      activeOption.scrollIntoView({ block: "nearest" });
+    }
+  }
+
+  function selectSuggestion(index) {
+    const tool = autocompleteMatches[index];
+    if (!tool) return false;
+    window.location.href = "/tools/" + tool.file + ".html";
+    return true;
+  }
+
+  function getAutocompleteMatches(keyword) {
+    if (!keyword) return [];
+    const boundaryRegex = new RegExp("(^|[^a-z0-9])" + escapeRegExp(keyword), "i");
+    const ranked = allTools
+      .map(function(tool) {
+        const name = (tool.name || "").toLowerCase();
+        if (name.indexOf(keyword) === -1) return null;
+        let rank = 2;
+        if (name.indexOf(keyword) === 0) rank = 0;
+        else if (boundaryRegex.test(name)) rank = 1;
+        return { tool: tool, rank: rank };
+      })
+      .filter(Boolean);
+
+    ranked.sort(function(a, b) {
+      if (a.rank !== b.rank) return a.rank - b.rank;
+      const aPopular = getPopularOrder(a.tool);
+      const bPopular = getPopularOrder(b.tool);
+      if (aPopular !== bPopular) return aPopular - bPopular;
+      return a.tool.name.localeCompare(b.tool.name);
+    });
+
+    return ranked.slice(0, MAX_AUTOCOMPLETE_RESULTS).map(function(item) { return item.tool; });
+  }
+
+  function renderAutocomplete(keyword) {
+    if (!searchInput || !searchSuggestionsEl) return;
+    const normalizedKeyword = keyword.toLowerCase();
+    autocompleteMatches = getAutocompleteMatches(normalizedKeyword);
+    autocompleteActiveIndex = -1;
+
+    if (!normalizedKeyword || autocompleteMatches.length === 0) {
+      hideAutocomplete();
+      return;
+    }
+
+    searchSuggestionsEl.innerHTML = autocompleteMatches.map(function(tool, idx) {
+      return "<button type=\"button\" class=\"search-suggestion\" role=\"option\" id=\"search-suggestion-" + idx + "\" data-index=\"" + idx + "\" aria-selected=\"false\"><span class=\"search-suggestion-name\">" + escapeHtml(tool.name || "") + "</span><span class=\"search-suggestion-cat\">" + escapeHtml(tool.category || "Tool") + "</span></button>";
+    }).join("");
+    searchSuggestionsEl.classList.add("visible");
+    searchInput.setAttribute("aria-expanded", "true");
+    searchInput.removeAttribute("aria-activedescendant");
+  }
+
+  function initAutocomplete() {
+    if (!searchInput || !searchSuggestionsEl || !searchWrap) return;
+
+    searchInput.addEventListener("focus", function() {
+      const keyword = searchInput.value.toLowerCase().trim();
+      if (keyword) renderAutocomplete(keyword);
+    });
+
+    searchInput.addEventListener("keydown", function(e) {
+      const hasVisibleSuggestions = searchSuggestionsEl.classList.contains("visible") && autocompleteMatches.length > 0;
+
+      if (e.key === "ArrowDown") {
+        if (!hasVisibleSuggestions) {
+          renderAutocomplete(searchInput.value.toLowerCase().trim());
+          if (autocompleteMatches.length === 0) return;
+        }
+        e.preventDefault();
+        setActiveSuggestion(autocompleteActiveIndex + 1);
+        return;
+      }
+
+      if (e.key === "ArrowUp") {
+        if (!hasVisibleSuggestions) {
+          renderAutocomplete(searchInput.value.toLowerCase().trim());
+          if (autocompleteMatches.length === 0) return;
+        }
+        e.preventDefault();
+        setActiveSuggestion(autocompleteActiveIndex - 1);
+        return;
+      }
+
+      if (e.key === "Enter") {
+        if (!hasVisibleSuggestions || autocompleteMatches.length === 0) return;
+        e.preventDefault();
+        selectSuggestion(autocompleteActiveIndex >= 0 ? autocompleteActiveIndex : 0);
+        return;
+      }
+
+      if (e.key === "Escape" && hasVisibleSuggestions) {
+        e.preventDefault();
+        hideAutocomplete();
+      }
+    });
+
+    searchSuggestionsEl.addEventListener("mousedown", function(e) {
+      e.preventDefault();
+    });
+
+    searchSuggestionsEl.addEventListener("mouseover", function(e) {
+      const suggestion = e.target.closest(".search-suggestion");
+      if (!suggestion) return;
+      const index = Number(suggestion.getAttribute("data-index"));
+      if (!Number.isNaN(index) && index !== autocompleteActiveIndex) {
+        setActiveSuggestion(index);
+      }
+    });
+
+    searchSuggestionsEl.addEventListener("click", function(e) {
+      const suggestion = e.target.closest(".search-suggestion");
+      if (!suggestion) return;
+      const index = Number(suggestion.getAttribute("data-index"));
+      if (!Number.isNaN(index)) {
+        selectSuggestion(index);
+      }
+    });
+
+    document.addEventListener("click", function(e) {
+      if (!searchWrap.contains(e.target)) hideAutocomplete();
+    });
+  }
+
   function searchTools() {
-    const keyword = document.getElementById("search").value.toLowerCase().trim();
+    const keyword = searchInput ? searchInput.value.toLowerCase().trim() : "";
     const filtered = keyword
       ? allTools.filter(function(t) { return t.name.toLowerCase().indexOf(keyword) !== -1; })
       : allTools;
     render(filtered);
+    renderAutocomplete(keyword);
   }
 
   window.searchTools = searchTools;
@@ -228,7 +406,7 @@
       var grouped = groupByCategory(allTools);
       renderTopNav(grouped);
       initMobileNav();
-      render(allTools);
+      searchTools();
       renderFavorites();
       var popular = allTools.filter(function(t) { return t.popular; });
       popular.sort(function(a, b) { return (a.popularOrder || 0) - (b.popularOrder || 0); });
@@ -236,6 +414,7 @@
       scrollToHash();
     });
 
+  initAutocomplete();
   window.addEventListener("hashchange", scrollToHash);
   window.addEventListener("storage", function(e) {
     if (e.key === "toolforge_favorites") renderFavorites();
