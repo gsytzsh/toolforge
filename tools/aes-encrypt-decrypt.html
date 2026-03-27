@@ -79,27 +79,29 @@
 <h1>AES Encrypt Decrypt</h1>
 <p class="subtitle">Password-based AES-256-GCM encrypt/decrypt using Web Crypto API. All processing in browser.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/developer-tools.html">More in Developer Tools</a></p>
 
 <h3>Encrypt</h3>
 <label for="plain">Plain text</label>
-<textarea id="plain" rows="4" style="width:90%" placeholder="Enter text to encrypt"></textarea>
+<textarea id="plain" rows="4" style="width:90%" placeholder="Enter text to encrypt" aria-label="Plain"></textarea>
 <br>
 <label for="passEnc">Password</label>
-<input id="passEnc" type="password" placeholder="Password" style="width:200px">
+<input id="passEnc" type="password" placeholder="Password" style="width:200px" aria-label="Pass Enc">
 <br><br>
 <button onclick="encrypt()">Encrypt</button>
 
 <h3>Decrypt</h3>
 <label for="cipher">Cipher text (base64)</label>
-<textarea id="cipher" rows="4" style="width:90%" placeholder="Paste encrypted output"></textarea>
+<textarea id="cipher" rows="4" style="width:90%" placeholder="Paste encrypted output" aria-label="Cipher"></textarea>
 <br>
 <label for="passDec">Password</label>
-<input id="passDec" type="password" placeholder="Password" style="width:200px">
+<input id="passDec" type="password" placeholder="Password" style="width:200px" aria-label="Pass Dec">
 <br><br>
 <button onclick="decrypt()">Decrypt</button>
 
 <h3>Result</h3>
-<textarea id="result" rows="4" style="width:90%" readonly></textarea>
+<label for="result" class="sr-only">Result text</label>
+<textarea id="result" rows="4" style="width:90%" readonly aria-label="Result text"></textarea>
 <button type="button" onclick="copyResult()">Copy Result</button>
 <p id="status" class="inline-status"></p>
 

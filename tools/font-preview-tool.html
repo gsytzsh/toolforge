@@ -88,15 +88,16 @@
 <h1>Font Preview Tool</h1>
 <p class="subtitle">Input text, select font family and see live preview.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/images--colors.html">More in Images &amp; Colors</a></p>
 
 <div class="controls-row">
 <label for="text">Sample text</label>
-<input id="text" type="text" value="The quick brown fox jumps over the lazy dog. 0123456789" style="flex:1;min-width:300px;max-width:600px;padding:10px;border:1px solid #ddd;border-radius:6px">
+<input id="text" type="text" value="The quick brown fox jumps over the lazy dog. 0123456789" style="flex:1;min-width:300px;max-width:600px;padding:10px;border:1px solid #ddd;border-radius:6px" aria-label="Text input">
 </div>
 
 <div class="controls-row">
 <label for="font">Font family</label>
-<select id="font" style="flex:1;min-width:200px;max-width:400px;padding:10px;border:1px solid #ddd;border-radius:6px">
+<select id="font" style="flex:1;min-width:200px;max-width:400px;padding:10px;border:1px solid #ddd;border-radius:6px" aria-label="Font">
 <optgroup label="Sans-Serif">
 <option value="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">system-ui (Default OS)</option>
 <option value="Arial, Helvetica, sans-serif">Arial</option>
@@ -131,9 +132,9 @@
 
 <div class="controls-row">
 <label for="size">Font size (px)</label>
-<input id="size" type="number" min="8" max="120" value="24" style="width:80px;padding:10px;border:1px solid #ddd;border-radius:6px">
+<input id="size" type="number" min="8" max="120" value="24" style="width:80px;padding:10px;border:1px solid #ddd;border-radius:6px" aria-label="Size">
 <label for="weight" style="margin-left:16px">Font weight</label>
-<select id="weight" style="width:120px;padding:10px;border:1px solid #ddd;border-radius:6px">
+<select id="weight" style="width:120px;padding:10px;border:1px solid #ddd;border-radius:6px" aria-label="Weight">
 <option value="300">300 (Light)</option>
 <option value="400" selected>400 (Normal)</option>
 <option value="500">500 (Medium)</option>
@@ -142,7 +143,7 @@
 <option value="800">800 (Extra-bold)</option>
 </select>
 <label for="lineheight" style="margin-left:16px">Line height</label>
-<input id="lineheight" type="number" min="0.8" max="3" step="0.1" value="1.5" style="width:70px;padding:10px;border:1px solid #ddd;border-radius:6px">
+<input id="lineheight" type="number" min="0.8" max="3" step="0.1" value="1.5" style="width:70px;padding:10px;border:1px solid #ddd;border-radius:6px" aria-label="Lineheight">
 </div>
 
 <h3>Preview</h3>

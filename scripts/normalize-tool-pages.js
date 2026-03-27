@@ -4,12 +4,24 @@ const path = require("path");
 
 const ROOT = path.resolve(__dirname, "..");
 const TOOLS_DIR = path.join(ROOT, "tools");
+const TOOLS_LIST = path.join(ROOT, "tools-list.json");
 const BASE_URL = (process.env.SITEMAP_BASE_URL || "https://toolforge.site").replace(/\/$/, "");
 
 function escapeAttr(value) {
   return String(value)
     .replace(/&/g, "&amp;")
     .replace(/"/g, "&quot;");
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function slugifyCategory(name) {
+  return String(name).toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
 }
 
 function insertAfter(html, marker, block) {
@@ -226,7 +238,25 @@ function ensureHiddenLabels(html) {
   return html;
 }
 
-function normalizeFile(filePath) {
+function ensureStaticCategoryLink(html, slug, categoryBySlug) {
+  const category = categoryBySlug.get(slug);
+  if (!category) return html;
+
+  const categorySlug = slugifyCategory(category);
+  const categoryHref = `/category/${categorySlug}.html`;
+  const block = `<p class="static-tool-discovery"><a href="${categoryHref}">More in ${escapeHtml(category)}</a></p>`;
+
+  if (/<p class="static-tool-discovery">[\s\S]*?<\/p>/i.test(html)) {
+    return html.replace(/<p class="static-tool-discovery">[\s\S]*?<\/p>/i, block);
+  }
+
+  if (html.includes(`href="${categoryHref}"`)) return html;
+
+  const backLinkRegex = /<p>\s*<a href="\/">Back to all tools(?: on ToolForge)?<\/a>\s*<\/p>/i;
+  return html.replace(backLinkRegex, (match) => `${match}\n${block}`);
+}
+
+function normalizeFile(filePath, categoryBySlug) {
   const slug = path.basename(filePath, ".html");
   let html = fs.readFileSync(filePath, "utf8");
   const original = html;
@@ -236,6 +266,7 @@ function normalizeFile(filePath) {
   html = ensureAriaLabels(html);
   html = ensureHiddenLabels(html);
   html = normalizeExistingLabelText(html);
+  html = ensureStaticCategoryLink(html, slug, categoryBySlug);
 
   if (html !== original) {
     fs.writeFileSync(filePath, html, "utf8");
@@ -246,13 +277,20 @@ function normalizeFile(filePath) {
 }
 
 function main() {
+  const tools = JSON.parse(fs.readFileSync(TOOLS_LIST, "utf8"));
+  const categoryBySlug = new Map(
+    tools
+      .filter((tool) => tool && tool.file && tool.category)
+      .map((tool) => [tool.file, tool.category])
+  );
+
   const files = fs.readdirSync(TOOLS_DIR)
     .filter((name) => name.endsWith(".html"))
     .map((name) => path.join(TOOLS_DIR, name));
 
   let updated = 0;
   files.forEach((filePath) => {
-    if (normalizeFile(filePath)) updated += 1;
+    if (normalizeFile(filePath, categoryBySlug)) updated += 1;
   });
 
   console.log(`Normalized ${updated} tool pages.`);

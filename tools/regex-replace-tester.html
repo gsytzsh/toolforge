@@ -79,6 +79,7 @@
 <h1>Regex Replace Tester</h1>
 <p class="subtitle">Test regex search-and-replace rules with flags and preview the transformed output instantly.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/developer-tools.html">More in Developer Tools</a></p>
 <label for="pattern" class="sr-only">Regex pattern</label>
 <input id="pattern" style="width:90%" aria-label="Regex pattern" placeholder="\\bfoo\\b">
 <br><br>
@@ -88,13 +89,14 @@
 <label for="replacement" class="sr-only">Replacement text</label>
 <input id="replacement" style="width:90%" aria-label="Replacement text" placeholder="bar">
 <br><br>
-<label for="input-text" class="sr-only">Input text</label>
-<textarea id="input-text" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Input text" placeholder="foo one&#10;foo two"></textarea>
+<label for="input-text" class="sr-only">Input Text</label>
+<textarea id="input-text" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Input Text" placeholder="foo one&#10;foo two"></textarea>
 <div class="tool-actions">
 <button type="button" onclick="runReplace()">Run Replace</button>
 <button type="button" onclick="copyOutput()">Copy Output</button>
 </div>
 <h3>Output</h3>
+<label for="output" class="sr-only">Output text</label>
 <textarea id="output" rows="10" class="pdf-editor pdf-editor-mono" aria-label="Output text" readonly></textarea>
 <p id="status" class="inline-status"></p>
 <section class="tool-seo">

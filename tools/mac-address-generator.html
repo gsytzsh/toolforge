@@ -79,13 +79,14 @@
 <h1>MAC Address Generator</h1>
 <p class="subtitle">Generate random MAC addresses in colon, dash, dot, or plain hex format with unicast/multicast selection.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/generators.html">More in Generators</a></p>
 
 <label for="count">Count</label>
-<input id="count" type="number" min="1" max="100" value="5" style="width:80px">
+<input id="count" type="number" min="1" max="100" value="5" style="width:80px" aria-label="Count">
 <br><br>
 
 <label for="format">Format</label>
-<select id="format">
+<select id="format" aria-label="Format">
 <option value="colon">Colon (AA:BB:CC:DD:EE:FF)</option>
 <option value="dash">Dash (AA-BB-CC-DD-EE-FF)</option>
 <option value="dot">Dot (AABB.CCDD.EEFF)</option>
@@ -94,7 +95,7 @@
 <br><br>
 
 <label for="addressType">Address Type</label>
-<select id="addressType">
+<select id="addressType" aria-label="Address Type">
 <option value="unicast-local">Unicast, Locally Administered (02:xx:xx...)</option>
 <option value="multicast-local">Multicast, Locally Administered (03:xx:xx...)</option>
 <option value="unicast-global">Unicast, Globally Unique (random OUI)</option>
@@ -106,7 +107,8 @@
 <button type="button" onclick="copyOutput()">Copy</button>
 
 <h3>Result</h3>
-<textarea id="output" rows="12" style="width:90%;font-family:monospace" readonly></textarea>
+<label for="output" class="sr-only">Output text</label>
+<textarea id="output" rows="12" style="width:90%;font-family:monospace" readonly aria-label="Output text"></textarea>
 <p id="status" class="inline-status"></p>
 
 <section class="tool-seo">

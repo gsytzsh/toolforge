@@ -74,25 +74,27 @@
 <h1>URL Batch Generator</h1>
 <p class="subtitle">Generate multiple URLs from base URL and pattern. Use {n} for the index (1-based).</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/developer-tools.html">More in Developer Tools</a></p>
 
 <label for="base">Base URL</label>
-<input id="base" type="text" value="https://example.com" placeholder="https://example.com" style="width:90%">
+<input id="base" type="text" value="https://example.com" placeholder="https://example.com" style="width:90%" aria-label="Base">
 <br><br>
 
 <label for="pattern">Pattern (use {n} for index)</label>
-<input id="pattern" type="text" value="/page-{n}" placeholder="/page-{n}" style="width:90%">
+<input id="pattern" type="text" value="/page-{n}" placeholder="/page-{n}" style="width:90%" aria-label="Regex pattern">
 <br><br>
 
 <label for="start">Start</label>
-<input id="start" type="number" value="1" style="width:80px">
+<input id="start" type="number" value="1" style="width:80px" aria-label="Start">
 <label for="end">End</label>
-<input id="end" type="number" value="10" style="width:80px">
+<input id="end" type="number" value="10" style="width:80px" aria-label="End">
 <br><br>
 
 <button onclick="generate()">Generate</button>
 
 <h3>Result</h3>
-<textarea id="output" rows="16" style="width:90%" readonly></textarea>
+<label for="output" class="sr-only">Output text</label>
+<textarea id="output" rows="16" style="width:90%" readonly aria-label="Output text"></textarea>
 <button type="button" onclick="copyOutput()">Copy</button>
 <p id="status" class="inline-status"></p>
 

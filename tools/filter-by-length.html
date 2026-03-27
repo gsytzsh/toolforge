@@ -79,14 +79,15 @@
 <h1>Filter by Length</h1>
 <p class="subtitle">Filter lines by minimum and/or maximum character length. Keep only lines that match.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/text-tools.html">More in Text Tools</a></p>
 <h3>Input</h3>
 <label for="input" class="sr-only">Input text</label>
 <textarea id="input" rows="10" style="width:90%" placeholder="Enter text with multiple lines&#10;Each line is filtered separately&#10;Short&#10;This is a longer line" aria-label="Input text"></textarea>
 <br><br>
 <label for="min">Min length:</label>
-<input id="min" type="number" min="0" value="0" style="width:80px;padding:6px;margin:0 8px">
+<input id="min" type="number" min="0" value="0" style="width:80px;padding:6px;margin:0 8px" aria-label="Minimum value">
 <label for="max">Max length:</label>
-<input id="max" type="number" min="0" placeholder="No limit" style="width:80px;padding:6px;margin-left:8px">
+<input id="max" type="number" min="0" placeholder="No limit" style="width:80px;padding:6px;margin-left:8px" aria-label="Maximum value">
 <br><br>
 <button onclick="run()">Filter Lines</button>
 <h3>Result</h3>

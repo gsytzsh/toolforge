@@ -74,15 +74,20 @@
 <h1>Text to Image</h1>
 <p class="subtitle">Convert text into an image. Set font, size and color, then download as PNG.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/images--colors.html">More in Images &amp; Colors</a></p>
 <h3>Text</h3>
-<label for="text" class="sr-only">Text</label>
-<textarea id="text" rows="4" style="width:90%" placeholder="Enter text to convert" aria-label="Text"></textarea>
+<label for="text" class="sr-only">Text input</label>
+<textarea id="text" rows="4" style="width:90%" placeholder="Enter text to convert" aria-label="Text input"></textarea>
 <h3>Options</h3>
 <p>
-<label>Font size: <input id="size" type="number" value="24" min="8" max="200" style="width:70px"></label>
-<label style="margin-left:16px">Font: <select id="font"><option value="Arial">Arial</option><option value="Georgia">Georgia</option><option value="Times New Roman">Times New Roman</option><option value="Courier New">Courier New</option><option value="Verdana">Verdana</option></select></label>
-<label style="margin-left:16px">Color: <input id="color" type="color" value="#000000"></label>
-<label style="margin-left:16px">Background: <input id="bg" type="color" value="#ffffff"></label>
+<label>Font size: <label for="size" class="sr-only">Size</label>
+<input id="size" type="number" value="24" min="8" max="200" style="width:70px" aria-label="Size"></label>
+<label style="margin-left:16px">Font: <label for="font" class="sr-only">Font</label>
+<select id="font" aria-label="Font"><option value="Arial">Arial</option><option value="Georgia">Georgia</option><option value="Times New Roman">Times New Roman</option><option value="Courier New">Courier New</option><option value="Verdana">Verdana</option></select></label>
+<label style="margin-left:16px">Color: <label for="color" class="sr-only">Color</label>
+<input id="color" type="color" value="#000000" aria-label="Color"></label>
+<label style="margin-left:16px">Background: <label for="bg" class="sr-only">Bg</label>
+<input id="bg" type="color" value="#ffffff" aria-label="Bg"></label>
 </p>
 <div class="tool-actions">
 <button type="button" onclick="generate()">Generate Image</button>

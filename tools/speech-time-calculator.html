@@ -79,14 +79,15 @@
 <h1>Speech Time Calculator</h1>
 <p class="subtitle">Estimate speaking duration from script word count and words per minute (WPM) pace.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/productivity.html">More in Productivity</a></p>
 
 <label for="wpm">Speaking Speed (WPM):</label>
-<input id="wpm" type="number" min="80" max="200" value="130" style="width:100px;margin-left:8px">
+<input id="wpm" type="number" min="80" max="200" value="130" style="width:100px;margin-left:8px" aria-label="Wpm">
 <span style="margin-left:8px;font-size:14px;color:#666" id="wpm-label">(Average)</span>
 
 <h3 style="margin-top:20px">Script Text</h3>
 <label for="text" class="sr-only">Speech text</label>
-<textarea id="text" rows="12" style="width:90%" placeholder="Paste your script or speech text here to count words and calculate speaking time"></textarea>
+<textarea id="text" rows="12" style="width:90%" placeholder="Paste your script or speech text here to count words and calculate speaking time" aria-label="Text input"></textarea>
 
 <div class="tool-actions" style="margin-top:16px">
 <button type="button" onclick="calculateSpeech()">Calculate Speaking Time</button>

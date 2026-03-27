@@ -92,6 +92,7 @@
 <h1>QR Code Generator</h1>
 <p class="subtitle">Create QR codes for text, URLs, WiFi, phone, email, SMS and more. Customize size and colors.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/web--network.html">More in Web &amp; Network</a></p>
 
 <div class="qr-type-tabs">
   <button type="button" class="qr-type-tab active" data-type="text">Text</button>
@@ -105,29 +106,29 @@
 <div id="panel-text" class="qr-type-panel active">
   <div class="qr-field">
     <label for="text-content">Text content</label>
-    <textarea id="text-content" rows="4" placeholder="Enter any text (up to ~300 chars for best scan results)" maxlength="500"></textarea>
+    <textarea id="text-content" rows="4" placeholder="Enter any text (up to ~300 chars for best scan results)" maxlength="500" aria-label="Text Content"></textarea>
   </div>
 </div>
 
 <div id="panel-url" class="qr-type-panel">
   <div class="qr-field">
     <label for="url-content">Website URL</label>
-    <input id="url-content" type="url" placeholder="https://example.com">
+    <input id="url-content" type="url" placeholder="https://example.com" aria-label="Url Content">
   </div>
 </div>
 
 <div id="panel-wifi" class="qr-type-panel">
   <div class="qr-field">
     <label for="wifi-ssid">Network name (SSID)</label>
-    <input id="wifi-ssid" placeholder="MyWiFi">
+    <input id="wifi-ssid" placeholder="MyWiFi" aria-label="Wifi Ssid">
   </div>
   <div class="qr-field">
     <label for="wifi-password">Password</label>
-    <input id="wifi-password" type="text" placeholder="Optional">
+    <input id="wifi-password" type="text" placeholder="Optional" aria-label="Wifi Password">
   </div>
   <div class="qr-field">
     <label for="wifi-encrypt">Encryption</label>
-    <select id="wifi-encrypt">
+    <select id="wifi-encrypt" aria-label="Wifi Encrypt">
       <option value="WPA">WPA/WPA2</option>
       <option value="WEP">WEP</option>
       <option value="">None</option>
@@ -138,53 +139,53 @@
 <div id="panel-phone" class="qr-type-panel">
   <div class="qr-field">
     <label for="phone-number">Phone number</label>
-    <input id="phone-number" type="tel" placeholder="+1 234 567 8900">
+    <input id="phone-number" type="tel" placeholder="+1 234 567 8900" aria-label="Phone Number">
   </div>
 </div>
 
 <div id="panel-email" class="qr-type-panel">
   <div class="qr-field">
     <label for="email-addr">Email address</label>
-    <input id="email-addr" type="email" placeholder="you@example.com">
+    <input id="email-addr" type="email" placeholder="you@example.com" aria-label="Email Addr">
   </div>
   <div class="qr-field">
     <label for="email-subject">Subject (optional)</label>
-    <input id="email-subject" placeholder="Optional">
+    <input id="email-subject" placeholder="Optional" aria-label="Email Subject">
   </div>
   <div class="qr-field">
     <label for="email-body">Body (optional)</label>
-    <textarea id="email-body" rows="2" placeholder="Optional"></textarea>
+    <textarea id="email-body" rows="2" placeholder="Optional" aria-label="Email Body"></textarea>
   </div>
 </div>
 
 <div id="panel-sms" class="qr-type-panel">
   <div class="qr-field">
     <label for="sms-number">Phone number</label>
-    <input id="sms-number" type="tel" placeholder="+1 234 567 8900">
+    <input id="sms-number" type="tel" placeholder="+1 234 567 8900" aria-label="Sms Number">
   </div>
   <div class="qr-field">
     <label for="sms-body">Message</label>
-    <textarea id="sms-body" rows="3" placeholder="Pre-filled SMS text" maxlength="300"></textarea>
+    <textarea id="sms-body" rows="3" placeholder="Pre-filled SMS text" maxlength="300" aria-label="Sms Body"></textarea>
   </div>
 </div>
 
 <div class="qr-opts">
   <div class="qr-opt">
     <label for="qr-size">Size:</label>
-    <input id="qr-size" type="number" min="128" max="512" value="256" step="32">
+    <input id="qr-size" type="number" min="128" max="512" value="256" step="32" aria-label="Qr Size">
     <span>px</span>
   </div>
   <div class="qr-opt">
     <label for="qr-fg">Foreground:</label>
-    <input id="qr-fg" type="color" value="#000000">
+    <input id="qr-fg" type="color" value="#000000" aria-label="Qr Fg">
   </div>
   <div class="qr-opt">
     <label for="qr-bg">Background:</label>
-    <input id="qr-bg" type="color" value="#ffffff">
+    <input id="qr-bg" type="color" value="#ffffff" aria-label="Qr Bg">
   </div>
   <div class="qr-opt">
     <label for="qr-ec">Error correction:</label>
-    <select id="qr-ec">
+    <select id="qr-ec" aria-label="Qr Ec">
       <option value="L">Low (7%)</option>
       <option value="M" selected>Medium (15%)</option>
       <option value="Q">Quartile (25%)</option>

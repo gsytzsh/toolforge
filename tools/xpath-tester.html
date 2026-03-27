@@ -79,9 +79,10 @@
 <h1>XPath Tester</h1>
 <p class="subtitle">Evaluate XPath expressions on sample HTML or XML.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/developer-tools.html">More in Developer Tools</a></p>
 
 <label for="doc">HTML/XML document</label>
-<textarea id="doc" rows="12" style="width:90%" placeholder="<root><item id='1'>A</item><item id='2'>B</item></root>"><root>
+<textarea id="doc" rows="12" style="width:90%" placeholder="<root><item id='1'>A</item><item id='2'>B</item></root>" aria-label="Doc"><root>
   <item id="1">Apple</item>
   <item id="2">Banana</item>
   <item id="3">Cherry</item>
@@ -90,7 +91,7 @@
 <br><br>
 
 <label for="xpath">XPath expression</label>
-<input id="xpath" type="text" value="//item" placeholder="//item" style="width:90%">
+<input id="xpath" type="text" value="//item" placeholder="//item" style="width:90%" aria-label="Xpath">
 <br><br>
 
 <button onclick="evaluate()">Evaluate</button>

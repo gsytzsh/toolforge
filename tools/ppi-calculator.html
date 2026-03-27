@@ -79,17 +79,18 @@
 <h1>PPI Calculator</h1>
 <p class="subtitle">Calculate screen pixels per inch (PPI) and dot pitch from resolution and diagonal size.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/calculators.html">More in Calculators</a></p>
 
 <label for="width">Width (pixels)</label>
-<input id="width" type="number" min="1" value="1920" style="width:120px">
+<input id="width" type="number" min="1" value="1920" style="width:120px" aria-label="Width">
 <br><br>
 
 <label for="height">Height (pixels)</label>
-<input id="height" type="number" min="1" value="1080" style="width:120px">
+<input id="height" type="number" min="1" value="1080" style="width:120px" aria-label="Height">
 <br><br>
 
 <label for="diagonal">Diagonal (inches)</label>
-<input id="diagonal" type="number" min="0.1" step="0.1" value="24" style="width:120px">
+<input id="diagonal" type="number" min="0.1" step="0.1" value="24" style="width:120px" aria-label="Diagonal">
 <br><br>
 
 <button onclick="calc()">Calculate</button>

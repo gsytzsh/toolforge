@@ -74,13 +74,14 @@
 <h1>String to HTML Paragraphs</h1>
 <p class="subtitle">Convert plain text to HTML paragraphs. Each paragraph (blank-line separated) becomes a &lt;p&gt; tag.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/text-tools.html">More in Text Tools</a></p>
 
 <label for="input">Plain text</label>
 <textarea id="input" rows="10" style="width:90%" placeholder="First paragraph here.
 
 Second paragraph after blank line.
 
-Third paragraph."></textarea>
+Third paragraph." aria-label="Input text"></textarea>
 <br><br>
 
 <div class="tool-actions">
@@ -89,7 +90,8 @@ Third paragraph."></textarea>
 </div>
 
 <h3>HTML Output</h3>
-<textarea id="output" rows="12" style="width:90%" readonly></textarea>
+<label for="output" class="sr-only">Output text</label>
+<textarea id="output" rows="12" style="width:90%" readonly aria-label="Output text"></textarea>
 <p id="status" class="inline-status"></p>
 
 <section class="tool-seo">

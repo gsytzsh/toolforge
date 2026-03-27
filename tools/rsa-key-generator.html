@@ -79,32 +79,36 @@
 <h1>RSA Key Generator</h1>
 <p class="subtitle">Generate RSA-OAEP key pairs and demonstrate encryption/decryption using Web Crypto API.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/developer-tools.html">More in Developer Tools</a></p>
 
 <button onclick="generateKeys()">Generate Key Pair</button>
 <p id="status" class="inline-status"></p>
 
 <h3>Public Key (SPKI, base64)</h3>
-<textarea id="pubKey" rows="4" style="width:90%" readonly placeholder="Click Generate"></textarea>
+<label for="pubKey" class="sr-only">Pub Key</label>
+<textarea id="pubKey" rows="4" style="width:90%" readonly placeholder="Click Generate" aria-label="Pub Key"></textarea>
 <button type="button" onclick="copyPub()">Copy Public Key</button>
 
 <h3>Private Key (PKCS#8, base64)</h3>
-<textarea id="privKey" rows="6" style="width:90%" readonly placeholder="Click Generate"></textarea>
+<label for="privKey" class="sr-only">Priv Key</label>
+<textarea id="privKey" rows="6" style="width:90%" readonly placeholder="Click Generate" aria-label="Priv Key"></textarea>
 <button type="button" onclick="copyPriv()">Copy Private Key</button>
 
 <hr>
 
 <h3>Encrypt (use public key)</h3>
 <label for="plain">Plain text (short, RSA has size limit)</label>
-<textarea id="plain" rows="2" style="width:90%" placeholder="Short message"></textarea>
+<textarea id="plain" rows="2" style="width:90%" placeholder="Short message" aria-label="Plain"></textarea>
 <button onclick="encryptDemo()">Encrypt</button>
 
 <h3>Decrypt (use private key)</h3>
 <label for="cipher">Cipher text (base64)</label>
-<textarea id="cipher" rows="4" style="width:90%" placeholder="Paste encrypted output"></textarea>
+<textarea id="cipher" rows="4" style="width:90%" placeholder="Paste encrypted output" aria-label="Cipher"></textarea>
 <button onclick="decryptDemo()">Decrypt</button>
 
 <h3>Result</h3>
-<textarea id="result" rows="3" style="width:90%" readonly></textarea>
+<label for="result" class="sr-only">Result text</label>
+<textarea id="result" rows="3" style="width:90%" readonly aria-label="Result text"></textarea>
 <button type="button" onclick="copyResult()">Copy Result</button>
 
 <section class="tool-seo">

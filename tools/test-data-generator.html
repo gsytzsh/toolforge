@@ -74,9 +74,10 @@
 <h1>Test Data Generator</h1>
 <p class="subtitle">Generate fake names, emails and phone numbers (English) for testing.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/generators.html">More in Generators</a></p>
 
 <label for="count">Count</label>
-<input id="count" type="number" min="1" max="50" value="5" style="width:80px">
+<input id="count" type="number" min="1" max="50" value="5" style="width:80px" aria-label="Count">
 <br><br>
 
 <label><input type="checkbox" id="names" checked> Names</label><br>
@@ -87,7 +88,8 @@
 <button onclick="generate()">Generate</button>
 
 <h3>Result</h3>
-<textarea id="output" rows="16" style="width:90%" readonly></textarea>
+<label for="output" class="sr-only">Output text</label>
+<textarea id="output" rows="16" style="width:90%" readonly aria-label="Output text"></textarea>
 <button type="button" onclick="copyOutput()">Copy</button>
 <p id="status" class="inline-status"></p>
 

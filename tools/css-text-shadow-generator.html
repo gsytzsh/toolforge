@@ -66,16 +66,17 @@
 <h1>CSS Text Shadow Generator</h1>
 <p class="subtitle">Generate text-shadow CSS with live preview. Adjust offset, blur and color.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/images--colors.html">More in Images &amp; Colors</a></p>
 
 <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:420px">
-<div><label for="h">Horizontal (px)</label><input id="h" type="number" value="2" style="width:80px"></div>
-<div><label for="v">Vertical (px)</label><input id="v" type="number" value="2" style="width:80px"></div>
-<div><label for="blur">Blur (px)</label><input id="blur" type="number" min="0" value="4" style="width:80px"></div>
-<div><label for="color">Color</label><input id="color" type="text" value="#000000" style="width:100px"></div>
+<div><label for="h">Horizontal (px)</label><input id="h" type="number" value="2" style="width:80px" aria-label="H"></div>
+<div><label for="v">Vertical (px)</label><input id="v" type="number" value="2" style="width:80px" aria-label="V"></div>
+<div><label for="blur">Blur (px)</label><input id="blur" type="number" min="0" value="4" style="width:80px" aria-label="Blur"></div>
+<div><label for="color">Color</label><input id="color" type="text" value="#000000" style="width:100px" aria-label="Color"></div>
 </div>
 
 <label for="sample">Sample text</label>
-<input id="sample" type="text" value="Text Shadow" style="width:200px">
+<input id="sample" type="text" value="Text Shadow" style="width:200px" aria-label="Sample">
 
 <h3>Live Preview</h3>
 <div id="preview-box"></div>

@@ -79,14 +79,15 @@
 <h1>Line Number Adder</h1>
 <p class="subtitle">Add line numbers to text with customizable starting number, padding, and separator.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/text-tools.html">More in Text Tools</a></p>
 <h3>Input Text</h3>
 <label for="input" class="sr-only">Input text</label>
 <textarea id="input" rows="10" style="width:90%;font-family:monospace" aria-label="Input text"></textarea>
 <h3>Options</h3>
 <label for="startNum">Starting number:</label>
-<input id="startNum" type="number" min="1" value="1" style="width:60px">
+<input id="startNum" type="number" min="1" value="1" style="width:60px" aria-label="Start Num">
 <label for="padding" style="margin-left:12px">Zero-pad to:</label>
-<select id="padding">
+<select id="padding" aria-label="Padding">
   <option value="0">No padding</option>
   <option value="2">2 digits (01-99)</option>
   <option value="3" selected>3 digits (001-999)</option>
@@ -94,7 +95,7 @@
   <option value="5">5 digits (00001-99999)</option>
 </select>
 <label for="separator" style="margin-left:12px">Separator:</label>
-<select id="separator">
+<select id="separator" aria-label="Separator">
   <option value=":">Colon (:)</option>
   <option value="\t" selected>Tab</option>
   <option value=" ">Space</option>
