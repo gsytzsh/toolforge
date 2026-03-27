@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Text to Image – Convert Text to Image Online | ToolForge</title>
-<meta name="description" content="Convert text into PNG images. Customize font, size, colors and download instantly without watermarks.">
+<title>Text to Image - Convert Text to Image Online | ToolForge</title>
+<meta name="description" content="Convert text into PNG images in your browser. Supports multi-line text, auto-wrapping, font and color options, and instant download without watermarks.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/text-to-image.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Text to Image – Convert Text to Image Online | ToolForge">
-<meta property="og:description" content="Convert text into PNG images. Customize font, size, colors and download instantly without watermarks.">
+<meta property="og:title" content="Text to Image - Convert Text to Image Online | ToolForge">
+<meta property="og:description" content="Convert text into PNG images in your browser with multi-line support, style options, and instant download.">
 <meta property="og:url" content="https://toolforge.site/tools/text-to-image.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Text to Image – Convert Text to Image Online | ToolForge">
-<meta name="twitter:description" content="Convert text into PNG images. Customize font, size, colors and download instantly without watermarks.">
+<meta name="twitter:title" content="Text to Image - Convert Text to Image Online | ToolForge">
+<meta name="twitter:description" content="Browser-based text to PNG converter with multi-line rendering and custom styling.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -27,42 +27,47 @@
       "name": "What image format is generated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The tool generates PNG images using the HTML5 canvas API. PNG is lossless and supports transparency (though this tool uses solid backgrounds)."
+        "text": "The tool exports PNG images generated from an HTML canvas. PNG is lossless and well-suited for text graphics."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I change the font family?",
+      "name": "Does this tool support multi-line text?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Choose from Arial, Georgia, Times New Roman, Courier New, or Verdana. These are web-safe fonts available on most systems."
+        "text": "Yes. Manual line breaks are preserved, and long lines are wrapped automatically based on the max width setting."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Is there a text length limit?",
+      "name": "Can I change font, size, and colors?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Long text may extend beyond the canvas width. For multi-line text or longer content, consider breaking into separate images."
+        "text": "Yes. You can choose font family, font size, text color, and background color before generating the image."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "What is the maximum font size?",
+      "name": "Is my text uploaded to a server?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Font sizes range from 8px to 200px. Larger sizes create taller images to accommodate the text height."
+        "text": "No. Rendering happens locally in your browser using Canvas API. Text is not uploaded by this tool."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Can I create transparent backgrounds?",
+      "name": "Is there a size limit for generated images?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This version uses solid colors. For transparency, you would need to modify the canvas fill to use 'transparent' instead of a color."
+        "text": "Yes. To avoid browser crashes, output is limited to a maximum canvas size of 4096 by 4096 pixels."
       }
-    },    {
+    },
+    {
       "@type": "Question",
-      "name": "Why does text rendering vary by browser?",
+      "name": "Why may text look slightly different across browsers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Different browsers and OS use different font rendering engines. Chrome, Firefox, and Safari may show slight variations in antialiasing."
+        "text": "Different browsers and operating systems use different font rendering engines, so anti-aliasing and spacing can vary slightly."
       }
     }
   ]
@@ -72,104 +77,426 @@
 <body>
 <main class="container">
 <h1>Text to Image</h1>
-<p class="subtitle">Convert text into an image. Set font, size and color, then download as PNG.</p>
+<p class="subtitle">Convert text into a PNG image with multi-line wrapping, style controls, and one-click download.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <p class="static-tool-discovery"><a href="/category/images--colors.html">More in Images &amp; Colors</a></p>
-<h3>Text</h3>
+
+<h2>Text</h2>
 <label for="text" class="sr-only">Text input</label>
-<textarea id="text" rows="4" style="width:90%" placeholder="Enter text to convert" aria-label="Text input"></textarea>
-<h3>Options</h3>
-<p>
-<label>Font size: <label for="size" class="sr-only">Size</label>
-<input id="size" type="number" value="24" min="8" max="200" style="width:70px" aria-label="Size"></label>
-<label style="margin-left:16px">Font: <label for="font" class="sr-only">Font</label>
-<select id="font" aria-label="Font"><option value="Arial">Arial</option><option value="Georgia">Georgia</option><option value="Times New Roman">Times New Roman</option><option value="Courier New">Courier New</option><option value="Verdana">Verdana</option></select></label>
-<label style="margin-left:16px">Color: <label for="color" class="sr-only">Color</label>
-<input id="color" type="color" value="#000000" aria-label="Color"></label>
-<label style="margin-left:16px">Background: <label for="bg" class="sr-only">Bg</label>
-<input id="bg" type="color" value="#ffffff" aria-label="Bg"></label>
-</p>
-<div class="tool-actions">
-<button type="button" onclick="generate()">Generate Image</button>
-<button type="button" onclick="downloadImg()">Download PNG</button>
+<textarea id="text" rows="6" style="width:90%;font-family:monospace" placeholder="Enter text to convert&#10;Use line breaks for multiple lines." aria-label="Text input"></textarea>
+
+<h2>Options</h2>
+<div style="display:flex;flex-wrap:wrap;gap:12px 16px;align-items:flex-end;width:90%">
+  <div>
+    <label for="size">Font size (px)</label><br>
+    <input id="size" type="number" value="24" min="8" max="200" style="width:90px" aria-label="Font size in pixels">
+  </div>
+  <div>
+    <label for="font">Font family</label><br>
+    <select id="font" aria-label="Font family">
+      <option value="Arial">Arial</option>
+      <option value="Georgia">Georgia</option>
+      <option value="Times New Roman">Times New Roman</option>
+      <option value="Courier New">Courier New</option>
+      <option value="Verdana">Verdana</option>
+    </select>
+  </div>
+  <div>
+    <label for="color">Text color</label><br>
+    <input id="color" type="color" value="#000000" aria-label="Text color">
+  </div>
+  <div>
+    <label for="bg">Background color</label><br>
+    <input id="bg" type="color" value="#ffffff" aria-label="Background color">
+  </div>
+  <div>
+    <label for="maxWidth">Max width (px)</label><br>
+    <input id="maxWidth" type="number" value="1200" min="200" max="4096" step="10" style="width:100px" aria-label="Maximum output width in pixels">
+  </div>
+  <div>
+    <input id="transparentBg" type="checkbox" aria-label="Transparent background">
+    <label for="transparentBg">Transparent background</label>
+  </div>
 </div>
-<h3>Preview</h3>
-<canvas id="canvas" style="border:1px solid #ddd;max-width:100%"></canvas>
-<p id="status" class="inline-status"></p>
+
+<div class="tool-actions">
+  <button type="button" onclick="generate()">Generate Image</button>
+  <button type="button" onclick="downloadImg()">Download PNG</button>
+  <button type="button" onclick="clearAll()">Clear</button>
+</div>
+
+<h2>Preview</h2>
+<canvas id="canvas" style="border:1px solid #ddd;max-width:100%" role="img" aria-label="Generated text image preview">Canvas preview is not supported in your browser.</canvas>
+<p id="image-meta" style="font-size:13px;color:#666;margin:8px 0"></p>
+<p id="status" class="inline-status" role="status" aria-live="polite" aria-atomic="true"></p>
+
 <section class="tool-seo">
-<h3>About Text to Image</h3>
-<p>This tool converts text into an image using canvas. You can set font, size and colors, then download the result as PNG.</p>
-<p>It is useful for creating simple text graphics, social media quotes and placeholder images without external software.</p>
-</section>
-<h3>Web Font Reference</h3>
-<table class="uni-table">
-<thead><tr><th>Font</th><th>Category</th><th>Best For</th></tr></thead>
-<tbody>
-<tr><td>Arial</td><td>Sans-serif</td><td>Clean, modern UI text</td></tr>
-<tr><td>Georgia</td><td>Serif</td><td>Elegant, readable paragraphs</td></tr>
-<tr><td>Times New Roman</td><td>Serif</td><td>Formal, traditional documents</td></tr>
-<tr><td>Courier New</td><td>Monospace</td><td>Code, technical content</td></tr>
-<tr><td>Verdana</td><td>Sans-serif</td><td>Screen readability at small sizes</td></tr>
-</tbody>
+<h2>About Text to Image</h2>
+<p>This tool renders text to an image using the HTML Canvas API directly in your browser. It supports multi-line text, automatic line wrapping, custom typography, and PNG download.</p>
+<p><strong>Last reviewed:</strong> March 27, 2026.</p>
+
+<h3>How Rendering Works</h3>
+<ol>
+  <li><strong>Text parsing:</strong> Input is split into lines by newline characters.</li>
+  <li><strong>Line wrapping:</strong> Long lines are wrapped based on your max width setting.</li>
+  <li><strong>Canvas sizing:</strong> Width and height are calculated from measured text metrics and padding.</li>
+  <li><strong>Drawing:</strong> Background and text are painted onto canvas using selected styles.</li>
+  <li><strong>Export:</strong> Canvas output is downloaded as a lossless PNG file.</li>
+</ol>
+
+<h3>Limits and Behavior</h3>
+<ul>
+  <li><strong>Multi-line support:</strong> Manual line breaks are preserved.</li>
+  <li><strong>Auto-wrap:</strong> Long lines wrap automatically to stay within max width.</li>
+  <li><strong>Safety limit:</strong> Output canvas is capped at <code>4096 x 4096</code> to avoid browser instability.</li>
+  <li><strong>Rendering differences:</strong> Font anti-aliasing may vary by browser and operating system.</li>
+</ul>
+
+<h3>Typical Use Cases</h3>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <thead>
+    <tr style="background:#f5f5f5">
+      <th style="border:1px solid #ddd;padding:8px;text-align:left">Use Case</th>
+      <th style="border:1px solid #ddd;padding:8px;text-align:left">Suggested Settings</th>
+      <th style="border:1px solid #ddd;padding:8px;text-align:left">Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #ddd;padding:8px">Quote cards</td>
+      <td style="border:1px solid #ddd;padding:8px">32-48px font, 1080px max width</td>
+      <td style="border:1px solid #ddd;padding:8px">Use high contrast colors for readability.</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd;padding:8px">UI placeholder labels</td>
+      <td style="border:1px solid #ddd;padding:8px">16-24px font, transparent background</td>
+      <td style="border:1px solid #ddd;padding:8px">Good for quick mockups and prototypes.</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd;padding:8px">Social snippets</td>
+      <td style="border:1px solid #ddd;padding:8px">24-36px font, 1200px max width</td>
+      <td style="border:1px solid #ddd;padding:8px">Keep text concise for better mobile display.</td>
+    </tr>
+  </tbody>
 </table>
 
+<h3>Privacy</h3>
+<p>All processing happens locally in your browser. Text content is not uploaded by this tool.</p>
+
+<h3>References</h3>
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillText">MDN: CanvasRenderingContext2D.fillText()</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/measureText">MDN: CanvasRenderingContext2D.measureText()</a></li>
+</ul>
+</section>
+
+<section class="how-to-use">
+<h2>How to Convert Text to PNG</h2>
+<ol class="how-to-steps">
+  <li><strong>Enter text:</strong> Paste or type your content, using line breaks if needed.</li>
+  <li><strong>Adjust style:</strong> Set font size, font family, text color, background, and max width.</li>
+  <li><strong>Generate:</strong> Click <strong>Generate Image</strong> to render the preview.</li>
+  <li><strong>Download:</strong> Click <strong>Download PNG</strong> to save the final image.</li>
+</ol>
+</section>
+
+<h2>Web Font Reference</h2>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+  <thead>
+    <tr style="background:#f5f5f5">
+      <th style="border:1px solid #ddd;padding:8px;text-align:left">Font</th>
+      <th style="border:1px solid #ddd;padding:8px;text-align:left">Category</th>
+      <th style="border:1px solid #ddd;padding:8px;text-align:left">Best For</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td style="border:1px solid #ddd;padding:8px">Arial</td><td style="border:1px solid #ddd;padding:8px">Sans-serif</td><td style="border:1px solid #ddd;padding:8px">Clean, modern UI text</td></tr>
+    <tr><td style="border:1px solid #ddd;padding:8px">Georgia</td><td style="border:1px solid #ddd;padding:8px">Serif</td><td style="border:1px solid #ddd;padding:8px">Elegant and readable body text</td></tr>
+    <tr><td style="border:1px solid #ddd;padding:8px">Times New Roman</td><td style="border:1px solid #ddd;padding:8px">Serif</td><td style="border:1px solid #ddd;padding:8px">Formal and traditional styles</td></tr>
+    <tr><td style="border:1px solid #ddd;padding:8px">Courier New</td><td style="border:1px solid #ddd;padding:8px">Monospace</td><td style="border:1px solid #ddd;padding:8px">Code and technical snippets</td></tr>
+    <tr><td style="border:1px solid #ddd;padding:8px">Verdana</td><td style="border:1px solid #ddd;padding:8px">Sans-serif</td><td style="border:1px solid #ddd;padding:8px">Small-size screen readability</td></tr>
+  </tbody>
+</table>
 
 <section class="faq">
-<h3>Frequently Asked Questions</h3>
+<h2>Frequently Asked Questions</h2>
 <dl class="faq-list">
   <dt>What image format is generated?</dt>
-  <dd>The tool generates PNG images using the HTML5 canvas API. PNG is lossless and supports transparency (though this tool uses solid backgrounds).</dd>
-  <dt>Can I change the font family?</dt>
-  <dd>Yes. Choose from Arial, Georgia, Times New Roman, Courier New, or Verdana. These are web-safe fonts available on most systems.</dd>
-  <dt>Is there a text length limit?</dt>
-  <dd>Long text may extend beyond the canvas width. For multi-line text or longer content, consider breaking into separate images.</dd>
-  <dt>What is the maximum font size?</dt>
-  <dd>Font sizes range from 8px to 200px. Larger sizes create taller images to accommodate the text height.</dd>
-  <dt>Can I create transparent backgrounds?</dt>
-  <dd>This version uses solid colors. For transparency, you would need to modify the canvas fill to use 'transparent' instead of a color.</dd>
-  <dt>Why does text rendering vary by browser?</dt>
-  <dd>Different browsers and OS use different font rendering engines. Chrome, Firefox, and Safari may show slight variations in antialiasing.</dd>
+  <dd>The tool exports PNG images generated from an HTML canvas. PNG is lossless and well-suited for text graphics.</dd>
+
+  <dt>Does this tool support multi-line text?</dt>
+  <dd>Yes. Manual line breaks are preserved, and long lines are wrapped automatically based on the max width setting.</dd>
+
+  <dt>Can I change font, size, and colors?</dt>
+  <dd>Yes. You can choose font family, font size, text color, and background color before generating the image.</dd>
+
+  <dt>Is my text uploaded to a server?</dt>
+  <dd>No. Rendering happens locally in your browser using Canvas API. Text is not uploaded by this tool.</dd>
+
+  <dt>Is there a size limit for generated images?</dt>
+  <dd>Yes. To avoid browser crashes, output is limited to a maximum canvas size of 4096 by 4096 pixels.</dd>
+
+  <dt>Why may text look slightly different across browsers?</dt>
+  <dd>Different browsers and operating systems use different font rendering engines, so anti-aliasing and spacing can vary slightly.</dd>
 </dl>
 </section>
 </main>
 <script>
-var canvas=document.getElementById("canvas")
-var ctx=canvas.getContext("2d")
+(function(){
+"use strict";
+
+var canvas=document.getElementById("canvas");
+var ctx=canvas.getContext("2d");
+var textEl=document.getElementById("text");
+var sizeEl=document.getElementById("size");
+var fontEl=document.getElementById("font");
+var colorEl=document.getElementById("color");
+var bgEl=document.getElementById("bg");
+var maxWidthEl=document.getElementById("maxWidth");
+var transparentBgEl=document.getElementById("transparentBg");
+var statusEl=document.getElementById("status");
+var imageMetaEl=document.getElementById("image-meta");
+
+var LIMITS={
+  minFontSize:8,
+  maxFontSize:200,
+  minWidth:200,
+  maxWidth:4096,
+  maxCanvasWidth:4096,
+  maxCanvasHeight:4096,
+  maxInputChars:20000
+};
+
+function setStatus(message,type){
+  statusEl.textContent=message;
+  if(type==="success"){
+    statusEl.style.color="#16a34a";
+    return;
+  }
+  if(type==="warning"){
+    statusEl.style.color="#b45309";
+    return;
+  }
+  if(type==="error"){
+    statusEl.style.color="#b91c1c";
+    return;
+  }
+  statusEl.style.color="#6b7280";
+}
+
+function clamp(value,min,max,fallback){
+  if(!Number.isFinite(value))return fallback;
+  return Math.min(max,Math.max(min,value));
+}
+
+function wrapLongToken(token,maxTextWidth,fontSpec){
+  if(!token)return [""];
+  if(ctx.measureText(token).width<=maxTextWidth)return [token];
+
+  var chunks=[];
+  var current="";
+  for(var i=0;i<token.length;i++){
+    var candidate=current+token[i];
+    if(ctx.measureText(candidate).width<=maxTextWidth){
+      current=candidate;
+      continue;
+    }
+    if(current){
+      chunks.push(current);
+      current=token[i];
+      continue;
+    }
+    chunks.push(token[i]);
+    current="";
+  }
+  if(current)chunks.push(current);
+  return chunks;
+}
+
+function wrapParagraph(paragraph,maxTextWidth,fontSpec){
+  if(paragraph==="")return [""];
+  var words=paragraph.split(/\s+/);
+  var lines=[];
+  var currentLine="";
+
+  for(var i=0;i<words.length;i++){
+    var word=words[i];
+    if(!word)continue;
+    var candidate=currentLine?currentLine+" "+word:word;
+    if(ctx.measureText(candidate).width<=maxTextWidth){
+      currentLine=candidate;
+      continue;
+    }
+
+    if(currentLine){
+      lines.push(currentLine);
+    }
+
+    if(ctx.measureText(word).width<=maxTextWidth){
+      currentLine=word;
+      continue;
+    }
+
+    var broken=wrapLongToken(word,maxTextWidth,fontSpec);
+    for(var j=0;j<broken.length-1;j++){
+      lines.push(broken[j]);
+    }
+    currentLine=broken[broken.length-1]||"";
+  }
+
+  if(currentLine||lines.length===0){
+    lines.push(currentLine);
+  }
+  return lines;
+}
+
+function buildWrappedLines(text,maxTextWidth,fontSpec){
+  var paragraphs=text.replace(/\r/g,"").split("\n");
+  var lines=[];
+  for(var i=0;i<paragraphs.length;i++){
+    var wrapped=wrapParagraph(paragraphs[i],maxTextWidth,fontSpec);
+    for(var j=0;j<wrapped.length;j++){
+      lines.push(wrapped[j]);
+    }
+  }
+  return lines.length?lines:[""];
+}
+
 function generate(){
-var text=document.getElementById("text").value||"Sample text"
-var size=parseInt(document.getElementById("size").value,10)||24
-var font=document.getElementById("font").value||"Arial"
-var color=document.getElementById("color").value||"#000000"
-var bg=document.getElementById("bg").value||"#ffffff"
-ctx.font=size+"px "+font
-var m=ctx.measureText(text)
-var w=Math.ceil(m.width)+40
-var h=size+40
-canvas.width=w
-canvas.height=h
-ctx.fillStyle=bg
-ctx.fillRect(0,0,w,h)
-ctx.fillStyle=color
-ctx.font=size+"px "+font
-ctx.textBaseline="middle"
-ctx.fillText(text,20,h/2)
-document.getElementById("status").innerText="Image generated."
-document.getElementById("status").style.color="#16a34a"
+  if(!ctx){
+    setStatus("Canvas is not supported in this browser.","error");
+    return;
+  }
+
+  var rawText=textEl.value;
+  if(rawText.length>LIMITS.maxInputChars){
+    setStatus("Text is too long. Please keep input under "+LIMITS.maxInputChars+" characters.","error");
+    return;
+  }
+
+  var text=rawText.trim()?rawText:"Sample text";
+  var size=clamp(parseInt(sizeEl.value,10),LIMITS.minFontSize,LIMITS.maxFontSize,24);
+  var maxWidth=clamp(parseInt(maxWidthEl.value,10),LIMITS.minWidth,LIMITS.maxWidth,1200);
+  var font=fontEl.value||"Arial";
+  var color=colorEl.value||"#000000";
+  var bg=bgEl.value||"#ffffff";
+  var transparentBg=!!transparentBgEl.checked;
+
+  sizeEl.value=String(size);
+  maxWidthEl.value=String(maxWidth);
+
+  var padding=24;
+  var lineHeight=Math.max(Math.round(size*1.4),size+6);
+  var fontSpec=size+"px "+font;
+  var maxTextWidth=Math.max(40,maxWidth-(padding*2));
+
+  ctx.font=fontSpec;
+
+  var lines=buildWrappedLines(text,maxTextWidth,fontSpec);
+  var widestLine=0;
+  for(var i=0;i<lines.length;i++){
+    widestLine=Math.max(widestLine,ctx.measureText(lines[i]).width);
+  }
+
+  var canvasWidth=Math.ceil(Math.max(240,widestLine+(padding*2)));
+  canvasWidth=Math.min(canvasWidth,maxWidth,LIMITS.maxCanvasWidth);
+
+  var canvasHeight=Math.ceil((lines.length*lineHeight)+(padding*2));
+  if(canvasHeight>LIMITS.maxCanvasHeight){
+    setStatus("Rendered image would be too tall. Reduce text length or font size.","error");
+    return;
+  }
+
+  canvas.width=canvasWidth;
+  canvas.height=canvasHeight;
+
+  if(transparentBg){
+    ctx.clearRect(0,0,canvasWidth,canvasHeight);
+  }else{
+    ctx.fillStyle=bg;
+    ctx.fillRect(0,0,canvasWidth,canvasHeight);
+  }
+
+  ctx.fillStyle=color;
+  ctx.font=fontSpec;
+  ctx.textBaseline="top";
+
+  for(var lineIndex=0;lineIndex<lines.length;lineIndex++){
+    var y=padding+(lineIndex*lineHeight);
+    if(y+lineHeight>canvasHeight)break;
+    ctx.fillText(lines[lineIndex],padding,y);
+  }
+
+  canvas.setAttribute("aria-label","Generated text image preview, "+canvasWidth+" by "+canvasHeight+" pixels");
+  imageMetaEl.textContent="Output: "+canvasWidth+" x "+canvasHeight+" px, "+lines.length+" line(s), PNG.";
+  setStatus("Image generated.","success");
 }
+
 function downloadImg(){
-if(!canvas.width){document.getElementById("status").innerText="Generate an image first.";document.getElementById("status").style.color="#b91c1c";return}
-var a=document.createElement("a")
-a.href=canvas.toDataURL("image/png")
-a.download="text-image.png"
-a.click()
-document.getElementById("status").innerText="Download started."
-document.getElementById("status").style.color="#16a34a"
+  if(!canvas.width||!canvas.height){
+    setStatus("Generate an image first.","error");
+    return;
+  }
+
+  if(typeof canvas.toBlob==="function"){
+    canvas.toBlob(function(blob){
+      if(!blob){
+        setStatus("Download failed.","error");
+        return;
+      }
+      var url=URL.createObjectURL(blob);
+      var a=document.createElement("a");
+      a.href=url;
+      a.download="text-image.png";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      setStatus("Download started.","success");
+    },"image/png");
+    return;
+  }
+
+  try{
+    var link=document.createElement("a");
+    link.href=canvas.toDataURL("image/png");
+    link.download="text-image.png";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setStatus("Download started.","success");
+  }catch(e){
+    setStatus("Download failed.","error");
+  }
 }
-document.getElementById("text").addEventListener("input",generate)
-document.getElementById("size").addEventListener("change",generate)
-document.getElementById("font").addEventListener("change",generate)
-document.getElementById("color").addEventListener("input",generate)
-document.getElementById("bg").addEventListener("input",generate)
+
+function clearAll(){
+  textEl.value="";
+  canvas.width=0;
+  canvas.height=0;
+  imageMetaEl.textContent="";
+  setStatus("Cleared.","neutral");
+}
+
+var renderTimer=null;
+function scheduleGenerate(){
+  clearTimeout(renderTimer);
+  renderTimer=setTimeout(generate,120);
+}
+
+textEl.addEventListener("input",scheduleGenerate);
+sizeEl.addEventListener("input",scheduleGenerate);
+fontEl.addEventListener("change",scheduleGenerate);
+colorEl.addEventListener("input",scheduleGenerate);
+bgEl.addEventListener("input",scheduleGenerate);
+maxWidthEl.addEventListener("input",scheduleGenerate);
+transparentBgEl.addEventListener("change",scheduleGenerate);
+
+generate();
+window.generate=generate;
+window.downloadImg=downloadImg;
+window.clearAll=clearAll;
+})();
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>
