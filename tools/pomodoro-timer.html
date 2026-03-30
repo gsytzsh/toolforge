@@ -80,18 +80,34 @@
 <p class="subtitle">Time-managed focus timer implementing the Pomodoro Technique for productivity.</p>
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <p class="static-tool-discovery"><a href="/category/date--time.html">More in Date &amp; Time</a></p>
-<label for="work" class="sr-only">Work minutes</label>
-<input id="work" type="number" min="1" value="25" style="width:90px" aria-label="Work minutes">
-<label for="break" class="sr-only">Break minutes</label>
-<input id="break" type="number" min="1" value="5" style="width:90px;margin-left:8px" aria-label="Break minutes">
+<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:8px">
+<div>
+<label for="work">Work (min)</label><br>
+<input id="work" type="number" min="1" value="25" style="width:96px" aria-label="Work minutes">
+</div>
+<div>
+<label for="break">Short Break (min)</label><br>
+<input id="break" type="number" min="1" value="5" style="width:120px" aria-label="Short break minutes">
+</div>
+<div>
+<label for="long-break">Long Break (min)</label><br>
+<input id="long-break" type="number" min="1" value="15" style="width:120px" aria-label="Long break minutes">
+</div>
+<div>
+<label for="cycles">Long Break Every</label><br>
+<input id="cycles" type="number" min="1" value="4" style="width:130px" aria-label="Long break every N work sessions">
+</div>
+</div>
 <h2 id="phase">Work</h2>
-<h2 id="display" style="font-size:2.5rem;font-family:monospace">25:00</h2>
+<h2 id="display" role="timer" aria-live="off" style="font-size:2.5rem;font-family:monospace">25:00</h2>
 <div class="tool-actions">
 <button type="button" onclick="startTimer()">Start</button>
 <button type="button" onclick="pauseTimer()">Pause</button>
 <button type="button" onclick="resetTimer()">Reset</button>
 </div>
-<p id="status" class="inline-status"></p>
+<p id="session-count" class="inline-status">Completed work sessions: 0</p>
+<p id="status" class="inline-status" role="status" aria-live="polite" aria-atomic="true"></p>
+<p id="announcer" class="sr-only" aria-live="polite" aria-atomic="true"></p>
 
 <section class="tool-seo">
 <h3>About Pomodoro Timer</h3>
@@ -127,53 +143,37 @@
 JavaScript Timer Implementation:
 
 let timerId = null;
-let remaining = 25 * 60; // Convert minutes to seconds
+let remaining = 25 * 60;
 let currentMode = "work";
+let completedWorkSessions = 0;
+let targetEndTime = 0;
 
-// Format and display time
-function render() {
-  const minutes = Math.floor(remaining / 60);
-  const seconds = remaining % 60;
-  const display = String(minutes).padStart(2, '0') + ':' +
-                  String(seconds).padStart(2, '0');
-  document.getElementById("display").innerText = display;
+// Start timer using a wall-clock target time to reduce drift
+function startTimer() {
+  if (timerId) return; // Prevent multiple intervals
+  targetEndTime = Date.now() + remaining * 1000;
+  timerId = setInterval(tick, 250);
 }
 
-// Countdown tick function
 function tick() {
-  remaining--;
-
+  const secondsLeft = Math.max(0, Math.ceil((targetEndTime - Date.now()) / 1000));
+  remaining = secondsLeft;
   if (remaining <= 0) {
-    // Switch modes when timer reaches zero
-    currentMode = currentMode === "work" ? "break" : "work";
-    const newDuration = currentMode === "work" ? workMinutes : breakMinutes;
-    remaining = newDuration * 60;
-    // Optionally play notification sound
+    moveToNextMode();
     return;
   }
-
   render();
 }
 
-// Start timer with setInterval
-function startTimer() {
-  if (timerId) return; // Prevent multiple intervals
-  timerId = setInterval(tick, 1000); // 1 second interval
-}
-
-// Pause timer
-function pauseTimer() {
-  if (timerId) {
-    clearInterval(timerId);
-    timerId = null;
+function moveToNextMode() {
+  if (currentMode === "work") {
+    completedWorkSessions++;
+    currentMode = completedWorkSessions % 4 === 0 ? "longBreak" : "break";
+  } else {
+    currentMode = "work";
   }
-}
-
-// Reset timer
-function resetTimer() {
-  pauseTimer();
-  remaining = initialWorkMinutes * 60;
-  currentMode = "work";
+  remaining = getModeMinutes(currentMode) * 60;
+  targetEndTime = Date.now() + remaining * 1000;
   render();
 }
 </pre>
@@ -394,48 +394,149 @@ Task Estimation Accuracy:
 let timerId=null
 let remaining=25*60
 let currentMode="work"
+let completedWorkSessions=0
+let targetEndTime=0
+
+function clampMinutes(value){
+let minutes=parseInt(value,10)
+return Number.isFinite(minutes)&&minutes>0?minutes:1
+}
+
+function getInputMinutes(id){
+let input=document.getElementById(id)
+let minutes=clampMinutes(input.value)
+if(String(input.value)!==String(minutes)){
+input.value=String(minutes)
+}
+return minutes
+}
+
+function getModeMinutes(mode){
+if(mode==="work") return getInputMinutes("work")
+if(mode==="break") return getInputMinutes("break")
+return getInputMinutes("long-break")
+}
+
+function getCyclesBeforeLongBreak(){
+return getInputMinutes("cycles")
+}
+
+function setStatus(message,color){
+let status=document.getElementById("status")
+status.innerText=message
+status.style.color=color
+}
+
+function announce(message){
+let announcer=document.getElementById("announcer")
+announcer.textContent=""
+window.setTimeout(function(){
+announcer.textContent=message
+},20)
+}
+
+function getPhaseLabel(mode){
+if(mode==="work") return "Work"
+if(mode==="break") return "Short Break"
+return "Long Break"
+}
+
 function render(){
 let minutes=Math.floor(remaining/60)
 let seconds=remaining%60
 document.getElementById("display").innerText=String(minutes).padStart(2,"0")+":"+String(seconds).padStart(2,"0")
-document.getElementById("phase").innerText=currentMode==="work"?"Work":"Break"
+document.getElementById("phase").innerText=getPhaseLabel(currentMode)
+document.getElementById("session-count").innerText="Completed work sessions: "+String(completedWorkSessions)
 }
+
 function setMode(mode){
 currentMode=mode
-let value=parseInt(document.getElementById(mode==="work"?"work":"break").value,10)||1
-remaining=value*60
+remaining=getModeMinutes(mode)*60
+targetEndTime=0
 render()
 }
+
+function moveToNextMode(){
+if(currentMode==="work"){
+completedWorkSessions++
+let cycles=getCyclesBeforeLongBreak()
+currentMode=completedWorkSessions%cycles===0?"longBreak":"break"
+}else{
+currentMode="work"
+}
+remaining=getModeMinutes(currentMode)*60
+targetEndTime=Date.now()+remaining*1000
+render()
+let message=currentMode==="work"
+?"Break finished. Back to work."
+:currentMode==="longBreak"
+?"Work session complete. Time for a long break."
+:"Work session complete. Time for a short break."
+setStatus(message,"#16a34a")
+announce(message)
+}
+
 function tick(){
-remaining--
+if(!timerId) return
+remaining=Math.max(0,Math.ceil((targetEndTime-Date.now())/1000))
 if(remaining<=0){
-currentMode=currentMode==="work"?"break":"work"
-document.getElementById("status").innerText=currentMode==="work"?"Break finished. Back to work.":"Work session complete. Time for a break."
-document.getElementById("status").style.color="#16a34a"
-setMode(currentMode)
+moveToNextMode()
 return
 }
 render()
 }
+
 function startTimer(){
 if(timerId) return
-timerId=setInterval(tick,1000)
-document.getElementById("status").innerText="Timer running."
-document.getElementById("status").style.color="#16a34a"
+targetEndTime=Date.now()+remaining*1000
+timerId=setInterval(tick,250)
+setStatus("Timer running.","#16a34a")
+announce(getPhaseLabel(currentMode)+" timer started.")
 }
+
 function pauseTimer(){
-if(timerId){clearInterval(timerId);timerId=null}
-document.getElementById("status").innerText="Timer paused."
-document.getElementById("status").style.color="#666"
+if(timerId){
+remaining=Math.max(0,Math.ceil((targetEndTime-Date.now())/1000))
+clearInterval(timerId)
+timerId=null
+targetEndTime=0
+render()
 }
+setStatus("Timer paused.","#666")
+announce("Timer paused.")
+}
+
 function resetTimer(){
 if(timerId){clearInterval(timerId);timerId=null}
+completedWorkSessions=0
 setMode("work")
-document.getElementById("status").innerText="Timer reset."
-document.getElementById("status").style.color="#666"
+setStatus("Timer reset.","#666")
+announce("Timer reset to work mode.")
 }
-document.getElementById("work").addEventListener("change",function(){if(currentMode==="work") setMode("work")})
-document.getElementById("break").addEventListener("change",function(){if(currentMode==="break") setMode("break")})
+
+function handleDurationChange(mode){
+let label=mode==="work"?"work":mode==="break"?"short break":"long break"
+if(timerId&&currentMode===mode){
+setStatus("Updated "+label+" duration. It will apply next session.","#666")
+return
+}
+if(!timerId&&currentMode===mode){
+remaining=getModeMinutes(mode)*60
+render()
+setStatus("Updated "+label+" duration.","#16a34a")
+}
+}
+
+document.getElementById("work").addEventListener("change",function(){handleDurationChange("work")})
+document.getElementById("break").addEventListener("change",function(){handleDurationChange("break")})
+document.getElementById("long-break").addEventListener("change",function(){handleDurationChange("longBreak")})
+document.getElementById("cycles").addEventListener("change",function(){
+getCyclesBeforeLongBreak()
+setStatus(
+timerId?"Updated long break frequency. It will apply in upcoming sessions.":"Updated long break frequency.",
+timerId?"#666":"#16a34a"
+)
+})
 render()
 </script>
 <script src="/js/favorites.js"></script>
