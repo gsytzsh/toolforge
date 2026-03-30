@@ -81,15 +81,15 @@
 <p><a href="/">Back to all tools on ToolForge</a></p>
 <p class="static-tool-discovery"><a href="/category/unit-converters.html">More in Unit Converters</a></p>
 <h3>Decimal to Roman</h3>
-<label for="dec" class="sr-only">Dec</label>
-<input id="dec" type="number" min="1" max="3999" placeholder="2024" style="width:100px" aria-label="Dec">
+<label for="dec" class="sr-only">Decimal number (1 to 3999)</label>
+<input id="dec" type="number" min="1" max="3999" step="1" placeholder="2024" style="width:100px" aria-label="Decimal number (1 to 3999)">
 <button onclick="toRoman()">To Roman</button>
-<p>Roman: <span id="roman"></span></p>
+<p>Roman: <span id="roman" role="status" aria-live="polite"></span></p>
 <h3>Roman to Decimal</h3>
-<label for="rom" class="sr-only">Rom</label>
-<input id="rom" placeholder="MMXXIV" style="width:120px" aria-label="Rom">
+<label for="rom" class="sr-only">Roman numeral (I to MMMCMXCIX)</label>
+<input id="rom" placeholder="MMXXIV" style="width:120px" aria-label="Roman numeral (I to MMMCMXCIX)">
 <button onclick="toDec()">To Decimal</button>
-<p>Decimal: <span id="decimal"></span></p>
+<p>Decimal: <span id="decimal" role="status" aria-live="polite"></span></p>
 
 <section class="tool-seo">
 <h3>About Roman Numerals Converter</h3>
@@ -298,7 +298,7 @@ Year Examples:
   1776 = MDCCLXXVI (US Declaration of Independence)
   1969 = MCMLXIX (Moon landing)
   2000 = MM (Millennium)
-  2024 = MMXXIV (Current year)
+  2024 = MMXXIV (example year)
 </pre>
 
 <h4>Historical Background</h4>
@@ -422,19 +422,40 @@ Year Examples:
 </main>
 <script>
 var R=[["M",1000],["CM",900],["D",500],["CD",400],["C",100],["XC",90],["L",50],["XL",40],["X",10],["IX",9],["V",5],["IV",4],["I",1]]
+var ROMAN_STRICT=/^(?=.+)M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/
+
+function setRomanResult(message){
+document.getElementById("roman").innerText=message
+}
+
+function setDecimalResult(message){
+document.getElementById("decimal").innerText=message
+}
+
 function toRoman(){
-var n=parseInt(document.getElementById("dec").value,10)
-if(isNaN(n)||n<1||n>3999){document.getElementById("roman").innerText="Enter 1–3999.";return}
+var raw=document.getElementById("dec").value.trim()
+var n=Number(raw)
+if(!Number.isInteger(n)||n<1||n>3999){setRomanResult("Enter an integer from 1 to 3999.");return}
 var s=""
 for(var i=0;i<R.length;i++)while(n>=R[i][1]){s+=R[i][0];n-=R[i][1]}
-document.getElementById("roman").innerText=s
+setRomanResult(s)
 }
+
 function toDec(){
 var s=document.getElementById("rom").value.toUpperCase().trim()
+if(!s){setDecimalResult("Enter a Roman numeral.");return}
+if(!ROMAN_STRICT.test(s)){setDecimalResult("Invalid Roman numeral.");return}
 var n=0
 for(var i=0;i<R.length;i++)while(s.indexOf(R[i][0])===0){n+=R[i][1];s=s.slice(R[i][0].length)}
-document.getElementById("decimal").innerText=s?"Invalid.":n
+setDecimalResult(String(n))
 }
+
+document.getElementById("dec").addEventListener("keydown",function(e){
+if(e.key==="Enter") toRoman()
+})
+document.getElementById("rom").addEventListener("keydown",function(e){
+if(e.key==="Enter") toDec()
+})
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>
