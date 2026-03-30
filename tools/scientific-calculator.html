@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Scientific Calculator – Online Scientific Calculator | ToolForge</title>
-<meta name="description" content="Scientific Calculator performs trigonometric, logarithmic, exponential, and algebraic operations with function reference, constant values, and order of operations explanation. Part of the ToolForge developer tools collection.">
+<meta name="description" content="Evaluate expressions with trig, log, powers, roots, constants, and parentheses. Scientific calculator with degree-based trig support.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://toolforge.site/tools/scientific-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolForge">
 <meta property="og:title" content="Scientific Calculator – Online Scientific Calculator | ToolForge">
-<meta property="og:description" content="Scientific Calculator performs trigonometric, logarithmic, exponential, and algebraic operations with function reference, constant values, and order of operations explanation. Part of the ToolForge developer tools collection.">
+<meta property="og:description" content="Evaluate expressions with trig, log, powers, roots, constants, and parentheses. Scientific calculator with degree-based trig support.">
 <meta property="og:url" content="https://toolforge.site/tools/scientific-calculator.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Scientific Calculator – Online Scientific Calculator | ToolForge">
-<meta name="twitter:description" content="Scientific Calculator performs trigonometric, logarithmic, exponential, and algebraic operations with function reference, constant values, and order of operations explanation. Part of the ToolForge developer tools collection.">
+<meta name="twitter:description" content="Evaluate expressions with trig, log, powers, roots, constants, and parentheses. Scientific calculator with degree-based trig support.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
 
@@ -166,7 +166,7 @@ Common Mistakes:
   8 / 2 * 2     = 8   (NOT 2)
   8 / (2 * 2)   = 2   (parentheses required)
 
-  2 ^ 3 ^ 2     = 64  (right to left: 3^2=9, then 2^9=512)
+  2 ^ 3 ^ 2     = 512 (right to left: 3^2=9, then 2^9=512)
   (2 ^ 3) ^ 2   = 64  (left to right: 2^3=8, then 8^2=64)
 </pre>
 
@@ -429,10 +429,16 @@ form XeY where X and Y are numbers.
 </main>
 <script>
 function degRad(x){return x*Math.PI/180}
+function radDeg(x){return x*180/Math.PI}
 function calc(){
-var s=document.getElementById("expr").value.replace(/\s+/g,"").replace(/π/g,"Math.PI").replace(/√/g,"Math.sqrt")
-s=s.replace(/sin\(/g,"(function(x){return Math.sin(degRad(x))})(").replace(/cos\(/g,"(function(x){return Math.cos(degRad(x))})(").replace(/tan\(/g,"(function(x){return Math.tan(degRad(x))})(")
-s=s.replace(/log\(/g,"Math.log10(").replace(/ln\(/g,"Math.log(").replace(/sqrt\(/g,"Math.sqrt(")
+var s=document.getElementById("expr").value
+if(!s){document.getElementById("result").innerText="";return}
+s=s.replace(/\s+/g,"").replace(/π/g,"Math.PI").replace(/√/g,"Math.sqrt")
+s=s.replace(/\bpi\b/gi,"Math.PI")
+s=s.replace(/(^|[^0-9A-Za-z_.])e(?=$|[^0-9A-Za-z_])/g,"$1Math.E")
+s=s.replace(/\basin\(/g,"(function(x){return radDeg(Math.asin(x))})(").replace(/\bacos\(/g,"(function(x){return radDeg(Math.acos(x))})(").replace(/\batan\(/g,"(function(x){return radDeg(Math.atan(x))})(")
+s=s.replace(/\bsin\(/g,"(function(x){return Math.sin(degRad(x))})(").replace(/\bcos\(/g,"(function(x){return Math.cos(degRad(x))})(").replace(/\btan\(/g,"(function(x){return Math.tan(degRad(x))})(")
+s=s.replace(/\blog\(/g,"Math.log10(").replace(/\bln\(/g,"Math.log(").replace(/\bexp\(/g,"Math.exp(").replace(/\bcbrt\(/g,"Math.cbrt(").replace(/\bsqrt\(/g,"Math.sqrt(")
 s=s.replace(/\^/g,"**")
 try{
 var v=eval(s)
