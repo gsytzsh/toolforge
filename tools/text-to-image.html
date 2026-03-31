@@ -64,6 +64,14 @@
     },
     {
       "@type": "Question",
+      "name": "What happens if the input is empty?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If the text box is empty, the preview uses a built-in \"Sample text\" placeholder so you can still test styling and export settings."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Why may text look slightly different across browsers?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -148,6 +156,8 @@
 <ul>
   <li><strong>Multi-line support:</strong> Manual line breaks are preserved.</li>
   <li><strong>Auto-wrap:</strong> Long lines wrap automatically to stay within max width.</li>
+  <li><strong>Empty input behavior:</strong> If no text is entered, preview renders a default <code>Sample text</code>.</li>
+  <li><strong>Input length cap:</strong> Text input is limited to <code>20,000</code> characters.</li>
   <li><strong>Safety limit:</strong> Output canvas is capped at <code>4096 x 4096</code> to avoid browser instability.</li>
   <li><strong>Rendering differences:</strong> Font anti-aliasing may vary by browser and operating system.</li>
 </ul>
@@ -235,6 +245,9 @@
 
   <dt>Is there a size limit for generated images?</dt>
   <dd>Yes. To avoid browser crashes, output is limited to a maximum canvas size of 4096 by 4096 pixels.</dd>
+
+  <dt>What happens if the input is empty?</dt>
+  <dd>If the text box is empty, the preview uses a built-in "Sample text" placeholder so you can still test styling and export settings.</dd>
 
   <dt>Why may text look slightly different across browsers?</dt>
   <dd>Different browsers and operating systems use different font rendering engines, so anti-aliasing and spacing can vary slightly.</dd>

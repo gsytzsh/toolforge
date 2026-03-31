@@ -35,7 +35,7 @@
       "name": "What line number formats are supported?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This tool supports: plain numbers (1, 2, 3), zero-padded numbers (001, 002, 003), Roman numerals (I, II, III), and alphabetic (a, b, c). Separators can be tab, space, colon, period, or custom. Padding ensures consistent width for sorting and alignment."
+        "text": "This tool supports plain numbers (1, 2, 3) and zero-padded numbers (001, 002, 003). Separator options include tab, space, colon, period, and pipe. Padding ensures consistent width for sorting and alignment."
       }
     },
     {
@@ -85,7 +85,7 @@
 <textarea id="input" rows="10" style="width:90%;font-family:monospace" aria-label="Input text"></textarea>
 <h3>Options</h3>
 <label for="startNum">Starting number:</label>
-<input id="startNum" type="number" min="1" value="1" style="width:60px" aria-label="Start Num">
+<input id="startNum" type="number" min="0" value="1" style="width:60px" aria-label="Start Num">
 <label for="padding" style="margin-left:12px">Zero-pad to:</label>
 <select id="padding" aria-label="Padding">
   <option value="0">No padding</option>
@@ -347,10 +347,17 @@ Use the Find and Replace tool with regex mode enabled.
 <script>
 function add(){
 var text=document.getElementById("input").value;
-var startNum=parseInt(document.getElementById("startNum").value,10)||1;
-var padding=parseInt(document.getElementById("padding").value,10)||0;
+var parsedStartNum=parseInt(document.getElementById("startNum").value,10);
+var startNum=Number.isNaN(parsedStartNum)?1:parsedStartNum;
+var parsedPadding=parseInt(document.getElementById("padding").value,10);
+var padding=Number.isNaN(parsedPadding)?0:Math.max(0,parsedPadding);
 var sepInput=document.getElementById("separator").value;
 var separator=sepInput==="\\t"?"\t":sepInput;
+if(text===""){
+document.getElementById("output").value="";
+document.getElementById("status").innerText="Input is empty.";
+return;
+}
 var lines=text.split(/\r?\n/);
 var result=lines.map(function(l,i){
 var num=startNum+i;
