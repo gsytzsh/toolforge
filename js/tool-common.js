@@ -1,7 +1,7 @@
 (function(){
   "use strict";
   var path=window.location.pathname||"";
-  var m=path.match(/\/(?:tools|guides)\/([^\/]+)\.html$/);
+  var m=path.match(/\/tools\/([^\/]+)\.html$/);
   var isToolPage=!!m;
   var currentFile=m?m[1]:null;
 

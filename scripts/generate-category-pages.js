@@ -133,7 +133,6 @@ function main() {
 </head>
 <body>
 <header class="top-nav">
-  <a href="/" class="top-nav-brand">ToolForge</a>
   <nav id="tool-top-nav-menu" class="top-nav-menu" aria-label="Tool categories"></nav>
 </header>
 <main class="container">
