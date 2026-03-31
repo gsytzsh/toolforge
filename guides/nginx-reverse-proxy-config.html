@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nginx 反向代理配置指南（生产可用模板）| ToolForge Guides</title>
+<meta name="description" content="Nginx 反向代理配置完整指南：HTTP 代理、WebSocket、HTTPS 站点、请求头、超时配置与常见问题排查。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://toolforge.site/guides/nginx-reverse-proxy-config.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Nginx 反向代理配置指南（生产可用模板）">
+<meta property="og:description" content="一套可直接落地的 Nginx 反向代理配置示例。">
+<meta property="og:url" content="https://toolforge.site/guides/nginx-reverse-proxy-config.html">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.guide-box{border:1px solid #ddd;border-radius:8px;padding:12px;background:#fafafa;margin:12px 0}
+.cmd{background:#111827;color:#e5e7eb;padding:12px;border-radius:6px;font-size:12px;overflow:auto;white-space:pre-wrap;line-height:1.45}
+.related{margin-top:28px;padding-top:14px;border-top:1px solid #e5e7eb}
+.related ul{margin:8px 0 0 20px}
+.small{font-size:13px;color:#555}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Nginx 反向代理配置指南（生产可用模板）</h1>
+<p class="subtitle">覆盖 HTTP、WebSocket 与 HTTPS 的常见代理场景。</p>
+<p><a href="/guides/index.html">Back to Guides</a> · <a href="/">Home</a></p>
+
+<section class="guide-box">
+<p><strong>前提：</strong>你已经安装并可运行 Nginx。</p>
+<p><strong>配置位置：</strong><code>/etc/nginx/conf.d/your-domain.conf</code></p>
+</section>
+
+<h2>1. 基础 HTTP 反向代理</h2>
+<pre class="cmd">server {
+    listen 80;
+    server_name example.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}</pre>
+
+<h2>2. WebSocket 代理（如 ws / socket.io）</h2>
+<pre class="cmd">location /ws/ {
+    proxy_pass http://127.0.0.1:8080;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_set_header Host $host;
+}</pre>
+
+<h2>3. 常用超时与请求体设置</h2>
+<pre class="cmd">client_max_body_size 20m;
+proxy_connect_timeout 60s;
+proxy_read_timeout 60s;
+proxy_send_timeout 60s;</pre>
+
+<h2>4. 测试并重载配置</h2>
+<pre class="cmd">sudo nginx -t
+sudo systemctl reload nginx</pre>
+
+<h2>5. HTTPS 部署提示</h2>
+<p>要启用 HTTPS，请先签发证书，再在 server 块中配置证书路径。</p>
+<pre class="cmd">ssl_certificate     /etc/letsencrypt/live/example.com/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;</pre>
+<p class="small">证书签发可参考下方 SSL 指南。</p>
+
+<section class="related">
+<h3>相关指南</h3>
+<ul>
+<li><a href="/guides/nginx-install-rocky9.html">Rocky 9 安装 Nginx</a></li>
+<li><a href="/guides/ssl-certificate-guide.html">Linux SSL 证书部署指南</a></li>
+<li><a href="/guides/install-docker-rocky9.html">Rocky 9 安装 Docker 指南</a></li>
+</ul>
+<h3>相关工具</h3>
+<ul>
+<li><a href="/tools/http-header-builder.html">HTTP Header Builder</a></li>
+<li><a href="/tools/http-header-parser.html">HTTP Header Parser</a></li>
+<li><a href="/tools/ip-info.html">IP Info</a></li>
+</ul>
+</section>
+</main>
+<script src="/js/tool-common.js"></script>
+</body>
+</html>

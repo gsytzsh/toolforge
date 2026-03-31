@@ -12,6 +12,7 @@ const path = require("path");
 const ROOT = path.resolve(__dirname, "..");
 const TOOLS_LIST = path.join(ROOT, "tools-list.json");
 const SITEMAP_OUT = path.join(ROOT, "sitemap.xml");
+const GUIDES_DIR = path.join(ROOT, "guides");
 
 const BASE_URL = (process.env.SITEMAP_BASE_URL || "https://toolforge.site").replace(/\/$/, "");
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -71,6 +72,34 @@ function main() {
       "    <priority>0.8</priority>",
       "  </url>"
     );
+  }
+
+  // Include standalone guides/*.html not present in tools-list.json
+  if (fs.existsSync(GUIDES_DIR)) {
+    const listedGuidePaths = new Set(
+      tools
+        .map((t) => (t && t.url ? String(t.url) : ""))
+        .filter((u) => /^\/guides\/[^/]+\.html$/i.test(u))
+    );
+
+    const guideFiles = fs
+      .readdirSync(GUIDES_DIR)
+      .filter((f) => f.toLowerCase().endsWith(".html"))
+      .sort();
+
+    for (const file of guideFiles) {
+      const rel = `/guides/${file}`;
+      if (listedGuidePaths.has(rel)) continue;
+      const loc = `${BASE_URL}${rel}`;
+      lines.push(
+        "  <url>",
+        `    <loc>${escapeXml(loc)}</loc>`,
+        `    <lastmod>${TODAY}</lastmod>`,
+        "    <changefreq>monthly</changefreq>",
+        "    <priority>0.8</priority>",
+        "  </url>"
+      );
+    }
   }
 
   lines.push("</urlset>");

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linux 常用命令速查（运维入门版）| ToolForge Guides</title>
+<meta name="description" content="Linux 常用命令速查清单：文件、系统、网络、进程、日志、防火墙、包管理。适合服务器运维快速查阅。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://toolforge.site/guides/linux-commands-cheat-sheet.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Linux 常用命令速查（运维入门版）">
+<meta property="og:description" content="可直接复制使用的 Linux 运维命令合集。">
+<meta property="og:url" content="https://toolforge.site/guides/linux-commands-cheat-sheet.html">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.cmd{background:#111827;color:#e5e7eb;padding:12px;border-radius:6px;font-size:12px;overflow:auto;white-space:pre-wrap;line-height:1.45}
+.related{margin-top:28px;padding-top:14px;border-top:1px solid #e5e7eb}
+.related ul{margin:8px 0 0 20px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Linux 常用命令速查（运维入门版）</h1>
+<p class="subtitle">按场景整理，适合日常运维和服务器排障。</p>
+<p><a href="/guides/index.html">Back to Guides</a> · <a href="/">Home</a></p>
+
+<h2>1. 文件与目录</h2>
+<pre class="cmd">ls -al
+pwd
+cd /path
+cp -r src dst
+mv old new
+rm -rf target
+mkdir -p /path/to/dir</pre>
+
+<h2>2. 系统与资源</h2>
+<pre class="cmd">uname -a
+uptime
+free -h
+df -h
+top
+htop   # 若未安装可先 sudo dnf install -y htop</pre>
+
+<h2>3. 进程与服务</h2>
+<pre class="cmd">ps aux | grep nginx
+sudo systemctl status nginx --no-pager
+sudo systemctl restart nginx
+sudo systemctl enable nginx</pre>
+
+<h2>4. 网络排查</h2>
+<pre class="cmd">ip a
+ss -tulpen
+ping -c 4 8.8.8.8
+curl -I https://example.com
+traceroute example.com   # 未安装可先装 traceroute</pre>
+
+<h2>5. 日志查看</h2>
+<pre class="cmd">sudo journalctl -u nginx --no-pager | tail -n 50
+tail -f /var/log/nginx/access.log
+tail -f /var/log/nginx/error.log</pre>
+
+<h2>6. 防火墙（firewalld）</h2>
+<pre class="cmd">sudo firewall-cmd --list-services
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --permanent --add-service=https
+sudo firewall-cmd --reload</pre>
+
+<h2>7. 包管理（Rocky/Alma）</h2>
+<pre class="cmd">sudo dnf makecache
+sudo dnf search nginx
+sudo dnf install -y nginx
+sudo dnf update -y</pre>
+
+<section class="related">
+<h3>相关指南</h3>
+<ul>
+<li><a href="/guides/nginx-install-rocky9.html">Rocky 9 安装 Nginx</a></li>
+<li><a href="/guides/nginx-reverse-proxy-config.html">Nginx 反向代理配置</a></li>
+<li><a href="/guides/install-docker-rocky9.html">Rocky 9 安装 Docker</a></li>
+</ul>
+<h3>相关工具</h3>
+<ul>
+<li><a href="/tools/ip-info.html">IP Info</a></li>
+<li><a href="/tools/linux-commands-reference.html">Linux Commands Reference</a></li>
+<li><a href="/tools/password-generator.html">Password Generator</a></li>
+</ul>
+</section>
+</main>
+<script src="/js/tool-common.js"></script>
+</body>
+</html>

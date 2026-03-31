@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rocky Linux 9 / AlmaLinux 9 安装 Nginx（官方稳定版）| ToolForge Guides</title>
+<meta name="description" content="Rocky Linux 9 / AlmaLinux 9 安装 Nginx 官方稳定版完整指南：添加官方源、安装、启动、防火墙放行、常用命令与排错。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://toolforge.site/guides/nginx-install-rocky9.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Rocky Linux 9 / AlmaLinux 9 安装 Nginx（官方稳定版）">
+<meta property="og:description" content="适合新手的 Nginx 安装与基础上线检查清单。">
+<meta property="og:url" content="https://toolforge.site/guides/nginx-install-rocky9.html">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.guide-box{border:1px solid #ddd;border-radius:8px;padding:12px;background:#fafafa;margin:12px 0}
+.cmd{background:#111827;color:#e5e7eb;padding:12px;border-radius:6px;font-size:12px;overflow:auto;white-space:pre-wrap;line-height:1.45}
+.small{font-size:13px;color:#555}
+.related{margin-top:28px;padding-top:14px;border-top:1px solid #e5e7eb}
+.related ul{margin:8px 0 0 20px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Rocky Linux 9 / AlmaLinux 9 安装 Nginx（官方稳定版）</h1>
+<p class="subtitle">从零安装到可访问，面向生产环境的最小可用流程。</p>
+<p><a href="/guides/index.html">Back to Guides</a> · <a href="/">Home</a></p>
+
+<section class="guide-box">
+<p><strong>适用系统：</strong>Rocky Linux 9 / AlmaLinux 9</p>
+<p><strong>目标：</strong>使用 Nginx 官方 stable 源安装最新版稳定版本，并完成服务启动和防火墙放行。</p>
+</section>
+
+<h2>1. 更新系统并安装基础工具</h2>
+<pre class="cmd">sudo dnf update -y
+sudo dnf install -y dnf-utils curl ca-certificates</pre>
+
+<h2>2. 添加 Nginx 官方 YUM 源</h2>
+<pre class="cmd">sudo tee /etc/yum.repos.d/nginx.repo >/dev/null <<'REPO'
+[nginx-stable]
+name=nginx stable repo
+baseurl=http://nginx.org/packages/centos/9/$basearch/
+gpgcheck=1
+enabled=1
+gpgkey=https://nginx.org/keys/nginx_signing.key
+module_hotfixes=true
+REPO</pre>
+
+<h2>3. 安装 Nginx</h2>
+<pre class="cmd">sudo dnf install -y nginx
+nginx -v</pre>
+
+<h2>4. 启动并设置开机自启</h2>
+<pre class="cmd">sudo systemctl enable --now nginx
+sudo systemctl status nginx --no-pager</pre>
+
+<h2>5. 防火墙放行 HTTP / HTTPS</h2>
+<pre class="cmd">sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --permanent --add-service=https
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-services</pre>
+
+<h2>6. 基础可用性检查</h2>
+<pre class="cmd">curl -I http://127.0.0.1
+sudo ss -tulpen | grep ':80'</pre>
+<p class="small">浏览器访问 <code>http://服务器公网IP</code>，看到 Nginx 欢迎页即安装成功。</p>
+
+<h2>7. 常用管理命令</h2>
+<pre class="cmd">sudo nginx -t
+sudo systemctl reload nginx
+sudo systemctl restart nginx
+sudo systemctl stop nginx</pre>
+
+<h2>8. 重要路径</h2>
+<ul>
+<li><code>/etc/nginx/nginx.conf</code>：主配置</li>
+<li><code>/etc/nginx/conf.d/</code>：站点配置目录</li>
+<li><code>/usr/share/nginx/html</code>：默认网站根目录</li>
+<li><code>/var/log/nginx/</code>：访问/错误日志</li>
+</ul>
+
+<section class="related">
+<h3>相关指南</h3>
+<ul>
+<li><a href="/guides/nginx-reverse-proxy-config.html">Nginx 反向代理配置指南</a></li>
+<li><a href="/guides/ssl-certificate-guide.html">Linux SSL 证书部署指南（acme.sh / certbot）</a></li>
+<li><a href="/guides/install-docker-rocky9.html">Rocky 9 安装 Docker 指南</a></li>
+</ul>
+<h3>相关工具</h3>
+<ul>
+<li><a href="/tools/ip-info.html">IP Info</a></li>
+<li><a href="/tools/http-header-parser.html">HTTP Header Parser</a></li>
+<li><a href="/tools/url-parser.html">URL Parser</a></li>
+</ul>
+</section>
+</main>
+<script src="/js/tool-common.js"></script>
+</body>
+</html>

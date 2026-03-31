@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rocky Linux 9 安装 Docker 与 Docker Compose | ToolForge Guides</title>
+<meta name="description" content="Rocky Linux 9 / AlmaLinux 9 安装 Docker CE 与 Docker Compose Plugin 全流程指南，含开机自启、非 root 使用与验证。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://toolforge.site/guides/install-docker-rocky9.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Rocky Linux 9 安装 Docker 与 Docker Compose">
+<meta property="og:description" content="适合新手的 Docker 安装与验证步骤。">
+<meta property="og:url" content="https://toolforge.site/guides/install-docker-rocky9.html">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.guide-box{border:1px solid #ddd;border-radius:8px;padding:12px;background:#fafafa;margin:12px 0}
+.cmd{background:#111827;color:#e5e7eb;padding:12px;border-radius:6px;font-size:12px;overflow:auto;white-space:pre-wrap;line-height:1.45}
+.related{margin-top:28px;padding-top:14px;border-top:1px solid #e5e7eb}
+.related ul{margin:8px 0 0 20px}
+.small{font-size:13px;color:#555}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Rocky Linux 9 安装 Docker 与 Docker Compose</h1>
+<p class="subtitle">官方源安装、启动自启、权限配置与可用性测试。</p>
+<p><a href="/guides/index.html">Back to Guides</a> · <a href="/">Home</a></p>
+
+<section class="guide-box">
+<p><strong>适用系统：</strong>Rocky Linux 9 / AlmaLinux 9</p>
+<p><strong>安装内容：</strong>Docker CE、Docker CLI、containerd、Compose Plugin</p>
+</section>
+
+<h2>1. 卸载旧版 Docker（如果有）</h2>
+<pre class="cmd">sudo dnf remove -y docker docker-client docker-client-latest docker-common docker-latest \
+  docker-latest-logrotate docker-logrotate docker-engine</pre>
+
+<h2>2. 安装依赖并添加官方仓库</h2>
+<pre class="cmd">sudo dnf install -y dnf-plugins-core
+sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</pre>
+
+<h2>3. 安装 Docker 组件</h2>
+<pre class="cmd">sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</pre>
+
+<h2>4. 启动并设置开机自启</h2>
+<pre class="cmd">sudo systemctl enable --now docker
+sudo systemctl status docker --no-pager
+docker --version
+docker compose version</pre>
+
+<h2>5. （可选）配置当前用户免 sudo 运行 Docker</h2>
+<pre class="cmd">sudo usermod -aG docker $USER
+newgrp docker
+# 重新登录后生效</pre>
+
+<h2>6. 验证安装</h2>
+<pre class="cmd">docker run --rm hello-world</pre>
+<p class="small">看到 "Hello from Docker!" 表示安装成功。</p>
+
+<h2>7. 常用维护命令</h2>
+<pre class="cmd">sudo systemctl restart docker
+sudo systemctl stop docker
+sudo systemctl start docker
+sudo journalctl -u docker --no-pager | tail -n 50</pre>
+
+<section class="related">
+<h3>相关指南</h3>
+<ul>
+<li><a href="/guides/nginx-install-rocky9.html">Rocky 9 安装 Nginx</a></li>
+<li><a href="/guides/nginx-reverse-proxy-config.html">Nginx 反向代理配置指南</a></li>
+<li><a href="/guides/ssl-certificate-guide.html">Linux SSL 证书部署指南</a></li>
+</ul>
+<h3>相关工具</h3>
+<ul>
+<li><a href="/tools/json-viewer.html">JSON Viewer</a></li>
+<li><a href="/tools/base64-encode.html">Base64 Encode/Decode</a></li>
+<li><a href="/tools/password-generator.html">Password Generator</a></li>
+</ul>
+</section>
+</main>
+<script src="/js/tool-common.js"></script>
+</body>
+</html>

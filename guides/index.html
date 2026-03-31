@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Server Guides - Linux, Nginx, Docker, SSL | ToolForge</title>
+<meta name="description" content="Practical server guides for Linux operations: Nginx install, reverse proxy setup, Docker install, SSL certificate deployment, and command cheat sheets.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://toolforge.site/guides/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="ToolForge Guides">
+<meta property="og:description" content="Step-by-step server operation guides for Linux, Nginx, Docker, and SSL.">
+<meta property="og:url" content="https://toolforge.site/guides/index.html">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.guide-card{display:block;border:1px solid #e5e7eb;border-radius:10px;padding:14px;background:#fff;text-decoration:none;color:inherit}
+.guide-card:hover{border-color:#94a3b8;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.guide-card h3{font-size:18px;margin:0 0 8px}
+.guide-card p{margin:0;color:#475569;font-size:14px;line-height:1.45}
+.tag-row{margin-top:10px;font-size:12px;color:#64748b}
+.intro{border:1px solid #ddd;border-radius:8px;padding:12px;background:#fafafa;margin:12px 0}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>ToolForge Guides</h1>
+<p class="subtitle">Step-by-step guides for Linux server setup and deployment.</p>
+<p><a href="/">Back to Home</a></p>
+
+<section class="intro">
+<p><strong>What you can find here:</strong> practical runbooks for Nginx, Docker, SSL certificate issuance, reverse proxy setup, and daily Linux operations.</p>
+</section>
+
+<div class="guide-grid">
+  <a class="guide-card" href="/guides/ssl-certificate-guide.html">
+    <h3>Linux SSL Certificate Guide (acme.sh &amp; Certbot)</h3>
+    <p>Beginner-friendly command builder and walkthrough for issuing, deploying, verifying, and renewing HTTPS certificates.</p>
+    <div class="tag-row">Linux · SSL · Let's Encrypt · acme.sh · Certbot</div>
+  </a>
+
+  <a class="guide-card" href="/guides/nginx-install-rocky9.html">
+    <h3>Rocky Linux 9 / AlmaLinux 9 安装 Nginx</h3>
+    <p>使用官方稳定源安装 Nginx，包含开机自启、防火墙放行和可用性检查。</p>
+    <div class="tag-row">Nginx · Rocky 9 · AlmaLinux 9</div>
+  </a>
+
+  <a class="guide-card" href="/guides/nginx-reverse-proxy-config.html">
+    <h3>Nginx 反向代理配置指南</h3>
+    <p>覆盖 HTTP/WebSocket/HTTPS 的生产可用代理模板和重载检查流程。</p>
+    <div class="tag-row">Reverse Proxy · Nginx · WebSocket</div>
+  </a>
+
+  <a class="guide-card" href="/guides/install-docker-rocky9.html">
+    <h3>Rocky Linux 9 安装 Docker 与 Docker Compose</h3>
+    <p>官方源安装 Docker CE + Compose Plugin，并完成服务启动、权限配置与验证。</p>
+    <div class="tag-row">Docker · Compose · Rocky 9</div>
+  </a>
+
+  <a class="guide-card" href="/guides/linux-commands-cheat-sheet.html">
+    <h3>Linux 常用命令速查</h3>
+    <p>文件、网络、进程、防火墙与日志排查命令清单，适合运维日常快速查阅。</p>
+    <div class="tag-row">Linux · Ops · Cheat Sheet</div>
+  </a>
+</div>
+</main>
+<script src="/js/tool-common.js"></script>
+</body>
+</html>
