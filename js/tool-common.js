@@ -42,7 +42,7 @@
     // Mobile navigation removed
   }
 
-  fetch("/tools-list.json").then(function(r){return r.json()}).then(function(tools){
+  fetch("/tools-list.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(tools){
     // Navigation removed
     injectBackToTop();
     if(!isToolPage)return;

@@ -399,7 +399,7 @@
     });
   }
 
-  fetch("/tools-list.json")
+  fetch("/tools-list.json", { cache: "no-store" })
     .then(function(r) { return r.json(); })
     .then(function(data) {
       allTools = data;
