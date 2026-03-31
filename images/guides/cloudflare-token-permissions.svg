@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="t d">
+  <title id="t">Cloudflare API Token Permissions Walkthrough</title>
+  <desc id="d">Illustrated steps to create a Cloudflare API token with DNS edit permissions for ACME DNS-01.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f4f7fb; }
+      .card { fill: #ffffff; stroke: #d7deea; stroke-width: 2; rx: 14; }
+      .title { font: 700 30px Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 16px Arial, sans-serif; fill: #334155; }
+      .h { font: 700 18px Arial, sans-serif; fill: #0b1220; }
+      .p { font: 500 15px Arial, sans-serif; fill: #1f2937; }
+      .mono { font: 600 14px "Courier New", monospace; fill: #0f172a; }
+      .badge { fill: #e2e8f0; stroke: #cbd5e1; stroke-width: 1; rx: 8; }
+      .ok { fill: #dcfce7; stroke: #86efac; stroke-width: 1; rx: 8; }
+      .arrow { stroke: #64748b; stroke-width: 3; fill: none; marker-end: url(#m); }
+    </style>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="760"/>
+
+  <text class="title" x="48" y="56">Cloudflare DNS-01: Create API Token</text>
+  <text class="subtitle" x="48" y="84">Use minimum required permissions for ACME DNS challenge automation.</text>
+
+  <rect class="card" x="48" y="118" width="520" height="156"/>
+  <text class="h" x="74" y="150">Step 1 - Open Token Page</text>
+  <text class="p" x="74" y="178">Cloudflare Dashboard -> My Profile -> API Tokens</text>
+  <text class="p" x="74" y="202">Click "Create Token" and start from "Edit zone DNS" template</text>
+  <rect class="badge" x="74" y="218" width="230" height="34"/>
+  <text class="mono" x="88" y="240">Path: Profile > API Tokens</text>
+
+  <rect class="card" x="632" y="118" width="520" height="156"/>
+  <text class="h" x="658" y="150">Step 2 - Set Token Permissions</text>
+  <rect class="ok" x="658" y="166" width="218" height="32"/>
+  <text class="mono" x="672" y="187">Zone:DNS:Edit</text>
+  <rect class="ok" x="658" y="206" width="218" height="32"/>
+  <text class="mono" x="672" y="227">Zone:Zone:Read</text>
+  <text class="p" x="658" y="256">Restrict token to the specific zone if possible.</text>
+
+  <path class="arrow" d="M568 196 L632 196"/>
+
+  <rect class="card" x="48" y="312" width="520" height="170"/>
+  <text class="h" x="74" y="344">Step 3 - Set Zone Resources</text>
+  <text class="p" x="74" y="372">Account resources: Include -> All accounts (or your target account)</text>
+  <text class="p" x="74" y="396">Zone resources: Include -> Specific zone -> example.com</text>
+  <rect class="badge" x="74" y="414" width="334" height="38"/>
+  <text class="mono" x="88" y="438">Scope tightly to reduce blast radius</text>
+
+  <rect class="card" x="632" y="312" width="520" height="170"/>
+  <text class="h" x="658" y="344">Step 4 - Create and Save Token</text>
+  <text class="p" x="658" y="372">Continue to summary -> Create Token</text>
+  <text class="p" x="658" y="396">Copy token once and store securely</text>
+  <rect class="ok" x="658" y="414" width="308" height="38"/>
+  <text class="mono" x="672" y="438">export CF_Token="..."</text>
+
+  <path class="arrow" d="M568 396 L632 396"/>
+
+  <rect class="card" x="48" y="520" width="1104" height="178"/>
+  <text class="h" x="74" y="552">Quick Validation Checklist</text>
+  <text class="p" x="74" y="580">1) Token has Zone:DNS:Edit and Zone:Zone:Read</text>
+  <text class="p" x="74" y="606">2) Token is scoped to correct zone/account</text>
+  <text class="p" x="74" y="632">3) Token is kept outside code repositories and chat history</text>
+  <rect class="badge" x="74" y="646" width="530" height="34"/>
+  <text class="mono" x="88" y="668">Tip: Rotate token if exposed or shared accidentally</text>
+</svg>

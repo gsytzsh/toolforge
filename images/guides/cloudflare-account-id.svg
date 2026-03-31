@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="t d">
+  <title id="t">Cloudflare Account ID Retrieval Walkthrough</title>
+  <desc id="d">Illustrated options to find CF Account ID from dashboard or API.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .card { fill: #ffffff; stroke: #d8e1ec; stroke-width: 2; rx: 14; }
+      .title { font: 700 30px Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 16px Arial, sans-serif; fill: #334155; }
+      .h { font: 700 18px Arial, sans-serif; fill: #111827; }
+      .p { font: 500 15px Arial, sans-serif; fill: #1f2937; }
+      .mono { font: 600 13px "Courier New", monospace; fill: #e5e7eb; }
+      .mono-dark { font: 600 14px "Courier New", monospace; fill: #0f172a; }
+      .panel { fill: #0f172a; rx: 10; }
+      .tag { fill: #e2e8f0; stroke: #cbd5e1; stroke-width: 1; rx: 8; }
+      .arrow { stroke: #64748b; stroke-width: 3; fill: none; marker-end: url(#m); }
+    </style>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="760"/>
+
+  <text class="title" x="48" y="56">Find CF_Account_ID (Two Easy Ways)</text>
+  <text class="subtitle" x="48" y="84">Use dashboard first, API fallback when you need scripting or multi-account visibility.</text>
+
+  <rect class="card" x="48" y="120" width="520" height="232"/>
+  <text class="h" x="74" y="154">Method A - Dashboard (fastest)</text>
+  <text class="p" x="74" y="184">1) Log in to Cloudflare dashboard</text>
+  <text class="p" x="74" y="208">2) Open account overview page</text>
+  <text class="p" x="74" y="232">3) Locate "Account ID" in the right-side panel</text>
+  <text class="p" x="74" y="256">4) Copy value and export as CF_Account_ID</text>
+  <rect class="tag" x="74" y="276" width="302" height="40"/>
+  <text class="mono-dark" x="88" y="301">export CF_Account_ID="..."</text>
+
+  <rect class="card" x="632" y="120" width="520" height="232"/>
+  <text class="h" x="658" y="154">Method B - API (script-friendly)</text>
+  <rect class="panel" x="658" y="174" width="468" height="156"/>
+  <text class="mono" x="678" y="204">curl -s -X GET "https://api.cloudflare.com/client/v4/accounts" \</text>
+  <text class="mono" x="678" y="228">  -H "Authorization: Bearer $CF_Token" \</text>
+  <text class="mono" x="678" y="252">  -H "Content-Type: application/json"</text>
+  <text class="mono" x="678" y="286"># Pick the account id from result[].id</text>
+  <text class="mono" x="678" y="310">export CF_Account_ID="your_account_id"</text>
+
+  <path class="arrow" d="M568 236 L632 236"/>
+
+  <rect class="card" x="48" y="388" width="1104" height="320"/>
+  <text class="h" x="74" y="422">Sanity Check Before Issuing</text>
+  <text class="p" x="74" y="452">1) CF_Token has DNS edit permissions for the target zone.</text>
+  <text class="p" x="74" y="478">2) CF_Account_ID belongs to the same account that owns the zone.</text>
+  <text class="p" x="74" y="504">3) DNS provider plugin variables are exported in current shell session.</text>
+  <text class="p" x="74" y="530">4) Test with a short issuance command before full automation.</text>
+
+  <rect class="panel" x="74" y="552" width="1038" height="124"/>
+  <text class="mono" x="94" y="582">export CF_Token="your_cloudflare_api_token"</text>
+  <text class="mono" x="94" y="606">export CF_Account_ID="your_cloudflare_account_id"</text>
+  <text class="mono" x="94" y="630">acme.sh --issue --dns dns_cf -d example.com -d '*.example.com'</text>
+  <text class="mono" x="94" y="654"># If this succeeds, your token/id pairing is correct.</text>
+</svg>

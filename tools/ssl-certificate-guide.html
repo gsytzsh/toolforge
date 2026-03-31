@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Linux SSL Certificate Guide (acme.sh & Certbot) - Free HTTPS Setup | ToolForge</title>
+<meta name="description" content="Step-by-step Linux guide to install and issue free SSL certificates using acme.sh or Certbot. Includes Nginx/Apache setup, renewal, wildcard DNS mode, and troubleshooting.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://toolforge.site/tools/ssl-certificate-guide.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Linux SSL Certificate Guide (acme.sh & Certbot) - Free HTTPS Setup | ToolForge">
+<meta property="og:description" content="Beginner-friendly Linux SSL guide with environment-aware command generation for acme.sh and Certbot.">
+<meta property="og:url" content="https://toolforge.site/tools/ssl-certificate-guide.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux SSL Certificate Guide (acme.sh & Certbot) - Free HTTPS Setup | ToolForge">
+<meta name="twitter:description" content="Detailed Linux SSL guide and command generator for acme.sh and Certbot.">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.guide-box{border:1px solid #ddd;border-radius:8px;padding:12px;background:#fafafa;margin:12px 0}
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;width:100%}
+.cmd{background:#111827;color:#e5e7eb;padding:12px;border-radius:6px;font-size:12px;overflow:auto;white-space:pre-wrap;line-height:1.45}
+.cmd.light{background:#f8fafc;color:#111827;border:1px solid #e5e7eb}
+.table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+.table th,.table td{border:1px solid #ddd;padding:8px;text-align:left;vertical-align:top}
+.table th{background:#f5f5f5}
+.small{font-size:13px;color:#555}
+.copy-btn{margin-top:8px}
+.builder-block{border:1px solid #ddd;border-radius:8px;background:#fff;padding:12px;margin-top:10px}
+.builder-title{margin:0 0 8px 0}
+.illu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;width:90%;margin-top:10px}
+.illu-card{border:1px solid #ddd;border-radius:8px;background:#fff;padding:10px}
+.illu-card img{width:100%;height:auto;border-radius:6px;border:1px solid #e5e7eb;background:#fff}
+.illu-card figcaption{font-size:13px;color:#475569;margin-top:8px;line-height:1.4}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Should I use acme.sh or Certbot on Linux?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Both are valid. acme.sh is lightweight shell-based and flexible for custom deployments. Certbot is widely documented and very convenient with nginx/apache plugins. Beginners often start with Certbot; advanced users often prefer acme.sh for portability."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What must be ready before issuing a certificate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Requirements depend on validation method. HTTP-01 needs domain DNS pointing to your server and reachable port 80. DNS-01 does not require A or AAAA records pointing to your server, but does require permission to create _acme-challenge TXT records. In all cases you need Linux sudo access and correct system time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I issue wildcard certificates?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Wildcard certificates require DNS validation (DNS-01 challenge). HTTP validation cannot issue wildcard certificates."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does automatic renewal work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "acme.sh installs a cron task, and Certbot uses a cron job or systemd timer depending on your install. Always test renewal with a dry run command and ensure web server reload happens after renewal."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where should I store certificate files?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Store deployed certificates under stable server paths such as /etc/ssl or /etc/letsencrypt, with restrictive permissions. For acme.sh, use --install-cert to copy to your final paths; do not directly depend on internal files under ~/.acme.sh."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this page Linux-only?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. This guide is written for Linux servers and assumes shell access over SSH with sudo permissions."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<main class="container">
+<h1>Linux SSL Certificate Guide (acme.sh &amp; Certbot)</h1>
+<p class="subtitle">A beginner-friendly Linux guide to install, issue, deploy, verify, and renew free TLS certificates.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/web--network.html">More in Web &amp; Network</a></p>
+
+<section class="guide-box">
+<p><strong>What this page does:</strong> it gives you exact Linux commands for your environment and explains each step so a first-time user can still get a working HTTPS certificate.</p>
+<p class="small"><strong>Scope:</strong> Linux servers only. This tool does not sign certificates for you. It helps you run trusted CA workflows (such as Let's Encrypt) on your own server.</p>
+</section>
+
+<h2>1. Validation Method and Command Builder</h2>
+<table class="table">
+  <tr>
+    <th>Method</th>
+    <th>Best For</th>
+    <th>Requirements</th>
+    <th>Wildcard Support</th>
+  </tr>
+  <tr>
+    <td>HTTP-01 (webroot)</td>
+    <td>Running Nginx/Apache site</td>
+    <td>Port 80 reachable, challenge path writable</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>HTTP-01 (standalone)</td>
+    <td>Short maintenance window</td>
+    <td>Port 80 free during issuance</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>DNS-01</td>
+    <td>Wildcard certificates</td>
+    <td>DNS TXT update access (manual or API)</td>
+    <td>Yes</td>
+  </tr>
+</table>
+
+<h3>Command Builder Inputs</h3>
+<div class="guide-grid" style="width:90%">
+  <div>
+    <label for="method">Choose Your Validation Method</label><br>
+    <select id="method" aria-label="Validation method" style="width:100%">
+      <option value="webroot">HTTP-01 webroot</option>
+      <option value="standalone">HTTP-01 standalone</option>
+      <option value="dns">DNS-01 wildcard</option>
+    </select>
+  </div>
+  <div>
+    <label for="os-family">Linux Family</label><br>
+    <select id="os-family" aria-label="Linux family" style="width:100%">
+      <option value="ubuntu">Ubuntu / Debian</option>
+      <option value="rhel">RHEL / CentOS / Rocky / Alma</option>
+    </select>
+  </div>
+  <div id="web-server-wrap">
+    <label for="web-server">Web Server (deploy/reload)</label><br>
+    <select id="web-server" aria-label="Web server" style="width:100%">
+      <option value="nginx">Nginx</option>
+      <option value="apache">Apache</option>
+    </select>
+  </div>
+  <div>
+    <label for="client">Certificate Tool</label><br>
+    <select id="client" aria-label="Certificate tool" style="width:100%">
+      <option value="acme">acme.sh</option>
+      <option value="certbot">Certbot</option>
+    </select>
+  </div>
+  <div>
+    <label for="domain">Primary Domain</label><br>
+    <input id="domain" type="text" value="example.com" style="width:100%" aria-label="Primary domain">
+  </div>
+  <div>
+    <label for="extra-domain">Additional Domain (optional)</label><br>
+    <input id="extra-domain" type="text" value="www.example.com" style="width:100%" aria-label="Additional domain">
+  </div>
+  <div>
+    <label for="email">Email</label><br>
+    <input id="email" type="email" value="admin@example.com" style="width:100%" aria-label="Email address">
+  </div>
+  <div id="webroot-wrap">
+    <label for="webroot">Webroot Path (HTTP webroot only)</label><br>
+    <input id="webroot" type="text" value="/var/www/html" style="width:100%" aria-label="Webroot path">
+  </div>
+</div>
+<p class="small" style="width:90%">Your method selection here controls prerequisites, commands, checks, and troubleshooting shown below.</p>
+<p id="server-note" class="small" style="width:90%;margin-top:8px"></p>
+<p id="webroot-note" class="small" style="width:90%;margin-top:4px"></p>
+
+<div class="builder-block" style="width:90%">
+  <h3 class="builder-title">Install Commands</h3>
+  <pre id="cmd-install" class="cmd light"></pre>
+  <button type="button" class="copy-btn" data-copy-target="cmd-install">Copy</button>
+</div>
+
+<div class="builder-block" style="width:90%">
+  <h3 class="builder-title">Issue Commands</h3>
+  <pre id="cmd-issue" class="cmd light"></pre>
+  <button type="button" class="copy-btn" data-copy-target="cmd-issue">Copy</button>
+</div>
+
+<div id="deploy-block" class="builder-block" style="width:90%">
+  <h3 class="builder-title">Deploy / Web Server Config Commands</h3>
+  <pre id="cmd-deploy" class="cmd light"></pre>
+  <button type="button" class="copy-btn" data-copy-target="cmd-deploy">Copy</button>
+</div>
+
+<div class="builder-block" style="width:90%">
+  <h3 class="builder-title">Verification Commands</h3>
+  <pre id="cmd-verify" class="cmd light"></pre>
+  <button type="button" class="copy-btn" data-copy-target="cmd-verify">Copy</button>
+</div>
+
+<div class="builder-block" style="width:90%">
+  <h3 class="builder-title">Renewal Commands</h3>
+  <pre id="cmd-renew" class="cmd light"></pre>
+  <button type="button" class="copy-btn" data-copy-target="cmd-renew">Copy</button>
+</div>
+
+<p id="builder-status" class="inline-status" role="status" aria-live="polite" aria-atomic="true"></p>
+
+<h2>2. Prerequisites (auto by selected method)</h2>
+<div id="prereq-web">
+<ol>
+  <li><strong>Domain resolution:</strong> your domain should point to your server public IP.</li>
+  <li><strong>Inbound ports:</strong> TCP <code>80</code> must be reachable for HTTP-01 challenge (and usually <code>443</code> for HTTPS service).</li>
+  <li><strong>Server access:</strong> SSH + <code>sudo</code> on Linux.</li>
+  <li><strong>System time:</strong> NTP/time sync should be healthy.</li>
+</ol>
+<pre class="cmd"># HTTP-01: listener and firewall checks
+sudo ss -tulpen | grep -E ':80|:443'
+
+# Ubuntu/Debian (UFW)
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw status
+
+# RHEL/CentOS/Rocky/Alma (firewalld)
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --permanent --add-service=https
+sudo firewall-cmd --reload
+
+# Time sync (all methods)
+sudo timedatectl set-ntp true
+timedatectl status</pre>
+</div>
+
+<div id="prereq-dns" style="display:none">
+<ol>
+  <li><strong>DNS control:</strong> you can create TXT records for <code>_acme-challenge</code> (manual or API).</li>
+  <li><strong>No A/AAAA dependency for issuance:</strong> DNS-01 validation does not require your domain to point to this server.</li>
+  <li><strong>Server access:</strong> SSH + <code>sudo</code> on Linux.</li>
+  <li><strong>System time:</strong> NTP/time sync should be healthy.</li>
+</ol>
+<pre class="cmd"># DNS-01: verify TXT visibility (replace domain)
+# If dig is missing:
+# Ubuntu/Debian: sudo apt install -y dnsutils
+# RHEL/Rocky/Alma: sudo dnf install -y bind-utils
+
+dig +short TXT _acme-challenge.example.com
+
+# Optional: check authoritative DNS answers
+dig TXT _acme-challenge.example.com
+
+# Time sync (all methods)
+sudo timedatectl set-ntp true
+timedatectl status</pre>
+</div>
+
+<section id="dns-helper-block" class="guide-box" style="width:90%;display:none">
+<h3>DNS-01 Add-on: API Automation vs Manual TXT</h3>
+<ol>
+  <li><strong>Option A (recommended): API automation</strong> for stable renewals. Example below uses Cloudflare token-based auth.</li>
+  <li><strong>Option B: Manual TXT records</strong> if you do not want to create API tokens. Good for one-off issuance, less convenient for renewal.</li>
+</ol>
+
+<h4>Cloudflare API Quick Setup (CF_Token / CF_Account_ID)</h4>
+<ol>
+  <li>Create token in Cloudflare Dashboard → <em>My Profile</em> → <em>API Tokens</em> with <code>Zone:DNS:Edit</code> and <code>Zone:Zone:Read</code>.</li>
+  <li>Export token in shell as <code>CF_Token</code>.</li>
+  <li>Get <code>CF_Account_ID</code> from dashboard account overview or by API.</li>
+</ol>
+<p class="small"><strong>Note:</strong> for <code>certbot-dns-cloudflare</code>, API token is usually enough. <code>CF_Account_ID</code> is mainly useful for account identification and some API workflows.</p>
+<pre class="cmd"># Set your token
+export CF_Token="your_cloudflare_api_token"
+
+# Get account list and IDs
+curl -s -X GET "https://api.cloudflare.com/client/v4/accounts" \
+  -H "Authorization: Bearer $CF_Token" \
+  -H "Content-Type: application/json"
+
+# Use the account that owns your DNS zone
+export CF_Account_ID="your_cloudflare_account_id"</pre>
+<p class="small">If multiple accounts are returned, choose the one that owns your target domain's zone.</p>
+
+<div class="illu-grid">
+  <figure class="illu-card">
+    <img src="/images/guides/cloudflare-token-permissions.svg" alt="Illustrated Cloudflare steps for creating an API token with DNS permissions for ACME DNS-01">
+    <figcaption>Illustration 1: create a minimum-scope token for DNS automation.</figcaption>
+  </figure>
+  <figure class="illu-card">
+    <img src="/images/guides/cloudflare-account-id.svg" alt="Illustrated Cloudflare steps for finding account ID from dashboard or API">
+    <figcaption>Illustration 2: locate <code>CF_Account_ID</code> from dashboard or API.</figcaption>
+  </figure>
+</div>
+</section>
+
+<h2>3. Tool Walkthrough (choose one path)</h2>
+<p id="tool-path-note" class="small">Select a tool in Step 1. This section will show only the matching walkthrough to avoid mixed instructions.</p>
+
+<div id="walkthrough-acme">
+<h3>Path A: acme.sh</h3>
+<h4>A1. Install dependencies</h4>
+<pre class="cmd"># Ubuntu / Debian
+sudo apt update
+sudo apt install -y curl socat cron openssl
+
+# RHEL / CentOS / Rocky / Alma
+sudo dnf install -y curl socat cronie openssl
+sudo systemctl enable --now crond</pre>
+
+<h4>A2. Install acme.sh</h4>
+<pre class="cmd">curl https://get.acme.sh | sh -s email=admin@example.com
+source ~/.bashrc
+acme.sh --version</pre>
+<p class="small">If command is not found, use <code>~/.acme.sh/acme.sh</code> directly.</p>
+
+<h4>A3. Set Let's Encrypt as default CA</h4>
+<pre class="cmd">acme.sh --set-default-ca --server letsencrypt
+acme.sh --showca</pre>
+
+<h4>A4. Issue certificate</h4>
+<div id="acme-issue-webroot">
+<pre class="cmd"># Webroot mode
+acme.sh --issue -d example.com -d www.example.com -w /var/www/html</pre>
+</div>
+<div id="acme-issue-standalone" style="display:none">
+<pre class="cmd"># Standalone mode
+# Stop web server first (pick one)
+sudo systemctl stop nginx
+# sudo systemctl stop apache2   # Ubuntu/Debian Apache
+# sudo systemctl stop httpd     # RHEL Apache
+
+acme.sh --issue -d example.com -d www.example.com --standalone
+
+# Start web server again (pick one)
+sudo systemctl start nginx
+# sudo systemctl start apache2  # Ubuntu/Debian Apache
+# sudo systemctl start httpd    # RHEL Apache</pre>
+</div>
+<div id="acme-issue-dns" style="display:none">
+<pre class="cmd"># DNS wildcard mode (Cloudflare example)
+export CF_Token="your_cloudflare_api_token"
+export CF_Account_ID="your_cloudflare_account_id"
+acme.sh --issue --dns dns_cf -d example.com -d '*.example.com'</pre>
+</div>
+
+<h4>A5. Install cert/key into stable paths</h4>
+<pre class="cmd">sudo mkdir -p /etc/ssl/toolforge/example.com
+
+acme.sh --install-cert -d example.com \
+--key-file       /etc/ssl/toolforge/example.com/privkey.pem \
+--fullchain-file /etc/ssl/toolforge/example.com/fullchain.pem \
+--reloadcmd      "sudo systemctl reload nginx"
+# For Apache, replace reload command:
+# --reloadcmd    "sudo systemctl reload apache2"   # Ubuntu/Debian
+# --reloadcmd    "sudo systemctl reload httpd"     # RHEL</pre>
+
+<h4>A6. Renewal checks</h4>
+<pre class="cmd">crontab -l | grep acme.sh
+~/.acme.sh/acme.sh --cron --home ~/.acme.sh
+~/.acme.sh/acme.sh --renew -d example.com --force</pre>
+</div>
+
+<div id="walkthrough-certbot">
+<h3>Path B: Certbot</h3>
+<h4>B1. Install Certbot</h4>
+<pre class="cmd"># Ubuntu / Debian
+sudo apt update
+sudo apt install -y snapd
+sudo snap install core
+sudo snap refresh core
+sudo snap install --classic certbot
+sudo ln -sf /snap/bin/certbot /usr/local/bin/certbot
+certbot --version
+
+# RHEL / Rocky / Alma
+sudo dnf install -y epel-release
+sudo dnf install -y snapd
+sudo systemctl enable --now snapd
+sudo ln -sfn /var/lib/snapd/snap /snap
+sudo snap install --classic certbot
+sudo ln -sf /snap/bin/certbot /usr/local/bin/certbot
+certbot --version</pre>
+
+<h4>B2. Issue certificate</h4>
+<div id="certbot-issue-webroot">
+<pre class="cmd"># Webroot mode
+sudo certbot certonly --webroot -w /var/www/html -d example.com -d www.example.com</pre>
+</div>
+<div id="certbot-issue-standalone" style="display:none">
+<pre class="cmd"># Standalone mode
+# Stop web server first (pick one)
+sudo systemctl stop nginx
+# sudo systemctl stop apache2   # Ubuntu/Debian Apache
+# sudo systemctl stop httpd     # RHEL Apache
+
+sudo certbot certonly --standalone -d example.com -d www.example.com
+
+# Start web server again (pick one)
+sudo systemctl start nginx
+# sudo systemctl start apache2  # Ubuntu/Debian Apache
+# sudo systemctl start httpd    # RHEL Apache</pre>
+</div>
+<div id="certbot-issue-dns" style="display:none">
+<pre class="cmd"># DNS wildcard mode (Cloudflare plugin example)
+sudo snap set certbot trust-plugin-with-root=ok
+sudo snap install certbot-dns-cloudflare
+sudo mkdir -p /root/.secrets/certbot
+sudo tee /root/.secrets/certbot/cloudflare.ini >/dev/null <<'INI'
+dns_cloudflare_api_token = your_cloudflare_api_token
+INI
+sudo chmod 600 /root/.secrets/certbot/cloudflare.ini
+sudo certbot certonly --dns-cloudflare --dns-cloudflare-credentials /root/.secrets/certbot/cloudflare.ini -d example.com -d '*.example.com'</pre>
+</div>
+
+<h4>B3. Renewal checks</h4>
+<pre class="cmd">sudo certbot renew --dry-run
+systemctl list-timers | grep certbot
+sudo ls -l /etc/letsencrypt/renewal/</pre>
+</div>
+
+<h2>4. Post-Issuance Checks (method-aware)</h2>
+<div id="verify-doc-web">
+<pre class="cmd"># HTTP-01 / web deployment checks
+# Check cert file dates on server (pick your path)
+# certbot path:
+sudo openssl x509 -in /etc/letsencrypt/live/example.com/fullchain.pem -noout -dates -issuer -subject
+# acme.sh deployed path example:
+sudo openssl x509 -in /etc/ssl/toolforge/example.com/fullchain.pem -noout -dates -issuer -subject
+
+# Check live cert from outside
+openssl s_client -connect example.com:443 -servername example.com < /dev/null 2>/dev/null | openssl x509 -noout -dates -issuer -subject
+
+# Check redirect behavior
+curl -I http://example.com
+curl -I https://example.com</pre>
+</div>
+<div id="verify-doc-dns" style="display:none">
+<pre class="cmd"># DNS-01 issuance checks (no HTTP/domain resolution required for validation)
+# certbot default path:
+sudo ls -l /etc/letsencrypt/live/example.com/
+sudo openssl x509 -in /etc/letsencrypt/live/example.com/fullchain.pem -noout -dates -issuer -subject
+
+# acme.sh storage/deploy paths:
+ls -la ~/.acme.sh | grep example.com
+# if installed to stable path:
+sudo ls -l /etc/ssl/toolforge/example.com/
+sudo openssl x509 -in /etc/ssl/toolforge/example.com/fullchain.pem -noout -dates -issuer -subject</pre>
+</div>
+
+<h2>5. Common Errors and Fixes (method-aware)</h2>
+<div id="errors-web">
+<table class="table">
+  <tr>
+    <th>Error</th>
+    <th>Likely Cause</th>
+    <th>Fix</th>
+  </tr>
+  <tr>
+    <td><code>Invalid response from /.well-known/acme-challenge</code></td>
+    <td>Port 80 blocked, reverse proxy mismatch, wrong webroot</td>
+    <td>Open port 80, verify challenge URL path, confirm webroot for the same vhost</td>
+  </tr>
+  <tr>
+    <td><code>Connection refused</code> / timeout</td>
+    <td>Firewall or security group blocks traffic</td>
+    <td>Allow inbound TCP 80/443 in both cloud and OS firewall</td>
+  </tr>
+  <tr>
+    <td><code>NXDOMAIN</code> or DNS validation failure</td>
+    <td>DNS not propagated or wrong record value</td>
+    <td>Check with <code>dig +short example.com</code> and DNS TXT values</td>
+  </tr>
+  <tr>
+    <td>Renewal succeeded but old cert still served</td>
+    <td>Web server was not reloaded</td>
+    <td>Configure reload hook/deploy hook and retest</td>
+  </tr>
+  <tr>
+    <td>Wildcard issuance failed</td>
+    <td>Used HTTP challenge</td>
+    <td>Use DNS-01 challenge only for wildcard certificates</td>
+  </tr>
+</table>
+</div>
+<div id="errors-dns" style="display:none">
+<table class="table">
+  <tr>
+    <th>Error</th>
+    <th>Likely Cause</th>
+    <th>Fix</th>
+  </tr>
+  <tr>
+    <td><code>No TXT record found</code></td>
+    <td>TXT record not created at <code>_acme-challenge</code> or wrong host</td>
+    <td>Create exact TXT record name/value and retry after propagation</td>
+  </tr>
+  <tr>
+    <td><code>Authentication error</code> from DNS API</td>
+    <td>Invalid token/account ID or wrong permission scope</td>
+    <td>Recreate token with required DNS permissions and correct zone scope</td>
+  </tr>
+  <tr>
+    <td><code>Zone not found</code></td>
+    <td>Token/account does not match target DNS zone</td>
+    <td>Use account/zone that actually owns the domain</td>
+  </tr>
+  <tr>
+    <td>DNS challenge times out</td>
+    <td>DNS propagation delay</td>
+    <td>Wait longer, lower DNS cache TTL when possible, then retry</td>
+  </tr>
+  <tr>
+    <td>Manual mode cannot auto-renew</td>
+    <td>Manual TXT mode was used</td>
+    <td>Switch to API mode for unattended renewal, or renew manually each cycle</td>
+  </tr>
+</table>
+</div>
+
+<section class="tool-seo">
+<h3>Best Practices Checklist</h3>
+<ul>
+  <li>Use one canonical HTTPS host and redirect all variants.</li>
+  <li>Protect private keys with restrictive permissions.</li>
+  <li>Run <code>nginx -t</code> or <code>apachectl configtest</code> before reload.</li>
+  <li>Test renewal monthly even if automation is enabled.</li>
+  <li>Never commit DNS API tokens to repositories.</li>
+</ul>
+
+<h3>References</h3>
+<ul>
+  <li><a href="https://certbot.eff.org/instructions">Certbot Official Instructions</a></li>
+  <li><a href="https://github.com/acmesh-official/acme.sh">acme.sh Official Repository</a></li>
+  <li><a href="https://github.com/acmesh-official/get.acme.sh">acme.sh Install Script</a></li>
+</ul>
+</section>
+
+<section class="faq">
+<h3>Frequently Asked Questions</h3>
+<dl class="faq-list">
+  <dt>Should I use acme.sh or Certbot on Linux?</dt>
+  <dd>Both are valid. acme.sh is lightweight shell-based and flexible for custom deployments. Certbot is widely documented and convenient with nginx/apache plugins.</dd>
+
+  <dt>What must be ready before issuing a certificate?</dt>
+  <dd>Requirements depend on validation method. HTTP-01 needs DNS pointing to your server and reachable port 80. DNS-01 does not require A/AAAA pointing to your server, but does require control of <code>_acme-challenge</code> TXT records. In all cases you need Linux sudo access and correct system time.</dd>
+
+  <dt>Can I issue wildcard certificates?</dt>
+  <dd>Yes, but only through DNS-01 validation.</dd>
+
+  <dt>How does automatic renewal work?</dt>
+  <dd>acme.sh uses cron; Certbot uses cron or systemd timer. Always test with dry-run commands.</dd>
+
+  <dt>Where should I store certificate files?</dt>
+  <dd>Use stable paths under <code>/etc/ssl</code> or <code>/etc/letsencrypt</code>, with strict permissions.</dd>
+
+  <dt>Is this page Linux-only?</dt>
+  <dd>Yes. Commands and service management examples are for Linux servers.</dd>
+</dl>
+</section>
+</main>
+
+<script>
+(function(){
+"use strict";
+
+var osEl=document.getElementById("os-family");
+var serverEl=document.getElementById("web-server");
+var clientEl=document.getElementById("client");
+var methodEl=document.getElementById("method");
+var domainEl=document.getElementById("domain");
+var extraDomainEl=document.getElementById("extra-domain");
+var emailEl=document.getElementById("email");
+var webrootEl=document.getElementById("webroot");
+var webServerWrapEl=document.getElementById("web-server-wrap");
+var webrootWrapEl=document.getElementById("webroot-wrap");
+
+var installEl=document.getElementById("cmd-install");
+var issueEl=document.getElementById("cmd-issue");
+var deployEl=document.getElementById("cmd-deploy");
+var deployBlockEl=document.getElementById("deploy-block");
+var verifyEl=document.getElementById("cmd-verify");
+var renewEl=document.getElementById("cmd-renew");
+var statusEl=document.getElementById("builder-status");
+var serverNoteEl=document.getElementById("server-note");
+var webrootNoteEl=document.getElementById("webroot-note");
+var toolPathNoteEl=document.getElementById("tool-path-note");
+var walkthroughAcmeEl=document.getElementById("walkthrough-acme");
+var walkthroughCertbotEl=document.getElementById("walkthrough-certbot");
+var dnsHelperBlockEl=document.getElementById("dns-helper-block");
+var acmeIssueWebrootEl=document.getElementById("acme-issue-webroot");
+var acmeIssueStandaloneEl=document.getElementById("acme-issue-standalone");
+var acmeIssueDnsEl=document.getElementById("acme-issue-dns");
+var certbotIssueWebrootEl=document.getElementById("certbot-issue-webroot");
+var certbotIssueStandaloneEl=document.getElementById("certbot-issue-standalone");
+var certbotIssueDnsEl=document.getElementById("certbot-issue-dns");
+var verifyDocWebEl=document.getElementById("verify-doc-web");
+var verifyDocDnsEl=document.getElementById("verify-doc-dns");
+var errorsWebEl=document.getElementById("errors-web");
+var errorsDnsEl=document.getElementById("errors-dns");
+var prereqWebEl=document.getElementById("prereq-web");
+var prereqDnsEl=document.getElementById("prereq-dns");
+
+function norm(v){
+  return (v||"").trim();
+}
+
+function domainFlags(main,extra){
+  var flags=[];
+  if(main){
+    flags.push("-d "+main);
+  }
+  if(extra&&extra!==main){
+    flags.push("-d "+extra);
+  }
+  return flags.join(" ");
+}
+
+function apacheServiceName(os){
+  return os==="ubuntu"?"apache2":"httpd";
+}
+
+function buildInstall(os,client,email){
+  if(client==="acme"){
+    if(os==="ubuntu"){
+      return [
+        "sudo apt update",
+        "sudo apt install -y curl socat cron openssl",
+        "curl https://get.acme.sh | sh -s email="+email,
+        "source ~/.bashrc",
+        "acme.sh --version"
+      ].join("\n");
+    }
+    return [
+      "sudo dnf install -y curl socat cronie openssl",
+      "sudo systemctl enable --now crond",
+      "curl https://get.acme.sh | sh -s email="+email,
+      "source ~/.bashrc",
+      "acme.sh --version"
+    ].join("\n");
+  }
+
+  if(os==="ubuntu"){
+    return [
+      "sudo apt update",
+      "sudo apt install -y snapd",
+      "sudo snap install core",
+      "sudo snap refresh core",
+      "sudo snap install --classic certbot",
+      "sudo ln -sf /snap/bin/certbot /usr/local/bin/certbot",
+      "certbot --version"
+    ].join("\n");
+  }
+
+  return [
+    "sudo dnf install -y epel-release",
+    "sudo dnf install -y snapd",
+    "sudo systemctl enable --now snapd",
+    "sudo ln -sfn /var/lib/snapd/snap /snap",
+    "sudo snap install --classic certbot",
+    "sudo ln -sf /snap/bin/certbot /usr/local/bin/certbot",
+    "certbot --version"
+  ].join("\n");
+}
+
+function buildIssue(client,method,server,os,domain,extra,webroot){
+  var flags=domainFlags(domain,extra);
+  var apacheService=apacheServiceName(os);
+  var stopService=server==="nginx"?"sudo systemctl stop nginx":"sudo systemctl stop "+apacheService;
+  var startService=server==="nginx"?"sudo systemctl start nginx":"sudo systemctl start "+apacheService;
+
+  if(client==="acme"){
+    if(method==="webroot"){
+      return [
+        "acme.sh --set-default-ca --server letsencrypt",
+        "acme.sh --issue "+flags+" -w "+webroot
+      ].join("\n");
+    }
+    if(method==="standalone"){
+      return [
+        stopService,
+        "acme.sh --set-default-ca --server letsencrypt",
+        "acme.sh --issue "+flags+" --standalone",
+        startService
+      ].join("\n");
+    }
+    return [
+      "# DNS wildcard - Option A: Cloudflare API automation",
+      "# Token should include Zone:DNS:Edit and Zone:Zone:Read",
+      "export CF_Token=\"your_cloudflare_api_token\"",
+      "export CF_Account_ID=\"your_cloudflare_account_id\"",
+      "curl -s -X GET \"https://api.cloudflare.com/client/v4/accounts\" -H \"Authorization: Bearer $CF_Token\" -H \"Content-Type: application/json\"",
+      "acme.sh --set-default-ca --server letsencrypt",
+      "acme.sh --issue --dns dns_cf -d "+domain+" -d '*."+domain+"'",
+      "",
+      "# DNS wildcard - Option B: manual TXT records (no API token)",
+      "acme.sh --issue --dns -d "+domain+" -d '*."+domain+"' --yes-I-know-dns-manual-mode-enough-go-ahead-please",
+      "# Add TXT records shown by command output, wait propagation, then finalize",
+      "acme.sh --renew -d "+domain+" --yes-I-know-dns-manual-mode-enough-go-ahead-please"
+    ].join("\n");
+  }
+
+  if(method==="webroot"){
+    return "sudo certbot certonly --webroot -w "+webroot+" "+flags;
+  }
+  if(method==="standalone"){
+    return [
+      stopService,
+      "sudo certbot certonly --standalone "+flags,
+      startService
+    ].join("\n");
+  }
+
+  return [
+    "# DNS wildcard - Option A: Cloudflare API automation",
+    "sudo snap set certbot trust-plugin-with-root=ok",
+    "sudo snap install certbot-dns-cloudflare",
+    "sudo mkdir -p /root/.secrets/certbot",
+    "sudo tee /root/.secrets/certbot/cloudflare.ini >/dev/null <<'INI'",
+    "dns_cloudflare_api_token = your_cloudflare_api_token",
+    "INI",
+    "sudo chmod 600 /root/.secrets/certbot/cloudflare.ini",
+    "sudo certbot certonly --dns-cloudflare --dns-cloudflare-credentials /root/.secrets/certbot/cloudflare.ini -d "+domain+" -d '*."+domain+"'",
+    "",
+    "# DNS wildcard - Option B: manual TXT records (no API token)",
+    "sudo certbot certonly --manual --preferred-challenges dns -d "+domain+" -d '*."+domain+"'",
+    "# Certbot will print TXT values. Add them in DNS, wait propagation, then continue."
+  ].join("\n");
+}
+
+function buildDeploy(client,server,os,domain){
+  var apacheService=apacheServiceName(os);
+  var reload=server==="nginx"?"sudo systemctl reload nginx":"sudo systemctl reload "+apacheService;
+
+  if(client==="acme"){
+    return [
+      "sudo mkdir -p /etc/ssl/toolforge/"+domain,
+      "acme.sh --install-cert -d "+domain+" \\",
+      "--key-file       /etc/ssl/toolforge/"+domain+"/privkey.pem \\",
+      "--fullchain-file /etc/ssl/toolforge/"+domain+"/fullchain.pem \\",
+      "--reloadcmd      \""+reload+"\""
+    ].join("\n");
+  }
+
+  if(server==="nginx"){
+    return [
+      "# Certbot default cert path",
+      "/etc/letsencrypt/live/"+domain+"/fullchain.pem",
+      "/etc/letsencrypt/live/"+domain+"/privkey.pem",
+      "",
+      "# Nginx SSL directives",
+      "ssl_certificate     /etc/letsencrypt/live/"+domain+"/fullchain.pem;",
+      "ssl_certificate_key /etc/letsencrypt/live/"+domain+"/privkey.pem;",
+      "",
+      reload
+    ].join("\n");
+  }
+
+  return [
+    "# Certbot default cert path",
+    "/etc/letsencrypt/live/"+domain+"/fullchain.pem",
+    "/etc/letsencrypt/live/"+domain+"/privkey.pem",
+    "",
+    "# Apache SSL directives",
+    "SSLCertificateFile /etc/letsencrypt/live/"+domain+"/fullchain.pem",
+    "SSLCertificateKeyFile /etc/letsencrypt/live/"+domain+"/privkey.pem",
+    "",
+    reload
+  ].join("\n");
+}
+
+function updateServerUi(method){
+  if(method==="dns"){
+    webServerWrapEl.style.display="none";
+    serverEl.disabled=true;
+    serverNoteEl.style.display="none";
+  }else{
+    webServerWrapEl.style.display="";
+    serverEl.disabled=false;
+    serverNoteEl.style.display="";
+    serverNoteEl.textContent="Web Server selection affects standalone stop/start and deploy/reload commands.";
+  }
+}
+
+function updateWebrootUi(method){
+  if(method==="dns"){
+    webrootWrapEl.style.display="none";
+    webrootEl.disabled=true;
+    webrootNoteEl.style.display="none";
+    return;
+  }
+  webrootWrapEl.style.display="";
+  if(method==="webroot"){
+    webrootEl.disabled=false;
+    webrootNoteEl.style.display="";
+    webrootNoteEl.textContent="Webroot path is required in HTTP-01 webroot mode.";
+    return;
+  }
+  webrootEl.disabled=true;
+  webrootNoteEl.style.display="";
+  webrootNoteEl.textContent="Webroot path is not used in standalone or DNS-01 modes.";
+}
+
+function updateToolWalkthroughUi(client){
+  if(client==="acme"){
+    walkthroughAcmeEl.style.display="";
+    walkthroughCertbotEl.style.display="none";
+    toolPathNoteEl.textContent="Showing acme.sh path based on Certificate Tool selection in Step 1. You can switch the Certificate Tool selector to view Certbot path.";
+    return;
+  }
+  walkthroughAcmeEl.style.display="none";
+  walkthroughCertbotEl.style.display="";
+  toolPathNoteEl.textContent="Showing Certbot path based on Certificate Tool selection in Step 1. You can switch the Certificate Tool selector to view acme.sh path.";
+}
+
+function updatePrereqUi(method){
+  var isDns=(method==="dns");
+  prereqWebEl.style.display=isDns?"none":"";
+  prereqDnsEl.style.display=isDns?"":"none";
+}
+
+function updateMethodDocs(method){
+  var isDns=(method==="dns");
+  verifyDocWebEl.style.display=isDns?"none":"";
+  verifyDocDnsEl.style.display=isDns?"":"none";
+  errorsWebEl.style.display=isDns?"none":"";
+  errorsDnsEl.style.display=isDns?"":"none";
+}
+
+function updateIssueExamples(method){
+  acmeIssueWebrootEl.style.display=method==="webroot"?"":"none";
+  acmeIssueStandaloneEl.style.display=method==="standalone"?"":"none";
+  acmeIssueDnsEl.style.display=method==="dns"?"":"none";
+  certbotIssueWebrootEl.style.display=method==="webroot"?"":"none";
+  certbotIssueStandaloneEl.style.display=method==="standalone"?"":"none";
+  certbotIssueDnsEl.style.display=method==="dns"?"":"none";
+}
+
+function buildVerify(domain,client,method){
+  if(method==="dns"){
+    if(client==="acme"){
+      return [
+        "# DNS-01 mode: verify local certificate files (no HTTP/domain check needed)",
+        "ls -la ~/.acme.sh | grep "+domain,
+        "# If you used --install-cert, check stable deployed path below:",
+        "sudo ls -l /etc/ssl/toolforge/"+domain+"/",
+        "sudo openssl x509 -in /etc/ssl/toolforge/"+domain+"/fullchain.pem -noout -dates -issuer -subject"
+      ].join("\n");
+    }
+    return [
+      "# DNS-01 mode: verify local certificate files (no HTTP/domain check needed)",
+      "sudo ls -l /etc/letsencrypt/live/"+domain+"/",
+      "sudo openssl x509 -in /etc/letsencrypt/live/"+domain+"/fullchain.pem -noout -dates -issuer -subject"
+    ].join("\n");
+  }
+
+  var localPath=client==="acme"?"/etc/ssl/toolforge/"+domain+"/fullchain.pem":"/etc/letsencrypt/live/"+domain+"/fullchain.pem";
+  return [
+    "sudo openssl x509 -in "+localPath+" -noout -dates -issuer -subject",
+    "openssl s_client -connect "+domain+":443 -servername "+domain+" < /dev/null 2>/dev/null | openssl x509 -noout -dates -issuer -subject",
+    "curl -I http://"+domain,
+    "curl -I https://"+domain
+  ].join("\n");
+}
+
+function buildRenew(client,domain){
+  if(client==="acme"){
+    return [
+      "crontab -l | grep acme.sh",
+      "~/.acme.sh/acme.sh --cron --home ~/.acme.sh",
+      "~/.acme.sh/acme.sh --renew -d "+domain+" --force"
+    ].join("\n");
+  }
+  return [
+    "sudo certbot renew --dry-run",
+    "systemctl list-timers | grep certbot",
+    "sudo ls -l /etc/letsencrypt/renewal/"
+  ].join("\n");
+}
+
+function updateBuilder(){
+  var os=norm(osEl.value)||"ubuntu";
+  var server=norm(serverEl.value)||"nginx";
+  var client=norm(clientEl.value)||"acme";
+  var method=norm(methodEl.value)||"webroot";
+  var domain=norm(domainEl.value)||"example.com";
+  var extra=norm(extraDomainEl.value);
+  var email=norm(emailEl.value)||"admin@example.com";
+  var webroot=norm(webrootEl.value)||"/var/www/html";
+  var isDns=(method==="dns");
+
+  updateServerUi(method);
+  updateWebrootUi(method);
+  updateToolWalkthroughUi(client);
+  updatePrereqUi(method);
+  updateMethodDocs(method);
+  updateIssueExamples(method);
+  dnsHelperBlockEl.style.display=isDns?"":"none";
+  deployBlockEl.style.display=isDns?"none":"";
+  installEl.textContent=buildInstall(os,client,email);
+  issueEl.textContent=buildIssue(client,method,server,os,domain,extra,webroot);
+  deployEl.textContent=isDns?"":buildDeploy(client,server,os,domain);
+  verifyEl.textContent=buildVerify(domain,client,method);
+  renewEl.textContent=buildRenew(client,domain);
+}
+
+function copyText(value){
+  if(!navigator.clipboard||typeof navigator.clipboard.writeText!=="function"){
+    return Promise.reject(new Error("Clipboard API unavailable"));
+  }
+  return navigator.clipboard.writeText(value);
+}
+
+document.addEventListener("input",function(event){
+  var t=event.target;
+  if(
+    t===osEl||t===serverEl||t===clientEl||t===methodEl||
+    t===domainEl||t===extraDomainEl||t===emailEl||t===webrootEl
+  ){
+    updateBuilder();
+  }
+});
+
+document.addEventListener("change",function(event){
+  var t=event.target;
+  if(t===osEl||t===serverEl||t===clientEl||t===methodEl){
+    updateBuilder();
+  }
+});
+
+document.addEventListener("click",function(event){
+  var target=event.target;
+  if(!(target instanceof HTMLElement))return;
+  var id=target.getAttribute("data-copy-target");
+  if(!id)return;
+  var block=document.getElementById(id);
+  if(!block)return;
+
+  copyText(block.textContent||"").then(function(){
+    statusEl.textContent="Copied.";
+    statusEl.style.color="#16a34a";
+  }).catch(function(){
+    statusEl.textContent="Copy failed. Please copy manually.";
+    statusEl.style.color="#b91c1c";
+  });
+});
+
+updateBuilder();
+})();
+</script>
+<script src="/js/favorites.js"></script>
+<script src="/js/tool-common.js"></script>
+</body>
+</html>

@@ -1069,6 +1069,11 @@
     "category": "Web & Network"
   },
   {
+    "file": "ssl-certificate-guide",
+    "name": "SSL Certificate Guide (Linux)",
+    "category": "Web & Network"
+  },
+  {
     "file": "url-to-qr",
     "name": "QR Code Generator",
     "category": "Web & Network"
