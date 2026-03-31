@@ -64,6 +64,10 @@ function escapeHtml(s) {
     .replace(/"/g, "&quot;");
 }
 
+function getToolUrl(t) {
+  return t.url || `/tools/${t.file}.html`;
+}
+
 function main() {
   let tools;
   try {
@@ -102,7 +106,7 @@ function main() {
     const metaDesc = `Free online ${categoryLabel}: ${focus}. ${desc} Browse ${list.length} tools on ToolForge.`;
     const toolLinks = list
       .sort((a, b) => (a.popularOrder || 999) - (b.popularOrder || 999) || (a.name || "").localeCompare(b.name || ""))
-      .map((t) => `    <li><a href="/tools/${t.file}.html">${escapeHtml(t.name)}</a></li>`)
+      .map((t) => `    <li><a href="${escapeHtml(getToolUrl(t))}">${escapeHtml(t.name)}</a></li>`)
       .join("\n");
 
     const html = `<!DOCTYPE html>

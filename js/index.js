@@ -86,6 +86,11 @@
       .replace(/'/g, "&#39;");
   }
 
+  function getToolUrl(tool) {
+    if (tool && tool.url) return tool.url;
+    return "/tools/" + tool.file + ".html";
+  }
+
   function render(list) {
     const container = document.getElementById("tool-list");
     container.innerHTML = "";
@@ -119,7 +124,7 @@
 
       sortedTools.forEach(function(tool) {
         const card = document.createElement("a");
-        card.href = "/tools/" + tool.file + ".html";
+        card.href = getToolUrl(tool);
         card.className = "tool-card";
         card.textContent = tool.name;
         grid.appendChild(card);
@@ -157,7 +162,7 @@
       dropdown.setAttribute("role", "menu");
       sortedTools.forEach(function(tool) {
         const a = document.createElement("a");
-        a.href = "/tools/" + tool.file + ".html";
+        a.href = getToolUrl(tool);
         a.textContent = tool.name;
         a.setAttribute("role", "menuitem");
         dropdown.appendChild(a);
@@ -174,7 +179,7 @@
     el.innerHTML = "";
     tools.forEach(function(tool) {
       const a = document.createElement("a");
-      a.href = "/tools/" + tool.file + ".html";
+      a.href = getToolUrl(tool);
       a.className = "popular-tool-tag";
       a.textContent = tool.tag || tool.name;
       el.appendChild(a);
@@ -197,7 +202,7 @@
     grid.innerHTML = "";
     tools.forEach(function(tool) {
       const a = document.createElement("a");
-      a.href = "/tools/" + tool.file + ".html";
+      a.href = getToolUrl(tool);
       a.className = "tool-link-plain";
       a.textContent = tool.name;
       grid.appendChild(a);
@@ -239,7 +244,7 @@
   function selectSuggestion(index) {
     const tool = autocompleteMatches[index];
     if (!tool) return false;
-    window.location.href = "/tools/" + tool.file + ".html";
+    window.location.href = getToolUrl(tool);
     return true;
   }
 

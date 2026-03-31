@@ -1,7 +1,7 @@
 (function(){
   "use strict";
   var path=window.location.pathname||"";
-  var m=path.match(/\/tools\/([^\/]+)\.html$/);
+  var m=path.match(/\/(?:tools|guides)\/([^\/]+)\.html$/);
   var isToolPage=!!m;
   var currentFile=m?m[1]:null;
 
@@ -17,6 +17,11 @@
       if(pa!==pb)return pa-pb;
       return (a.name||"").localeCompare(b.name||"");
     });
+  }
+
+  function getToolUrl(tool){
+    if(tool&&tool.url)return tool.url;
+    return "/tools/"+tool.file+".html";
   }
 
   function injectTopNav(tools){
@@ -102,7 +107,7 @@
       related.forEach(function(t){
         var li=document.createElement("li");
         var a=document.createElement("a");
-        a.href="/tools/"+t.file+".html";
+        a.href=getToolUrl(t);
         a.textContent=t.name;
         li.appendChild(a);
         ul.appendChild(li);

@@ -1071,6 +1071,7 @@
   {
     "file": "ssl-certificate-guide",
     "name": "SSL Certificate Guide (Linux)",
+    "url": "/guides/ssl-certificate-guide.html",
     "category": "Web & Network"
   },
   {

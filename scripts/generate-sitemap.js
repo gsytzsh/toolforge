@@ -62,7 +62,7 @@ function main() {
 
   for (const tool of tools) {
     const file = tool.file || tool;
-    const loc = `${BASE_URL}/tools/${file}.html`;
+    const loc = tool.url ? `${BASE_URL}${tool.url}` : `${BASE_URL}/tools/${file}.html`;
     lines.push(
       "  <url>",
       `    <loc>${escapeXml(loc)}</loc>`,
