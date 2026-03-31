@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sitemap XML Generator - Generate sitemap.xml and sitemap index online | ToolForge</title>
+<meta name="description" content="Generate valid sitemap.xml files from URL lists. Auto-deduplicate links, validate URL format, split into multiple files for 50,000+ URLs, and create sitemap index XML in your browser.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://toolforge.site/tools/sitemap-xml-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Sitemap XML Generator - Generate sitemap.xml and sitemap index online | ToolForge">
+<meta property="og:description" content="Create sitemap.xml from URL lists with optional lastmod, changefreq, priority, and automatic sitemap index generation.">
+<meta property="og:url" content="https://toolforge.site/tools/sitemap-xml-generator.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sitemap XML Generator - Generate sitemap.xml and sitemap index online | ToolForge">
+<meta name="twitter:description" content="Browser-based sitemap generator with URL validation, deduplication, splitting, and download-ready XML files.">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="/css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What format does this sitemap generator output?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool outputs XML in sitemap.org format. It generates a standard <urlset> sitemap when URLs fit in one file, and generates multiple sitemap files plus a <sitemapindex> when splitting is needed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the tool handle duplicate URLs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Duplicate URLs are removed automatically. The first occurrence is kept and repeated entries are excluded from the generated sitemap files."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens with invalid URLs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Invalid lines are skipped and listed in an error report with line numbers. Only absolute HTTP or HTTPS URLs are included in output files."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can this tool generate sitemap index files for large sites?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can choose chunk size up to 50,000 URLs per sitemap. When more than one sitemap file is required, the tool creates a sitemap index file that references each generated sitemap."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I include lastmod, changefreq, and priority?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can set optional global values for lastmod date, changefreq, and priority, and they are applied to each URL entry in generated sitemaps."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my sitemap data uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. URL parsing and XML generation run locally in your browser. Input data is not uploaded by this tool."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<main class="container">
+<h1>Sitemap XML Generator</h1>
+<p class="subtitle">Generate sitemap.xml files from URL lists with validation, deduplication, and optional sitemap index creation.</p>
+<p><a href="/">Back to all tools on ToolForge</a></p>
+<p class="static-tool-discovery"><a href="/category/seo-tools.html">More in SEO Tools</a></p>
+
+<h3>URL List</h3>
+<label for="url-input" class="sr-only">URL input list</label>
+<textarea id="url-input" rows="12" style="width:90%;font-family:monospace;font-size:13px" aria-label="URL input list" placeholder="https://example.com/&#10;https://example.com/about&#10;https://example.com/blog/post-1"></textarea>
+
+<h3 style="margin-top:16px">Options</h3>
+<div style="display:flex;flex-wrap:wrap;gap:12px 16px;align-items:flex-end;width:90%">
+  <div>
+    <label for="base-name">Sitemap base name</label><br>
+    <input id="base-name" type="text" value="sitemap" style="width:150px" aria-label="Sitemap base name">
+  </div>
+  <div>
+    <label for="chunk-size">Max URLs per file</label><br>
+    <input id="chunk-size" type="number" min="1" max="50000" value="50000" style="width:140px" aria-label="Maximum URLs per sitemap file">
+  </div>
+  <div>
+    <label for="sitemap-base-url">Sitemap files base URL (for index)</label><br>
+    <input id="sitemap-base-url" type="url" placeholder="https://example.com/" style="width:260px" aria-label="Base URL used in sitemap index loc entries">
+  </div>
+  <div>
+    <input id="use-lastmod" type="checkbox" checked aria-label="Include lastmod tag">
+    <label for="use-lastmod">Include lastmod</label><br>
+    <input id="lastmod-date" type="date" aria-label="Last modification date">
+  </div>
+  <div>
+    <label for="changefreq">changefreq</label><br>
+    <select id="changefreq" aria-label="Change frequency">
+      <option value="">Omit</option>
+      <option value="always">always</option>
+      <option value="hourly">hourly</option>
+      <option value="daily">daily</option>
+      <option value="weekly" selected>weekly</option>
+      <option value="monthly">monthly</option>
+      <option value="yearly">yearly</option>
+      <option value="never">never</option>
+    </select>
+  </div>
+  <div>
+    <input id="use-priority" type="checkbox" aria-label="Include priority tag">
+    <label for="use-priority">Include priority</label><br>
+    <input id="priority" type="number" min="0" max="1" step="0.1" value="0.5" style="width:90px" aria-label="Priority value">
+  </div>
+</div>
+
+<div class="tool-actions" style="margin-top:16px">
+  <button type="button" onclick="generateSitemaps()">Generate Sitemaps</button>
+  <button type="button" onclick="downloadAll()">Download All</button>
+  <button type="button" onclick="clearAll()">Clear</button>
+</div>
+
+<p id="status" class="inline-status" role="status" aria-live="polite" aria-atomic="true"></p>
+<div id="summary" style="width:90%;font-size:14px;color:#333"></div>
+
+<h3 style="margin-top:20px">Generated Files</h3>
+<div id="files-output" style="width:90%"></div>
+
+<h3 style="margin-top:20px">Skipped Lines (Invalid URLs)</h3>
+<label for="invalid-output" class="sr-only">Invalid URL lines report</label>
+<textarea id="invalid-output" rows="6" style="width:90%;font-family:monospace;font-size:13px" aria-label="Invalid URL lines report" readonly></textarea>
+
+<section class="tool-seo">
+<h3>About Sitemap XML Generator</h3>
+<p>This sitemap XML generator creates standards-compliant sitemap files from plain URL lists directly in your browser. It validates input URLs, removes duplicates, and supports optional <code>lastmod</code>, <code>changefreq</code>, and <code>priority</code> fields.</p>
+<p><strong>Last reviewed:</strong> March 31, 2026.</p>
+
+<h4>How It Works</h4>
+<ol>
+  <li><strong>Parse input:</strong> One URL per line is read from the text area.</li>
+  <li><strong>Validate URLs:</strong> Only absolute <code>http://</code> and <code>https://</code> URLs are accepted.</li>
+  <li><strong>Deduplicate:</strong> Repeated URLs are removed automatically.</li>
+  <li><strong>Split if needed:</strong> URLs are chunked into multiple files based on your max URLs setting.</li>
+  <li><strong>Generate XML:</strong> The tool outputs one or more <code>urlset</code> files, and a <code>sitemapindex</code> when multiple files exist.</li>
+</ol>
+
+<h4>Limits and Behavior</h4>
+<ul>
+  <li><strong>Max URLs per file:</strong> Configurable from 1 to 50,000.</li>
+  <li><strong>Duplicate handling:</strong> First occurrence is kept; duplicates are excluded.</li>
+  <li><strong>Invalid lines:</strong> Invalid URLs are skipped and listed with line numbers.</li>
+  <li><strong>Sitemap index base URL:</strong> If left blank, index links default to the first valid URL's origin.</li>
+  <li><strong>Privacy:</strong> All generation and validation happen locally in your browser.</li>
+</ul>
+
+<h4>Example Output Structure</h4>
+<pre style="background:#f5f5f5;padding:12px;border-radius:4px;font-size:13px;overflow:auto">
+sitemap-index.xml
+  -> references sitemap-1.xml
+  -> references sitemap-2.xml
+
+sitemap-1.xml
+  -> first chunk of URLs
+
+sitemap-2.xml
+  -> remaining URLs
+</pre>
+
+<h4>Recommended Workflow</h4>
+<ol>
+  <li>Generate sitemap files from your canonical URL list.</li>
+  <li>Validate output with Sitemap Validator.</li>
+  <li>Add sitemap URL(s) to <code>robots.txt</code>.</li>
+  <li>Submit sitemap index or sitemap file in Google Search Console.</li>
+</ol>
+</section>
+
+<section class="faq">
+<h3>Frequently Asked Questions</h3>
+<dl class="faq-list">
+  <dt>What format does this sitemap generator output?</dt>
+  <dd>The tool outputs XML in sitemap.org format. It generates a standard <code>&lt;urlset&gt;</code> sitemap when URLs fit in one file, and generates multiple sitemap files plus a <code>&lt;sitemapindex&gt;</code> when splitting is needed.</dd>
+
+  <dt>How does the tool handle duplicate URLs?</dt>
+  <dd>Duplicate URLs are removed automatically. The first occurrence is kept and repeated entries are excluded from the generated sitemap files.</dd>
+
+  <dt>What happens with invalid URLs?</dt>
+  <dd>Invalid lines are skipped and listed in an error report with line numbers. Only absolute HTTP or HTTPS URLs are included in output files.</dd>
+
+  <dt>Can this tool generate sitemap index files for large sites?</dt>
+  <dd>Yes. You can choose chunk size up to 50,000 URLs per sitemap. When more than one sitemap file is required, the tool creates a sitemap index file that references each generated sitemap.</dd>
+
+  <dt>Can I include lastmod, changefreq, and priority?</dt>
+  <dd>Yes. You can set optional global values for lastmod date, changefreq, and priority, and they are applied to each URL entry in generated sitemaps.</dd>
+
+  <dt>Is my sitemap data uploaded to a server?</dt>
+  <dd>No. URL parsing and XML generation run locally in your browser. Input data is not uploaded by this tool.</dd>
+</dl>
+</section>
+</main>
+
+<script>
+(function(){
+"use strict";
+
+var urlInput=document.getElementById("url-input");
+var baseNameInput=document.getElementById("base-name");
+var chunkSizeInput=document.getElementById("chunk-size");
+var sitemapBaseUrlInput=document.getElementById("sitemap-base-url");
+var useLastmodInput=document.getElementById("use-lastmod");
+var lastmodDateInput=document.getElementById("lastmod-date");
+var changefreqInput=document.getElementById("changefreq");
+var usePriorityInput=document.getElementById("use-priority");
+var priorityInput=document.getElementById("priority");
+var statusEl=document.getElementById("status");
+var summaryEl=document.getElementById("summary");
+var filesOutputEl=document.getElementById("files-output");
+var invalidOutputEl=document.getElementById("invalid-output");
+
+var LIMITS={
+  maxUrlsPerFile:50000,
+  minUrlsPerFile:1
+};
+
+var generatedFiles=[];
+
+function setDefaultDate(){
+  var now=new Date();
+  var month=String(now.getMonth()+1).padStart(2,"0");
+  var day=String(now.getDate()).padStart(2,"0");
+  lastmodDateInput.value=now.getFullYear()+"-"+month+"-"+day;
+}
+
+function setStatus(message,type){
+  statusEl.textContent=message;
+  if(type==="success"){
+    statusEl.style.color="#16a34a";
+    return;
+  }
+  if(type==="warning"){
+    statusEl.style.color="#b45309";
+    return;
+  }
+  if(type==="error"){
+    statusEl.style.color="#b91c1c";
+    return;
+  }
+  statusEl.style.color="#6b7280";
+}
+
+function clamp(value,min,max,fallback){
+  if(!Number.isFinite(value))return fallback;
+  return Math.min(max,Math.max(min,value));
+}
+
+function escapeXml(value){
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/\"/g,"&quot;")
+    .replace(/'/g,"&apos;");
+}
+
+function sanitizeBaseName(value){
+  var cleaned=(value||"").toLowerCase().trim().replace(/[^a-z0-9-]+/g,"-").replace(/^-+|-+$/g,"");
+  return cleaned||"sitemap";
+}
+
+function parseUrlLines(raw){
+  var lines=raw.replace(/\r/g,"").split("\n");
+  var seen={};
+  var valid=[];
+  var invalid=[];
+  var duplicates=0;
+
+  for(var i=0;i<lines.length;i++){
+    var lineNumber=i+1;
+    var original=lines[i];
+    var trimmed=original.trim();
+    if(!trimmed)continue;
+
+    try{
+      var parsed=new URL(trimmed);
+      if(parsed.protocol!=="http:"&&parsed.protocol!=="https:"){
+        invalid.push({line:lineNumber,value:original,reason:"Only HTTP/HTTPS URLs are allowed"});
+        continue;
+      }
+
+      var normalized=parsed.href;
+      if(seen[normalized]){
+        duplicates++;
+        continue;
+      }
+
+      seen[normalized]=true;
+      valid.push(normalized);
+    }catch(e){
+      invalid.push({line:lineNumber,value:original,reason:"Invalid URL format"});
+    }
+  }
+
+  return {
+    valid:valid,
+    invalid:invalid,
+    duplicates:duplicates,
+    totalNonEmpty:valid.length+invalid.length+duplicates
+  };
+}
+
+function splitIntoChunks(list,size){
+  var chunks=[];
+  for(var i=0;i<list.length;i+=size){
+    chunks.push(list.slice(i,i+size));
+  }
+  return chunks;
+}
+
+function buildUrlsetXml(urls,options){
+  var xml=[];
+  xml.push('<?xml version="1.0" encoding="UTF-8"?>');
+  xml.push('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
+
+  for(var i=0;i<urls.length;i++){
+    xml.push("  <url>");
+    xml.push("    <loc>"+escapeXml(urls[i])+"</loc>");
+    if(options.lastmod){
+      xml.push("    <lastmod>"+escapeXml(options.lastmod)+"</lastmod>");
+    }
+    if(options.changefreq){
+      xml.push("    <changefreq>"+escapeXml(options.changefreq)+"</changefreq>");
+    }
+    if(options.priority){
+      xml.push("    <priority>"+escapeXml(options.priority)+"</priority>");
+    }
+    xml.push("  </url>");
+  }
+
+  xml.push("</urlset>");
+  return xml.join("\n");
+}
+
+function normalizeBaseUrl(baseUrl,fallbackOrigin){
+  var candidate=(baseUrl||"").trim();
+  if(!candidate){
+    return fallbackOrigin+"/";
+  }
+
+  try{
+    var parsed=new URL(candidate);
+    if(parsed.protocol!=="http:"&&parsed.protocol!=="https:"){
+      return null;
+    }
+    return candidate.endsWith("/")?candidate:(candidate+"/");
+  }catch(e){
+    return null;
+  }
+}
+
+function buildIndexXml(fileNames,baseUrl,lastmod){
+  var xml=[];
+  xml.push('<?xml version="1.0" encoding="UTF-8"?>');
+  xml.push('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
+
+  for(var i=0;i<fileNames.length;i++){
+    xml.push("  <sitemap>");
+    xml.push("    <loc>"+escapeXml(baseUrl+fileNames[i])+"</loc>");
+    if(lastmod){
+      xml.push("    <lastmod>"+escapeXml(lastmod)+"</lastmod>");
+    }
+    xml.push("  </sitemap>");
+  }
+
+  xml.push("</sitemapindex>");
+  return xml.join("\n");
+}
+
+function downloadFile(filename,content){
+  var blob=new Blob([content],{type:"application/xml;charset=utf-8"});
+  var url=URL.createObjectURL(blob);
+  var link=document.createElement("a");
+  link.href=url;
+  link.download=filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+function copyText(value){
+  if(!navigator.clipboard||typeof navigator.clipboard.writeText!=="function"){
+    return Promise.reject(new Error("Clipboard API unavailable"));
+  }
+  return navigator.clipboard.writeText(value);
+}
+
+function renderFiles(){
+  filesOutputEl.innerHTML="";
+
+  if(!generatedFiles.length){
+    filesOutputEl.innerHTML='<p style="color:#666">No generated files yet.</p>';
+    return;
+  }
+
+  for(var i=0;i<generatedFiles.length;i++){
+    var file=generatedFiles[i];
+
+    var card=document.createElement("div");
+    card.style.border="1px solid #ddd";
+    card.style.borderRadius="6px";
+    card.style.padding="12px";
+    card.style.marginBottom="12px";
+    card.style.background="#fafafa";
+
+    var title=document.createElement("h4");
+    title.style.margin="0 0 8px 0";
+    title.textContent=file.name;
+
+    var actions=document.createElement("div");
+    actions.style.marginBottom="8px";
+
+    var copyBtn=document.createElement("button");
+    copyBtn.type="button";
+    copyBtn.textContent="Copy";
+    copyBtn.setAttribute("data-action","copy");
+    copyBtn.setAttribute("data-index",String(i));
+
+    var downloadBtn=document.createElement("button");
+    downloadBtn.type="button";
+    downloadBtn.textContent="Download";
+    downloadBtn.style.marginLeft="8px";
+    downloadBtn.setAttribute("data-action","download");
+    downloadBtn.setAttribute("data-index",String(i));
+
+    actions.appendChild(copyBtn);
+    actions.appendChild(downloadBtn);
+
+    var text=document.createElement("textarea");
+    text.rows=8;
+    text.readOnly=true;
+    text.setAttribute("aria-label",file.name+" content");
+    text.style.width="100%";
+    text.style.fontFamily="monospace";
+    text.style.fontSize="12px";
+    text.value=file.content;
+
+    card.appendChild(title);
+    card.appendChild(actions);
+    card.appendChild(text);
+    filesOutputEl.appendChild(card);
+  }
+}
+
+function writeInvalidReport(invalidLines){
+  if(!invalidLines.length){
+    invalidOutputEl.value="None.";
+    return;
+  }
+
+  var rows=[];
+  for(var i=0;i<invalidLines.length;i++){
+    var item=invalidLines[i];
+    rows.push("Line "+item.line+": "+item.value+" ["+item.reason+"]");
+  }
+  invalidOutputEl.value=rows.join("\n");
+}
+
+function buildSummary(details){
+  summaryEl.innerHTML="<strong>Summary:</strong> "+
+    details.validCount+" valid URL(s), "+
+    details.duplicateCount+" duplicate(s) removed, "+
+    details.invalidCount+" invalid line(s) skipped, "+
+    details.fileCount+" file(s) generated.";
+}
+
+function generateSitemaps(){
+  var parsed=parseUrlLines(urlInput.value||"");
+  if(!parsed.valid.length){
+    generatedFiles=[];
+    renderFiles();
+    writeInvalidReport(parsed.invalid);
+    summaryEl.innerHTML="";
+    setStatus("No valid URLs found. Add at least one absolute HTTP/HTTPS URL.","error");
+    return;
+  }
+
+  var baseName=sanitizeBaseName(baseNameInput.value);
+  baseNameInput.value=baseName;
+
+  var chunkSize=clamp(parseInt(chunkSizeInput.value,10),LIMITS.minUrlsPerFile,LIMITS.maxUrlsPerFile,LIMITS.maxUrlsPerFile);
+  chunkSizeInput.value=String(chunkSize);
+
+  var useLastmod=!!useLastmodInput.checked;
+  var lastmod=(lastmodDateInput.value||"").trim();
+  if(useLastmod&&!lastmod){
+    setDefaultDate();
+    lastmod=lastmodDateInput.value;
+  }
+
+  var usePriority=!!usePriorityInput.checked;
+  var priorityValue=clamp(parseFloat(priorityInput.value),0,1,0.5).toFixed(1);
+  priorityInput.value=priorityValue;
+
+  var options={
+    lastmod:useLastmod?lastmod:"",
+    changefreq:(changefreqInput.value||"").trim(),
+    priority:usePriority?priorityValue:""
+  };
+
+  var chunks=splitIntoChunks(parsed.valid,chunkSize);
+  var files=[];
+
+  if(chunks.length===1){
+    files.push({
+      name:baseName+".xml",
+      content:buildUrlsetXml(chunks[0],options)
+    });
+  }else{
+    var fileNames=[];
+    for(var i=0;i<chunks.length;i++){
+      var chunkName=baseName+"-"+(i+1)+".xml";
+      fileNames.push(chunkName);
+      files.push({
+        name:chunkName,
+        content:buildUrlsetXml(chunks[i],options)
+      });
+    }
+
+    var fallbackOrigin=new URL(parsed.valid[0]).origin;
+    var indexBaseUrl=normalizeBaseUrl(sitemapBaseUrlInput.value,fallbackOrigin);
+    if(!indexBaseUrl){
+      generatedFiles=[];
+      renderFiles();
+      writeInvalidReport(parsed.invalid);
+      summaryEl.innerHTML="";
+      setStatus("Sitemap files base URL is invalid. Use absolute HTTP/HTTPS URL.","error");
+      return;
+    }
+
+    var indexName=baseName+"-index.xml";
+    var indexContent=buildIndexXml(fileNames,indexBaseUrl,options.lastmod);
+    files.unshift({name:indexName,content:indexContent});
+
+    if(!(sitemapBaseUrlInput.value||"").trim()){
+      sitemapBaseUrlInput.value=indexBaseUrl;
+      setStatus("Generated with auto base URL from first valid URL origin.","warning");
+    }
+  }
+
+  generatedFiles=files;
+  renderFiles();
+  writeInvalidReport(parsed.invalid);
+  buildSummary({
+    validCount:parsed.valid.length,
+    duplicateCount:parsed.duplicates,
+    invalidCount:parsed.invalid.length,
+    fileCount:generatedFiles.length
+  });
+
+  if(chunks.length===1){
+    setStatus("Sitemap generated successfully.","success");
+    return;
+  }
+  if((sitemapBaseUrlInput.value||"").trim()){
+    setStatus("Sitemap files and sitemap index generated successfully.","success");
+  }
+}
+
+function downloadAll(){
+  if(!generatedFiles.length){
+    setStatus("Generate files before downloading.","error");
+    return;
+  }
+
+  for(var i=0;i<generatedFiles.length;i++){
+    downloadFile(generatedFiles[i].name,generatedFiles[i].content);
+  }
+  setStatus("Download started for "+generatedFiles.length+" file(s).","success");
+}
+
+function clearAll(){
+  urlInput.value="";
+  generatedFiles=[];
+  renderFiles();
+  invalidOutputEl.value="";
+  summaryEl.innerHTML="";
+  setStatus("Cleared.","neutral");
+}
+
+filesOutputEl.addEventListener("click",function(event){
+  var target=event.target;
+  if(!(target instanceof HTMLElement))return;
+
+  var action=target.getAttribute("data-action");
+  var index=parseInt(target.getAttribute("data-index"),10);
+  if(!action||!Number.isFinite(index)||!generatedFiles[index])return;
+
+  var file=generatedFiles[index];
+
+  if(action==="download"){
+    downloadFile(file.name,file.content);
+    setStatus("Downloading "+file.name+"...","success");
+    return;
+  }
+
+  if(action==="copy"){
+    copyText(file.content).then(function(){
+      setStatus(file.name+" copied.","success");
+    }).catch(function(){
+      setStatus("Copy failed. Try selecting and copying manually.","error");
+    });
+  }
+});
+
+window.generateSitemaps=generateSitemaps;
+window.downloadAll=downloadAll;
+window.clearAll=clearAll;
+
+setDefaultDate();
+renderFiles();
+})();
+</script>
+<script src="/js/favorites.js"></script>
+<script src="/js/tool-common.js"></script>
+</body>
+</html>
