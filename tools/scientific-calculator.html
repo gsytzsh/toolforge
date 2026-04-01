@@ -16,6 +16,11 @@
 <meta name="twitter:description" content="Evaluate expressions with trig, log, powers, roots, constants, and parentheses. Scientific calculator with degree-based trig support.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/css/style.css">
+<style>
+.calc-toolbar{display:flex;flex-wrap:wrap;gap:6px;max-width:640px;margin:10px 0 14px}
+.calc-key{padding:6px 10px;border:1px solid #d1d5db;border-radius:6px;background:#fff;cursor:pointer;font-size:13px;line-height:1.2}
+.calc-key:hover{background:#f8fafc}
+</style>
 
 <script type="application/ld+json">
 {
@@ -84,6 +89,30 @@
 <label for="expr" class="sr-only">Expression</label>
 <input id="expr" style="width:280px" placeholder="e.g. 2 + 3 * 4 or sin(90)" aria-label="Expression">
 <br><br>
+<div id="calc-toolbar" class="calc-toolbar" aria-label="Quick insert buttons">
+<button type="button" class="calc-key" data-insert="sin(">sin(</button>
+<button type="button" class="calc-key" data-insert="cos(">cos(</button>
+<button type="button" class="calc-key" data-insert="tan(">tan(</button>
+<button type="button" class="calc-key" data-insert="asin(">asin(</button>
+<button type="button" class="calc-key" data-insert="acos(">acos(</button>
+<button type="button" class="calc-key" data-insert="atan(">atan(</button>
+<button type="button" class="calc-key" data-insert="log(">log(</button>
+<button type="button" class="calc-key" data-insert="ln(">ln(</button>
+<button type="button" class="calc-key" data-insert="sqrt(">sqrt(</button>
+<button type="button" class="calc-key" data-insert="cbrt(">cbrt(</button>
+<button type="button" class="calc-key" data-insert="π">π</button>
+<button type="button" class="calc-key" data-insert="e">e</button>
+<button type="button" class="calc-key" data-insert="^">^</button>
+<button type="button" class="calc-key" data-insert="(">(</button>
+<button type="button" class="calc-key" data-insert=")">)</button>
+<button type="button" class="calc-key" data-insert="%">%</button>
+<button type="button" class="calc-key" data-insert="+">+</button>
+<button type="button" class="calc-key" data-insert="-">-</button>
+<button type="button" class="calc-key" data-insert="*">*</button>
+<button type="button" class="calc-key" data-insert="/">/</button>
+<button type="button" class="calc-key" data-action="backspace">DEL</button>
+<button type="button" class="calc-key" data-action="clear">AC</button>
+</div>
 <button onclick="calc()">Calculate</button>
 <h3>Result</h3>
 <p id="result"></p>
@@ -430,21 +459,85 @@ form XeY where X and Y are numbers.
 <script>
 function degRad(x){return x*Math.PI/180}
 function radDeg(x){return x*180/Math.PI}
+function dSin(x){return Math.sin(degRad(x))}
+function dCos(x){return Math.cos(degRad(x))}
+function dTan(x){return Math.tan(degRad(x))}
+function dAsin(x){return radDeg(Math.asin(x))}
+function dAcos(x){return radDeg(Math.acos(x))}
+function dAtan(x){return radDeg(Math.atan(x))}
+var exprEl=document.getElementById("expr")
+var resultEl=document.getElementById("result")
+function isAllowedExpression(raw){
+if(/[^0-9+\-*/%^().,a-zA-Zπ√\s]/.test(raw))return false
+var tokens=raw.match(/[A-Za-z]+/g)
+if(!tokens)return true
+var allow={sin:1,cos:1,tan:1,asin:1,acos:1,atan:1,log:1,ln:1,exp:1,cbrt:1,sqrt:1,pi:1,e:1}
+for(var i=0;i<tokens.length;i++){
+var t=tokens[i].toLowerCase()
+if(!allow[t])return false
+}
+return true
+}
 function calc(){
-var s=document.getElementById("expr").value
-if(!s){document.getElementById("result").innerText="";return}
-s=s.replace(/\s+/g,"").replace(/π/g,"Math.PI").replace(/√/g,"Math.sqrt")
+var s=exprEl.value
+if(!s){resultEl.innerText="";return}
+if(!isAllowedExpression(s)){resultEl.innerText="Error: Unsupported expression";return}
+s=s.replace(/\s+/g,"").replace(/π/g,"pi")
+s=s.replace(/√\(/g,"sqrt(").replace(/√([0-9A-Za-z_.]+)/g,"sqrt($1)")
+s=s.replace(/(\d|\))pi/gi,"$1*pi")
+s=s.replace(/\)\(/g,")*(")
+s=s.replace(/(\d|\))(?=(sqrt|sin|cos|tan|asin|acos|atan|log|ln|exp|cbrt)\()/g,"$1*")
 s=s.replace(/\bpi\b/gi,"Math.PI")
 s=s.replace(/(^|[^0-9A-Za-z_.])e(?=$|[^0-9A-Za-z_])/g,"$1Math.E")
-s=s.replace(/\basin\(/g,"(function(x){return radDeg(Math.asin(x))})(").replace(/\bacos\(/g,"(function(x){return radDeg(Math.acos(x))})(").replace(/\batan\(/g,"(function(x){return radDeg(Math.atan(x))})(")
-s=s.replace(/\bsin\(/g,"(function(x){return Math.sin(degRad(x))})(").replace(/\bcos\(/g,"(function(x){return Math.cos(degRad(x))})(").replace(/\btan\(/g,"(function(x){return Math.tan(degRad(x))})(")
+s=s.replace(/(\d|\))(?=Math\.(PI|E))/g,"$1*")
+s=s.replace(/\basin\(/g,"dAsin(").replace(/\bacos\(/g,"dAcos(").replace(/\batan\(/g,"dAtan(")
+s=s.replace(/\bsin\(/g,"dSin(").replace(/\bcos\(/g,"dCos(").replace(/\btan\(/g,"dTan(")
 s=s.replace(/\blog\(/g,"Math.log10(").replace(/\bln\(/g,"Math.log(").replace(/\bexp\(/g,"Math.exp(").replace(/\bcbrt\(/g,"Math.cbrt(").replace(/\bsqrt\(/g,"Math.sqrt(")
 s=s.replace(/\^/g,"**")
 try{
 var v=eval(s)
-document.getElementById("result").innerText=typeof v==="number"&&isFinite(v)?v:"Invalid"
-}catch(e){document.getElementById("result").innerText="Error: "+e.message}
+resultEl.innerText=typeof v==="number"&&isFinite(v)?v:"Invalid"
+}catch(e){resultEl.innerText="Error: "+e.message}
 }
+function insertAtCursor(text){
+var start=exprEl.selectionStart||0
+var end=exprEl.selectionEnd||0
+var value=exprEl.value
+exprEl.value=value.slice(0,start)+text+value.slice(end)
+var pos=start+text.length
+exprEl.focus()
+exprEl.setSelectionRange(pos,pos)
+}
+function handleBackspace(){
+var start=exprEl.selectionStart||0
+var end=exprEl.selectionEnd||0
+var value=exprEl.value
+if(start!==end){
+exprEl.value=value.slice(0,start)+value.slice(end)
+exprEl.setSelectionRange(start,start)
+exprEl.focus()
+return
+}
+if(start===0)return
+exprEl.value=value.slice(0,start-1)+value.slice(end)
+exprEl.setSelectionRange(start-1,start-1)
+exprEl.focus()
+}
+var toolbarEl=document.getElementById("calc-toolbar")
+if(toolbarEl){
+toolbarEl.addEventListener("click",function(e){
+var btn=e.target.closest("button")
+if(!btn)return
+var action=btn.getAttribute("data-action")
+if(action==="clear"){exprEl.value="";exprEl.focus();return}
+if(action==="backspace"){handleBackspace();return}
+var insert=btn.getAttribute("data-insert")
+if(insert)insertAtCursor(insert)
+})
+}
+exprEl.addEventListener("keydown",function(e){
+if(e.key==="Enter"){e.preventDefault();calc()}
+})
 </script>
 <script src="/js/favorites.js"></script>
 <script src="/js/tool-common.js"></script>
