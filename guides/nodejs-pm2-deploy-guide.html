@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Node.js PM2 Deployment Guide (Ubuntu / Rocky) | ToolForge Guides</title>
+<meta name="description" content="Install Node.js LTS and PM2, run your app as a service, enable auto-start, set environment variables, and troubleshoot crashes and restart loops.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://toolforge.site/guides/nodejs-pm2-deploy-guide.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Node.js PM2 Deployment Guide (Ubuntu / Rocky)">
+<meta property="og:description" content="Production-oriented PM2 workflow for Node.js applications.">
+<meta property="og:url" content="https://toolforge.site/guides/nodejs-pm2-deploy-guide.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node.js PM2 Deployment Guide">
+<meta name="twitter:description" content="Run Node.js apps with PM2, auto-start on reboot, and monitor logs easily.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.guide-box{border:1px solid #ddd;border-radius:8px;padding:12px;background:#fafafa;margin:12px 0}
+.cmd{background:#111827;color:#e5e7eb;padding:12px;border-radius:6px;font-size:12px;overflow:auto;white-space:pre-wrap;line-height:1.45}
+.table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+.table th,.table td{border:1px solid #ddd;padding:8px;text-align:left;vertical-align:top}
+.table th{background:#f5f5f5}
+.related{margin-top:28px;padding-top:14px;border-top:1px solid #e5e7eb}
+.related ul{margin:8px 0 0 20px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Node.js PM2 Deployment Guide</h1>
+<p class="subtitle">Install Node.js, run apps with PM2, and keep services resilient across reboots.</p>
+<p><a href="/guides/index.html">Back to Guides</a> · <a href="/">Home</a></p>
+
+<section class="guide-box">
+<p><strong>What this guide covers:</strong> Node.js LTS install, PM2 setup, startup integration, and common production troubleshooting.</p>
+<p><strong>Best for:</strong> API services, web apps, and worker processes on Linux VPS or dedicated servers.</p>
+</section>
+
+<h2>1. Install Node.js LTS</h2>
+<h3>Ubuntu / Debian</h3>
+<pre class="cmd">curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt install -y nodejs
+node -v
+npm -v</pre>
+
+<h3>Rocky / AlmaLinux / CentOS</h3>
+<pre class="cmd">curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash -
+sudo dnf install -y nodejs
+node -v
+npm -v</pre>
+
+<h2>2. Install PM2</h2>
+<pre class="cmd">sudo npm install -g pm2
+pm2 -v</pre>
+
+<h2>3. Run Your App with PM2</h2>
+<pre class="cmd"># Start app
+pm2 start app.js --name myapp
+
+# Or run npm start
+pm2 start npm --name myapp -- start
+
+# View process list
+pm2 list
+
+# Show logs
+pm2 logs myapp</pre>
+
+<h2>4. Persist Processes Across Reboot</h2>
+<pre class="cmd"># Save current process list
+pm2 save
+
+# Generate startup script
+pm2 startup
+
+# Run the printed sudo command, then save again
+pm2 save</pre>
+
+<h2>5. Recommended ecosystem.config.js</h2>
+<pre class="cmd">module.exports = {
+  apps: [
+    {
+      name: "myapp",
+      script: "app.js",
+      instances: 1,
+      exec_mode: "fork",
+      watch: false,
+      max_memory_restart: "300M",
+      env: {
+        NODE_ENV: "production",
+        PORT: 3000
+      }
+    }
+  ]
+};</pre>
+
+<pre class="cmd">pm2 start ecosystem.config.js
+pm2 save</pre>
+
+<h2>6. Zero-Downtime Reload (Cluster Mode)</h2>
+<pre class="cmd"># In ecosystem config, use:
+# instances: "max"
+# exec_mode: "cluster"
+
+pm2 reload myapp</pre>
+
+<h2>7. Common Operations</h2>
+<pre class="cmd">pm2 restart myapp
+pm2 stop myapp
+pm2 delete myapp
+pm2 monit
+pm2 logs --lines 200
+pm2 flush</pre>
+
+<h2>8. Troubleshooting</h2>
+<table class="table">
+  <tr>
+    <th>Issue</th>
+    <th>Typical Cause</th>
+    <th>Fix</th>
+  </tr>
+  <tr>
+    <td>App restarts repeatedly</td>
+    <td>Unhandled exception or env var missing</td>
+    <td>Check <code>pm2 logs</code>, verify env values and startup command</td>
+  </tr>
+  <tr>
+    <td>Port already in use</td>
+    <td>Another process binds the same port</td>
+    <td>Find conflicting process and change port or stop old service</td>
+  </tr>
+  <tr>
+    <td>Process missing after reboot</td>
+    <td><code>pm2 save</code> or startup setup not completed</td>
+    <td>Run <code>pm2 startup</code>, execute printed command, then <code>pm2 save</code></td>
+  </tr>
+</table>
+
+<section class="related">
+<h3>Related Guides</h3>
+<ul>
+<li><a href="/guides/nginx-reverse-proxy-config.html">Nginx Reverse Proxy Configuration</a></li>
+<li><a href="/guides/linux-commands-cheat-sheet.html">Linux Commands Cheat Sheet</a></li>
+</ul>
+<h3>Related Tools</h3>
+<ul>
+<li><a href="/tools/json-viewer.html">JSON Viewer</a></li>
+<li><a href="/tools/base64-encode.html">Base64 Encode/Decode</a></li>
+<li><a href="/tools/timestamp-converter.html">Timestamp Converter</a></li>
+</ul>
+</section>
+</main>
+<script src="/js/tool-common.js"></script>
+</body>
+</html>

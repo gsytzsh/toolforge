@@ -1387,6 +1387,36 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://toolforge.site/guides/redis-install-auth-reset.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolforge.site/guides/postgresql-install-reset-password.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolforge.site/guides/nginx-php-fpm-setup.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolforge.site/guides/nodejs-pm2-deploy-guide.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolforge.site/guides/git-common-issues-fixes.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://toolforge.site/guides/install-docker-ubuntu.html</loc>
     <lastmod>2026-04-01</lastmod>
     <changefreq>monthly</changefreq>

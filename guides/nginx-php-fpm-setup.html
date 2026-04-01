@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nginx + PHP-FPM Setup Guide (Ubuntu / Rocky) | ToolForge Guides</title>
+<meta name="description" content="Set up Nginx with PHP-FPM on Ubuntu and Rocky Linux: install packages, configure server blocks, test PHP, and troubleshoot common 502/permission issues.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://toolforge.site/guides/nginx-php-fpm-setup.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Nginx + PHP-FPM Setup Guide (Ubuntu / Rocky)">
+<meta property="og:description" content="Production-oriented Nginx and PHP-FPM setup steps with a safe baseline config.">
+<meta property="og:url" content="https://toolforge.site/guides/nginx-php-fpm-setup.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nginx + PHP-FPM Setup Guide">
+<meta name="twitter:description" content="Install and configure Nginx with PHP-FPM on Linux, with practical troubleshooting.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.guide-box{border:1px solid #ddd;border-radius:8px;padding:12px;background:#fafafa;margin:12px 0}
+.cmd{background:#111827;color:#e5e7eb;padding:12px;border-radius:6px;font-size:12px;overflow:auto;white-space:pre-wrap;line-height:1.45}
+.small{font-size:13px;color:#555}
+.table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+.table th,.table td{border:1px solid #ddd;padding:8px;text-align:left;vertical-align:top}
+.table th{background:#f5f5f5}
+.related{margin-top:28px;padding-top:14px;border-top:1px solid #e5e7eb}
+.related ul{margin:8px 0 0 20px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Nginx + PHP-FPM Setup Guide</h1>
+<p class="subtitle">A practical Linux setup for serving PHP applications with Nginx and PHP-FPM.</p>
+<p><a href="/guides/index.html">Back to Guides</a> · <a href="/">Home</a></p>
+
+<section class="guide-box">
+<p><strong>What this guide covers:</strong> package installation, PHP-FPM socket setup, Nginx server block config, and common 502 fixes.</p>
+<p><strong>Scope:</strong> Ubuntu/Debian and Rocky/Alma/CentOS style systems.</p>
+</section>
+
+<h2>1. Install Nginx and PHP-FPM (Ubuntu / Debian)</h2>
+<pre class="cmd">sudo apt update
+sudo apt install -y nginx php-fpm php-mysql
+
+sudo systemctl enable --now nginx
+sudo systemctl enable --now php8.2-fpm
+
+sudo systemctl status nginx --no-pager
+sudo systemctl status php8.2-fpm --no-pager</pre>
+
+<p class="small">If your PHP version differs, replace <code>php8.2-fpm</code> with the installed version (for example <code>php8.1-fpm</code>).</p>
+
+<h2>2. Install Nginx and PHP-FPM (Rocky / AlmaLinux / CentOS)</h2>
+<pre class="cmd">sudo dnf install -y nginx php php-fpm php-mysqlnd
+
+sudo systemctl enable --now nginx
+sudo systemctl enable --now php-fpm
+
+sudo systemctl status nginx --no-pager
+sudo systemctl status php-fpm --no-pager</pre>
+
+<h2>3. Configure PHP-FPM Pool</h2>
+<pre class="cmd"># Ubuntu pool file (version may vary):
+# /etc/php/8.2/fpm/pool.d/www.conf
+
+# Rocky pool file:
+# /etc/php-fpm.d/www.conf
+
+# Ensure PHP-FPM user/group match Nginx worker user where needed.
+# Common users: www-data (Ubuntu), nginx (Rocky)
+
+# Restart PHP-FPM after edits
+sudo systemctl restart php8.2-fpm
+# or
+sudo systemctl restart php-fpm</pre>
+
+<h2>4. Nginx Server Block for PHP</h2>
+<p>Use a minimal but safe baseline:</p>
+<pre class="cmd">server {
+    listen 80;
+    server_name example.com;
+
+    root /var/www/example/public;
+    index index.php index.html;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+
+        # Option A: Unix socket (Ubuntu typical)
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+
+        # Option B: PHP-FPM TCP (common on Rocky)
+        # fastcgi_pass 127.0.0.1:9000;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}</pre>
+
+<pre class="cmd"># Test and reload Nginx
+sudo nginx -t
+sudo systemctl reload nginx</pre>
+
+<h2>5. Create and Test a PHP Page</h2>
+<pre class="cmd">sudo mkdir -p /var/www/example/public
+echo '<?php phpinfo();' | sudo tee /var/www/example/public/index.php >/dev/null
+
+# Open in browser: http://example.com
+# Remove phpinfo page after validation in production.</pre>
+
+<h2>6. Security Baseline</h2>
+<ol>
+<li>Set proper ownership and permissions on app files.</li>
+<li>Do not expose unnecessary write permissions to web user.</li>
+<li>Disable sensitive PHP functions only if your app supports it.</li>
+<li>Use HTTPS and secure headers once the site is online.</li>
+</ol>
+
+<h2>7. Common Troubleshooting</h2>
+<table class="table">
+  <tr>
+    <th>Issue</th>
+    <th>Typical Cause</th>
+    <th>Fix</th>
+  </tr>
+  <tr>
+    <td>502 Bad Gateway</td>
+    <td>Wrong <code>fastcgi_pass</code> socket/port or PHP-FPM not running</td>
+    <td>Check FPM status and verify socket path from pool config</td>
+  </tr>
+  <tr>
+    <td>Download prompt for .php file</td>
+    <td>PHP location block missing or incorrect</td>
+    <td>Add <code>location ~ \.php$</code> section and reload Nginx</td>
+  </tr>
+  <tr>
+    <td>Permission denied</td>
+    <td>App files owned by wrong user/group</td>
+    <td>Correct ownership and directory permissions</td>
+  </tr>
+</table>
+
+<section class="related">
+<h3>Related Guides</h3>
+<ul>
+<li><a href="/guides/nginx-install-rocky9.html">Install Nginx on Rocky Linux 9 / AlmaLinux 9</a></li>
+<li><a href="/guides/nginx-reverse-proxy-config.html">Nginx Reverse Proxy Configuration</a></li>
+<li><a href="/guides/ssl-certificate-guide.html">Linux SSL Certificate Guide</a></li>
+</ul>
+<h3>Related Tools</h3>
+<ul>
+<li><a href="/tools/http-header-parser.html">HTTP Header Parser</a></li>
+<li><a href="/tools/ip-info.html">IP Info</a></li>
+<li><a href="/tools/port-reference.html">Port Reference</a></li>
+</ul>
+</section>
+</main>
+<script src="/js/tool-common.js"></script>
+</body>
+</html>

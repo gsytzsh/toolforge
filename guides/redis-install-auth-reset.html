@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redis Installation and Password Reset Guide (Ubuntu / Rocky / Windows) | ToolForge Guides</title>
+<meta name="description" content="Install Redis on Ubuntu and Rocky Linux, secure it with password/ACL, and recover access when credentials are lost. Includes Windows options and troubleshooting.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://toolforge.site/guides/redis-install-auth-reset.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Redis Installation and Password Reset Guide (Ubuntu / Rocky / Windows)">
+<meta property="og:description" content="Beginner-friendly Redis setup, security hardening, and password recovery workflow.">
+<meta property="og:url" content="https://toolforge.site/guides/redis-install-auth-reset.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis Installation and Password Reset Guide">
+<meta name="twitter:description" content="Install Redis, enable authentication, and recover access safely.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.guide-box{border:1px solid #ddd;border-radius:8px;padding:12px;background:#fafafa;margin:12px 0}
+.cmd{background:#111827;color:#e5e7eb;padding:12px;border-radius:6px;font-size:12px;overflow:auto;white-space:pre-wrap;line-height:1.45}
+.small{font-size:13px;color:#555}
+.table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+.table th,.table td{border:1px solid #ddd;padding:8px;text-align:left;vertical-align:top}
+.table th{background:#f5f5f5}
+.related{margin-top:28px;padding-top:14px;border-top:1px solid #e5e7eb}
+.related ul{margin:8px 0 0 20px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Redis Installation and Password Reset Guide</h1>
+<p class="subtitle">Install Redis, secure it, and recover access on Ubuntu, Rocky Linux, and Windows environments.</p>
+<p><a href="/guides/index.html">Back to Guides</a> · <a href="/">Home</a></p>
+
+<section class="guide-box">
+<p><strong>What this guide covers:</strong> Redis installation, service startup, password/ACL security basics, and account recovery if access is lost.</p>
+<p><strong>Recommended setup:</strong> keep Redis on private networks unless you have strict firewall and TLS protections in place.</p>
+</section>
+
+<h2>1. Prerequisites</h2>
+<ol>
+<li>Server administrator access (<code>sudo</code>).</li>
+<li>A backup/snapshot for production systems before security changes.</li>
+<li>Firewall policy that blocks Redis port <code>6379</code> from public internet unless explicitly required.</li>
+</ol>
+
+<h2>2. Install Redis on Ubuntu / Debian</h2>
+<pre class="cmd"># Update packages
+sudo apt update
+
+# Install Redis
+sudo apt install -y redis-server
+
+# Enable and start
+sudo systemctl enable --now redis-server
+sudo systemctl status redis-server --no-pager
+
+# Basic check
+redis-cli ping</pre>
+
+<h2>3. Install Redis on Rocky / AlmaLinux / CentOS</h2>
+<pre class="cmd"># Install Redis package
+sudo dnf install -y redis
+
+# Enable and start
+sudo systemctl enable --now redis
+sudo systemctl status redis --no-pager
+
+# Basic check
+redis-cli ping</pre>
+
+<h2>4. Windows Options</h2>
+<ol>
+<li>Preferred: run Redis in WSL2 (Ubuntu) and follow Linux instructions.</li>
+<li>Alternative: run Redis via Docker container.</li>
+</ol>
+<pre class="cmd"># Docker quick run (Windows or Linux)
+docker run -d --name redis -p 6379:6379 redis:7</pre>
+
+<h2>5. Secure Redis (Password and Network)</h2>
+<p>Edit Redis config and keep it reachable only where needed.</p>
+<pre class="cmd"># Common config locations:
+# Ubuntu: /etc/redis/redis.conf
+# Rocky:  /etc/redis.conf
+
+# Suggested settings:
+bind 127.0.0.1 ::1
+protected-mode yes
+requirepass NewStrongPassword!123</pre>
+
+<pre class="cmd"># Restart service after config changes
+sudo systemctl restart redis-server
+# or
+sudo systemctl restart redis
+
+# Test with auth
+redis-cli
+AUTH NewStrongPassword!123
+PING</pre>
+
+<h2>6. Recover Access / Reset Forgotten Password</h2>
+<p><strong>Safe method:</strong> stop Redis, temporarily remove or replace <code>requirepass</code> in config, then restart and set a new password.</p>
+
+<pre class="cmd"># 1) Stop Redis
+sudo systemctl stop redis-server
+# or
+sudo systemctl stop redis
+
+# 2) Edit config and set a new password (or temporarily comment requirepass)
+sudo nano /etc/redis/redis.conf
+# or
+sudo nano /etc/redis.conf
+
+# 3) Start Redis
+sudo systemctl start redis-server
+# or
+sudo systemctl start redis
+
+# 4) Verify
+redis-cli
+AUTH NewStrongPassword!123
+PING</pre>
+
+<p class="small">If ACL is enabled in your environment, reset credentials with <code>ACL SETUSER</code> from an authorized session.</p>
+
+<h2>7. Useful Maintenance Commands</h2>
+<pre class="cmd"># Memory and persistence info
+redis-cli INFO memory
+redis-cli INFO persistence
+
+# Save snapshot
+redis-cli BGSAVE
+
+# View logs (systemd)
+sudo journalctl -u redis --no-pager | tail -n 50
+sudo journalctl -u redis-server --no-pager | tail -n 50</pre>
+
+<h2>8. Common Troubleshooting</h2>
+<table class="table">
+  <tr>
+    <th>Issue</th>
+    <th>Typical Cause</th>
+    <th>Fix</th>
+  </tr>
+  <tr>
+    <td><code>NOAUTH Authentication required</code></td>
+    <td>Password is enabled but no <code>AUTH</code> provided</td>
+    <td>Run <code>AUTH your_password</code> first</td>
+  </tr>
+  <tr>
+    <td>Cannot connect to Redis</td>
+    <td>Service down, wrong bind address, firewall blocked</td>
+    <td>Check service status, bind setting, and port rules</td>
+  </tr>
+  <tr>
+    <td>Redis exposed publicly</td>
+    <td>0.0.0.0 bind + open firewall</td>
+    <td>Restrict network, set auth, and isolate access</td>
+  </tr>
+</table>
+
+<section class="related">
+<h3>Related Guides</h3>
+<ul>
+<li><a href="/guides/linux-commands-cheat-sheet.html">Linux Commands Cheat Sheet</a></li>
+<li><a href="/guides/nginx-reverse-proxy-config.html">Nginx Reverse Proxy Configuration</a></li>
+</ul>
+<h3>Related Tools</h3>
+<ul>
+<li><a href="/tools/password-generator.html">Password Generator</a></li>
+<li><a href="/tools/ip-info.html">IP Info</a></li>
+<li><a href="/tools/port-reference.html">Port Reference</a></li>
+</ul>
+</section>
+</main>
+<script src="/js/tool-common.js"></script>
+</body>
+</html>

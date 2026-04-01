@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git Common Issues and Fixes Guide | ToolForge Guides</title>
+<meta name="description" content="Fix common Git problems: detached HEAD, non-fast-forward push, merge conflicts, wrong branch commits, accidental reset, and safe recovery commands.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://toolforge.site/guides/git-common-issues-fixes.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ToolForge">
+<meta property="og:title" content="Git Common Issues and Fixes Guide">
+<meta property="og:description" content="A practical troubleshooting runbook for daily Git errors and recovery.">
+<meta property="og:url" content="https://toolforge.site/guides/git-common-issues-fixes.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git Common Issues and Fixes Guide">
+<meta name="twitter:description" content="Troubleshoot and recover from frequent Git mistakes safely.">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.guide-box{border:1px solid #ddd;border-radius:8px;padding:12px;background:#fafafa;margin:12px 0}
+.cmd{background:#111827;color:#e5e7eb;padding:12px;border-radius:6px;font-size:12px;overflow:auto;white-space:pre-wrap;line-height:1.45}
+.table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+.table th,.table td{border:1px solid #ddd;padding:8px;text-align:left;vertical-align:top}
+.table th{background:#f5f5f5}
+.related{margin-top:28px;padding-top:14px;border-top:1px solid #e5e7eb}
+.related ul{margin:8px 0 0 20px}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>Git Common Issues and Fixes Guide</h1>
+<p class="subtitle">A practical command reference for recovering from common Git mistakes safely.</p>
+<p><a href="/guides/index.html">Back to Guides</a> · <a href="/">Home</a></p>
+
+<section class="guide-box">
+<p><strong>Goal:</strong> help you recover quickly without losing work.</p>
+<p><strong>Safety tip:</strong> before risky fixes, create a temporary branch: <code>git switch -c rescue/backup-$(date +%Y%m%d-%H%M)</code></p>
+</section>
+
+<h2>1. "Not a git repository"</h2>
+<pre class="cmd"># Check current folder
+pwd
+ls -la
+
+# Enter the correct repository directory
+cd /path/to/your/repo
+
+# If needed, initialize a new repo
+git init</pre>
+
+<h2>2. Detached HEAD</h2>
+<pre class="cmd"># Check status
+git status
+
+# Create a branch from current detached commit
+git switch -c fix/detached-head-work
+
+# Or return to main branch
+git switch main</pre>
+
+<h2>3. Push Rejected (non-fast-forward)</h2>
+<pre class="cmd"># Fetch latest remote commits
+git fetch origin
+
+# Rebase your branch onto remote
+git rebase origin/main
+
+# Resolve conflicts if prompted, then continue
+git rebase --continue
+
+# Push after rebase
+git push origin main</pre>
+
+<h2>4. Merge Conflicts</h2>
+<pre class="cmd"># Start merge/rebase and inspect conflict files
+git status
+
+# Edit conflict markers in files, then mark resolved
+git add &lt;resolved-file&gt;
+
+# Continue merge/rebase
+git merge --continue
+# or
+git rebase --continue</pre>
+
+<h2>5. Committed to Wrong Branch</h2>
+<pre class="cmd"># Example: commit is on main, but should be on feature branch
+
+# 1) Remember latest commit hash
+git log --oneline -n 3
+
+# 2) Create target branch from current commit
+git switch -c feature/correct-branch
+
+# 3) Return to main and remove wrong commit safely
+git switch main
+git reset --hard HEAD~1</pre>
+
+<p>If the wrong commit was already pushed, use <code>git revert</code> instead of history rewrite on shared branches.</p>
+
+<h2>6. Accidentally Lost Commits</h2>
+<pre class="cmd"># Use reflog to find lost commit refs
+git reflog
+
+# Recover by creating a branch at that commit
+git switch -c recover/lost-work &lt;commit-hash&gt;</pre>
+
+<h2>7. Undo Last Commit Safely</h2>
+<pre class="cmd"># Keep changes staged
+git reset --soft HEAD~1
+
+# Keep changes unstaged
+git reset --mixed HEAD~1
+
+# Create inverse commit (safe for shared branches)
+git revert HEAD</pre>
+
+<h2>8. Common Error Reference</h2>
+<table class="table">
+  <tr>
+    <th>Error</th>
+    <th>Likely Cause</th>
+    <th>Action</th>
+  </tr>
+  <tr>
+    <td><code>fatal: refusing to merge unrelated histories</code></td>
+    <td>Two repos with unrelated roots</td>
+    <td>Use <code>--allow-unrelated-histories</code> only if intentional</td>
+  </tr>
+  <tr>
+    <td><code>src refspec ... does not match any</code></td>
+    <td>No commit yet or wrong branch name</td>
+    <td>Create first commit and verify branch name</td>
+  </tr>
+  <tr>
+    <td><code>Permission denied (publickey)</code></td>
+    <td>SSH key missing or not registered</td>
+    <td>Check local SSH key and Git host key registration</td>
+  </tr>
+</table>
+
+<h2>9. Quick Health Checks</h2>
+<pre class="cmd">git status
+git branch -vv
+git remote -v
+git log --oneline --graph --decorate -n 20</pre>
+
+<section class="related">
+<h3>Related Guides</h3>
+<ul>
+<li><a href="/guides/linux-commands-cheat-sheet.html">Linux Commands Cheat Sheet</a></li>
+<li><a href="/guides/adsense-readiness-checklist.html">AdSense Readiness Checklist for Tool Sites</a></li>
+</ul>
+<h3>Related Tools</h3>
+<ul>
+<li><a href="/tools/base64-encode.html">Base64 Encode/Decode</a></li>
+<li><a href="/tools/timestamp-converter.html">Timestamp Converter</a></li>
+<li><a href="/tools/uuid-generator.html">UUID Generator</a></li>
+</ul>
+</section>
+</main>
+<script src="/js/tool-common.js"></script>
+</body>
+</html>
