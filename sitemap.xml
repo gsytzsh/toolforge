@@ -1381,6 +1381,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://toolforge.site/guides/mysql-install-reset-password.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://toolforge.site/guides/install-docker-ubuntu.html</loc>
     <lastmod>2026-04-01</lastmod>
     <changefreq>monthly</changefreq>
