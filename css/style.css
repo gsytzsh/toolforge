@@ -147,6 +147,34 @@ margin:0;
 font-size:0.95rem;
 }
 
+.site-footer{
+margin:36px auto 26px;
+padding:0 30px;
+max-width:1100px;
+text-align:center;
+}
+
+.site-footer-links{
+margin:0;
+color:#6b7280;
+line-height:1.8;
+}
+
+.site-footer-links a{
+color:#2563eb;
+text-decoration:none;
+}
+
+.site-footer-links a:hover{
+text-decoration:underline;
+}
+
+.site-footer-copy{
+margin:8px 0 0;
+font-size:0.85rem;
+color:#94a3b8;
+}
+
 .tool-seo{
 margin-top:32px;
 padding-top:20px;
@@ -407,6 +435,10 @@ white-space:normal;
 
 .info-grid{
 grid-template-columns:1fr;
+}
+
+.site-footer{
+padding:0 16px;
 }
 
 }

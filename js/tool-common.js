@@ -43,14 +43,35 @@
     btn.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});
   }
 
+  function injectSiteFooter(){
+    if(document.getElementById("site-footer-global")||document.querySelector(".site-footer"))return;
+    var footer=document.createElement("footer");
+    footer.id="site-footer-global";
+    footer.className="site-footer";
+    footer.setAttribute("aria-label","Site footer");
+    footer.innerHTML=
+      '<p class="site-footer-links">'+
+      '<a href="/privacy-policy.html">Privacy Policy</a> · '+
+      '<a href="/terms-of-service.html">Terms of Service</a> · '+
+      '<a href="/about-us.html">About Us</a> · '+
+      '<a href="/contact-us.html">Contact Us</a>'+
+      "</p>"+
+      '<p class="site-footer-copy">© <span data-year>2026</span> ToolForge</p>';
+    document.body.appendChild(footer);
+    var y=footer.querySelector("[data-year]");
+    if(y)y.textContent=String(new Date().getFullYear());
+  }
+
   function initMobileNav(){
     // Mobile navigation removed
   }
 
+  injectBackToTop();
+  injectSiteFooter();
+  if(!isToolPage)return;
+
   fetch("/tools-list.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(tools){
     // Navigation removed
-    injectBackToTop();
-    if(!isToolPage)return;
     var current=null;
     var byCat={};
     tools.forEach(function(t){
@@ -143,6 +164,8 @@
     }
     addSchema(schema);
     addSchema(breadcrumbSchema);
+  }).catch(function(){
+    // Tool metadata fetch failed; keep base UX functional.
   });
 
   function escapeHtml(s){

@@ -13,6 +13,12 @@ const ROOT = path.resolve(__dirname, "..");
 const TOOLS_LIST = path.join(ROOT, "tools-list.json");
 const SITEMAP_OUT = path.join(ROOT, "sitemap.xml");
 const GUIDES_DIR = path.join(ROOT, "guides");
+const STATIC_PAGES = [
+  "/privacy-policy.html",
+  "/terms-of-service.html",
+  "/about-us.html",
+  "/contact-us.html",
+];
 
 const BASE_URL = (process.env.SITEMAP_BASE_URL || "https://toolforge.site").replace(/\/$/, "");
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -46,6 +52,17 @@ function main() {
     "    <priority>1.0</priority>",
     "  </url>",
   ];
+
+  for (const page of STATIC_PAGES) {
+    lines.push(
+      "  <url>",
+      `    <loc>${escapeXml(BASE_URL + page)}</loc>`,
+      `    <lastmod>${TODAY}</lastmod>`,
+      "    <changefreq>monthly</changefreq>",
+      "    <priority>0.4</priority>",
+      "  </url>"
+    );
+  }
 
   const cats = [...new Set(tools.map((t) => t.category || "Other"))];
   const slugify = (s) => String(s).toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");

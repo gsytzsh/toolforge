@@ -73,6 +73,7 @@
   <h2>Guides</h2>
   <p class="static-links">
     <a href="/guides/index.html">All Guides</a> ·
+    <a href="/guides/adsense-readiness-checklist.html">AdSense Readiness Checklist</a> ·
     <a href="/guides/ssl-certificate-guide.html">SSL Certificate Guide</a> ·
     <a href="/guides/nginx-install-rocky9.html">Nginx Install (Rocky 9)</a> ·
     <a href="/guides/install-docker-rocky9.html">Docker Install (Rocky 9)</a>
@@ -124,6 +125,16 @@
 
 </div>
 
+<footer class="site-footer" aria-label="Site footer">
+  <p class="site-footer-links">
+    <a href="/privacy-policy.html">Privacy Policy</a> ·
+    <a href="/terms-of-service.html">Terms of Service</a> ·
+    <a href="/about-us.html">About Us</a> ·
+    <a href="/contact-us.html">Contact Us</a>
+  </p>
+  <p class="site-footer-copy">© <span id="site-footer-year">2026</span> ToolForge</p>
+</footer>
+
 <button id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 
 <script src="/js/favorites.js"></script>
@@ -139,6 +150,8 @@ toggle()
 btn.addEventListener("click",function(){
 window.scrollTo({top:0,behavior:"smooth"})
 })
+var year=document.getElementById("site-footer-year")
+if(year)year.textContent=String(new Date().getFullYear())
 })()
 </script>
 </body>
