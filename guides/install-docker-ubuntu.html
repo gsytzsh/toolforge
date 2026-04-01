@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Install Docker on Rocky Linux 9 (Docker CE + Compose) | ToolForge Guides</title>
-<meta name="description" content="Complete guide to install Docker CE and Docker Compose Plugin on Rocky Linux 9 / AlmaLinux 9: official repository setup, service configuration, and verification.">
+<title>Install Docker on Ubuntu/Debian (Docker CE + Compose) | ToolForge Guides</title>
+<meta name="description" content="Complete guide to install Docker CE and Docker Compose Plugin on Ubuntu/Debian: official repository setup, service configuration, and verification.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://toolforge.site/guides/install-docker-rocky9.html">
+<link rel="canonical" href="https://toolforge.site/guides/install-docker-ubuntu.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Install Docker on Rocky Linux 9 (Docker CE + Compose)">
+<meta property="og:title" content="Install Docker on Ubuntu/Debian (Docker CE + Compose)">
 <meta property="og:description" content="Docker installation guide for beginners: official source, auto-start, and verification.">
-<meta property="og:url" content="https://toolforge.site/guides/install-docker-rocky9.html">
+<meta property="og:url" content="https://toolforge.site/guides/install-docker-ubuntu.html">
 <link rel="stylesheet" href="/css/style.css">
 <style>
 .guide-box{border:1px solid #ddd;border-radius:8px;padding:12px;background:#fafafa;margin:12px 0}
@@ -23,42 +23,50 @@
 </head>
 <body>
 <main class="container">
-<h1>Install Docker on Rocky Linux 9</h1>
+<h1>Install Docker on Ubuntu/Debian</h1>
 <p class="subtitle">Official Docker CE installation with Compose Plugin and service verification.</p>
 <p><a href="/guides/index.html">Back to Guides</a> · <a href="/">Home</a></p>
 
 <section class="guide-box">
-<p><strong>Applies to:</strong> Rocky Linux 9 / AlmaLinux 9</p>
+<p><strong>Applies to:</strong> Ubuntu 20.04/22.04/24.04, Debian 11/12</p>
 <p><strong>Installs:</strong> Docker CE, Docker CLI, containerd, Compose Plugin</p>
 </section>
 
 <h2>1. Remove Old Docker Versions (if any)</h2>
-<pre class="cmd">sudo dnf remove -y docker docker-client docker-client-latest docker-common docker-latest \
-  docker-latest-logrotate docker-logrotate docker-engine</pre>
+<pre class="cmd">sudo apt remove -y docker docker-engine docker.io containerd runc</pre>
 
-<h2>2. Install Prerequisites and Add Official Repository</h2>
-<pre class="cmd">sudo dnf install -y dnf-plugins-core
-sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</pre>
+<h2>2. Install Prerequisites</h2>
+<pre class="cmd">sudo apt update
+sudo apt install -y ca-certificates curl gnupg lsb-release</pre>
 
-<h2>3. Install Docker CE and Components</h2>
-<pre class="cmd">sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</pre>
+<h2>3. Add Docker's Official GPG Key</h2>
+<pre class="cmd">sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg</pre>
 
-<h2>4. Start and Enable Docker</h2>
+<h2>4. Set Up the Docker Repository</h2>
+<pre class="cmd">echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null</pre>
+
+<h2>5. Install Docker CE and Components</h2>
+<pre class="cmd">sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</pre>
+
+<h2>6. Start and Enable Docker</h2>
 <pre class="cmd">sudo systemctl enable --now docker
 sudo systemctl status docker --no-pager
 docker --version
 docker compose version</pre>
 
-<h2>5. (Optional) Allow Non-root Docker Access</h2>
+<h2>7. (Optional) Allow Non-root Docker Access</h2>
 <pre class="cmd">sudo usermod -aG docker $USER
 newgrp docker
 # Log out and back in for changes to take effect</pre>
 
-<h2>6. Verify Installation</h2>
+<h2>8. Verify Installation</h2>
 <pre class="cmd">docker run --rm hello-world</pre>
 <p class="small">If you see "Hello from Docker!", installation was successful.</p>
 
-<h2>7. Common Maintenance Commands</h2>
+<h2>9. Common Maintenance Commands</h2>
 <pre class="cmd">sudo systemctl restart docker
 sudo systemctl stop docker
 sudo systemctl start docker
@@ -67,7 +75,7 @@ sudo journalctl -u docker --no-pager | tail -n 50</pre>
 <section class="related">
 <h3>Related Guides</h3>
 <ul>
-<li><a href="/guides/nginx-install-rocky9.html">Install Nginx on Rocky Linux 9</a></li>
+<li><a href="/guides/nginx-install-ubuntu.html">Install Nginx on Ubuntu/Debian</a></li>
 <li><a href="/guides/nginx-reverse-proxy-config.html">Nginx Reverse Proxy Configuration</a></li>
 <li><a href="/guides/ssl-certificate-guide.html">Linux SSL Certificate Guide</a></li>
 </ul>

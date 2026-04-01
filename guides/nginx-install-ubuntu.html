@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Install Nginx on Rocky Linux 9 / AlmaLinux 9 (Official Stable) | ToolForge Guides</title>
-<meta name="description" content="Complete guide to install Nginx official stable version on Rocky Linux 9 / AlmaLinux 9: add official repository, install, start, firewall configuration, and troubleshooting.">
+<title>Install Nginx on Ubuntu/Debian (Official Stable) | ToolForge Guides</title>
+<meta name="description" content="Complete guide to install Nginx official stable version on Ubuntu/Debian: add official repository, install, start, firewall configuration, and troubleshooting.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://toolforge.site/guides/nginx-install-rocky9.html">
+<link rel="canonical" href="https://toolforge.site/guides/nginx-install-ubuntu.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="ToolForge">
-<meta property="og:title" content="Install Nginx on Rocky Linux 9 / AlmaLinux 9 (Official Stable)">
+<meta property="og:title" content="Install Nginx on Ubuntu/Debian (Official Stable)">
 <meta property="og:description" content="Nginx installation guide for beginners: from zero to production-ready.">
-<meta property="og:url" content="https://toolforge.site/guides/nginx-install-rocky9.html">
+<meta property="og:url" content="https://toolforge.site/guides/nginx-install-ubuntu.html">
 <link rel="stylesheet" href="/css/style.css">
 <style>
 .guide-box{border:1px solid #ddd;border-radius:8px;padding:12px;background:#fafafa;margin:12px 0}
@@ -23,43 +23,36 @@
 </head>
 <body>
 <main class="container">
-<h1>Install Nginx on Rocky Linux 9 / AlmaLinux 9 (Official Stable)</h1>
+<h1>Install Nginx on Ubuntu/Debian (Official Stable)</h1>
 <p class="subtitle">From installation to production-ready deployment.</p>
 <p><a href="/guides/index.html">Back to Guides</a> · <a href="/">Home</a></p>
 
 <section class="guide-box">
-<p><strong>Applies to:</strong> Rocky Linux 9 / AlmaLinux 9</p>
+<p><strong>Applies to:</strong> Ubuntu 20.04/22.04/24.04, Debian 11/12</p>
 <p><strong>Goal:</strong> Install the latest stable Nginx from the official repository and configure firewall rules.</p>
 </section>
 
 <h2>1. Update System and Install Prerequisites</h2>
-<pre class="cmd">sudo dnf update -y
-sudo dnf install -y dnf-utils curl ca-certificates</pre>
+<pre class="cmd">sudo apt update
+sudo apt install -y curl gnupg2 ca-certificates lsb-release ubuntu-keyring</pre>
 
-<h2>2. Add Official Nginx YUM Repository</h2>
-<pre class="cmd">sudo tee /etc/yum.repos.d/nginx.repo >/dev/null <<'REPO'
-[nginx-stable]
-name=nginx stable repo
-baseurl=http://nginx.org/packages/centos/9/$basearch/
-gpgcheck=1
-enabled=1
-gpgkey=https://nginx.org/keys/nginx_signing.key
-module_hotfixes=true
-REPO</pre>
+<h2>2. Add Official Nginx Repository</h2>
+<pre class="cmd">echo "deb http://nginx.org/packages/mainline/ubuntu `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
+curl -fsSL https://nginx.org/keys/nginx_signing.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/nginx.gpg > /dev/null</pre>
 
 <h2>3. Install Nginx</h2>
-<pre class="cmd">sudo dnf install -y nginx
+<pre class="cmd">sudo apt update
+sudo apt install -y nginx
 nginx -v</pre>
 
 <h2>4. Start and Enable Nginx</h2>
 <pre class="cmd">sudo systemctl enable --now nginx
 sudo systemctl status nginx --no-pager</pre>
 
-<h2>5. Configure Firewall (firewalld)</h2>
-<pre class="cmd">sudo firewall-cmd --permanent --add-service=http
-sudo firewall-cmd --permanent --add-service=https
-sudo firewall-cmd --reload
-sudo firewall-cmd --list-services</pre>
+<h2>5. Configure Firewall (UFW)</h2>
+<pre class="cmd">sudo ufw allow 'Nginx Full'
+sudo ufw reload
+sudo ufw status</pre>
 
 <h2>6. Basic Availability Check</h2>
 <pre class="cmd">curl -I http://127.0.0.1
@@ -75,8 +68,9 @@ sudo systemctl stop nginx</pre>
 <h2>8. Important Paths</h2>
 <ul>
 <li><code>/etc/nginx/nginx.conf</code>: Main configuration file</li>
-<li><code>/etc/nginx/conf.d/</code>: Site configurations directory</li>
-<li><code>/usr/share/nginx/html</code>: Default web root</li>
+<li><code>/etc/nginx/sites-available/</code>: Site configurations</li>
+<li><code>/etc/nginx/sites-enabled/</code>: Enabled sites (symlinks)</li>
+<li><code>/var/www/html</code>: Default web root</li>
 <li><code>/var/log/nginx/</code>: Access and error logs</li>
 </ul>
 
@@ -85,7 +79,7 @@ sudo systemctl stop nginx</pre>
 <ul>
 <li><a href="/guides/nginx-reverse-proxy-config.html">Nginx Reverse Proxy Configuration</a></li>
 <li><a href="/guides/ssl-certificate-guide.html">Linux SSL Certificate Guide (acme.sh / Certbot)</a></li>
-<li><a href="/guides/install-docker-rocky9.html">Install Docker on Rocky Linux 9</a></li>
+<li><a href="/guides/install-docker-ubuntu.html">Install Docker on Ubuntu/Debian</a></li>
 </ul>
 <h3>Related Tools</h3>
 <ul>
