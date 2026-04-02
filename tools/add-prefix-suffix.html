@@ -261,10 +261,31 @@ Markdown list with bold:
 </section>
 </main>
 <script>
+function unescapePrefixSuffix(value){
+var s=value||""
+var out=""
+for(var i=0;i<s.length;i++){
+var ch=s.charAt(i)
+if(ch==="\\"){
+var next=s.charAt(i+1)
+if(next==="n"){out+="\n";i++;continue}
+if(next==="t"){out+="\t";i++;continue}
+if(next==="\\"){out+="\\";i++;continue}
+}
+out+=ch
+}
+return out
+}
+
 function run(){
-var lines=document.getElementById("input").value.split(/\r?\n/)
-var prefix=(document.getElementById("prefix").value||"").replace(/\\n/g,"\n").replace(/\\t/g,"\t")
-var suffix=(document.getElementById("suffix").value||"").replace(/\\n/g,"\n").replace(/\\t/g,"\t")
+var inputText=document.getElementById("input").value
+if(inputText===""){
+document.getElementById("output").value=""
+return
+}
+var lines=inputText.split(/\r?\n/)
+var prefix=unescapePrefixSuffix(document.getElementById("prefix").value)
+var suffix=unescapePrefixSuffix(document.getElementById("suffix").value)
 document.getElementById("output").value=lines.map(function(l){return prefix+l+suffix}).join("\n")
 }
 </script>
