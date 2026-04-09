@@ -290,38 +290,131 @@ reader.readAsText(file)
 
 function tokenizeSql(sql){
 let tokens=[]
-let current=""
-let quote=null
-for(let i=0;i<sql.length;i++){
+let i=0
+
+function readDollarQuoteTag(text,start){
+if(text[start]!=="$") return null
+let end=start+1
+while(end<text.length&&/[A-Za-z0-9_]/.test(text[end])) end++
+if(text[end]!=="$") return null
+if(end===start+1) return "$$"
+if(!/[A-Za-z_]/.test(text[start+1])) return null
+return text.slice(start,end+1)
+}
+
+while(i<sql.length){
 let ch=sql[i]
-if(quote){
-current+=ch
-if(ch===quote&&sql[i-1]!=="\\") quote=null
-continue
-}
-if(ch==="'"||ch==='"'||ch==="`"){
-current+=ch
-quote=ch
-continue
-}
+
 if(/\s/.test(ch)){
-if(current){
-tokens.push(current)
-current=""
-}
+i++
 continue
 }
-if(ch===","||ch==="("||ch===")"){
-if(current){
-tokens.push(current)
-current=""
-}
-tokens.push(ch)
+
+if(ch==="-"&&sql[i+1]==="-"){
+let end=i+2
+while(end<sql.length&&sql[end]!=="\n") end++
+tokens.push({type:"comment",value:sql.slice(i,end)})
+i=end
 continue
 }
-current+=ch
+
+if(ch==="/"&&sql[i+1]==="*"){
+let end=i+2
+while(end<sql.length-1&&!(sql[end]==="*"&&sql[end+1]==="/")) end++
+end=Math.min(end+2,sql.length)
+tokens.push({type:"comment",value:sql.slice(i,end)})
+i=end
+continue
 }
-if(current) tokens.push(current)
+
+if(ch==="'"){
+let end=i+1
+while(end<sql.length){
+if(sql[end]==="'"){
+if(sql[end+1]==="'"){
+end+=2
+continue
+}
+end++
+break
+}
+end++
+}
+tokens.push({type:"literal",value:sql.slice(i,end)})
+i=end
+continue
+}
+
+if(ch==='"'){
+let end=i+1
+while(end<sql.length){
+if(sql[end]==='"'){
+if(sql[end+1]==='"'){
+end+=2
+continue
+}
+end++
+break
+}
+end++
+}
+tokens.push({type:"literal",value:sql.slice(i,end)})
+i=end
+continue
+}
+
+if(ch==="`"){
+let end=i+1
+while(end<sql.length){
+if(sql[end]==="`"){
+if(sql[end+1]==="`"){
+end+=2
+continue
+}
+end++
+break
+}
+end++
+}
+tokens.push({type:"literal",value:sql.slice(i,end)})
+i=end
+continue
+}
+
+let dollarTag=readDollarQuoteTag(sql,i)
+if(dollarTag){
+let end=sql.indexOf(dollarTag,i+dollarTag.length)
+if(end===-1){
+tokens.push({type:"literal",value:sql.slice(i)})
+break
+}
+end+=dollarTag.length
+tokens.push({type:"literal",value:sql.slice(i,end)})
+i=end
+continue
+}
+
+if(ch===","||ch==="("||ch===")"||ch===";"){
+tokens.push({type:"symbol",value:ch})
+i++
+continue
+}
+
+let end=i
+while(end<sql.length){
+let c=sql[end]
+if(/\s/.test(c)) break
+if(c===","||c==="("||c===")"||c===";") break
+if(c==="-"&&sql[end+1]==="-") break
+if(c==="/"&&sql[end+1]==="*") break
+if(c==="'"||c==='"'||c==="`") break
+if(readDollarQuoteTag(sql,end)) break
+end++
+}
+tokens.push({type:"word",value:sql.slice(i,end)})
+i=end
+}
+
 return tokens
 }
 
@@ -332,41 +425,105 @@ setStatus("Enter SQL first.","#b91c1c")
 return false
 }
 let tokens=tokenizeSql(sql)
-let breakWords=["SELECT","FROM","WHERE","HAVING","LIMIT","OFFSET","VALUES","SET","JOIN","ON","AND","OR"]
+let breakWords=new Set(["SELECT","FROM","WHERE","HAVING","LIMIT","OFFSET","VALUES","SET","JOIN","ON","AND","OR","UPDATE","INSERT","DELETE","WITH","UNION"])
+let twoWordClauses=new Set(["GROUP BY","ORDER BY","LEFT JOIN","RIGHT JOIN","INNER JOIN","OUTER JOIN","FULL JOIN","CROSS JOIN","NATURAL JOIN","UNION ALL"])
+let threeWordClauses=new Set(["LEFT OUTER JOIN","RIGHT OUTER JOIN","FULL OUTER JOIN"])
 let output=""
 let indent=0
+let parenIndentStack=[]
+
+function upperWord(index){
+if(!tokens[index]||tokens[index].type!=="word") return ""
+return tokens[index].value.toUpperCase()
+}
+
+function appendClause(text){
+if(!output.trim()){
+output+=text+" "
+return
+}
+output=output.trimEnd()+"\n"+"  ".repeat(indent)+text+" "
+}
+
 for(let i=0;i<tokens.length;i++){
 let token=tokens[i]
-let upper=token.toUpperCase()
-let next=(tokens[i+1]||"").toUpperCase()
-let combined=upper+" "+next
-if(upper===")"){
-indent=Math.max(indent-1,0)
+if(token.type==="word"){
+let upper=upperWord(i)
+let next=upperWord(i+1)
+let next2=upperWord(i+2)
+let combined3=upper&&next&&next2?(upper+" "+next+" "+next2):""
+let combined2=upper&&next?(upper+" "+next):""
+
+if(threeWordClauses.has(combined3)){
+appendClause(combined3)
+i+=2
+continue
 }
-if(["GROUP BY","ORDER BY","LEFT JOIN","RIGHT JOIN","INNER JOIN","OUTER JOIN"].includes(combined)){
-output+="\n"+"  ".repeat(indent)+combined+" "
+if(twoWordClauses.has(combined2)){
+appendClause(combined2)
 i++
 continue
 }
-if(breakWords.includes(upper)){
-output+="\n"+"  ".repeat(indent)+upper+" "
+if(breakWords.has(upper)){
+appendClause(upper)
 continue
 }
-if(token==="("){
-output+="(\n"
+output+=token.value+" "
+continue
+}
+
+if(token.type==="literal"){
+output+=token.value+" "
+continue
+}
+
+if(token.type==="comment"){
+if(output&&!output.endsWith("\n")){
+output=output.trimEnd()+" "
+}
+output+=token.value
+output+="\n"+"  ".repeat(indent)
+continue
+}
+
+if(token.type==="symbol"){
+if(token.value==="("){
+let nextWord=upperWord(i+1)
+let shouldIndent=nextWord==="SELECT"||nextWord==="WITH"
+parenIndentStack.push(shouldIndent)
+if(shouldIndent){
+output=output.trimEnd()+" (\n"
 indent++
 output+="  ".repeat(indent)
+}else{
+output=output.trimEnd()+" ("
+}
 continue
 }
-if(token===")"){
+if(token.value===")"){
+let wasIndented=parenIndentStack.pop()
+if(wasIndented){
+indent=Math.max(indent-1,0)
 output=output.trimEnd()+"\n"+"  ".repeat(indent)+") "
+}else{
+output=output.trimEnd()+") "
+}
 continue
 }
-if(token===","){
+if(token.value===","){
+let inInlineParens=parenIndentStack.length>0&&parenIndentStack[parenIndentStack.length-1]===false
+if(inInlineParens){
+output=output.trimEnd()+", "
+}else{
 output=output.trimEnd()+",\n"+"  ".repeat(indent)
+}
 continue
 }
-output+=token+" "
+if(token.value===";"){
+output=output.trimEnd()+";\n\n"+"  ".repeat(indent)
+continue
+}
+}
 }
 document.getElementById("sql-input").value=output.trim()
 setStatus("SQL formatted with conservative rules.","#16a34a")
@@ -411,7 +568,11 @@ return
 }
 try{
 writeTextPdf(sql,"sql-to-pdf.pdf",title)
+if(/[^\u0000-\u00ff]/.test(sql+title)){
+setStatus("PDF downloaded. Non-Latin text may require custom font embedding.","#b45309")
+}else{
 setStatus("PDF downloaded.","#16a34a")
+}
 }catch(e){
 setStatus("PDF export failed.","#b91c1c")
 }
