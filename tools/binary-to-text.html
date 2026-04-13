@@ -108,7 +108,7 @@
 <div id="panel-encode" style="display:none">
 <h3>Text Input</h3>
 <label for="text-in" class="sr-only">Text input</label>
-<textarea id="text-in" rows="6" style="width:90%" placeholder="Hello" aria-label="Text input"></textarea>
+<textarea id="text-in" rows="6" style="width:90%" placeholder="Hello (ASCII only)" aria-label="Text input"></textarea>
 <br><br>
 <label><input type="checkbox" id="space" checked> Space between bytes</label>
 <br><br>
@@ -434,6 +434,7 @@ function decodeBinary(binary) {
   <li>Spaces between binary digits are optional - the tool removes all whitespace before decoding</li>
   <li>Binary length must be divisible by 8 for valid decoding (each character = 8 bits)</li>
   <li>Only 0 and 1 are valid binary characters - other characters cause errors</li>
+  <li>Encoding currently supports ASCII characters only (code points 0-127)</li>
   <li>Use spaces in encoded output for better readability and manual verification</li>
   <li>Control characters (like newline) may not display visibly in output</li>
 </ul>
@@ -468,22 +469,32 @@ document.getElementById("tab-decode").classList.toggle("active",t==="decode")
 document.getElementById("tab-encode").classList.toggle("active",t==="encode")
 document.getElementById("panel-decode").style.display=t==="decode"?"block":"none"
 document.getElementById("panel-encode").style.display=t==="encode"?"block":"none"
+var nextHash=t==="encode"?"#encode":""
+if(location.hash!==nextHash){
+if(history.replaceState){history.replaceState(null,"",location.pathname+location.search+nextHash)}
+else{location.hash=nextHash}
 }
-if(location.hash==="#encode") showTab("encode")
+}
+showTab(location.hash==="#encode"?"encode":"decode")
+window.addEventListener("hashchange",function(){showTab(location.hash==="#encode"?"encode":"decode")})
 
 function decode(){
-var s=document.getElementById("bin").value.replace(/\s+/g,"")
-document.getElementById("err").innerText=""
-if(s.length%8!==0){document.getElementById("text-out").value="";document.getElementById("err").innerText="Binary length must be multiple of 8.";document.getElementById("err").style.color="#b91c1c";return}
+var input=document.getElementById("bin").value
+var err=document.getElementById("err")
+var outEl=document.getElementById("text-out")
+err.innerText=""
+if(!input.trim()){outEl.value="";err.innerText="Please enter binary input.";err.style.color="#b91c1c";return}
+if(/[^01\s]/.test(input)){outEl.value="";err.innerText="Invalid binary. Only 0, 1, and whitespace are allowed.";err.style.color="#b91c1c";return}
+var s=input.replace(/\s+/g,"")
+if(s.length%8!==0){outEl.value="";err.innerText="Binary length must be multiple of 8.";err.style.color="#b91c1c";return}
 var out=""
 for(var i=0;i<s.length;i+=8){
 var byte=s.slice(i,i+8)
-if(/[^01]/.test(byte)){document.getElementById("text-out").value="";document.getElementById("err").innerText="Invalid binary.";document.getElementById("err").style.color="#b91c1c";return}
 out+=String.fromCharCode(parseInt(byte,2))
 }
-document.getElementById("text-out").value=out
-document.getElementById("err").innerText="Decoded successfully."
-document.getElementById("err").style.color="#16a34a"
+outEl.value=out
+err.innerText="Decoded successfully."
+err.style.color="#16a34a"
 }
 
 function copyDecodeOutput(){
@@ -502,11 +513,17 @@ err.style.color="#b91c1c"
 function encode(){
 var s=document.getElementById("text-in").value
 var sep=document.getElementById("space").checked?" ":""
+var status=document.getElementById("status")
+if(!s){document.getElementById("bin-out").value="";status.innerText="Please enter text input.";status.style.color="#b91c1c";return}
 var out=""
-for(var i=0;i<s.length;i++)out+=(i?sep:"")+s.charCodeAt(i).toString(2).padStart(8,"0")
+for(var i=0;i<s.length;i++){
+var code=s.charCodeAt(i)
+if(code>127){document.getElementById("bin-out").value="";status.innerText="ASCII only: unsupported character at position "+(i+1)+".";status.style.color="#b91c1c";return}
+out+=(i?sep:"")+code.toString(2).padStart(8,"0")
+}
 document.getElementById("bin-out").value=out
-document.getElementById("status").innerText="Encoded successfully."
-document.getElementById("status").style.color="#16a34a"
+status.innerText="Encoded successfully."
+status.style.color="#16a34a"
 }
 
 function copyEncodeOutput(){
